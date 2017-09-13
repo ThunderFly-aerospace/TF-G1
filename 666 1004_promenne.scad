@@ -1,0 +1,14 @@
+width=35;
+depth=62.5;
+height=35;
+diameter=25;
+okraj=(width-diameter)/2;
+mezera=depth-2*okraj-2*diameter;
+difference(){
+translate([-(diameter/2+okraj),-(depth-diameter/2-okraj),0])
+cube([width,depth,height]);
+    cylinder(h=height,r1=diameter/2,r2=diameter/2);
+    translate([-(diameter/2+okraj),-(diameter+mezera),diameter/2+okraj])
+    rotate([0,90,0])
+    cylinder(h=height,r1=diameter/2,r2=diameter/2);  
+       }
