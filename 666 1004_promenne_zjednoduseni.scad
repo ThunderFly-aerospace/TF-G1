@@ -29,8 +29,8 @@ cube([width,depth,height]);
     rotate([-45,0,0])
     cube([width,radius+wall_thickness,height/2]);
    
-    translate([-(width/2),-(depth-wall_thickness),height])
-    rotate([-45,0,0])
-    cube([width,radius+wall_thickness,height/2]); 
-
+    translate([-(width/2), -depth + height/2 - sqrt(2) * wall_thickness,height/2])  // protoze kostka je otocena, tak je potreba ji posunout o nasobek odmocniny ze dvou. Jde o uhlopricku ctverce.
+    rotate([45,0,0])
+    cube([width,height,height]); // tady jsem si zvetsil rozmery kostky, abych ji ji mohl posunout doprostred vysky a byla symetricka. Pak se mi to lepe predstavuje. 
+    
     }
