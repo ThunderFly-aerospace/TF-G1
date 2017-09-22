@@ -1,7 +1,7 @@
-diameter=25;
-radius=diameter/2;
-wall_thickness=diameter/(10/3);
-width=diameter+2*wall_thickness;	
+main_tube_diameter=25;
+radius=main_tube_diameter/2;
+wall_thickness=main_tube_diameter/(10/3);
+width=main_tube_diameter+2*wall_thickness;	
 depth=width;
 height=width;
 
@@ -9,12 +9,12 @@ height=width;
 c_na_druhou=width*width+width*width;
 uhlopricka=sqrt(c_na_druhou);
 
-mini_diameter=4;
-mini_radius=mini_diameter/2;
+M4_screw_diameter=4;
+mini_radius=M4_screw_diameter/2;
 wall_thickness_mini_cylinder_X = mini_radius;
 stred_mini_cylinder_X = width/2 - mini_radius - mini_radius;
-stred_mini_cylinder_Z_horni = height - mini_radius - mini_diameter*0.75;
-stred_mini_cylinder_Z_dolni = mini_radius + mini_diameter*2;
+stred_mini_cylinder_Z_horni = height - mini_radius - M4_screw_diameter*0.75;
+stred_mini_cylinder_Z_dolni = mini_radius + M4_screw_diameter*2;
 
 difference (){
 
