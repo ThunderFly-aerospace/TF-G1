@@ -1,10 +1,10 @@
-diameter=35;		
-wall_thickness=diameter/5;
-thickness_between_tubes=diameter/10;			
-width=diameter+2*wall_thickness;
-depth=diameter*2+2*wall_thickness+thickness_between_tubes;
+main_tube_diameter=35;		
+wall_thickness=main_tube_diameter/5;
+thickness_between_tubes=main_tube_diameter/10;			
+width=main_tube_diameter+2*wall_thickness;
+depth=main_tube_diameter*2+2*wall_thickness+thickness_between_tubes;
 height=width;
-radius=diameter/2;
+radius=main_tube_diameter/2;
 
 difference(){
 
@@ -13,7 +13,7 @@ cube([width,depth,height]);
 
     cylinder(h=height,r1=radius,r2=radius);
 
-    translate([-(radius+wall_thickness),-(diameter+thickness_between_tubes),radius+wall_thickness])
+    translate([-(radius+wall_thickness),-(main_tube_diameter+thickness_between_tubes),radius+wall_thickness])
     rotate([0,90,0])
     cylinder(h=height,r1=radius,r2=radius);
     
