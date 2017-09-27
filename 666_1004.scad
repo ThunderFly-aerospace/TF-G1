@@ -1,4 +1,4 @@
-include <./parameters.scad>
+include <./Parameters.scad>
 		
 wall_thickness=main_tube_outer_diameter/5;
 thickness_between_tubes=main_tube_outer_diameter/10;			

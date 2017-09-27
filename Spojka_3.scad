@@ -1,4 +1,4 @@
-include <./parameters.scad>
+include <./Parameters.scad>
 		
 wall_thickness= tube_for_undercarriage_outer_diameter/5;
 thickness_between_tubes=tube_for_undercarriage_outer_diameter/10;			
