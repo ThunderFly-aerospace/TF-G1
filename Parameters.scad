@@ -9,3 +9,10 @@ tube_for_undercarriage_inner_diameter = 5;
 //Screw diameter in model 666_1019 [mm]
 M4_screw_diameter=4;
 
+
+//Screw diameter in model 666_1004 [mm]
+M3_5_screw_diameter = 3.7;
+
+//Nut in model 666_1004 [mm]
+Nut_height = 2.8;
+Nut_diameter = 6.58;
