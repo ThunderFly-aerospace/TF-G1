@@ -44,10 +44,10 @@ cube([width,depth,height]);
 
    	translate([-width/2,0,height/2])
 	rotate ([0,90,0])   
-    cylinder(h = width, r1 = M3_5_screw_diameter/2, r2 = M3_5_screw_diameter/2);
+    cylinder(h = width, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2);
 
     translate ([0,- (main_tube_outer_diameter+thickness_between_tubes),0])
-    cylinder (h = height, r1 = M3_5_screw_diameter/2, r2 = M3_5_screw_diameter/2);
+    cylinder (h = height, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2);
 			
     //nut
 
@@ -57,5 +57,13 @@ cube([width,depth,height]);
 
     translate([0, -(main_tube_outer_diameter+thickness_between_tubes),0])
     cylinder (h = Nut_height, r1 = Nut_diameter/2, r2 = Nut_diameter/2, $fn = 6);
+
+    translate([width/2 - Nut_height,0,height/2])
+	rotate ([0,90,0])
+    cylinder (h = Nut_height, r1 = Nut_diameter/2 ,r2 = Nut_diameter/2, $fn = 6);
+
+    translate([0,-(main_tube_outer_diameter+thickness_between_tubes),height - Nut_height])
+    cylinder (h = Nut_height, r1 = Nut_diameter/2, r2 = Nut_diameter/2, $fn = 6);    
+
 
     }

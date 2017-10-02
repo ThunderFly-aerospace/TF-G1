@@ -11,8 +11,8 @@ M4_screw_diameter=4;
 
 
 //Screw diameter in model 666_1004 [mm]
-M3_5_screw_diameter = 3.7;
+M3_screw_diameter = 3.2;
 
 //Nut in model 666_1004 [mm]
-Nut_height = 2.8;
-Nut_diameter = 6.58;
+Nut_height = 2.4;
+Nut_diameter = 6.05;
