@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <./Parameters.scad>
 		
 wall_thickness=main_tube_outer_diameter/5;
 thickness_between_tubes=main_tube_outer_diameter/10;			
@@ -54,17 +54,17 @@ cube([width,depth,height]);
 
     translate([-width/2-3,0, height/2])
     rotate ([0,90,0])
-    cylinder (h = Nut_height+3, r1 = Nut_diameter/2 ,r2 = Nut_diameter/2, $fn = 6);
+    cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2 ,r2 = Nut_diameter_M3/2, $fn = 6);
 
     translate([0, -(main_tube_outer_diameter+thickness_between_tubes),-3])
-    cylinder (h = Nut_height+3, r1 = Nut_diameter/2, r2 = Nut_diameter/2, $fn = 6);
+    cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
-    translate([width/2 - Nut_height,0,height/2])
+    translate([width/2 - Nut_height_M3,0,height/2])
 	rotate ([0,90,0])
-    cylinder (h = Nut_height+3, r1 = Nut_diameter/2 ,r2 = Nut_diameter/2, $fn = 6);
+    cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2 ,r2 = Nut_diameter_M3/2, $fn = 6);
 
-    translate([0,-(main_tube_outer_diameter+thickness_between_tubes),height - Nut_height])
-    cylinder (h = Nut_height+3, r1 = Nut_diameter/2, r2 = Nut_diameter/2, $fn = 6);    
+    translate([0,-(main_tube_outer_diameter+thickness_between_tubes),height - Nut_height_M3])
+    cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);    
 
 
     }
