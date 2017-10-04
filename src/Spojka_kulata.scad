@@ -1,4 +1,4 @@
-include <./Parameters.scad>
+include <../Parameters.scad>
 height = 40;
 
 difference (){
