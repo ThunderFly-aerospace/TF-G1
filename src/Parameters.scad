@@ -1,6 +1,6 @@
 //Main tube diameter [mm]
-main_tube_outer_diameter = 25;
-main_tube_inner_diameter = 21;
+main_tube_outer_diameter = 25.3;
+main_tube_inner_diameter = 22;
 
 //Tube for undercarriage [mm]
 tube_for_undercarriage_outer_diameter = 10;
