@@ -1,6 +1,6 @@
 include <../Parameters.scad>
 		
-wall_thickness= tube_for_undercarriage_outer_diameter/5;
+wall_thickness= tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes=tube_for_undercarriage_outer_diameter/10;			
 width=tube_for_undercarriage_outer_diameter+2*wall_thickness;
 depth=tube_for_undercarriage_outer_diameter+M3_screw_diameter+2*wall_thickness+thickness_between_tubes;
@@ -45,7 +45,7 @@ cube([width,depth,height]);
 
     translate([-width/2,-(thickness_between_tubes+tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),radius+wall_thickness])
     rotate([0,90,0])
-    cylinder(h=width,r1=M3_screw_diameter/2,r2=M3_screw_diameter/2, $fn = 15);
+    cylinder(h=width,r1=M4_screw_diameter/2,r2=M4_screw_diameter/2, $fn = 20);
 
     translate([-width/2,0,height/2])
     rotate ([0,90,0])
@@ -55,10 +55,10 @@ cube([width,depth,height]);
 
 	translate([-width/2-3,0,height/2])
 	rotate([0,90,0])
-	cylinder (h = Nut_height_M3 + 3, r1 = Nut_diamete0_M3/2 ,r2 = Nut_diameter_M3/2, $fn = 6);
+	cylinder (h = Nut_height_M3 + 3, r1 = Nut_diameter_M3/2 ,r2 = Nut_diameter_M3/2, $fn = 6);
 
 	translate([-width/2-3,-(thickness_between_tubes+tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),radius+wall_thickness])
 	rotate([0,90,0])
-	cylinder (h = Nut_height + 3, r1 = Nut_diameter/2 ,r2 = Nut_diameter/2, $fn = 6);
+	cylinder (h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2 ,r2 = Nut_diameter_M4/2, $fn = 6);
     
     }
