@@ -6,7 +6,7 @@ depth=width;
 height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
 radius=main_tube_outer_diameter/2;
 
-
+module 666_1017(){
 difference () {
 	translate([-(width/2),-(width/2),0])
 	cube ([width,depth,height]);
@@ -104,3 +104,8 @@ difference () {
 
 
    }    
+}
+
+
+translate([0,-width+02,-3])
+666_1017();
