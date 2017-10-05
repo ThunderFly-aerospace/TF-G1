@@ -23,7 +23,7 @@ difference (){
 translate([-(width/2),-(depth/2),0])
 cube ([width,depth,height]);
 	
-	cylinder(h=height,r1=radius,r2=radius);
+	cylinder(h=height,r1=radius,r2=radius,$fn=200);
 
 
 	translate([stred_M4_cylinder_X,depth/2,stred_M4_cylinder_Z_horni])

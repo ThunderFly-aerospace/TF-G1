@@ -1,4 +1,4 @@
-include <./Parameters.scad>
+include <../Parameters.scad>
 
 wall_thickness=main_tube_outer_diameter/5;
 width=main_tube_outer_diameter+2*wall_thickness;
@@ -25,54 +25,54 @@ difference () {
    				//cube([width,depth, height+6]);
 
    	//screw
-   	translate ([-width/2-3,10-M4_screw_diameter/2,height-wall_thickness-radius])
+   	translate ([-width/2-3,10-M3_screw_diameter/2,height-wall_thickness-radius])
    	rotate ([0,90,0])
- 	cylinder (h=width+6, r1 = M4_screw_diameter/2, r2 = M4_screw_diameter/2, $fn = 15);
+ 	cylinder (h=width+6, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
 
- 	translate([-width/2-3,-10+M4_screw_diameter/2,height-wall_thickness-radius])
+ 	translate([-width/2-3,-10+M3_screw_diameter/2,height-wall_thickness-radius])
  	rotate([0,90,0])
- 	cylinder(h=width+6, r1 = M4_screw_diameter/2, r2 = M4_screw_diameter/2, $fn = 15);
+ 	cylinder(h=width+6, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
 
  	translate([-width/2-3,0,27.5])
  	rotate([0,90,0])
- 	cylinder(h=width+6, r1 = M4_screw_diameter/2, r2 = M4_screw_diameter/2, $fn = 15);
+ 	cylinder(h=width+6, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
 
  	translate([-width/2-3,0,7.5])
  	rotate([0,90,0])
- 	cylinder(h=width+6, r1 = M4_screw_diameter/2, r2 = M4_screw_diameter/2, $fn = 15);
+ 	cylinder(h=width+6, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
 
  	//nut
- 	translate ([-width/2-3,10-M4_screw_diameter/2,height-wall_thickness-radius])
+ 	translate ([-width/2-3,10-M3_screw_diameter/2,height-wall_thickness-radius])
    	rotate ([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 	
-	translate([-width/2-3,-10+M4_screw_diameter/2,height-wall_thickness-radius])
+	translate([-width/2-3,-10+M3_screw_diameter/2,height-wall_thickness-radius])
  	rotate([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
-	translate ([width/2-Nut_height_M4,10-M4_screw_diameter/2,height-wall_thickness-radius])
+	translate ([width/2-Nut_height_M3,10-M3_screw_diameter/2,height-wall_thickness-radius])
    	rotate ([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 	
-	translate([width/2-Nut_height_M4,-10+M4_screw_diameter/2,height-wall_thickness-radius])
+	translate([width/2-Nut_height_M3,-10+M3_screw_diameter/2,height-wall_thickness-radius])
  	rotate([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
  	translate([-width/2-3,0,27.5])
  	rotate ([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
  	translate([-width/2-3,0,7.5])
  	rotate ([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
  	translate([width/2-3,0,27.5])
  	rotate ([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
  	translate([width/2-3,0,7.5])
  	rotate ([0,90,0])
- 	cylinder (h=Nut_height_M4+3, r1 = Nut_diameter_M4/2, r2 = Nut_diameter_M4/2, $fn = 6);
+ 	cylinder (h=Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
    //horizontal bevelled edge
 
