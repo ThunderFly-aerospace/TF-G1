@@ -21,6 +21,7 @@ stred_M4_cylinder_X = width/2 - M4_screw_radius * 2;
 stred_M4_cylinder_Z_horni = height - M4_screw_radius - M4_screw_diameter*0.75;
 stred_M4_cylinder_Z_dolni = M4_screw_radius + M4_screw_diameter*2;
 
+module 666_1026(){
 difference (){
 
 translate([-(width/2),-(depth/2),0])
@@ -57,4 +58,5 @@ cube ([width,depth,height]);
 	translate([width/2,-uhlopricka_2-depth/2+1,-3])
 	rotate([0,0,45])
 	cube([depth/2,depth/2,height+6]);
+}
 }

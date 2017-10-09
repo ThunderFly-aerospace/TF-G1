@@ -7,6 +7,7 @@ depth=tube_for_undercarriage_outer_diameter+M3_screw_diameter+2*wall_thickness+t
 height=width;
 radius=tube_for_undercarriage_outer_diameter/2;
 
+module 666_1014(){
 //mirror ([1,0,0])
 
 difference(){
@@ -62,3 +63,4 @@ cube([width,depth,height]);
 	cylinder (h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2 ,r2 = Nut_diameter_M4/2, $fn = 6);
     
     }
+}

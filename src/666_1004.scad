@@ -7,7 +7,7 @@ depth=main_tube_outer_diameter*2+2*wall_thickness+thickness_between_tubes;
 height=width;
 radius=main_tube_outer_diameter/2;
 
-
+module 666_1004(){
 
 difference(){
 
@@ -68,3 +68,4 @@ cube([width,depth,height]);
 
 
     }
+}
