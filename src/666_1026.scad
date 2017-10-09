@@ -39,23 +39,6 @@ cube ([width,depth,height]);
 	translate([0,depth/2+3,42.5])
 	rotate([90,0,0])
 	cylinder(h=depth+6, r1=M4_screw_radius, r2 = M4_screw_radius, $fn=20);
-
-	//nut
-	translate([0,depth/2+3,7.5])
-	rotate([90,0,0])
-	cylinder(h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2, r2= Nut_diameter_M4/2, $fn = 6);
-
-	translate([0,depth/2+3,42.5])
-	rotate([90,0,0])
-	cylinder(h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2, r2= Nut_diameter_M4/2, $fn = 6);
-
-	translate([0,-depth/2+3,7.5])
-	rotate([90,0,0])
-	cylinder(h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2, r2= Nut_diameter_M4/2, $fn = 6);
-
-	translate([0,-depth/2+3,42.5])
-	rotate([90,0,0])
-	cylinder(h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2, r2= Nut_diameter_M4/2, $fn = 6);
 	
 	//bevelled edge
 
