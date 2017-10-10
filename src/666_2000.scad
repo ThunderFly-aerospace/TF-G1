@@ -3,6 +3,7 @@ use <666_1006.scad>
 use <666_1014.scad>
 use <666_1017.scad>
 use <666_1026.scad>
+use <Parameters.scad>
 
 
 
@@ -14,5 +15,31 @@ translate([50,0,0])
 666_1026();
 
 
+
 translate([100,2,-3])
 666_1004();
+
+
+
+translate([150,90,0])
+rotate([90,0,0])
+666_1006();
+
+translate([0,90,0])
+rotate([90,0,0])
+666_1006();
+
+translate([0,-90,0])
+rotate([-90,0,0])
+666_1006();
+
+translate([150,-90,0])
+rotate([-90,0,0])
+666_1006();
+
+
+
+translate([200,0,0])
+666_1014();
+
+
