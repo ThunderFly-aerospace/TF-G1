@@ -1,9 +1,9 @@
 //Main tube diameter [mm]
 main_tube_outer_diameter = 25.3;
-main_tube_inner_diameter = 22.8;
+main_tube_inner_diameter = 23.6;
 
 //Tube for undercarriage [mm]
-tube_for_undercarriage_outer_diameter = 10.3;
+tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 
 //Screw diameter and nut for M4 [mm]
