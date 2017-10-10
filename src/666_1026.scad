@@ -1,5 +1,7 @@
 include <../Parameters.scad>
 
+module 666_1026(){
+
 radius=main_tube_outer_diameter/2;
 wall_thickness=main_tube_outer_diameter/10;
 width=main_tube_outer_diameter+2*wall_thickness;	
@@ -12,16 +14,12 @@ uhlopricka=sqrt(c_na_druhou);
 c2_na_druhou=(depth/2*depth/2)+(depth/2*depth/2);
 uhlopricka_2=sqrt(c2_na_druhou);
 
-
-
-
 M4_screw_radius=M4_screw_diameter/2;
 wall_thickness_M4_cylinder_X = M4_screw_radius;
 stred_M4_cylinder_X = width/2 - M4_screw_radius * 2;
 stred_M4_cylinder_Z_horni = height - M4_screw_radius - M4_screw_diameter*0.75;
 stred_M4_cylinder_Z_dolni = M4_screw_radius + M4_screw_diameter*2;
 
-module 666_1026(){
 difference (){
 
 translate([-(width/2),-(depth/2),0])
@@ -60,3 +58,6 @@ cube ([width,depth,height]);
 	cube([depth/2,depth/2,height+6]);
 }
 }
+
+
+666_1026();

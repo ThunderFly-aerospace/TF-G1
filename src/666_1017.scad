@@ -1,12 +1,14 @@
 include <../Parameters.scad>
 
+module 666_1017() {
+
 wall_thickness=main_tube_outer_diameter/5;
 width=main_tube_outer_diameter+2*wall_thickness;
 depth=width;
 height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
 radius=main_tube_outer_diameter/2;
 
-module 666_1017 () {
+
 difference () {
 	translate([-(width/2),-(width/2),0])
 	cube ([width,depth,height]);
@@ -105,3 +107,5 @@ difference () {
 
    }    
 }
+
+666_1017();

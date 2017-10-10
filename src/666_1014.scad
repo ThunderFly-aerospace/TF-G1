@@ -1,14 +1,13 @@
 include <../Parameters.scad>
-		
+
+module 666_1014(){
+
 wall_thickness= tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes=tube_for_undercarriage_outer_diameter/10;			
 width=tube_for_undercarriage_outer_diameter+2*wall_thickness;
 depth=tube_for_undercarriage_outer_diameter+M3_screw_diameter+2*wall_thickness+thickness_between_tubes;
 height=width;
 radius=tube_for_undercarriage_outer_diameter/2;
-
-module 666_1014(){
-//mirror ([1,0,0])
 
 difference(){
 
@@ -64,3 +63,5 @@ cube([width,depth,height]);
     
     }
 }
+
+666_1014();

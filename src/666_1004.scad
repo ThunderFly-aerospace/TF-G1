@@ -1,13 +1,14 @@
 include <../Parameters.scad>
-		
+
+module 666_1004(){
+
 wall_thickness=main_tube_outer_diameter/5;
-thickness_between_tubes=main_tube_outer_diameter/10;			
+thickness_between_tubes=main_tube_outer_diameter/10;
 width=main_tube_outer_diameter+2*wall_thickness;
 depth=main_tube_outer_diameter*2+2*wall_thickness+thickness_between_tubes;
 height=width;
 radius=main_tube_outer_diameter/2;
 
-module 666_1004(){
 
 difference(){
 
@@ -69,3 +70,7 @@ cube([width,depth,height]);
 
     }
 }
+
+
+666_1004();
+

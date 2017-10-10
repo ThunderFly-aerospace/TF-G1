@@ -1,8 +1,6 @@
 include <../Parameters.scad>
-height = 25;
-height_of_mini_cylinder = 2;
 
-module 666_1006(){
+module 666_1006(height = 25, height_of_mini_cylinder = 2){
 	difference (){
 
 cylinder (h = height, r1 = (main_tube_inner_diameter-0.4)/2, r2 = (main_tube_inner_diameter-0.4)/2, $fn=200); //ubrala jsem na průměru 0.4, aby se ta vložka vešla do vnitřku té hlavní trubky
@@ -28,3 +26,5 @@ cylinder (h=height_of_mini_cylinder+6, r1 = tube_for_undercarriage_outer_diamete
 		}
 	}
 }
+
+666_1006();
