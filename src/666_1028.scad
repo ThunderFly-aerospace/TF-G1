@@ -136,13 +136,10 @@ cube ([50,150,170]);
 //mirror ([1,0,0])
 union(){
 
-translate([-150,75,0])
-rotate([0,0,-90])
+translate([-150,-75,0])
+rotate([0,-90,-90])
 airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
 
-translate([-150,-75,0])
-rotate([0,0,90])
-airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
 }
 
 
