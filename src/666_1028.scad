@@ -1,7 +1,7 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 
-//mirror ([1,0,0])
+mirror ([1,0,0])
 
 //BASIC DROP
 difference (){
@@ -41,8 +41,8 @@ cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $
 
 
 //for printing
-translate([-0.1,-75,-10])
-cube ([50,150,170]);
+translate ([-0.1,-75,0])
+cube ([150,150,170]);
 
 }
 
@@ -62,72 +62,73 @@ union (){
 	difference(){
 	//triangle profile
 translate([0,0,0])
-rotate([0,0,155])
-airfoil(naca = 0008, L = uhlopricka, N=101, h = 150, open = false);
+rotate([0,-90,152.5])
+airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
 
 translate([0,0,-15])
 cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
 
 //for printing
-translate([-0.1,-75,-10])
-cube ([50,150,170]);
+translate ([-149.9,-75,0])
+cube ([150,150,170]);
 }
 }
 
 //mirror ([1,0,0])
-union (){
+//union (){
 	
-	difference(){
-translate([-150,75,0])
-rotate([0,0,-25])
-airfoil(naca = 0008, L = uhlopricka, N=101, h = 150, open = false);
+//	difference(){
+//translate([-150,75,0])
+//rotate([0,0,-25])
+//airfoil(naca = 0008, L = uhlopricka, N=101, h = 150, open = false);
 
-translate([0,0,-15])
-cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+//translate([0,0,-15])
+//cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
 
 //for printing
-translate([-0.1,-75,-10])
-cube ([50,150,170]);
-}
-}
+//translate([-0.1,-75,-10])
+//cube ([50,150,170]);
+//}
+//}
 
 
 //LOWER
 
 //mirror ([1,0,0])
 union (){
-	difference(){
+
+		difference(){
 
 
 translate([0,0,0])
-rotate([0,0,-155])
-airfoil(naca = 0008, L =uhlopricka, N=101, h = 150, open = false);
+rotate([0,-90,-152.5])
+airfoil(naca = 0008, L =150, N=101, h = 150, open = false);
 
 translate([0,0,-15])
 cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
 
 //for printing
-translate([-0.1,-75,-10])
-cube ([50,150,170]);
+translate ([-149.9,-75,0])
+cube ([150,150,170]);
 }
 }
 
 //mirror ([1,0,0])
-union (){
-	difference(){
+//union (){
+//	difference(){
 
-translate([-150,-75,0])
-rotate([0,0,25])
-airfoil(naca = 0008, L =uhlopricka, N=101, h = 150, open = false);
+//translate([-150,-75,0])
+//rotate([0,0,25])
+//airfoil(naca = 0008, L =uhlopricka, N=101, h = 150, open = false);
 
-translate([0,0,-15])
-cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+//translate([0,0,-15])
+//cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
 
 //for printing
-translate([-0.1,-75,-10])
-cube ([50,150,170]);
-}
-}
+//translate([-0.1,-75,-10])
+//cube ([50,150,170]);
+//}
+//}
 
 
 
@@ -136,13 +137,13 @@ cube ([50,150,170]);
 //mirror ([1,0,0])
 union(){
 
-translate([-150,75,0])
-rotate([0,0,-90])
-airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
+translate([135,74,0])
+rotate([90,-90,0])
+airfoil(naca = 0008, L = 150, N=101, h = 148, open = false);
 
-translate([-150,-75,0])
-rotate([0,0,90])
-airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
+//translate([-150,-75,0])
+//rotate([0,0,90])
+//airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
 }
 
 
