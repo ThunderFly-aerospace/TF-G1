@@ -68,6 +68,15 @@ airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
 translate([0,0,-15])
 cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
 
+translate ([-150*0.4,0,150*0.4/2])
+rotate ([0,90,0])
+cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+translate ([-150*0.4,0,150*0.4])
+rotate ([0,90,0])
+cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+
 //for printing
 translate ([-149.9,-75,0])
 cube ([150,150,170]);
@@ -106,6 +115,15 @@ airfoil(naca = 0008, L =150, N=101, h = 150, open = false);
 
 translate([0,0,-15])
 cylinder (h = 105, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+
+translate ([-150*0.4,0,150*0.4/2])
+rotate ([0,90,0])
+cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+translate ([-150*0.4,0,150*0.4])
+rotate ([0,90,0])
+cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
 
 //for printing
 translate ([-149.9,-75,0])
