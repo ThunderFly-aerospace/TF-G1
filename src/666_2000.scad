@@ -3,8 +3,7 @@ use <666_1006.scad>
 use <666_1014.scad>
 use <666_1017.scad>
 use <666_1026.scad>
-use <Parameters.scad>
-
+include <../Parameters.scad>
 
 
 translate([0,0,0])
