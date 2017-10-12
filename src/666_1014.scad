@@ -38,8 +38,11 @@ cube([width,depth,height]);
     cube([width+6,height,height]);  
 
     //for mirror
-    translate ([-0.1,-depth+radius+wall_thickness-3,-3])
-    cube ([width,depth+6,height+6]);
+    //translate ([-0.1,-depth+radius+wall_thickness-3,-3])
+    //cube ([width,depth+6,height+6]);
+
+    translate ([-0.1,-depth/2-3,-3])
+    cube ([0.2,depth+6,height+6]);
 
     //screw
 
@@ -61,6 +64,16 @@ cube([width,depth,height]);
 	rotate([0,90,0])
 	cylinder (h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2 ,r2 = Nut_diameter_M4/2, $fn = 6);
     
+    translate([width/2- Nut_height_M3,0,height/2])
+	rotate([0,90,0])
+	cylinder (h = Nut_height_M3 + 3, r1 = Nut_diameter_M3/2 ,r2 = Nut_diameter_M3/2, $fn = 6);
+
+	translate([width/2- Nut_height_M4,-(thickness_between_tubes+tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),radius+wall_thickness])
+	rotate([0,90,0])
+	cylinder (h = Nut_height_M4 + 3, r1 = Nut_diameter_M4/2 ,r2 = Nut_diameter_M4/2, $fn = 6);
+
+
+
     }
 }
 
