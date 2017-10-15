@@ -1,7 +1,7 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 
-
+module 666_1028(){
 //mirror ([1,0,0])
 
 
@@ -77,7 +77,8 @@ difference (){
 
 
 
-
+}
+666_1028();
 
 
 
