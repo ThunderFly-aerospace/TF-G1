@@ -16,7 +16,7 @@ difference (){
                     difference()
                     {
 
-                      polygon(points = airfoil_data(naca=0030, L = 150)); 
+                      polygon(points = airfoil_data(naca=0030, L = 140)); 
                       square(200, 200); 
                     }
 
