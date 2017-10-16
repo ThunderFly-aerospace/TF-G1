@@ -25,20 +25,20 @@ difference (){
 
     //UPPER
         translate([0,0,0])
-            rotate([0,-90,152.5])
-                airfoil(naca = 0008, L = 50, N=101, h = 130, open = false);
+            rotate ([0,-90, 135])			//rotate([0,-90,152.5])
+                airfoil(naca = 0008, L = 50, N=101, h = 210, open = false);
     //LOWER
 
         translate([0,0,0])
-            rotate([0,-90,-152.5])
-                airfoil(naca = 0008, L =50, N=101, h = 130, open = false);
+            rotate ([0,-90,-135])		//rotate([0,-90,-152.5])
+                airfoil(naca = 0008, L =50, N=101, h = 210, open = false);
 
 
     //VERTICAL
 
-        translate([115,74,0])
+        translate ([147,150,0])//translate([115,74,0])
             rotate([90,-90,0])
-                airfoil(naca = 0008, L = 70, N=101, h = 148, open = false);
+                airfoil(naca = 0008, L = 70, N=101, h = 300, open = false);
     }
 
 
@@ -56,14 +56,14 @@ difference (){
             cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
     //nut
-    translate([-150*0.4/2,0,150*0.4])
+    translate([150*0.4/3.5-Nut_height_M3,0,150*0.4])
         rotate([0,90,0])
-            %cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+            cylinder (h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
 
-    translate([-150*0.4/2,0,150*0.4/2])
+    translate([150*0.4/3-Nut_height_M3,0,150*0.4/2])
         rotate([0,90,0])
-            cylinder (h = Nut_height_M3+3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+            cylinder (h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
 
 
@@ -75,6 +75,11 @@ difference (){
         cube ([200,200,200]);
 }
 
+//For help 150X150
+//translate([0,149,0])
+//cube ([150,1,10]);
+//translate([0,-150,0])
+//cube ([150,1,10]);
 
 
 }
