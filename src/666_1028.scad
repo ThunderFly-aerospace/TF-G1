@@ -24,20 +24,28 @@ module 666_1028(){
         //UPPER
             translate([0,-10,0])
                 rotate ([0,-90, 160])			//rotate([0,-90,152.5])
-                    airfoil(naca = 0008, L = 95, N=101, h = 149, open = false);
+                    airfoil(naca = 0005, L = 95, N=101, h = 149, open = false);
         //LOWER
 
             translate([0,10,0])
                 rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
-                    airfoil(naca = 0008, L =95, N=101, h = 149, open = false);
+                    airfoil(naca = 0005, L =95, N=101, h = 149, open = false);
 
 
         //VERTICAL
 
             translate ([140,75,0])//translate([115,74,0])
                 rotate([90,-87,0])
-                    airfoil(naca = 0008, L = 150, N=101, h = 150, open = false);
+                    airfoil(naca = 0005, L = 150, N=101, h = 150, open = false);
         }
+
+
+        //straightening ribbons 
+        translate([140/2,-100,40])
+            cube([0.5,200,15]);
+        translate([125,0,45])
+            cube([50,0.5,30]);
+
 
 
         //tube
@@ -79,8 +87,8 @@ module 666_1028(){
 666_1028();
 
 //For printing size limits check.
-translate([0,-75,0])
-%    cube ([150,150,150]);
+//translate([0,-75,0])
+//%    cube ([150,150,150]);
 
 
 
