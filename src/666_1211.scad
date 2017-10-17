@@ -11,8 +11,8 @@ union (){
 
 			//žlábek
 			difference(){
-			translate ([0,0,+4])
-			cylinder (h = 9+4, r1 = 75/2, r2 = 75/2, $fn = 200);
+			translate ([0,0,0])
+			cylinder (h = 13+4, r1 = 75/2, r2 = 75/2, $fn = 200);
 
 			translate([0,0,0])
 			cylinder (h = 20, r1 = 50/2, r2 = 50/2, $fn = 200);
@@ -47,6 +47,8 @@ union (){
 				cylinder (h = 1, r1 = 43/2, r2 = 42/2, $fn = 200);
 				}
 		
+
+		cube ([100,100,100]);
 
 	}
  
