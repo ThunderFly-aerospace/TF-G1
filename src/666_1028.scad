@@ -5,7 +5,8 @@ module 666_1028(){
 //mirror ([1,0,0])
 
     //BASIC DROP
-    render(convexity = 2) difference (){
+    //render(convexity = 2) 
+    difference (){
 
         union (){
             translate([0,0,-8.5])
@@ -22,16 +23,24 @@ module 666_1028(){
         //TRIANGLE PROFILE
 
         //UPPER
+            difference (){
             translate([0,-10,0])
                 rotate ([0,-90, 160])			//rotate([0,-90,152.5])
-                    airfoil(naca = 0005, L = 95, N=101, h = 149, open = false);
-        //LOWER
+                    airfoil(naca = 0005, L = 95, N=101, h = 152, open = false);
+			translate ([140,-68,0]) 
+            	cube ([15,15,15]);
+			}	        
 
+
+        //LOWER
+        	difference (){
             translate([0,10,0])
                 rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
-                    airfoil(naca = 0005, L =95, N=101, h = 149, open = false);
+                    airfoil(naca = 0005, L =95, N=101, h = 152, open = false);
 
-
+			translate ([140,55,0]) 
+            	cube ([15,15,15]);
+        }
         //VERTICAL
 
             translate ([140,75,0])//translate([115,74,0])
@@ -49,9 +58,12 @@ module 666_1028(){
 
 
         //tube
+        
         translate([0,0,-10])
             cylinder (h = 90, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn=200);
-
+		
+        
+        
         //screw
         translate ([-150*0.4,0,150*0.4/2])
             rotate ([0,90,0])
@@ -79,9 +91,25 @@ module 666_1028(){
 
         translate ([-50,-100,-200])
             cube ([200,200,200]);
+
+        
     }
 }
 
+	difference (){
+	union (){
+    translate ([0,0,80])
+            rotate ([0,180,0])
+		cylinder (h = 5, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = 200);
+		}
+
+ //cleanup for printing
+        translate ([-149.9,-75,-1])
+            cube ([150,150,170]);
+
+        translate ([-50,-100,-200])
+            cube ([200,200,200]);
+	}
 
 
 666_1028();
