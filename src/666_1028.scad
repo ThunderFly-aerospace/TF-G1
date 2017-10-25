@@ -235,7 +235,7 @@ strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
             //cube ([200,200,200]);
 
         //for faster printing
-        translate ([-40,-75,-10])
+        translate ([-35,-75,-10])
         	cube ([150,150,150]);    
 
 }	
