@@ -24,50 +24,49 @@ module 666_1028(){
 
         //UPPER
             difference (){
-            translate([0,-10,0])
-                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
-                    airfoil(naca = 0005, L = 95, N=101, h = 152, open = false);
-			translate ([140,-68,0]) 
-            	cube ([15,15,15]);
+	            translate([0,-10,0])
+	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
+	                    airfoil(naca = 0005, L = 95, N=101, h = 152, open = false);
+				translate ([140,-68,0]) 
+	            	cube ([15,15,15]);
 			
-
         		x = 170;
         		y = 170;
         		z = 60;
-					fen_x = 1;
-					fen_y = 9;
-					fen_size = 0.5;
+				fen_x = 1;
+				fen_y = 5;
+				fen_size = 0.2;
 
-					fen_size_x = fen_size * x / 2;
-fen_size_y = fen_size * y / 100;
+				fen_size_x = fen_size * x / 2;
+				fen_size_y = fen_size * y / 100;
 
-strut_x = (x - fen_x * fen_size_x) / (fen_x + 10); 
-strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
+				strut_x = (x - fen_x * fen_size_x) / (fen_x + 10); 
+				strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
 
-// take away windows from fenestrated surface
-  
-    
-    
-    translate([135,-90,3])
-    rotate([0,0,70])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-       cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
-translate([125,-90,32])
-    rotate([0,0,70])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
- 
-			}	        
+				// take away windows from fenestrated surface
+				  
+				    
+				    
+			    translate([135,-90,3])
+			    rotate([0,0,70])
+			    for (i = [0:fen_x - 1]) {
+			      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
+			      for (i = [0:fen_y - 1]) {
+			        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
+			       cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+			      }
+			  }
+			translate([125,-90,32])
+			    rotate([0,0,70])
+			    for (i = [0:fen_x - 1]) {
+			      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
+			      for (i = [0:fen_y - 1]) {
+			        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
+			        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+			      }
+			  }
+			 
+						}	        
 
 
         //LOWER
@@ -78,110 +77,69 @@ translate([125,-90,32])
 
 			translate ([140,55,0]) 
             	cube ([15,15,15]);
- //fenestrated surface
+        //fenestrated surface
         //fenestrated surface
         
         		x = 170;
         		y = 170;
         		z = 60;
-					fen_x = 1;
-					fen_y = 9;
-					fen_size = 0.5;
+				fen_x = 1;
+				fen_y = 9;
+				fen_size = 0.5;
 
-					fen_size_x = fen_size * x / 2;
-fen_size_y = fen_size * y / 100;
+				fen_size_x = fen_size * x / 2;
+				fen_size_y = fen_size * y / 100;
 
-strut_x = (x - fen_x * fen_size_x) / (fen_x + 10); 
-strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
+				strut_x = (x - fen_x * fen_size_x) / (fen_x + 10); 
+				strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
 
-// take away windows from fenestrated surface
-  
-    
-    
-    translate([-20,40,3])
-    rotate([0,0,-70])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
+		// take away windows from fenestrated surface
+		  
+		    
+		    
+		    translate([-20,40,3])
+		    rotate([0,0,-70])
+		    for (i = [0:fen_x - 1]) {
+		      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
+		      for (i = [0:fen_y - 1]) {
+		        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
+		        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+		      }
+		  }
 
-      translate([-10,40,32])
-    rotate([0,0,-70])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
+		      translate([-10,40,32])
+		    rotate([0,0,-70])
+		    for (i = [0:fen_x - 1]) {
+		      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
+		      for (i = [0:fen_y - 1]) {
+		        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
+		        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+		      }
+		  }
        	}
         //VERTICAL
-		difference() { 
-            translate ([140,75,0])//translate([115,74,0])
-                rotate([90,-87,0])
-                    airfoil(naca = 0005, L = 150, N=101, h = 150, open = false);
-        //fenestrated surface
-        
-        		x = 170;
-        		y = 170;
-        		z = 60;
-					fen_x = 1;
-					fen_y = 9;
-					fen_size = 0.5;
+            difference (){
+                translate ([140,75,0])//translate([115,74,0])
+                    rotate([90,-87,0])
+                        airfoil(naca = 0005, L = 150, N=101, h = 150, open = false);
 
-					fen_size_x = fen_size * x / 2;
-fen_size_y = fen_size * y / 100;
 
-strut_x = (x - fen_x * fen_size_x) / (fen_x + 10); 
-strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
+                //VERTICAL - fenestrating windows
+                translate([130,-82,40])
+                  for (i = [0:7]) { // opakovani cyklu
+                    if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                        translate([0, i * 20, 0])  //sude prorezy
+                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                    }
+                    else{
+                        translate([0, i * 20, -20]) // liche prorezy
+                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                    }
+                }
+            }
 
-// take away windows from fenestrated surface
-  
-    
-    
-    translate([110,-90,3])
-    rotate([0,0,0])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
-    translate([110,-82,40])
-    rotate([0,0,0])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
-    translate([110,-90,85])
-    rotate([0,0,0])
-    for (i = [0:fen_x - 1]) {
-      translate([i * (fen_size_x + strut_x) + strut_x, 0, 0])
-      for (i = [0:fen_y - 1]) {
-        translate([0, i * (fen_size_y + strut_y) + strut_x, -1]) 
-        cube([fen_size_x, fen_size_y, z+2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-      }
-  }
-
-                
-
-        //straightening ribbons 
-        //translate([140/2,-100,40])
-            //cube([0.5,200,15]);
-        //translate([125,0,45])
-            //cube([50,0.5,30]);
-
-        
-    }
-  }
-
+	    } // end of union
+        // Start of substraction objects
 
 
         //tube
@@ -221,23 +179,11 @@ strut_y = (y - fen_y * fen_size_y) / (fen_y + 0);
         translate ([-50,-100,-200])
             cube ([200,200,200]);
     
-    }
-
-
-	
- 
-        //cleanup for printing
-     
-        //translate ([-149.9,-75,-1])
-            //cube ([150,150,170]);
-
-        //translate ([-50,-100,-200])
-            //cube ([200,200,200]);
-
-        //for faster printing
-        translate ([-35,-75,-10])
+        translate ([-75,-75,-10])
         	cube ([150,150,150]);    
 
+    }	
+ 
 }	
 
 
