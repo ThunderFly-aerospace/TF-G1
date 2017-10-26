@@ -64,9 +64,9 @@ difference (){
 
 
 //for front part
-		translate ([-2,3,-25])
-				cube ([52,depth+3,50]);
-
+		translate ([-2,-1,-25])
+				cube ([52,depth+10,50]);
+			
 
 //for tube in back
 		translate ([width-10,0,0])
@@ -76,8 +76,11 @@ difference (){
 //for tube - propeller
 		translate ([237.5 - (main_tube_outer_diameter/2),90,-main_tube_outer_diameter/2])
 			rotate ([90,0,0])
-				%cube ([main_tube_outer_diameter, main_tube_outer_diameter,main_tube_outer_diameter]);
-
+				cube ([main_tube_outer_diameter, main_tube_outer_diameter,main_tube_outer_diameter]);
+			
+//for printing
+		translate([0,-4.9,-170/2])
+				cube ([600,5,170]);
 
 }
 
