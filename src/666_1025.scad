@@ -1,6 +1,8 @@
  use <./lib/naca4.scad>
 include <../Parameters.scad>
 
+module 666_1025() {
+
 length_of_drop = 580;
 thickness = 2;
 depth = 75;
@@ -85,3 +87,7 @@ difference (){
 
 }
 
+
+}
+
+666_1025();
