@@ -3,11 +3,12 @@ include <../Parameters.scad>
 
 length_of_drop = 580;
 thickness = 2;
-ratio = (length_of_drop-thickness)/length_of_drop;
 depth = 75;
 height = 150;
 width = 550;
-
+ratio_x = (length_of_drop-thickness)/length_of_drop;
+ratio_y = (depth - thickness)/depth;
+ratio_z = (height - thickness)/height; 
 
 difference (){
 	
@@ -35,7 +36,7 @@ difference (){
 
 //for hollow
 		translate ([0,0,0])
-			scale ([ratio,ratio,ratio])
+			scale ([ratio_x,ratio_y,ratio_z])
 
 
 	intersection () {
