@@ -1,5 +1,7 @@
  use <./lib/naca4.scad>
 include <../Parameters.scad>
+
+module 666_1029() {
 	
 length_of_drop = 580;
 thickness = 2;
@@ -80,7 +82,12 @@ difference (){
 				cube ([main_tube_outer_diameter,13, height+40]);
 
 
-
-
+	//hollow front
+		translate([-2,0,-56/2])
+				cube ([47.50+2,2,56]);			
 
 }
+
+}
+
+666_1029();
