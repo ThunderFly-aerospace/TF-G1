@@ -37,12 +37,12 @@ difference (){
 	}
 
 	//for hollow
-		translate ([0,0,0])
+		translate ([thickness/2,0,0])
 			scale ([ratio_x,ratio_y,ratio_z])
 
 
 	intersection () {
- 		translate([thickness/2,0,0])
+ 		translate([0,0,0])
      		rotate ([0,90,0])           
                 rotate_extrude($fn = 100)
                     rotate([0,0,90])
