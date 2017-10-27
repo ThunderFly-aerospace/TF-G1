@@ -37,7 +37,7 @@ difference (){
 	}
 
 //for hollow
-		translate ([0,0,0])
+		translate ([thickness/2,0,0])
 			scale ([ratio_x,ratio_y,ratio_z])
 
 
