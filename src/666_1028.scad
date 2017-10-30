@@ -36,11 +36,11 @@ module 666_1028(){
                   for (i = [0:7]) { // opakovani cyklu
                     if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
                         translate([0, i * 19, 5])  //sude prorezy
-                            cube([30, 0.2, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                     else{
                         translate([0, i * 19, -20]) // liche prorezy
-                            cube([30, 0.2, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
         
        	}
