@@ -13,14 +13,18 @@ difference () {
 	translate([-(width/2),-(width/2),0])
 	   cube ([width,depth,height]);
 
+    //middle cut
+    translate ([-0.1,-depth/2-3,-3])
+        cube ([0.2,depth+6,height+6]);
+
 	//main tube
 	translate([0,radius+wall_thickness+3, height-radius-wall_thickness])    //main_tube_outer_diameter*1.8+radius])
         rotate([90,0,0])
             cylinder(h=depth+6,r1=radius,r2=radius, $fn = 200);
 
-   //vertical tube
-   translate ([0,0,-1])
-    cylinder(h= height-main_tube_outer_diameter-wall_thickness,r1=radius,r2=radius, $fn=200);
+    //vertical tube
+    translate ([0,0,-1])
+        cylinder(h= height-main_tube_outer_diameter-wall_thickness,r1=radius,r2=radius, $fn=200);
 
    				//translate([-width/2,0,0])
    				//cube([width,depth, height+6]);
