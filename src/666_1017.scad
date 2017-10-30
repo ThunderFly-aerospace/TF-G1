@@ -14,8 +14,8 @@ difference () {
 	   cube ([width,depth,height]);
 
     //middle cut
-    translate ([-0.1,-depth/2-3,-3])
-        cube ([0.2,depth+6,height+6]);
+    translate ([-4,-depth/2-3,-3])
+        cube ([8,depth+6,height+6]);
 
 	//main tube
 	translate([0,radius+wall_thickness+3, height-radius-wall_thickness])    //main_tube_outer_diameter*1.8+radius])
