@@ -35,12 +35,12 @@ module 666_1028(){
                 	rotate([0,0,70])	
                   for (i = [0:7]) { // opakovani cyklu
                     if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 20, 0])  //sude prorezy
-                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        translate([0, i * 19, 5])  //sude prorezy
+                            cube([30, 0.2, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                     else{
-                        translate([0, i * 20, -20]) // liche prorezy
-                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        translate([0, i * 19, -20]) // liche prorezy
+                            cube([30, 0.2, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
         
        	}
@@ -57,16 +57,16 @@ module 666_1028(){
             	cube ([15,15,15]);
 
             	//LOWER - fenestrating windows
-                translate([0,20,30])
+                translate([0,20,40])
                 	rotate([0,0,-70])	
                   for (i = [0:7]) { // opakovani cyklu
                     if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 20, 0])  //sude prorezy
-                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        translate([0, i * 19, 5])  //sude prorezy
+                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                     else{
-                        translate([0, i * 20, -20]) // liche prorezy
-                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        translate([0, i * 19, -20]) // liche prorezy
+                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
         
        	}
@@ -79,15 +79,15 @@ module 666_1028(){
 
 
                 //VERTICAL - fenestrating windows
-                translate([130,-82,40])
-                  for (i = [0:7]) { // opakovani cyklu
+                translate([130,-72,40])
+                  for (i = [1:7]) { // opakovani cyklu
                     if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 20, 0])  //sude prorezy
-                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        translate([0, i * 18, 20])  //sude prorezy
+                            cube([30, 0.1, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                     else{
-                        translate([0, i * 20, -20]) // liche prorezy
-                            cube([30, 0.2, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        translate([0, i * 18, -20]) // liche prorezy
+                            cube([30, 0.1, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                 }
             }
@@ -102,8 +102,7 @@ module 666_1028(){
             cylinder (h = 90, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn=200);
 		
         translate ([0,0,80])
-          rotate ([0,0,0])
-		cylinder (h = 5, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = 200);
+            cylinder (h = 15, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = 200);
         
         //screw
         translate ([-150*0.4,0,150*0.4/2])
