@@ -40,6 +40,14 @@ function airfoil_data(naca=12, L = 100, N = 81, open = false) =
     let(yt = sign(b)*Na[2]/.2*(A*[sqrt(x), x, x*x, x*x*x, x*x*x*x])) 
     Na[0]==0?L*[x, yt]:L*camber(x, yt, Na[0], Na[1], sign(b))];  
 
+
+function trailing_edge_angle(naca=12, open = false) = 
+  let(Na = len(naca)!=3?NACA(naca):naca)
+  let(A = [.2969, -0.126, -.3516, .2843, open?-0.1015:-0.1036])
+  let (x =0.999)  
+  let(yt = Na[2]/.2*(A*[sqrt(x), x, x*x, x*x*x, x*x*x*x])) 
+  atan2(yt,1-x);  
+
 // helper functions
 function NACA(naca) = 
   let (M = floor(naca/1000))
