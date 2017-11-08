@@ -6,6 +6,7 @@ use <666_1026.scad>
 use <666_1028.scad>
 use <666_1025.scad>
 use <666_1029.scad>
+use <666_1032.scad>
 
 include <../Parameters.scad>
 
@@ -77,6 +78,9 @@ translate ([0,0,-(main_tube_outer_diameter+2*main_tube_outer_diameter/10)/2])
 translate([0,0,-(main_tube_outer_diameter+2*main_tube_outer_diameter/10)/2+2])
 	rotate([-90,0,0])
 		666_1029();
+
+translate([180,0,87])
+		666_1032();
 
 
 //hlavní trubky
