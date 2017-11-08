@@ -2,6 +2,9 @@ use <./lib/naca4.scad>
 include <../Parameters.scad>
 use <666_1026.scad>
 
+module 666_1032(){
+
+
 airfoil_thickness = 0030;
 depth = main_tube_outer_diameter*2;
 width = main_tube_outer_diameter + 2*(main_tube_outer_diameter/10);
@@ -41,3 +44,5 @@ difference (){
 
 //translate ([0,-3-depth/2,0])
 //cube ([100,3,10]);
+}
+666_1026();
