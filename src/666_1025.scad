@@ -20,12 +20,12 @@ module 666_1025() {
     	intersection () {
      		translate([0,0,0])
          		rotate ([0,90,0])           
-                    rotate_extrude($fn = 200)
+                    rotate_extrude($fn = 100)
                         rotate([0,0,90])
                             difference()
                             {
 
-                              polygon(points = airfoil_data(naca=airfoil_thickness, L = length_of_drop , N=200)); 
+                              polygon(points = airfoil_data(naca=airfoil_thickness, L = length_of_drop , N=100)); 
                               square(length_of_drop, length_of_drop); 
                             }
          	minkowski(){                   
@@ -33,7 +33,7 @@ module 666_1025() {
          		cube ([x_size,y_size,z_size]);
          	
          		rotate ([0,90,0])
-             		cylinder (h = 1, r = corner_radius, $fn = 200);                   
+             		cylinder (h = 1, r = corner_radius, $fn = 100);                   
 
     		}
     	}
