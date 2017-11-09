@@ -88,18 +88,23 @@ scale ([scale_x,scale_y,scale_z])
 				cube ([600,15,170]);
 
     //for undercarriage
-        translate ([60.50, -main_tube_outer_diameter,-z_size/2-20])
+        //translate ([60.50, -main_tube_outer_diameter,-z_size/2-20])
+		translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,-main_tube_outer_diameter,-z_size/2-20])         
                 cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
-        translate ([60.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
+        //translate ([60.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
+        translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2- main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])         
                 cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
 
-        translate ([390.50, -main_tube_outer_diameter,-z_size/2-20])
+        //translate ([390.50, -main_tube_outer_diameter,-z_size/2-20])
+          translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),-main_tube_outer_diameter,-z_size/2-20])
                 cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
-        translate ([390.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
-                cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
+        //translate ([390.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
+		  translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5)-main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])
+	            cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
 
-
-
+	//hollow front
+		translate([-10,-main_tube_outer_diameter/2-3.5,-56/2])
+				cube ([47.50+2,10,56]);	
 }
 }
 
