@@ -71,12 +71,10 @@ translate([920-80,0,0])
 //rotate ([-90,0,90])
 //666_1014();
 
-translate ([0,0,-(main_tube_outer_diameter+2*main_tube_outer_diameter/10)/2])
+
 	rotate ([90,0,0])
 		666_1025();
-
-translate([0,0,-(main_tube_outer_diameter+2*main_tube_outer_diameter/10)/2+2])
-	rotate([-90,0,0])
+	rotate([90,0,0])	
 		666_1029();
 
 translate([180,0,87])
