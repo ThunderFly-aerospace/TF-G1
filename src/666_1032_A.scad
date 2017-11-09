@@ -1,4 +1,5 @@
 	use <./lib/naca4.scad>
+    use <666_1025.scad>
 include <../Parameters.scad>
 
 module 666_1032_A(){
@@ -21,7 +22,7 @@ module 666_1032_A(){
 
 
     airfoil_thickness = 0030;
-depth = main_tube_outer_diameter*2;
+depth = main_tube_outer_diameter*5;
 width = main_tube_outer_diameter + 2*(main_tube_outer_diameter/10);
 height = depth;
 thickness = 1;
@@ -40,27 +41,36 @@ echo(trailing_wall); // print a relative thickness of material at traling edge t
     
 
 
-difference (){
 
-translate([120,0,0])
-rotate ([-90,0,0])
-    airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
-    translate ([thickness+120,0,0])
+
+//translate([180,0,0])
+    //rotate ([-90,0,0])
+        //airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
+            //translate ([thickness+180,0,0])
         //scale([ratio,ratio,210], auto=true) airfoil(naca = 0035, L = 170, N=101, h = 200, open = false);
-        rotate([-90,0,0])
-            resize([170 - thickness - trailing_wall*thickness,(170*airfoil_thickness/100)- 2*thickness,315], auto=true) airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
-
+                 //rotate([-90,0,0])
+                     //resize([170 - thickness - trailing_wall*thickness,(170*airfoil_thickness/100)- 2*thickness,315], auto=true) airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
+difference (){
+scale ([1,1,1.2])
+    translate([180,0,0])
+      rotate ([-90,0,0])
+        airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
+            translate ([thickness+180,0,0])
+        //scale([ratio,ratio,210], auto=true) airfoil(naca = 0035, L = 170, N=101, h = 200, open = false);
+            scale ([1,1,1.2])     
+                 rotate([-90,0,0])
+                     resize([170 - thickness - trailing_wall*thickness,(170*airfoil_thickness/100)- 2*thickness,315], auto=true) airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
 
     //pro otevření
-    translate ([150+133,70,0])
+    translate ([150+193,70,0])
         rotate([-90,0,0])    
             cube ([10,1,195]);
 
-    translate ([35+120,+207,height/2+1.5])
+    translate ([35+180,+207,height/2+1.5])
         rotate ([-90,0,0]) 
             cube ([width*5,depth+6,height+3]);
 
-
+//pro přesné odříznutí je zde hodní díl krytu
 intersection () {
          translate([0,0,0])
                 rotate ([0,90,0])           
