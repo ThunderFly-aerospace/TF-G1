@@ -1,93 +1,107 @@
- use <./lib/naca4.scad>
+	use <./lib/naca4.scad>
 include <../Parameters.scad>
 
-module 666_1029() {
-	
-length_of_drop = 580;
-thickness = 2;
-depth = 90;
-height = 150;
-width = 544;
-ratio_x = (length_of_drop-thickness)/length_of_drop;
-ratio_y = (depth - thickness)/depth;
-ratio_z = (height - thickness)/height; 
+module 666_1029(){
 
-difference (){
-	
-	intersection () {
- 		translate([0,0,0])
-     		rotate ([0,90,0])           
-                rotate_extrude($fn = 100)
-                    rotate([0,0,90])
-                        difference()
-                        {
-
-                          polygon(points = airfoil_data(naca=0045, L = length_of_drop)); 
-                          square(length_of_drop, length_of_drop); 
-                        }
-     	minkowski(){                   
-     	translate ([0,0,-height/2])
-     		cube ([width,depth,height]);
-     	
-     		translate ([0,0,0])
-     		rotate ([0,90,0])
-     		cylinder (h = 1, r1 = 4, r2 = 4, $fn = 100);                   
-
-		}
-	}
-
-	//for hollow
-		translate ([thickness/2,0,0])
-			scale ([ratio_x,ratio_y,ratio_z])
+    length_of_drop = 580;
+    thickness = 0.8;
+    y_size = 100;
+    z_size = 150;
+    x_size = 580;
+    corner_radius = 4;
+    airfoil_thickness= 35;
+    scale_x = 1;
+    scale_y = 1.5;
+    scale_z = 1.5;
 
 
-	intersection () {
- 		translate([0,0,0])
-     		rotate ([0,90,0])           
-                rotate_extrude($fn = 100)
-                    rotate([0,0,90])
-                        difference()
-                        {
-
-                          polygon(points = airfoil_data(naca=0045, L = length_of_drop)); 
-                          square(length_of_drop, length_of_drop); 
-                        }
-     	minkowski(){                   
-     	translate ([0,0,-height/2])
-     		cube ([width,depth,height]);
-     	
-     		translate ([0,0,0])
-     		rotate ([0,90,0])
-     		cylinder (h = 1, r1 = 4, r2 = 4, $fn = 100);                   
-
-		}                   
-
-	}
-
-	//for printing
-		translate([0,-4.9,-170/2])
-				cube ([600,5,170]);
-
-	// hollow for tube for undercarriage
-		
-		//front
-		translate ([60.50,12, -height/2-20])
-				cylinder (h = height + 40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);			
-		translate ([60.50 - main_tube_outer_diameter/2,-1, - height/2-20])
-				cube ([main_tube_outer_diameter,13, height+40]);
-		//back
-		translate ([390.50,12, -height/2-20])
-				cylinder (h = height + 40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);			
-		translate ([390.50 - main_tube_outer_diameter/2,-1, - height/2-20])
-				cube ([main_tube_outer_diameter,13, height+40]);
+    beta = 90 - trailing_edge_angle(naca = airfoil_thickness); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
 
-	//hollow front
-		translate([-2,0,-56/2])
-				cube ([47.50+2,2,56]);			
+difference(){
+
+intersection () {
+    translate([0,0,0])
+         		rotate ([0,90,0])           
+                    rotate_extrude($fn = 100)
+                        rotate([0,0,90])
+                            difference()
+                            {
+
+                              polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
+                              square(length_of_drop,length_of_drop); 
+                            }
+
+scale ([scale_x,scale_y,scale_z]) 
+				rotate ([0,90,0])           
+                   	rotate_extrude($fn = 100)
+                       	rotate([0,0,90])
+                            difference()
+                            {
+
+                              polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
+                              square(length_of_drop,length_of_drop); 
+                            }
+
+                     minkowski(){                   
+         	              translate ([0,-y_size*scale_y - main_tube_outer_diameter/2,-z_size/2])
+         		                 cube ([x_size,y_size*scale_y,z_size]);
+         	
+         		             rotate ([0,90,0])
+             		             cylinder (h = 1, r = corner_radius, $fn = 100);                   
+
+    		          }
+
+
 
 }
 
+//hollowing skeleton
+		translate ([thickness,0,0])
+            	intersection () {
+                    resize([length_of_drop - thickness - trailing_wall* thickness, (length_of_drop*airfoil_thickness/100) - 2*thickness, (length_of_drop*airfoil_thickness/100) - 2*thickness], auto=true)
+                 		rotate ([0,90,0])           
+                            rotate_extrude($fn = 100)
+                                rotate([0,0,90])
+                                    difference()
+                                    {
+
+                                      polygon(points = airfoil_data(naca=airfoil_thickness, L = length_of_drop, N=200)); 
+                                      square(length_of_drop, length_of_drop); 
+                                    }
+                 	minkowski(){                   
+                     	translate ([0,-y_size- main_tube_outer_diameter/2,-z_size/2 + thickness])
+                     		     cube ([x_size,y_size - thickness, z_size - 2*thickness]);
+                     		
+                            rotate ([0,90,0])
+                         		cylinder (h = 1, r = corner_radius, $fn = 100);                   
+            		}                   
+            	}
+          
+
+    
+    			
+    //for printing
+		translate([0,-main_tube_outer_diameter/2,-170/2])
+				cube ([600,15,170]);
+
+    //for undercarriage
+        translate ([60.50, -main_tube_outer_diameter,-z_size/2-20])
+                cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+        translate ([60.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
+                cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
+
+        translate ([390.50, -main_tube_outer_diameter,-z_size/2-20])
+                cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+        translate ([390.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
+                cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
+
+
+
 }
+}
+
 
 666_1029();
