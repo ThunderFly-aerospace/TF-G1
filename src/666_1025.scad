@@ -84,9 +84,11 @@ scale ([scale_x,scale_y,scale_z])
 				cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
 					    
     //for tube - propeller
-		translate ([237.5 - (main_tube_outer_diameter/2),90,-main_tube_outer_diameter/2])
-			rotate ([90,0,0])
-				cube ([main_tube_outer_diameter, main_tube_outer_diameter,main_tube_outer_diameter]);
+		//translate ([237.5 - (main_tube_outer_diameter/2),90,-main_tube_outer_diameter/2])
+		translate ([170+68- main_tube_outer_diameter/2,main_tube_outer_diameter+40,-main_tube_outer_diameter/2])
+
+			rotate ([0,0,0])
+				cube ([main_tube_outer_diameter, main_tube_outer_diameter*2,main_tube_outer_diameter]);
     			
     //for printing
 		translate([0,-main_tube_outer_diameter/2-4.90,-170/2])
