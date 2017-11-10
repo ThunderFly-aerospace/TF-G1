@@ -1,4 +1,5 @@
 	use <./lib/naca4.scad>
+	use <666_1032_A.scad>
 include <../Parameters.scad>
 
 module 666_1025(){
@@ -14,10 +15,15 @@ module 666_1025(){
     scale_y = 1.5;
     scale_z = 1.5;
 
+
     beta = 90 - trailing_edge_angle(naca = airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
     echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
+   
+
+difference(){
+union (){
 difference(){
 intersection () {
 translate([0,0,0])
@@ -97,6 +103,28 @@ scale ([scale_x,scale_y,scale_z])
 		translate([x_size-50,-main_tube_outer_diameter,-main_tube_outer_diameter/2])		
 			cube([80,main_tube_outer_diameter, main_tube_outer_diameter]);	
 
+}
+
+difference(){
+//hodní držák
+
+scale ([1,1,1.2])     
+    translate([180,0,0])             
+    	rotate([-90,0,0])
+            resize([170 - thickness - trailing_wall*thickness,(170*airfoil_thickness/100)- 2*thickness,315], auto=true) airfoil(naca = airfoil_thickness, L = 170, N=101, h = 260, open = false);
+    translate([185,0,0])
+        rotate([-90,0,0])    
+            resize([150 - thickness - trailing_wall*thickness,(150*airfoil_thickness/100)- 2*thickness,315], auto=true) airfoil(naca = airfoil_thickness, L = 150, N=101, h = 240, open = false);
+
+    translate([180,110,-100])        
+			cube([200,250,200]);
+}
+
+
+}
+
+translate([-30,-50,-0.5])
+cube ([600,250,1]);
 }
 }
 
