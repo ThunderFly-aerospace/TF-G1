@@ -7,7 +7,6 @@ use <666_1028.scad>
 use <666_1025.scad>
 use <666_1029.scad>
 use <666_1032.scad>
-use <666_1032_A.scad>
 
 
 include <../Parameters.scad>
@@ -79,12 +78,8 @@ translate([920-80,0,0])
 	rotate([90,0,0])	
 		666_1029();
 
-//translate([180,0,87])
-		//666_1032();
-
-	rotate([90,0,0])
-		666_1032_A();
-
+translate([180,0,87])
+		666_1032();
 
 //hlavní trubky
 
