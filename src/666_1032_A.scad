@@ -29,8 +29,8 @@ thickness = 1;
 
 /*ratio = (170*airfoil_thickness/100 - 2*thickness)/(170*airfoil_thickness/100);
 echo(ratio);*/
-translate ([50,0,0])
-    666_1026();
+//translate ([0,0,0])
+    //666_1025();
 
 beta = 90 - trailing_edge_angle(naca = airfoil_thickness); // calculate the angle of trailing edge
 trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
