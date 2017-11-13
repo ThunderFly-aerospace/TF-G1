@@ -29,7 +29,7 @@ Help_tube_for_undercarriage_inner = 5;
 
 hull_drop_length = 580;
 hull_wall_thickness = 0.8;
-hull_y_size = 100;
+hull_y_size = 120;
 hull_z_size = 150;
 hull_x_size = 580;
 hull_corner_radius = 4;
