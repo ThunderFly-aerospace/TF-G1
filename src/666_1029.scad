@@ -22,41 +22,33 @@ module 666_1029(){
 
 difference(){
 
-intersection () {
-    translate([0,0,0])
+	intersection () {
+    	translate([0,0,0])
          		rotate ([0,90,0])           
                     rotate_extrude($fn = 100)
                         rotate([0,0,90])
-                            difference()
-                            {
-
+                            difference(){
                               polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
                               square(length_of_drop,length_of_drop); 
                             }
 
-scale ([scale_x,scale_y,scale_z]) 
+	scale ([scale_x,scale_y,scale_z]) 
 				rotate ([0,90,0])           
                    	rotate_extrude($fn = 100)
                        	rotate([0,0,90])
-                            difference()
-                            {
-
+                            difference(){
                               polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
                               square(length_of_drop,length_of_drop); 
                             }
 
-                     minkowski(){                   
-         	              translate ([0,-y_size*scale_y - main_tube_outer_diameter/2,-z_size/2])
-         		                 cube ([x_size,y_size*scale_y,z_size]);
+                    		minkowski(){                   
+         	              		translate ([0,-y_size*scale_y - main_tube_outer_diameter/2,-z_size/2])
+         		           	    	  	cube ([x_size,y_size*scale_y,z_size]);
          	
-         		             rotate ([0,90,0])
-             		             cylinder (h = 1, r = corner_radius, $fn = 100);                   
-
-    		          }
-
-
-
-}
+         		            		rotate ([0,90,0])
+             		             		cylinder (h = 1, r = corner_radius, $fn = 100);                   
+    		         		}
+	}
 
 //hollowing skeleton
 		translate ([thickness,0,0])
@@ -65,19 +57,17 @@ scale ([scale_x,scale_y,scale_z])
                  		rotate ([0,90,0])           
                             rotate_extrude($fn = 100)
                                 rotate([0,0,90])
-                                    difference()
-                                    {
-
+                                    difference(){
                                       polygon(points = airfoil_data(naca=airfoil_thickness, L = length_of_drop, N=200)); 
                                       square(length_of_drop, length_of_drop); 
                                     }
-                 	minkowski(){                   
-                     	translate ([0,-y_size- main_tube_outer_diameter/2,-z_size/2 + thickness])
-                     		     cube ([x_size,y_size - thickness, z_size - 2*thickness]);
+                 			minkowski(){                   
+                    	 		translate ([0,-y_size- main_tube_outer_diameter/2,-z_size/2 + thickness])
+                     		    		 cube ([x_size,y_size - thickness, z_size - 2*thickness]);
                      		
-                            rotate ([0,90,0])
-                         		cylinder (h = 1, r = corner_radius, $fn = 100);                   
-            		}                   
+                            		rotate ([0,90,0])
+                         				cylinder (h = 1, r = corner_radius, $fn = 100);                   
+            				}                   
             	}
           
 
@@ -87,26 +77,23 @@ scale ([scale_x,scale_y,scale_z])
 		translate([0,-main_tube_outer_diameter/2,-170/2])
 				cube ([600,15,170]);
 
-    //for undercarriage
-        //translate ([60.50, -main_tube_outer_diameter,-z_size/2-20])
+    //holes for undercarriage
 		translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,-main_tube_outer_diameter,-z_size/2-20])         
                 cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
-        //translate ([60.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
         translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2- main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])         
                 cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
 
-        //translate ([390.50, -main_tube_outer_diameter,-z_size/2-20])
-          translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),-main_tube_outer_diameter,-z_size/2-20])
+        translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),-main_tube_outer_diameter,-z_size/2-20])
                 cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
-        //translate ([390.50 - main_tube_outer_diameter/2,-main_tube_outer_diameter, -z_size/2-20 ])        
-		  translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5)-main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])
+		translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5)-main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])
 	            cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
 
 	//hollow front
 		translate([-10,-main_tube_outer_diameter/2-3.5,-56/2])
 				cube ([47.50+2,10,56]);	
-}
+
 }
 
-
+//final part
+}
 666_1029();
