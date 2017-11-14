@@ -1,5 +1,16 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
+use <666_1032.scad>
+
+
+//Jen pro názornost
+	//translate([180,0,0])
+		//rotate ([-90,0,0])
+			//666_1032();
+
+
+
+
 
 module 666_1025(){
 
@@ -26,10 +37,14 @@ module 666_1025(){
                         translate([180,0,0]) 
                             rotate ([-90,0,0]) 
                                 difference(){
-                                    airfoil(naca = 0030, L = 170, N=101, h = 195, open = false);
-                                    translate ([hull_wall_thickness,0,-5])
+                                    
+                                    translate ([hull_wall_thickness,0,0])
                                         resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*0030/100)- 2*hull_wall_thickness,210], auto=true) 
                                             airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
+                                    translate ([2*hull_wall_thickness,0,0])       
+                                        resize([170 - hull_wall_thickness*2 - trailing_wall*hull_wall_thickness*2,(160*0030/100)- 2*hull_wall_thickness,210], auto=true) 
+                                            airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
+                                    
                                 }
 
                     }
@@ -74,11 +89,11 @@ module 666_1025(){
             				cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
             					    
                 //for tube - propeller
-            		//translate ([237.5 - (main_tube_outer_diameter/2),90,-main_tube_outer_diameter/2])
-            		translate ([170+68- main_tube_outer_diameter/2,main_tube_outer_diameter+40,-main_tube_outer_diameter/2])
 
-            			rotate ([0,0,0])
-            				cube ([main_tube_outer_diameter, main_tube_outer_diameter*2,main_tube_outer_diameter]);
+					translate ([180+2*hull_wall_thickness,-10,0])       
+						rotate ([-90,0,0])
+                            resize([170 - hull_wall_thickness*2 - trailing_wall*hull_wall_thickness*2,(160*0030/100)- 2*hull_wall_thickness,210], auto=true) 
+                                airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
                 			
                 //for printing
             		translate([0,-main_tube_outer_diameter/2-4.90,-170/2])
