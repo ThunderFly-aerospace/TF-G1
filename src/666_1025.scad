@@ -107,9 +107,22 @@ module 666_1025(){
     	}
 
         //for dividing into two parts
-    	translate([170+68,-30,hull_z_size])
-    		rotate ([0,90,0])
-    			cube ([600,250,1]);		
+    					
+        				//původní dělení - prořez
+    					//translate([170+68,-30,hull_z_size])
+    						//rotate ([0,90,0])
+    							//cube ([600,250,1]);	
+    	
+    	//návrh na nové dělení						
+    	//translate([0,-40,-250])
+    			//cube ([170+68,250,250]);
+    	//translate([0,-40,0])	
+    			//cube ([170+68,250,250]);
+    	//translate([170+68,-40,-250])
+    			//cube ([450,250,250]);
+    	//translate([170+68,-40,0])
+    			//cube ([450,250,250]);
+
     }
 }
 
