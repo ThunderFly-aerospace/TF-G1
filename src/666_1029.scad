@@ -92,6 +92,23 @@ difference(){
 		translate([-10,-main_tube_outer_diameter/2-3.5,-56/2])
 				cube ([47.50+2,10,56]);	
 
+
+	//divided part for printing
+	
+		//translate([0,-140,0])
+				//cube([150,150,150]);
+		//translate([0,-140,-150])
+				//cube([150,150,150]);
+		//translate([150,-140,0])
+				//cube([150,150,150]);
+		//translate([150,-140,-150])
+				//cube([150,150,150]);
+		//translate([300,-140,0])
+				//cube([150,150,150]);			
+		//translate([300,-140,-150])
+				//cube([150,150,150]);
+		//translate([450,-140,-150/2])
+				//cube([150,150,150]);
 }
 
 //final part
