@@ -1,6 +1,6 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
-use <666_1026.scad>
+use <666_1025.scad>
 
 module 666_1032(){
 
@@ -30,7 +30,7 @@ module 666_1032(){
     	   cube ([width*5,depth+6,height+3]);
 
         // hull shell from 666_1025.scad
-        translate ([-main_pilon_position,0,0])
+        translate ([-180,0,0])
             rotate ([90,0,0])
                 intersection () {
                     rotate ([0,90,0])           
