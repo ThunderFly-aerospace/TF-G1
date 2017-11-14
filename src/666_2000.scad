@@ -78,7 +78,7 @@ translate([920-80,0,0])
 	rotate([90,0,0])	
 		666_1029();
 
-translate([180,0,87])
+translate([180,0,10])
 		666_1032();
 
 //hlavní trubky
@@ -97,7 +97,7 @@ translate([180,0,87])
 
 		//kolmá na nejdelší
 	difference(){
-		translate ([170+68,0,Help_main_tube_outer/2])
+		translate ([main_pilon_position,0,Help_main_tube_outer/2])
 				cylinder (h = 195, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
 		translate ([0,0,-3])
