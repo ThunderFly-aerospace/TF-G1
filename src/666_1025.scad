@@ -46,14 +46,15 @@ module 666_1025(){
                         }
 
             }
-            minkowski(){                   
-             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             		cube ([hull_x_size, hull_y_size,hull_z_size]);
+            translate([0,0,hull_corner_radius])
+            	minkowski(){                   
+             		translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
+             				cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
              	
-             		rotate ([0,90,0])
-                 		cylinder (h = 1, r = hull_corner_radius-2, $fn = 100);                   
+             			rotate ([0,90,0])
+                 			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
 
-        	}
+		        }
 
         }   
 
@@ -70,12 +71,13 @@ module 666_1025(){
                                       polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
                                       square(hull_drop_length); 
                                     }
-                 	minkowski(){                   
-                     	translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2 + hull_wall_thickness])
-                     		cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness]);
-                     		rotate ([0,90,0])
-                         		cylinder (h = 1, r = hull_corner_radius-2, $fn = 100);                   
-            		}                   
+                 	translate([0,0,hull_corner_radius])
+                 		minkowski(){                   
+                     		translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2 + hull_wall_thickness])
+                     				cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness-2*hull_corner_radius]);
+                     			rotate ([0,90,0])
+                         			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+            			}                   
             	}
             //for front part
     		translate ([-2,-1 - main_tube_outer_diameter/2,-25])
@@ -100,10 +102,20 @@ module 666_1025(){
     		translate([hull_x_size-50,-main_tube_outer_diameter,-main_tube_outer_diameter/2])		
     			cube([80,main_tube_outer_diameter, main_tube_outer_diameter]);	
 
+//díry pro šrouby
+translate([50,-5,-200/2])
+rotate([0,0,0])
+%cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2);
+
+
+
     }
 
 
+
+
 }
+
 
     intersection(){
         666_1025();
@@ -130,11 +142,9 @@ module 666_1025(){
         intersection(){
             666_1025();
             translate([450,-20,-150])
-               cube([150,150,300]);
+              cube([150,150,300]);
         }
-//jen pro názornost
-        translate([0,0,-150/2])
-        %cube ([150,150,150]);
+
 
 
 
