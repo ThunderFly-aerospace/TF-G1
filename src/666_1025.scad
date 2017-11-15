@@ -46,14 +46,15 @@ module 666_1025(){
                         }
 
             }
-            minkowski(){                   
-             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             		cube ([hull_x_size, hull_y_size,hull_z_size]);
-             	
-             		rotate ([0,90,0])
-                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+            translate([0,0,hull_corner_radius])
+	            minkowski(){                   
+	             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
+	             		cube ([hull_x_size, hull_y_size,hull_z_size- 2*hull_corner_radius]);
+	             	
+	             		rotate ([0,90,0])
+	                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
 
-        	}
+	        	}
 
         }   
 
@@ -70,9 +71,10 @@ module 666_1025(){
                                       polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
                                       square(hull_drop_length); 
                                     }
+                    translate([0,0,hull_corner_radius])
                  	minkowski(){                   
                      	translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2 + hull_wall_thickness])
-                     		cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness]);
+                     		cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
                      		rotate ([0,90,0])
                          		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
             		}                   
@@ -107,8 +109,8 @@ module 666_1025(){
 
     intersection(){
         666_1025();
-        translate([0,-20,-150])                        
-           cube([150,150,300]);
+        translate([0,-20,-75])                        
+     %      cube([150,150,150]);
     }
 
     translate([20,0,0])
