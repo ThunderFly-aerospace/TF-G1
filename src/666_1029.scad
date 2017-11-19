@@ -15,7 +15,7 @@ module 666_1029(){
     scale_z = 1.5;
 
 
-    beta = 90 - trailing_edge_angle(naca = airfoil_thickness); // calculate the angle of trailing edge
+    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
     echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
@@ -28,45 +28,58 @@ difference(){
                     rotate_extrude($fn = 100)
                         rotate([0,0,90])
                             difference(){
-                              polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
-                              square(length_of_drop,length_of_drop); 
+                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length , N=100)); 
+                              square(hull_drop_length); 
                             }
 
-	scale ([scale_x,scale_y,scale_z]) 
-				rotate ([0,90,0])           
-                   	rotate_extrude($fn = 100)
-                       	rotate([0,0,90])
-                            difference(){
-                              polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
-                              square(length_of_drop,length_of_drop); 
-                            }
+	//scale ([scale_x,scale_y,scale_z]) 
+	//			rotate ([0,90,0])           
+      //             	rotate_extrude($fn = 100)
+        //               	rotate([0,0,90])
+          //                  difference(){
+            //                  polygon(points = airfoil_data(naca=airfoil_thickness, L =length_of_drop , N=100)); 
+              //                square(length_of_drop,length_of_drop); 
+                //            }
 
-                    		minkowski(){                   
-         	              		translate ([0,-y_size*scale_y - main_tube_outer_diameter/2,-z_size/2])
-         		           	    	  	cube ([x_size,y_size*scale_y,z_size]);
-         	
-         		            		rotate ([0,90,0])
-             		             		cylinder (h = 1, r = corner_radius, $fn = 100);                   
-    		         		}
+                  //  		minkowski(){                   
+         	        //      		translate ([0,-y_size*scale_y - main_tube_outer_diameter/2,-z_size/2])
+         		      //     	    	  	cube ([x_size,y_size*scale_y,z_size]);
+         	//
+         	//	            		rotate ([0,90,0])
+             //		             		cylinder (h = 1, r = corner_radius, $fn = 100);                   
+    		   //      		}
+	
+            translate([0,0,hull_corner_radius])
+	            minkowski(){                   
+	             	translate ([0,-hull_y_size- main_tube_outer_diameter/2,-hull_z_size/2 - hull_corner_radius])
+	             		cube ([hull_x_size, hull_y_size,hull_z_size + 2*hull_corner_radius]);
+	             	
+	             		rotate ([0,90,0])
+	                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+
+	        	}
+
+
+
 	}
 
 //hollowing skeleton
-		translate ([thickness,0,0])
+		translate ([hull_wall_thickness,0,0])
             	intersection () {
-                    resize([length_of_drop - thickness - trailing_wall* thickness, (length_of_drop*airfoil_thickness/100) - 2*thickness, (length_of_drop*airfoil_thickness/100) - 2*thickness], auto=true)
+                    resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
                  		rotate ([0,90,0])           
                             rotate_extrude($fn = 100)
                                 rotate([0,0,90])
                                     difference(){
-                                      polygon(points = airfoil_data(naca=airfoil_thickness, L = length_of_drop, N=200)); 
-                                      square(length_of_drop, length_of_drop); 
+                                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
+                                      square(hull_drop_length); 
                                     }
                  			minkowski(){                   
-                    	 		translate ([0,-y_size- main_tube_outer_diameter/2,-z_size/2 + thickness])
-                     		    		 cube ([x_size,y_size - thickness, z_size - 2*thickness]);
+                    	 		translate ([0,-hull_y_size- main_tube_outer_diameter/2,-hull_z_size/2 + hull_wall_thickness])
+                     		    		 cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness]);
                      		
                             		rotate ([0,90,0])
-                         				cylinder (h = 1, r = corner_radius, $fn = 100);                   
+                         				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
             				}                   
             	}
           
@@ -110,7 +123,6 @@ union(){
            					cube([150,150,300]);
 		    	}
 	//díry pro šrouby
-
 	}
 
 	//rantl pro slepení vpravo
