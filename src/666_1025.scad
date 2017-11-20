@@ -122,10 +122,16 @@ module 666_1025(){
        					cube([150,150,150]);
 		    }
     	//díry pro šrouby
-    		translate([30,-5,-200/2])
-					cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
-    		translate([120,-5,-200/2])
-					cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+    		
+
+     translate([0,-5,-85])
+                rotate([0,45,0])
+                    cylinder (h = 70, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+            translate([0,-5,85])
+                rotate([0,135,0])
+                    cylinder (h = 70, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+            translate([120,-5,-200/2])
+                    cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
 		}
 	//rantl pro slepení vpravo
 		intersection(){
@@ -288,9 +294,14 @@ module 666_1025(){
         		}
         //díry pro šrouby
        		translate([370,-5,-200/2])
-					cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
-    		translate([460,-5,-200/2])
-					cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+                    cylinder (h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+
+            translate([448,-5,-25])
+                rotate([0,+90+beta,0])
+                    cylinder (h = 70, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+            translate([432,-5,-25])
+                rotate([0,90-beta,0])
+                    cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
 		}			
 		
     	//rantl pro slepení vlevo
@@ -392,10 +403,19 @@ module 666_1025(){
               				cube([150,150,300]);
         		}
         //díry pro šrouby
-        	translate([530,-5,-200/2])
-        			cylinder(h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
-        	translate([580,-5,-200/2])
-        			cylinder(h = 200, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+        	translate([508,-5,0])
+                rotate([0,90-beta,0])
+                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+            translate([515,-5,0])
+                rotate([0,90+beta,0])
+                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+
+            translate([567,-5,0])
+                rotate([0,90-beta,0]) 
+                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
+            translate([567,-5,0])
+                rotate([0,90+beta,0])   
+                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 15);
         }
 
     	//rantl pro slepení vlevo
