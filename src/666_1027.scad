@@ -1,7 +1,7 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 use <666_1032.scad>
-
+use <666_1004.scad>
 
 
 module 666_1027(){
@@ -13,8 +13,17 @@ module 666_1027(){
 hole_for_nut_x = 15;
 hole_for_nut_y = 50;
 hole_for_nut_z = 20;
+    y_size = 100;
+    z_size = 150;
+    x_size = 580;
     
+union(){
         
+
+
+
+
+//samotná podložka
     difference(){
                
 
@@ -59,6 +68,7 @@ hole_for_nut_z = 20;
                 cylinder(h = hull_drop_length, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 100);
         translate([0,0, -main_tube_outer_diameter/2])        
                 cube([hull_drop_length,main_tube_outer_diameter,main_tube_outer_diameter]);
+    
     //díry pro šrouby z horního krytu            
             ///horní kryt část 1
             translate([0,-5,-85])
@@ -174,11 +184,117 @@ hole_for_nut_z = 20;
                     }
                 }
 
+    //odečtení spojek trubek
+    translate([main_tube_outer_diameter*2,0,0])
+        rotate ([90,-90,90])
+            666_1004();
+
+    translate([398,0,0])
+        rotate ([90,-90,90])
+            666_1004();
+
 
     //final difference
     }
+    
+//spojka přední malá 
+    //z+
+    difference(){
+    translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter+2-1,-hull_z_size/2 + hull_wall_thickness + hull_corner_radius])         
+        union(){
+            difference(){
+                translate([-(40/2),-(35 - main_tube_outer_diameter/2 - main_tube_outer_diameter/5),0])
+                        cube([40,35,10]);
+                translate([0,0,-3])
+                        cylinder(h=15,r1=main_tube_outer_diameter/2,r2=main_tube_outer_diameter/2,$fn=200);
+                //pro uříznutí
+                translate([-45/2,-6,-6])
+                        cube([45,45,45]);
+            }
+        }
+    //díry pro šrouby
+    translate ([main_tube_outer_diameter+10+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,-hull_z_size/2])         
+            cylinder(h = 20, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);   
+    translate ([main_tube_outer_diameter+40+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,-hull_z_size/2])         
+            cylinder(h = 20, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);    
+        
+    //matka
+     translate ([main_tube_outer_diameter+10+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,-hull_z_size/2+ 12.5])         
+            cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+      translate ([main_tube_outer_diameter+40+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,-hull_z_size/2+ 12.5])         
+            cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+    }
+
+    //z-    
+    difference(){
+    translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter+2-1,+hull_z_size/2-10 - hull_corner_radius])         
+        union(){
+            difference(){
+                translate([-(40/2),-(35 - main_tube_outer_diameter/2 - main_tube_outer_diameter/5),0])
+                        cube([40,35,10]);
+                translate([0,0,-3])
+                        cylinder(h=15,r1=main_tube_outer_diameter/2,r2=main_tube_outer_diameter/2,$fn=200);
+                //pro uříznutí
+                translate([-45/2,-6,-6])
+                        cube([45,45,45]);
+            }
+        }
+    //díry pro šrouby
+    translate ([main_tube_outer_diameter+10+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,hull_z_size/2-18])         
+            cylinder(h = 20, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);   
+    translate ([main_tube_outer_diameter+40+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,hull_z_size/2-18])         
+            cylinder(h = 20, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);    
+        
+    //matka
+     translate ([main_tube_outer_diameter+10+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,hull_z_size/2-15])         
+            cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+      translate ([main_tube_outer_diameter+40+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,main_tube_outer_diameter-10,hull_z_size/2-15])         
+            cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+    }    
+
+
+    //final union
+    }
+
 //final part
 }
 666_1027();
+
+
+//část 1
+    //základní dělení pro tisk
+        
+         //   intersection(){
+           //     666_1027();
+             //   translate([0,-75,-75])                        
+               //         cube([150,150,150]);
+           // }
+
+//část 2
+     //základní dělení pro tisk
+        //translate([20,0,0])    
+          //  intersection(){
+            //    666_1027();
+              //  translate([150,-75,-75])                        
+                //        cube([150,150,150]);
+            //}
+        
+//část 3        
+    //základní dělení pro tisk
+        //translate([40,0,0])
+          //  intersection(){
+            //    666_1027();
+              //  translate([300,-20,-75])                        
+                //        cube([150,150,150]);
+            //}
+
+//část 4
+    //základní dělení pro tisk
+        //translate([60,0,0])
+          //  intersection(){
+            //    666_1027();
+              //  translate([450,-20,-75])                        
+                //        cube([150,150,150]);
+            //}
 
 
