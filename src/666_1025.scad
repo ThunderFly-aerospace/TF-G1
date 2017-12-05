@@ -513,22 +513,21 @@ module 666_1025ZK1(){
     clearance = 0.5; 
 
     difference (){
-      airfoil(naca = airfoil_thickness, L = 170, N=101, h = 195, open = false);
-      translate ([hull_wall_thickness,0,-5])
-            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,210], auto=true) 
-                airfoil(naca = airfoil_thickness, L = 170, N=101, h = 200, open = false);
+      airfoil(naca = airfoil_thickness, L = 170, N=101, h = 5, open = false);
+      translate ([hull_wall_thickness,0,0])
+            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,5], auto=true) 
+                airfoil(naca = airfoil_thickness, L = 170, N=101, h = 5, open = false);
     }
 
 
-    translate ([0.5,0,0])
+    translate ([hull_wall_thickness + 0.5,0,0])
     difference(){
         
-        translate ([hull_wall_thickness,0,0])
-            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
-                airfoil(naca = 0030, L = 170, N=101, h = 2, open = false);
-        translate([hull_wall_thickness+hull_wall_thickness,0,0])       
-            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
-                airfoil(naca = 0030, L = 170, N=101, h = 2, open = false);
+        resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance - clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
+            airfoil(naca = 0030, L = 170, N=101, h = 5, open = false);
+        translate([hull_wall_thickness,0,0])       
+            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
+                airfoil(naca = 0030, L = 170, N=101, h = 5, open = false);
     }
 
 }
