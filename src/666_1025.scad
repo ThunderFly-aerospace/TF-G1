@@ -31,6 +31,7 @@ union(){
 
                               polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
                               square(hull_drop_length); 
+                              
                             }
 
                 // 666_1032 part holder
@@ -38,11 +39,11 @@ union(){
                     rotate ([-90,0,0]) 
                         difference(){
                             
-                            translate ([hull_wall_thickness+0.5,0-0.5,-0.5])
-                                resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness-1,(170*0030/100)- 2*hull_wall_thickness-1,210-1], auto=true) 
+                            translate ([hull_wall_thickness,0,0])
+                                resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness-2,(170*0030/100)- 2*hull_wall_thickness-2,210-2], auto=true) 
                                     airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
-                            translate ([2*hull_wall_thickness+0.5,-0.5,-0.5])       
-                                resize([170 - hull_wall_thickness*2 -1- trailing_wall*hull_wall_thickness*2,(160*0030/100)- 2*hull_wall_thickness-1,210-1], auto=true) 
+                            translate([2*hull_wall_thickness,0,0])       
+                                resize([170 - hull_wall_thickness*2  - trailing_wall*hull_wall_thickness*2-2,(160*0030/100)- 2*hull_wall_thickness-2,210-2], auto=true) 
                                     airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
                             
                         }
@@ -172,6 +173,14 @@ union(){
 		        	}
 		}
 
+//nápis
+translate([hull_x_size/3,0,hull_z_size/2])
+text("TF-G1", size = 20,font = "Liberation Sans");
+
+translate([hull_x_size/3,0,-hull_z_size/2])
+
+text("TF-G1", size = 20,font = "Liberation Sans", direction = "rtl");
+//konec union
 }
 
 
@@ -186,7 +195,7 @@ module 666_1025AA(){
 				intersection(){
     				666_1025();
     					translate([0,-20,-75])                        
-       						cube([52,150,150]);
+       						cube([50,150,150]);
        			}
 
 		//rantl pro slepení Z+
@@ -194,8 +203,8 @@ module 666_1025AA(){
        	intersection(){
 
        		//čtverec
-				translate([-20,0,25])		
-						cube([52, hull_y_size, hull_wall_thickness]);
+				translate([-20,-main_tube_outer_diameter/2,25])		
+						cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
 			//odstranění čtverce z vnější strany
 				translate([-20,0,0])
@@ -223,8 +232,8 @@ module 666_1025AA(){
 
 		intersection(){
        		//čtverec
-				translate([-20,0,-25 - hull_wall_thickness])		
-						cube([52, hull_y_size, hull_wall_thickness]);
+				translate([-20,- main_tube_outer_diameter/2,-25 - hull_wall_thickness])		
+						cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
 			//odstranění čtverce z vnější strany
 				translate([-20,0,0])
@@ -253,7 +262,7 @@ module 666_1025AA(){
 		intersection(){
 		//pro lepení - čtverec 
 			difference(){
-			translate([32 - hull_wall_thickness,0,-hull_z_size])
+			translate([30- hull_wall_thickness,0,-hull_z_size])
 					cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 			translate([20,0,0])
 				rotate([0,90,0])
@@ -293,8 +302,8 @@ module 666_1025A(){
 		//základní dělení pro tisk
 			intersection(){
     			666_1025();
-    			translate([52,-20,-75])                        
-       				cube([150-52,150,150]);
+    			translate([50,-20,-75])                        
+       				cube([150-50,150,150]);
 		    }
 	   //rantl pro slepení vpravo
 		intersection(){
@@ -490,11 +499,27 @@ module 666_1025D(){
 	}
 }
 
-666_1025AA();
-666_1025A();
-666_1025B();
 
-666_1025C();
 
-666_1025D();
+//díl jen pro tisk nástavce, zda je správně
+module 666_1025ZK1(){
 
+	intersection(){
+		666_1025B();
+			translate([195,40,-75])
+				cube([125,90,150]);
+	}
+}
+
+module 666_1025ZK2(){
+
+	intersection(){
+		666_1025C();
+			translate([330,40,-75])
+				cube([70,90,150]);
+	}
+}
+
+
+
+666_1025();
