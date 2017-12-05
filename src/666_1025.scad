@@ -15,8 +15,7 @@ use <666_1032.scad>
 module 666_1025(){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
-    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
-    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness.    
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
 
    
 union(){
@@ -91,7 +90,7 @@ union(){
     			rotate ([0,90,0])
     				cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
     					    
-        //for tube - propeller
+        //for rotor pilon
 
 			translate ([180+2*hull_wall_thickness,-10,])       
 				rotate ([-90,0,0])
@@ -173,13 +172,12 @@ union(){
 		        	}
 		}
 
-//nápis
-translate([hull_x_size/3,0,hull_z_size/2])
-text("TF-G1", size = 20,font = "Liberation Sans");
+    //nápis
+    translate([hull_x_size/3,0,hull_z_size/2])
+      text("TF-G1", size = 20,font = "Liberation Sans");
 
-translate([hull_x_size/3,0,-hull_z_size/2])
-
-text("TF-G1", size = 20,font = "Liberation Sans", direction = "rtl");
+    translate([hull_x_size/3,0,-hull_z_size/2])
+      text("TF-G1", size = 20,font = "Liberation Sans", direction = "rtl");
 //konec union
 }
 
@@ -504,22 +502,36 @@ module 666_1025D(){
 //díl jen pro tisk nástavce, zda je správně
 module 666_1025ZK1(){
 
-	intersection(){
-		666_1025B();
-			translate([195,40,-75])
-				cube([125,90,150]);
-	}
+    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
+
+
+    airfoil_thickness = 0030;
+    depth = main_tube_outer_diameter*2;
+    width = main_tube_outer_diameter + 2*(main_tube_outer_diameter/10);
+    height = depth;
+    clearance = 0.5; 
+
+    difference (){
+      airfoil(naca = airfoil_thickness, L = 170, N=101, h = 195, open = false);
+      translate ([hull_wall_thickness,0,-5])
+            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,210], auto=true) 
+                airfoil(naca = airfoil_thickness, L = 170, N=101, h = 200, open = false);
+    }
+
+
+    translate ([0.5,0,0])
+    difference(){
+        
+        translate ([hull_wall_thickness,0,0])
+            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
+                airfoil(naca = 0030, L = 170, N=101, h = 2, open = false);
+        translate([hull_wall_thickness+hull_wall_thickness,0,0])       
+            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
+                airfoil(naca = 0030, L = 170, N=101, h = 2, open = false);
+    }
+
 }
-
-module 666_1025ZK2(){
-
-	intersection(){
-		666_1025C();
-			translate([330,40,-75])
-				cube([70,90,150]);
-	}
-}
-
 
 
 666_1025();
