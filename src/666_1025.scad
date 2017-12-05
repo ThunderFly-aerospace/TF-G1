@@ -31,6 +31,7 @@ union(){
 
                               polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
                               square(hull_drop_length); 
+                              
                             }
 
                 // 666_1032 part holder
@@ -172,6 +173,14 @@ union(){
 		        	}
 		}
 
+//nápis
+translate([hull_x_size/3,0,hull_z_size/2])
+text("TF-G1", size = 20,font = "Liberation Sans");
+
+translate([hull_x_size/3,0,-hull_z_size/2])
+
+text("TF-G1", size = 20,font = "Liberation Sans", direction = "rtl");
+//konec union
 }
 
 
@@ -513,5 +522,4 @@ module 666_1025ZK2(){
 
 
 
-666_1025ZK1();
-666_1025ZK2();
+666_1025();
