@@ -171,7 +171,7 @@ union(){
       text("TF-G1", size = 20,font = "Liberation Sans");
 
     translate([hull_x_size/3,0,-hull_z_size/2])
-      text("TF-G1", size = 20,font = "Liberation Sans", direction = "rtl");
+      rotate([0,180,0]) text("TF-G1", size = 20,font = "PT Sans");
 //konec union
 }
 
