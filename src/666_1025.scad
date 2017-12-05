@@ -17,6 +17,7 @@ module 666_1025(){
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
 
+clearance = 0.5;
    
 union(){
     difference(){
@@ -33,19 +34,13 @@ union(){
                               
                             }
 
-                // 666_1032 part holder
+                // 666_1032 part holder 
+
                 translate([180,0,0]) 
-                    rotate ([-90,0,0]) 
-                        difference(){
-                            
-                            translate ([hull_wall_thickness,0,0])
-                                resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness-2,(170*0030/100)- 2*hull_wall_thickness-2,210-2], auto=true) 
-                                    airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
-                            translate([2*hull_wall_thickness,0,0])       
-                                resize([170 - hull_wall_thickness*2  - trailing_wall*hull_wall_thickness*2-2,(160*0030/100)- 2*hull_wall_thickness-2,210-2], auto=true) 
-                                    airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
-                            
-                        }
+                    rotate ([-90,0,0])
+                        translate ([hull_wall_thickness,0,0])
+                            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance - clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
+                                airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
 
             }
             translate([0,0,hull_corner_radius])
@@ -91,10 +86,9 @@ union(){
     				cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
     					    
         //for rotor pilon
-
-			translate ([180+2*hull_wall_thickness,-10,])       
+	       	translate ([180+2*hull_wall_thickness,-10,])       
 				rotate ([-90,0,0])
-                    resize([170 - hull_wall_thickness*2 - trailing_wall*hull_wall_thickness*2,(160*0030/100)- 2*hull_wall_thickness,210], auto=true) 
+                    resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
                         airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
         			
         //for printing
