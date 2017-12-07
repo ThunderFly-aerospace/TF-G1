@@ -1,15 +1,5 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
-use <666_1032.scad>
-
-
-//Jen pro názornost
-	//translate([180,0,0])
-		//rotate ([-90,0,0])
-			//666_1032();
-
-
-
 
 
 module 666_1025(){
@@ -46,7 +36,7 @@ union(){
             translate([0,0,hull_corner_radius])
 	            minkowski(){                   
 	             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-	             		cube ([hull_x_size, hull_y_size,hull_z_size- 2*hull_corner_radius]);
+	             		cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
 	             	
 	             		rotate ([0,90,0])
 	                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
@@ -58,23 +48,23 @@ union(){
         //hollowing skeleton
     		translate ([hull_wall_thickness,0,0])
             	intersection () {
-                    resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
+                resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
                  		rotate ([0,90,0])           
-                            rotate_extrude($fn = 100)
-                                rotate([0,0,90])
-                                    difference()
-                                    {
+                        rotate_extrude($fn = 100)
+                            rotate([0,0,90])
+                                difference()
+                                {
+                                  polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
+                                  square(hull_drop_length); 
+                                }
 
-                                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
-                                      square(hull_drop_length); 
-                                    }
-                    translate([0,0,hull_corner_radius])
-                 	minkowski(){                   
-                     	translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2 + hull_wall_thickness])
-                     		cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
-                     		rotate ([0,90,0])
-                         		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-            		}                   
+                  translate([0,0,hull_corner_radius])
+                   	minkowski(){                   
+                       	translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2 + hull_wall_thickness])
+                       		cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
+                       		rotate ([0,90,0])
+                           		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+              		  }                   
             	}
             //for front part
     		translate ([-2,-1 - main_tube_outer_diameter/2,-25])
