@@ -35,7 +35,7 @@ union(){
             }
             translate([0,0,hull_corner_radius])
 	            minkowski(){                   
-	             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
+	             	translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
 	             		cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
 	             	
 	             		rotate ([0,90,0])
