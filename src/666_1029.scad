@@ -3,47 +3,33 @@ include <../Parameters.scad>
 
 module 666_1029(){
 
-    length_of_drop = 580;
-    thickness = 0.8;
-    y_size = 100;
-    z_size = 150;
-    x_size = 580;
-    corner_radius = 4;
-    airfoil_thickness= 35;
-    scale_x = 1;
-    scale_y = 1.5;
-    scale_z = 1.5;
-
-
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
     echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
 
-difference(){
-
-	intersection () {
-    	translate([0,0,0])
-         		rotate ([0,90,0])           
-                    rotate_extrude($fn = 100)
-                        rotate([0,0,90])
-                            difference(){
-                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length , N=100)); 
-                              square(hull_drop_length); 
-                            }
+    difference(){
+    	intersection() {
+     		rotate ([0,90,0])           
+                rotate_extrude($fn = 100)
+                    rotate([0,0,90])
+                        difference(){
+                          polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length , N=100)); 
+                          square(hull_drop_length); 
+                        }
 
             translate([0,0,hull_corner_radius])
 	            minkowski(){                   
-	             	translate ([0,-hull_y_size- main_tube_outer_diameter/2,-hull_z_size/2 - hull_corner_radius])
-	             		cube ([hull_x_size, hull_y_size,hull_z_size + 2*hull_corner_radius]);
+	             	translate ([0,-hull_y_size - main_tube_outer_diameter/2, -hull_z_size/2])
+	             		cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
 	             	
 	             		rotate ([0,90,0])
 	                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
 	        	}
-	}
+        }
 
-//hollowing skeleton
-		translate ([hull_wall_thickness,0,0])
+    //hollowing skeleton
+    		translate ([hull_wall_thickness,0,0])
             	intersection () {
                     resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
                  		rotate ([0,90,0])           
@@ -53,48 +39,37 @@ difference(){
                                       polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
                                       square(hull_drop_length); 
                                     }
-                 			minkowski(){                   
-                    	 		translate ([0,-hull_y_size- main_tube_outer_diameter/2,-hull_z_size/2 + hull_wall_thickness])
-                     		    		 cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness + 2*hull_corner_radius]);
-                     		
-                            		rotate ([0,90,0])
-                         				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-            				}                   
+         			minkowski(){                   
+            	 		translate ([0,- hull_y_size - main_tube_outer_diameter/2, -hull_z_size/2 + hull_wall_thickness + hull_corner_radius ])
+             		    	//cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);	
+                            cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius ]);    
+                    		rotate ([0,90,0])
+                 				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+    				}                   
             	}
-          
+        			
+        //for printing
+    		translate([0,-main_tube_outer_diameter/2,-170/2])
+    			cube ([600,15,170]);
 
-    
+        //holes for undercarriage
+    		translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,-main_tube_outer_diameter,-hull_z_size/2-20])         
+                cylinder (h = hull_z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+            translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2- main_tube_outer_diameter/2,-main_tube_outer_diameter,-hull_z_size/2-20])         
+                cube ([main_tube_outer_diameter, main_tube_outer_diameter, hull_z_size+40]);
 
+            translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),-main_tube_outer_diameter,-hull_z_size/2-20])
+                cylinder (h = hull_z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+    		translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5)-main_tube_outer_diameter/2,-main_tube_outer_diameter,-hull_z_size/2-20])
+                cube ([main_tube_outer_diameter, main_tube_outer_diameter, hull_z_size+40]);
 
-
-
-    			
-    //for printing
-		translate([0,-main_tube_outer_diameter/2,-170/2])
-				cube ([600,15,170]);
-
-    //holes for undercarriage
-		translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,-main_tube_outer_diameter,-z_size/2-20])         
-                cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
-        translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2- main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])         
-                cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
-
-        translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),-main_tube_outer_diameter,-z_size/2-20])
-                cylinder (h = z_size+40, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
-		translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5)-main_tube_outer_diameter/2,-main_tube_outer_diameter,-z_size/2-20])
-	            cube ([main_tube_outer_diameter, main_tube_outer_diameter, z_size+40]);
-
-	//hollow front
-		translate([-10,-main_tube_outer_diameter/2-3.5,-56/2])
-				cube ([47.50+2,10,56]);	
-
-
-
-
-//final part
+    	//hollow front
+    		translate([-10,-main_tube_outer_diameter/2-3.5,-56/2])
+    			cube ([47.50+2,10,56]);	
+    //final part
+    }
 }
-}
-
+/*
 //část 1
 union(){
 	
@@ -369,3 +344,7 @@ union(){
 
 //konec union
 }
+
+*/
+
+666_1029();
