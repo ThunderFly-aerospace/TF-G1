@@ -100,27 +100,27 @@ union(){
     				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
     		//část A
-    		translate([50+50,0,-hull_z_size/2-15])
+    		translate([50+50,-main_tube_outer_diameter/4,-hull_z_size/2-15])
     				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
     		//část B
-    		translate([50+100+75,0,-hull_z_size/2-15])
+    		translate([50+100+75,-main_tube_outer_diameter/4,-hull_z_size/2-15])
     				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
     		//část C
-    		translate([50+100+150+60,0,+50])
+    		translate([50+100+150+60,-main_tube_outer_diameter/4,+50])
     			rotate([0,90-beta,0])	
     				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
-    		translate([50+100+150+60,0,-50])
+    		translate([50+100+150+60,-main_tube_outer_diameter/4,-50])
     			rotate([0,90+beta,0])	
     				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
     		//část D		
-    		translate([50+100+150+150+35,0,0])
+    		translate([50+100+150+150+35,-main_tube_outer_diameter/4,0])
     			rotate([0,90-beta,0])
     				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
-    		translate([50+100+150+150+35,0,0])
+    		translate([50+100+150+150+35,-main_tube_outer_diameter/4,0])
     			rotate([0,90+beta,0])
     				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
