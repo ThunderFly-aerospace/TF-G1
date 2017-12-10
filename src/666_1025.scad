@@ -88,6 +88,44 @@ union(){
     		translate([hull_x_size-50,-main_tube_outer_diameter,-main_tube_outer_diameter/2])		
     			cube([80,main_tube_outer_diameter, main_tube_outer_diameter]);	
     
+
+    	//šrouby
+    		//část AA
+    		translate([30,-main_tube_outer_diameter/4,hull_z_size/2-30])
+    			rotate([0,-45,0])
+    				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    
+    		translate([5,-main_tube_outer_diameter/4,-hull_z_size/2])
+    			rotate([0,45,0])
+    				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+    		//část A
+    		translate([50+50,0,-hull_z_size/2-15])
+    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+    		//část B
+    		translate([50+100+75,0,-hull_z_size/2-15])
+    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+    		//část C
+    		translate([50+100+150+60,0,+50])
+    			rotate([0,90-beta,0])	
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    		translate([50+100+150+60,0,-50])
+    			rotate([0,90+beta,0])	
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+    		//část D		
+    		translate([50+100+150+150+35,0,0])
+    			rotate([0,90-beta,0])
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+    		translate([50+100+150+150+35,0,0])
+    			rotate([0,90+beta,0])
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+
+
     //konec difference
     }
 
@@ -155,7 +193,8 @@ union(){
                  				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
 		        	}
 		}
-		//rantl pro slepení Z+
+
+//stěna Z+
        	
        	intersection(){
 
@@ -185,7 +224,7 @@ union(){
 		        	}
 		}
 
-       	//rantl pro slepení Z-
+//stěna Z-
 
 		intersection(){
        		//čtverec
@@ -214,7 +253,7 @@ union(){
 		        	}
 		}
 
-    
+
 
 
 
@@ -521,4 +560,8 @@ module 666_1025ZK1(){
 }
 
 
-666_1025();
+666_1025AA();
+666_1025A();
+666_1025B();
+666_1025C();
+666_1025D();
