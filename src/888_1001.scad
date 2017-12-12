@@ -18,7 +18,7 @@ height = height_of_accumulator + 5 - sink_of_accumulator;
 
 width_cube = 10;
 depth_cube = depth;
-height_cube = 3;	
+height_cube = 10;	
 
 
 union(){
