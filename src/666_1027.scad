@@ -225,23 +225,23 @@ union(){
             //část A
             //translate([50+50,main_tube_outer_diameter/4,-hull_z_size/2-20])
                 translate([100,0,-hull_z_size/2-20])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,35])        
+                    %union(){ //spojení kvárdu, matky a díry pro šroub
+                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
                                 cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
             
-                        translate([0,- main_tube_outer_diameter/4,35])        
+                        translate([0,- main_tube_outer_diameter/4,30])        
                                 cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
                     
                         translate([0,-main_tube_outer_diameter/4,0])        
                                 cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
                    }
 
-                translate([100,0,hull_z_size/2-15])    
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,5])        
+                translate([100,0,hull_z_size/2-20])    
+                    %union(){ //spojení kvárdu, matky a díry pro šroub
+                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
                                 cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
             
-                        translate([0,- main_tube_outer_diameter/4,5])        
+                        translate([0,- main_tube_outer_diameter/4,10])        
                                 cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
                         translate([0,-main_tube_outer_diameter/4,0])        
                                 cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
@@ -251,22 +251,22 @@ union(){
 
                 translate([225,0,-hull_z_size/2-20])
                     union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,35])        
+                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
                                 cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
             
-                        translate([0,- main_tube_outer_diameter/4,35])        
+                        translate([0,- main_tube_outer_diameter/4,30])        
                                 cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
                     
                         translate([0,-main_tube_outer_diameter/4,0])        
                                 cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
                    }
 
-                translate([225,0,hull_z_size/2-15])    
+                translate([225,0,hull_z_size/2-20])    
                     union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,5])        
+                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
                                 cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
             
-                        translate([0,- main_tube_outer_diameter/4,5])        
+                        translate([0,- main_tube_outer_diameter/4,10])        
                                 cylinder(h = Nut_height_M3, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
                         translate([0,-main_tube_outer_diameter/4,0])        
                                 cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
