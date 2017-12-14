@@ -394,47 +394,44 @@ module 666_1027(){
 
 module 666_1027A(){
 //část 1
-    //základní dělení pro tisk
-        
-           intersection(){
-                666_1027();
-                    translate([0,-75,-75])                        
-                            cube([150,150,150]);
-            }
+//základní dělení pro tisk
+
+   intersection(){
+        666_1027();
+            translate([0,-75,-75])                        
+                    cube([150,150,150]);
+    }
 }
 
 module 666_1027B(){
 //část 2
-     //základní dělení pro tisk
-        translate([20,0,0])    
-            intersection(){
-                666_1027();
-                    translate([150,-75,-75])                        
-                            cube([150,150,150]);
-            }
+//základní dělení pro tisk
+    intersection(){
+        666_1027();
+            translate([150,-75,-75])                        
+                    cube([150,150,150]);
+    }
 }            
 
 
 module 666_1027C(){        
 //část 3        
-    //základní dělení pro tisk
-        translate([40,0,0])
-            intersection(){
-                666_1027();
-                    translate([300,-60,-75])                        
-                        cube([150,150,150]);
-            }
+//základní dělení pro tisk
+    intersection(){
+        666_1027();
+            translate([300,-60,-75])                        
+                cube([150,150,150]);
+    }
 }
 
 module 666_1027D(){
 //část 4
-    //základní dělení pro tisk
-        translate([60,0,0])
-            intersection(){
-                666_1027();
-                    translate([450,-60,-75])                        
-                       cube([150,150,150]);
-            }
+//základní dělení pro tisk
+    intersection(){
+        666_1027();
+            translate([450,-60,-75])                        
+               cube([150,150,150]);
+    }
 }
 
 666_1027();
