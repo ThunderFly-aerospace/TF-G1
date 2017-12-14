@@ -2,21 +2,17 @@ use <./lib/naca4.scad>
 include <../Parameters.scad>
 
 module 666_1028(){
-//mirror ([1,0,0])
-
     //BASIC DROP
     //render(convexity = 2) 
     difference (){
-
         union (){
             translate([0,0,-8.5])
                 rotate_extrude($fn = 100)
                     rotate([0,0,90])
                         difference()
                         {
-
-                          polygon(points = airfoil_data(naca=0030, L = 140)); 
-                          square(200, 200); 
+                            polygon(points = airfoil_data(naca=0030, L = 140)); 
+                            square(200, 200); 
                         }
 
 
@@ -31,20 +27,19 @@ module 666_1028(){
 	            	cube ([15,15,15]);
 			
         		            	//UPPER - fenestrating windows
-                translate([125,-70,30])
+                translate([125,-70,35])
                 	rotate([0,0,70])	
-                  for (i = [0:7]) { // opakovani cyklu
-                    if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 19, 5])  //sude prorezy
-                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
-                    else{
-                        translate([0, i * 19, -20]) // liche prorezy
-                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
-        
-       	}
-						}	        
+                    for (i = [0:7]) { // opakovani cyklu
+                        if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                            translate([0, i * 19, 10])  //sude prorezy
+                                cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        }
+                        else{
+                            translate([0, i * 19, -20]) // liche prorezy
+                                cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        }
+       	            }
+			}	        
 
 
         //LOWER - od osy x do plus y
@@ -57,19 +52,19 @@ module 666_1028(){
             	cube ([15,15,15]);
 
             	//LOWER - fenestrating windows
-                translate([0,20,40])
-                	rotate([0,0,-70])	
-                  for (i = [0:7]) { // opakovani cyklu
-                    if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 19, 5])  //sude prorezy
-                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
-                    else{
-                        translate([0, i * 19, -20]) // liche prorezy
-                            cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
+                translate([0,20,35])
+                    rotate([0,0,-70])	
+                    for (i = [0:7]) { // opakovani cyklu
+                        if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                            translate([0, i * 19, 10])  //sude prorezy
+                                cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        }
+                        else{
+                            translate([0, i * 19, -20]) // liche prorezy
+                                cube([30, 0.1, 25]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        }
         
-       	}
+       	            }
        }
         //VERTICAL
             difference (){
@@ -82,7 +77,7 @@ module 666_1028(){
                 translate([130,-72,40])
                   for (i = [1:7]) { // opakovani cyklu
                     if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 18, 20])  //sude prorezy
+                        translate([0, i * 18, 30])  //sude prorezy
                             cube([30, 0.1, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                     else{
@@ -137,8 +132,69 @@ module 666_1028(){
 
     }	
  
+}
+
+module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
+{
+    radius=main_tube_outer_diameter/2;
+    wall_thickness=main_tube_outer_diameter/10;
+    width=main_tube_outer_diameter+2*wall_thickness;    
+    depth=main_tube_outer_diameter*2;
+    //height=depth;
+
+
+    c_na_druhou=width*width+width*width;
+    uhlopricka=sqrt(c_na_druhou);
+    c2_na_druhou=(depth/2*depth/2)+(depth/2*depth/2);
+    uhlopricka_2=sqrt(c2_na_druhou);
+
+    M3_screw_radius=M3_screw_diameter/2;
+    wall_thickness_M3_cylinder_X = M3_screw_radius;
+    stred_M4_cylinder_X = width/2 - M3_screw_radius * 2;
+    stred_M4_cylinder_Z_horni = height - M3_screw_radius - M3_screw_diameter*0.75;
+    stred_M4_cylinder_Z_dolni = M3_screw_radius + M3_screw_diameter*2;
+
+    difference (){
+
+    translate([-(depth/2),-(width/2),height_of_cap_cylinder])
+        cube ([depth,width,height]);
+            
+            //tube
+        translate([0,0,-1])
+            cylinder(h=height+1,r=radius,$fn=200);
+
+        //screw
+        translate ([-150*0.4,0,150*0.4/2 - 20])
+            rotate ([0,90,0])
+                cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+        translate ([-150*0.4,0,150*0.4 - 20])
+            rotate ([0,90,0])
+                cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+            
+        //bevelled edge
+        translate([depth/2,width/2-1,-3])
+            rotate([0,0,45])
+                cube([depth/2,depth/2,height+6]);
+
+        translate([-(depth/2),width/2-1,-3])
+            rotate([0,0,45])
+                cube([depth/2,depth/2,height+6]);
+
+        translate([-(depth/2),-uhlopricka_2-width/2+1,-3])
+            rotate([0,0,45])
+                cube([depth/2,depth/2,height+6]);
+
+        translate([depth/2,-uhlopricka_2-width/2+1,-3])
+            rotate([0,0,45])
+                cube([depth/2,depth/2,height+6]);
+    }
 }	
 
+
+translate ([75,0,62])
+    rotate([0,180,0])
+        666_1028_drillhelper();
 
 666_1028();
 
