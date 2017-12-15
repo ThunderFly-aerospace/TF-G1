@@ -5,6 +5,7 @@ main_tube_inner_diameter = 23.5;
 //Tube for undercarriage - hole [mm]
 tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
+global_clearance = 0.5;
 
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
