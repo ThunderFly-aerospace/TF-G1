@@ -71,8 +71,8 @@ module 666_1027(){
             }                   
         }
     //for front part
-        translate ([-2,-6 - main_tube_outer_diameter/2-20,- width_of_front_part/2])
-                cube ([52,hull_y_size+10,width_of_front_part]);
+        translate ([0,-6 - main_tube_outer_diameter/2-20,-width_of_front_part/2])
+                cube ([52,hull_y_size+10, width_of_front_part]);
 
     //for tube in back
         translate ([hull_x_size-70,0,0])
@@ -108,15 +108,15 @@ module 666_1027(){
         
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-40,-38/2])
-                cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5),50,38]);
-        
+                cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, 50, 38 + global_clearance]);
+
         //666_1004 - zadní
         translate([398,-40,-38/2])
-                cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5),50,38]);
+                cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, 50, 38 + global_clearance]);
 
         //666_1017 - prostředek
         translate([170+68-(main_tube_outer_diameter+2*(main_tube_outer_diameter/5))/2,-40,-36/2])
-                cube ([main_tube_outer_diameter+2*(main_tube_outer_diameter/5),50,36]);
+                cube ([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, 50, 36 + global_clearance]);
               
         //odečtení děr pro lemy
 
@@ -394,47 +394,44 @@ module 666_1027(){
 
 module 666_1027A(){
 //část 1
-    //základní dělení pro tisk
-        
-           intersection(){
-                666_1027();
-                    translate([0,-75,-75])                        
-                            cube([150,150,150]);
-            }
+//základní dělení pro tisk
+
+   intersection(){
+        666_1027();
+            translate([0,-75,-75])                        
+                    cube([150,150,150]);
+    }
 }
 
 module 666_1027B(){
 //část 2
-     //základní dělení pro tisk
-        translate([20,0,0])    
-            intersection(){
-                666_1027();
-                    translate([150,-75,-75])                        
-                            cube([150,150,150]);
-            }
+//základní dělení pro tisk
+    intersection(){
+        666_1027();
+            translate([150,-75,-75])                        
+                    cube([150,150,150]);
+    }
 }            
 
 
 module 666_1027C(){        
 //část 3        
-    //základní dělení pro tisk
-        translate([40,0,0])
-            intersection(){
-                666_1027();
-                    translate([300,-60,-75])                        
-                        cube([150,150,150]);
-            }
+//základní dělení pro tisk
+    intersection(){
+        666_1027();
+            translate([300,-60,-75])                        
+                cube([150,150,150]);
+    }
 }
 
 module 666_1027D(){
 //část 4
-    //základní dělení pro tisk
-        translate([60,0,0])
-            intersection(){
-                666_1027();
-                    translate([450,-60,-75])                        
-                       cube([150,150,150]);
-            }
+//základní dělení pro tisk
+    intersection(){
+        666_1027();
+            translate([450,-60,-75])                        
+               cube([150,150,150]);
+    }
 }
 
 666_1027();
