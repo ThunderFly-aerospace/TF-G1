@@ -1,3 +1,10 @@
+
+// improving rendering speed.
+draft = false;
+draft = true;   // comment out for printing.
+$fs = draft ? 5 : 0.5;
+$fa = 10;
+
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
 main_tube_inner_diameter = 23.5;
