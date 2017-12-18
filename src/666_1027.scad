@@ -53,7 +53,7 @@ module 666_1027(){
         intersection () {
             resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
                 rotate ([0,90,0])           
-                    rotate_extrude($fn = 100)
+                    rotate_extrude($fn = draft ? 50 : 100)
                         rotate([0,0,90])
                             difference()
                             {
@@ -67,7 +67,7 @@ module 666_1027(){
                     //v ose y mínus 100 - pro zmenšení kapky na vložku
                     cube ([hull_x_size,main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
                         rotate ([0,90,0])
-                            cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                            cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
             }                   
         }
     //for front part
@@ -77,7 +77,7 @@ module 666_1027(){
     //for tube in back
         translate ([hull_x_size-70,0,0])
             rotate ([0,90,0])
-                cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+                cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                             
     //for printing
         translate([hull_x_size-50-30,-main_tube_outer_diameter,-main_tube_outer_diameter/2])       
@@ -86,7 +86,7 @@ module 666_1027(){
         //vyříznutí díry pro horizontální trubku
             translate([0,-main_tube_outer_diameter/2,0])    
                 rotate([0,90,0])
-                    cylinder(h = hull_drop_length, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 100);
+                    cylinder(h = hull_drop_length, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
             translate([0,-main_tube_outer_diameter*1.5, -main_tube_outer_diameter/2])        
                     cube([hull_drop_length,main_tube_outer_diameter,main_tube_outer_diameter]);
         
@@ -136,7 +136,7 @@ module 666_1027(){
                 //for tube in back
                     translate ([hull_x_size-70,-6,0])
                         rotate ([0,90,0])
-                            cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+                            cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
 
                 //kapka pro kapkovitý tvar
                     translate ([hull_wall_thickness+2.5+0.5,0,0])
@@ -148,7 +148,7 @@ module 666_1027(){
                                             difference()
                                             {
 
-                                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
+                                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 200)); 
                                               square(hull_drop_length); 
                                             }
                             translate([0,0,hull_corner_radius])
@@ -156,7 +156,7 @@ module 666_1027(){
                                 translate ([2.5+0.5,-(main_tube_outer_diameter/2)-2.5-0.5,-hull_z_size/2 + hull_wall_thickness+2.5+0.5])
                                     cube ([hull_x_size-5-1,hull_y_size - hull_wall_thickness-5-1, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius-5-1]);
                                     rotate ([0,90,0])
-                                        cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                                        cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
                             }                   
                         }
                 }       
@@ -169,7 +169,7 @@ module 666_1027(){
                                 rotate([0,0,90])
                                     difference()
                                     {
-                                    polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
+                                    polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=draft ? 50 : 100)); 
                                     square(hull_drop_length); 
                                     }
                     }
@@ -179,7 +179,7 @@ module 666_1027(){
                                 cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
                 
                             rotate ([0,90,0])
-                                cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                                cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
                     }
             }
 
