@@ -1,5 +1,3 @@
-
-
 module hollowing_skeleton()
 {
 
@@ -26,6 +24,41 @@ module hollowing_skeleton()
           }                   
     }
 }
+
+module drop()
+{
+
+    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness 
+
+	intersection () {
+    	rotate ([0,90,0])           
+        	rotate_extrude($fn = draft ? 50 : 100)
+                    rotate([0,0,90])
+                        difference()
+                        {
+	                        polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
+    	                    square(hull_drop_length); 
+        	            }
+            		
+        translate([0,0,hull_corner_radius])
+          	minkowski(){                   
+             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
+             			cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
+             	  	rotate ([0,90,0])
+                 		cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
+		    }
+	}
+}
+
+module whole_drop(){
+	difference(){
+		drop();
+		translate ([hull_wall_thickness,0,0])
+		hollowing_skeleton();
+	}
+}
+
 
 module 666_1025(){
 
@@ -73,6 +106,7 @@ union(){
         //hollowing skeleton
     		translate ([hull_wall_thickness,0,0])
             	hollowing_skeleton();
+
             //for front part
     		translate ([-2,-1 - main_tube_outer_diameter/2,-25])
     				cube ([52,hull_y_size+10,50]);
@@ -100,36 +134,36 @@ union(){
     		//část AA
     		translate([30,-main_tube_outer_diameter/4,hull_z_size/2-30])
     			rotate([0,-45,0])
-    				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
     
     		translate([5,-main_tube_outer_diameter/4,-hull_z_size/2])
     			rotate([0,45,0])
-    				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     		//část A
     		translate([50+50,-main_tube_outer_diameter/4,-hull_z_size/2-15])
-    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     		//část B
     		translate([50+100+75,-main_tube_outer_diameter/4,-hull_z_size/2-15])
-    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     		//část C
     		translate([50+100+150+60,-main_tube_outer_diameter/4,+50])
     			rotate([0,90-beta,0])	
-    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
     		translate([50+100+150+60,-main_tube_outer_diameter/4,-50])
     			rotate([0,90+beta,0])	
-    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     		//část D		
     		translate([50+100+150+150+35,-main_tube_outer_diameter/4,0])
     			rotate([0,90-beta,0])
-    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     		translate([50+100+150+150+35,-main_tube_outer_diameter/4,0])
     			rotate([0,90+beta,0])
-    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+    				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
 
 
@@ -153,7 +187,7 @@ union(){
         		//for tube in back
     				translate ([hull_x_size-70,-6,0])
     					rotate ([0,90,0])
-    						cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = 200);
+    						cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
 
 				//kapka pro kapkovitý tvar
 					translate ([hull_wall_thickness+2.5,0,0])
@@ -181,24 +215,7 @@ union(){
 
 			//odstranění dna z vnější strany
 				translate([0,0,0])
-					intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-	                              	polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-    	                          	square(hull_drop_length); 
-        	                    	}
-            		}
-            	translate([-20,0,hull_corner_radius])
-            		minkowski(){                   
-             			translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             					cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             				rotate ([0,90,0])
-                 				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
-		        	}
+					drop();
 		}
 
 //stěna Z+
@@ -211,24 +228,7 @@ union(){
 
 			//odstranění čtverce z vnější strany
 				translate([0,0,0])
-					intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = draft ? 50 : 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-	                              	polygon(points = airfoil_data(naca = hull_airfoil_thickness, L = hull_drop_length , N = draft ? 50 : 100)); 
-    	                          	square(hull_drop_length); 
-        	                    	}
-            		}
-            	translate([0,0,hull_corner_radius])
-            		minkowski(){                   
-             			translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             					cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             				rotate ([0,90,0])
-                 				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
-		        	}
+					drop();
 		}
 
 //stěna Z-
@@ -240,24 +240,7 @@ union(){
 
 			//odstranění čtverce z vnější strany
 				translate([0,0,0])
-					intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = draft ? 50 : 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-	                              	polygon(points = airfoil_data(naca = hull_airfoil_thickness, L =hull_drop_length , N = draft ? 50 : 100)); 
-    	                          	square(hull_drop_length); 
-        	                    	}
-            		}
-            	translate([0,0,hull_corner_radius])
-            		minkowski(){                   
-             			translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             					cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             				rotate ([0,90,0])
-                 				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
-		        	}
+					drop();
 		}
 
 
@@ -310,54 +293,13 @@ difference(){
 			}
 		//odstranění čtverce z vnější strany
 			translate([-20,0,0])
-				intersection () {
-        			rotate ([0,90,0])           
-                    	rotate_extrude($fn = 100)
-                        	rotate([0,0,90])
-                            	difference()
-                            	{
-	                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-    	                          square(hull_drop_length); 
-        	                    }
-            	}
-            translate([-20,0,hull_corner_radius])
-            	minkowski(){                   
-             		translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             				cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             			rotate ([0,90,0])
-                 			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-
-		        }
+				drop();
 		}
 		}
 translate([-20,0,0])
 	union(){
 		intersection(){
-		 		//celá kapka
-		 		difference(){
-        			intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-
-                              		polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                              		square(hull_drop_length); 
-	                            	}
-           				translate([0,0,hull_corner_radius])
-	           				 minkowski(){                   
-	             				translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
-	             						cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
-	             					rotate ([0,90,0])
-				                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-				        	}
-			       	 }   
-		        //hollowing skeleton
-    			translate ([hull_wall_thickness,0,0]) 
-                    hollowing_skeleton();
-    			}
+		 		whole_drop();
     //čtverec pro zámek
 		translate([52,68,0])
 			rotate([0,0,90-beta])
@@ -372,34 +314,11 @@ translate([-20,0,0])
 translate([-20,0,0])
 	union(){
 		intersection(){
-		 		//celá kapka
-		 		difference(){
-        			intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-
-                              		polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                              		square(hull_drop_length); 
-	                            	}
-           				translate([0,0,hull_corner_radius])
-	           				 minkowski(){                   
-	             				translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
-	             						cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
-	             					rotate ([0,90,0])
-				                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-				        	}
-			       	 }   
-		        //hollowing skeleton
-    			translate ([hull_wall_thickness,0,0])
-                    hollowing_skeleton();
-    			}
+		 		whole_drop();
     //čtverec pro zámek
-	translate([49,2,hull_z_size/2-10])
-		rotate([0,0,0])
-			cube([hull_wall_thickness*2,15,10]);
+		translate([49,2,hull_z_size/2-10])
+			rotate([0,0,0])
+				cube([hull_wall_thickness*2,15,10]);
 		//final intersetcion pro zámek
 		}
 	
@@ -410,34 +329,11 @@ translate([-20,0,0])
 translate([-20,0,0])	
 	union(){
 		intersection(){
-		 		//celá kapka
-		 		difference(){
-        			intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-
-                              		polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                              		square(hull_drop_length); 
-	                            	}
-           				translate([0,0,hull_corner_radius])
-	           				 minkowski(){                   
-	             				translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
-	             						cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
-	             					rotate ([0,90,0])
-				                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-				        	}
-			       	 }   
-		        //hollowing skeleton
-    			translate ([hull_wall_thickness,0,0])
-                    hollowing_skeleton();
-    			}
+		 	whole_drop();
     //čtverec pro zámek
-	translate([49,2,-hull_z_size/2])
-		rotate([0,0,0])
-			cube([hull_wall_thickness*2,15,40]);
+		translate([49,2,-hull_z_size/2])
+			rotate([0,0,0])
+				cube([hull_wall_thickness*2,15,40]);
 		//final intersetcion pro zámek
 		}
 	
@@ -463,9 +359,6 @@ module 666_1025A(){
     			666_1025();
     			translate([50,-20,-75])                        
        				cube([150-50,150,150]);
-		    			    		
-		    	
-
 		    }
 	   //rantl pro slepení vpravo
 		intersection(){
@@ -476,61 +369,21 @@ module 666_1025A(){
 		//pro lepení - odstranění čtverce válcem
 			translate([120,20,0])
 				rotate([0,90,0])		
-					cylinder(h = 40,r1 = 60, r2 = 70, $fn = 100);
+					cylinder(h = 40,r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
 		}
 		//odstranění čtverce z vnější strany
 			translate([0,0,0])
-				intersection () {
-        			rotate ([0,90,0])           
-                    	rotate_extrude($fn = 100)
-                        	rotate([0,0,90])
-                            	difference()
-                            	{
-	                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-    	                          square(hull_drop_length); 
-        	                    }
-            	}
-            translate([0,0,hull_corner_radius])
-            	minkowski(){                   
-             		translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             				cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             			rotate ([0,90,0])
-                 			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-
-		        }
+				drop();
 		}
 	//zámek horní
 	union(){
 		intersection(){
 		 		//celá kapka
-		 		difference(){
-        			intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-
-                              		polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                              		square(hull_drop_length); 
-	                            	}
-           				translate([0,0,hull_corner_radius])
-	           				 minkowski(){                   
-	             				translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
-	             						cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
-	             					rotate ([0,90,0])
-				                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-				        	}
-			       	 }   
-		        //hollowing skeleton
-    			translate ([hull_wall_thickness,0,0])
-                    hollowing_skeleton();
-    			}
+		 		whole_drop();
     //čtverec pro zámek
-	translate([52,68,0])
-		rotate([0,0,90-beta])
-			cube([hull_wall_thickness,15,10]);
+		translate([52,68,0])
+			rotate([0,0,90-beta])
+				cube([hull_wall_thickness,15,10]);
 		//final intersetcion pro zámek
 		}
 	
@@ -541,33 +394,11 @@ module 666_1025A(){
 	union(){
 		intersection(){
 		 		//celá kapka
-		 		difference(){
-        			intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-
-                              		polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                              		square(hull_drop_length); 
-	                            	}
-           				translate([0,0,hull_corner_radius])
-	           				 minkowski(){                   
-	             				translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
-	             						cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
-	             					rotate ([0,90,0])
-				                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-				        	}
-			       	 }   
-		        //hollowing skeleton
-    			translate ([hull_wall_thickness,0,0])
-                    hollowing_skeleton();
-    			}
+		 		whole_drop();
     //čtverec pro zámek
-	translate([49,2,hull_z_size/2-10])
-		rotate([0,0,0])
-			cube([hull_wall_thickness*2,15,10]);
+		translate([49,2,hull_z_size/2-10])
+			rotate([0,0,0])
+				cube([hull_wall_thickness*2,15,10]);
 		//final intersetcion pro zámek
 		}
 	
@@ -579,33 +410,11 @@ module 666_1025A(){
 	union(){
 		intersection(){
 		 		//celá kapka
-		 		difference(){
-        			intersection () {
-        				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
-                        		rotate([0,0,90])
-                            		difference()
-                            		{
-
-                              		polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                              		square(hull_drop_length); 
-	                            	}
-           				translate([0,0,hull_corner_radius])
-	           				 minkowski(){                   
-	             				translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
-	             						cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
-	             					rotate ([0,90,0])
-				                 		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-				        	}
-			       	 }   
-		        //hollowing skeleton
-    			translate ([hull_wall_thickness,0,0])
-                    hollowing_skeleton();
-    			}
+		 		whole_drop();
     //čtverec pro zámek
-	translate([49,2,-hull_z_size/2])
-		rotate([0,0,0])
-			cube([hull_wall_thickness*2,15,40]);
+		translate([49,2,-hull_z_size/2])
+			rotate([0,0,0])
+				cube([hull_wall_thickness*2,15,40]);
 		//final intersetcion pro zámek
 		}
 	
@@ -645,7 +454,7 @@ module 666_1025B(){
 		//pro lepení - odstranění čtverce válcem
 			translate([140,20,0])
 				rotate([0,90,0])		
-					cylinder(h = 40,r1 = 60, r2 = 70, $fn = 100);
+					cylinder(h = 40,r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
 		//pro lepení - odstranění kusu z díry pro horní držák
 			translate ([180+2*hull_wall_thickness+30,-10,0])       
 				rotate ([-90,0,0])
@@ -655,24 +464,7 @@ module 666_1025B(){
 
         //odstranění čtverce z vnější strany
 		translate([20,0,0])
-			intersection () {
-    			rotate ([0,90,0])           
-                	rotate_extrude($fn = 100)
-                    	rotate([0,0,90])
-                        	difference()
-                        	{
-                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-	                          square(hull_drop_length); 
-    	                    }
-        	}
-        translate([0,0,hull_corner_radius])
-        	minkowski(){                   
-         		translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-         				cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-         	
-         			rotate ([0,90,0])
-             			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-	        }
+			drop();
 	}
 }
 
@@ -700,7 +492,7 @@ module 666_1025C(){
 		//pro lepení - odstranění čtverce válcem
 			translate([320,13,0])
 				rotate([0,90,0])		
-					cylinder(h = 30,r1 = 60, r2 = 70, $fn = 100);
+					cylinder(h = 30,r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
 		//pro lepení - odstranění kusu z díry pro horní držák
 			translate ([180+40,-10,0])       
 				rotate ([-90,0,0])
@@ -709,25 +501,7 @@ module 666_1025C(){
 		}
 		//odstranění čtverce z vnější strany
 			translate([40,0,0])
-				intersection () {
-        			rotate ([0,90,0])           
-                    	rotate_extrude($fn = 100)
-                        	rotate([0,0,90])
-                            	difference()
-                            	{
-	                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-    	                          square(hull_drop_length); 
-        	                    }
-            	}
-            translate([0,0,hull_corner_radius])
-            	minkowski(){                   
-             		translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             				cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             			rotate ([0,90,0])
-                 			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-
-		        }
+				drop();
 	}
 }
 	
@@ -754,29 +528,11 @@ module 666_1025D(){
 		//pro lepení - odstranění čtverce válcem
 			translate([490,6,0])
 				rotate([0,90,0])		
-					cylinder(h = 40,r1 = 40, r2 = 30, $fn = 100);
+					cylinder(h = 40,r1 = 40, r2 = 30, $fn = draft ? 50 : 100);
 		}
 		//odstranění čtverce z vnější strany
 			translate([60,0,0])
-				intersection () {
-        			rotate ([0,90,0])           
-                    	rotate_extrude($fn = 100)
-                        	rotate([0,0,90])
-                            	difference()
-                            	{
-	                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-    	                          square(hull_drop_length); 
-        	                    }
-            	}
-            translate([0,0,hull_corner_radius])
-            	minkowski(){                   
-             		translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-             				cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-             	
-             			rotate ([0,90,0])
-                 			cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-
-		        }
+				drop();
 	}
 }
 
