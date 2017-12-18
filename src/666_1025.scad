@@ -55,7 +55,7 @@ union(){
                     rotate ([-90,0,0])
                         translate ([hull_wall_thickness,0,0])
                             resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance - clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
-                                airfoil(naca = 0030, L = 170, N=101, h = draft ? 50 : 100, open = false);
+                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = draft ? 50 : 100, open = false);
 
             }
             translate([0,0,hull_corner_radius])
@@ -80,13 +80,13 @@ union(){
         //for tube in back
     		translate ([hull_x_size-70,0,0])
     			rotate ([0,90,0])
-    				cylinder (h = 80, r =  main_tube_outer_diameter/2, $fn = draft ? 20 : 100);
+    				cylinder (h = 80, r =  main_tube_outer_diameter/2, $fn = draft ? 20 : 50);
     					    
         //for rotor pilon
 	       	translate ([180+2*hull_wall_thickness,-10,])       
 				rotate ([-90,0,0])
                     resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
-                        airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
+                        airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
         			
         //for printing
     		translate([0,-main_tube_outer_diameter/2-4.90,-170/2])
@@ -173,7 +173,7 @@ union(){
                      	translate ([2.5,-(main_tube_outer_diameter/2)-2.5,-hull_z_size/2 + hull_wall_thickness+2.5])
                      		cube ([hull_x_size-5,hull_y_size - hull_wall_thickness-5, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius-5]);
                      		rotate ([0,90,0])
-                         		cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                         		cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
             		}                   
             	}
 
@@ -197,7 +197,7 @@ union(){
              					cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
              	
              				rotate ([0,90,0])
-                 				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                 				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
 		        	}
 		}
 
@@ -213,11 +213,11 @@ union(){
 				translate([0,0,0])
 					intersection () {
         				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
+                    		rotate_extrude($fn = draft ? 50 : 100)
                         		rotate([0,0,90])
                             		difference()
                             		{
-	                              	polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
+	                              	polygon(points = airfoil_data(naca = hull_airfoil_thickness, L = hull_drop_length , N = draft ? 50 : 100)); 
     	                          	square(hull_drop_length); 
         	                    	}
             		}
@@ -227,7 +227,7 @@ union(){
              					cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
              	
              				rotate ([0,90,0])
-                 				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                 				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
 		        	}
 		}
 
@@ -242,11 +242,11 @@ union(){
 				translate([0,0,0])
 					intersection () {
         				rotate ([0,90,0])           
-                    		rotate_extrude($fn = 100)
+                    		rotate_extrude($fn = draft ? 50 : 100)
                         		rotate([0,0,90])
                             		difference()
                             		{
-	                              	polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
+	                              	polygon(points = airfoil_data(naca = hull_airfoil_thickness, L =hull_drop_length , N = draft ? 50 : 100)); 
     	                          	square(hull_drop_length); 
         	                    	}
             		}
@@ -256,7 +256,7 @@ union(){
              					cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
              	
              				rotate ([0,90,0])
-                 				cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
+                 				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
 		        	}
 		}
 
@@ -306,7 +306,7 @@ difference(){
 					cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 			translate([20,0,0])
 				rotate([0,90,0])
-					cylinder(h = 20, r1 = 60, r2 = 60, $fn = 100);
+					cylinder(h = 20, r1 = 60, r2 = 60, $fn = draft ? 50 : 100);
 			}
 		//odstranění čtverce z vnější strany
 			translate([-20,0,0])
