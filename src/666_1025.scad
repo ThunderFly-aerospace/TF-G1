@@ -284,65 +284,71 @@ difference(){
 		
 		intersection(){
 		//pro lepení - čtverec 
-			difference(){
-			translate([30- hull_wall_thickness,0,-hull_z_size])
-					cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-			translate([20,0,0])
-				rotate([0,90,0])
-					cylinder(h = 20, r1 = 60, r2 = 60, $fn = draft ? 50 : 100);
+			union(){
+			
+				difference(){
+			
+					translate([30- hull_wall_thickness,0,-hull_z_size])
+							cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+			
+					translate([20,0,0])
+						rotate([0,90,0])
+							cylinder(h = 20, r1 = 60, r2 = 60, $fn = draft ? 50 : 100);
+				
+					//trojúhelník Z+
+					translate([30 - hull_wall_thickness-0.5,4.5,42])
+						rotate([45,0,0])		
+							cube([2*hull_wall_thickness,20,30]);
+						
+					//trojúhelník Z+
+					translate([30 - hull_wall_thickness-0.5,-1,-75])
+						rotate([45,0,0])		
+							cube([2*hull_wall_thickness,30,30]);
+						
+
+				}		
+			
+			//pro rovnou hranu rantlu
+			translate([30 - hull_wall_thickness,54,-25 - 2*hull_wall_thickness])
+					cube ([hull_wall_thickness,8,25 + 25 + 3*hull_wall_thickness]);		
 			}
+		
 		//odstranění čtverce z vnější strany
-			translate([-20,0,0])
+		translate([-20,0,0])
 				drop();
+		
 		}
-		}
-translate([-20,0,0])
-	union(){
-		intersection(){
-		 		whole_drop();
-    //čtverec pro zámek
-		translate([52,68,0])
-			rotate([0,0,90-beta])
-				cube([hull_wall_thickness,15,10]);       
-
-		//final intersetcion pro zámek
 		}
 	
-	}	
+	//díry pro zámky
+	translate([-20,0,0])
+		union(){
+			intersection(){
+				whole_drop();	
+			union(){
+    			//čtverec pro zámek horní
+				translate([52,68,0])
+					rotate([0,0,90-beta])
+						cube([hull_wall_thickness,15,10]);
+			    //čtverec pro zámek Z+
+				translate([49,2,hull_z_size/2-10])
+					rotate([0,0,0])
+						cube([hull_wall_thickness*2,15,10]);
+				//čtverec pro zámek Z-
+				translate([49,2,-hull_z_size/2])
+					rotate([0,0,0])
+						cube([hull_wall_thickness*2,15,40]);
+			//union
+			}	
+			//intersection
+			}
+		//union zámky
+		}	
 
-//zámek Z+
-translate([-20,0,0])
-	union(){
-		intersection(){
-		 		whole_drop();
-    //čtverec pro zámek
-		translate([49,2,hull_z_size/2-10])
-			rotate([0,0,0])
-				cube([hull_wall_thickness*2,15,10]);
-		//final intersetcion pro zámek
-		}
-	
-	//final union pro zámek
-	}
-
-//zámek Z-
-translate([-20,0,0])	
-	union(){
-		intersection(){
-		 	whole_drop();
-    //čtverec pro zámek
-		translate([49,2,-hull_z_size/2])
-			rotate([0,0,0])
-				cube([hull_wall_thickness*2,15,40]);
-		//final intersetcion pro zámek
-		}
-	
-	//final union pro zámek
-	}
-
+//final difference
 }
 
-
+//final module
 }
 //část 1
 
@@ -375,51 +381,30 @@ module 666_1025A(){
 			translate([0,0,0])
 				drop();
 		}
-	//zámek horní
-	union(){
-		intersection(){
-		 		//celá kapka
-		 		whole_drop();
-    //čtverec pro zámek
-		translate([52,68,0])
-			rotate([0,0,90-beta])
-				cube([hull_wall_thickness,15,10]);
-		//final intersetcion pro zámek
-		}
-	
-	//final union pro zámek
-	}
-
-	//zámek Z+
-	union(){
-		intersection(){
-		 		//celá kapka
-		 		whole_drop();
-    //čtverec pro zámek
-		translate([49,2,hull_z_size/2-10])
-			rotate([0,0,0])
-				cube([hull_wall_thickness*2,15,10]);
-		//final intersetcion pro zámek
-		}
-	
-	//final union pro zámek
-	}
-
-
-//zámek Z-
-	union(){
-		intersection(){
-		 		//celá kapka
-		 		whole_drop();
-    //čtverec pro zámek
-		translate([49,2,-hull_z_size/2])
-			rotate([0,0,0])
-				cube([hull_wall_thickness*2,15,40]);
-		//final intersetcion pro zámek
-		}
-	
-	//final union pro zámek
-	}
+		
+		//zámky
+		union(){
+			intersection(){
+				whole_drop();	
+			union(){
+    			//čtverec pro zámek horní
+				translate([52,68,0])
+					rotate([0,0,90-beta])
+						cube([hull_wall_thickness,15,10]);
+			    //čtverec pro zámek Z+
+				translate([49,2,hull_z_size/2-10])
+					rotate([0,0,0])
+						cube([hull_wall_thickness*2,15,10]);
+				//čtverec pro zámek Z-
+				translate([49,2,-hull_z_size/2])
+					rotate([0,0,0])
+						cube([hull_wall_thickness*2,15,40]);
+			//union
+			}	
+			//intersection
+			}
+		//union zámky
+		}	
 
 //final union
 }
@@ -573,6 +558,6 @@ module 666_1025ZK1(){
 
 
 666_1025AA();
-666_1025A();
+
 use <./lib/naca4.scad>
 include <../Parameters.scad>
