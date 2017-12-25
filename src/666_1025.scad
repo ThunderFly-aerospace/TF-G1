@@ -117,7 +117,7 @@ union(){
     				cylinder (h = 80, r =  main_tube_outer_diameter/2, $fn = draft ? 20 : 50);
     					    
         //for rotor pilon
-	       	translate ([180+2*hull_wall_thickness,-10,])       
+	       	translate ([180+2*hull_wall_thickness,-10,0])       
 				rotate ([-90,0,0])
                     resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
                         airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
@@ -145,8 +145,14 @@ union(){
     				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     		//část B
-    		translate([50+100+75,-main_tube_outer_diameter/4,-hull_z_size/2-15])
+    		translate([50+100+37,-main_tube_outer_diameter/4,-hull_z_size/2-15])
     				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+    		
+    		//část BB	
+    		translate([50+100+112,-main_tube_outer_diameter/4,-hull_z_size/2-15])
+    				cylinder(h = hull_z_size+30, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
 
     		//část C
     		translate([50+100+150+60,-main_tube_outer_diameter/4,+50])
@@ -257,10 +263,10 @@ union(){
 
 
     //nápis
-    translate([hull_x_size/3,0,hull_z_size/2])
-      text("TF-G1", size = 20,font = "Liberation Sans");
+    translate([hull_x_size/3,0,hull_z_size/2 + 0.5])
+      text("TF-G1", size = 20,font = "PT Sans");
 
-    translate([hull_x_size/3,0,-hull_z_size/2])
+    translate([hull_x_size/3,0,-hull_z_size/2 - 0.5])
       rotate([0,180,0]) text("TF-G1", size = 20,font = "PT Sans");
 //konec union
 }
@@ -456,6 +462,7 @@ module 666_1025B(){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+    clearance = 0.5;
 
 union(){	
 	//základní dělení pro tisk
@@ -463,32 +470,32 @@ union(){
     		intersection(){
         				666_1025();
         		translate([150,-20,-150])
-           				cube([150,150,300]);
+           				cube([75,150,300]);
     		}
     
-    //rantl pro slepení vlevo
-	//intersection(){
-	//	difference(){
-		//pro lepení - čtverec 
-	//		translate([170,0,-hull_z_size])
-	//				cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-		//pro lepení - odstranění čtverce válcem
-	//		translate([140,20,0])
-	//			rotate([0,90,0])		
-	//				cylinder(h = 40,r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
-		//pro lepení - odstranění kusu z díry pro horní držák
-			//translate ([180+2*hull_wall_thickness+30,-10,0])       
-			//	rotate ([-90,0,0])
-            //		resize([170 - hull_wall_thickness*2 - trailing_wall*hull_wall_thickness*2,(160*0030/100)- 2*hull_wall_thickness,210], auto=true) 
-              //  		airfoil(naca = 0030, L = 170, N=101, h = 200, open = false);
-	//	}
+    //rantl pro slepení vpravo
+	intersection(){
+		difference(){
+	//pro lepení - čtverec 
+			translate([170 +75 - hull_wall_thickness,0,-hull_z_size])
+					cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+	//pro lepení - odstranění čtverce válcem
+			translate([210,20,0])
+				rotate([0,90,0])		
+					cylinder(h = 40,r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
+	//pro lepení - odstranění kusu z díry pro horní držák
+	       	translate ([180+2*hull_wall_thickness + 20,-10,0])       
+				rotate ([-90,0,0])
+                    resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
+                        airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+	//final difference
+		}
 
-        //odstranění čtverce z vnější strany
-	//	translate([20,0,0])
-	//		drop();
-	//}
-
-
+    //odstranění čtverce z vnější strany
+		translate([20,0,0])
+			drop();
+	//final intersection	
+	}
 
 	//zámky vlevo
 		union(){
@@ -515,27 +522,77 @@ union(){
 		//union zámky vlevo
 		}
 
+//final union
+}
+//final module
+}
+
+
+//část 2B
+
+module 666_1025BB(){
+
+    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+    clearance = 0.5;
+
+union(){	
+	//základní dělení pro tisk
+	    translate([30,0,0])
+    		intersection(){
+        				666_1025();
+        		translate([150+75,-20,-150])
+           				cube([75,150,300]);
+    		}
+    
+    //rantl pro slepení vlevo
+	intersection(){
+		difference(){
+	//pro lepení - čtverec 
+			translate([170 +75 + 10,0,-hull_z_size])
+					cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+	//pro lepení - odstranění čtverce válcem
+			translate([220,20,0])
+				rotate([0,90,0])		
+					cylinder(h = 40,r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
+	//pro lepení - odstranění kusu z díry pro horní držák
+	       	translate ([180+2*hull_wall_thickness + 20 + 10,-10,0])       
+				rotate ([-90,0,0])
+                    resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,200], auto=true) 
+                        airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+	//final difference
+		}
+
+    //odstranění čtverce z vnější strany
+		translate([30,0,0])
+			drop();
+	//final intersection	
+	}
+
+
+
+
 	//zámky vpravo
 		union(){
 			intersection(){
-				translate([20,0,0])
+				translate([30,0,0])
 					whole_drop();	
 			union(){
     			//čtverec pro zámek horní
-				translate([52+100 + 22 - hull_wall_thickness*2 + 150 - 3,hull_z_size/2,-50])
+				translate([52+100 + 22 - hull_wall_thickness*2 + 150 - 3 + 10,hull_z_size/2,-50])
 					rotate([0,0,0])
 						cube([hull_wall_thickness*3,20,20]);
-			    translate([52+100 + 22 - hull_wall_thickness*2 + 150 - 3,hull_z_size/2,25])
+			    translate([52+100 + 22 - hull_wall_thickness*2 + 150 - 3 + 10,hull_z_size/2,25])
 					rotate([0,0,0])
 						cube([hull_wall_thickness*3,20,20]);
 
 
 			    //čtverec pro zámek Z+
-				translate([49 + 100 + 20 - hull_wall_thickness + 150 + hull_wall_thickness,2,hull_z_size/2-10])
+				translate([49 + 100 + 20 - hull_wall_thickness + 150 + hull_wall_thickness + 10,2,hull_z_size/2-10])
 					rotate([0,0,0])
 						cube([hull_wall_thickness*4,15,10]);
 				//čtverec pro zámek Z-
-				translate([49+100+20 - hull_wall_thickness + 150 + hull_wall_thickness,2,-hull_z_size/2])
+				translate([49+100+20 - hull_wall_thickness + 150 + hull_wall_thickness + 10,2,-hull_z_size/2])
 					rotate([0,0,0])
 						cube([hull_wall_thickness*4,15,40]);
 			//union
@@ -552,6 +609,17 @@ union(){
 }
 //final module
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 module 666_1025C(){	
@@ -729,15 +797,11 @@ difference(){
 
 //666_1025();
 
-666_1025AA();
 
-666_1025A();
 
 666_1025B();
 
-666_1025C();
-
-666_1025D();
+666_1025BB();
 
 
 use <./lib/naca4.scad>
