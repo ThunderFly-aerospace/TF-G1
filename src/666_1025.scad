@@ -727,42 +727,18 @@ difference(){
 }
 
 
+//666_1025();
 
-//díl jen pro tisk nástavce, zda je správně
-module 666_1025ZK1(){
+666_1025AA();
 
-    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
-    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
+666_1025A();
 
+666_1025B();
 
-    airfoil_thickness = 0030;
-    depth = main_tube_outer_diameter*2;
-    width = main_tube_outer_diameter + 2*(main_tube_outer_diameter/10);
-    height = depth;
-    clearance = 0.5; 
+666_1025C();
 
-    difference (){
-      airfoil(naca = airfoil_thickness, L = 170, N=101, h = 5, open = false);
-      translate ([hull_wall_thickness,0,0])
-            resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,5], auto=true) 
-                airfoil(naca = airfoil_thickness, L = 170, N=101, h = 5, open = false);
-    }
+666_1025D();
 
 
-    translate ([hull_wall_thickness + 0.5,0,0])
-    difference(){
-        
-        resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*clearance - clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
-            airfoil(naca = 0030, L = 170, N=101, h = 5, open = false);
-        translate([hull_wall_thickness,0,0])       
-            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*clearance  - clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*clearance ,5], auto=true) 
-                airfoil(naca = 0030, L = 170, N=101, h = 5, open = false);
-    }
-
-}
-
-
-
-666_1025();
 use <./lib/naca4.scad>
 include <../Parameters.scad>
