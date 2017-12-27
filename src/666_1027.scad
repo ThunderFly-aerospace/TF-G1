@@ -24,7 +24,17 @@ module 666_1027(){
     //kostka spojky pro akumulátor, ve které je umístěn otvor pro šroub
     width_cube = 10;
     depth_cube = depth;
-    height_cube = 10;    
+    height_cube = 10;   
+
+    //opticalFlow
+    width_optical_flow_senzor = 45.5;
+    depth_optical_flow_senzor = 10;
+    height_optical_flow_senzor = 35;
+    sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
+    M3_optical_flow_senzor_Z = 30.4;
+    M3_optical_flow_senzor_X = 24;
+    M3_optical_flow_senzor_Z_alone = 9.1;
+    M3_optical_flow_senzor_X_alone = 16.7;
 
     //translate([move_of_accumulator,hull_corner_radius,-height_of_accumulator])    
         //rotate([270,0,0])
@@ -464,8 +474,55 @@ module 666_1027(){
         rotate([0,-53,0])      
             cube([25,40,20]);
 
+//umístění OpticalFlow senzoru
+    translate([hull_x_size*0.58,- depth_optical_flow_senzor - main_tube_outer_diameter + sink_of_optical_flow_senzor,hull_z_size/8])
+        
+        union(){    
+            translate([0,0,-20])
+            cube([width_optical_flow_senzor,depth_optical_flow_senzor,height_optical_flow_senzor+20]);
+        //otvory pro šrouby pro připevnění senzoru
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2,50,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2])    
+            rotate([90,0,0])
+                cylinder(h = 80, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2,50,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_Z])    
+            rotate([90,0,0])
+                cylinder(h = 80, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_X,50,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2])    
+            rotate([90,0,0])
+                cylinder(h = 80, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_X,50,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_Z])    
+            rotate([90,0,0])
+                cylinder(h = 80, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+        translate([width_optical_flow_senzor - M3_optical_flow_senzor_X_alone,50, height_optical_flow_senzor - M3_optical_flow_senzor_Z_alone])
+            rotate([90,0,0])
+                cylinder(h = 80, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        //otvory pro matky
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2,40 + depth_optical_flow_senzor + 10,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2])    
+            rotate([90,0,0])
+                cylinder (h = 40, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2,40 + depth_optical_flow_senzor + 10,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_Z])    
+            rotate([90,0,0])
+                cylinder (h = 40, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_X,40 + depth_optical_flow_senzor + 10,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2])    
+            rotate([90,0,0])
+                cylinder (h = 40, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+
+        translate([(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_X,40 + depth_optical_flow_senzor + 10,(height_optical_flow_senzor - M3_optical_flow_senzor_Z)/2 + M3_optical_flow_senzor_Z])    
+            rotate([90,0,0])
+                cylinder (h = 40, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+       
+        translate([width_optical_flow_senzor - M3_optical_flow_senzor_X_alone,40 + depth_optical_flow_senzor + 10, height_optical_flow_senzor - M3_optical_flow_senzor_Z_alone])
+            rotate([90,0,0])
+                cylinder (h = 40, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+
+        }
+    
 
            
     //final difference
