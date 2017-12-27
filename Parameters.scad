@@ -47,3 +47,17 @@ hull_scale_y = 1.5;
 hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
+
+//accumulator
+//základní rozměry akumulátoru
+width_of_accumulator = 129.4;//45+1;
+depth_of_accumulator = 40.61;
+height_of_accumulator = 43.65;
+//Zapuštění akumulátoru
+sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
+//tloušťka hrany spojky
+okraj = 18; 
+//posunutí akumálátoru na podložce
+move_of_accumulator = 165;
+	
+
