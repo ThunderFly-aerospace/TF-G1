@@ -1,14 +1,6 @@
-use <./lib/naca4.scad>
-include <../Parameters.scad>
-
 module 888_1001(){
 
-width_of_accumulator = 129.4;//45+1;
-depth_of_accumulator = 40.61;
-height_of_accumulator = 43.65;
-sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
 
-okraj = 18;
 width =width_of_accumulator + okraj;
 depth = 20;
 height = height_of_accumulator - sink_of_accumulator + 5;
@@ -16,9 +8,9 @@ height = height_of_accumulator - sink_of_accumulator + 5;
 
 
 
-width_cube = 10;
+width_cube = 10; 	//šířka kostky ve které je otvor na šroub
 depth_cube = depth;
-height_cube = 10;	
+height_cube = 10;	//výška kostky ve které je otvor na šroub
 
 
 union(){
@@ -62,3 +54,6 @@ union(){
 
 
 888_1001();
+
+use <./lib/naca4.scad>
+include <../Parameters.scad>

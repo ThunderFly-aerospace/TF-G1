@@ -1,11 +1,3 @@
-use <./lib/naca4.scad>
-include <../Parameters.scad>
-use <666_1032.scad>
-use <666_1004.scad>
-use <666_1026.scad>
-use <888_1001.scad>
-
-
 module 666_1027(){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -19,25 +11,20 @@ module 666_1027(){
     z_size = 150;
     x_size = 580;
     
+   
     width_of_front_part = 63;  
 
-    width_of_accumulator = 129.4;//45+1;
-    depth_of_accumulator = 40.61;
-    height_of_accumulator = 43.65;
-    sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
-    move_of_accumulator = 165;
+   
 
-    okraj = 18;
+    //akumulátor
     width =width_of_accumulator + okraj;
     depth = 20;
     height = height_of_accumulator + 5 - sink_of_accumulator;
 
-
-
-
+    //kostka spojky pro akumulátor, ve které je umístěn otvor pro šroub
     width_cube = 10;
     depth_cube = depth;
-    height_cube = 3;    
+    height_cube = 10;    
 
     //translate([move_of_accumulator,hull_corner_radius,-height_of_accumulator])    
         //rotate([270,0,0])
@@ -539,3 +526,9 @@ translate([60,0,0])
 666_1027A();
 
 
+use <./lib/naca4.scad>
+include <../Parameters.scad>
+use <666_1032.scad>
+use <666_1004.scad>
+use <666_1026.scad>
+use <888_1001.scad>
