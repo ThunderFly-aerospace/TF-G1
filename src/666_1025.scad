@@ -18,7 +18,7 @@ module hollowing_skeleton()
       translate([0,0,hull_corner_radius])
         minkowski(){                   
             translate ([0,- main_tube_outer_diameter/2,-hull_z_size/2 + hull_wall_thickness])
-                cube ([hull_x_size,hull_y_size, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
+                cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
                 rotate ([0,90,0])
                     cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
           }                   
@@ -43,7 +43,7 @@ module drop()
             		
         translate([0,0,hull_corner_radius])
           	minkowski(){                   
-             	translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2])
+             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
              			cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
              	  	rotate ([0,90,0])
                  		cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
@@ -213,9 +213,9 @@ module 666_1025(){
 
 
     				//kapka pro kapkovitý tvar
-    					translate ([2.5,0,0])
+    					translate ([2.5 + hull_wall_thickness,0,0])
                 	intersection () {
-                        resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5], auto=true)
+                        resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness], auto=true)
                      		rotate ([0,90,0])           
                                 rotate_extrude($fn = 100)
                                     rotate([0,0,90])
@@ -286,7 +286,7 @@ module 666_1025AA(){
 
 //část 0
 	//základní dělení pro tisk
-			
+translate([20,0,0])			
 difference(){
 		union(){	
 			translate([-20,0,0])
@@ -330,7 +330,7 @@ difference(){
 			}
 		
 		//odstranění čtverce z vnější strany
-		translate([-20,0,0])
+		translate([-20 + hull_wall_thickness,0,0])
 				drop();
 		
 		}
@@ -395,7 +395,7 @@ union(){
 		
 		}
 		//odstranění čtverce z vnější strany
-			translate([0,0,0])
+			translate([0,-hull_wall_thickness,0])
 				drop();
 		}
 		
@@ -471,7 +471,7 @@ union(){
     		intersection(){
         				666_1025();
         		translate([150,-20,-150])
-           				cube([75,150,300]);
+           				cube([100,150,300]);
     		}
     
     //rantl pro slepení vpravo
@@ -542,8 +542,8 @@ union(){
 	    translate([30,0,0])
     		intersection(){
         				666_1025();
-        		translate([150+75,-20,-150])
-           				cube([75,150,300]);
+        		translate([150+100,-20,-150])
+           				cube([150,150,300]);
     		}
     
     //rantl pro slepení vlevo
@@ -624,8 +624,8 @@ difference(){
 			translate([40,0,0])
     		intersection(){
         				666_1025();
-        		translate([300,-20,-150])
-           				cube([150,150,300]);
+        		translate([375+25,-20,-150])
+           				cube([75,150,300]);
     		}
 	
 
@@ -786,11 +786,11 @@ difference(){
 }
 
 
-666_1025();
 
+666_1025B();
+666_1025BB();
 
-
-
+666_1025C();
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
