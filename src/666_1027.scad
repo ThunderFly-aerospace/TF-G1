@@ -78,7 +78,7 @@ module 666_1027(){
                     cube([hull_drop_length,main_tube_outer_diameter,main_tube_outer_diameter]);
         
         //prořezy        
-            translate([390,-40,-25])
+        /*    translate([390,-40,-25])
                rotate([0,0,90])    
                     for (i = [0:17]) { // opakovani cyklu
                         if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
@@ -90,7 +90,7 @@ module 666_1027(){
                             cube([60, 0.1, 65]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
                 }
-
+        */
         //odečtení spojek trubek
         
         //666_1004 - přední
@@ -523,8 +523,12 @@ translate([60,0,0])
     }
 }
 
-666_1027A();
+666_1027();
 
+//666_1027A();
+//666_1027B();
+//666_1027C();
+//666_1027D();
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
