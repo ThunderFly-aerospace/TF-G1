@@ -172,16 +172,16 @@ module 666_1025(){
         				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         	    //nápis
-        		translate([hull_x_size/4 + 35, hull_y_size/3, hull_z_size/2 - 0.3])
+        		translate([hull_x_size/4 + 35, hull_y_size/5, hull_z_size/2 - 0.3])
             		linear_extrude(hull_wall_thickness) 
                 		text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
 			
-        //nápis
+                //nápis
 
-        translate([hull_x_size/4 + 35, hull_y_size/3, -hull_z_size/2 + 0.3])
-            rotate([0,180,0])
-                linear_extrude(hull_wall_thickness) 
-                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+                translate([hull_x_size/4 + 35, hull_y_size/5, -hull_z_size/2 + 0.3])
+                    rotate([0,180,0])
+                        linear_extrude(hull_wall_thickness) 
+                            text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
 
         //konec difference
         }
