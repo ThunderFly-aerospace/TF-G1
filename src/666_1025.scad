@@ -17,8 +17,8 @@ module hollowing_skeleton()
 
       translate([0,0,hull_corner_radius])
         minkowski(){                   
-            translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2 + hull_wall_thickness])
-                cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
+            translate ([0,- main_tube_outer_diameter/2,-hull_z_size/2 + hull_wall_thickness])
+                cube ([hull_x_size,hull_y_size, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
                 rotate ([0,90,0])
                     cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
           }                   
@@ -43,7 +43,7 @@ module drop()
             		
         translate([0,0,hull_corner_radius])
           	minkowski(){                   
-             	translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
+             	translate ([0,-(main_tube_outer_diameter/2),-hull_z_size/2])
              			cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
              	  	rotate ([0,90,0])
                  		cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
@@ -89,9 +89,10 @@ module 666_1025(){
                                     airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = draft ? 50 : 100, open = false);
 
                 }
+                
                 translate([0,0,hull_corner_radius])
     	            minkowski(){                   
-    	             	translate ([0,-(main_tube_outer_diameter/2)+1, -hull_z_size/2])
+    	             	translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
     	             		cube ([hull_x_size, hull_y_size,hull_z_size - 2*hull_corner_radius]);
     	             	
     	             		rotate ([0,90,0])
@@ -102,11 +103,12 @@ module 666_1025(){
             }   
 
             //hollowing skeleton
-        		translate ([hull_wall_thickness,0,0])
+        		translate ([hull_wall_thickness,,0])
                 	hollowing_skeleton();
+            
 
                 //for front part
-        		translate ([-2,-1 - main_tube_outer_diameter/2,-25])
+        		translate ([-2,-1 - main_tube_outer_diameter/2 - hull_wall_thickness,-25])
         				cube ([52,hull_y_size+10,50]);
 
             //for tube in back
@@ -169,16 +171,28 @@ module 666_1025(){
         			rotate([0,90+beta,0])
         				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
+        	    //nápis
+        		translate([hull_x_size/4 + 35, hull_y_size/3, hull_z_size/2 - 0.3])
+            		linear_extrude(hull_wall_thickness) 
+                		text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+			
+        //nápis
+
+        translate([hull_x_size/4 + 35, hull_y_size/3, -hull_z_size/2 + 0.3])
+            rotate([0,180,0])
+                linear_extrude(hull_wall_thickness) 
+                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+
         //konec difference
         }
 
             //lem
-           	
+           	union(){
            	intersection(){
 
            		//dno
     				difference(){
-    					translate([0,-main_tube_outer_diameter/2,-hull_z_size/2])		
+    					translate([0,-main_tube_outer_diameter/2+0.1,-hull_z_size/2])		
     							cube([hull_x_size, hull_wall_thickness, hull_z_size]);
 
     				//for front part
@@ -199,7 +213,7 @@ module 666_1025(){
 
 
     				//kapka pro kapkovitý tvar
-    					translate ([hull_wall_thickness+2.5,0,0])
+    					translate ([2.5,0,0])
                 	intersection () {
                         resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5], auto=true)
                      		rotate ([0,90,0])           
@@ -224,8 +238,11 @@ module 666_1025(){
 
     			//odstranění dna z vnější strany
     				translate([0,0,0])
-    					drop();
+    					hollowing_skeleton();
+    					//drop();
     		}
+    	}
+
 
     //stěna Z+
            	
@@ -236,7 +253,7 @@ module 666_1025(){
     						cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
     			//odstranění čtverce z vnější strany
-    				translate([0,0,0])
+    				translate([hull_wall_thickness,0,0])
     					drop();
     		}
 
@@ -248,21 +265,15 @@ module 666_1025(){
     						cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
     			//odstranění čtverce z vnější strany
-    				translate([0,0,0])
+    				translate([hull_wall_thickness,0,0])
     					drop();
     		}
 
-        //nápis
-        translate([hull_x_size/4, hull_y_size/3, hull_z_size/2 ])
-            linear_extrude(hull_wall_thickness) 
-                text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-
-        translate([hull_x_size/4, hull_y_size/3, -hull_z_size/2])
-            rotate([0,180,0])
-                linear_extrude(hull_wall_thickness) 
-                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+    
+    
     //konec union
     }
+
 //konec model
 }
 
@@ -602,16 +613,6 @@ union(){
 
 
 
-
-
-
-
-
-
-
-
-
-
 module 666_1025C(){	
 
 	beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -785,17 +786,10 @@ difference(){
 }
 
 
-666_1025A();
+666_1025();
 
-666_1025AA();
 
-666_1025B();
 
-666_1025BB();
-
-666_1025C();
-
-666_1025D();
 
 
 use <./lib/naca4.scad>
