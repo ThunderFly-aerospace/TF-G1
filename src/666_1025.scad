@@ -249,7 +249,7 @@ module 666_1025(){
            	intersection(){
 
            		//čtverec
-    				translate([0,-main_tube_outer_diameter/2,25])		
+    				translate([0,-main_tube_outer_diameter/2+0.1,25])		
     						cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
     			//odstranění čtverce z vnější strany
@@ -261,7 +261,7 @@ module 666_1025(){
 
     		intersection(){
            		//čtverec
-    				translate([0,- main_tube_outer_diameter/2,-25 - hull_wall_thickness])		
+    				translate([0,- main_tube_outer_diameter/2+0.1,-25 - hull_wall_thickness])		
     						cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
     			//odstranění čtverce z vnější strany
