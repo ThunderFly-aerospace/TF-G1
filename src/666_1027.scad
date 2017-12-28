@@ -14,7 +14,15 @@ module 666_1027(){
    
     width_of_front_part = 63;  
 
-   
+    // lightening holes list
+    lightening_hole_size = 15;
+    lightening_hole_spacing = 5;
+
+    lightening_grid_list = [
+        for (j = [10 : lightening_hole_size + lightening_hole_spacing : x_size], i = [10 : lightening_hole_size + lightening_hole_spacing : y_size]) 
+    /*if ((j>(x_size-10) && i>(y_size-10)) || (j<10 && i<10) || (j<10 && i>(y_size-10)) || (j>(x_size-10) && i<10) )*/ 
+            [j,0, i] ];
+
 
     //akumulátor
     width =width_of_accumulator + okraj;
@@ -46,63 +54,89 @@ module 666_1027(){
 
     difference(){
         //hollowing skeleton
-       translate ([hull_wall_thickness,0,0])
-        intersection () {
-            resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
-                rotate ([0,90,0])           
-                    rotate_extrude($fn = draft ? 50 : 100)
-                        rotate([0,0,90])
-                            difference()
-                            {
+        translate ([hull_wall_thickness,0,0])
+            intersection () {
+                resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
+                    rotate ([0,90,0])           
+                        rotate_extrude($fn = draft ? 50 : 100)
+                            rotate([0,0,90])
+                                difference()
+                                {
 
-                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 100)); 
-                              square(hull_drop_length); 
-                            }
-            translate([0,0,hull_corner_radius])
-            minkowski(){                   
-                translate ([0,-main_tube_outer_diameter,-hull_z_size/2 + hull_wall_thickness])
-                    //v ose y mínus 100 - pro zmenšení kapky na vložku
-                    cube ([hull_x_size,main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
-                        rotate ([0,90,0])
-                            cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 10 : 100);                   
-            }                   
-        }
-    //for front part
+                                  polygon(points = airfoil_data(naca = hull_airfoil_thickness, L = hull_drop_length, N = draft ? 50 : 100)); 
+                                  square(hull_drop_length); 
+                                }
+                translate([0,0,hull_corner_radius])
+                minkowski(){                   
+                    translate ([0,-main_tube_outer_diameter,-hull_z_size/2 + hull_wall_thickness])
+                        //v ose y mínus 100 - pro zmenšení kapky na vložku
+                        cube ([hull_x_size,main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);
+                            rotate ([0,90,0])
+                                cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 10 : 100);                   
+                }                   
+            }
+        //for front part
         translate ([0,-6 - main_tube_outer_diameter/2-20,-width_of_front_part/2])
-                cube ([52,hull_y_size+10, width_of_front_part]);
+            cube([52, hull_y_size + 10, width_of_front_part]);
 
-    //for tube in back
+        //for tube in back
         translate ([hull_x_size-70,0,0])
             rotate ([0,90,0])
-                cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+                cylinder (h = 80, r =  main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                             
-    //for printing
-        translate([hull_x_size-50-30,-main_tube_outer_diameter,-main_tube_outer_diameter/2])       
-                cube([80,main_tube_outer_diameter, main_tube_outer_diameter]);  
+        //for printing
+        translate([hull_x_size-50-30,-main_tube_outer_diameter, -main_tube_outer_diameter/2])       
+            cube([80,main_tube_outer_diameter, main_tube_outer_diameter]);  
 
         //vyříznutí díry pro horizontální trubku
-            translate([0,-main_tube_outer_diameter/2,0])    
-                rotate([0,90,0])
-                    cylinder(h = hull_drop_length, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
-            translate([0,-main_tube_outer_diameter*1.5, -main_tube_outer_diameter/2])        
-                    cube([hull_drop_length,main_tube_outer_diameter,main_tube_outer_diameter]);
+        translate([0,-main_tube_outer_diameter/2,0])    
+            rotate([0,90,0])
+                cylinder(h = hull_drop_length, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+        translate([0,-main_tube_outer_diameter*1.5, -main_tube_outer_diameter/2])        
+                cube([hull_drop_length, main_tube_outer_diameter, main_tube_outer_diameter]);
         
-        //prořezy        
-        /*    translate([390,-40,-25])
-               rotate([0,0,90])    
-                    for (i = [0:17]) { // opakovani cyklu
-                        if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            translate([0, i * 19, 5])  //sude prorezy
-                                cube([60, 0.1, 65]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        }
-                        else{
-                        translate([0, i * 19, -20]) // liche prorezy
-                            cube([60, 0.1, 65]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+
+
+        //odlehčující prořezy        
+        /*translate([100,0,-25])
+           rotate([0,45,0])    
+                for (i = [0:17]) { // opakovani cyklu
+                    if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                        translate([i * 19, 0, 0])  //sude prorezy
+                            cube([15, 50, 15]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     }
+                    else{
+                    translate([i * 19, 0, 20]) // liche prorezy
+                        cube([15, 50, 15]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                 }
-        */
-        //odečtení spojek trubek
+            }*/
         
+        rotate([0,45,0])
+        for (j = lightening_grid_list) {
+            translate(j)
+                translate([0,-main_tube_outer_diameter*1.5,z_size/2])
+                    cube([15, 50, 15]);
+        }
+
+        for (i = [10 : lightening_hole_size + 2*lightening_hole_spacing : x_size])
+            translate([i,- main_tube_outer_diameter,-z_size/2])
+                rotate([0,0,45]) 
+                    cube([15, 15, z_size*2]);
+
+
+        //render()
+        // podélné odlehčení 
+        translate([0,-main_tube_outer_diameter/2,z_size/4])
+            minkowski(){                   
+                cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter/2]);
+                rotate ([0,90,0])
+                    cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
+            }
+
+
+
+
+        //odečtení spojek trubek
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-40,-38/2])
                 cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, 50, 38 + global_clearance]);
@@ -117,337 +151,335 @@ module 666_1027(){
               
         //odečtení děr pro lemy
 
-            //lem
-            
-            intersection(){
+        //lem    
+        intersection(){
 
-                //dno
-                difference(){
-                    translate([0,-main_tube_outer_diameter/2 - hull_wall_thickness-0.25,-hull_z_size/2])       
-                            cube([hull_x_size, hull_wall_thickness*2+0.5, hull_z_size]);
+            //dno
+            difference(){
+                translate([0,-main_tube_outer_diameter/2 - hull_wall_thickness-0.25,-hull_z_size/2])       
+                        cube([hull_x_size, hull_wall_thickness*2+0.5, hull_z_size]);
 
-                //for front part
-                    translate ([-2,-1 - main_tube_outer_diameter/2,-25])
-                            cube ([52,hull_y_size+10,50]);
+            //for front part
+                translate ([-2,-1 - main_tube_outer_diameter/2,-25])
+                        cube ([52,hull_y_size+10,50]);
 
-                //for tube in back
-                    translate ([hull_x_size-70,-6,0])
-                        rotate ([0,90,0])
-                            cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+            //for tube in back
+                translate ([hull_x_size-70,-6,0])
+                    rotate ([0,90,0])
+                        cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
 
-                //kapka pro kapkovitý tvar
-                    translate ([hull_wall_thickness+2.5+0.5,0,0])
-                        intersection () {
-                            resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5-1, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-1, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-1], auto=true)
-                                rotate ([0,90,0])           
-                                    rotate_extrude($fn = 100)
-                                        rotate([0,0,90])
-                                            difference()
-                                            {
-
-                                              polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 200)); 
-                                              square(hull_drop_length); 
-                                            }
-                            translate([0,0,hull_corner_radius])
-                            minkowski(){                   
-                                translate ([2.5+0.5,-(main_tube_outer_diameter/2)-2.5-0.5,-hull_z_size/2 + hull_wall_thickness+2.5+0.5])
-                                    cube ([hull_x_size-5-1,hull_y_size - hull_wall_thickness-5-1, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius-5-1]);
-                                    rotate ([0,90,0])
-                                        cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 10 : 50);                   
-                            }                   
-                        }
-                }       
-
-                //odstranění dna z vnější strany
-                translate([0,0,0])
+            //kapka pro kapkovitý tvar
+                translate ([hull_wall_thickness+2.5+0.5,0,0])
                     intersection () {
-                        rotate ([0,90,0])           
-                            rotate_extrude($fn = 100)
-                                rotate([0,0,90])
-                                    difference()
-                                    {
+                        resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5-1, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-1, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-1], auto=true)
+                            rotate ([0,90,0])           
+                                rotate_extrude($fn = 100)
+                                    rotate([0,0,90])
+                                        difference()
+                                        {
+
+                                          polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 200)); 
+                                          square(hull_drop_length); 
+                                        }
+                        translate([0,0,hull_corner_radius])
+                        minkowski(){                   
+                            translate ([2.5+0.5,-(main_tube_outer_diameter/2)-2.5-0.5,-hull_z_size/2 + hull_wall_thickness+2.5+0.5])
+                                cube ([hull_x_size-5-1,hull_y_size - hull_wall_thickness-5-1, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius-5-1]);
+                                rotate ([0,90,0])
+                                    cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 10 : 50);                   
+                        }                   
+                    }
+            }       
+
+            //odstranění dna z vnější strany
+            translate([0,0,0])
+                intersection () {
+                    rotate ([0,90,0])           
+                        rotate_extrude($fn = 100)
+                            rotate([0,0,90])
+                                difference(){
                                     polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=draft ? 50 : 100)); 
                                     square(hull_drop_length); 
-                                    }
-                    }
-                translate([-20,0,hull_corner_radius])
-                    minkowski(){                   
-                        translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-                                cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
-                
-                            rotate ([0,90,0])
-                                cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
-                    }
-            }
+                                }
+                }
+            translate([-20,0,hull_corner_radius])
+                minkowski(){                   
+                    translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
+                        cube ([hull_x_size, hull_y_size,hull_z_size-2*hull_corner_radius]);
+            
+                    rotate ([0,90,0])
+                        cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
+                }
+        }
 
     
         //šrouby a matky horní kryt
-            //část AA
-            translate([30,0,hull_z_size/2-30])
-                rotate([0,-45,0])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,4])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,4])        
-                                cylinder(h = Nut_height_M3 +1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-            
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-
-                    }        
-            
-
-            translate([5,0,-hull_z_size/2])
-               rotate([0,45,0])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,35])        
+        //část AA
+        translate([30,0,hull_z_size/2-30])
+            rotate([0,-45,0])
+                union(){ //spojení kvárdu, matky a díry pro šroub
+                    translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,4])        
                             cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,35])        
-                            cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                    
-                        translate([0,-main_tube_outer_diameter/4,0])   
+        
+                    translate([0,- main_tube_outer_diameter/4,4])        
+                            cylinder(h = Nut_height_M3 +1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+        
+                    translate([0,-main_tube_outer_diameter/4,0])        
                             cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    } 
 
+                }        
+        
 
-            //část A
-            //translate([50+50,main_tube_outer_diameter/4,-hull_z_size/2-20])
-                translate([100,0,-hull_z_size/2-20])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,30])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                    
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                   }
-
-                translate([100,0,hull_z_size/2-20-2])    
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,10])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    } 
-
-            //část B
-
-                translate([187,0,-hull_z_size/2-20])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3+1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,30])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                    
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    }
-
-                translate([187,0,hull_z_size/2-20-2])    
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3+1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,10])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    } 
-
-            //část BB
-                translate([262,0,-hull_z_size/2-20])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,30])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                    
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    }
-
-                translate([262,0,hull_z_size/2-20-2])    
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,10])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    } 
-            
-            //část C
-            
-            translate([360,0,50])    
-                rotate([0,90-beta,0])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,14])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,14])        
-                                cylinder(h = Nut_height_M3+1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    } 
-
-            translate([360,0,-50])            
-                rotate([0,90+beta,0])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,14])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,15])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                    
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    }
-
-
-
-            //část D        
-            translate([485,0,0])    
-                rotate([0,90-beta,0])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,24])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,24])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    } 
-
-            translate([485,0,0])    
-                rotate([0,90+beta,0])
-                    union(){ //spojení kvárdu, matky a díry pro šroub
-                        translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,24])        
-                                cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
-            
-                        translate([0,- main_tube_outer_diameter/4,25])        
-                                cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
-                        translate([0,-main_tube_outer_diameter/4,0])        
-                                cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                    }
-    
-            //akumulátory
-            translate([move_of_accumulator,- sink_of_accumulator,-height_of_accumulator*1.5])  
-                    cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
-
-            translate([move_of_accumulator,- sink_of_accumulator,height_of_accumulator/2])  
-                    cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
-
-
-            //šrouby pro připevnění akumulátorů
-            translate([move_of_accumulator - okraj/2 - width_cube/2,-50,height_of_accumulator])
-                rotate([270,0,0])
-                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-
-            translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-50,height_of_accumulator])
-                rotate([270,0,0])
-                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        translate([5,0,-hull_z_size/2])
+           rotate([0,45,0])
+                union(){ //spojení kvárdu, matky a díry pro šroub
+                    translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,35])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+        
+                    translate([0,- main_tube_outer_diameter/4,35])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
                 
-            translate([move_of_accumulator - okraj/2 - width_cube/2,-50,-height_of_accumulator])
-                rotate([270,0,0])
-                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                    translate([0,-main_tube_outer_diameter/4,0])   
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                } 
 
-            translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-50,-height_of_accumulator])
-                rotate([270,0,0])
-                    cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-            //matka
-            translate([move_of_accumulator - okraj/2 - width_cube/2,-main_tube_outer_diameter/4,height_of_accumulator])
-                rotate([90,0,0])
-                   cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+        //část A
+        //translate([50+50,main_tube_outer_diameter/4,-hull_z_size/2-20])
+        translate([100,0,-hull_z_size/2-20])
+            union(){ //spojení kvárdu, matky a díry pro šroub
+                translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+    
+                translate([0,- main_tube_outer_diameter/4,30])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+            
+                translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+           }
+
+        translate([100,0,hull_z_size/2-20-2])    
+            union(){ //spojení kvárdu, matky a díry pro šroub
+                translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+    
+                translate([0,- main_tube_outer_diameter/4,10])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            } 
+
+    //část B
+
+        translate([187,0,-hull_z_size/2-20])
+            union(){ //spojení kvárdu, matky a díry pro šroub
+                translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3+1]);
+    
+                translate([0,- main_tube_outer_diameter/4,30])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+            
+                translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            }
+
+        translate([187,0,hull_z_size/2-20-2])    
+            union(){ //spojení kvárdu, matky a díry pro šroub
+                translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3+1]);
+    
+                translate([0,- main_tube_outer_diameter/4,10])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            } 
+
+    //část BB
+        translate([262,0,-hull_z_size/2-20])
+            union(){ //spojení kvárdu, matky a díry pro šroub
+                translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,30])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+    
+                translate([0,- main_tube_outer_diameter/4,30])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+            
+                translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            }
+
+        translate([262,0,hull_z_size/2-20-2])    
+            union(){ //spojení kvárdu, matky a díry pro šroub
+                translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,10])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+    
+                translate([0,- main_tube_outer_diameter/4,10])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            } 
+    
+        //část C
         
-            translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-main_tube_outer_diameter/4,height_of_accumulator])
-                rotate([90,0,0])
-                   cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
-
-            translate([move_of_accumulator - okraj/2 - width_cube/2,-main_tube_outer_diameter/4,-height_of_accumulator])
-                rotate([90,0,0])
-                   cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+        translate([360,0,50])    
+            rotate([0,90-beta,0])
+                union(){ //spojení kvárdu, matky a díry pro šroub
+                    translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,14])        
+                            cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
         
-            translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-main_tube_outer_diameter/4,-height_of_accumulator])
-                rotate([90,0,0])
-                   cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+                    translate([0,- main_tube_outer_diameter/4,14])        
+                            cylinder(h = Nut_height_M3+1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                    translate([0,-main_tube_outer_diameter/4,0])        
+                            cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                } 
+
+        translate([360,0,-50])            
+            rotate([0,90+beta,0])
+                union(){ //spojení kvárdu, matky a díry pro šroub
+                    translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,14])        
+                            cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+        
+                    translate([0,- main_tube_outer_diameter/4,15])        
+                            cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                
+                    translate([0,-main_tube_outer_diameter/4,0])        
+                            cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                }
 
 
-            //připevnění horizontální trubky
-            //A
+
+        //část D        
+        translate([485,0,0])    
+            rotate([0,90-beta,0])
+                union(){ //spojení kvárdu, matky a díry pro šroub
+                    translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,24])        
+                            cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+        
+                    translate([0,- main_tube_outer_diameter/4,24])        
+                            cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                    translate([0,-main_tube_outer_diameter/4,0])        
+                            cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                } 
+
+        translate([485,0,0])    
+            rotate([0,90+beta,0])
+                union(){ //spojení kvárdu, matky a díry pro šroub
+                    translate([- Nut_diameter_M3/2,- main_tube_outer_diameter/4,24])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+        
+                    translate([0,- main_tube_outer_diameter/4,25])        
+                        cylinder(h = Nut_height_M3 + 1, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn=6);
+                    translate([0,-main_tube_outer_diameter/4,0])        
+                        cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                }
+
+        //akumulátory
+        translate([move_of_accumulator,- sink_of_accumulator,-height_of_accumulator*1.5])  
+            cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
+
+        translate([move_of_accumulator,- sink_of_accumulator,height_of_accumulator/2])  
+            cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
+
+
+        //šrouby pro připevnění akumulátorů
+        translate([move_of_accumulator - okraj/2 - width_cube/2,-50,height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+        translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-50,height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             
-            translate([100,-main_tube_outer_diameter/2,0])
-            union(){
-                translate([0,0, -hull_z_size/2 - 20])           
-                    cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        translate([move_of_accumulator - okraj/2 - width_cube/2,-50,-height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([0,0, main_tube_outer_diameter])           
-                    cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
+        translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-50,-height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([0,0, - hull_z_size - main_tube_outer_diameter])           
-                    cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
+        //matka
+        translate([move_of_accumulator - okraj/2 - width_cube/2,-main_tube_outer_diameter/4,height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+    
+        translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-main_tube_outer_diameter/4,height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
-            }        
+        translate([move_of_accumulator - okraj/2 - width_cube/2,-main_tube_outer_diameter/4,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+    
+        translate([move_of_accumulator + width_of_accumulator + okraj/2 + width_cube/2-1,-main_tube_outer_diameter/4,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
 
-            //B
-            translate([200,-main_tube_outer_diameter/2,0])
-            union(){
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
 
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
-            
-                translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
-                        cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
-            }        
-            
-            translate([275,-main_tube_outer_diameter/2,0])
-            union(){
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        //připevnění horizontální trubky
+        //A
+        
+        translate([100,-main_tube_outer_diameter/2,0])
+        union(){
+            translate([0,0, -hull_z_size/2 - 20])           
+                cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
-            
-                translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
-                        cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
-            }        
+            translate([0,0, main_tube_outer_diameter])           
+                cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
 
-            //C
-            translate([375,-main_tube_outer_diameter/2,0])
-            union(){
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            translate([0,0, - hull_z_size - main_tube_outer_diameter])           
+                cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
 
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
-            
-                translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
-                        cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
-            }    
-            //D
-            translate([470,-main_tube_outer_diameter/2,0])
-            union(){
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        }        
 
-                translate([0,0,- hull_z_size/2 - 20])           
-                        cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
-            
-                translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
-                        cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
-            }    
+        //B
+        translate([200,-main_tube_outer_diameter/2,0])
+        union(){
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
+        
+            translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
+                    cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
+        }        
+        
+        translate([275,-main_tube_outer_diameter/2,0])
+        union(){
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
+        
+            translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
+                    cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
+        }        
+
+        //C
+        translate([375,-main_tube_outer_diameter/2,0])
+        union(){
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
+        
+            translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
+                    cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
+        }    
+        //D
+        translate([470,-main_tube_outer_diameter/2,0])
+        union(){
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+            translate([0,0,- hull_z_size/2 - 20])           
+                    cylinder(h = hull_z_size + 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 6);
+        
+            translate([-M3_screw_diameter/2,- main_tube_outer_diameter, - hull_z_size/2 - 10])
+                    cube([M3_screw_diameter, main_tube_outer_diameter, hull_z_size + 20]);
+        }    
 
             //šrouby a matky spodní kryt
                 //šrouby
