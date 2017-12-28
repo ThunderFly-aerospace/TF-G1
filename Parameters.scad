@@ -61,3 +61,5 @@ okraj = 18;
 move_of_accumulator = 165;
 	
 
+//Top Cover Division - dělení horního krytu pro tisk
+top_cover_division = [50,150,250,400,475,hull_x_size];
