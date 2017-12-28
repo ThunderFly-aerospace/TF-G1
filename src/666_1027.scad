@@ -1,3 +1,42 @@
+
+
+module lightening(x_size, y_size, z_size){        // generování dutin pro snížení hmotnosti podložky
+
+    // lightening holes list
+    lightening_hole_size = 15;
+    lightening_hole_spacing = 5;
+
+    lightening_grid_list = [
+        for (j = [10 : lightening_hole_size + lightening_hole_spacing : x_size], i = [10 : lightening_hole_size + lightening_hole_spacing : y_size]) 
+    /*if ((j>(x_size-10) && i>(y_size-10)) || (j<10 && i<10) || (j<10 && i>(y_size-10)) || (j>(x_size-10) && i<10) )*/ 
+            [j,0, i] ];
+
+
+        rotate([0,45,0])
+    for (j = lightening_grid_list) {
+        translate(j)
+            translate([0,-main_tube_outer_diameter*1.5,z_size/2])
+                cube([15, 50, 15]);
+    }
+
+    for (i = [10 : lightening_hole_size + 2*lightening_hole_spacing : x_size])
+        translate([i,- main_tube_outer_diameter,-z_size/2])
+            rotate([0,0,45]) 
+                cube([15, 15, z_size*2]);
+
+
+    //render()
+    // podélné odlehčení 
+    translate([0,-main_tube_outer_diameter/2,z_size/4])
+    /*    minkowski(){                   
+            cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter/2]);
+            rotate ([0,90,0])
+                cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
+        }*/
+        cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter]);
+}
+
+
 module 666_1027(){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -13,15 +52,6 @@ module 666_1027(){
     
    
     width_of_front_part = 63;  
-
-    // lightening holes list
-    lightening_hole_size = 15;
-    lightening_hole_spacing = 5;
-
-    lightening_grid_list = [
-        for (j = [10 : lightening_hole_size + lightening_hole_spacing : x_size], i = [10 : lightening_hole_size + lightening_hole_spacing : y_size]) 
-    /*if ((j>(x_size-10) && i>(y_size-10)) || (j<10 && i<10) || (j<10 && i>(y_size-10)) || (j>(x_size-10) && i<10) )*/ 
-            [j,0, i] ];
 
 
     //akumulátor
@@ -98,44 +128,8 @@ module 666_1027(){
 
 
         //odlehčující prořezy        
-        /*translate([100,0,-25])
-           rotate([0,45,0])    
-                for (i = [0:17]) { // opakovani cyklu
-                    if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([i * 19, 0, 0])  //sude prorezy
-                            cube([15, 50, 15]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
-                    else{
-                    translate([i * 19, 0, 20]) // liche prorezy
-                        cube([15, 50, 15]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                }
-            }*/
+        lightening(x_size, y_size, z_size);
         
-        rotate([0,45,0])
-        for (j = lightening_grid_list) {
-            translate(j)
-                translate([0,-main_tube_outer_diameter*1.5,z_size/2])
-                    cube([15, 50, 15]);
-        }
-
-        for (i = [10 : lightening_hole_size + 2*lightening_hole_spacing : x_size])
-            translate([i,- main_tube_outer_diameter,-z_size/2])
-                rotate([0,0,45]) 
-                    cube([15, 15, z_size*2]);
-
-
-        //render()
-        // podélné odlehčení 
-        translate([0,-main_tube_outer_diameter/2,z_size/4])
-            minkowski(){                   
-                cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter/2]);
-                rotate ([0,90,0])
-                    cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
-            }
-
-
-
-
         //odečtení spojek trubek
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-40,-38/2])
