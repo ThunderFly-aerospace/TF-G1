@@ -62,4 +62,5 @@ move_of_accumulator = 165;
 	
 
 //Top Cover Division - dělení horního krytu pro tisk
-top_cover_division = [50, 150, 280, 430, hull_x_size];
+top_cover_division = [0, 50, 150, 280, 430, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
+//top_cover_division = [ 50, 150, 280, 430, hull_x_size];
