@@ -64,3 +64,18 @@ width_of_engine_holder = 63;
 
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [0, 50, 150, 280, 430, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
+
+////////////////
+// Senzory
+///////////////////
+
+
+//opticalFlow
+    width_optical_flow_senzor = 45.5;
+    depth_optical_flow_senzor = 15;
+    height_optical_flow_senzor = 35;
+    sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
+    M3_optical_flow_senzor_Z = 30.4;
+    M3_optical_flow_senzor_X = 24;
+    M3_optical_flow_senzor_Z_alone = 9.1;
+    M3_optical_flow_senzor_X_alone = 16.7;
