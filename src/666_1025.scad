@@ -684,69 +684,6 @@ translate([40,0,0])
 	}
 //final module
 }
-	
-
-module 666_1025F(){
-
-    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
-
-translate([60,0,0])
-    difference(){
-    	union(){
-    	//základní dělení pro tisk
-        		intersection(){
-            				666_1025();
-            		translate([top_cover_division[4],-20,-150])
-              				cube([top_cover_division[5] - top_cover_division[4],150,300]);
-        		}
-
-    	//rantl pro slepení vlevo
-    	intersection(){
-    		difference(){
-    		//pro lepení - čtverec 
-    			translate([top_cover_division[4],0,-hull_z_size])
-    					cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-    		//pro lepení - odstranění čtverce válcem
-    			translate([top_cover_division[4]-20,6,0])
-    				rotate([0,90,0])		
-    					cylinder(h = 40,r1 = 25, r2 = 25, $fn = draft ? 50 : 100);
-    		}
-    		//odstranění čtverce z vnější strany
-    				drop();
-    	}
-
-    	//final union
-    	}
-
-    //zámky vpravo odečtení
-	//zámky vlevo
-    	union(){
-    			intersection(){
-    					whole_drop();	
-    			union(){
-        			//čtverec pro zámek horní
-    				translate([top_cover_division[4] - 2*hull_wall_thickness,hull_y_size/2-35,-10])
-    					rotate([0,0,0])
-    						cube([hull_wall_thickness*4 + global_clearance,20 + global_clearance,20 + global_clearance]);
-    		
-    			    //čtverec pro zámek Z+
-    				translate([top_cover_division[4] - 2*hull_wall_thickness,2,hull_z_size/2-40])
-    						cube([hull_wall_thickness*4 + global_clearance,15 + global_clearance,40 + global_clearance]);
-    				//čtverec pro zámek Z-
-    				translate([top_cover_division[4] - 2*hull_wall_thickness,2,-hull_z_size/2])
-    						cube([hull_wall_thickness*4 + global_clearance,15 + global_clearance,40 + global_clearance]);
-    			//union
-    			}	
-    			//intersection
-    			}
-    		//union zámky vlevo
-    		}
-
-
-    //final difference
-    }	
-//final module
-}
 
 666_1025A();
 666_1025B();
