@@ -112,9 +112,9 @@ module 666_1025(){
                 	hollowing_skeleton();
             
 
-                //for front part
-        		translate ([-2,-1 - main_tube_outer_diameter/2 - hull_wall_thickness,-25])
-        				cube ([52,hull_y_size+10,50]);
+            //engine holder 
+        		translate ([-2,-1 - main_tube_outer_diameter/2 - hull_wall_thickness, - width_of_engine_holder/2])
+        				cube ([ top_cover_division[1], hull_y_size+10, width_of_engine_holder]);
 
             //for tube in back
         		translate ([hull_x_size-70,0,0])
@@ -253,13 +253,13 @@ module 666_1025(){
 
                 //přední stěna Z+
        		    //čtverec
-				translate([0,-main_tube_outer_diameter/2+0.1,25])		
-					cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
+				translate([ 0, - main_tube_outer_diameter/2+0.1, width_of_engine_holder/2 ])		
+					cube([top_cover_division[1] - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
                 //přední stěna Z-
        		    //čtverec
-				translate([0,- main_tube_outer_diameter/2+0.1,-25 - hull_wall_thickness])		
-					cube([50 - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
+				translate([ 0, - main_tube_outer_diameter/2+0.1, - width_of_engine_holder/2 - hull_wall_thickness])		
+					cube([top_cover_division[1] - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
 
                 //pro rovnou horní hranu předního lemu
                 translate([top_cover_division[1] - hull_wall_thickness,54, -25 - 2*hull_wall_thickness])
@@ -283,8 +283,6 @@ module 666_1025(){
                     translate([top_cover_division[1] - hull_wall_thickness-0.5,-1,-75])
                         rotate([45,0,0])        
                             cube([2*hull_wall_thickness,30,30]);
-                        
-
                 }       
                 
                 // lem pro výztuhu a lepení části B    

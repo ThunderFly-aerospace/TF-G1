@@ -59,7 +59,8 @@ sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
 okraj = 18; 
 //posunutí akumálátoru na podložce
 move_of_accumulator = 165;
-	
+
+width_of_engine_holder = 63;
 
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [0, 50, 150, 280, 430, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
