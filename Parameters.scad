@@ -63,3 +63,15 @@ move_of_accumulator = 165;
 
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [50,150,250,400,475,hull_x_size];
+
+
+
+//opticalFlow
+    width_optical_flow_senzor = 45.5;
+    depth_optical_flow_senzor = 15;
+    height_optical_flow_senzor = 35;
+    sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
+    M3_optical_flow_senzor_Z = 30.4;
+    M3_optical_flow_senzor_X = 24;
+    M3_optical_flow_senzor_Z_alone = 9.1;
+    M3_optical_flow_senzor_X_alone = 16.7;
