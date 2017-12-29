@@ -60,7 +60,7 @@ module whole_drop(){
 	difference(){
 		drop();
 		translate ([hull_wall_thickness,0,0])
-		hollowing_skeleton();
+            hollowing_skeleton();
 	}
 }
 
@@ -264,16 +264,91 @@ module 666_1025(){
                 //pro rovnou horní hranu předního lemu
                 translate([top_cover_division[1] - hull_wall_thickness,54, -25 - 2*hull_wall_thickness])
                     cube ([hull_wall_thickness,hull_y_size,25 + 25 + 3*hull_wall_thickness]);
-            }     
 
+                // lem pro výztuhu a slepení dílu A    
+                difference(){
+                    translate([top_cover_division[1] - hull_wall_thickness, 0, - hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+            
+                    translate([top_cover_division[1]-10,0,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
+                        rotate([0,90,0])
+                            cylinder(h = 20, r = 60, $fn = draft ? 50 : 100);
+                
+                    //trojúhelník Z+
+                    translate([top_cover_division[1] - hull_wall_thickness-0.5,4.5,42])
+                        rotate([45,0,0])        
+                            cube([2*hull_wall_thickness,20,30]);
+                        
+                    //trojúhelník Z+
+                    translate([top_cover_division[1] - hull_wall_thickness-0.5,-1,-75])
+                        rotate([45,0,0])        
+                            cube([2*hull_wall_thickness,30,30]);
+                        
+
+                }       
+                
+                // lem pro výztuhu a lepení části B    
+                difference(){
+                    //pro lepení - čtverec 
+                    translate([top_cover_division[2] - hull_wall_thickness,0,-hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                    //pro lepení - odstranění čtverce válcem
+                    translate([top_cover_division[2]-30,20,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
+                        rotate([0,90,0])        
+                            cylinder(h = 40, r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
+                
+                }
+
+                // lem pro výztuhu a lepení části C    
+                difference(){
+                    //pro lepení - čtverec 
+                    translate([top_cover_division[3] - hull_wall_thickness,0,-hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                    //pro lepení - odstranění čtverce válcem
+                    translate([top_cover_division[3]-20,20,0])   // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
+                        rotate([0,90,0])        
+                            cylinder(h = 40,r = 60, $fn = draft ? 50 : 100);
+                    //pro lepení - odstranění kusu z díry pro horní držák
+                    translate ([180+2*hull_wall_thickness,-10,0])       
+                        rotate ([-90,0,0])
+                            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true) 
+                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+                }
+
+                // lem pro výztuhu a lepení části D    
+                difference(){
+                    //pro lepení - čtverec 
+                    translate([top_cover_division[3], 0, -hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                    //pro lepení - odstranění čtverce válcem
+                    translate([top_cover_division[3] - 20,20,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
+                        rotate([0,90,0])        
+                            cylinder(h = 40,r = 60, $fn = draft ? 50 : 100);
+                    //pro lepení - odstranění kusu z díry pro horní držák
+                    translate ([180+2*hull_wall_thickness,-10,0])       
+                        rotate ([-90,0,0])
+                            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true) 
+                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+                    //final difference
+                }
+
+                // lem pro výztuhu a lepení části E    
+                difference(){
+                //pro lepení - čtverec 
+                    translate([top_cover_division[4], 0, -hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                //pro lepení - odstranění čtverce válcem
+                    translate([top_cover_division[4]-20,8,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
+                        rotate([0,90,0])        
+                            cylinder(h = 30, r = 40, $fn = draft ? 50 : 100);
+                }
+            }     
 	        //odstranění přesahů z vnější strany
 			translate([hull_wall_thickness,0,0])
 				drop();
 		}
-
     //konec union
     }
-
 //konec model celek
 }
 
@@ -699,99 +774,150 @@ module 666_1025_part(part_number){
     previous_division = top_cover_division[part_number - 1];
 
     part_lenght = division_position - previous_division;
+    lock_width = 10;
+    part_flip = 4;  // část od které se otáčí pořadí zámků.
 
-    difference(){
-        union(){    
-            //základní dělení pro tisk
-            intersection(){
-                666_1025();
-                translate([previous_division,-20,-75])                        
-                    cube([part_lenght,150,150]);
-            }
-            //rantl pro slepení vpravo
-            intersection(){
-                difference(){
-                    //lem pro lepení 
-                    translate([division_position - hull_wall_thickness,0,-hull_z_size])
-                        cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                    //trojúhelník Z+
-                    translate([division_position - hull_wall_thickness-0.5,4.5,42])
-                        rotate([45,0,0])        
-                            cube([2*hull_wall_thickness,20,30]);
-                        
-                    //trojúhelník Z+
-                    translate([division_position - hull_wall_thickness-0.5,-1,-75])
-                        rotate([45,0,0])        
-                            cube([2*hull_wall_thickness,30,30]);
-
-                    //pro lepení - odstranění čtverce válcem
-                    translate([division_position - 10,0,0])
-                        rotate([0,90,0])        
-                            cylinder(h = 40, r = 60, $fn = draft ? 50 : 100);
+    if (part_number < part_flip) {
+        difference(){
+            union(){    
+                //základní dělení pro tisk
+                intersection(){
+                    666_1025();
+                    translate([previous_division + global_clearance/2,-20,-75])                        
+                        cube([part_lenght - global_clearance/2, 150, 150]);
                 }
-                //zarovnání z vnější strany trupu
-                translate([0,-hull_wall_thickness,0])
-                    drop();
+                
+                //zámky přidané 
+                union(){
+                    intersection(){
+                        whole_drop();   
+                        union(){
+                            //čtverec pro zámek horní
+                            translate([previous_division - 2*hull_wall_thickness, main_tube_outer_diameter, -lock_width/2])
+                                    cube([hull_wall_thickness*3, hull_y_size, lock_width]);
+                            //čtverec pro zámek Z+
+                            translate([previous_division - 2*hull_wall_thickness, 0, main_tube_outer_diameter ])
+                                    cube([hull_wall_thickness*3, lock_width, hull_z_size]);
+                            //čtverec pro zámek Z-
+                            translate([previous_division - 2*hull_wall_thickness, 0, - hull_z_size - main_tube_outer_diameter])
+                                    cube([hull_wall_thickness*3, lock_width, hull_z_size]);
+                        //union
+                        }   
+                    //intersection
+                    }
+                //union zámky
+                }   
+
+            //final union
+            }
+
+            //zámky odečtení
+            if (part_number != (part_flip-1)){   // na společném lemu pro prostřední díl se otvory na zámky vynechávají.                
+                union(){
+                    intersection(){
+                        whole_drop();   
+                        union(){
+                            //čtverec pro zámek horní
+                            translate([division_position - 2*hull_wall_thickness, main_tube_outer_diameter, -lock_width/2])
+                                cube([hull_wall_thickness*4 + global_clearance, hull_y_size, lock_width + global_clearance]);
+                            //čtverec pro zámek Z+
+                            translate([division_position - 2*hull_wall_thickness, 0,hull_z_size/2])
+                                cube([hull_wall_thickness*4 + global_clearance, lock_width + global_clearance, hull_z_size]);
+                            //čtverec pro zámek Z-
+                            translate([division_position - 2*hull_wall_thickness, 0,- hull_z_size - main_tube_outer_diameter ])
+                                cube([hull_wall_thickness*4 + global_clearance, lock_width + global_clearance, hull_z_size]);
+                        //union
+                        }   
+                    //intersection
+                    }
+                //union zámky vlevo
+                }
             }
             
-            //zámky
-            union(){
-                intersection(){
-                    whole_drop();   
-                    union(){
-                        //čtverec pro zámek horní
-                        translate([previous_division,hull_y_size/2+7,0])
-                            rotate([0,0,90-beta])
-                                cube([hull_wall_thickness*4, 15, 10]);
-                        //čtverec pro zámek Z+
-                        translate([previous_division - 2*hull_wall_thickness,2,hull_z_size/2-hull_corner_radius])
-                            rotate([0,0,0])
-                                cube([hull_wall_thickness*4, 15, 10]);
-                        //čtverec pro zámek Z-
-                        translate([previous_division - 2*hull_wall_thickness,2,- hull_z_size/2 - hull_corner_radius])
-                                cube([hull_wall_thickness*4, 15, 40]);
-                    //union
-                    }   
-                //intersection
-                }
-            //union zámky
-            }   
+        //final difference
+        }
+    }
+    else{       // pokud jde o díl až za prostředním dělením.
 
-        //final union
+        difference(){
+            union(){    
+                //základní dělení pro tisk
+                intersection(){
+                    666_1025();
+                    translate([previous_division,-20,-75])                        
+                        cube([part_lenght - global_clearance/2, 150, 150]);
+                }
+                
+                //zámky přidané 
+                union(){
+                    intersection(){
+                        whole_drop();   
+                        union(){
+                            //čtverec pro zámek horní
+                            translate([division_position - 2*hull_wall_thickness, main_tube_outer_diameter, - lock_width/2])
+                                    cube([hull_wall_thickness*4, hull_y_size, lock_width]);
+                            //čtverec pro zámek Z+
+                            translate([division_position - 2*hull_wall_thickness, 0, main_tube_outer_diameter])
+                                    cube([hull_wall_thickness*4, lock_width, hull_z_size]);
+                            //čtverec pro zámek Z-
+                            translate([division_position - 2*hull_wall_thickness, 0, -main_tube_outer_diameter - hull_z_size ])
+                                    cube([hull_wall_thickness*4, lock_width, hull_z_size]);
+                        //union
+                        }   
+                    //intersection
+                    }
+                //union zámky
+                }   
+            //final union
+            }
+
+            if (part_number != part_flip){   // na společném lemu pro prostřední díl se otvory na zámky vynechávají.                
+                //zámky odečtení
+                union(){
+                    intersection(){
+                        whole_drop();   
+                        union(){
+                            //čtverec pro zámek horní
+                            translate([previous_division - 2*hull_wall_thickness, main_tube_outer_diameter/2, -lock_width/2])
+                                cube([hull_wall_thickness*4 + global_clearance, hull_y_size, lock_width + global_clearance]);
+                            //čtverec pro zámek Z+
+                            translate([previous_division - 2*hull_wall_thickness, 0, main_tube_outer_diameter])
+                                cube([hull_wall_thickness*4 + global_clearance, lock_width + global_clearance, hull_z_size]);
+                            //čtverec pro zámek Z-
+                            translate([previous_division - 2*hull_wall_thickness, 0, - main_tube_outer_diameter - hull_z_size])
+                                cube([hull_wall_thickness*4 + global_clearance, lock_width + global_clearance, hull_z_size]);
+                        //union
+                        }   
+                    //intersection
+                    }
+                //union zámky vlevo
+                }
+            }
+        //final difference
         }
 
-        //zámky odečtení
-            union(){
-                intersection(){
-                        whole_drop();   
-                    union(){
-                        //čtverec pro zámek horní
-                        translate([division_position + 2*hull_wall_thickness,hull_y_size/2+30,0])
-                            rotate([0,0,90-beta])
-                                cube([hull_wall_thickness*4 + global_clearance,15 + global_clearance,10 + global_clearance]);
-                        //čtverec pro zámek Z+
-                        translate([division_position - 2*hull_wall_thickness,2,hull_z_size/2-hull_corner_radius])
-                                cube([hull_wall_thickness*4 + global_clearance,15 + global_clearance,10 + global_clearance]);
-                        //čtverec pro zámek Z-
-                        translate([division_position - 2*hull_wall_thickness,2,-hull_z_size/2])
-                                cube([hull_wall_thickness*4 + global_clearance,15 + global_clearance,10 + global_clearance]);
-                    //union
-                    }   
-                //intersection
-                }
-            //union zámky vlevo
-            }
-        
-    //final difference
     }
 
 //final module
 }   
 
-//666_1025_part(1);
+666_1025_part(1);
 
-666_1025();
+translate([10,0,0])
+666_1025_part(2);
+
+translate([20,0,0])
+666_1025_part(3);
+
+translate([30,0,0])
+666_1025_part(4);
+
+translate([40,0,0])
+666_1025_part(5);
+
+
+
+//666_1025();
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
