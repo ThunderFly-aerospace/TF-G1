@@ -1,4 +1,7 @@
-
+// Nastavení zobrazení
+$vpr = [338, 0, 357];
+$vpt = [180, 25, -18];
+$vpd = 1280;
 
 module lightening(x_size, y_size, z_size){        // generování dutin pro snížení hmotnosti podložky
 
@@ -50,10 +53,6 @@ module 666_1027(){
     z_size = 150;
     x_size = 580;
     
-   
-    width_of_front_part = 63;  
-
-
     //akumulátor
     width =width_of_accumulator + okraj;
     depth = 20;
@@ -106,8 +105,8 @@ module 666_1027(){
                 }                   
             }
         //for front part
-        translate ([0,-6 - main_tube_outer_diameter/2-20,-width_of_front_part/2])
-            cube([52, hull_y_size + 10, width_of_front_part]);
+        translate ([0,-6 - main_tube_outer_diameter/2 - 20, (-width_of_engine_holder + 2*hull_wall_thickness + 2*global_clearance)/2])
+            cube([52, hull_y_size + 10, width_of_engine_holder + 2*hull_wall_thickness + 2*global_clearance]);
 
         //for tube in back
         translate ([hull_x_size-70,0,0])
