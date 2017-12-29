@@ -1,7 +1,7 @@
 module 666_1004_mod(){
 
-width_mod = main_tube_outer_diameter + 2*(main_tube_outer_diameter/5);
-depth_mod = main_tube_outer_diameter*2 + 2*(main_tube_outer_diameter/5) + main_tube_outer_diameter/10;
+width_mod = main_tube_outer_diameter + 2*(main_tube_outer_diameter/5) + global_clearance;
+depth_mod = main_tube_outer_diameter*2 + 2*(main_tube_outer_diameter/5) + main_tube_outer_diameter/ + global_clearance;
 height_mod = width_mod;
 
 	difference(){
