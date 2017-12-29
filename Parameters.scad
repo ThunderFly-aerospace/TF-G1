@@ -64,6 +64,10 @@ move_of_accumulator = 165;
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [50,150,250,400,475,hull_x_size];
 
+//Bottom Cover Division - dělení dolního krytu pro tisk
+
+
+bottom_cover_division = [110,260,400,hull_x_size];
 
 
 //opticalFlow
