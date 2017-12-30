@@ -1,6 +1,7 @@
-//666_1025();
-//666_1027();
-
+// Nastavení zobrazení
+$vpr = [338, 0, 357];
+$vpt = [180, 25, -18];
+$vpd = 1280;
 
 module hollowing_skeleton_B(){
 
