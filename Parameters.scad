@@ -1,7 +1,7 @@
 
 // improving rendering speed.
 draft = false;
-draft = true;   // comment out for printing.
+//draft = true;   // comment out for printing.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
