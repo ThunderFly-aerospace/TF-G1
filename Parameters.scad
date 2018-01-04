@@ -74,7 +74,7 @@ bottom_cover_division = [110,260,400,hull_x_size];
 
 //opticalFlow
     width_optical_flow_senzor = 45.5;
-    depth_optical_flow_senzor = 15;
+    depth_optical_flow_senzor = 6;
     height_optical_flow_senzor = 35;
     sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
     M3_optical_flow_senzor_Z = 30.4;
