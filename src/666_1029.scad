@@ -221,7 +221,7 @@ module 666_1029A(){
 
 module 666_1029B(){
 
-translate([20,0,0])	
+//translate([20,0,0])	
 
    union(){
     	//základní dělení pro tisk
@@ -279,7 +279,7 @@ translate([20,0,0])
 
 module 666_1029C(){
 
-translate([40,0,0])
+//translate([40,0,0])
 	 
 	    union(){	
 	    	//základní dělení pro tisk
@@ -364,10 +364,10 @@ translate([60,0,0])
 //final module
 }
 
-666_1029A();
+
 666_1029B();
 666_1029C();
-666_1029D();
+
 
 
 
