@@ -1,8 +1,7 @@
 // Nastavení zobrazení
-/*$vpr = [338, 0, 357];
+$vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-*/
 
 // improving rendering speed.
 draft = true;   // sets rendering quality to draft.
@@ -193,13 +192,13 @@ module 666_1025(draft){
         				cylinder(h = 50, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         	    //nápis
-        		translate([hull_x_size/4 + 35, hull_y_size/5, hull_z_size/2 - 0.3])
+        		translate([hull_x_size/4 + 35, hull_y_size/5, hull_z_size/2 - hull_wall_thickness/5])
             		linear_extrude(hull_wall_thickness) 
                 		text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
 			
-                //nápis
+                // boční text s identifikací
 
-                translate([hull_x_size/4 + 35, hull_y_size/5, -hull_z_size/2 + 0.3])
+                translate([hull_x_size/4 + 35, hull_y_size/5, -hull_z_size/2 + hull_wall_thickness/5])
                     rotate([0,180,0])
                         linear_extrude(hull_wall_thickness) 
                             text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
@@ -223,7 +222,7 @@ module 666_1025(draft){
             		//for tube in back
         				translate ([hull_x_size-70,-6,0])
         					rotate ([0,90,0])
-        						cylinder (h = 80, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+        						cylinder (h = 80, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
 
     					translate ([hull_x_size-65,-16,16.5])
     						rotate([0,100,0])
@@ -236,9 +235,9 @@ module 666_1025(draft){
     				//kapka pro kapkovitý tvar
     					translate ([2.5 + hull_wall_thickness,0,0])
                 	intersection () {
-                        resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness], auto=true)
+                        resize([hull_drop_length - hull_wall_thickness - trailing_wall * hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness], auto=true)
                      		rotate ([0,90,0])           
-                                rotate_extrude($fn = 100)
+                                rotate_extrude($fn = draft ? 50 : 100)
                                     rotate([0,0,90])
                                         difference()
                                         {
