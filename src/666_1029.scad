@@ -3,11 +3,13 @@ $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
 
-module hollowing_skeleton_B(){
+draft = true;
+
+
+module hollowing_skeleton_B(draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
-    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
 		intersection () {
                     resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
@@ -15,7 +17,7 @@ module hollowing_skeleton_B(){
                             rotate_extrude($fn = draft ? 50 : 100)
                                 rotate([0,0,90])
                                     difference(){
-                                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 100)); 
+                                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N = draft ? 50 : 100)); 
                                       square(hull_drop_length); 
                                     }
          			minkowski(){                   
@@ -28,12 +30,10 @@ module hollowing_skeleton_B(){
             	}
 }
 
-module drop_B(){
+module drop_B(draft){
     
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
-    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
-
 
     	intersection() {
      		rotate ([0,90,0])           
@@ -56,7 +56,7 @@ module drop_B(){
 }
 
 
-module whole_drop_B(){
+module whole_drop_B(draft){
 	
 	difference(){
 		drop_B();
@@ -66,11 +66,10 @@ module whole_drop_B(){
 }
 
 
-module 666_1029(){
+module 666_1029(draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
-    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
     union(){
         difference(){
@@ -183,7 +182,7 @@ module 666_1029(){
 }
 
 
-module 666_1029A(){
+module 666_1029A(draft){
 
     union(){
     	
@@ -219,7 +218,7 @@ module 666_1029A(){
 }
 
 
-module 666_1029B(){
+module 666_1029B(draft){
 
 translate([20,0,0])	
 
@@ -277,7 +276,7 @@ translate([20,0,0])
 //final module
 }
 
-module 666_1029C(){
+module 666_1029C(draft){
 
 translate([40,0,0])
 	 
@@ -332,7 +331,7 @@ translate([40,0,0])
 //final module 
 }
 
-module 666_1029D(){
+module 666_1029D(draft){
 
 translate([60,0,0])	
     
@@ -364,10 +363,10 @@ translate([60,0,0])
 //final module
 }
 
-666_1029A();
-666_1029B();
-666_1029C();
-666_1029D();
+666_1029A(draft);
+666_1029B(draft);
+666_1029C(draft);
+666_1029D(draft);
 
 
 

@@ -3,7 +3,23 @@
 $vpt = [180, 25, -18];
 $vpd = 1280;
 */
-module hollowing_skeleton()
+
+// improving rendering speed.
+draft = true;   // sets rendering quality to draft.
+$fs = draft ? 5 : 0.5;
+$fa = 10;
+
+/*
+TODO: 
+
+Přední díl obsahuje převis ve směru vybrání pro držák motoru. (U horního zámku)
+Otvory pro šrouby v předním dílu jsou oválné, protože nejsou kolmo k rovině modelu.
+
+
+*/
+
+
+module hollowing_skeleton(draft)
 {
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -16,7 +32,7 @@ module hollowing_skeleton()
                 rotate([0,0,90])
                     difference()
                     {
-                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 100)); 
+                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=draft ? 50 : 200)); 
                       square(hull_drop_length); 
                     }
 
@@ -30,7 +46,7 @@ module hollowing_skeleton()
     }
 }
 
-module drop()
+module drop(draft)
 {
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -42,7 +58,7 @@ module drop()
                     rotate([0,0,90])
                         difference()
                         {
-	                        polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
+	                        polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=draft ? 50 : 200)); 
     	                    square(hull_drop_length); 
         	            }
             		
@@ -56,16 +72,16 @@ module drop()
 	}
 }
 
-module whole_drop(){
+module whole_drop(draft){
 	difference(){
-		drop();
+		drop(draft);
 		translate ([hull_wall_thickness,0,0])
-            hollowing_skeleton();
+            hollowing_skeleton(draft);
 	}
 }
 
 
-module 666_1025(){
+module 666_1025(draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
@@ -350,7 +366,7 @@ module 666_1025(){
 //konec model celek
 }
 
-module 666_1025_part(part_number){ 
+module 666_1025_part(part_number, draft){ 
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -487,20 +503,20 @@ module 666_1025_part(part_number){
 }   
 
 
-666_1025_part(1);
+666_1025_part(1, draft);
 
-/*translate([10,0,0])
-666_1025_part(2);
+translate([10,0,0])
+666_1025_part(2, draft);
 
 translate([20,0,0])
-666_1025_part(3);
+666_1025_part(3, draft);
 
 translate([30,0,0])
-666_1025_part(4);
+666_1025_part(4, draft);
 
 translate([40,0,0])
-666_1025_part(5);
-*/
+666_1025_part(5, draft);
+
 
 //666_1025();
 

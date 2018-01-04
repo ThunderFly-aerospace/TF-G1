@@ -6,6 +6,7 @@ use <../666_1014.scad>
 use <../666_1017.scad>
 use <../666_1026.scad>
 
+draft = false;
 
 place_in_rect(100, 100) // arange that stuff in a grid
 {
