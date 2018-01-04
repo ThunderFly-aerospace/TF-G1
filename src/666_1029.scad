@@ -10,6 +10,7 @@ module hollowing_skeleton_B(draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
 		intersection () {
                     resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
@@ -34,6 +35,8 @@ module drop_B(draft){
     
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
+
 
     	intersection() {
      		rotate ([0,90,0])           
@@ -220,7 +223,7 @@ module 666_1029A(draft){
 
 module 666_1029B(draft){
 
-translate([20,0,0])	
+//translate([20,0,0])	
 
    union(){
     	//základní dělení pro tisk
@@ -278,7 +281,7 @@ translate([20,0,0])
 
 module 666_1029C(draft){
 
-translate([40,0,0])
+//translate([40,0,0])
 	 
 	    union(){	
 	    	//základní dělení pro tisk
