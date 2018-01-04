@@ -139,11 +139,11 @@ module 666_1025(){
         		//část A
         		translate([top_cover_division[0]-20,-main_tube_outer_diameter/4,hull_z_size/2-30])
         			rotate([0,-45,0])
-        				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        				%cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
         
         		translate([top_cover_division[0]-45,-main_tube_outer_diameter/4,-hull_z_size/2])
         			rotate([0,45,0])
-        				cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        				%cylinder(h = 40, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         		//část B
         		translate([(top_cover_division[1] - top_cover_division[0])/2 + top_cover_division[0],-main_tube_outer_diameter/4,-hull_z_size/2-15])
