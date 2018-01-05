@@ -1,9 +1,10 @@
 // Nastavení zobrazení
-/*
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-*/
+
+
+draft = true;
 
 module lightening(x_size, y_size, z_size){        // generování dutin pro snížení hmotnosti podložky
 
@@ -42,11 +43,10 @@ module lightening(x_size, y_size, z_size){        // generování dutin pro sní
 }
 
 
-module 666_1027(){
+module 666_1027(draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
-    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness.    
 
     hole_for_nut_x = 15;
     hole_for_nut_y = 50;
@@ -644,52 +644,52 @@ module 666_1027(){
 }
 
 
-module 666_1027A(){
+module 666_1027A(draft){
 //část 1
 //základní dělení pro tisk
 
    intersection(){
-        666_1027();
+        666_1027(draft);
             translate([0,-75,-75])                        
                     cube([150,150,150]);
     }
 }
 
-module 666_1027B(){
+module 666_1027B(draft){
 //část 2
 translate([20,0,0])
 //základní dělení pro tisk
     intersection(){
-        666_1027();
+        666_1027(draft);
             translate([150,-75,-75])                        
                     cube([150,150,150]);
     }
 }            
 
 
-module 666_1027C(){        
+module 666_1027C(draft){        
 //část 3        
 translate([40,0,0])
 //základní dělení pro tisk
     intersection(){
-        666_1027();
+        666_1027(draft);
             translate([300,-60,-75])                        
                 cube([150,150,150]);
     }
 }
 
-module 666_1027D(){
+module 666_1027D(draft){
 //část 4
 translate([60,0,0])
 //základní dělení pro tisk
     intersection(){
-        666_1027();
+        666_1027(draft);
             translate([450,-60,-75])                        
                cube([150,150,150]);
     }
 }
 
-666_1027();
+666_1027(draft);
 
 //666_1027A();
 //666_1027B();

@@ -94,7 +94,7 @@ module 666_1028(){
         //tube
         
         translate([0,0,-10])
-            cylinder (h = 90, r1 = main_tube_outer_diameter/2, r2 = main_tube_outer_diameter/2, $fn=200);
+            cylinder (h = 90, r = main_tube_outer_diameter/2, $fn=200);
 		
         translate ([0,0,80])
             cylinder (h = 15, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = 200);
@@ -102,21 +102,21 @@ module 666_1028(){
         //screw
         translate ([-150*0.4,0,150*0.4/2])
             rotate ([0,90,0])
-                cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+                cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
 
         translate ([-150*0.4,0,150*0.4])
             rotate ([0,90,0])
-                cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+                cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
 
         //nut
         translate([17.5,0,150*0.4])
             rotate([0,90,0])
-                cylinder (h = Nut_height_M3+10, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = Nut_height_M3+10, r = Nut_diameter_M3/2, $fn = 6);
 
 
         translate([17.5,0,150*0.4/2])
             rotate([0,90,0])
-                cylinder (h = Nut_height_M3+10, r1 = Nut_diameter_M3/2, r2 = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = Nut_height_M3+10, r = Nut_diameter_M3/2, $fn = 6);
 
 
 
@@ -156,24 +156,24 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
 
     difference (){
 
-    translate([-(depth/2),-(width/2),height_of_cap_cylinder])
-        cube ([depth,width,height]);
+        translate([-(depth/2),-(width/2),height_of_cap_cylinder])
+            cube ([depth,width,height]);
             
             //tube
         translate([0,0,-1])
-            cylinder(h=height+1,r=radius,$fn=200);
+            cylinder(h = height+1, r = radius,$fn = 200);
 
         //screw
         translate ([-150*0.4,0,150*0.4/2 - 20])
             rotate ([0,90,0])
-                cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+                cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
 
         translate ([-150*0.4,0,150*0.4 - 20])
             rotate ([0,90,0])
-                cylinder (h = 100, r1 = M3_screw_diameter/2, r2 = M3_screw_diameter/2, $fn = 20);
+                cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
             
         //bevelled edge
-        translate([depth/2,width/2-1,-3])
+        translate([depth/2, width/2-1, -3])
             rotate([0,0,45])
                 cube([depth/2,depth/2,height+6]);
 
@@ -192,9 +192,10 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
 }	
 
 
-translate ([75,0,62])
-    rotate([0,180,0])
+/*translate ([75, 0, 62])
+    rotate([0, 180, 0])
         666_1028_drillhelper();
+*/
 
 666_1028();
 
