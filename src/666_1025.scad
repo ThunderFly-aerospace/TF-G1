@@ -1,9 +1,10 @@
+
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
 
-// improving rendering speed.
+//improving rendering speed.
 draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
@@ -153,7 +154,7 @@ module 666_1025(draft){
         	//šrouby
                 translate([(top_cover_division[0] + top_cover_division[1])/4, -main_tube_outer_diameter/4, -hull_z_size/2])
                     rotate([0,45,0])
-                        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                       cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
                 mirror([0,0,1])
             		translate([(top_cover_division[0] + top_cover_division[1])/4, -main_tube_outer_diameter/4, -hull_z_size/2])
