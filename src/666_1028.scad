@@ -1,13 +1,15 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 
+draft = true;
+
 module 666_1028(){
     //BASIC DROP
     //render(convexity = 2) 
     difference (){
         union (){
             translate([0,0,-8.5])
-                rotate_extrude($fn = 100)
+                rotate_extrude($fn = draft ? 50 : 200)
                     rotate([0,0,90])
                         difference()
                         {
@@ -20,9 +22,9 @@ module 666_1028(){
 
         //UPPER - od osy x do minus y
             difference (){
-	            translate([0,-10,0])
+	            translate([0,-10,-0.1]) // elementary negative Z shift to improve adhesion on the printig surface
 	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
-	                    airfoil(naca = 0005, L = 95, N=101, h = 152, open = false);
+	                    airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
 				translate ([140,-68,0]) 
 	            	cube ([15,15,15]);
 			
@@ -44,9 +46,9 @@ module 666_1028(){
 
         //LOWER - od osy x do plus y
         	difference (){
-            translate([0,10,0])
+            translate([0,10,-0.1]) // elementary negative Z shift to improve adhesion on the printig surface
                 rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
-                    airfoil(naca = 0005, L =95, N=101, h = 152, open = false);
+                    airfoil(naca = 0005, L =95, N = draft ? 50 : 100, h = 152, open = false);
 
 			translate ([140,55,0]) 
             	cube ([15,15,15]);
@@ -68,9 +70,9 @@ module 666_1028(){
        }
         //VERTICAL
             difference (){
-                translate ([140,75,0])//translate([115,74,0])
+                translate ([140,75,-0.05]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
-                        airfoil(naca = 0005, L = 150, N=101, h = 150, open = false);
+                        airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false);
 
 
                 //VERTICAL - fenestrating windows
@@ -94,10 +96,10 @@ module 666_1028(){
         //tube
         
         translate([0,0,-10])
-            cylinder (h = 90, r = main_tube_outer_diameter/2, $fn=200);
+            cylinder (h = 90, r = main_tube_outer_diameter/2, $fn= draft ? 50 : 200);
 		
         translate ([0,0,80])
-            cylinder (h = 15, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = 200);
+            cylinder (h = 15, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = draft ? 50 : 200);
         
         //screw
         translate ([-150*0.4,0,150*0.4/2])
@@ -161,7 +163,7 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
             
             //tube
         translate([0,0,-1])
-            cylinder(h = height+1, r = radius,$fn = 200);
+            cylinder(h = height+1, r = radius, $fn = draft ? 50 : 100);
 
         //screw
         translate ([-150*0.4,0,150*0.4/2 - 20])
