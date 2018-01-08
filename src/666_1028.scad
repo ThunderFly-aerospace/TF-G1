@@ -22,7 +22,7 @@ module 666_1028(){
 
         //UPPER - od osy x do minus y
             difference (){
-	            translate([0,-10,-0.1]) // elementary negative Z shift to improve adhesion on the printig surface
+	            translate([0,-10,-0.5]) // elementary negative Z shift to improve adhesion on the printig surface
 	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
 	                    airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
 				translate ([140,-68,0]) 
@@ -46,7 +46,7 @@ module 666_1028(){
 
         //LOWER - od osy x do plus y
         	difference (){
-            translate([0,10,-0.1]) // elementary negative Z shift to improve adhesion on the printig surface
+            translate([0,10,-0.5]) // elementary negative Z shift to improve adhesion on the printig surface
                 rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                     airfoil(naca = 0005, L =95, N = draft ? 50 : 100, h = 152, open = false);
 
@@ -70,7 +70,7 @@ module 666_1028(){
        }
         //VERTICAL
             difference (){
-                translate ([140,75,-0.05]) // elementar Z shift to improve adhesion on the printig surface
+                translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                         airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false);
 
