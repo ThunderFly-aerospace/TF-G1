@@ -120,6 +120,21 @@ module 666_1028(){
             rotate([0,90,0])
                 cylinder (h = Nut_height_M3+10, r = Nut_diameter_M3/2, $fn = 6);
 
+        // wing tensile scructure (upper)
+        translate ([200,-84,53])
+            rotate ([0,0,70])
+                cube([1.8,250,11]);
+        translate ([200,-84,20])
+            rotate ([0,0,70])
+                cube([1.8,250,11]);
+
+        // wing tensile scructure (lower)
+        translate ([0,11,53])
+            rotate ([0,0,-70])
+                cube([1.8,250,11]);
+        translate ([0,11,20])
+            rotate ([0,0,-70])
+                cube([1.8,250,11]);
 
 
         //cleanup for printing
