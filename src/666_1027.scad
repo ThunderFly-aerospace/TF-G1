@@ -530,76 +530,74 @@ module 666_1027(draft){
         //sloupky pro GPS anténu - matky a otvory pro šrouby
 
         translate([hull_x_size-115,0,-18])
-
-        union(){
-            translate([0,- main_tube_outer_diameter - 5,0])
             union(){
-            translate([-((48.01 - 37.48)/2 + 37.48)/2,-2,0])    
-                rotate([-90,0,0])
-                    cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([((48.01 - 37.48)/2 + 37.48)/2,-2,0])        
-                rotate([-90,0,0])
-                    cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([0,-2,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
-                rotate([-90,0,0])
-                    cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                       
-            translate([-((48.01 - 37.48)/2 + 37.48)/2,0,0])    
-                rotate([-90,0,0])
-                    cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
-            translate([((48.01 - 37.48)/2 + 37.48)/2,0,0])        
-                rotate([-90,0,0])
-                    cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
-            translate([0,0,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
-                rotate([-90,0,0])
-                    cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                translate([0,- main_tube_outer_diameter - 5,0])
+                union(){
+                    translate([-((48.01 - 37.48)/2 + 37.48)/2,-2,0])    
+                        rotate([-90,0,0])
+                            cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                    translate([((48.01 - 37.48)/2 + 37.48)/2,-2,0])        
+                        rotate([-90,0,0])
+                            cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                    translate([0,-2,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
+                        rotate([-90,0,0])
+                            cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                               
+                    translate([-((48.01 - 37.48)/2 + 37.48)/2,0,0])    
+                        rotate([-90,0,0])
+                            cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                    translate([((48.01 - 37.48)/2 + 37.48)/2,0,0])        
+                        rotate([-90,0,0])
+                            cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                    translate([0,0,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
+                        rotate([-90,0,0])
+                            cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                }
             }
-        }
 
-           
     //final difference
-        }
+    }
     
     //sloupky pro GPS anténu
     translate([hull_x_size-115,0,-18])
         difference(){
             //sloupky
             union(){                
-            translate([-((48.01 - 37.48)/2 + 37.48)/2,0,0])    
-                rotate([-90,0,0])
-                    cylinder(h = 12, r1 = M3_screw_diameter/2+2, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
-            translate([((48.01 - 37.48)/2 + 37.48)/2,0,])        
-                rotate([-90,0,0])
-                    cylinder(h = 12, r1 = M3_screw_diameter/2+2, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
-            translate([0,0,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
-                rotate([-90,0,0])
-                    cylinder(h = 12, r1 = M3_screw_diameter/2+2, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                translate([-((48.01 - 37.48)/2 + 37.48)/2,0,0])    
+                    rotate([-90,0,0])
+                        cylinder(h = 12, r1 = 3 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                translate([((48.01 - 37.48)/2 + 37.48)/2,0,])        
+                    rotate([-90,0,0])
+                        cylinder(h = 12, r1 = 3 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                translate([0,0,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
+                    rotate([-90,0,0])
+                        cylinder(h = 12, r1 = 3 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
             }
             union(){
-            translate([0,- main_tube_outer_diameter - 5,0])
-            union(){
-            //otvory pro šrouby
-            translate([-((48.01 - 37.48)/2 + 37.48)/2,-2,0])    
-                rotate([-90,0,0])
-                    cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([((48.01 - 37.48)/2 + 37.48)/2,-2,0])        
-                rotate([-90,0,0])
-                    cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([0,-2,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
-                rotate([-90,0,0])
-                    cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                       
-            //matky
-            translate([-((48.01 - 37.48)/2 + 37.48)/2,0,0])    
-                rotate([-90,0,0])
-                    cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
-            translate([((48.01 - 37.48)/2 + 37.48)/2,0,0])        
-                rotate([-90,0,0])
-                    cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
-            translate([0,0,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
-                rotate([-90,0,0])
-                    cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
-            }
+                translate([0,- main_tube_outer_diameter - 5,0])
+                    union(){
+                    //otvory pro šrouby
+                    translate([-((48.01 - 37.48)/2 + 37.48)/2,-2,0])    
+                        rotate([-90,0,0])
+                            cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                    translate([((48.01 - 37.48)/2 + 37.48)/2,-2,0])        
+                        rotate([-90,0,0])
+                            cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                    translate([0,-2,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
+                        rotate([-90,0,0])
+                            cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+                    //matky
+                    translate([-((48.01 - 37.48)/2 + 37.48)/2,0,0])    
+                        rotate([-90,0,0])
+                            cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                    translate([((48.01 - 37.48)/2 + 37.48)/2,0,0])        
+                        rotate([-90,0,0])
+                            cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                    translate([0,0,((37.78+(48.01-37.48)/2)*sqrt(3))/2])        
+                        rotate([-90,0,0])
+                            cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+                    }
             }             
         }    
 
