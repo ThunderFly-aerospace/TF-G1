@@ -1,9 +1,9 @@
-/*
+
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-*/
+
 
 draft = true;
 
@@ -149,7 +149,7 @@ module 666_1027(draft){
 
 
         //odlehčující prořezy        
-        translate([0,0,0])
+        /*translate([0,0,0])
             lightening(x_size, y_size, z_size);
         translate([112,0,30])
             lightening_pricne (x_size, y_size, z_size);
@@ -157,7 +157,7 @@ module 666_1027(draft){
             //lightening_pricne (x_size, y_size, z_size);
         translate([-112,0,0])
             lightening_pricne (x_size, y_size, z_size);
-        
+        */
         //odečtení spojek trubek
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-40,-38/2])
@@ -168,8 +168,8 @@ module 666_1027(draft){
                 cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, 50, 38 + global_clearance]);
 
         //666_1017 - prostředek
-        translate([170+68-(main_tube_outer_diameter+2*(main_tube_outer_diameter/5))/2,-40,-36/2])
-                cube ([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, 50, 36 + global_clearance]);
+        translate([170+68 - (3*main_tube_outer_diameter)/2, -40, -36/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
+                cube ([3 * main_tube_outer_diameter, 50, 36 + global_clearance]);
               
         //odečtení děr pro lemy
 
