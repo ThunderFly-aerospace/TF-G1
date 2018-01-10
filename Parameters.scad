@@ -63,7 +63,7 @@ top_cover_division = [0, 50, 150, 280, 430, hull_x_size]; // upraveny seznam tak
 bottom_cover_division = [0,100,250,380, 450, hull_x_size];
 
 //Base Divison - dělení podložky
-base_division = [0,150,300,450, hull_x_size];
+base_division = [0,150,300,420, hull_x_size];
 
 ////////////////
 // Senzory
