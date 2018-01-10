@@ -22,7 +22,7 @@ module 666_1028(){
 
         //UPPER - od osy x do minus y
             difference (){
-	            translate([0,-10,-0.5]) // elementary negative Z shift to improve adhesion on the printig surface
+	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
 	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
 	                    airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
 				translate ([140,-68,0]) 
@@ -46,7 +46,7 @@ module 666_1028(){
 
         //LOWER - od osy x do plus y
         	difference (){
-            translate([0,10,-0.5]) // elementary negative Z shift to improve adhesion on the printig surface
+            translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
                 rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                     airfoil(naca = 0005, L =95, N = draft ? 50 : 100, h = 152, open = false);
 
@@ -120,28 +120,32 @@ module 666_1028(){
             rotate([0,90,0])
                 cylinder (h = Nut_height_M3+10, r = Nut_diameter_M3/2, $fn = 6);
 
+        tensile_thickness = 1.8;
+
         // wing tensile scructure (upper)
         translate ([200,-84,53])
             rotate ([0,0,70])
-                cube([1.8,250,11]);
+                cube([tensile_thickness,250,10]);
+
         translate ([200,-84,20])
             rotate ([0,0,70])
-                cube([1.8,250,11]);
+                cube([tensile_thickness,250,11]);
 
         // wing tensile scructure (lower)
-        translate ([0,11,53])
+        translate ([0,10 + tensile_thickness/2 ,53])
             rotate ([0,0,-70])
-                cube([1.8,250,11]);
-        translate ([0,11,20])
+                cube([tensile_thickness,250,10]);
+
+        translate ([0,10 + tensile_thickness/2 ,20])
             rotate ([0,0,-70])
-                cube([1.8,250,11]);
+                cube([tensile_thickness,250,11]);
 
 
         //cleanup for printing
         translate ([-149.9,-75,-1])
         		 cube ([150,150,170]);
 
-        translate ([-50,-100,-200])
+        translate ([-50,-100,-140]) //translate ([-50,-100,-200])
             cube ([200,200,200]);
     
         //translate ([-75,-75,-10])
