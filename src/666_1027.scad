@@ -585,7 +585,6 @@ module 666_1027A(draft){
 
 module 666_1027B(draft){
 //část 2
-translate([20,0,0])
 //základní dělení pro tisk
     intersection(){
         666_1027(draft);
@@ -597,7 +596,6 @@ translate([20,0,0])
 
 module 666_1027C(draft){        
 //část 3        
-translate([40,0,0])
 //základní dělení pro tisk
     intersection(){
         666_1027(draft);
@@ -608,7 +606,6 @@ translate([40,0,0])
 
 module 666_1027D(draft){
 //část 4
-translate([60,0,0])
 //základní dělení pro tisk
     intersection(){
         666_1027(draft);
