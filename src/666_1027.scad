@@ -149,7 +149,7 @@ module 666_1027(draft){
 
 
         //odlehčující prořezy        
-        /*translate([0,0,0])
+        translate([0,0,0])
             lightening(x_size, y_size, z_size);
         translate([112,0,30])
             lightening_pricne (x_size, y_size, z_size);
@@ -157,7 +157,7 @@ module 666_1027(draft){
             //lightening_pricne (x_size, y_size, z_size);
         translate([-112,0,0])
             lightening_pricne (x_size, y_size, z_size);
-        */
+        
         //odečtení spojek trubek
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-40,-38/2])
