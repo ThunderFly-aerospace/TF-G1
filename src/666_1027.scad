@@ -571,57 +571,29 @@ module 666_1027(draft){
 //final part
 }
 
+module 666_1027_part(part_number, draft){ 
 
-module 666_1027A(draft){
-//část 1
-//základní dělení pro tisk
+    division_position = base_division[part_number];
+    previous_division = base_division[part_number - 1];
 
-   intersection(){
-        666_1027(draft);
-            translate([base_division[0],-75,-75])                        
-                    cube([base_division[1] - base_division[0],150,150]);
-    }
-}
+    part_lenght = division_position - previous_division;
 
-module 666_1027B(draft){
-//část 2
-//základní dělení pro tisk
     intersection(){
         666_1027(draft);
-            translate([base_division[1],-75,-75])                        
-                    cube([base_division[2] - base_division[1],150,150]);
+            translate([previous_division,-75,-75])                        
+                    cube([part_lenght,150,150]);
     }
-}            
 
 
-module 666_1027C(draft){        
-//část 3        
-//základní dělení pro tisk
-    intersection(){
-        666_1027(draft);
-            translate([base_division[2],-60,-75])                        
-                cube([base_division[3] - base_division[2],150,150]);
-    }
 }
-
-module 666_1027D(draft){
-//část 4
-//základní dělení pro tisk
-    intersection(){
-        666_1027(draft);
-            translate([base_division[3],-60,-75])                        
-               cube([base_division[4] - base_division[3] ,150,150]);
-    }
-}
-
 
 666_1027(draft);
 
-/*
-666_1027A(draft);
-666_1027B(draft);
-666_1027C(draft);
-666_1027D(draft);
+
+/*666_1027_part(1,draft);
+666_1027_part(2,draft);
+666_1027_part(3,draft);
+666_1027_part(4,draft);
 */
 
 use <./lib/naca4.scad>
