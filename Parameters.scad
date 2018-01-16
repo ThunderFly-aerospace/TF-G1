@@ -8,6 +8,10 @@ tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;
 
+// Parameters of cube couplings
+coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
+thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
+
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;
@@ -63,7 +67,7 @@ top_cover_division = [0, 50, 150, 280, 430, hull_x_size]; // upraveny seznam tak
 bottom_cover_division = [0,100,250,380, 450, hull_x_size];
 
 //Base Divison - dělení podložky
-base_division = [0,150,300,450, hull_x_size];
+base_division = [0,150,300,420, hull_x_size];
 
 ////////////////
 // Senzory
