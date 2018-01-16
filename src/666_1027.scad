@@ -34,13 +34,13 @@ module lightening(x_size, y_size, z_size){        // generování dutin pro sní
 
     //render()
     // podélné odlehčení 
-    translate([0,-main_tube_outer_diameter/2,z_size/4])
+    //translate([0,-main_tube_outer_diameter/2,z_size/4])
     /*    minkowski(){                   
             cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter/2]);
             rotate ([0,90,0])
                 cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
         }*/
-        cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter]);
+        //cube ([hull_x_size, main_tube_outer_diameter/4,main_tube_outer_diameter]);
 }
 
 //pouze příčné odlehčení
@@ -118,8 +118,8 @@ module 666_1027(draft){
                                   square(hull_drop_length); 
                                 }
                 union(){                   
-                    translate ([0,-main_tube_outer_diameter,-hull_z_size/2 + hull_wall_thickness])
-                        cube([hull_x_size, main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2 * global_clearance ]);
+                    translate ([0,- main_tube_outer_diameter - thickness_between_tubes, -hull_z_size/2 + hull_wall_thickness])
+                        cube([hull_x_size, main_tube_outer_diameter + coupling_wall_thickness + thickness_between_tubes, hull_z_size - 2*hull_wall_thickness - 2 * global_clearance ]);
 
                     translate([hull_x_size - 115 - hull_wall_thickness, 0, -18])
                         //sloupky pro GPS
@@ -244,7 +244,6 @@ module 666_1027(draft){
                 }
         }
 
-    
         //šrouby a matky horní kryt - vždy spojení šroubu a matky dohromady
 
         //část A
@@ -583,12 +582,9 @@ module 666_1027_part(part_number, draft){
             translate([previous_division,-75,-75])                        
                     cube([part_lenght,150,150]);
     }
-
-
 }
 
 666_1027(draft);
-
 
 /*666_1027_part(1,draft);
 666_1027_part(2,draft);

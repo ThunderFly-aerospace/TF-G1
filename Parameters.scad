@@ -8,6 +8,10 @@ tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;
 
+// Parameters of cube couplings
+coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
+thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
+
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;
