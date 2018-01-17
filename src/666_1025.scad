@@ -268,6 +268,21 @@ module 666_1025(draft){
                     union(){
                         translate([top_cover_division[1] - hull_wall_thickness, 0, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                        //pro lepení - čtverec 
+                        translate([top_cover_division[2] - hull_wall_thickness,0,-hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                        //pro lepení - čtverec 
+                        translate([top_cover_division[3] - hull_wall_thickness,0,-hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                        //pro lepení - čtverec 
+                        translate([top_cover_division[3], 0, -hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                        //pro lepení - čtverec 
+                        translate([top_cover_division[4], 0, -hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                     }
             
                     translate([top_cover_division[1]-10,0,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
@@ -283,67 +298,22 @@ module 666_1025(draft){
                     translate([top_cover_division[1] - hull_wall_thickness-0.5,-main_tube_outer_diameter/6,-main_tube_outer_diameter*3 - main_tube_outer_diameter/15]) //hodnoty posunuti v ose z a y od oka
                         rotate([45,0,0])        
                             cube([2*hull_wall_thickness,2*main_tube_outer_diameter,2*main_tube_outer_diameter]);
+
+                    //pro lepení - odstranění kusu z díry pro horní držák
+                    translate ([180+2*hull_wall_thickness,-10,0])       
+                        rotate ([-90,0,0])
+                            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true) 
+                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+
+                    ribbon_width = 10; // šířka vyztužovacích lemů. 
+
+                    translate([ribbon_width,0,0])
+                        hollowing_skeleton(ribbon_width, draft);
                 }       
                 
-                // lem pro výztuhu a lepení části B    
-                difference(){
-                    //pro lepení - čtverec 
-                    translate([top_cover_division[2] - hull_wall_thickness,0,-hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                    //pro lepení - odstranění čtverce válcem
-                    translate([top_cover_division[2]-30,20,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
-                        rotate([0,90,0])        
-                            cylinder(h = 40, r1 = 60, r2 = 70, $fn = draft ? 50 : 100);
-                
-                }
-
-                // lem pro výztuhu a lepení části C    
-                difference(){
-                    //pro lepení - čtverec 
-                    translate([top_cover_division[3] - hull_wall_thickness,0,-hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                    //pro lepení - odstranění čtverce válcem
-                    translate([top_cover_division[3]-20,20,0])   // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
-                        rotate([0,90,0])        
-                            cylinder(h = 40,r = 60, $fn = draft ? 50 : 100);
-                    //pro lepení - odstranění kusu z díry pro horní držák
-                    translate ([180+2*hull_wall_thickness,-10,0])       
-                        rotate ([-90,0,0])
-                            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true) 
-                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
-                }
-
-                // lem pro výztuhu a lepení části D    
-                difference(){
-                    //pro lepení - čtverec 
-                    translate([top_cover_division[3], 0, -hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                    //pro lepení - odstranění čtverce válcem
-                    translate([top_cover_division[3] - 20,20,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
-                        rotate([0,90,0])        
-                            cylinder(h = 40,r = 60, $fn = draft ? 50 : 100);
-                    //pro lepení - odstranění kusu z díry pro horní držák
-                    translate ([180+2*hull_wall_thickness,-10,0])       
-                        rotate ([-90,0,0])
-                            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true) 
-                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
-                    //final difference
-                }
-
-                // lem pro výztuhu a lepení části E    
-                difference(){
-                //pro lepení - čtverec 
-                    translate([top_cover_division[4], 0, -hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                //pro lepení - odstranění čtverce válcem
-                    translate([top_cover_division[4]-20,8,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
-                        rotate([0,90,0])        
-                            cylinder(h = 30, r = 40, $fn = draft ? 50 : 100);
-                }
             }     
 	        //odstranění přesahů z vnější strany
-			translate([hull_wall_thickness,0,0])
-				drop();
+			drop();
 		}
     //konec union
     }
