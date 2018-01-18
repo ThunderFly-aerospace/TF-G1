@@ -46,7 +46,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft)
     }
 }
 
-module drop(draft)
+module drop(draft = true)
 {
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -191,58 +191,34 @@ module 666_1025(draft){
 
             //lem
            	union(){
-           	intersection(){
-
-           		//dno
+           	    intersection(){
     				difference(){
     					translate([0,-main_tube_outer_diameter/2+0.1,-hull_z_size/2])		
     							cube([hull_x_size, hull_wall_thickness, hull_z_size]);
 
     				//for front part
         				translate ([-2,-1 - main_tube_outer_diameter/2,- width_of_engine_holder/2])
-        						cube([52,hull_y_size+10,width_of_engine_holder]);
+        					cube([52,hull_y_size+10,width_of_engine_holder]);
 
             		//for tube in back
         				translate ([hull_x_size-70,-6,0])
-        					rotate ([0,90,0])
-        						cylinder(h = 80, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+        					cube([4*main_tube_outer_diameter, main_tube_outer_diameter, main_tube_outer_diameter], center = true);
 
     					translate ([hull_x_size-65,-16,16.5])
     						rotate([0,100,0])
     							cube([hull_wall_thickness*5,30,30]);
+
     					translate ([hull_x_size-65,-15,-12.5])
     						rotate([0,80,0])
     						cube([hull_wall_thickness*5,30,30]);
 
-
-    				//kapka pro kapkovitý tvar
-    					translate ([2.5 + hull_wall_thickness,0,0])
-                	intersection () {
-                        resize([hull_drop_length - hull_wall_thickness - trailing_wall * hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5-2*hull_wall_thickness], auto=true)
-                     		rotate ([0,90,0])           
-                                rotate_extrude($fn = draft ? 50 : 100)
-                                    rotate([0,0,90])
-                                        difference()
-                                        {
-
-                                          polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N=200)); 
-                                          square(hull_drop_length); 
-                                        }
-                        translate([0,0,hull_corner_radius])
-                     	minkowski(){                   
-                         	translate ([2.5,-(main_tube_outer_diameter/2)-2.5,-hull_z_size/2 + hull_wall_thickness+2.5])
-                         		cube ([hull_x_size-5,hull_y_size - hull_wall_thickness-5, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius-5]);
-                         		rotate ([0,90,0])
-                             		cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
-                		}                   
-                	}
-
+                        //odebrání dna
+                        translate([ribbon_width/2,0,0])
+                            hollowing_skeleton(ribbon_width/2, draft);
     				}		
 
-    			//odstranění dna z vnější strany
-    				translate([0,0,0])
-    					hollowing_skeleton();
-    					//drop();
+    			//odstranění dna z vnější strany krytu
+    				drop(draft);
     		}
     	}
            	
@@ -304,8 +280,6 @@ module 666_1025(draft){
                         rotate ([-90,0,0])
                             resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true) 
                                 airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
-
-                    ribbon_width = 10; // šířka vyztužovacích lemů. 
 
                     translate([ribbon_width,0,0])
                         hollowing_skeleton(ribbon_width, draft);

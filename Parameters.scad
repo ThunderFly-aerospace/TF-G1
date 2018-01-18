@@ -46,6 +46,9 @@ hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
 
+ribbon_width = 10; // šířka vyztužovacích lemů. 
+
+
 //accumulator
 //základní rozměry akumulátoru
 width_of_accumulator = 129.4;//45+1;
