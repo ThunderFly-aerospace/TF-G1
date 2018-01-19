@@ -228,12 +228,12 @@ module 666_1025(draft){
                 //přední stěna Z+
        		    //čtverec
 				translate([ 0, - main_tube_outer_diameter/2+0.1, width_of_engine_holder/2 ])		
-					cube([top_cover_division[1] - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
+					cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                 //přední stěna Z-
        		    //čtverec
 				translate([ 0, - main_tube_outer_diameter/2+0.1, - width_of_engine_holder/2 - hull_wall_thickness])		
-					cube([top_cover_division[1] - hull_wall_thickness, hull_y_size, hull_wall_thickness]);
+					cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                 //pro rovnou horní hranu předního lemu
                 translate([top_cover_division[1] - hull_wall_thickness, 1*main_tube_outer_diameter, -width_of_engine_holder/2 - hull_wall_thickness])
