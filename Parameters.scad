@@ -46,7 +46,7 @@ hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
 
-ribbon_width = 10; // šířka vyztužovacích lemů. 
+ribbon_width = 5; // šířka vyztužovacích lemů. 
 
 
 //accumulator

@@ -193,8 +193,8 @@ module 666_1025(draft){
            	union(){
            	    intersection(){
     				difference(){
-    					translate([0,-main_tube_outer_diameter/2+0.1,-hull_z_size/2])		
-    							cube([hull_x_size, hull_wall_thickness, hull_z_size]);
+    					translate([0,-main_tube_outer_diameter/2+global_clearance,-hull_z_size/2])		
+    						cube([hull_x_size, hull_wall_thickness, hull_z_size]);
 
     				//for front part
         				translate ([-2,-1 - main_tube_outer_diameter/2,- width_of_engine_holder/2])
@@ -259,22 +259,18 @@ module 666_1025(draft){
                         //pro lepení - čtverec 
                         translate([top_cover_division[4], 0, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                        //podélná výztuha
+                        translate([top_cover_division[1],hull_y_size/4,-hull_z_size/2])      
+                            cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+
                     }
             
                     translate([top_cover_division[1]-10,0,0])  // bylo by vhodné zaměnit za odečtení kapkového tvaru trupu
                         rotate([0,90,0])
                             cylinder(h = 20, r = 60, $fn = draft ? 50 : 100);
                 
-                    //trojúhelník Z+
-                    translate([top_cover_division[1] - hull_wall_thickness-0.5,-main_tube_outer_diameter/6,main_tube_outer_diameter/4]) //hodnoty posunuti v ose z a y od oka
-                        rotate([45,0,0])        
-                            cube([2*hull_wall_thickness,2*main_tube_outer_diameter,2*main_tube_outer_diameter]);
-                        
-                    //trojúhelník Z+
-                    translate([top_cover_division[1] - hull_wall_thickness-0.5,-main_tube_outer_diameter/6,-main_tube_outer_diameter*3 - main_tube_outer_diameter/15]) //hodnoty posunuti v ose z a y od oka
-                        rotate([45,0,0])        
-                            cube([2*hull_wall_thickness,2*main_tube_outer_diameter,2*main_tube_outer_diameter]);
-
                     //pro lepení - odstranění kusu z díry pro horní držák
                     translate ([180+2*hull_wall_thickness,-10,0])       
                         rotate ([-90,0,0])
