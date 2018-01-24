@@ -44,9 +44,9 @@ function airfoil_data(naca=12, L = 100, N = 81, open = false) =
 function trailing_edge_angle(naca=12, open = false) = 
   let(Na = len(naca)!=3?NACA(naca):naca)
   let(A = [.2969, -0.126, -.3516, .2843, open?-0.1015:-0.1036])
-  let (x =0.999)  
-  let(yt = Na[2]/.2*(A*[sqrt(x), x, x*x, x*x*x, x*x*x*x])) 
-  atan2(yt,1-x);  
+  let (x =0.999)  // set x near to airfoil trailing edge
+  let(yt = Na[2]/.2*(A*[sqrt(x), x, x*x, x*x*x, x*x*x*x])) // calculate distance from x-axis at previously set position
+  atan2(yt,1-x);  // calculate angle of triangle between end of airfoil. The triange height corresponds to previously calculated distance from x-axis
 
 // helper functions
 function NACA(naca) = 
