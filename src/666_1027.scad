@@ -1,9 +1,9 @@
-
+/*
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-
+*/
 
 draft = true;
 
@@ -117,6 +117,7 @@ module 666_1027(draft){
                                   polygon(points = airfoil_data(naca = hull_airfoil_thickness, L = hull_drop_length, N = draft ? 50 : 100)); 
                                   square(hull_drop_length); 
                                 }
+                
                 union(){                   
                     translate ([0,- main_tube_outer_diameter - thickness_between_tubes, -hull_z_size/2 + hull_wall_thickness])
                         cube([hull_x_size, main_tube_outer_diameter + coupling_wall_thickness + thickness_between_tubes, hull_z_size - 2*hull_wall_thickness - 2 * global_clearance ]);
@@ -157,7 +158,7 @@ module 666_1027(draft){
                 cube([hull_drop_length, main_tube_outer_diameter, main_tube_outer_diameter]);
         
 
-
+/*
         //odlehčující prořezy        
         translate([0,0,0])
             lightening(x_size, y_size, z_size);
@@ -167,7 +168,7 @@ module 666_1027(draft){
             //lightening_pricne (x_size, y_size, z_size);
         translate([-112,0,0])
             lightening_pricne (x_size, y_size, z_size);
-        
+        */
         //odečtení spojek trubek
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-40,-38/2])
@@ -188,8 +189,8 @@ module 666_1027(draft){
 
             //dno
             difference(){
-                translate([0,-main_tube_outer_diameter/2 - hull_wall_thickness-0.25,-hull_z_size/2])       
-                        cube([hull_x_size, hull_wall_thickness*2+0.5, hull_z_size]);
+                translate([0,-main_tube_outer_diameter/2 - hull_wall_thickness - global_clearance/2,-hull_z_size/2])       
+                        %cube([hull_x_size, hull_wall_thickness*2 + global_clearance, hull_z_size]);
 
             //for front part
                 translate ([-2,-1 - main_tube_outer_diameter/2,-25])
@@ -592,9 +593,15 @@ module 666_1027_part(part_number, draft){
 666_1027_part(4,draft);
 */
 
+//666_1025();
+//666_1029();
+
+
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 use <666_1032.scad>
 use <666_1004.scad>
 use <666_1026.scad>
 use <888_1001.scad>
+use <666_1025.scad>
+use <666_1029.scad>
