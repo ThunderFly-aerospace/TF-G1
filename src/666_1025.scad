@@ -1,9 +1,9 @@
-
+/*
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-
+*/
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
@@ -38,7 +38,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft)
 
       translate([0,0,hull_corner_radius])
         minkowski(){                   
-            translate ([0,- main_tube_outer_diameter/2,-hull_z_size/2 + shell_thickness])
+            translate ([0,- main_tube_outer_diameter/2 ,-hull_z_size/2 + shell_thickness])
                 cube ([hull_x_size,hull_y_size - shell_thickness, hull_z_size - 2*shell_thickness - 2*hull_corner_radius]);
                 rotate ([0,90,0])
                     cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
@@ -106,6 +106,11 @@ module 666_1025(draft){
                     }
                     translate([hull_wall_thickness,0,0])
                         hollowing_skeleton(hull_wall_thickness,draft);
+ 
+
+
+                
+
                 }
  
             }
@@ -190,7 +195,10 @@ module 666_1025(draft){
         }
 
             //lem
-           	union(){
+         
+
+           	
+            union(){
            	    intersection(){
     				difference(){
     					translate([0,-main_tube_outer_diameter/2+global_clearance,-hull_z_size/2])		
@@ -214,13 +222,13 @@ module 666_1025(draft){
 
                         //odebrání dna
                         translate([ribbon_width/2,0,0])
-                            hollowing_skeleton(ribbon_width/2, draft);
+                            hollowing_skeleton(ribbon_width, draft);
     				}		
 
     			//odstranění dna z vnější strany krytu
     				drop(draft);
-    		}
-    	}
+    		  }
+    	   }
            	
        	intersection(){
             union(){
@@ -242,28 +250,55 @@ module 666_1025(draft){
                 // lem pro výztuhu a slepení dílu A    
                 difference(){
                     union(){
-                        translate([top_cover_division[1] - hull_wall_thickness, 0, - hull_z_size])
+                        translate([top_cover_division[1] - hull_wall_thickness, coupling_wall_thickness + 2*global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //pro lepení - čtverec 
-                        translate([top_cover_division[2] - hull_wall_thickness,0,-hull_z_size])
+                        difference(){
+                            translate([top_cover_division[2] - hull_wall_thickness,coupling_wall_thickness + 2*global_clearance,-hull_z_size])
+                                cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                        //odečtení nápisu od podélné výztuhy
+                        //nápis
+                            translate([hull_x_size/4 + 35, hull_y_size/5, hull_z_size/2 - hull_wall_thickness/5])
+                                linear_extrude(hull_wall_thickness) 
+                                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+        
+                        // boční text s identifikací
+                            translate([hull_x_size/4 + 35, hull_y_size/5, -hull_z_size/2 + hull_wall_thickness/5])
+                                rotate([0,180,0])
+                                    linear_extrude(hull_wall_thickness) 
+                                        text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+                        }
+
+                        //pro lepení - čtverec 
+                        translate([top_cover_division[3] - hull_wall_thickness,coupling_wall_thickness + 2*global_clearance,-hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //pro lepení - čtverec 
-                        translate([top_cover_division[3] - hull_wall_thickness,0,-hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        //pro lepení - čtverec 
-                        translate([top_cover_division[3], 0, -hull_z_size])
+                        translate([top_cover_division[3], coupling_wall_thickness + 2*global_clearance, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                         //pro lepení - čtverec 
-                        translate([top_cover_division[4], 0, -hull_z_size])
+                        translate([top_cover_division[4], coupling_wall_thickness + 2*global_clearance, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //podélná výztuha
-                        translate([top_cover_division[1],hull_y_size/4,-hull_z_size/2])      
-                            cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        difference(){
+                            translate([top_cover_division[1],hull_y_size/4,-hull_z_size/2])      
+                                cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
 
+                        //odečtení nápisu od podélné výztuhy
+                        //nápis
+                            translate([hull_x_size/4 + 35, hull_y_size/5, hull_z_size/2 - hull_wall_thickness/5])
+                                linear_extrude(hull_wall_thickness) 
+                                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+        
+                        // boční text s identifikací
+
+                            translate([hull_x_size/4 + 35, hull_y_size/5, -hull_z_size/2 + hull_wall_thickness/5])
+                                rotate([0,180,0])
+                                    linear_extrude(hull_wall_thickness) 
+                                        text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+                        }
 
                     }
             

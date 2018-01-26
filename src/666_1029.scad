@@ -8,32 +8,33 @@ $vpd = 1280;
 draft = true;
 
 
-module hollowing_skeleton_B(draft){
+module hollowing_skeleton_B(shell_thickness = hull_wall_thickness, draft)
+{
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
     echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
 		intersection () {
-                    resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness], auto=true)
+                    resize([hull_drop_length - shell_thickness - trailing_wall* shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness], auto=true)
                  		rotate ([0,90,0])           
                             rotate_extrude($fn = draft ? 50 : 100)
                                 rotate([0,0,90])
                                     difference(){
-                                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N = draft ? 50 : 100)); 
+                                      polygon(points = airfoil_data(naca=hull_airfoil_thickness, L = hull_drop_length, N = draft ? 50 : 200)); 
                                       square(hull_drop_length); 
                                     }
          			minkowski(){                   
-            	 		translate ([0,- hull_y_size - main_tube_outer_diameter/2, -hull_z_size/2 + hull_wall_thickness + hull_corner_radius ])
+            	 		translate ([0,- hull_y_size - main_tube_outer_diameter/2, -hull_z_size/2 + shell_thickness + hull_corner_radius ])
              		    	//cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius]);	
-                            cube ([hull_x_size,hull_y_size - hull_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*hull_corner_radius ]);    
+                            cube ([hull_x_size,hull_y_size - shell_thickness, hull_z_size - 2*shell_thickness - 2*hull_corner_radius ]);    
                     		rotate ([0,90,0])
                  				cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
     				}                   
-            	}
+        }
 }
 
-module drop_B(draft){
+module drop_B(draft = true){
     
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -64,9 +65,9 @@ module drop_B(draft){
 module whole_drop_B(draft){
 	
 	difference(){
-		drop_B();
+		drop_B(draft);
 		    translate ([hull_wall_thickness,0,0])
-		hollowing_skeleton_B();
+		hollowing_skeleton_B(hull_wall_thickness, draft);
 	}
 }
 
@@ -78,11 +79,11 @@ module 666_1029(draft){
 
     union(){
         difference(){
-        	drop_B();
+        	drop_B(draft);
 
         //hollowing skeleton
         		translate ([hull_wall_thickness,0,0])
-                	hollowing_skeleton_B();
+                	hollowing_skeleton_B(hull_wall_thickness, draft);
             			
             //for printing
         		translate([0,-main_tube_outer_diameter/2,-170/2])
@@ -146,8 +147,8 @@ module 666_1029(draft){
 
            		//dno
     				difference(){
-    					translate([0,-main_tube_outer_diameter/2,-hull_z_size/2])		
-    						cube([hull_x_size, hull_wall_thickness, hull_z_size]);
+    					translate([0,-main_tube_outer_diameter/2,-hull_z_size])		
+    						cube([hull_x_size, hull_wall_thickness, hull_z_size*2]);
 
         	//hollow front
         		translate([-10,-main_tube_outer_diameter/2-3.5,-56/2])
@@ -159,16 +160,17 @@ module 666_1029(draft){
         					rotate ([0,90,0])
         						cylinder (h = 80, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
 
-    					translate ([hull_x_size-65,-16,16.5])
-    						rotate([0,100,0])
-    							cube([hull_wall_thickness*5,30,30]);
-    					translate ([hull_x_size-65,-15,-12.5])
-    						rotate([0,80,0])
-    						cube([hull_wall_thickness*5,30,30]);
+    					translate ([hull_x_size-35,-16,10])
+    						rotate([0,190,0])
+    							cube([40,30,hull_wall_thickness*5]);
+    					translate ([hull_x_size-75,-16,-17])
+    						rotate([0,-10,0])
+    						cube([40,30, 5*hull_wall_thickness]);
 
     		
     				//kapka pro kapkovitý tvar
-    					translate ([hull_wall_thickness+2.5,0,0])
+    					/*
+                        translate ([hull_wall_thickness+2.5,0,0])
                 	intersection () {
                         resize([hull_drop_length - hull_wall_thickness - trailing_wall* hull_wall_thickness-5, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5, (hull_drop_length*hull_airfoil_thickness/100) - 2*hull_wall_thickness-5], auto=true)
                      		rotate ([0,90,0])           
@@ -188,6 +190,9 @@ module 666_1029(draft){
                              		cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);                   
                 		}                   
                 	}
+                    */
+                    translate([ribbon_width,ribbon_width/2,0])
+                        hollowing_skeleton_B(ribbon_width, draft);
     				//holes for undercarriage            
     	            translate ([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2- main_tube_outer_diameter/2,-main_tube_outer_diameter, -hull_z_size/2 - 20])         
                         cube ([main_tube_outer_diameter, main_tube_outer_diameter, hull_z_size + 40]);
@@ -196,8 +201,7 @@ module 666_1029(draft){
     				//difference
     				}		
     			//odstranění dna z vnější strany
-    				translate([0,0,0])
-    					drop_B();
+    					drop_B(draft);
     		//intersection
     		}
     //final union
