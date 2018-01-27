@@ -7,6 +7,21 @@ $vpd = 1280;
 
 draft = true;
 
+/*
+//výpočty pro odlehčení závisející na šířce kapky - počítáme počet čtverečků
+
+B = 5;       //B = šířka mezery    2 -< B -< 6
+A = 15;      //A = šířka uhlopříčky čtverečku    10 -< A -< 20
+X = (hull_drop_length/hull_airfoil_thickness)*100;
+Z = A * sqrt(2)
+
+
+C = (X-B)/(A+B)  //počet čtverečků pro odlehčení
+C = Floor(C);
+echo (C);
+*/
+
+
 module lightening(x_size, y_size, z_size){        // generování dutin pro snížení hmotnosti podložky
 
     // lightening holes list
@@ -76,14 +91,16 @@ module 666_1027(draft){
     x_size = 580;
     
     //akumulátor
-    width =width_of_accumulator + okraj;
-    depth = 20;
-    height = height_of_accumulator + 5 - sink_of_accumulator;
+     width =width_of_accumulator + accumulator_holder_width;
+    depth = accumulator_holder_width;
+    height = height_of_accumulator - sink_of_accumulator + accumulator_holder_thickness;
+
 
     //kostka spojky pro akumulátor, ve které je umístěn otvor pro šroub
-    width_cube = 10;
-    depth_cube = depth;
-    height_cube = 10;   
+    width_cube = accumulator_holder_thickness;    //šířka kostky ve které je otvor na šroub
+    depth_cube = accumulator_holder_width;
+    height_cube = accumulator_holder_thickness; //výška kostky ve které je otvor na šroub
+  
 
     //opticalFlow
     width_optical_flow_senzor = 45.5;
@@ -190,7 +207,7 @@ module 666_1027(draft){
             //dno
             difference(){
                 translate([0,-main_tube_outer_diameter/2 - hull_wall_thickness - global_clearance/2,-hull_z_size/2])       
-                        %cube([hull_x_size, hull_wall_thickness*2 + global_clearance, hull_z_size]);
+                        cube([hull_x_size, hull_wall_thickness*2 + global_clearance, hull_z_size]);
 
             //for front part
                 translate ([-2,-1 - main_tube_outer_diameter/2,-25])
