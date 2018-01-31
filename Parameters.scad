@@ -58,7 +58,7 @@ height_of_accumulator = 43.65;
 sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
 //tloušťka hrany spojky
 accumulator_holder_width = 18; 
-accumulator_holder_thickness = 5; 
+accumulator_holder_thickness = 10; 
 //posunutí akumálátoru na podložce
 move_of_accumulator = 165;
 
