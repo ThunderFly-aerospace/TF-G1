@@ -114,7 +114,13 @@ module 666_1029(draft){
                 rotate([0,45,0])
             		cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-
+            translate([bottom_cover_division[1]/1.1, - main_tube_outer_diameter*(3/4), - hull_z_size/2 - 10])		
+            		cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        
+        mirror([0,0,1])
+            translate([bottom_cover_division[1]/1.1, - main_tube_outer_diameter*(3/4), - hull_z_size/2 - 10])		
+            		cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        
 	 	//D
         	union(){
             translate([(bottom_cover_division[4] - bottom_cover_division[3])/10 + bottom_cover_division[3],-main_tube_outer_diameter*(3/4),+50])
@@ -144,7 +150,7 @@ module 666_1029(draft){
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
  
-//šrouby mezi 2 a 3
+		//šrouby mezi 2 a 3
     	translate([ bottom_cover_division[2] - 10,- 1.4*main_tube_outer_diameter,hull_z_size/2 - M3_screw_diameter/1.2])
     		union(){
     			translate([-1,0,0])	
@@ -218,17 +224,23 @@ module 666_1029(draft){
     		}
     	}
 
+    	//výztuhy
     	intersection(){
     		union(){
     			difference(){
     				union(){
     					//čtverce pro slepení dílů
-    					translate([bottom_cover_division[1] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter, - hull_z_size])
+    					translate([bottom_cover_division[1] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
     						cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-    				    
+
+    				    //odečtení díry pro šrouby mezi díly 2 a 3
     				    difference(){
-    				    		translate([bottom_cover_division[2] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter, - hull_z_size])
+    				    		union(){
+    				    		translate([bottom_cover_division[2] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
     									cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+    							translate([bottom_cover_division[2], - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
+    									cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+    							}
     							translate([ bottom_cover_division[2] - 10,- 1.4*main_tube_outer_diameter,hull_z_size/2 - M3_screw_diameter/1.2])
     								rotate([0,90,0])
     									cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);	
@@ -239,9 +251,10 @@ module 666_1029(draft){
 
     					}	
 
-    					translate([bottom_cover_division[3] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter, - hull_z_size])
+    					//čtverce pro slepení dílů
+    					translate([bottom_cover_division[3], - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
     						cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-    					translate([bottom_cover_division[4] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter, - hull_z_size])
+    					translate([bottom_cover_division[4] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
     						cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
     					//podélná výztuha
@@ -256,10 +269,20 @@ module 666_1029(draft){
     			translate([ribbon_width,ribbon_width,0])
     				hollowing_skeleton_B(ribbon_width, draft);
     			}
+    		
+    			//pro uzavření dílu 2 a 3
+    			translate([bottom_cover_division[1], - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
+    				cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+    			translate([bottom_cover_division[3] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
+    				cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+				translate([bottom_cover_division[1],- main_tube_outer_diameter - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])	
+					cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness + global_clearance, hull_z_size]);
+			//union
     		}
     		//odstranění přesahů z vnější strany
     		drop_B();
     	}
+    
     //šrouby mezi díly 2 a 3
     
     	intersection(){
@@ -300,7 +323,7 @@ module 666_1029(draft){
   		//intersection
 		}
 
-	mirror([0,0,1])
+		mirror([0,0,1])
 		intersection(){
     	union(){
     		translate([ bottom_cover_division[2] - 10,- 1.4*main_tube_outer_diameter,hull_z_size/2 - M3_screw_diameter/1.2])
@@ -422,8 +445,8 @@ module 666_1029_part(part_number, draft){
 666_1029(draft);
 
 
-/*
 
+/*
 666_1029_part(1, draft);
 
 translate([10,0,0])
@@ -438,6 +461,9 @@ translate([30,0,0])
 translate([40,0,0])
 666_1029_part(5, draft);
 */
+
+//666_1027();
+//666_1025();
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
