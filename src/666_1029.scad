@@ -276,7 +276,7 @@ module 666_1029(draft){
     			translate([bottom_cover_division[3] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter - thickness_between_tubes, - hull_z_size])
     				cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 				translate([bottom_cover_division[1],- main_tube_outer_diameter - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])	
-					cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness + global_clearance, hull_z_size]);
+					cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 			//union
     		}
     		//odstranění přesahů z vnější strany
@@ -370,6 +370,80 @@ module 666_1029(draft){
 
 
 //
+module 666_1029_part(part_number,draft){
+
+    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+
+    division_bottom_position = bottom_cover_division[part_number];
+    previous_bottom_division = bottom_cover_division[part_number - 1];
+
+    part_lenght_bottom = division_bottom_position - previous_bottom_division;
+    lock_width_bottom = 10;
+
+ 
+    	
+       // difference(){
+            union(){
+                //základní dělení pro tisk
+                intersection(){
+                    666_1029();
+                    translate([previous_bottom_division + global_clearance/2, -140, -150])
+                        cube([part_lenght_bottom - global_clearance/2, 150, 300]);
+                }
+
+                //zámky přidané
+                union(){
+                    intersection(){
+                        drop_skin_B();
+                        union(){
+                            //čtverec pro zámek horní
+                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.2*hull_y_size, - lock_width_bottom/2])
+                                    cube([hull_wall_thickness*3, hull_y_size, lock_width_bottom]);
+                            //čtverec pro zámek Z+
+                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, main_tube_outer_diameter ])
+                                    cube([hull_wall_thickness*3, lock_width_bottom, hull_z_size]);
+                            //čtverec pro zámek Z-
+                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter,- hull_z_size - main_tube_outer_diameter])
+                                    cube([hull_wall_thickness*3, lock_width_bottom, hull_z_size]);
+                        //union
+                        }
+                	//intersection        
+                	}
+            	//union zámky    
+           	}
+
+        	//final union    
+        	}
+        
+        //zámky odečtení
+        		union (){
+        		intersection(){
+        			drop_skin_B();
+        			union(){
+        				//čtverec pro zámek horní
+        				translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.2*hull_y_size, - lock_width_bottom/2])
+        					cube([hull_wall_thickness*4 + global_clearance, hull_y_size, lock_width_bottom + global_clearance]);
+        				//čtverec pro zámek Z+
+        				translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, hull_z_size/2 - main_tube_outer_diameter])
+        					cube([hull_wall_thickness*4 + global_clearance, lock_width_bottom + global_clearance, hull_z_size]);
+        				//čtverec pro zámek Z-
+        				translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, - hull_z_size - main_tube_outer_diameter])
+        					cube([hull_wall_thickness*4 + global_clearance, lock_width_bottom + global_clearance, hull_z_size]);
+        			//union		
+        			}
+        		//intersection
+        		}
+        		//union zámky vlevo
+        		}
+        	
+        //final difference
+       // }
+        
+//final module
+}
+
+/*
 module 666_1029_part(part_number, draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -381,6 +455,8 @@ module 666_1029_part(part_number, draft){
     part_lenght_bottom = division_bottom_position - previous_bottom_division;
     lock_width_bottom = 10;
 
+ 
+    	
         difference(){
             union(){
                 //základní dělení pro tisk
@@ -396,13 +472,13 @@ module 666_1029_part(part_number, draft){
                         drop_skin_B();
                         union(){
                             //čtverec pro zámek horní
-                            translate([previous_bottom_division - 2*hull_wall_thickness, - 1.2*hull_y_size, - lock_width_bottom/2])
+                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.2*hull_y_size, - lock_width_bottom/2])
                                     cube([hull_wall_thickness*3, hull_y_size, lock_width_bottom]);
                             //čtverec pro zámek Z+
-                            translate([previous_bottom_division - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, main_tube_outer_diameter ])
+                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, main_tube_outer_diameter ])
                                     cube([hull_wall_thickness*3, lock_width_bottom, hull_z_size]);
                             //čtverec pro zámek Z-
-                            translate([previous_bottom_division - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter,- hull_z_size - main_tube_outer_diameter])
+                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter,- hull_z_size - main_tube_outer_diameter])
                                     cube([hull_wall_thickness*3, lock_width_bottom, hull_z_size]);
                         //union
                         }
@@ -414,53 +490,54 @@ module 666_1029_part(part_number, draft){
         	}
         
         //zámky odečtení
-        	union (){
+        		union (){
         		intersection(){
         			drop_skin_B();
         			union(){
         				//čtverec pro zámek horní
-        				translate([division_bottom_position - 2*hull_wall_thickness, - 1.2*hull_y_size, - lock_width_bottom/2])
+        				translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.2*hull_y_size, - lock_width_bottom/2])
         					cube([hull_wall_thickness*4 + global_clearance, hull_y_size, lock_width_bottom + global_clearance]);
         				//čtverec pro zámek Z+
-        				translate([division_bottom_position - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, hull_z_size/2 - main_tube_outer_diameter])
+        				translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, hull_z_size/2 - main_tube_outer_diameter])
         					cube([hull_wall_thickness*4 + global_clearance, lock_width_bottom + global_clearance, hull_z_size]);
         				//čtverec pro zámek Z-
-        				translate([division_bottom_position - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, - hull_z_size - main_tube_outer_diameter])
+        				translate([bottom_cover_division[4] - 2*hull_wall_thickness, - 1.5*main_tube_outer_diameter, - hull_z_size - main_tube_outer_diameter])
         					cube([hull_wall_thickness*4 + global_clearance, lock_width_bottom + global_clearance, hull_z_size]);
         			//union		
         			}
         		//intersection
         		}
-        	//union zámky vlevo
-        	}
+        		//union zámky vlevo
+        		}
+        	
         //final difference
         }
+        
 //final module
 }
+*/
+
+
+
+//666_1029(draft);
 
 
 
 
-
-666_1029(draft);
-
-
-
+//666_1029_part(1, draft);
 /*
-666_1029_part(1, draft);
-
 translate([10,0,0])
 666_1029_part(2,draft);
 
 translate([20,0,0])
 666_1029_part(3, draft);
-
+*/
 translate([30,0,0])
 666_1029_part(4, draft);
 
 translate([40,0,0])
 666_1029_part(5, draft);
-*/
+
 
 //666_1027();
 //666_1025();
