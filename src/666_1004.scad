@@ -64,5 +64,5 @@ module 666_1004(wall_thickness, thickness_between_tubes, draft = true){
 }
 
 
-666_1004(coupling_wall_thickness, thickness_between_tubes);
+666_1004(coupling_wall_thickness, thickness_between_tubes, draft);
 
