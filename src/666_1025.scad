@@ -483,5 +483,8 @@ translate([40,0,0])
 
 666_1025(draft);
 
+
+use <888_1000.scad>
+
 use <./lib/naca4.scad>
 include <../Parameters.scad>
