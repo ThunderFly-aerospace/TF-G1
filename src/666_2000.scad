@@ -27,7 +27,7 @@ translate([main_tube_outer_diameter*2,0,0])
 
 translate([398,0,0])
 	rotate ([90,0,90])
-		666_1004();
+		%666_1004();
 
 translate([170+68,0,195-main_tube_outer_diameter*2+Help_main_tube_outer/2])
 		666_1026();
@@ -75,9 +75,10 @@ translate([-90,184.5,-92])
 	rotate ([-90,0,90])
 		666_1014();
 
-/*
+
 rotate ([90,0,0])
 	666_1025();
+	/*
 rotate([90,0,0])	
 	666_1029();
 */
@@ -85,7 +86,8 @@ rotate([90,0,0])
 translate([180,0,10])
 		666_1032();
 
-	rotate([0,0,0])	
+translate([0,0,main_tube_outer_diameter/2])
+	rotate([90,0,0])	
 		666_1027();
 
 translate([190,0,-10])
@@ -118,9 +120,10 @@ translate([190,0,-10])
 			//přední
 
 	difference(){
+		//translate([0,0,-main_tube_outer_diameter - thickness_between_tubes/2])
 		translate([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 			rotate ([90,0,0])
-				cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
+				%cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
 		translate([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,300/2+3,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 			rotate ([90,0,0])
