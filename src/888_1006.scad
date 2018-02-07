@@ -68,8 +68,8 @@ module 888_1006(draft){
 
 		//drážka pro lem od horního a spodního krytu
 		difference(){
-			translate ([-10,-hull_wall_thickness - global_clearance - thickness_between_tubes,- hull_z_size/2 - 10])
-					cube([hull_drop_length + 20, 2*hull_wall_thickness + 2*global_clearance, hull_z_size + 20 ]);
+			translate ([-10,- hull_wall_thickness - global_clearance/2,- hull_z_size/2 - 10])
+					cube([hull_drop_length + 20, 2*hull_wall_thickness + global_clearance, hull_z_size + 20 ]);
 			translate([ribbon_width*0.75,0])
 					hollowing_skeleton_hem(1.5*ribbon_width,draft);
 		}
@@ -391,6 +391,11 @@ translate([-hull_wall_thickness,0,0])
 translate([-hull_wall_thickness,0,0])
 888_1007();
 */
+/*
+translate([-hull_wall_thickness, 0,0])
+666_1025(draft);
+*/
+use <666_1025.scad>
 use <888_1000.scad>
 use <888_1004.scad>
 use <888_1007.scad>

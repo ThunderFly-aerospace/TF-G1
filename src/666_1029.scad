@@ -519,7 +519,7 @@ module 666_1029_part(part_number, draft){
 
 
 
-//666_1029(draft);
+666_1029(draft);
 
 
 
@@ -531,13 +531,13 @@ translate([10,0,0])
 
 translate([20,0,0])
 666_1029_part(3, draft);
-*/
+
 translate([30,0,0])
 666_1029_part(4, draft);
 
 translate([40,0,0])
 666_1029_part(5, draft);
-
+*/
 
 //666_1027();
 //666_1025();

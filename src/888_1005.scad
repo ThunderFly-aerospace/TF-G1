@@ -1,13 +1,23 @@
 			       translate([main_tube_outer_diameter*2,0,0])
 		rotate([0,90,0])
-			 
-
-
 			666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
+	
+	translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness,0,0])
+		rotate([0,90,0])
+			666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
+
 
 			888_1006();
 
 			//888_1004();
+
+			666_1027();
+translate([-hull_wall_thickness,0,0])
+888_1007();
+
+
+rotate([90,0,90])
+			666_1026();
 
 //hlavní trubky
 
@@ -45,6 +55,9 @@
 use <666_1004.scad>
 use <888_1006.scad>
 use <888_1004.scad>
+use <888_1007.scad>
+use <666_1026.scad>
+use <666_1027.scad>
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>

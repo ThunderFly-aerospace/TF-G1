@@ -8,6 +8,14 @@ tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;
 
+
+//umístění podvozkových trubek
+
+second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
+
+
+
+
 // Parameters of cube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
 thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
