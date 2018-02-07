@@ -49,6 +49,8 @@ main_pilon_position = 170+68;
 ribbon_width = 5; // šířka vyztužovacích lemů. 
 
 
+
+
 //accumulator
 //základní rozměry akumulátoru
 width_of_accumulator = 129.4;//45+1;
