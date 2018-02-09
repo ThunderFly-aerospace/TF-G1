@@ -123,9 +123,9 @@ module 666_1027(draft){
     difference(){
         union(){
             intersection (){
-                    hollowing_skeleton(hull_wall_thickness, draft);
-                translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes, - hull_z_size/2])
-                    cube ([hull_drop_length, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size]);
+                hollowing_skeleton(hull_wall_thickness, draft);
+                translate([main_tube_outer_diameter,-main_tube_outer_diameter/2 - thickness_between_tubes, - hull_z_size/2]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
+                   cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size]);
             }
     
 
