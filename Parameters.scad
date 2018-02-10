@@ -83,6 +83,9 @@ bottom_cover_division = [0,100,250,365, 470, hull_x_size];
 //Base Divison - dělení podložky
 base_division = [0,150,300,420, hull_x_size];
 
+//šířka zámků
+lock_width = 10;
+
 ////////////////
 // Senzory
 ///////////////////
