@@ -70,7 +70,7 @@ sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
 accumulator_holder_width = 18; 
 accumulator_holder_thickness = 10; 
 //posunutí akumálátoru na podložce
-move_of_accumulator = 165;
+move_of_accumulator = 165;   // pozice akumulátoru (ovlivňuje těžiště)
 
 width_of_engine_holder = 63;
 

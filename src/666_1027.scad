@@ -123,9 +123,9 @@ module 666_1027(draft){
     difference(){
         union(){
             intersection (){
-                    hollowing_skeleton();
-                translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes, - hull_z_size/2])
-                    cube ([hull_drop_length, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size]);
+                hollowing_skeleton(hull_wall_thickness, draft);
+                translate([main_tube_outer_diameter,-main_tube_outer_diameter/2 - thickness_between_tubes, - hull_z_size/2]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
+                   cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size]);
             }
     
 
@@ -147,14 +147,14 @@ module 666_1027(draft){
         //drážka pro lem od horního a spodního krytu
         difference(){
             translate ([-10,- hull_wall_thickness - global_clearance/2,- hull_z_size/2 - 10])
-                    cube([hull_drop_length + 20, 2*hull_wall_thickness + global_clearance, hull_z_size + 20 ]);
+                cube([hull_drop_length + 20, 2*hull_wall_thickness + global_clearance, hull_z_size + 20 ]);
             translate([ribbon_width*0.75,0])
-                    hollowing_skeleton_hem(1.5*ribbon_width,draft);
+                hollowing_skeleton(1.5*ribbon_width,draft);
         }
 
             //for front part
             translate ([-global_clearance,-5 - main_tube_outer_diameter/2 - hull_wall_thickness,- width_of_engine_holder/2 - hull_wall_thickness - global_clearance])
-                    cube([top_cover_division[1] + 2, hull_y_size + 10, width_of_engine_holder + 2*hull_wall_thickness + 2*global_clearance]);
+                cube([top_cover_division[1] + 2, hull_y_size + 10, width_of_engine_holder + 2*hull_wall_thickness + 2*global_clearance]);
 
         //for tube in back
         translate ([hull_x_size-70,0,0])
@@ -187,7 +187,7 @@ module 666_1027(draft){
 
         //666_1004 - přední
         translate([main_tube_outer_diameter*2,-hull_y_size/2,- main_tube_outer_diameter/2 - coupling_wall_thickness - global_clearance/2])
-                cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_y_size, main_tube_outer_diameter + 2*coupling_wall_thickness + global_clearance]);
+            cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_y_size, main_tube_outer_diameter + 2*coupling_wall_thickness + global_clearance]);
 
         //666_1004 - zadní
         translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness,- hull_y_size/2,- main_tube_outer_diameter/2 - coupling_wall_thickness - global_clearance/2])
