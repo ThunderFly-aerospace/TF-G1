@@ -1,8 +1,10 @@
-use <./lib/naca4.scad>
-include <../Parameters.scad>
-use <666_1025.scad>
 
-module 666_1032(){
+
+draft = true;   // sets rendering quality to draft.
+$fs = draft ? 5 : 0.5;
+$fa = 10;
+
+module 666_1032(draft){
 
     airfoil_thickness = 0030;
     depth = main_tube_outer_diameter*2;
@@ -16,41 +18,28 @@ module 666_1032(){
 
     difference (){
 
-    	airfoil(naca = airfoil_thickness, L = 170, N=101, h = 195, open = false);
+    	airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube, open = false);
     	translate ([hull_wall_thickness,0,-5])
             resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,210], auto=true) 
-                airfoil(naca = airfoil_thickness, L = 170, N=101, h = 200, open = false);
+                airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube + 2*global_clearance, open = false);
 
     	//pro otevření
-    	translate ([150,-0.5,-3])
-    	   cube ([10,1,201]);
+    	translate ([160,- hull_wall_thickness/2,- 2*global_clearance])
+    	   cube ([20,hull_wall_thickness,height_of_vertical_tube + 4*global_clearance]);
 
-    	translate ([35,-depth/2-3,195-height])
-    	   cube ([width*5,depth+6,height+3]);
+    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2,-depth/2 - global_clearance, height_of_vertical_tube-height - global_clearance/2])
+    	   cube ([width*5,depth + 2*global_clearance,height+global_clearance]);
 
         // hull shell from 666_1025.scad
-        translate ([-180,0,0])
+        translate ([- cover_pilon_position,0,0])
             rotate ([90,0,0])
-                intersection () {
-                    rotate ([0,90,0])           
-                        rotate_extrude($fn = 100)
-                            rotate([0,0,90])
-                                difference()
-                                {
-
-                                  polygon(points = airfoil_data(naca=hull_airfoil_thickness, L =hull_drop_length , N=100)); 
-                                  square(hull_drop_length); 
-                                }
-
-                    minkowski(){                   
-                        translate ([0,-(main_tube_outer_diameter/2)+1,-hull_z_size/2])
-                            cube ([hull_x_size,hull_y_size,hull_z_size]);
-                            rotate ([0,90,0])
-                                cylinder (h = 1, r = hull_corner_radius, $fn = 100);                   
-
-                    }
-                }
+                drop(draft);
     }
 }
 
-666_1032();
+666_1032(draft);
+
+use <./lib/naca4.scad>
+include <../Parameters.scad>
+use <666_1025.scad>
+use <888_1000.scad>
