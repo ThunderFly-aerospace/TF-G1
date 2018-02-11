@@ -76,43 +76,43 @@ union(){
             //část A
                 translate([(top_cover_division[0] + top_cover_division[1])/4, main_tube_outer_diameter/4, -hull_z_size/2])
                     rotate([0,45,0])
-                        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                        %cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             mirror([0,0,1])
                 translate([(top_cover_division[0] + top_cover_division[1])/4, main_tube_outer_diameter/4, -hull_z_size/2])
                     rotate([0,45,0])
-                        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                        %cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
 
             //část B
-                translate([(top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], main_tube_outer_diameter/4,-hull_z_size/2-15])
-                        cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                translate([(top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], main_tube_outer_diameter/4,-hull_z_size/2-25])
+                        %cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             
             //část C    
-                translate([(top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],main_tube_outer_diameter/4,-hull_z_size/2-15])
-                        cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                translate([(top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],main_tube_outer_diameter/4,-hull_z_size/2-25])
+                        %cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
 
             //část D
-                translate([(top_cover_division[4] - top_cover_division[3])/2 + top_cover_division[3],main_tube_outer_diameter/4,-50])
+                translate([(top_cover_division[4] - top_cover_division[3])/2 + top_cover_division[3],main_tube_outer_diameter/4,-55])
                     rotate([0,90+beta,0])   
-                        cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                        %cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                             
             mirror([0,0,1])
-                translate([(top_cover_division[4] - top_cover_division[3])/2 + top_cover_division[3],main_tube_outer_diameter/4,-50])
+                translate([(top_cover_division[4] - top_cover_division[3])/2 + top_cover_division[3],main_tube_outer_diameter/4,-55])
                     rotate([0,90+beta,0])   
-                       cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                       %cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             //část E
-                translate([(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20,main_tube_outer_diameter/4,0])
+                translate([(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20,main_tube_outer_diameter/4,-15])
                     rotate([0,90+beta,0])
-                        cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                        %cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             mirror([0,0,1])
-                translate([(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20,main_tube_outer_diameter/4,0])
+                translate([(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20,main_tube_outer_diameter/4,-15])
                     rotate([0,90+beta,0])
-                        cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                        %cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             //nápis
             translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
