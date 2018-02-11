@@ -90,7 +90,7 @@ module 666_1029(draft){
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
         
-            translate([bottom_cover_division[4] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,0])
+            translate([bottom_cover_division[4] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,5])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             }
@@ -99,7 +99,7 @@ module 666_1029(draft){
             translate([+ bottom_cover_division[4],-main_tube_outer_diameter/4,20])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([+ bottom_cover_division[4] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,0])
+            translate([+ bottom_cover_division[4] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,5])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             
