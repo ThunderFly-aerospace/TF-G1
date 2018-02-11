@@ -327,7 +327,7 @@ module 666_1029_A(draft){
     union(){
     difference(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([0, - hull_y_size, -hull_z_size/2])
                 cube([bottom_cover_division[1] - bottom_cover_division[0], hull_y_size, hull_z_size]);
         }
@@ -349,7 +349,7 @@ module 666_1029_B(draft){
     translate([20,0,0])
     union(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([bottom_cover_division[1], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[2] - bottom_cover_division[1], hull_y_size, hull_z_size]);
         }
@@ -360,7 +360,7 @@ module 666_1029_C(draft){
     translate([40,0,0])
     union(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([bottom_cover_division[2], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[3] - bottom_cover_division[2], hull_y_size, hull_z_size]);    
         }
@@ -372,7 +372,7 @@ module 666_1029_D(draft){
         union(){
             difference(){
                 intersection(){
-                        666_1029();
+                        666_1029(draft);
                     translate([bottom_cover_division[3], -hull_y_size,- hull_z_size/2])
                         cube([bottom_cover_division[4] - bottom_cover_division[3], hull_y_size, hull_z_size]);    
                 }
@@ -421,7 +421,7 @@ module 666_1029_E(draft){
 
     difference(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([bottom_cover_division[4], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[5] - bottom_cover_division[4], hull_y_size, hull_z_size]);
         }
