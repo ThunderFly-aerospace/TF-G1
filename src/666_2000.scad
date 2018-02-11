@@ -78,15 +78,14 @@ translate([-90,184.5,-92])
 
 rotate ([90,0,0])
 	666_1025();
-	/*
+	
 rotate([90,0,0])	
 	666_1029();
-*/
+
 
 translate([180,0,10])
 		666_1032();
 
-translate([0,0,main_tube_outer_diameter/2])
 	rotate([90,0,0])	
 		666_1027();
 
@@ -111,7 +110,7 @@ translate([190,0,-10])
 		//kolmá na nejdelší
 	difference(){
 		translate ([main_pilon_position,0,Help_main_tube_outer/2])
-				cylinder (h = 195, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
+				%cylinder (h = height_of_vertical_tube, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
 		translate ([0,0,-3])
 				cylinder (h = 306, r1 = Help_main_tube_inner/2, r2 = Help_main_tube_inner/2, $fn = 200);
@@ -121,9 +120,9 @@ translate([190,0,-10])
 
 	difference(){
 		//translate([0,0,-main_tube_outer_diameter - thickness_between_tubes/2])
-		translate([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
+			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,150,- Help_main_tube_outer - thickness_between_tubes])
 			rotate ([90,0,0])
-				%cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
+				cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
 		translate([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,300/2+3,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 			rotate ([90,0,0])
@@ -132,11 +131,11 @@ translate([190,0,-10])
 			//zadní
 
 	difference(){
-		translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
+		translate([second_undercarriage_hole,300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 			rotate ([90,0,0])
 				cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
-		translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),300/2+3,-main_tube_outer_diameter - (main_tube_outer_diameter/5)/2])
+		translate([- second_undercarriage_hole,300/2+3,-main_tube_outer_diameter - (main_tube_outer_diameter/5)/2])
 			rotate ([90,0,0])
 				cylinder (h = 306, r1 = Help_main_tube_inner/2, r2 = Help_main_tube_inner/2, $fn = 200);
 	}
