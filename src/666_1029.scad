@@ -48,45 +48,45 @@ module 666_1029(draft){
 
         //šrouby pro připevnění k 666_1027
         //A
-            translate([(bottom_cover_division[0] + bottom_cover_division[1])/15,-main_tube_outer_diameter/4, -hull_z_size/2])
+            translate([(bottom_cover_division[0] + bottom_cover_division[1])/15 + 5,-main_tube_outer_diameter/4, -hull_z_size/2 - 13])
                 rotate([0,45,0])
                     cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         mirror([0,0,1])
-            translate([(bottom_cover_division[0] + bottom_cover_division[1])/15, -main_tube_outer_diameter/4, -hull_z_size/2])
+            translate([(bottom_cover_division[0] + bottom_cover_division[1])/15 + 5, -main_tube_outer_diameter/4, -hull_z_size/2 - 13])
                 rotate([0,45,0])
                     cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-            translate([bottom_cover_division[1]/1.1, - main_tube_outer_diameter/4, - hull_z_size/2 - 10])       
+            translate([bottom_cover_division[1]/1.1, - main_tube_outer_diameter/4, - hull_z_size/2 - 35])       
                     cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
         
         mirror([0,0,1])
-            translate([bottom_cover_division[1]/1.1, - main_tube_outer_diameter/4, - hull_z_size/2 - 10])       
+            translate([bottom_cover_division[1]/1.1, - main_tube_outer_diameter/4, - hull_z_size/2 - 35])       
                     cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
         
         //D
             union(){
-            translate([+ bottom_cover_division[3],-main_tube_outer_diameter/4,+50])
+            translate([+ bottom_cover_division[3],-main_tube_outer_diameter/4,+52])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([+ bottom_cover_division[3] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,+30])
+            translate([+ bottom_cover_division[3] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,+38])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             }
 
         mirror([0,0,1])
             union(){
-            translate([bottom_cover_division[3],-main_tube_outer_diameter/4,+50])
+            translate([bottom_cover_division[3],-main_tube_outer_diameter/4,+52])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([ + bottom_cover_division[3] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,+30])
+            translate([ + bottom_cover_division[3] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,+38])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             }
 
         //E     
             union(){
-            translate([bottom_cover_division[4],-main_tube_outer_diameter/4,0])
+            translate([bottom_cover_division[4],-main_tube_outer_diameter/4,20])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
         
@@ -96,12 +96,13 @@ module 666_1029(draft){
             }
         mirror([0,0,1]) 
             union(){
+            translate([+ bottom_cover_division[4],-main_tube_outer_diameter/4,20])
+                rotate([0,90-beta,0])   
+                    cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             translate([+ bottom_cover_division[4] + bottom_cover_division[1]/2,-main_tube_outer_diameter/4,0])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([+ bottom_cover_division[4],-main_tube_outer_diameter/4,0])
-                rotate([0,90-beta,0])   
-                    cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            
             }
 
         //šrouby mezi 2 a 3
