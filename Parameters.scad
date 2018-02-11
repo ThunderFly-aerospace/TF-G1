@@ -13,7 +13,7 @@ global_clearance = 0.5;
 
 second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
 
-
+height_of_vertical_tube = 195;
 
 
 // Parameters of cube couplings
@@ -53,6 +53,7 @@ hull_scale_y = 1.5;
 hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
+cover_pilon_position = 180;
 
 ribbon_width = 5; // šířka vyztužovacích lemů. 
 
