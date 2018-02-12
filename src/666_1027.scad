@@ -483,10 +483,10 @@ module 666_1027(draft){
 
 
         //akumulátory
-        translate([move_of_accumulator,- sink_of_accumulator,-height_of_accumulator*1.5])  
+        translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness - sink_of_accumulator,-height_of_accumulator*1.5])  
             cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
 
-        translate([move_of_accumulator,- sink_of_accumulator,height_of_accumulator/2])  
+        translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness- sink_of_accumulator,height_of_accumulator/2])  
             cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
 
 
