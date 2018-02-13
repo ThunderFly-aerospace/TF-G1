@@ -15,9 +15,9 @@ module 888_1001(){
     	difference (){
     		translate([-(accumulator_holder_width/2),- accumulator_holder_width/2,0])
     			cube ([width,depth,height]);
-    		translate([-0.5,height_of_accumulator/2+0.5,-2 - sink_of_accumulator])		
+    		translate([-0.5,height_of_accumulator/2+0.5,-2 - sink_of_accumulator - depth_of_accumulator])		
     			rotate([90,0,0])	
-    				cube([width_of_accumulator+1, depth_of_accumulator+3, height_of_accumulator+1]);
+    				cube([width_of_accumulator+1, depth_of_accumulator+3 + depth_of_accumulator, height_of_accumulator+1]);
      	}
 
     	difference(){
