@@ -77,7 +77,7 @@ width_of_accumulator = 129.4;//45+1;
 depth_of_accumulator = 40.61;
 height_of_accumulator = 43.65;
 //Zapuštění akumulátoru
-sink_of_accumulator = -12; //main_tube_outer_diameter/5 - Nut_height_M3*1.5;
+sink_of_accumulator = 5; //main_tube_outer_diameter/5 - Nut_height_M3*1.5;
 
 //tloušťka hrany spojky
 accumulator_holder_width = 18; 
