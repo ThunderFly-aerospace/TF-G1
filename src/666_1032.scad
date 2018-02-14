@@ -19,7 +19,7 @@ module 666_1032(draft){
     difference (){
 
     	airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance, open = false);
-    	translate ([hull_wall_thickness,0,50])
+    	translate ([hull_wall_thickness,0,45])
             resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,210], auto=true) 
                 airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance, open = false);
 
