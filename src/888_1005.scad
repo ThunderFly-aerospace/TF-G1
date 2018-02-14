@@ -20,10 +20,10 @@ translate([-hull_wall_thickness,0,0])
 
 	rotate([90,0,90])
 		666_1026(draft);
-
+/*
 translate([-hull_wall_thickness,0,0])
 		666_1025(draft);
-
+*/
 translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	rotate([-90,0,0])
 		666_1032(draft);
@@ -54,7 +54,7 @@ translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diamete
 
 			//zadní
 
-		translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, -150])
+		translate([second_undercarriage_hole - coupling_wall_thickness,- Help_main_tube_outer - thickness_between_tubes, -150])
 				cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
 
