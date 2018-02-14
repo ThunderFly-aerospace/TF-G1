@@ -33,6 +33,7 @@ translate([main_tube_outer_diameter*2,0,0])
 
 translate([398,0,0])
 	rotate ([90,0,90])
+
 		%666_1004(draft);
 
 translate([170+68,0,195-main_tube_outer_diameter*2+Help_main_tube_outer/2])
@@ -89,6 +90,7 @@ rotate([90,0,0])
 	666_1029(draft);
 
 
+
 translate([180,0,10])
 		666_1032(draft);
 
@@ -115,7 +117,7 @@ translate([190,0,-10])
 
 		//kolmá na nejdelší
 	difference(){
-		translate ([main_pilon_position,0,Help_main_tube_outer/2])
+		translate ([main_pilon_position,0,main_tube_outer_diameter/2 + coupling_wall_thickness])
 				%cylinder (h = height_of_vertical_tube, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
 		translate ([0,0,-3])
