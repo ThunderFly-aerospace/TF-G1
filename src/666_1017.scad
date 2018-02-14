@@ -24,7 +24,7 @@ difference () {
 
     //vertical tube
     translate ([0,0,-1])
-        cylinder(h= height-main_tube_outer_diameter-wall_thickness,r1=radius,r2=radius, $fn=200);
+        cylinder(h= height-main_tube_outer_diameter - wall_thickness,r1=radius,r2=radius, $fn=200);
 
    				//translate([-width/2,0,0])
    				//cube([width,depth, height+6]);
