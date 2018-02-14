@@ -9,15 +9,14 @@ draft = true;
 
 
 module 666_1029(draft){
-    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
-    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
 
+    beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
 
     union(){
         difference(){
             intersection(){
-                    drop_skin();
-            translate([0,-hull_y_size,-hull_z_size/2])
+                drop_skin(draft);
+                translate([0,-hull_y_size,-hull_z_size/2])
                     cube([hull_drop_length, hull_y_size, hull_z_size]); 
             }
 
@@ -170,7 +169,7 @@ module 666_1029(draft){
 
 
                     //odebrání dna
-                    translate([ribbon_width/2,0,0])
+                    translate([ribbon_width,0,0])
                             hollowing_skeleton(ribbon_width, draft);
 
                 }
@@ -208,15 +207,12 @@ module 666_1029(draft){
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //podélná výztuha
-                        
-                        translate([bottom_cover_division[1],- hull_y_size/2.4, - hull_z_size/2])
-                            cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness,hull_z_size]);
-                        translate([bottom_cover_division[1],- hull_y_size/4, - hull_z_size/2])
+                        translate([bottom_cover_division[1],-hull_y_size/3, -hull_z_size/2])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness,hull_z_size]);
                         
                     }
                 //dutý tvar
-                translate([ribbon_width,ribbon_width,0])
+                translate([ribbon_width,0,0])
                     hollowing_skeleton(ribbon_width, draft);
         
                     }
@@ -230,7 +226,6 @@ module 666_1029(draft){
                     //uzavření seshora
                 translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])  
                     cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
-
             }
             //odstranění z vnější strany
             drop(draft);
@@ -326,12 +321,12 @@ module 666_1029_A(draft){
     union(){
     difference(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([0, - hull_y_size, -hull_z_size/2])
                 cube([bottom_cover_division[1] - bottom_cover_division[0], hull_y_size, hull_z_size]);
         }
-            translate([ribbon_width/2,ribbon_width,0])
-                hollowing_skeleton(ribbon_width,draft);
+            translate([ribbon_width,0,0])
+                hollowing_skeleton(ribbon_width, draft);
                 
         //pro odstranění zbytku rantlu od protichůdného dílu pro tisk    
         intersection(){
@@ -348,7 +343,7 @@ module 666_1029_B(draft){
     translate([20,0,0])
     union(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([bottom_cover_division[1], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[2] - bottom_cover_division[1], hull_y_size, hull_z_size]);
         }
@@ -359,7 +354,7 @@ module 666_1029_C(draft){
     translate([40,0,0])
     union(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([bottom_cover_division[2], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[3] - bottom_cover_division[2], hull_y_size, hull_z_size]);    
         }
@@ -371,7 +366,7 @@ module 666_1029_D(draft){
         union(){
             difference(){
                 intersection(){
-                        666_1029();
+                        666_1029(draft);
                     translate([bottom_cover_division[3], -hull_y_size,- hull_z_size/2])
                         cube([bottom_cover_division[4] - bottom_cover_division[3], hull_y_size, hull_z_size]);    
                 }
@@ -420,7 +415,7 @@ module 666_1029_E(draft){
 
     difference(){
         intersection(){
-                666_1029();
+                666_1029(draft);
             translate([bottom_cover_division[4], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[5] - bottom_cover_division[4], hull_y_size, hull_z_size]);
         }
@@ -454,9 +449,10 @@ module 666_1029_E(draft){
 
 /*
 666_1029_A(draft);
+*/
 
-666_1029_B(draft);
-
+//666_1029_B(draft);
+/*
 666_1029_C(draft);
 
 666_1029_D(draft);

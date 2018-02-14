@@ -13,9 +13,6 @@ global_clearance = 0.5;
 
 second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
 
-height_of_vertical_tube = 195;
-
-
 // Parameters of cube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
 thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
@@ -54,25 +51,11 @@ hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
 cover_pilon_position = 180;
+height_of_vertical_tube = 195;
 
 ribbon_width = 5; // šířka vyztužovacích lemů. 
 
-
-
-
-//accumulator
-//základní rozměry akumulátoru
-width_of_accumulator = 129.4;//45+1;
-depth_of_accumulator = 40.61;
-height_of_accumulator = 43.65;
-//Zapuštění akumulátoru
-sink_of_accumulator = main_tube_outer_diameter/4 - Nut_height_M3*1.5;
-//tloušťka hrany spojky
-accumulator_holder_width = 18; 
-accumulator_holder_thickness = 10; 
-//posunutí akumálátoru na podložce
-move_of_accumulator = 165;   // pozice akumulátoru (ovlivňuje těžiště)
-
+// šířka otvoru v přední části kapoty pro držák motoru.
 width_of_engine_holder = 63;
 
 //Top Cover Division - dělení horního krytu pro tisk
@@ -86,6 +69,23 @@ base_division = [0,150,300,420, hull_x_size];
 
 //šířka zámků
 lock_width = 10;
+
+
+//accumulator
+//základní rozměry akumulátoru
+width_of_accumulator = 129.4;//45+1;
+depth_of_accumulator = 40.61;
+height_of_accumulator = 43.65;
+//Zapuštění akumulátoru
+sink_of_accumulator = 5; //main_tube_outer_diameter/5 - Nut_height_M3*1.5;
+
+//tloušťka hrany spojky
+accumulator_holder_width = 18; 
+accumulator_holder_thickness = 10; 
+
+//posunutí akumálátoru na podložce
+move_of_accumulator = 165;   // pozice akumulátoru (ovlivňuje těžiště)
+
 
 ////////////////
 // Senzory

@@ -12,86 +12,94 @@ use <666_1018.scad>
 
 include <../Parameters.scad>
 
+// Nastavení zobrazení
+$vpr = [73, 0, 12];
+$vpt = [442, 80, -15];
+$vpd = 1580;
+
+draft = true;
 
 translate([0,0,0])
 	rotate ([0,90,0])
-		666_1026();
+		666_1026(draft);
 
 translate([170+68,0,70-main_tube_outer_diameter/5 - main_tube_outer_diameter/2])
 	rotate ([0,180,90])
-		666_1017();
+		666_1017(draft);
 
 translate([main_tube_outer_diameter*2,0,0])
 	rotate ([90,0,90])
-		666_1004();
+		666_1004(draft);
 
 translate([398,0,0])
 	rotate ([90,0,90])
-		666_1004();
 
-translate([main_pilon_position,0,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2 + coupling_wall_thickness])
-		666_1026();
+		%666_1004(draft);
+
+translate([170+68,0,195-main_tube_outer_diameter*2+Help_main_tube_outer/2])
+		666_1026(draft);
 
 
 translate([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 	rotate([90,0,0])
-		666_1006();
+		666_1006(draft);
 
 translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 	rotate([90,0,0])
-		666_1006();
+		666_1006(draft);
 
 translate([main_tube_outer_diameter*2+(main_tube_outer_diameter+2*main_tube_outer_diameter/5)/2,-300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 	rotate([-90,0,0])
-		666_1006();
+		666_1006(draft);
 
 translate([398+main_tube_outer_diameter/2+(main_tube_outer_diameter/5),-300/2,-main_tube_outer_diameter- (main_tube_outer_diameter/5)/2])
 	rotate([-90,0,0])
-		666_1006();
+		666_1006(draft);
 
 translate ([920-80,0,0])
 	rotate ([90,0,90])
-		666_1028();
+		666_1028(draft);
 
 translate([920-80,0,0])
 	rotate ([90,180,90])
-		666_1028 ();
+		666_1028(draft);
 
 		
 
 translate([90,-184.5,-92])
 	rotate ([-90,0,90])
-		666_1014();
+		666_1014(draft);
 
 translate([-90,-184.5,-92])
 	rotate ([-90,0,90])
-		666_1014();
+		666_1014(draft);
 
 translate([90,184.5,-92])
 	rotate ([-90,0,90])
-		666_1014();
+		666_1014(draft);
 
 translate([-90,184.5,-92])
 	rotate ([-90,0,90])
-		666_1014();
+		666_1014(draft);
 
 
 rotate ([90,0,0])
-	666_1025();
+	666_1025(draft);
 	
 rotate([90,0,0])	
-	666_1029();
+	666_1029(draft);
 
 
-translate([180,0,0])
-		666_1032();
+
+translate([180,0,10])
+		666_1032(draft);
 
 	rotate([90,0,0])	
-		666_1027();
+		666_1027(draft);
 
 translate([190,0,-10])
 	rotate([0,270,0])
-		666_1018();
+		666_1018(draft);
 
 //hlavní trubky
 
