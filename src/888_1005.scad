@@ -28,7 +28,7 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	rotate([-90,0,0])
 		666_1032(draft);
 
-translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2,0])
+translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2,0])
 	rotate([-90,0,0])
 			666_1026(draft);
 
@@ -41,7 +41,7 @@ translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diamete
 
 
 		//kolmá na nejdelší
-		translate ([main_pilon_position,0,0])
+		translate ([main_pilon_position,main_tube_outer_diameter/2,0])
 			rotate([-90,0,0])
 				cylinder (h = height_of_vertical_tube, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
 
