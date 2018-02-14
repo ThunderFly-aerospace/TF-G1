@@ -18,17 +18,17 @@ module 666_1032(draft){
 
     difference (){
 
-    	airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube, open = false);
-    	translate ([hull_wall_thickness,0,-5])
+    	airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance, open = false);
+    	translate ([hull_wall_thickness,0,50])
             resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,210], auto=true) 
-                airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube + 2*global_clearance, open = false);
+                airfoil(naca = airfoil_thickness, L = 170, N=101, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance, open = false);
 
     	//pro otevření
     	translate ([160,- hull_wall_thickness/2,- 2*global_clearance])
     	   cube ([20,hull_wall_thickness,height_of_vertical_tube + 4*global_clearance]);
 
-    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2,-depth/2 - global_clearance, height_of_vertical_tube-height - global_clearance/2])
-    	   cube ([width*5,depth + 2*global_clearance,height+global_clearance]);
+    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2,-depth/2 - global_clearance,height_of_vertical_tube - main_tube_outer_diameter*2 - global_clearance/2 + main_tube_outer_diameter/2])
+    	   cube ([width*5,depth + 2*global_clearance,height+global_clearance + main_tube_outer_diameter]);
 
         // hull shell from 666_1025.scad
         translate ([- cover_pilon_position,0,0])
