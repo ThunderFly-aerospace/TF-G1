@@ -224,10 +224,10 @@ module 666_1029(draft){
                         translate([bottom_cover_division[1], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                         
-                        translate([bottom_cover_division[1],- hull_y_size/1.5,- hull_z_size/2])
+                        /*translate([bottom_cover_division[1],- hull_y_size/1.5,- hull_z_size/2])
                             cube([ribbon_width, hull_wall_thickness, hull_z_size]);
                         translate([bottom_cover_division[1],- hull_y_size/6,- hull_z_size/2])
-                            cube([ribbon_width, hull_wall_thickness, hull_z_size]);
+                            cube([ribbon_width, hull_wall_thickness, hull_z_size]);*/
                         translate([bottom_cover_division[1],- hull_y_size/3,- hull_z_size/2])
                             cube([ribbon_width, hull_wall_thickness, hull_z_size]);
                         translate([bottom_cover_division[1],- hull_y_size/2,- hull_z_size/2])
@@ -511,16 +511,16 @@ module 666_1029_E(draft){
 */
 
 //666_1029_B(draft);
-/*
-666_1029_C(draft);
 
+666_1029_C(draft);
+/*
 666_1029_D(draft);
 
 666_1029_E(draft);
 */
 
 
-666_1029(draft);
+//666_1029(draft);
 
 
 
