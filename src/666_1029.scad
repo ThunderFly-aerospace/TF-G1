@@ -368,6 +368,23 @@ module 666_1029(draft){
 
         //intersection
         }
+
+        //vyztužení otvorů pro podvozkové nohy - určeno k odstranění
+            //přední
+            translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 + hull_wall_thickness/2 -0.3])
+                            cube([main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+            translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter, hull_z_size/2 -  hull_wall_thickness/2 - 0.3])
+                            cube([main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+
+            //zadní
+            translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness -global_clearance, - thickness_between_tubes - main_tube_outer_diameter, - hull_z_size/2 + thickness_between_tubes*4 +  hull_wall_thickness/2 + 0.6 ])
+                    rotate([-10,-15,0])
+                    cube([main_tube_outer_diameter + global_clearance*2, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+
+            translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness -global_clearance, - thickness_between_tubes - main_tube_outer_diameter, + hull_z_size/2 - thickness_between_tubes*4 -  2*hull_wall_thickness - 0.6 ])
+                    rotate([10,15,0])
+                    cube([main_tube_outer_diameter + global_clearance*2, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+
 //final union
     }
 //final module
