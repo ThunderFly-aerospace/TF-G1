@@ -203,6 +203,9 @@ module 666_1029(draft){
                         }   
 
                         //čtverce pro slepení dílů - rantly
+                        translate([bottom_cover_division[3], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
                         translate([bottom_cover_division[4], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
@@ -454,26 +457,12 @@ module 666_1029_C(draft){
 module 666_1029_D(draft){
     translate([60,0,0])
         union(){
-            difference(){
                 intersection(){
                         666_1029(draft);
                     translate([bottom_cover_division[3], -hull_y_size,- hull_z_size/2])
                         cube([bottom_cover_division[4] - bottom_cover_division[3], hull_y_size, hull_z_size]);    
                 }
 
-                //pro odstranění zbytku rantlu od protichůdného dílu pro tisk    
-                intersection(){
-                        hollowing_skeleton(hull_wall_thickness,draft);
-                    translate([bottom_cover_division[4] - 2* hull_wall_thickness, - hull_y_size - main_tube_outer_diameter/2, - hull_z_size/2])
-                        cube([4*hull_wall_thickness, hull_y_size, hull_z_size]);
-                }
-
-                intersection(){
-                        hollowing_skeleton(hull_wall_thickness,draft);
-                    translate([bottom_cover_division[3] - 2* hull_wall_thickness, - hull_y_size - main_tube_outer_diameter/2, - hull_z_size/2])
-                        cube([4*hull_wall_thickness, hull_y_size, hull_z_size]);
-                }
-            }   
 
             //zámky přidané    
             union(){
@@ -539,11 +528,12 @@ module 666_1029_E(draft){
 
 /*
 666_1029_A(draft);
-*/
 
-//666_1029_B(draft);
-/*
+
+666_1029_B(draft);
+
 666_1029_C(draft);
+
 
 666_1029_D(draft);
 
