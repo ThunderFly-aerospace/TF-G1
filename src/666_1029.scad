@@ -370,20 +370,34 @@ module 666_1029(draft){
         }
 
         //vyztužení otvorů pro podvozkové nohy - určeno k odstranění
-            //přední
-            translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 + hull_wall_thickness/2 -0.3])
-                            cube([main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
-            translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter, hull_z_size/2 -  hull_wall_thickness/2 - 0.3])
-                            cube([main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+        //přední
+        translate([0,0,0.3])
+            intersection(){
+                translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter,- hull_z_size/2])
+                        cube ([main_tube_outer_diameter, main_tube_outer_diameter, 0.6]);
+                drop_skin(hull_wall_thickness, draft);
+            }
+        translate([0,0,-0.3])
+            intersection(){       
+                translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter, hull_z_size/2 - hull_wall_thickness/2])
+                        cube ([main_tube_outer_diameter, main_tube_outer_diameter, 0.6]);
+                drop_skin(hull_wall_thickness, draft);
+            }
 
-            //zadní
-            translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness -global_clearance, - thickness_between_tubes - main_tube_outer_diameter, - hull_z_size/2 + thickness_between_tubes*4 +  hull_wall_thickness/2 + 0.6 ])
-                    rotate([-10,-15,0])
-                    cube([main_tube_outer_diameter + global_clearance*2, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+        //zadní
+        translate([0,0,0.3])
+            intersection(){      
+                translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness, - main_tube_outer_diameter, - hull_z_size/2 + 5])
+                    cube ([main_tube_outer_diameter, main_tube_outer_diameter, 20]);
+                drop_skin(hull_wall_thickness, draft);
+            }
 
-            translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness -global_clearance, - thickness_between_tubes - main_tube_outer_diameter, + hull_z_size/2 - thickness_between_tubes*4 -  2*hull_wall_thickness - 0.6 ])
-                    rotate([10,15,0])
-                    cube([main_tube_outer_diameter + global_clearance*2, main_tube_outer_diameter + thickness_between_tubes, 0.6]);
+        translate([0,0,-0.3])
+            intersection(){
+                translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness, - main_tube_outer_diameter,  hull_z_size/2 - 20])
+                    cube ([main_tube_outer_diameter, main_tube_outer_diameter,20]);
+                drop_skin(hull_wall_thickness, draft);
+            }
 
 //final union
     }
