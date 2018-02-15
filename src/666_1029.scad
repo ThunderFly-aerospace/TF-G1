@@ -203,6 +203,9 @@ module 666_1029(draft){
                         }   
 
                         //čtverce pro slepení dílů - rantly
+                        translate([bottom_cover_division[1] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
                         translate([bottom_cover_division[3], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
@@ -412,23 +415,11 @@ module 666_1029(draft){
 
 module 666_1029_A(draft){
     union(){
-    difference(){
         intersection(){
                 666_1029(draft);
             translate([0, - hull_y_size, -hull_z_size/2])
                 cube([bottom_cover_division[1] - bottom_cover_division[0], hull_y_size, hull_z_size]);
         }
-            translate([ribbon_width,0,0])
-                hollowing_skeleton(ribbon_width, draft);
-                
-        //pro odstranění zbytku rantlu od protichůdného dílu pro tisk    
-        intersection(){
-                hollowing_skeleton(hull_wall_thickness,draft);
-            translate([bottom_cover_division[1] - 2* hull_wall_thickness, - hull_y_size - main_tube_outer_diameter/2, - hull_z_size/2])
-                cube([4*hull_wall_thickness, hull_y_size, hull_z_size]);
-        }
-
-    }
     }
 }
 
