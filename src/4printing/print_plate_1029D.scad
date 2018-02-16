@@ -3,8 +3,9 @@ use <../666_1029.scad>
 
 draft = false;
 
-rotate([0,90,0])
-    666_1029_D(draft);
+translate([0,30,-bottom_cover_division[4]])
+    rotate([0,-90,0])
+        666_1029_D(draft);
 
 
 
