@@ -17,6 +17,9 @@ second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diamete
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
 thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
 
+coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
+thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
+
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;
