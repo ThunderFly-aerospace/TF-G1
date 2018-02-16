@@ -41,7 +41,7 @@ mirror([1,0,0])
 
     // middle cut
     translate ([-0.1,-depth/2 - global_clearance/2,- global_clearance/2])
-        %cube ([0.2,depth + global_clearance,height + global_clearance]);
+        cube ([0.2,depth + global_clearance,height + global_clearance]);
 
     //screw
     translate([-width/2,-(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),tube_for_undercarriage_outer_diameter/2+coupling_wall_thickness_undercarriage])
