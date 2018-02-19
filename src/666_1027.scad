@@ -507,36 +507,36 @@ module 666_1027(draft){
 
 
         //šrouby pro připevnění akumulátorů
-        translate([move_of_accumulator - accumulator_holder_thickness/2 - width_cube/2,-50,height_of_accumulator])
+        translate([move_of_accumulator -accumulator_holder_width/2 - accumulator_holder_thickness/2,-50,height_of_accumulator])
             rotate([270,0,0])
                 cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + width_cube/2-1,-50,height_of_accumulator])
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + accumulator_holder_thickness-1,-50,height_of_accumulator])
             rotate([270,0,0])
                 cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             
-        translate([move_of_accumulator - accumulator_holder_thickness/2 - width_cube/2,-50,-height_of_accumulator])
+        translate([move_of_accumulator - accumulator_holder_thickness/2 - accumulator_holder_thickness + 1,-50,-height_of_accumulator])
             rotate([270,0,0])
                 cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + width_cube/2-1,-50,-height_of_accumulator])
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + accumulator_holder_thickness -1,-50,-height_of_accumulator])
             rotate([270,0,0])
                 cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         //matka
-        translate([move_of_accumulator - accumulator_holder_thickness/2 - width_cube/2,-main_tube_outer_diameter/4,height_of_accumulator])
+        translate([move_of_accumulator - accumulator_holder_thickness/2 - accumulator_holder_thickness/2 - Nut_diameter_M3/2 - 0.5,-main_tube_outer_diameter/4,height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
     
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + width_cube/2-1,-main_tube_outer_diameter/4,height_of_accumulator])
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + accumulator_holder_thickness/2 + Nut_diameter_M3/2 + 0.5,-main_tube_outer_diameter/4,height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
 
-        translate([move_of_accumulator - accumulator_holder_thickness/2 - width_cube/2,-main_tube_outer_diameter/4,-height_of_accumulator])
+        translate([move_of_accumulator - accumulator_holder_thickness/2 - accumulator_holder_thickness/2 - Nut_diameter_M3/2 - 0.5,-main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
     
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + width_cube/2-1,-main_tube_outer_diameter/4,-height_of_accumulator])
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_thickness/2 + accumulator_holder_thickness/2 + Nut_diameter_M3/2 + 0.5, - main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
 
@@ -696,8 +696,8 @@ difference(){
 //fianl part module
 }
 
-//666_1027(draft);
-
+666_1027(draft);
+/*
     666_1027_part(1,draft);
 
 translate([20,0,0])
@@ -708,11 +708,20 @@ translate([40,0,0])
 
 translate([60,0,0])
     666_1027_part(4,draft);
-
+*/
 
 //666_1025();
 //666_1029();
 
+/*
+//jen znázornění držáku akumulátoru
+translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thickness,height_of_accumulator])
+    rotate([-90,0,0])
+        888_1001();
+translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thickness,-height_of_accumulator])
+    rotate([-90,0,0])
+        888_1001();
+*/
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
@@ -723,3 +732,4 @@ use <888_1001.scad>
 use <666_1025.scad>
 use <666_1029.scad>
 use <888_1000.scad>
+use <888_1001.scad>
