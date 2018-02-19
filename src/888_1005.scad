@@ -32,6 +32,11 @@ translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diamete
 	rotate([-90,0,0])
 			666_1026(draft);
 
+//držák akumulátor
+        translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thickness,height_of_accumulator])
+	rotate([-90,0,0])
+		888_1001();
+
 //hlavní trubky
 
 		//nejdelší
@@ -65,6 +70,7 @@ use <666_1027.scad>
 use <666_1029.scad>
 use <666_1025.scad>
 use <666_1032.scad>
+use <888_1001.scad>
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
