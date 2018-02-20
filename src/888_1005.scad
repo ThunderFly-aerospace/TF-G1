@@ -15,15 +15,14 @@ $fa = 10;
 
 		666_1027(draft);
 
-translate([-hull_wall_thickness,0,0])
+translate([0,0,0])
 		666_1029(draft);
 
 	rotate([90,0,90])
 		666_1026(draft);
-/*
-translate([-hull_wall_thickness,0,0])
+
 		666_1025(draft);
-*/
+
 translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	rotate([-90,0,0])
 		666_1032(draft);
