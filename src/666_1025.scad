@@ -401,7 +401,7 @@ module 666_1025_part(part_number, draft){
 
 
 
-
+/*
 666_1025_part(1, draft);
 
 translate([10,0,0])
@@ -417,8 +417,8 @@ translate([40,0,0])
 666_1025_part(5, draft);
 
 
-
-//666_1025(draft);
+*/
+666_1025(draft);
 
 
 use <888_1000.scad>
