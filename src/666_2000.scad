@@ -11,12 +11,12 @@ use <666_1027.scad>
 use <666_1018.scad>
 
 include <../Parameters.scad>
-
+/*
 // Nastavení zobrazení
 $vpr = [73, 0, 12];
 $vpt = [442, 80, -15];
 $vpd = 1580;
-
+*/
 draft = true;
 
 translate([0,0,0])
@@ -26,7 +26,7 @@ translate([0,0,0])
 translate([170+68,0,70-main_tube_outer_diameter/5 - main_tube_outer_diameter/2])
 	rotate ([0,180,90])
 		666_1017(draft);
-
+/*
 translate([main_tube_outer_diameter*2,0,0])
 	rotate ([90,0,90])
 		666_1004(draft);
@@ -34,7 +34,15 @@ translate([main_tube_outer_diameter*2,0,0])
 translate([398,0,0])
 	rotate ([90,0,90])
 
-		%666_1004(draft);
+		666_1004(draft);
+*/
+			       translate([main_tube_outer_diameter*2,0,0])
+		rotate([90,0,90])
+			666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
+	
+	translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness,0,0])
+		rotate([90,0,90])
+			666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
 
 translate([170+68,0,195-main_tube_outer_diameter*2+Help_main_tube_outer/2])
 		666_1026(draft);
