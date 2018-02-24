@@ -5,7 +5,7 @@ $fa = 10;
 
 
 
-module 666_1014(){
+module 666_1014(draft){
 
 width = tube_for_undercarriage_outer_diameter+2*coupling_wall_thickness_undercarriage;
 depth = tube_for_undercarriage_outer_diameter+M3_screw_diameter+2*coupling_wall_thickness_undercarriage+thickness_between_tubes_undercarriage;
@@ -73,7 +73,7 @@ mirror([1,0,0])
     }
 }
 
-666_1014();
+666_1014(draft);
 
 
 include <../Parameters.scad>
