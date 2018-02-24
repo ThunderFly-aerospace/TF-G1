@@ -11,7 +11,7 @@ intersection(){
 			cylinder(h = 10, r = (83.8 - global_clearance)/2, $fn = draft ? 50:100);
 		//vnější průměr domku
 		translate([0,0,- global_clearance/2])
-			cylinder(h = 10 + global_clearance, r = (40 + global_clearance)/2, $fn =  draft ? 50 :100);
+			cylinder(h = 10 + global_clearance, r = 40/2 + global_clearance, $fn =  draft ? 50 :100);
 		//otvory na gumy
 		translate([25,- 31/2, - global_clearance/2])
 			cube([11,31,49]);
