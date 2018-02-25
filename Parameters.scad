@@ -54,7 +54,7 @@ hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
 cover_pilon_position = 180;
-height_of_vertical_tube = 195;
+height_of_vertical_tube = 275; //278mm je změřená délka trubky. 
 
 ribbon_width = 5; // šířka vyztužovacích lemů. 
 
