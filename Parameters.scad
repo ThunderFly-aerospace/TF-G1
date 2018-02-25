@@ -72,6 +72,9 @@ bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 //Base Divison - dělení podložky
 base_division = [0,140,280,410, hull_x_size];
 
+//Cover pilon division - na výšku (v ose Z)
+cover_pilon_division = [0,140,height_of_vertical_tube + main_tube_outer_diameter + coupling_wall_thickness];
+
 //šířka zámků
 lock_width = 10;
 
