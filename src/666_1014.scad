@@ -23,18 +23,18 @@ difference(){
     //bevelled edge
     translate([width/2+sqrt(2)*coupling_wall_thickness_undercarriage,0,- global_clearance/2])
         rotate([0,0,45])
-           cube([width,width,height + global_clearance]);
+           cube([width,width,height+ global_clearance]);
 
 mirror([1,0,0])
     translate([width/2+sqrt(2)*coupling_wall_thickness_undercarriage,0,- global_clearance/2])
         rotate([0,0,45])
             cube([width,width,height + global_clearance]);
 
-    translate([-(width/2) - global_clearance/2,- depth + height/2-sqrt(2)*coupling_wall_thickness_undercarriage,-height+(sqrt(2)*coupling_wall_thickness_undercarriage)/2])
-        rotate([45,0,0])
+    translate([-(width/2) - global_clearance/2,- depth + height/2-sqrt(2)*coupling_wall_thickness_undercarriage,height/2])
+        rotate([-135,0,0])
             cube([width + global_clearance, height,height]);
    
-    translate([-(width/2) - global_clearance/2, -depth + height/2-sqrt(2)*coupling_wall_thickness_undercarriage,height/2])  
+   translate([-(width/2) - global_clearance/2, -depth + height/2-sqrt(2)*coupling_wall_thickness_undercarriage,height/2])  
         rotate([45,0,0])
             cube([width + global_clearance,height,height]);  
 
