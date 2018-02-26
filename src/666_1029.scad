@@ -401,14 +401,14 @@ module 666_1029_D(draft){
             
                     union(){
                        //čtverec pro zámek horní
-                        translate([bottom_cover_division[4]- 2*hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2])
-                                    cube([hull_wall_thickness*3, hull_y_size, lock_width]);
+                        translate([bottom_cover_division[4] - hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2])
+                                    cube([lock_length, hull_y_size, lock_width]);
                             //čtverec pro zámek Z+
-                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness, main_tube_outer_diameter ])
-                                    cube([hull_wall_thickness*3, lock_width, hull_z_size]);
+                            translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness, main_tube_outer_diameter ])
+                                    cube([lock_length, lock_width, hull_z_size]);
                             //čtverec pro zámek Z-
-                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness, - hull_z_size - main_tube_outer_diameter])
-                                    cube([hull_wall_thickness*3, lock_width, hull_z_size]);
+                            translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness, - hull_z_size - main_tube_outer_diameter])
+                                   cube([lock_length, lock_width, hull_z_size]);
                         //union
                         }   
                     //intersection
@@ -435,14 +435,14 @@ module 666_1029_E(draft){
                     
                         union(){
                        //čtverec pro zámek horní
-                        translate([bottom_cover_division[4]- 2*hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2 - global_clearance/2])
-                                    cube([hull_wall_thickness*3, hull_y_size, lock_width + global_clearance]);
+                        translate([bottom_cover_division[4] - hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2 - global_clearance/2])
+                                    cube([lock_length, hull_y_size, lock_width + global_clearance]);
                             //čtverec pro zámek Z+
-                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3* hull_wall_thickness - global_clearance/2, main_tube_outer_diameter ])
-                                    cube([hull_wall_thickness*3, lock_width + global_clearance, hull_z_size]);
+                            translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3* hull_wall_thickness - global_clearance/2, main_tube_outer_diameter ])
+                                    cube([lock_length, lock_width + global_clearance, hull_z_size]);
                             //čtverec pro zámek Z-
-                            translate([bottom_cover_division[4] - 2*hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness - global_clearance/2, - hull_z_size - main_tube_outer_diameter])
-                                    cube([hull_wall_thickness*3, lock_width + global_clearance, hull_z_size]);
+                            translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness - global_clearance/2, - hull_z_size - main_tube_outer_diameter])
+                                   cube([lock_length, lock_width + global_clearance, hull_z_size]);
                         //union
                         }   
                     //intersection

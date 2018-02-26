@@ -78,6 +78,9 @@ cover_pilon_division = [0,140,height_of_vertical_tube + main_tube_outer_diameter
 //šířka zámků
 lock_width = 10;
 
+//délka zámků
+lock_length = 3;
+
 
 //accumulator
 //základní rozměry akumulátoru
