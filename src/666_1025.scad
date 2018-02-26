@@ -105,6 +105,8 @@ union(){
                        cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             //část E
+
+
                 translate([(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20,main_tube_outer_diameter/4,-15])
                     rotate([0,90+beta,0])
                         cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
