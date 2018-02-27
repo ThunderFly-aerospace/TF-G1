@@ -19,10 +19,10 @@ module 666_1032(draft){
         union(){
 
             difference(){
-            	airfoil(naca = airfoil_thickness, L = 170, N = draft ? 50 : 100, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + coupling_wall_thickness, open = false);
+            	airfoil(naca = airfoil_thickness, L = 170, N = draft ? 50 : 100, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes, open = false);
             	translate ([hull_wall_thickness,0,45])
-                    resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,height_of_vertical_tube + main_tube_outer_diameter/2 + 4*global_clearance + coupling_wall_thickness], auto=true) 
-                        airfoil(naca = airfoil_thickness, L = 170, N = draft ? 50 : 100, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + coupling_wall_thickness, open = false);
+                    resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,height_of_vertical_tube + main_tube_outer_diameter/2 + 4*global_clearance + thickness_between_tubes], auto=true) 
+                        airfoil(naca = airfoil_thickness, L = 170, N = draft ? 50 : 100, h = 10, open = false);
             }
             //lem spodní a horní díl
             intersection(){
@@ -41,8 +41,10 @@ module 666_1032(draft){
     	translate ([120,- hull_wall_thickness/2,- 2*global_clearance])
     	   cube ([60,hull_wall_thickness,height_of_vertical_tube + 4*global_clearance]);
 
-    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2,-depth/2 - global_clearance,height_of_vertical_tube - main_tube_outer_diameter*2 - global_clearance/2 + coupling_wall_thickness + main_tube_outer_diameter/2])
-    	   cube ([width*5,depth + 2*global_clearance,height+global_clearance + main_tube_outer_diameter]);
+      // výřez pro rotorovou hlavu
+    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2, -depth/2 - global_clearance, height_of_vertical_tube - main_tube_outer_diameter*2 - 2*global_clearance + main_tube_outer_diameter/2 + thickness_between_tubes])
+            cube ([width*5,depth + 2*global_clearance, height + global_clearance + main_tube_outer_diameter]);
+
 
         // hull shell from 666_1025.scad
         translate ([ - cover_pilon_position,0,0])

@@ -28,7 +28,7 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	rotate([-90,0,0])
 		666_1032(draft);
 
-translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2 + coupling_wall_thickness,0])
+translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2 + thickness_between_tubes,0])
 	rotate([-90,0,0])
 			666_1026(draft);
 
@@ -50,21 +50,21 @@ translate([main_pilon_position,70 - coupling_wall_thickness - main_tube_outer_di
 
 
 		//kolmá na nejdelší
-		translate ([main_pilon_position,main_tube_outer_diameter/2 + coupling_wall_thickness,0])
+		translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes,0])
 			rotate([-90,0,0])
-				cylinder (h = height_of_vertical_tube, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
+				cylinder (h = height_of_vertical_tube, r = Help_main_tube_outer/2, $fn = 200);
 
 	
 		//kolmá na nejdelší - pro podvozek
 			//přední
 
 			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,-150])
-				cylinder (h = 300, r = Help_main_tube_outer/2,$fn = 200);
+				cylinder (h = 300, r = Help_main_tube_outer/2, $fn = 200);
 
 			//zadní
 
 		translate([second_undercarriage_hole - coupling_wall_thickness,- Help_main_tube_outer - thickness_between_tubes, -150])
-				cylinder (h = 300, r1 = Help_main_tube_outer/2, r2 = Help_main_tube_outer/2, $fn = 200);
+				cylinder (h = 300, r = Help_main_tube_outer/2, $fn = 200);
 
 }
 
