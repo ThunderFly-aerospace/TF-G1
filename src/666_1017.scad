@@ -25,7 +25,7 @@ difference () {
             cylinder(h = depth + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
     //vertical tube
-    translate ([0,0, - coupling_wall_thickness])
+    translate ([0,0, - thickness_between_tubes])
         cylinder(h = height - coupling_wall_thickness - main_tube_outer_diameter,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
    			
