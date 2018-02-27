@@ -41,7 +41,7 @@ module 666_1032(draft){
     	translate ([120,- hull_wall_thickness/2,- 2*global_clearance])
     	   cube ([60,hull_wall_thickness,height_of_vertical_tube + 4*global_clearance]);
 
-    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2,-depth/2 - global_clearance,height_of_vertical_tube - main_tube_outer_diameter*2 - global_clearance/2 + main_tube_outer_diameter/2 + coupling_wall_thickness])
+    	translate ([main_tube_outer_diameter + coupling_wall_thickness*2,-depth/2 - global_clearance,height_of_vertical_tube - main_tube_outer_diameter*2 - global_clearance/2 + coupling_wall_thickness + main_tube_outer_diameter/2])
     	   cube ([width*5,depth + 2*global_clearance,height+global_clearance + main_tube_outer_diameter]);
 
         // hull shell from 666_1025.scad
