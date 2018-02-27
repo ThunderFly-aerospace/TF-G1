@@ -54,7 +54,7 @@ hull_scale_z = 1.5;
 
 main_pilon_position = 170+68;
 cover_pilon_position = 180;
-height_of_vertical_tube = 195;
+height_of_vertical_tube = 275; //278mm je změřená délka trubky. 
 
 ribbon_width = 5; // šířka vyztužovacích lemů. 
 
@@ -65,15 +65,15 @@ width_of_engine_holder = 63;
 top_cover_division = [0, 50, 150, 280, 410, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
 
 //Bottom Cover Division - dělení dolního krytu pro tisk
-//bottom_cover_division = [0,100,250,365, 470, hull_x_size];
+bottom_cover_division = [0,100,250,365, 470, hull_x_size];
 // zkrácená část pro payload pro testovací tisk
-bottom_cover_division = [0,200,250,365, 470, hull_x_size];
+//bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
 //Base Divison - dělení podložky
 base_division = [0,140,280,410, hull_x_size];
 
 //Cover pilon division - na výšku (v ose Z)
-cover_pilon_division = [0,140,height_of_vertical_tube + main_tube_outer_diameter + coupling_wall_thickness];
+cover_pilon_division = [0,170,height_of_vertical_tube + main_tube_outer_diameter + coupling_wall_thickness];
 
 //pozice šroubů
 //horní kryt
