@@ -20,12 +20,12 @@ difference () {
         cube ([8,depth + global_clearance,height + global_clearance]);
 
 	//main tube
-	translate([0,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance/2, height- main_tube_outer_diameter/2 - coupling_wall_thickness])   
+	translate([0,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance/2, height - main_tube_outer_diameter/2 - coupling_wall_thickness])   
         rotate([90,0,0])
             cylinder(h = depth + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
     //vertical tube
-    translate ([0,0, - global_clearance*2])
+    translate ([0,0, - coupling_wall_thickness])
         cylinder(h = height - coupling_wall_thickness - main_tube_outer_diameter,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
    			
