@@ -41,9 +41,10 @@ module 666_1032(draft){
     	translate ([120,- hull_wall_thickness/2,- 2*global_clearance])
     	   cube ([60,hull_wall_thickness,height_of_vertical_tube + 4*global_clearance]);
 
-        // výřez pro rotorovou hlavu
+      // výřez pro rotorovou hlavu
     	translate ([main_tube_outer_diameter + coupling_wall_thickness*2, -depth/2 - global_clearance, height_of_vertical_tube - main_tube_outer_diameter*2 - 2*global_clearance + main_tube_outer_diameter/2 + thickness_between_tubes])
             cube ([width*5,depth + 2*global_clearance, height + global_clearance + main_tube_outer_diameter]);
+
 
         // hull shell from 666_1025.scad
         translate ([ - cover_pilon_position,0,0])
