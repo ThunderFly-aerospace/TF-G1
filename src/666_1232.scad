@@ -1,9 +1,4 @@
-use <./lib/naca4.scad>
-include <../Parameters.scad>
-
-
-
-module 666_1204(){
+module 666_1232(){
 
 thickness = 12; 
 	difference(){
@@ -36,4 +31,7 @@ thickness = 12;
 
 	}
 }
-666_1204();
+666_1232();
+
+use <./lib/naca4.scad>
+include <../Parameters.scad>
