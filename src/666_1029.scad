@@ -37,10 +37,12 @@ module 666_1029(draft){
         
         //holes for undercarriage
             translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 - 20])
-                union(){    
+                %union(){    
                     translate([main_tube_outer_diameter/2,0,0])
                             cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                             cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
+                translate([0,main_tube_outer_diameter,0])
+                %cube([15,4*hull_wall_thickness,15]);
                 }
             
             translate([second_undercarriage_hole,-thickness_between_tubes- main_tube_outer_diameter,-hull_z_size/2 - 20])
@@ -79,20 +81,20 @@ module 666_1029(draft){
         
         //D
             union(){
-            translate([+ bottom_screw_position[3],-main_tube_outer_diameter/4,+52])
+            translate([+ bottom_screw_position[3],-main_tube_outer_diameter/4,+49])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([bottom_screw_position[4],-main_tube_outer_diameter/4,+38])
+            translate([bottom_screw_position[4],-main_tube_outer_diameter/4,+35])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             }
 
         mirror([0,0,1])
             union(){
-            translate([bottom_screw_position[3],-main_tube_outer_diameter/4,+52])
+            translate([bottom_screw_position[3],-main_tube_outer_diameter/4,+49])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            translate([bottom_screw_position[4],-main_tube_outer_diameter/4,+38])
+            translate([bottom_screw_position[4],-main_tube_outer_diameter/4,+35])
                 rotate([0,90-beta,0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             }
