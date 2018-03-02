@@ -85,7 +85,7 @@ union(){
 
 
             //část B
-                translate([top_screw_position[2], main_tube_outer_diameter/4,-hull_z_size/2-25])
+                translate([top_screw_position[2], main_tube_outer_diameter/4,-hull_z_size/2-20])
                         cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             
