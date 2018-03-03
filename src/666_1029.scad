@@ -78,7 +78,6 @@ module 666_1029(draft){
                     translate([-15 - sqrt(15) - 15/2 + second_undercarriage_hole + sqrt(15),- thickness_between_tubes + 2*hull_wall_thickness,sqrt(15) + ribbon_width - hull_z_size/2 + 15 - ribbon_width])
                         rotate([0,45,0])
                             cube([15,2*hull_wall_thickness,15]);
-      
             }
 
             //hollow front
