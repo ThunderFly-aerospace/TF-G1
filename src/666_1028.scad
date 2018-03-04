@@ -1,9 +1,13 @@
-use <./lib/naca4.scad>
-include <../Parameters.scad>
+
 
 draft = true;
 
 module 666_1028(){
+
+	    beta = 90 - trailing_edge_angle(naca = 0.005); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
+
     //BASIC DROP
     //render(convexity = 2) 
     difference (){
@@ -25,6 +29,11 @@ module 666_1028(){
 	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
 	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
 	                    airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+				translate([0,-10,-0.5 + hull_wall_thickness])
+					rotate([0,-90,160])
+						resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((95-hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,152 - hull_wall_thickness], auto=true) 
+                        	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+
 				translate ([140,-68,0]) 
 	            	cube ([15,15,15]);
 			
@@ -49,11 +58,36 @@ module 666_1028(){
             translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
                 rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                     airfoil(naca = 0005, L =95, N = draft ? 50 : 100, h = 152, open = false);
+                translate([0,10,-0.5 + hull_wall_thickness ])
+                    rotate([0,-90,-160])
+                  
+                //výztuhy
+                  difference(){
+                 		resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((95-hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,152 - hull_wall_thickness], auto=true) 
+                        	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+                    translate([-10,0,20])
+                   		rotate([0,0,-80])
+                    		for (i = [0:9]) { // opakovani cyklu
+                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                            		translate([0, i * 11,-15])  //sude prorezy
+                                		cube([30, hull_wall_thickness, 152]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        		}
+                        		else{
+                            		translate([0, i * 11, -15]) // liche prorezy
+                                		cube([30, hull_wall_thickness, 152]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                        		}
+        
+       	            }
+
+
+            }
+              
 
 			translate ([140,55,0]) 
             	cube ([15,15,15]);
 
             	//LOWER - fenestrating windows
+            	/*
                 translate([0,20,35])
                     rotate([0,0,-70])	
                     for (i = [0:7]) { // opakovani cyklu
@@ -67,26 +101,21 @@ module 666_1028(){
                         }
         
        	            }
+       	            */
        }
         //VERTICAL
             difference (){
                 translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                         airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false);
+                //dutý profil
+                translate([140,75 - hull_wall_thickness/2,-0.5 + hull_wall_thickness])
+                    rotate([90,-87,0])
+                    	resize([150 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((150-2*hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,150 - hull_wall_thickness], auto=true) 
+                        	airfoil(naca = 0005, L = 150 , N = draft ? 50 : 100, h = 150 , open = false);
 
 
-                //VERTICAL - fenestrating windows
-                translate([130,-72,40])
-                  for (i = [1:7]) { // opakovani cyklu
-                    if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                        translate([0, i * 18, 30])  //sude prorezy
-                            cube([30, 0.1, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
-                    else{
-                        translate([0, i * 18, -20]) // liche prorezy
-                            cube([30, 0.1, 50]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                    }
-                }
+              
             }
 
 	    } // end of union
@@ -226,7 +255,8 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
 
 
 
-
+use <./lib/naca4.scad>
+include <../Parameters.scad>
 
 
 
