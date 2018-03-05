@@ -271,7 +271,7 @@ module 666_1027(draft){
                     union(){
                         cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                     translate([- Nut_diameter_M3/2,0,30])        
-                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
+                        %cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3 + 1]);
                     translate([0,0,30])        
                         cylinder(h = Nut_height_M3 + 1, r = Nut_diameter_M3/2, $fn=6);
                     }            
