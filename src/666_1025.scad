@@ -55,6 +55,20 @@ union(){
             translate([hull_wall_thickness,0,0])
                     hollowing_skeleton(hull_wall_thickness, draft);
             }
+            
+            //lem
+                intersection(){
+                    difference(){
+                        translate([0,0,-hull_z_size/2])       
+                            cube([hull_x_size, hull_wall_thickness, hull_z_size]);
+                        //odebrání dna
+                        translate([ribbon_width/2,0,0])
+                            hollowing_skeleton(ribbon_width, draft);
+                    }       
+
+                //odstranění dna z vnější strany krytu
+                    drop(draft);
+              }
         }
 
             //engine holder 
@@ -93,6 +107,31 @@ union(){
                 translate([top_screw_position[3],main_tube_outer_diameter/4,-hull_z_size/2-25])
                         cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
+            //spojení částí C a D
+                translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter])
+                    rotate([0,99,0])
+                        union(){
+                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                            translate([0,0,22 - Nut_height_M3 - 5])    
+                                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                            translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3 - 0.5])
+                                    cube([20,Nut_diameter_M3, Nut_height_M3 + 1 ]);
+                            translate([0,0,-25])   
+                                    cylinder(h = 30, r = Nut_diameter_M3/2, $fn = 6);
+                        }
+
+            mirror([0,0,1])
+                translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter ])
+                    rotate([0,99,0])
+                        union(){
+                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                            translate([0,0,22 - Nut_height_M3 - 5])    
+                                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                            translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3 - 0.5])
+                                    cube([20,Nut_diameter_M3, Nut_height_M3 + 1]);
+                            translate([0,0,-25])   
+                                    cylinder(h = 30, r = Nut_diameter_M3/2, $fn = 6);
+                        }
 
             //část D
                 translate([top_screw_position[4],main_tube_outer_diameter/4,-55])
@@ -130,38 +169,6 @@ union(){
 
     //final difference
     }
-            //lem
-            union(){
-                intersection(){
-                    difference(){
-                        translate([0,0,-hull_z_size/2])       
-                            cube([hull_x_size, hull_wall_thickness, hull_z_size]);
-
-                    //for front part
-                        translate ([- global_clearance,-1 - main_tube_outer_diameter/2,- width_of_engine_holder/2])
-                            cube([top_cover_division[1] + global_clearance,hull_y_size+10,width_of_engine_holder]);
-
-                    //for tube in back
-                        translate ([hull_x_size-70,-6,0])
-                            cube([6*main_tube_outer_diameter, main_tube_outer_diameter, main_tube_outer_diameter], center = true);
-
-                        translate ([hull_x_size-65,-16,16.5])
-                            rotate([0,100,0])
-                                cube([hull_wall_thickness*5,30,30]);
-
-                        translate ([hull_x_size-65,-15,-12.5])
-                            rotate([0,80,0])
-                            cube([hull_wall_thickness*5,30,30]);
-
-                        //odebrání dna
-                        translate([ribbon_width/2,0,0])
-                            hollowing_skeleton(ribbon_width, draft);
-                    }       
-
-                //odstranění dna z vnější strany krytu
-                    drop(draft);
-              }
-           }
 
         intersection(){
             union(){
@@ -203,13 +210,22 @@ union(){
                                         text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
                         }
 
-                        //pro lepení - čtverec 
-                        translate([top_cover_division[3] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        //pro lepení - čtverec 
-                        translate([top_cover_division[3], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                        //pro lepení - čtverec
+                        difference(){
+                            union(){ 
+                                translate([top_cover_division[3] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
+                                        cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                                translate([top_cover_division[3], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
+                                        cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                            }
+                                translate([top_cover_division[3] - 10,main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter])
+                                    rotate([0,99,0])
+                                        cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20); 
+                                mirror([0,0,1])  
+                                translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter])
+                                    rotate([0,99,0])
+                                        cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20); 
+                        }
                         //pro lepení - čtverec 
                         translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
@@ -254,6 +270,54 @@ union(){
             drop(draft);
         }
 
+ //šrouby mezi díly 2 a 3
+    
+        intersection(){
+            translate([top_cover_division[3] - 10,main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness  - global_clearance])
+                difference(){
+                translate([-main_tube_outer_diameter*1.5,-5,-10])
+                        cube([main_tube_outer_diameter*2.5, 15,15]);
+                    translate([0,0,-M3_screw_diameter])
+                    rotate([0,99,0])
+                        union(){
+                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                            translate([0,0,22 - Nut_height_M3 - 5])    
+                                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                            translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3 - 0.5])
+                                    cube([20,Nut_diameter_M3, Nut_height_M3 + 1]);
+                            translate([0,0,-25])   
+                                    cylinder(h = 30, r = Nut_diameter_M3/2, $fn = 6);
+                        }
+                }
+            
+            drop(draft);
+
+        //intersection
+        }
+
+    mirror([0,0,1])
+        intersection(){
+            translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - global_clearance ])
+                difference(){
+                translate([-main_tube_outer_diameter*1.5,-5,-10])
+                        cube([main_tube_outer_diameter*2.5, 15,15]);
+                    translate([0,0,-M3_screw_diameter])
+                    rotate([0,99,0])
+                        union(){
+                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                            translate([0,0,22 - Nut_height_M3 - 5])    
+                                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                            translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3 - 0.5])
+                                    cube([20,Nut_diameter_M3, Nut_height_M3 + 1]);
+                            translate([0,0,-25])   
+                                    cylinder(h = 30, r = Nut_diameter_M3/2, $fn = 6);
+                        }
+                }
+            
+            drop(draft);
+
+        //intersection
+        }
 //final union   
 
 }
@@ -417,9 +481,9 @@ translate([30,0,0])
 
 translate([40,0,0])
 666_1025_part(5, draft);
-
-
 */
+
+
 666_1025(draft);
 
 
