@@ -56,6 +56,10 @@ main_pilon_position = 170+68;
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky. 
 
+//délka hlavní dlouhé trubky
+length_of_main_tube = 920;
+length_of_undercarriage_tube = 300;
+
 ribbon_width = 5; // šířka vyztužovacích lemů. 
 
 // šířka otvoru v přední části kapoty pro držák motoru.
