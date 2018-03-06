@@ -1,9 +1,9 @@
-/*
+
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-*/
+
 
 draft = true;
 
