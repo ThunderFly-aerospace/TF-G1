@@ -19,7 +19,7 @@ module part_base(){
 module part1(){
 	translate([25,15,20])
 		rotate([0,0,0])
-			cylinder(40,10,5,true,$fn=5);
+			cylinder(40,10,5,true,$fn=3);
 }
 
 module part2(){
