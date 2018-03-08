@@ -31,7 +31,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft = true)
     intersection(){
     resize([hull_drop_length - shell_thickness - trailing_wall* shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness], auto=true)
             rotate ([0,90,0])           
-            rotate_extrude($fn = draft ? 50 : 100)
+            rotate_extrude($fn = draft ? 50 : 200)
                 rotate([0,0,90])
                     difference()
                     {
@@ -59,7 +59,7 @@ module hollowing_skeleton_hem(ribbon_width, draft)
     intersection () {
     resize([hull_drop_length - ribbon_width - trailing_wall* ribbon_width, (hull_drop_length*hull_airfoil_thickness/100) - 2*ribbon_width, (hull_drop_length*hull_airfoil_thickness/100) - 2*ribbon_width], auto=true)
             rotate ([0,90,0])           
-            rotate_extrude($fn = draft ? 50 : 100)
+            rotate_extrude($fn = draft ? 50 : 200)
                 rotate([0,0,90])
                     difference()
                     {
