@@ -279,8 +279,8 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
     }
 }	
 
-
-/*translate ([75, 0, 62])
+/*
+translate ([75, 0, 62])
     rotate([0, 180, 0])
         666_1028_drillhelper();
 */
