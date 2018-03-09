@@ -50,7 +50,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft = true)
     }
 }
 
-module hollowing_skeleton_hem(ribbon_width, draft)
+/*module hollowing_skeleton_hem(ribbon_width, draft)
 {
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
@@ -76,7 +76,7 @@ module hollowing_skeleton_hem(ribbon_width, draft)
           }
                             
     }
-}
+}*/
 
 
 
@@ -90,7 +90,7 @@ module drop(draft = true)
 
 	intersection () {
     	rotate ([0,90,0])           
-        	rotate_extrude($fn = draft ? 50 : 100)
+        	rotate_extrude($fn = draft ? 50 : 200)
                     rotate([0,0,90])
                         difference()
                         {

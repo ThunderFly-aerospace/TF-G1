@@ -239,9 +239,15 @@ union(){
                                 translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])      
                                     cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                                translate([0,0,width_of_engine_holder/2])
-                                    rotate([-45,0,0])
+                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                                    rotate([-48,0,0])
                                         cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                                mirror([0,0,1])
+                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                                    rotate([-48,0,0])
+                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
                             }
                         //odečtení nápisu od podélné výztuhy
                         //nápis
