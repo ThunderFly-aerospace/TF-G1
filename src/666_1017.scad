@@ -114,7 +114,60 @@ difference () {
     }    
 }
 
-rotate([90,0,0])
+module 666_1017_drillhelper(height = 70 - coupling_wall_thickness + main_tube_outer_diameter/2, height_of_cap_cylinder = 2){
+
+width=main_tube_outer_diameter+4*thickness_between_tubes;
+depth=main_tube_outer_diameter*2;
+
+
+
+difference () {
+
+    translate([-(width/2),-(depth/2),0])
+       cube ([width,depth,height]);
+
+
+    //main tube
+    translate([0,main_tube_outer_diameter + coupling_wall_thickness + global_clearance/2, height - main_tube_outer_diameter/2 - main_tube_outer_diameter/2])   
+        rotate([90,0,0])
+            cylinder(h = main_tube_outer_diameter*3 + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+
+    //vertical tube
+    translate ([0,0, - thickness_between_tubes])
+        cylinder(h = height - main_tube_outer_diameter/2 - main_tube_outer_diameter,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+
+            
+
+    //screws
+    translate ([- width/2 - global_clearance/2,10 - M3_screw_diameter/2,height - main_tube_outer_diameter/2 - main_tube_outer_diameter/2])
+        rotate ([0,90,0])
+            cylinder (h = width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+    translate([- width/2 - global_clearance/2,- 10 + M3_screw_diameter/2,height - main_tube_outer_diameter/2 - main_tube_outer_diameter/2])
+        rotate([0,90,0])
+            cylinder(h = width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+    translate([- width/2 - global_clearance/2,0,27.5])
+        rotate([0,90,0])
+            cylinder(h = width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+    translate([- width/2 - global_clearance/2,0,7.5])
+        rotate([0,90,0])
+            cylinder(h = width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+
+
+    }
+
+}
+
+
+
+
+
+//rotate([90,0,0])
     666_1017(draft);
+
+translate([70,0,0])
+666_1017_drillhelper();
 
 include <../Parameters.scad>
