@@ -224,8 +224,7 @@ module 666_1028(){
 module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
 {
     radius=main_tube_outer_diameter/2;
-    wall_thickness=main_tube_outer_diameter/10;
-    width=main_tube_outer_diameter+2*wall_thickness;    
+    width=main_tube_outer_diameter+2*thickness_between_tubes;    
     depth=main_tube_outer_diameter*2;
     //height=depth;
 
@@ -278,11 +277,11 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
     }
 }	
 
-/*
+
 translate ([75, 0, 62])
     rotate([0, 180, 0])
         666_1028_drillhelper();
-*/
+
 
 666_1028();
 
