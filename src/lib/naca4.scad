@@ -31,6 +31,34 @@ module airfoil(naca=12, L = 100, N = 81, h = 1, open = false)
   polygon(points = airfoil_data(naca, L, N, open)); 
 }
 
+module hollow_airfoil(lnaca=12, L = 100, N = 81, h = 1, open = false, wall_thickness = 1)
+{
+    if (open){
+        linear_extrude(height = h)
+            difference(){
+                polygon(points = airfoil_data(naca, L, N, open));
+                offset(delta = - wall_thickness) polygon(points = airfoil_data(naca, L, N, open = false));
+            }
+    }
+    else{
+
+        linear_extrude(height = wall_thickness)
+            polygon(points = airfoil_data(naca, L, N, false)); 
+
+        linear_extrude(height = h)
+            difference(){
+                polygon(points = airfoil_data(naca, L, N, open));
+                offset(delta = - wall_thickness) polygon(points = airfoil_data(naca, L, N, open = false));
+            }
+
+        translate([0,0, h - wall_thickness])
+            linear_extrude(height = wall_thickness)
+                polygon(points = airfoil_data(naca, L, N, false)); 
+
+    }
+}
+
+
 // this is the main function providing the airfoil data
 function airfoil_data(naca=12, L = 100, N = 81, open = false) = 
   let(Na = len(naca)!=3?NACA(naca):naca)
