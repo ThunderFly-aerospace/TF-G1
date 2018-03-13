@@ -13,7 +13,7 @@ global_clearance = 0.5;
 
 second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
 
-// Parameters of cube couplings
+// Parameters of tube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
 thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
 
@@ -69,21 +69,21 @@ width_of_engine_holder = 63;
 top_cover_division = [0, 50, 150, 280, 410, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
 
 //Bottom Cover Division - dělení dolního krytu pro tisk
-bottom_cover_division = [0,100,250,365, 470, hull_x_size];
+bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
 // zkrácená část pro payload pro testovací tisk
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
 //Base Divison - dělení podložky
-base_division = [0,140,280,410, hull_x_size];
+base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter,second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness + main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_x_size];
 
 //Cover pilon division - na výšku (v ose Z)
 cover_pilon_division = [0,170,height_of_vertical_tube + main_tube_outer_diameter + coupling_wall_thickness];
 
 //pozice šroubů
 	//horní kryt
-top_screw_position = [0, (top_cover_division[0] + top_cover_division[1])/4, (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], (top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],(top_cover_division[4] - top_cover_division[3])/2 + top_cover_division[3],(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20];
+top_screw_position = [0, (top_cover_division[0] + top_cover_division[1])/4, (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], (top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],(top_cover_division[4] - top_cover_division[3])/8 + top_cover_division[3],(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20];
 	//spodní kryt
-bottom_screw_position = [0,(bottom_cover_division[0] + bottom_cover_division[1])/15 + 5, bottom_cover_division[1]/1.1, + bottom_cover_division[3], bottom_cover_division[3] + bottom_cover_division[1]/2, bottom_cover_division[4] - 6*global_clearance, bottom_cover_division[4] + bottom_cover_division[1]/2.5];
+bottom_screw_position = [0,(bottom_cover_division[0] + bottom_cover_division[1])/15 + 5, bottom_cover_division[1]/1.1, + bottom_cover_division[3], bottom_cover_division[3] + bottom_cover_division[1]/1.5];
 
 
 

@@ -4,9 +4,8 @@ draft = true;
 
 module 666_1028(){
 
-	    beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
+	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
-    echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
 
     //BASIC DROP
     //render(convexity = 2) 
@@ -29,43 +28,44 @@ module 666_1028(){
 	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
 	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
 	                    airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
-				translate([0,-10,-0.5 + hull_wall_thickness])
+
+				translate([0,-10,-0.5 + 3*hull_wall_thickness])
 					rotate([0,-90,160])
+        				//výztuhy
+        				difference(){
+        					resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(95*0005/100) - 2*hull_wall_thickness, 152 - hull_wall_thickness], auto=true) 
+                          //      resize([hull_drop_length - shell_thickness - trailing_wall*     , (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness], auto=true)
 
-					//výztuhy
-					difference(){
-						resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((95-hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,152 - hull_wall_thickness], auto=true) 
-                        	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
-					translate([-50,0,90])
-                		rotate([135,0,80])	
-                    		for (i = [0:13]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11, -15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 150]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-       	            		}
+                            	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+        				translate([-50,0,90])
+                    		rotate([135,0,80])	
+                        		for (i = [0:13]) { // opakovani cyklu
+                            		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                                		translate([0, i * 11, -15])  //sude prorezy
+                                    		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                            		else{
+                                		translate([0, i * 11, -15]) // liche prorezy
+                                    		cube([30, hull_wall_thickness, 150]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+           	            		}
 
-       	            translate([50,-15,-10])
-                		rotate([45,0,80])	
-                    		for (i = [0:13]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11, -15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 150]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-       	            		}
-					}
+           	            translate([50,-15,-10])
+                    		rotate([45,0,80])	
+                        		for (i = [0:13]) { // opakovani cyklu
+                            		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                                		translate([0, i * 11, -15])  //sude prorezy
+                                    		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                            		else{
+                                		translate([0, i * 11, -15]) // liche prorezy
+                                    		cube([30, hull_wall_thickness, 150]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+           	            		}
+        				}
 
 				translate ([140,-68,0]) 
-	            	cube ([15,15,15]);
-			
+	            	cube ([15,15,15]);			
 			}	        
 
 
@@ -74,39 +74,39 @@ module 666_1028(){
             	translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
                 	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                     	airfoil(naca = 0005, L =95, N = draft ? 50 : 100, h = 152, open = false);
-                translate([0,10,-0.5 + hull_wall_thickness ])
-                    rotate([0,-90,-160])
-                  
-                //výztuhy
-                  	difference(){
-                 		resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((95-hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,152 - hull_wall_thickness], auto=true) 
-                        	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
-                    translate([150,30,80])
-                   		rotate([135,0,-80])
-                    		for (i = [0:13]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11,-15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 95]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-		       	            }
+    
+                translate([0,10,-0.5 + 3 * hull_wall_thickness ])
+                    rotate([0,-90,-160])              
+                        //výztuhy
+                      	difference(){
+                     		resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((95-hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,152 - hull_wall_thickness], auto=true) 
+                            	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+                        translate([150,30,80])
+                       		rotate([135,0,-80])
+                        		for (i = [0:13]) { // opakovani cyklu
+                            		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                                		translate([0, i * 11,-15])  //sude prorezy
+                                    		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                            		else{
+                                		translate([0, i * 11, -15]) // liche prorezy
+                                    		cube([30, hull_wall_thickness, 95]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                   	            }
 
-		       	    translate([50,20,-20])
-                   		rotate([45,0,-80])
-                    		for (i = [0:13]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11,-15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 95]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-		       	            }
-		            }
+                   	    translate([50,20,-20])
+                       		rotate([45,0,-80])
+                        		for (i = [0:13]) { // opakovani cyklu
+                            		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                                		translate([0, i * 11,-15])  //sude prorezy
+                                    		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                            		else{
+                                		translate([0, i * 11, -15]) // liche prorezy
+                                    		cube([30, hull_wall_thickness, 95]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                   	            }
+                        }
               
 
 			translate ([140,55,0]) 
@@ -119,39 +119,40 @@ module 666_1028(){
                     rotate([90,-87,0])
                         airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false);
                 //dutý profil
-                translate([140,75 - hull_wall_thickness/2,-0.5 + hull_wall_thickness])
+                translate([140,75 - hull_wall_thickness, -0.5 + 3 * hull_wall_thickness])
                     rotate([90,-87,0])
-                //výztuhy
-                  	difference(){
-                    	resize([150 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((150-2*hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,150 - hull_wall_thickness], auto=true) 
-                        	airfoil(naca = 0005, L = 150 , N = draft ? 50 : 100, h = 150 , open = false);
-                    translate([70,-15,-55])
-                   		rotate([45,0,90])
-                    		for (i = [0:17]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11,-15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 220]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 152]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-		       	            }
+                        //výztuhy
+                      	difference(){
+                        	resize([150 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((150-2*hull_wall_thickness)*0005/100)- 2*hull_wall_thickness, 150 - 2*hull_wall_thickness], auto=true) 
+                            	airfoil(naca = 0005, L = 150 , N = draft ? 50 : 100, h = 150 , open = false);
 
-		       	    translate([-60,-15,85])
-                   		rotate([135,0,90])
-                    		for (i = [0:17]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11,-15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 152]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-		       	            }
+                        translate([70,-15,-55])
+                       		rotate([45,0,90])
+                        		for (i = [0:17]) { // opakovani cyklu
+                            		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                                		translate([0, i * 11,-15])  //sude prorezy
+                                    		cube([30, hull_wall_thickness, 220]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                            		else{
+                                		translate([0, i * 11, -15]) // liche prorezy
+                                    		cube([30, hull_wall_thickness, 152]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+        	       	            }
 
-		            }
+        	       	    translate([-60,-15,85])
+                       		rotate([135,0,90])
+                        		for (i = [0:17]) { // opakovani cyklu
+                            		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
+                                		translate([0, i * 11,-15])  //sude prorezy
+                                    		cube([30, hull_wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+                            		else{
+                                		translate([0, i * 11, -15]) // liche prorezy
+                                    		cube([30, hull_wall_thickness, 152]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                            		}
+        	       	            }
+
+        	            }
             }
 
 	    } // end of union
@@ -214,8 +215,8 @@ module 666_1028(){
         translate ([-50,-100,-200])
             cube ([200,200,200]);
     
-        //translate ([-75,-75,-10])
-        	//cube ([150,150,150]);    
+        /*translate ([-75,-75,-10])
+        	cube ([150,150,150]);*/
 
     }	
  
