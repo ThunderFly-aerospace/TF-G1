@@ -475,13 +475,13 @@ module 666_1029_E(draft){
                         union(){
                        //čtverec pro zámek horní
                         translate([bottom_cover_division[4] - hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2 - global_clearance/2])
-                                    cube([lock_length, hull_y_size, lock_width + global_clearance]);
+                                    cube([lock_length + global_clearance/2, hull_y_size, lock_width + global_clearance]);
                             //čtverec pro zámek Z+
                             translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3* hull_wall_thickness - global_clearance/2, main_tube_outer_diameter ])
-                                    cube([lock_length, lock_width + global_clearance, hull_z_size]);
+                                    cube([lock_length + global_clearance/2, lock_width + global_clearance, hull_z_size]);
                             //čtverec pro zámek Z-
                             translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness - global_clearance/2, - hull_z_size - main_tube_outer_diameter])
-                                   cube([lock_length, lock_width + global_clearance, hull_z_size]);
+                                   cube([lock_length + global_clearance/2, lock_width + global_clearance, hull_z_size]);
                         //union
                         }   
                     //intersection
