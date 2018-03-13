@@ -60,7 +60,8 @@ union(){
                 intersection(){
                     difference(){
                         translate([0,0,-hull_z_size/2])       
-                            cube([hull_x_size, hull_wall_thickness, hull_z_size]);
+                            cube([hull_x_size, hull_wall_thickness, hull_z_size]); // spodní lem
+
                         //odebrání dna
                         translate([ribbon_width/2,0,0])
                             hollowing_skeleton(ribbon_width, draft);
@@ -165,7 +166,7 @@ union(){
                     rotate([0,90+beta,0])
                         cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-            //nápis
+         /*   //nápis
             translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
                 linear_extrude(hull_wall_thickness) 
                     text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
@@ -176,6 +177,7 @@ union(){
                 rotate([0,180,0])
                     linear_extrude(hull_wall_thickness) 
                         text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
+        */
 
     //final difference
     }
@@ -184,13 +186,11 @@ union(){
             union(){
 
                 //přední stěna Z+
-                //čtverec
-                translate([ 0,2*hull_wall_thickness, width_of_engine_holder/2 ])       
+                translate([0, 0, width_of_engine_holder/2 ])       
                     cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                 //přední stěna Z-
-                //čtverec
-                translate([ 0,2*hull_wall_thickness, - hull_wall_thickness - width_of_engine_holder/2])        
+                translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])        
                     cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                 //pro rovnou horní hranu předního lemu
@@ -204,12 +204,12 @@ union(){
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //pro lepení - čtverec 
-                        difference(){
+                        //difference(){
                             translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
                                 cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                         //odečtení nápisu od příčné výztuhy
                         //nápis
-                            translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
+                        /*    translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
                                 linear_extrude(hull_wall_thickness) 
                                     text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
         
@@ -218,7 +218,8 @@ union(){
                                 rotate([0,180,0])
                                     linear_extrude(hull_wall_thickness) 
                                         text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-                        }
+                        */
+                        //}
 
                         //pro lepení - čtverec
                         difference(){
@@ -250,16 +251,26 @@ union(){
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //podélná výztuha
-                        difference(){
+                        //difference(){
                             union(){
-                            translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])      
-                                cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
-                            translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])      
-                                cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                                translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])      
+                                    cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                                translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])      
+                                    cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                                    rotate([-48,0,0])
+                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                                mirror([0,0,1])
+                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                                    rotate([-48,0,0])
+                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
                             }
                         //odečtení nápisu od podélné výztuhy
                         //nápis
-                            translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
+                        /*    translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
                                 linear_extrude(hull_wall_thickness) 
                                     text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
         
@@ -269,7 +280,8 @@ union(){
                                 rotate([0,180,0])
                                     linear_extrude(hull_wall_thickness) 
                                         text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-                        }
+                        */
+                        //}
 
                     }
             
@@ -291,12 +303,9 @@ union(){
 
  //šrouby mezi díly 2 a 3
     
-        intersection(){
-            rotate([-90,0,0])
 
-        	union(){
-        		        	            translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-
+ /*       intersection(){
+>>>>>>> d4cf4d49898702b189fba18729f42e1f6631101c
             translate([top_cover_division[3] - 10,main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness  - global_clearance])
                 difference(){
                 translate([-main_tube_outer_diameter*1.5,2.5,0])
@@ -354,7 +363,7 @@ union(){
             drop(draft);
 
         //intersection
-        }
+        }*/
 //final union   
 
 }
@@ -498,27 +507,6 @@ module 666_1025_part(part_number, draft){
 
 //final module
 }   
-
-
-
-
-
-
-/*
-666_1025_part(1, draft);
-
-translate([10,0,0])
-666_1025_part(2, false);
-
-translate([20,0,0])
-666_1025_part(3, draft);
-
-translate([30,0,0])
-666_1025_part(4, draft);
-
-translate([40,0,0])
-666_1025_part(5, draft);
-*/
 
 
 666_1025(draft);
