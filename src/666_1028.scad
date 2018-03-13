@@ -25,48 +25,36 @@ module 666_1028(){
         //TRIANGLE PROFILE
 
         //UPPER - od osy x do minus y
-            difference (){
+            //difference (){
 	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
-	                rotate ([0,-90, 160])			//rotate([0,-90,152.5])
-	                    airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
-				translate([0,-10,-0.5 + hull_wall_thickness])
-					rotate([0,-90,160])
+	                rotate ([0,-90, 160])
+                    {			//rotate([0,-90,152.5])
+	                    //hollow_airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
+                        hollow_airfoil(naca = 0005, L = 95, N =  100, h = 152, open = false);
+
 
 					//výztuhy
-					difference(){
-						resize([95 - hull_wall_thickness - trailing_wall*hull_wall_thickness,((95-hull_wall_thickness)*0005/100)- 2*hull_wall_thickness,152 - hull_wall_thickness], auto=true) 
-                        	airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
-					translate([-50,0,90])
-                		rotate([135,0,80])	
-                    		for (i = [0:13]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11, -15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 150]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-       	            		}
+    					intersection(){
+                            airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+                            union(){
+            					translate([-50,0,90])
+                            		rotate([135,0,80])	
+                                		for (i = [0:13]){ // opakovani cyklu
+                                    		translate([0, i * 25, -15])  //zebra
+                                        		cube([30, hull_wall_thickness, 180]); 
+                   	            		}
 
-       	            translate([50,-15,-10])
-                		rotate([45,0,80])	
-                    		for (i = [0:13]) { // opakovani cyklu
-                        		if (i % 2 == 0){ // testovani jestli jde o lichy nebo sudy prorez
-                            		translate([0, i * 11, -15])  //sude prorezy
-                                		cube([30, hull_wall_thickness, 180]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-                        		else{
-                            		translate([0, i * 11, -15]) // liche prorezy
-                                		cube([30, hull_wall_thickness, 150]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-                        		}
-       	            		}
-					}
-
-				translate ([140,-68,0]) 
-	            	cube ([15,15,15]);
+                   	            translate([50,-15,-10])
+                            		rotate([45,0,80])	
+                                		for (i = [0:13]){ 
+                                        		translate([0, i * 25, -15])  
+                                            		cube([30, hull_wall_thickness, 180]); 
+                   	            		}
+                            }
+                        }
+                    }
 			
-			}	        
+			//}	        
 
 
         //LOWER - od osy x do plus y
@@ -277,10 +265,6 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
     }
 }	
 
-
-translate ([75, 0, 62])
-    rotate([0, 180, 0])
-        666_1028_drillhelper();
 
 
 666_1028();
