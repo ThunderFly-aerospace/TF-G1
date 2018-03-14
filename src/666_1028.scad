@@ -83,7 +83,8 @@ module 666_1028(){
                 }
 
 			translate ([140,-75,0]) 
-            	cube ([15,150,15]);
+                rotate([0,3,0])
+            	   cube ([15,150,150]);
 	       }
 
         //VERTICAL
@@ -147,26 +148,6 @@ module 666_1028(){
 
         tensile_thickness = 1.8;
 
-/*
-        // wing tensile scructure (upper)
-        translate ([200,-84,53])
-            rotate ([0,0,70])
-                cube([tensile_thickness,250,10]);
-
-        translate ([200,-84,20])
-            rotate ([0,0,70])
-                cube([tensile_thickness,250,11]);
-
-        // wing tensile scructure (lower)
-        translate ([0,10 + tensile_thickness/2 ,53])
-            rotate ([0,0,-70])
-                cube([tensile_thickness,250,10]);
-
-        translate ([0,10 + tensile_thickness/2 ,20])
-            rotate ([0,0,-70])
-               cube([tensile_thickness,250,11]);
-
-*/
         //cleanup for printing
         translate ([-149.9,-75,-1])
         		 cube ([150,150,170]);
