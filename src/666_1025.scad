@@ -392,7 +392,7 @@ module 666_1025_part(part_number, draft){
                 //základní dělení pro tisk
                 intersection(){
                     666_1025(draft);
-                    translate([previous_division + global_clearance/2,-20,-75])                        
+                    translate([previous_division,-20,-75])                        
                         cube([part_lenght - global_clearance/100, 150, 150]);
                 }
                 
