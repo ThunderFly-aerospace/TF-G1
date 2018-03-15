@@ -28,7 +28,7 @@ Nut_diameter_M4 = 7.86;
 
 //Screw diameter and nut for M3 [mm]
 M3_screw_diameter = 3.2;
-Nut_height_M3 = 1.7;	
+Nut_height_M3 = 2.7;	
 Nut_diameter_M3 = 6.6; 
 
 
@@ -124,3 +124,9 @@ move_of_accumulator = 165;   // pozice akumulátoru (ovlivňuje těžiště)
     M3_optical_flow_senzor_X = 24;
     M3_optical_flow_senzor_Z_alone = 9.1;
     M3_optical_flow_senzor_X_alone = 16.7;
+
+//GPS anténa
+GPS_outer_length = 48.01;   //Vnější rozměr
+GPS_inner_length = 37.48;   //Vnitřní rozměr
+GPS_diameter = (GPS_outer_length - GPS_inner_length)/2;    //Průměr otvoru
+GPS_middle_length = GPS_diameter + GPS_inner_length;      //Střední rozměr
