@@ -4,9 +4,11 @@ draft = true;
 
 module 666_1028(){
 
-	    beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
+	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
     echo(trailing_wall); // print a relative thickness of material at traling edge to wall thickness. 
+
+    wall_thickness = 0.6;
 
     //BASIC DROP
     //render(convexity = 2) 
@@ -30,7 +32,7 @@ module 666_1028(){
     	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
     	                rotate ([0,-90, 160])
                         {			//rotate([0,-90,152.5])
-    	                    hollow_airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = true, hull_wall_thickness);
+    	                    hollow_airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
 
     					//výztuhy
         					intersection(){
@@ -40,14 +42,14 @@ module 666_1028(){
                                 		rotate([135,0,80])	
                                     		for (i = [0:13]){ // opakovani cyklu
                                         		translate([0, i * 25, -15])  //zebra
-                                            		cube([30, hull_wall_thickness, 180]); 
+                                            		cube([30, wall_thickness, 180]); 
                        	            		}
 
                        	            translate([50,-15,-10])
                                 		rotate([45,0,80])	
                                     		for (i = [0:13]){ 
                                             		translate([0, i * 25, -15])  
-                                                		cube([30, hull_wall_thickness, 180]); 
+                                                		cube([30, wall_thickness, 180]); 
                        	            		}
                                 }
                             }
@@ -68,14 +70,14 @@ module 666_1028(){
                                    		rotate([135,0,-80])
                                     		for (i = [0:13]) { // opakovani cyklu
                                         		translate([0, i * 25,-15])  //sude prorezy
-                                            		cube([30, hull_wall_thickness, 180]); 
+                                            		cube([30, wall_thickness, 180]); 
                 		       	            }
 
                 		       	    translate([50,20,-20])
                                    		rotate([45,0,-80])
                                     		for (i = [0:13]) { // opakovani cyklu
                                         		translate([0, i * 25,-15])  //sude prorezy
-                                            		cube([30, hull_wall_thickness, 180]); 
+                                            		cube([30, wall_thickness, 180]); 
                 		       	            }
                                 }
         		            }
@@ -101,14 +103,14 @@ module 666_1028(){
                        		rotate([45,0,90])
                         		for (i = [0:17]) { // opakovani cyklu
                                 		translate([0, i * 25,-15])  //sude prorezy
-                                    		cube([30, hull_wall_thickness, 220]); 
+                                    		cube([30, wall_thickness, 220]); 
     		       	            }
 
     		       	    translate([-60,-15,85])
                        		rotate([135,0,90])
                         		for (i = [0:17]) { // opakovani cyklu
                                 		translate([0, i * 25,-15])  //sude prorezy
-                                    		cube([30, hull_wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                                    		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
     		       	            }
                     }
 
