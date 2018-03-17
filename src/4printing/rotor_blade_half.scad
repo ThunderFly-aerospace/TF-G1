@@ -5,7 +5,7 @@ draft = false;
 
 $vpd = 680;
         
-333_1037(twosided = true, draft = true);
+333_1037(twosided = false, draft = true);
 
 
 
