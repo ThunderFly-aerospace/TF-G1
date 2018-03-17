@@ -4,7 +4,7 @@ SRC_DIR=src
 PLATE_DIMMENSIONS=120
 SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
-OPENSCAD_APP=openscad-nightly
+OPENSCAD_APP=openscad
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
