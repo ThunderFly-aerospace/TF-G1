@@ -1,4 +1,19 @@
 
+DOC_SCALING_FACTOR = 100;
+DOC_HEIGHT = 250;
+
+use <./lib/dimlines.scad>
+
+
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;
+
+PART_HEIGHT = 100;
+PART_RADIUS = 200;
+HOLE_RADIUS = 50;
+SLOT_WIDTH = 30;
+SLOT_DEPTH = 50;
+
 
 draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
