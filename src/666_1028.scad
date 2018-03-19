@@ -1,4 +1,12 @@
 
+DOC_SCALING_FACTOR = 100;
+DOC_HEIGHT = 50;
+
+include <./lib/dimlines.scad>
+
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;
+
 
 draft = true;
 
@@ -220,9 +228,28 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
     }
 }	
 
+module 666_1028_drillhelper_doc(){
 
 
-666_1028();
+    color("Black")
+        union(){
+	        //screw
+	        translate ([-150*0.4,0,150*0.4/2 - 20])
+	            rotate ([0,90,0])
+	                circle_center(radius=main_tube_outer_diameter, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+
+	        translate ([-150*0.4,0,150*0.4 - 20])
+	            rotate ([0,90,0])
+	                circle_center(radius=main_tube_outer_diameter, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+	    }
+}
+
+666_1028_drillhelper();
+
+
+
+//666_1028();
+666_1028_drillhelper_doc();
 
 //For printing size limits check.
 //translate([0,-75,0])

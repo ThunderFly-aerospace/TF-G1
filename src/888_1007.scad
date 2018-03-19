@@ -77,6 +77,10 @@ module 888_1007_doc(){
                         text=str("666_1028"),
                         do_circle=false);
 
+            translate([0,-2 + length_of_main_tube,0])
+                rotate([270,90,0])
+                    666_1028_drillhelper_doc();
+
         }
 
 
