@@ -12,7 +12,6 @@ translate([40,0,0])
 
 666_1025_part(1, draft);
 
-/*
 translate([10,0,0])
 666_1025_part(2, false);
 
@@ -24,4 +23,3 @@ translate([30,0,0])
 
 translate([40,0,0])
 666_1025_part(5, draft);
-*/
