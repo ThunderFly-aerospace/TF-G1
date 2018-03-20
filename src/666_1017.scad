@@ -124,6 +124,7 @@ depth=main_tube_outer_diameter*2;
 difference () {
 
     translate([-(width/2),-(depth/2),0])
+    color([1,0,0])
        cube ([width,depth,height]);
 
 

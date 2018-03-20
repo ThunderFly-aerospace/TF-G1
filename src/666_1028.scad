@@ -193,6 +193,7 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
     difference (){
 
         translate([-(depth/2),-(width/2),height_of_cap_cylinder])
+        color([0,0,0.5])
             cube ([depth,width,height]);
             
             //tube
