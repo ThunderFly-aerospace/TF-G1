@@ -1,3 +1,13 @@
+
+/*
+This is an OpenSCAD module that creates an inner bevel between any (convex) part and a plane at z=h. Please note that the part does not have to be perpendicular to the z-plane. The bevel will be h_bevel high and r_bevel wide. For h_bevel equal to r_bevel the bevel will have circular cross section in the plane(s) perpendicular to the z-plane.
+The number of faces of the bevel along its cross section is given by fn_bevel. For fn_bevel=1 this will be a linear bevel. The 'roundness' of the bevel along the z-plane is given by $fn.
+This module uses projection() to get the 2d shape of the part at a certain height. This shape is then minkowski()-ed with a circle with the radius of the width of the bevel at this height. In a last step hull() is applied to two layers of consecutive height.
+Because of the use of the hull() command the shape of the part has to be convex (concave parts would be filled in from the hull() command).
+Because of a limitation of the minkowski() command the part has to be simple: no holes and not comprised out of two disjoint shapes. 
+*/
+
+
 h=20;
 
 h_bevel=6;
@@ -90,7 +100,7 @@ module bevel(h,h_bevel,r_bevel,fn_bevel){
 
 use <./naca4.scad>
 
-//bevel(10,10,10,20)airfoil(naca = 0015, L = 100, N = 100, h = 50, open = false);
+bevel(10,10,10,20)airfoil(naca = 0015, L = 100, N = 100, h = 50, open = false);
 
 
 
