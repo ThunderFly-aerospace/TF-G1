@@ -173,32 +173,21 @@ module 666_1028(){
 
 module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
 {
-    radius=main_tube_outer_diameter/2;
-    width=main_tube_outer_diameter+2*thickness_between_tubes;    
+    width=main_tube_outer_diameter+4*thickness_between_tubes;    
     depth=main_tube_outer_diameter*2;
     //height=depth;
 
 
-    c_na_druhou=width*width+width*width;
-    uhlopricka=sqrt(c_na_druhou);
-    c2_na_druhou=(depth/2*depth/2)+(depth/2*depth/2);
-    uhlopricka_2=sqrt(c2_na_druhou);
-
-    M3_screw_radius=M3_screw_diameter/2;
-    wall_thickness_M3_cylinder_X = M3_screw_radius;
-    stred_M4_cylinder_X = width/2 - M3_screw_radius * 2;
-    stred_M4_cylinder_Z_horni = height - M3_screw_radius - M3_screw_diameter*0.75;
-    stred_M4_cylinder_Z_dolni = M3_screw_radius + M3_screw_diameter*2;
 
     difference (){
 
-        translate([-(depth/2),-(width/2),height_of_cap_cylinder])
-        color([0,0,0.5])
-            cube ([depth,width,height]);
+        translate([-(width/2),-(depth/2),height_of_cap_cylinder])
+            color([0,0,0.5])
+                cube ([width,depth,height]);
             
             //tube
         translate([0,0,-1])
-            cylinder(h = height+1, r = radius, $fn = draft ? 50 : 100);
+                cylinder(h = height+1, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
 
         //screw
         translate ([-150*0.4,0,150*0.4/2 - 20])
@@ -233,7 +222,7 @@ module 666_1028_drillhelper_doc(){
 
 
 
-//666_1028();
+666_1028();
 666_1028_drillhelper_doc();
 
 //For printing size limits check.
