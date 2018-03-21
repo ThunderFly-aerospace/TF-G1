@@ -36,8 +36,8 @@ module hollow_airfoil(lnaca=12, L = 100, N = 81, h = 1, open = false, wall_thick
     if (open){
         linear_extrude(height = h)
             difference(){
-                polygon(points = airfoil_data(naca, L, N, open));
-                offset(delta = - wall_thickness) polygon(points = airfoil_data(naca, L, N, open = false));
+                polygon(points = airfoil_data(naca, L, N, false));
+                offset(delta = - wall_thickness, chamfer = false) polygon(points = airfoil_data(naca, L, N, open = false));
             }
     }
     else{
@@ -75,6 +75,17 @@ function trailing_edge_angle(naca=12, open = false) =
   let (x =0.999)  // set x near to airfoil trailing edge
   let(yt = Na[2]/.2*(A*[sqrt(x), x, x*x, x*x*x, x*x*x*x])) // calculate distance from x-axis at previously set position
   atan2(yt,1-x);  // calculate angle of triangle between end of airfoil. The triange height corresponds to previously calculated distance from x-axis
+
+function surface_angle(x = 0.5, naca=12, open = false) = 
+  let(Na = len(naca)!=3?NACA(naca):naca)
+  let(A = [0.2969, -0.126, -0.3516, 0.2843, open?-0.1015:-0.1036])
+  let(dy = Na[2]/0.2*(A*[(1/2)*(1/sqrt(x)), 1, 2*x, 3*x*x, 4*x*x*x])) // calculate derivative of airfoil function at the x point
+  atan(dy);  // calculate  the angle from function derivative
+
+function surface_distance(x = 0.5, naca=12, open = false) = 
+  let(Na = len(naca)!=3?NACA(naca):naca)
+  let(A = [0.2969, -0.126, -0.3516, 0.2843, open?-0.1015:-0.1036])
+  Na[2]/.2*(A*[sqrt(x), x, x*x, x*x*x, x*x*x*x]); // calculate distance from x-axis at previously set position
 
 // helper functions
 function NACA(naca) = 
