@@ -22,9 +22,16 @@ Otvory pro šrouby v předním dílu jsou oválné, protože nejsou kolmo k rovi
 
 module 666_1025(draft = true){
 
+    cylinder_position = 0.6;
+
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
 
+    angle = surface_angle(x = cylinder_position, naca=hull_airfoil_thickness, open = false);
+    distance = surface_distance(x = cylinder_position, naca=hull_airfoil_thickness, open = false);
+  
+    echo("surface distance is:", distance);
+    echo("angle of surface is:", angle);
 
 union(){
 
@@ -109,11 +116,12 @@ union(){
                         cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
             //spojení částí C a D
-            translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-            rotate([-90,0,0])
+
+
+               rotate([0,0,angle])
             union(){
-                translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter])
-                    rotate([0,99,0])
+                translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
+                    rotate([-270,180,90])
                         union(){
                                     cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
                             translate([0,0,22 - Nut_height_M3 - 5])    
@@ -122,21 +130,15 @@ union(){
                                     cube([20,Nut_diameter_M3, Nut_height_M3]);
                             translate([0,0,-12])   
                                     cylinder(h = 17, r = Nut_diameter_M3/2, $fn = 6);
-                            translate([-Nut_diameter_M3/2,0,-20])                               
-                                rotate([0,20,0])
-                                    cylinder(h = 10, r1 = (Nut_diameter_M3/2), r2 = (Nut_diameter_M3/2), $fn = 6);
-
                         }
             }
+
 
             mirror([0,0,1])
-
-            translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-            rotate([-90,0,0])
-
+               rotate([0,0,angle])
             union(){
-                translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter ])
-                    rotate([0,99,0])
+                translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
+                    rotate([-270,180,90])
                         union(){
                                     cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
                             translate([0,0,22 - Nut_height_M3 - 5])    
@@ -145,11 +147,10 @@ union(){
                                     cube([20,Nut_diameter_M3, Nut_height_M3]);
                             translate([0,0,-12])   
                                     cylinder(h = 17, r = Nut_diameter_M3/2, $fn = 6);
-                            translate([-Nut_diameter_M3/2,0,-20])                               
-                                rotate([0,20,0])
-                                    cylinder(h = 10, r1 = (Nut_diameter_M3/2), r2 = (Nut_diameter_M3/2), $fn = 6);
                         }
             }
+
+
 
             //část D
                 translate([top_screw_position[4],main_tube_outer_diameter/4,-55])
@@ -236,22 +237,20 @@ union(){
                                 translate([top_cover_division[3], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
                                         cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                             }
-                            translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-            				rotate([-90,0,0])
-                            union(){
-                                translate([top_cover_division[3] - 10,main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter])
-                                    rotate([0,99,0])
-                                        cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20); 
+                            rotate([0,0,angle])
+                                union(){
+                                    translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
+                                        rotate([-270,180,90])
+                                                cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
                                 }
 
-                                mirror([0,0,1])
-                                translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-            					rotate([-90,0,0])
-                                union(){ 
-                                translate([top_cover_division[3] - 10, main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness - M3_screw_diameter])
-                                    rotate([0,99,0])
-                                        cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20); 
-                        }
+                        mirror([0,0,1])
+                            rotate([0,0,angle])
+                                union(){
+                                    translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
+                                        rotate([-270,180,90])
+                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                                }
                         }
                         //pro lepení - čtverec 
                         translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
@@ -312,13 +311,10 @@ union(){
 
 
        intersection(){
-            translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-            rotate([-90,0,0])
 
        		union(){
-            translate([top_cover_division[3] - 10,main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness  - global_clearance])
                 difference(){
-                    translate([-20,0,0])
+                            translate([top_cover_division[4] * cylinder_position + 5,hull_y_size/2 + 23, -42])
                     rotate([0,90,0])
                         union(){
                                     cylinder(h = main_tube_outer_diameter*1.5, r = 10, $fn = draft ? 100 : 200);
@@ -328,24 +324,22 @@ union(){
                                     cylinder (h = 20, r1 = 10, r2 = 2, $fn = draft ? 100 : 200);
                         }
 
-                    translate([0,0,-M3_screw_diameter + hull_wall_thickness])
-                    rotate([0,99,0])
+                        rotate([0,0,angle])
                         union(){
-                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
-                            translate([0,0,22 - Nut_height_M3 - 5])    
-                                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
-                            translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3])
-                                    cube([20,Nut_diameter_M3, Nut_height_M3]);
-                            translate([0,0,-12])   
-                                    cylinder(h = 17, r = Nut_diameter_M3/2, $fn = 6);
-                            translate([-Nut_diameter_M3/2,0,-20])                               
-                                rotate([0,20,0])
-                                    cylinder(h = 10, r1 = (Nut_diameter_M3/2), r2 = (Nut_diameter_M3/2), $fn = 6);
+                            translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
+                                rotate([-270,180,90])
+                                    union(){
+                                            cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                                    translate([0,0,22 - Nut_height_M3 - 5])    
+                                            cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                                    translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3])
+                                            cube([20,Nut_diameter_M3, Nut_height_M3]);
+                                    translate([0,0,-12])   
+                                            cylinder(h = 17, r = Nut_diameter_M3/2, $fn = 6);
+                                    }
+                        }
 
-   
-                     }
-
-                                        }   
+                }   
             }
             drop(draft);
 
@@ -353,37 +347,35 @@ union(){
         }
 
     mirror([0,0,1])
-        intersection(){
-            translate([0, main_tube_outer_diameter/2 - M3_screw_diameter/2 - hull_wall_thickness/2,-main_tube_outer_diameter/2])
-            rotate([-90,0,0])
+       intersection(){
 
-       		union(){
-            translate([top_cover_division[3] - 10,main_tube_outer_diameter,hull_z_size/2 - hull_wall_thickness  - global_clearance])
+            union(){
                 difference(){
-                    translate([-20,0,0])
+                            translate([top_cover_division[4] * cylinder_position + 5,hull_y_size/2 + 23, -42])
                     rotate([0,90,0])
                         union(){
                                     cylinder(h = main_tube_outer_diameter*1.5, r = 10, $fn = draft ? 100 : 200);
                             translate([0,0,-20])
                                     cylinder (h = 20, r1 = 0, r2 = 10, $fn = draft ? 100 : 200);
                             translate([0,0,main_tube_outer_diameter*1.5])
-                                    cylinder (h = 20, r1 = 10, r2 = 0, $fn = draft ? 100 : 200);
+                                    cylinder (h = 20, r1 = 10, r2 = 2, $fn = draft ? 100 : 200);
                         }
 
-                    translate([0,0,-M3_screw_diameter + hull_wall_thickness])
-                    rotate([0,99,0])
+                        rotate([0,0,angle])
                         union(){
-                                    cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
-                            translate([0,0,22 - Nut_height_M3 - 5])    
-                                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
-                            translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3])
-                                    cube([20,Nut_diameter_M3, Nut_height_M3]);
-                            translate([0,0,-12])   
-                                    cylinder(h = 17, r = Nut_diameter_M3/2, $fn = 6);
-                            translate([-Nut_diameter_M3/2,0,-20])                               
-                                rotate([0,20,0])
-                                    cylinder(h = 10, r1 = (Nut_diameter_M3/2), r2 = (Nut_diameter_M3/2), $fn = 6);
+                            translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
+                                rotate([-270,180,90])
+                                    union(){
+                                            cylinder(h = 22, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);   
+                                    translate([0,0,22 - Nut_height_M3 - 5])    
+                                            cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                                    translate([-20,- Nut_diameter_M3/2,22 - 5 - Nut_height_M3])
+                                            cube([20,Nut_diameter_M3, Nut_height_M3]);
+                                    translate([0,0,-12])   
+                                            cylinder(h = 17, r = Nut_diameter_M3/2, $fn = 6);
+                                    }
                         }
+
                 }   
             }
             drop(draft);
@@ -535,18 +527,18 @@ module 666_1025_part(part_number, draft){
 }   
 
 
-666_1025_part(1, draft);
+//666_1025_part(1, draft);
 
-666_1025_part(2, draft);
+//666_1025_part(2, draft);
 
-666_1025_part(3, draft);
+//666_1025_part(3, draft);
 
-666_1025_part(4, draft);
+//666_1025_part(4, draft);
 
-666_1025_part(5, draft);
+//666_1025_part(5, draft);
 
 
-//666_1025(draft);
+666_1025(draft);
 
 
 use <888_1000.scad>
