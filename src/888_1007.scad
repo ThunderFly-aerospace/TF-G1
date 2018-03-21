@@ -23,7 +23,7 @@ module 888_1007(){
             666_1026_drillhelper();
          
     translate([0,-2 + length_of_main_tube,0])
-        rotate([270,90,0])
+        rotate([270,0,0])
             666_1028_drillhelper();
 
         rotate([-90,0,0])
@@ -78,7 +78,7 @@ module 888_1007_doc(){
                         do_circle=false);
 
             translate([0,-2 + length_of_main_tube,0])
-                rotate([270,90,0])
+                rotate([270,180,0])
                     666_1028_drillhelper_doc();
 
         }
