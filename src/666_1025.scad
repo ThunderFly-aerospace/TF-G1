@@ -22,7 +22,7 @@ Otvory pro šrouby v předním dílu jsou oválné, protože nejsou kolmo k rovi
 
 module 666_1025(draft = true){
 
-    cylinder_position = 0.6;
+    cylinder_position = 1;
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness   
@@ -119,7 +119,7 @@ union(){
 
 
                rotate([0,0,angle])
-            union(){
+            %union(){
                 translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
                     rotate([-270,180,90])
                         union(){
@@ -136,7 +136,7 @@ union(){
 
             mirror([0,0,1])
                rotate([0,0,angle])
-            union(){
+            %union(){
                 translate([top_cover_division[4] * cylinder_position - 5,hull_y_size + 23,-40])
                     rotate([-270,180,90])
                         union(){
