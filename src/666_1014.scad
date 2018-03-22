@@ -40,8 +40,8 @@ mirror([1,0,0])
 
 
     // middle cut
-    translate ([-0.1,- depth,- global_clearance/2])
-        cube ([0.2,depth*2,height + global_clearance]);
+    translate ([-0.25,- depth,- global_clearance/2])
+        cube ([0.5,depth*2,height + global_clearance]);
 
     //screw
     translate([-width/2,-(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),tube_for_undercarriage_outer_diameter/2+coupling_wall_thickness_undercarriage])
@@ -64,11 +64,6 @@ mirror([1,0,0])
 	translate([width/2 - Nut_height_M4,-(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),tube_for_undercarriage_outer_diameter/2+coupling_wall_thickness_undercarriage])
 	   rotate([0,90,0])
 	       cylinder (h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
-
-    translate([-width/2 - global_clearance,-(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2+ M4_screw_diameter/2),tube_for_undercarriage_outer_diameter/2+coupling_wall_thickness_undercarriage])
-       rotate([0,90,0])
-           cylinder (h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
-
 
     }
 }
