@@ -100,7 +100,7 @@ module orientate(v,vref=[0,0,1], roll=0)
   //-- Rotate the child!
   rotate(a=roll, v=v)
     rotate(a=ang, v=raxis)
-      child(0);
+      children(0);
 }
 
 module orientate2(v,vref=[0,0,1], roll=0)

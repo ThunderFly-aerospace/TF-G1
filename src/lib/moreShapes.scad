@@ -6,8 +6,8 @@
 
 // some borrowed from nophead / Mendel90 utils.scad
 
-include <polyholes.scad>
-include <teardrops.scad>
+//include <polyholes.scad>
+//include <teardrops.scad>
 
 // fudge
 eta = 0.01;
@@ -122,7 +122,7 @@ module arrangeShapesOnAxis(axis=[1,0,0], spacing=50) {
 	for (i=[0:$children-1]) {
 		translate([spacing * axis[0] *i,
 					spacing * axis[1]*i,
-					spacing * axis[2]*i]) child(i);
+					spacing * axis[2]*i]) children(i);
 	}
 }
 
@@ -130,7 +130,7 @@ module arrangeShapesOnGrid(xSpacing=50, ySpacing=50, cols=3, showLocalAxes=false
 	// layout is cols, rows
 	for (i=[0:$children-1]) {
 		translate([(i - floor(i / cols)*cols) * xSpacing, floor(i / cols) * ySpacing, 0]) {
-			child(i);
+			children(i);
 
 			if (showLocalAxes) {
 				color("red") line([0,0,0], [xSpacing/2,0,0], 0.2);
