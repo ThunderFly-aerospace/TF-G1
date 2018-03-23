@@ -23,7 +23,7 @@ thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;
-Nut_diameter_M4 = 7.86;
+Nut_diameter_M4 = 8.4;
 
 
 //Screw diameter and nut for M3 [mm]
