@@ -171,7 +171,7 @@ module 666_1028(){
  
 }
 
-module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2)
+module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = true)
 {
     width=main_tube_outer_diameter+4*thickness_between_tubes;    
     depth=main_tube_outer_diameter*2;

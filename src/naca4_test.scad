@@ -6,7 +6,7 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
-cylinder_position = 0.6;
+/*cylinder_position = 0.6;
 
     airfoil_thickness = 0030;
 
@@ -20,3 +20,12 @@ cylinder_position = 0.6;
 translate([170*cylinder_position,170*distance,50])
     rotate([0,90,angle])
         cylinder(d=10, h = 30, $fn = 20, center = true);
+*/
+
+module drop_skin(wall_thickness = 1, draft = true){
+
+            difference(){
+                polygon(points = airfoil_data(naca, L, N, open));
+                offset(delta = - wall_thickness) polygon(points = airfoil_data(naca, L, N, open = false));
+            }    
+}
