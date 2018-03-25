@@ -130,3 +130,21 @@ GPS_outer_length = 48.01;   //Vnější rozměr
 GPS_inner_length = 37.48;   //Vnitřní rozměr
 GPS_diameter = (GPS_outer_length - GPS_inner_length)/2;    //Průměr otvoru
 GPS_middle_length = GPS_diameter + GPS_inner_length;      //Střední rozměr
+
+
+
+
+//Position of screws
+    position_screw_upper = 0.464;		//pozice šroubů spojení horního krytu části C a D
+	    angle_upper = surface_angle(x = position_screw_upper, naca=hull_airfoil_thickness, open = false);
+    	distance_upper = surface_distance(x = position_screw_upper, naca=hull_airfoil_thickness, open = false);
+  
+
+	position_screw_base_top = 1;		//pozice šroubů pro připevnění horního krytu k podložce
+    	angle_base_top = surface_angle(x = position_screw_base_top, naca=hull_airfoil_thickness, open = false);
+    	distance_base_top = surface_distance(x = position_screw_base_top, naca=hull_airfoil_thickness, open = false);
+
+
+	position_screw_base_bottom = 1;		//pozice šroubů pro připevnění horního krytu k podložce
+    	angle_base_bottom = surface_angle(x = position_screw_base_bottom, naca=hull_airfoil_thickness, open = false);
+    	distance_base_bottom = surface_distance(x = position_screw_base_bottom, naca=hull_airfoil_thickness, open = false);
