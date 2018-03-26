@@ -81,9 +81,9 @@ cover_pilon_division = [0,170,height_of_vertical_tube + main_tube_outer_diameter
 
 //pozice šroubů
 	//horní kryt
-top_screw_position = [0, (top_cover_division[0] + top_cover_division[1])/4, (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], (top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],(top_cover_division[4] - top_cover_division[3])/8 + top_cover_division[3],(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 20];
+top_screw_position = [0, (top_cover_division[0] + top_cover_division[1])/4, (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], (top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],(top_cover_division[4] - top_cover_division[3])/8 + top_cover_division[3],(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 15];
 	//spodní kryt
-bottom_screw_position = [0,(bottom_cover_division[0] + bottom_cover_division[1])/15 + 5, bottom_cover_division[1]/1.1, + bottom_cover_division[3], bottom_cover_division[3] + bottom_cover_division[1]/1.5];
+bottom_screw_position = [0,(bottom_cover_division[0] + bottom_cover_division[1])/15 + 5, bottom_cover_division[1]/1.1, + bottom_cover_division[3] + 10, bottom_cover_division[3] + bottom_cover_division[1]/1.5];
 
 
 
@@ -133,18 +133,3 @@ GPS_middle_length = GPS_diameter + GPS_inner_length;      //Střední rozměr
 
 
 
-
-//Position of screws
-    position_screw_upper = 0.464;		//pozice šroubů spojení horního krytu části C a D
-	    angle_upper = surface_angle(x = position_screw_upper, naca=hull_airfoil_thickness, open = false);
-    	distance_upper = surface_distance(x = position_screw_upper, naca=hull_airfoil_thickness, open = false);
-  
-
-	position_screw_base_top = 1;		//pozice šroubů pro připevnění horního krytu k podložce
-    	angle_base_top = surface_angle(x = position_screw_base_top, naca=hull_airfoil_thickness, open = false);
-    	distance_base_top = surface_distance(x = position_screw_base_top, naca=hull_airfoil_thickness, open = false);
-
-
-	position_screw_base_bottom = 1;		//pozice šroubů pro připevnění horního krytu k podložce
-    	angle_base_bottom = surface_angle(x = position_screw_base_bottom, naca=hull_airfoil_thickness, open = false);
-    	distance_base_bottom = surface_distance(x = position_screw_base_bottom, naca=hull_airfoil_thickness, open = false);
