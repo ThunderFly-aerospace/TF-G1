@@ -87,6 +87,35 @@ module 666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
            rotate([90,0,0])
                cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
         
+        //prořezy pro zajištění proti otočení
+        translate([main_tube_outer_diameter/2 -global_clearance,- thickness_between_tubes/2,- main_tube_outer_diameter])
+                cube([main_tube_outer_diameter, thickness_between_tubes, 4*main_tube_outer_diameter]);
+
+        mirror([1,0,0])
+        translate([main_tube_outer_diameter/2 - global_clearance,- thickness_between_tubes/2,- main_tube_outer_diameter])
+                cube([main_tube_outer_diameter, thickness_between_tubes, 4*main_tube_outer_diameter]);
+
+        //šrouby pro zajištění
+        translate([depth/2,0,width/2])
+            rotate([90,0,0])
+                union(){
+                        cylinder(h = 50, r = M4_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - Nut_height_M4])
+                        cylinder(h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
+                        cylinder(h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                }
+        
+        mirror([1,0,0])
+        translate([depth/2,0,width/2])
+            rotate([90,0,0])
+                union(){
+                        cylinder(h = 50, r = M4_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - Nut_height_M4])
+                        cylinder(h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
+                        cylinder(h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                }
     }
 
 
@@ -94,6 +123,9 @@ module 666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
 }
 
 
-666_1026(draft);
+//666_1026(draft);
+
+666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2);
+
 
 include <../Parameters.scad>
