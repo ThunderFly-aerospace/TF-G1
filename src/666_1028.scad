@@ -198,6 +198,19 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = tru
             rotate ([0,90,0])
                 cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
             
+    	//prořezy pro zajištění
+    	translate([-thickness_between_tubes/2,main_tube_outer_diameter - (2*main_tube_outer_diameter)*(2/3),0])
+    			cube([thickness_between_tubes, main_tube_outer_diameter*2, depth*2]);
+        translate([0,main_tube_outer_diameter/2,height/2])   
+            rotate([0,90,0])
+                union(){ 
+                       cylinder(h = 50, r = M4_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M4])
+                        cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
+                        cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                }
+
     }
 }	
 
@@ -222,7 +235,7 @@ module 666_1028_drillhelper_doc(){
 
 
 
-666_1028();
+//666_1028();
 666_1028_drillhelper_doc();
 
 //For printing size limits check.
