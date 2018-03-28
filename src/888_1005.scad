@@ -50,7 +50,7 @@ translate([main_pilon_position,70 - coupling_wall_thickness - main_tube_outer_di
 	rotate([0,-90,90])
 		666_1017();
 
-
+/*
 ////
 translate([length_of_main_tube - 80 + global_clearance,0,0])
 	rotate([0,90,0])
@@ -59,7 +59,7 @@ translate([length_of_main_tube - 80 + global_clearance,0,0])
 translate([length_of_main_tube - 80 + global_clearance,0,0])
 	rotate([0,-90,180])
 		666_1028();
-
+*/
 ////
 translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2])
 		666_1006();
@@ -75,7 +75,7 @@ translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_
 	rotate([180,0,0])	
 		666_1006();
 
-
+/*
 ////
 translate([main_pilon_position - main_tube_outer_diameter/2 - coupling_wall_thickness,height_of_vertical_tube + coupling_wall_thickness + main_tube_outer_diameter/2,0])
 	rotate([90,90,0])
@@ -95,15 +95,49 @@ translate([main_pilon_position, height_of_vertical_tube + 25,0])
 			rotate([90,70,0])
 				333_1037();
 	}
+*/
+
+
+//// podvozek
+translate([0, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2])
+	rotate([-90,-90,0])
+		888_1008();
+
+
+//// úchytky na kolečka
+union(){
+translate([2*main_tube_outer_diameter + coupling_wall_thickness, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage])
+	rotate([0,90,0])
+		666_1014();
+
+translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_undercarriage + second_undercarriage_hole - vzdalenost_x - radius_undercarriage , - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage])
+	rotate([0,90,0])
+		666_1014();
+}
+
+mirror([0,0,1])
+union(){
+translate([2*main_tube_outer_diameter + coupling_wall_thickness, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage])
+	rotate([0,90,0])
+		666_1014();
+
+translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_undercarriage + second_undercarriage_hole - vzdalenost_x - radius_undercarriage , - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage])
+	rotate([0,90,0])
+		666_1014();
+}
+
 
 //hlavní trubky
 
 		//nejdelší
 		difference(){
 			rotate ([0,90,0])
+			    color([1,0,0])
+
 				cylinder (h = length_of_main_tube, r = Help_main_tube_outer/2, $fn = 200);
 		translate([- global_clearance/2,0,0])
 			rotate ([0,90,0])
+			    color([1,0,0])
 				cylinder (h = length_of_main_tube + global_clearance/2, r = Help_main_tube_inner/2, $fn = 200);
 
 		}
@@ -113,10 +147,12 @@ translate([main_pilon_position, height_of_vertical_tube + 25,0])
 		difference(){
 		translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes,0])
 			rotate([-90,0,0])
+			    color([1,0,0])
 				cylinder (h = height_of_vertical_tube, r = Help_main_tube_outer/2, $fn = 200);
 
 		translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes + global_clearance/2,0])
 			rotate([-90,0,0])
+			    color([1,0,0])
 				cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 
 		}
@@ -125,8 +161,10 @@ translate([main_pilon_position, height_of_vertical_tube + 25,0])
 			//přední
 		difference(){
 			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2])
+			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube, r = Help_main_tube_outer/2, $fn = 200);
 			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2 - global_clearance/2])
+			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 		}	
 
@@ -134,8 +172,10 @@ translate([main_pilon_position, height_of_vertical_tube + 25,0])
 			//zadní
 		difference(){
 			translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2])
+			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube, r = Help_main_tube_outer/2, $fn = 200);
 			translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2 - global_clearance/2])
+			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 		}
 
@@ -168,6 +208,8 @@ use <666_1028.scad>
 use <666_1006.scad>
 use <333_1037.scad>
 use <666_1232.scad>
+use <888_1008.scad>
+use <666_1014.scad>
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
