@@ -22,6 +22,8 @@ module 666_1032(draft){
             	airfoil(naca = airfoil_thickness, L = 170, N = draft ? 50 : 100, h = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes, open = false);
             	translate ([hull_wall_thickness,0,45])
                     resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness,(170*airfoil_thickness/100)- 2*hull_wall_thickness,height_of_vertical_tube + main_tube_outer_diameter/2 + 4*global_clearance + thickness_between_tubes], auto=true) 
+                           color([1,0,0])
+
                         airfoil(naca = airfoil_thickness, L = 170, N = draft ? 50 : 100, h = 10, open = false);
             }
             //lem spodní a horní díl
