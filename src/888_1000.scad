@@ -29,6 +29,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft = true)
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness 
 
     intersection(){
+
     resize([hull_drop_length - shell_thickness - trailing_wall* shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness], auto=true)
             rotate ([0,90,0])           
             rotate_extrude($fn = draft ? 50 : 200)
