@@ -77,9 +77,9 @@ module torusSlice(r1, r2, start_angle, end_angle, convexity=10, r3=0, $fn=64) {
     a4 = (0 * start_angle + 4 * end_angle) / 4;
     if(end_angle > start_angle)
         intersection() {
-			rotate_extrude(convexity=convexity) translate([r1,0,0]) difference() {
-				circle(r2, $fn=$fn/4);
-				circle(r3, $fn=$fn/4);
+			rotate_extrude(convexity=convexity, $fn=64) translate([r1,0,0]) difference() {
+				circle(r2, $fn=30);
+				circle(r3, $fn=30);
 			}
 
 			translate([0,0,-r2-1])
