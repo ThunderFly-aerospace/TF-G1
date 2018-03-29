@@ -264,7 +264,7 @@ module 666_1029(draft){
                     }  
 
                     //uzavření seshora + výztuhy
-                    /*
+                    
                     union(){
 
                         translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])  
@@ -288,7 +288,7 @@ module 666_1029(draft){
                         translate([bottom_cover_division[2],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width, - hull_z_size/2])
                             cube([hull_wall_thickness, ribbon_width, hull_z_size]);
                     }
-                    */
+                    
             }
             //odstranění z vnější strany
             drop(draft);
