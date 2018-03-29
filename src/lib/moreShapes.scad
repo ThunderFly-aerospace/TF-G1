@@ -213,11 +213,11 @@ module sector(r, a, h, , center = true) {
         }
 }
 
-module tube(or, ir, h, center = true) {
+module tube(or, ir, h, center = true, $fn=30) {
     linear_extrude(height = h, center = center, convexity = 5)
         difference() {
-            circle(or);
-            circle(ir);
+            circle(or, $fn=$fn);
+            circle(ir, $fn=$fn);
         }
 }
 
