@@ -94,13 +94,13 @@ module 666_1029(draft){
 
 
         //A
-            translate([hull_drop_length * (bottom_screw_position[1]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * 2 * 0.0690096])
-                rotate([0,57.7852,0])
+            translate([hull_drop_length * (bottom_screw_position[1]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * 2 * surface_distance(x = bottom_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+                rotate([0,surface_angle(x = bottom_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                    cylinder(h = 90, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
         mirror([0,0,1])
-            translate([hull_drop_length * (bottom_screw_position[1]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * 2 * 0.0690096])
-                rotate([0,57.7852,0])
+            translate([hull_drop_length * (bottom_screw_position[1]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * 2 * surface_distance(x = bottom_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+                rotate([0,surface_angle(x = bottom_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                    cylinder(h = 90, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
         translate([bottom_screw_position[2], - main_tube_outer_diameter/4, - hull_z_size/2 - 35])       
@@ -112,21 +112,21 @@ module 666_1029(draft){
         
         //D
             union(){
-            translate([hull_drop_length * (bottom_screw_position[3]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length *   0.120792])
-                rotate([0, -14.849,0])   
+            translate([hull_drop_length * (bottom_screw_position[3]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length *  surface_distance(x = bottom_screw_position[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+                rotate([0, surface_angle(x = bottom_screw_position[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            translate([hull_drop_length * (bottom_screw_position[4]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * 0.0927866])
-                rotate([0, -17.0902,0])   
+            translate([hull_drop_length * (bottom_screw_position[4]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * surface_distance(x = bottom_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+                rotate([0, surface_angle(x = bottom_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
             }
 
         mirror([0,0,1])
             union(){
-            translate([hull_drop_length * (bottom_screw_position[3]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length *   0.120792])
-                rotate([0, -14.849,0])   
+            translate([hull_drop_length * (bottom_screw_position[3]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length *  surface_distance(x = bottom_screw_position[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+                rotate([0, surface_angle(x = bottom_screw_position[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            translate([hull_drop_length * (bottom_screw_position[4]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * 0.0927866])
-                rotate([0, -17.0902,0])   
+            translate([hull_drop_length * (bottom_screw_position[4]/hull_drop_length),-main_tube_outer_diameter/4, - hull_drop_length * surface_distance(x = bottom_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+                rotate([0, surface_angle(x = bottom_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])   
                     cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
             }
 
@@ -139,8 +139,8 @@ module 666_1029(draft){
     echo("surface distance is:", distance);
     echo("angle of surface is:", angle);
 
-        translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
-          rotate([0,90 - 2*6.29732,0])
+        translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
+          rotate([0,90 - 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                 union(){
                         cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
                 translate([0,0,- Nut_height_M3 - 5])    
@@ -153,8 +153,8 @@ module 666_1029(draft){
 
 
         mirror([0,0,1])
-        translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
-          rotate([0,90 - 2*6.29732,0])
+        translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
+          rotate([0,90 - 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                 union(){
                         cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
                 translate([0,0,- Nut_height_M3 - 5])    
@@ -184,12 +184,12 @@ module 666_1029(draft){
                                         cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                                 }
                                 
-                                translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
-                                    rotate([0,90 - 2*6.29732,0])
+                                translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
+                                    rotate([0,90 - 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                                         cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
                                 mirror([0,0,1])  
-                                translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
-                                    rotate([0,90 - 2*6.29732,0])
+                                translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
+                                    rotate([0,90 - 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                                         cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
                         }   
 
@@ -298,7 +298,7 @@ module 666_1029(draft){
         intersection(){
             union(){
                 difference(){
-                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 3, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
+                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 3, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                         rotate([180,0,0])
                             union(){
                                 translate([17,0,0])
@@ -320,8 +320,8 @@ module 666_1029(draft){
                                         }
                             }
 
-                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
-                        rotate([0,90 - 2*6.29732,0])
+                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
+                        rotate([0,90 - 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             union(){
                                     cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
                             translate([0,0,- Nut_height_M3 - 5])    
@@ -343,7 +343,7 @@ module 666_1029(draft){
         intersection(){
             union(){
                 difference(){
-                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 3, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
+                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 3, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                         rotate([180,0,0])
                             union(){
                                 translate([17,0,0])
@@ -365,8 +365,8 @@ module 666_1029(draft){
                                         }
                             }
 
-                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * 0.169066 - 26])
-                        rotate([0,90 - 2*6.29732,0])
+                    translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
+                        rotate([0,90 - 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             union(){
                                     cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
                             translate([0,0,- Nut_height_M3 - 5])    
