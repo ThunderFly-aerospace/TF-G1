@@ -157,10 +157,10 @@ difference () {
             cylinder(h = width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     //prořezy pro zajištění
-    translate([-thickness_between_tubes/2,-depth/2 - global_clearance,height - main_tube_outer_diameter/2 - global_clearance])
-            cube([thickness_between_tubes,depth + 2*global_clearance, main_tube_outer_diameter]);
-    translate([-thickness_between_tubes/2, -2*main_tube_outer_diameter, -global_clearance])
-            cube([thickness_between_tubes, 4*main_tube_outer_diameter, 1.5*main_tube_outer_diameter]);
+    translate([- (3*global_clearance)/2,-depth/2 - global_clearance,height - main_tube_outer_diameter/2 - global_clearance])
+           cube([3*global_clearance,depth + 2*global_clearance, main_tube_outer_diameter]);
+    translate([-(3*global_clearance)/2, -2*main_tube_outer_diameter, -global_clearance])
+            cube([3*global_clearance, 4*main_tube_outer_diameter, 1.5*main_tube_outer_diameter]);
     //šrouby
         translate([0,0,70 - thickness_between_tubes/2])
             rotate([0,90,0])

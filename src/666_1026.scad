@@ -90,12 +90,12 @@ module 666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
                cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
         
         //prořezy pro zajištění proti otočení
-        translate([main_tube_outer_diameter/2 -global_clearance,- thickness_between_tubes/2,- main_tube_outer_diameter])
-                cube([main_tube_outer_diameter, thickness_between_tubes, 4*main_tube_outer_diameter]);
+        translate([main_tube_outer_diameter/2 -global_clearance,- (3*global_clearance)/2,- main_tube_outer_diameter])
+                cube([main_tube_outer_diameter, 3*global_clearance, 4*main_tube_outer_diameter]);
 
         mirror([1,0,0])
-        translate([main_tube_outer_diameter/2 - global_clearance,- thickness_between_tubes/2,- main_tube_outer_diameter])
-                cube([main_tube_outer_diameter, thickness_between_tubes, 4*main_tube_outer_diameter]);
+        translate([main_tube_outer_diameter/2 - global_clearance,- (3*global_clearance)/2,- main_tube_outer_diameter])
+                cube([main_tube_outer_diameter, 3*global_clearance, 4*main_tube_outer_diameter]);
 
         //šrouby pro zajištění
         translate([depth/2,0,width/2])
