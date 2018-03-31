@@ -99,9 +99,13 @@ translate([main_pilon_position, height_of_vertical_tube + 25,0])
 
 
 //// podvozek
-translate([0, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2])
+translate([0, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 - 45])
 	rotate([-90,-90,0])
-		888_1008();
+		888_1008_A();
+
+translate([0, - 131 - Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2 + 45])
+	rotate([-90,-90,0])
+		888_1008_B();
 
 
 //// úchytky na kolečka
@@ -159,6 +163,7 @@ translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_u
 	
 		//kolmá na nejdelší - pro podvozek
 			//přední
+			
 		difference(){
 			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2])
 			    color([1,0,0])
@@ -167,7 +172,6 @@ translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_u
 			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 		}	
-
 
 			//zadní
 		difference(){
@@ -208,7 +212,8 @@ use <666_1028.scad>
 use <666_1006.scad>
 use <333_1037.scad>
 use <666_1232.scad>
-use <888_1008.scad>
+use <888_1008_A.scad>
+use <888_1008_B.scad>
 use <666_1014.scad>
 
 use <./lib/naca4.scad>
