@@ -7,19 +7,11 @@ $vpd = 1280;
 
 draft = true;
 
-/*
-//výpočty pro odlehčení závisející na šířce kapky - počítáme počet čtverečků
-
-B = 5;       //B = šířka mezery    2 -< B -< 6
-A = 15;      //A = šířka uhlopříčky čtverečku    10 -< A -< 20
-X = (hull_drop_length/hull_airfoil_thickness)*100;
-Z = A * sqrt(2)
 
 
-C = (X-B)/(A+B)  //počet čtverečků pro odlehčení
-C = Floor(C);
-echo (C);
-*/
+
+
+
 
 
 module lightening(x_size, y_size, z_size){        // generování dutin pro snížení hmotnosti podložky
@@ -68,6 +60,24 @@ module lightening_pricne (x_size, y_size, z_size){
 }
 
 module 666_1027(draft){
+
+//výpočty pro odlehčení závisející na šířce kapky - počítáme počet čtverečků
+/*
+B = 5;       //B = šířka mezery    2 -< B -< 6
+A = 15;      //A = délka uhlopříčky čtverečku    10 -< A -< 20
+X = (hull_drop_length/hull_airfoil_thickness)*100;
+X = surface_distance(x = base_division[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
+Z = A * sqrt(2)			//délka strany čtverce
+
+echo("Z is", Z);
+*/
+
+A = hull_drop_length*(base_division[3]/hull_drop_length);		//délka v ose X
+B = hull_drop_length*surface_distance(x = base_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false); 	//Délka v ose Z
+
+C = (sqrt(A*A + B*B) - 5) / (15 + 5);
+echo("C is", C);
+//echo(Floor (C));
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -223,10 +233,11 @@ module 666_1027(draft){
                 cube([hull_drop_length, main_tube_outer_diameter, main_tube_outer_diameter]);
 
 
-/*
+
         //odlehčující prořezy        
         translate([0,0,0])
             lightening(x_size, y_size, z_size);
+            /*
         translate([112,0,30])
             lightening_pricne (x_size, y_size, z_size);
         //translate([224,0,30])
