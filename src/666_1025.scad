@@ -97,13 +97,13 @@ union(){
 
                 translate([top_screw_position[1], main_tube_outer_diameter/4, - hull_drop_length * surface_distance(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
                     rotate([0,surface_angle(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                        %cylinder(h = 60, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                        cylinder(h = 60, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
             mirror([0,0,1])
 
                 translate([top_screw_position[1], main_tube_outer_diameter/4, - hull_drop_length * surface_distance(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
                     rotate([0,surface_angle(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                        %cylinder(h = 60, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                        cylinder(h = 60, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
 
 
@@ -414,7 +414,7 @@ module 666_1025_part(part_number, draft){
                 //základní dělení pro tisk
                 intersection(){
                     666_1025(draft);
-                    translate([previous_division,-20,-75])                        
+                    translate([previous_division + global_clearance/100,-20,-75])                        
                         cube([part_lenght - global_clearance/100, 150, 150]);
                 }
                 
@@ -475,7 +475,7 @@ module 666_1025_part(part_number, draft){
                 //základní dělení pro tisk
                 intersection(){
                     666_1025(draft);
-                    translate([previous_division,-20,-75])                        
+                    translate([previous_division - global_clearance/100, -20,-75])                        
                         cube([part_lenght - global_clearance/100, 150, 150]);
                 }
                 
@@ -535,7 +535,7 @@ module 666_1025_part(part_number, draft){
 
 //666_1025_part(1, draft);
 
-//666_1025_part(2, draft);
+666_1025_part(5, draft);
 /*
 666_1025_part(3, draft);
 
@@ -545,7 +545,7 @@ translate([20,0,0])
 //666_1025_part(5, draft);
 
 
-666_1025(draft);
+//666_1025(draft);
 
 
 use <888_1000.scad>
