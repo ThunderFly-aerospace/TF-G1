@@ -11,6 +11,13 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
+// Nastavení zobrazení
+$vpr = [38, 0, 38];
+$vpt = [0, 0, 0];
+$vpd = 1960;
+
+
+
 module 333_1037(twosided = true, draft = false){
 
     airfoil_NACA = 0016;    // typ použitého profilu
@@ -35,6 +42,11 @@ module 333_1037(twosided = true, draft = false){
                 // odečet frézovaného objemu, pokud jde o jednostranný polotovar, tak musí být zanechán materiál pro přidržení rámečku materiálu.
             	translate ([0, 0, 10/2 + (twosided ? (core_thickness/2) : (bridge_thickness + core_thickness/2))])
                     cube([material_width - 2*7.5, length, 10], center = true);
+                    minkowski()
+{
+  cube([10,10,1]);
+  cylinder(r=2,h=1);
+}
 
                 translate ([0, 0, -10/2 - (twosided ? core_thickness/2 : (bridge_thickness + core_thickness/2))])
                     cube([material_width - 2*7.5, length, 10], center = true);
@@ -55,8 +67,10 @@ module 333_1037(twosided = true, draft = false){
 
             // přechod z kořenu rotorového listu na list
             intersection(){
+                union(){
                 translate ([ 0.1, 0, 0])
                     cube([50,length,airfoil_thickness], center = true);
+                }
 
                 union(){
                     translate ([ -material_width/2 + 2.6 + 7.5, length/2, 0])
@@ -108,7 +122,7 @@ module 333_1037_doc(length = 970, material_width = 70, twosided = true, draft = 
 
 }
 
-333_1037(twosided = false, draft = true);
+333_1037(twosided = false, draft = draft);
 333_1037_doc(length=970);
 
 
