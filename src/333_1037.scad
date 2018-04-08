@@ -27,6 +27,7 @@ module 333_1037(twosided = true, draft = false){
     core_thickness = 1.0;       // tloušťka jádra
     airfoil_thickness = (airfoil_NACA/100) * airfoil_depth; // vypočtená maximální tloušťka profilu
     bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
+    milling_cutter_radius = 2.5;
 
     if(twosided) // výpis vypočtené tloušťky profilu
         echo("Minimum material thickness", airfoil_thickness);
@@ -41,12 +42,12 @@ module 333_1037(twosided = true, draft = false){
 
                 // odečet frézovaného objemu, pokud jde o jednostranný polotovar, tak musí být zanechán materiál pro přidržení rámečku materiálu.
             	translate ([0, 0, 10/2 + (twosided ? (core_thickness/2) : (bridge_thickness + core_thickness/2))])
-                    cube([material_width - 2*7.5, length, 10], center = true);
                     minkowski()
-{
-  cube([10,10,1]);
-  cylinder(r=2,h=1);
-}
+                    {
+                      cube([material_width - 2*7.5 - 2* milling_cutter_radius, length, 10 - 2* milling_cutter_radius], center = true);
+                      rotate([90,0,0])
+                        cylinder(r=milling_cutter_radius, h=1, $fn = draft ? 20 :50);
+                    }
 
                 translate ([0, 0, -10/2 - (twosided ? core_thickness/2 : (bridge_thickness + core_thickness/2))])
                     cube([material_width - 2*7.5, length, 10], center = true);
