@@ -152,3 +152,6 @@ vzdalenost_y = (131 - radius_undercarriage)/tan(79);
 echo ("vzdalenost_y is:", vzdalenost_y);
 
 maximum_printable_size = 150;
+
+
+/
