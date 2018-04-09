@@ -38,13 +38,18 @@ module 333_1037(twosided = true, draft = false){
         union(){
             // laminátové jádro listu
             difference (){
-                cube([material_width, length, airfoil_thickness], center = true);
+                minkowski()     // základní materiál
+                {                
+                    cube([material_width - 2*milling_cutter_radius, length-1, airfoil_thickness - 2*milling_cutter_radius], center = true);
+                    rotate([90,0,0])
+                        cylinder(r=milling_cutter_radius, h=1, $fn = draft ? 20 :50, center = true);
+                }
 
                 // odečet frézovaného objemu, pokud jde o jednostranný polotovar, tak musí být zanechán materiál pro přidržení rámečku materiálu.
             	translate ([0, 0, 10/2 + (twosided ? (core_thickness/2) : (bridge_thickness + core_thickness/2))])
                     minkowski()
                     {
-                      cube([material_width - 2*7.5 - 2* milling_cutter_radius, length, 10 - 2* milling_cutter_radius], center = true);
+                      cube([material_width - (material_width - airfoil_depth - 4* milling_cutter_radius), length, 10 - 2* milling_cutter_radius], center = true);
                       rotate([90,0,0])
                         cylinder(r=milling_cutter_radius, h=1, $fn = draft ? 20 :50);
                     }
@@ -55,7 +60,11 @@ module 333_1037(twosided = true, draft = false){
 
             // kořeny rotorového listu
             translate ([ 0.1, -970/2 + 60, 0])
+            {
                 cube ([50, 120, airfoil_thickness], center = true);
+                bevel(core_thickness/2,milling_cutter_radius,milling_cutter_radius, draft ? 20 : 50) cube ([50, 120, airfoil_thickness], center = true);
+
+            }
 
             translate ([ 0.1, 970/2 - 60, 0])
                 cube ([50, 120, airfoil_thickness], center = true);
@@ -123,8 +132,8 @@ module 333_1037_doc(length = 970, material_width = 70, twosided = true, draft = 
 
 }
 
-333_1037(twosided = false, draft = draft);
-333_1037_doc(length=970);
+333_1037(twosided = true, draft = draft);
+//333_1037_doc(length=970);
 
 
 use <./lib/naca4.scad>
