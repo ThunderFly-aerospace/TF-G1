@@ -330,7 +330,7 @@ module 666_1029(draft){
                     translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 3, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                         rotate([180,0,0])
                             union(){
-                                translate([17,0,-13])
+                                translate([17,8,-13])
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 20, r = 18, $fn = draft ? 100 : 200);
@@ -339,7 +339,7 @@ module 666_1029(draft){
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                         }
                                 mirror([1,0,0])
-                                translate([21,0,-13])
+                                translate([21,8,-13])
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 15, r = 18, $fn = draft ? 100 : 200);
@@ -375,7 +375,7 @@ module 666_1029(draft){
                     translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 3, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                         rotate([180,0,0])
                             union(){
-                                translate([17,0,-13])
+                                translate([17,8,-13])
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 20, r = 18, $fn = draft ? 100 : 200);
@@ -384,7 +384,7 @@ module 666_1029(draft){
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                         }
                                 mirror([1,0,0])
-                                translate([21,0,-13])
+                                translate([21,8,-13])
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 15, r = 18, $fn = draft ? 100 : 200);
