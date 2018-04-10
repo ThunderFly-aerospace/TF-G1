@@ -62,9 +62,8 @@ module lightening_pricne (x_size, y_size, z_size){
 
 //sestava - šroub, matka, kvádřík
 
-        module screw_top (position_number,draft){
+        module screw_top (position_number, draft){
         	//funkce
-        		for (position_number){
 
         	distance_top = - hull_drop_length * surface_distance(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
         	echo (distance_top);
@@ -148,15 +147,12 @@ module lightening_pricne (x_size, y_size, z_size){
 
 
 
-        //final for
-        }
 //final module
 }
 
 ///////////////////////
         module screw_bottom (position_number,draft){
         	//funkce
-        		for (position_number){
 
         	distance_bottom = - hull_drop_length * surface_distance(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
         	echo (distance_bottom);
@@ -240,8 +236,7 @@ module lightening_pricne (x_size, y_size, z_size){
 
 
 
-        //final for
-        }
+
 //final module
 }
 
@@ -265,13 +260,14 @@ distance_top = - hull_drop_length * surface_distance(x = top_screw_position[1]/h
 
 ////////
 //A = hull_drop_length*(base_division[3]/hull_drop_length);		//délka v ose X
-B = hull_drop_length*surface_distance(x = base_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false); 	//Délka v ose Z
+/*
+B = hull_drop_length*surface_distance(x = base_division[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false); 	//Délka v ose Z
 
 C = (B - 5) / (15 + 5); //B -> vzdálenost v ose z
 echo("C is", C);
 echo(floor (C));
 
-
+*/
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -457,93 +453,41 @@ echo(floor (C));
 
 
 
-        //šrouby a matky horní kryt - vždy spojení šroubu a matky dohromady
+        //šrouby a matky HORNÍ kryt - vždy spojení šroubu a matky dohromady
 
-        //část A
-        
-                %screw_top (1, draft);
-            mirror([0,0,1])
-                %screw_top (1, draft);
-
-        //část B
-               	%screw_top (2, draft);
-            mirror([0,0,1])
-               	%screw_top (2, draft);
-
-        //část C
-                %screw_top (3, draft);
-            mirror([0,0,1])
-                %screw_top (3, draft);
-
-        //část D        
-                %screw_top (4, draft);
-            mirror([0,0,1])
-                %screw_top (4, draft);
-
-                %screw_top (5, draft);
-            mirror([0,0,1])
-                %screw_top (5, draft);
-
-    //šrouby a matky spodní kryt - vždy spojení šroubu a matky dohromady
-
-    //A
-             	%screw_bottom (1, draft);
+        for (position_number = [1:5])
+        {
+        		screw_top(position_number, draft);
         	mirror([0,0,1])
-             	%screw_bottom (1, draft);
-
-       			%screw_bottom(2, draft);
-       		mirror([0,0,1])
-       			%screw_bottom(2, draft);
-
-
-        //D
-                %screw_bottom(3, draft);
-            mirror([0,0,1])
-                %screw_bottom(3, draft);
-
-   				%screw_bottom(4, draft);
-   			mirror([0,0,1])
-        		%screw_bottom(4, draft);
-
-
-
-
-
-        //akumulátory
-        translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness - sink_of_accumulator,-height_of_accumulator*1.5])  
-            cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
-
-        translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness- sink_of_accumulator,height_of_accumulator/2])  
-            cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
-
-
-        //šrouby pro připevnění akumulátorů
-        union(){
-        translate([move_of_accumulator -accumulator_holder_width/2 - accumulator_holder_thickness/2,-50,height_of_accumulator])
-            rotate([270,0,0])
-                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2,-50,height_of_accumulator])
-            rotate([270,0,0])
-                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-            
-        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,-50,-height_of_accumulator])
-            rotate([270,0,0])
-                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2,-50,-height_of_accumulator])
-            rotate([270,0,0])
-                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-
-        //matka
-        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,-main_tube_outer_diameter/4,height_of_accumulator])
-            rotate([90,0,0])
-               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+        		screw_top(position_number, draft);
+        }
     
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2,-main_tube_outer_diameter/4,height_of_accumulator])
-            rotate([90,0,0])
-               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+    	//šrouby a matky SPODNÍ kryt - vždy spojení šroubu a matky dohromady
 
+        for (position_number = [1:4])
+        {
+        		screw_bottom(position_number, draft);
+        	mirror([0,0,1])
+        		screw_bottom(position_number, draft);
+        }
+
+        //spojení akumulátor + otvor na šroub + otvor na matku
+
+        union (){
+        //akumulátor
+        translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness - sink_of_accumulator,-height_of_accumulator*1.5])  
+           		cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
+	    
+	    //šrouby pro připevnění akumulátorů
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,0,-height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2,0,-height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+        
+        //matka
         translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,-main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
@@ -552,6 +496,36 @@ echo(floor (C));
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
         }
+
+        //spojení akumulátor + otvor na šroub + otvor na matku
+
+        mirror ([0,0,1])
+
+        union (){
+        //akumulátor
+        translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness - sink_of_accumulator,-height_of_accumulator*1.5])  
+           		cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
+	    
+	    //šrouby pro připevnění akumulátorů
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,0,-height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2,0,-height_of_accumulator])
+            rotate([270,0,0])
+                cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+        
+        //matka
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,-main_tube_outer_diameter/4,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+    
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, - main_tube_outer_diameter/4,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+        }
+
+
         //připevnění horizontální trubky
         //A
 
@@ -632,7 +606,28 @@ echo(floor (C));
             
             }
 
+for (position_number = [1:5]){
+B = hull_drop_length*surface_distance(x = base_division[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false); 	//Délka v ose Z
 
+C = (B - 5) / (15 + 5); //B -> vzdálenost v ose z
+echo("C is", C);
+echo(floor (C));
+
+
+//for (i = [0:10*sqrt(2) + 5: hull_drop_length*(base_division[position_number]/hull_drop_length)], j = [0: 10*sqrt(2) + 5 : B])
+	for(i = [0: 15 + 10 : hull_drop_length*(base_division[position_number]/hull_drop_length)], j = [0: 15 + 5 : floor(C) * 15 + floor(C) * 5 ])
+
+{
+
+translate([35,0,0])
+rotate([0,180,180])
+%union(){
+translate([i,0,j])
+	rotate([0,45,0])
+		cube ([10,hull_z_size, 10], center = true);
+}
+}
+}
     //final difference
     }
 /*

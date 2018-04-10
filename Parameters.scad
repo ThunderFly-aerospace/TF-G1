@@ -81,12 +81,7 @@ cover_pilon_division = [0,170,height_of_vertical_tube + main_tube_outer_diameter
 
 //pozice šroubů
 	//horní kryt
-top_screw_position = [0, 
-                        (top_cover_division[0] + top_cover_division[1])/2, 
-                        (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1], 
-                        (top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],
-                        (top_cover_division[4] - top_cover_division[3])/8 + top_cover_division[3],
-                        (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 15];
+top_screw_position = [0,(top_cover_division[0] + top_cover_division[1])/2,(top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1],(top_cover_division[3] - top_cover_division[2])/2 + top_cover_division[2],(top_cover_division[4] - top_cover_division[3])/8 + top_cover_division[3],(top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - 15];
 	//spodní kryt
 bottom_screw_position = [0,
                         (bottom_cover_division[0] + bottom_cover_division[1])*(2/6), 
@@ -152,3 +147,5 @@ vzdalenost_y = (131 - radius_undercarriage)/tan(79);
 echo ("vzdalenost_y is:", vzdalenost_y);
 
 maximum_printable_size = 150;
+
+

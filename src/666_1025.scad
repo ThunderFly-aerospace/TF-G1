@@ -149,7 +149,7 @@ union(){
 
 
             //část D
-                translate([hull_drop_length * (top_screw_position[4]/hull_drop_length),main_tube_outer_diameter/4,- hull_drop_length *  surface_distance(x = top_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
+             translate([hull_drop_length * (top_screw_position[4]/hull_drop_length),main_tube_outer_diameter/4,- hull_drop_length *  surface_distance(x = top_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
                         cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                             
             //část E
@@ -300,24 +300,24 @@ union(){
                 difference(){
                    
             translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 12,38])
-                rotate([90,0,0])
+               rotate([90,0,0])
                             union(){
-                                translate([17,0,0])
+                                translate([15,7,-13])
                                     rotate([0,-75,0])
                                         union(){
-                                                cylinder(h = 20, r = 8, $fn = draft ? 100 : 200);
+                                                cylinder(h = 20, r = 20, $fn = draft ? 100 : 200);
                                             translate([0,0,20])    
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
                                         }
                                 mirror([1,0,0])
-                                translate([22,0,0])
+                                translate([21,7,-12])
                                     rotate([0,-75,0])
                                         union(){
-                                                cylinder(h = 20, r = 8, $fn = draft ? 100 : 200);
-                                            translate([0,0,20])    
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
+                                                cylinder(h = 15, r = 20, $fn = draft ? 100 : 200);
+                                            translate([0,0,15])    
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
                                         }
                             }
             translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
@@ -349,22 +349,22 @@ union(){
             translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 12,38])
                 rotate([90,0,0])
                             union(){
-                                translate([17,0,0])
+                                translate([15,7,-13])
                                     rotate([0,-75,0])
                                         union(){
-                                                cylinder(h = 20, r = 8, $fn = draft ? 100 : 200);
+                                                cylinder(h = 20, r = 20, $fn = draft ? 100 : 200);
                                             translate([0,0,20])    
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
                                         }
                                 mirror([1,0,0])
-                                translate([22,0,0])
+                                translate([21,7,-12])
                                     rotate([0,-75,0])
                                         union(){
-                                                cylinder(h = 20, r = 8, $fn = draft ? 100 : 200);
-                                            translate([0,0,20])    
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
-                                                sphere (r = 8,$fs = 0.5, $fa = 10);
+                                                cylinder(h = 15, r = 20, $fn = draft ? 100 : 200);
+                                            translate([0,0,15])    
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
+                                                sphere (r = 20,$fs = 0.5, $fa = 10);
                                         }
                             }
             translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
