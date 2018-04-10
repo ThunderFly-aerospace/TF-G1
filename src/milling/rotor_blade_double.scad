@@ -6,10 +6,10 @@ $vpd = 680;
 module rotor_blade_double(draft)
 {
     draft = false;        
-    plywood_thickness = 4;
+    plywood_thickness = 4.5;
     core_thickness = 1.0;
-    length = 970;       // celková délka polotovaru
-    material_width = 70;
+    length = 974+5;       // celková délka polotovaru
+    material_width = 50;
     side_margin = 10; 
 
     x_size = 2*material_width + 3*side_margin;

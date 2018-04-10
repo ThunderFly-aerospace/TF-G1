@@ -1,9 +1,10 @@
 include <../../Parameters.scad>
-use <../333_1037.scad>
+use <../666_1201.scad>
 
 $vpd = 680;
+draft = false;
         
-333_1037(twosided = true, draft = false);
+666_1201(draft = draft, holes = true);
 
 
 

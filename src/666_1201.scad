@@ -1,13 +1,13 @@
 
 DOC_SCALING_FACTOR = 100;
-DOC_HEIGHT = 250;
+DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
-draft = false;   // sets rendering quality to draft.
+draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
@@ -18,82 +18,109 @@ $vpd = 1960;
 */
 
 
-module 333_1037(twosided = true, draft = false){
+module 666_1201(draft = false, holes = true){
 
     airfoil_NACA = 0016;    // typ použitého profilu
     airfoil_depth = 50; // hloubka profilu
-    length = 970-1;       // celková délka polotovaru
-    material_width = 70;
+    length = 970;       // celková délka polotovaru
     core_thickness = 1.0;       // tloušťka jádra
-    airfoil_thickness = (airfoil_NACA/100) * airfoil_depth; // vypočtená maximální tloušťka profilu
     bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
+    airfoil_thickness = (airfoil_NACA/100) * (airfoil_depth + bridge_thickness); // vypočtená maximální tloušťka profilu
     milling_cutter_radius = 1.5;
 
-    if(twosided) // výpis vypočtené tloušťky profilu
-        echo("Minimum material thickness", airfoil_thickness);
-    else
-        echo("Minimum material thickness", airfoil_thickness/2 - core_thickness/2);  
+    echo("Minimum material thickness", airfoil_thickness);
 
-    //difference (){      // odečet poloviny polotovaru a jádra v případě, že jde o jednostranný  polotovar
+    difference (){      // odečet poloviny polotovaru a jádra v případě, že jde o jednostranný  polotovar
+        union(){
+            // profil rotorového listu
+            //color("Blue",0.5)
+            intersection(){
+                cube([airfoil_depth, length,airfoil_thickness], center = true);
 
-    difference (){
-        cube([material_width - 2*milling_cutter_radius, length, airfoil_thickness - 2*milling_cutter_radius], center = true); // základní materiál
+                translate ([ -airfoil_depth/2, length/2, 0])
+                    rotate([90, 0, 0])
+                        airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = draft ? 50 : 100, h = length, open = false);  
+            }
 
-        // odečet frézovaného objemu, pokud jde o jednostranný polotovar, tak musí být zanechán materiál pro přidržení rámečku materiálu.
-    	translate([airfoil_depth/2 + milling_cutter_radius, 0, airfoil_thickness/2 - milling_cutter_radius - core_thickness/2])
-            cube([4* milling_cutter_radius, 2*length, 2* milling_cutter_radius], center = true);
+            // kořen rotorevého listu
+            translate ([0, -length/2 + 110/2, 0])
+                cube([airfoil_depth, 110, airfoil_thickness], center = true);
 
-        translate([-airfoil_depth/2 + 0.1 - milling_cutter_radius, 0, airfoil_thickness/2 - milling_cutter_radius - core_thickness/2])
-            cube([4* milling_cutter_radius, 2*length, 2* milling_cutter_radius], center = true);
+            // přechod z kořenu rotorového listu na list
+            intersection(){
+                cube([airfoil_depth, length, airfoil_thickness], center = true);
 
-        // boční drážky mezi rámečkem a listem
-        translate([airfoil_depth/2 + milling_cutter_radius, 0, milling_cutter_radius + core_thickness/2])
-            rotate([90,0,0])
-                cylinder(r = milling_cutter_radius, h = 2*length, $fn = draft ? 20 :50, center = true);
+                translate ([ -airfoil_depth/2, -length/2, 0])
+                    rotate([-90,0,0])
+                        bevel(110,15,15,draft ? 5 : 50)
+                            airfoil(naca = airfoil_NACA, L = airfoil_depth, N = draft ? 50 : 100, h = length, open = false);
 
-        translate([-airfoil_depth/2 + 0.1 - milling_cutter_radius, 0, milling_cutter_radius + core_thickness/2])
-            rotate([90,0,0])
-                cylinder(r = milling_cutter_radius, h = 2*length, $fn = draft ? 20 :50, center = true);
-                
-        // místo pro list
-        translate ([0, 0, airfoil_thickness/2 + core_thickness/2])
-            cube([airfoil_depth + 2* milling_cutter_radius, length - 2*120, airfoil_thickness], center = true);
+            }
+
+            //zakončení listu
+            translate ([-airfoil_depth/2, length/2, 0])
+               intersection(){
+                    translate ([airfoil_depth/2, 0, 0])
+                        cube([airfoil_depth, length, airfoil_thickness], center = true);
+            
+                    rotate([0,90,0])
+                        rotate_extrude($fn = draft ? 50 : 100)
+                            rotate([0,0,90])
+                                difference()
+                                {
+                                  polygon(points = airfoil_data(naca=airfoil_NACA, L = airfoil_depth + bridge_thickness, N=draft ? 50 : 200)); 
+                                  square(airfoil_depth + bridge_thickness); 
+                                }
+                }
+
+        }
+
+        if (holes)
+        {
+            // díry pro uchycení listu
+            translate([-airfoil_depth/4,-length/2,0])
+                rotate([180,0,90])
+                    union(){
+                        // díry pro uchycení rotorového listu
+                        translate([23-14,7-7,-1])
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+
+                        translate([43-14,25-7,-1])   
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+
+                        translate([63-14, 7-7, -1])  
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+
+                        translate([83-14, 23-7, -1]) 
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+
+                        translate([103-14, 7-7, -1]) 
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                    }
+
+            // díry pro vyvážení
+            translate([-airfoil_depth/4,length/4,0])
+                rotate([0,0,90])
+                    union(){
+                        // díry pro uchycení rotorového listu
+                        translate([-15,0,0])
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+
+                        translate([0,0,0])   
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+
+                        translate([15, 0, 0])  
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                    }
+
+        }
 
 
     }
 
-    // profil rotorového listu
-    /*//color("Blue",0.5)
-    translate ([ -airfoil_depth/2 + 0.1, length/2, 0])
-        rotate([90, 0, 0])
-            airfoil(naca = airfoil_NACA, L = airfoil_depth, N = draft ? 50 : 100, h = length, open = false);  
-
-    // přechod z kořenu rotorového listu na list
-    intersection(){
-        translate ([ 0.1, 0, 0])
-            minkowski()     // základní materiál
-            {
-                cube([airfoil_depth - 2* milling_cutter_radius, length,airfoil_thickness - 2* milling_cutter_radius], center = true);
-                rotate([90,0,0])
-                    cylinder(r = milling_cutter_radius, h = 2*length, $fn = draft ? 20 :50, center = true);
-            }
-
-        union(){
-            translate ([ -material_width/2 + 2.6 + 7.5, length/2, 0])
-                rotate([90, 0, 0])
-                    bevel(120,15,15, draft ? 5 : 50)
-                        airfoil(naca = airfoil_NACA, L = airfoil_depth, N = draft ? 50 : 100, h = length, open = false);
-
-            translate ([ -material_width/2 + 2.6 + 7.5, -length/2, 0])
-                rotate([-90,0,0])
-                    bevel(120,15,15,draft ? 5 : 50)
-                        airfoil(naca = airfoil_NACA, L = airfoil_depth, N = draft ? 50 : 100, h = length, open = false);
-        }
-    }*/
-
 }
 
-module 333_1037_doc(length = 970, material_width = 70, twosided = true, draft = false){
+module 666_1201_doc(length = 970, material_width = 50, twosided = true, draft = false){
 
     translate([0, 0, DOC_HEIGHT])
     color("Black")
@@ -112,7 +139,6 @@ module 333_1037_doc(length = 970, material_width = 70, twosided = true, draft = 
             translate([material_width / 2, -length/ 2, 0])
                 line(DIM_SPACE * 3, line_width=DIM_LINE_WIDTH);
 
-
             translate([-material_width / 2, length/2 + DIM_SPACE * 2 , 0])
                 dimensions(material_width, line_width=DIM_LINE_WIDTH, loc=DIM_CENTER);
 
@@ -120,11 +146,10 @@ module 333_1037_doc(length = 970, material_width = 70, twosided = true, draft = 
                 rotate([0, 0, 90])
                     dimensions(length, line_width=DIM_LINE_WIDTH, loc=DIM_CENTER);
         }
-
 }
 
-333_1037(twosided = true, draft = draft);
-//333_1037_doc(length=970);
+666_1201(draft = draft, holes = true);
+666_1201_doc(length=970);
 
 
 
