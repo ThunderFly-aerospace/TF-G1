@@ -212,8 +212,7 @@ use <666_1028.scad>
 use <666_1006.scad>
 use <333_1037.scad>
 use <666_1232.scad>
-use <888_1008_A.scad>
-use <888_1008_B.scad>
+use <888_1008.scad>
 use <666_1014.scad>
 
 use <./lib/naca4.scad>
