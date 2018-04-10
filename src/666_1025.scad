@@ -19,7 +19,68 @@ Otvory pro šrouby v předním dílu jsou oválné, protože nejsou kolmo k rovi
 */
 
 
+////// otvory pro šrouby pro připevnění k dílu 666_1027
+module screw_top (position_number, draft){
+            //funkce
 
+            distance_top = - hull_drop_length * surface_distance(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
+            echo (distance_top);
+
+        if (position_number > 1 && position_number < 5) //tato podmínka znamená, že v pozici 2,3 a 4 se šroub neotáčí podle surface_angle a ani neposouvá podle surface_distance, protože je na podložce rovná hrana. Je tam tedy dané pevné posunugí -hull_z_size/2
+        {
+
+
+            if (distance_top <= - maximum_printable_size/2)
+            {
+                distance_top = - maximum_printable_size/2;
+                
+                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
+                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                
+            //final if
+            }
+            
+            else
+            {
+                distance_top = distance_top;
+
+                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size])
+                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+            //final if
+            }
+
+        //final if
+        }
+        else
+        {
+            if (distance_top <= - maximum_printable_size/2)
+            {
+                distance_top = - maximum_printable_size/2;
+                
+                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
+                    rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+            //fianl if
+            }
+            
+            else
+            {
+                distance_top = distance_top;
+
+                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
+                    rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+            //final if
+            }
+
+        //final if
+        }
+
+//final module
+}
+
+
+/////////////////////////////////////
 module 666_1025(draft = true){
 
     //UPPER SCREWS
@@ -91,30 +152,13 @@ union(){
                         airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
 
             //šrouby
-            //část A
-                //připevnění k podložce horní kryt
-    
 
-                translate([hull_drop_length * (top_screw_position[1]/hull_drop_length), main_tube_outer_diameter/4, - hull_drop_length * surface_distance(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                    rotate([0,surface_angle(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                        cylinder(h = 60, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
+            for (position_number = [1:5])
+            {
+                screw_top(position_number, draft);
             mirror([0,0,1])
-
-                translate([hull_drop_length * (top_screw_position[1]/hull_drop_length), main_tube_outer_diameter/4, - hull_drop_length * surface_distance(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                    rotate([0,surface_angle(x = top_screw_position[1]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                        cylinder(h = 60, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-
-
-            //část B
-                translate([hull_drop_length * (top_screw_position[2]/hull_drop_length), main_tube_outer_diameter/4,- hull_drop_length *  surface_distance(x = top_screw_position[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                        cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-
-            
-            //část C    
-                translate([hull_drop_length * (top_screw_position[3]/hull_drop_length),main_tube_outer_diameter/4,- hull_drop_length *  surface_distance(x = top_screw_position[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                        cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                screw_top(position_number, draft);
+            }
 
             //spojení částí C a D
 
@@ -145,23 +189,6 @@ union(){
                         translate([0,0,3])
                                 cylinder(h = 30, r = Nut_diameter_M3/2, $fn = draft ? 100 : 200);
                     }
-
-
-
-            //část D
-             translate([hull_drop_length * (top_screw_position[4]/hull_drop_length),main_tube_outer_diameter/4,- hull_drop_length *  surface_distance(x = top_screw_position[4]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                        cylinder(h = hull_z_size+30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                            
-            //část E
-
-                translate([hull_drop_length*(top_screw_position[5]/hull_drop_length),main_tube_outer_diameter/4, - hull_drop_length *  surface_distance(x = top_screw_position[5]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                    rotate([0,surface_angle(x = top_screw_position[5]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                       % cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-            mirror([0,0,1])
-                translate([hull_drop_length*(top_screw_position[5]/hull_drop_length),main_tube_outer_diameter/4, - hull_drop_length *  surface_distance(x = top_screw_position[5]/hull_drop_length, naca = hull_airfoil_thickness, open = false)])
-                    rotate([0,surface_angle(x = top_screw_position[5]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                        cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
          /*   //nápis
             translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
