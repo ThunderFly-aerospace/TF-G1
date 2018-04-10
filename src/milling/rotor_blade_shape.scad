@@ -1,7 +1,5 @@
 include <../../Parameters.scad>
-use <../333_1037.scad>
-
-use <rotor_blade_double.scad>
+use <../666_1201.scad>
 
 $vpd = 680;
 
@@ -10,7 +8,7 @@ plywood_thickness = 4;
 thickness = 30;
 core_thickness = 1.0;
 length = 970;       // celková délka polotovaru
-material_width = 70;
+material_width = 50;
 side_margin = 10; 
 
 difference()
@@ -21,14 +19,22 @@ difference()
         cube([x_size,y_size, thickness]);
 
     translate([0, 0, thickness])
+    {
         rotate([0,180,0])
         {
             translate([- material_width/2 - side_margin/2, 0, 0])
-                333_1037(twosided = true, draft = draft);
+                666_1201(holes = false, draft = draft);
 
             translate([material_width/2 + side_margin/2, 0, 0])
-                333_1037(twosided = true, draft = draft);
+                666_1201(holes = false, draft = draft);
         }
+
+        translate([- material_width/2 - side_margin/2, -length/2 + 60, 0])
+            cube([55, 120, 8.096], center = true);
+
+        translate([material_width/2 + side_margin/2, -length/2 + 60, 0])
+            cube([55, 120, 8.096], center = true);
+    }
 }
 
 
