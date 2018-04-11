@@ -68,7 +68,7 @@ module lightening_pricne (x_size, y_size, z_size){
         	distance_top = - hull_drop_length * surface_distance(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
         	echo (distance_top);
 
-        	if (position_number > 1 && position_number < 5)
+        	if (position_number > 1 && position_number < 5) //tato podmínka znamená, že v pozici 2,3 a 4 se šroub neotáčí podle surface_angle a ani neposouvá podle surface_distance, protože je na podložce rovná hrana. Je tam tedy dané pevné posunugí -hull_z_size/2
         	{
 
 
@@ -487,7 +487,7 @@ echo(floor (C));
             rotate([270,0,0])
                 cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
         
-        //matka
+        //matka spodní
         translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,-main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
@@ -495,6 +495,16 @@ echo(floor (C));
         translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, - main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+        
+        //matka horní
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,1.5*main_tube_outer_diameter,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+    
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, 1.5 * main_tube_outer_diameter,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+
         }
 
         //spojení akumulátor + otvor na šroub + otvor na matku
@@ -515,7 +525,7 @@ echo(floor (C));
             rotate([270,0,0])
                 cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
         
-        //matka
+        //matka spodní
         translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,-main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
@@ -523,6 +533,16 @@ echo(floor (C));
         translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, - main_tube_outer_diameter/4,-height_of_accumulator])
             rotate([90,0,0])
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+
+        //matka horní
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,1.5*main_tube_outer_diameter,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+    
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, 1.5 * main_tube_outer_diameter,-height_of_accumulator])
+            rotate([90,0,0])
+               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+
         }
 
 
@@ -605,7 +625,8 @@ echo(floor (C));
                         cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
             
             }
-
+/*
+//ODLEHČENÍ
 for (position_number = [1:5]){
 B = hull_drop_length*surface_distance(x = base_division[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false); 	//Délka v ose Z
 
@@ -628,6 +649,7 @@ translate([i,0,j])
 }
 }
 }
+*/
     //final difference
     }
 /*
