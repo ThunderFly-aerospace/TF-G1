@@ -39,7 +39,7 @@ module 666_1201(draft = false, holes = true){
 
                 translate ([ -airfoil_depth/2, length/2, 0])
                     rotate([90, 0, 0])
-                        airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = draft ? 50 : 100, h = length, open = false);  
+                        airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = draft ? 50 : 300, h = length, open = false);  
             }
 
             // kořen rotorevého listu
@@ -52,8 +52,8 @@ module 666_1201(draft = false, holes = true){
 
                 translate ([ -airfoil_depth/2, -length/2, 0])
                     rotate([-90,0,0])
-                        bevel(110,15,15,draft ? 5 : 50)
-                            airfoil(naca = airfoil_NACA, L = airfoil_depth, N = draft ? 50 : 100, h = length, open = false);
+                        bevel(110,15,15,draft ? 5 : 100)
+                            airfoil(naca = airfoil_NACA, L = airfoil_depth, N = draft ? 50 : 200, h = length, open = false);
 
             }
 
@@ -64,7 +64,7 @@ module 666_1201(draft = false, holes = true){
                         cube([airfoil_depth, length, airfoil_thickness], center = true);
             
                     rotate([0,90,0])
-                        rotate_extrude($fn = draft ? 50 : 100)
+                        rotate_extrude($fn = draft ? 50 : 200)
                             rotate([0,0,90])
                                 difference()
                                 {
@@ -82,20 +82,20 @@ module 666_1201(draft = false, holes = true){
                 rotate([180,0,90])
                     union(){
                         // díry pro uchycení rotorového listu
-                        translate([23-14,7-7,-1])
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                        translate([23-14,0,-1])
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([43-14,25-7,-1])   
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                        translate([43-14,18,-1])   
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([63-14, 7-7, -1])  
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                        translate([63-14, 0, -1])  
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([83-14, 23-7, -1]) 
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                        translate([83-14, 16, -1]) 
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([103-14, 7-7, -1]) 
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                        translate([103-14, 0, -1]) 
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
                     }
 
             // díry pro vyvážení
@@ -104,13 +104,13 @@ module 666_1201(draft = false, holes = true){
                     union(){
                         // díry pro uchycení rotorového listu
                         translate([-15,0,0])
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
                         translate([0,0,0])   
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
                         translate([15, 0, 0])  
-                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 10, center = true);
+                            cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
                     }
 
         }
