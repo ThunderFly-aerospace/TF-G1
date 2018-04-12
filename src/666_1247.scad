@@ -43,7 +43,7 @@ module 666_1247(){
 			//	rotate([AOA,0,0])	
 					cylinder (h = 10, r = 3.6/2, $fn = 10);
 
-			translate([-1,0,1.07])		// set AOA
+			translate([-1,0,1.07-0.5])		// set AOA
 				rotate([AOA,0,0])		
 					cube([200, 100, 10]);
 		}
