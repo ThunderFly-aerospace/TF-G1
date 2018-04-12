@@ -236,7 +236,44 @@ module 666_1029(draft){
                         translate([bottom_cover_division[1],-hull_y_size/3, -hull_z_size/2])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness,hull_z_size]);
                         
+                        //vyztužení dílu A
+                        union(){
+
+                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                            rotate([50,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness, + main_tube_outer_diameter/3])       // výztuha v přední části krytu
+                            rotate([60,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        
+                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness,0])       // výztuha v přední části krytu
+                            rotate([80,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        }
+
+
+
+                        mirror([0,0,1])
+
+                        union(){
+
+                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                            rotate([50,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness, + main_tube_outer_diameter/3])       // výztuha v přední části krytu
+                            rotate([60,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        
+                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness,0])       // výztuha v přední části krytu
+                            rotate([80,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                        }
+
                     }
+
                 //dutý tvar
                 translate([ribbon_width,0,0])
                     hollowing_skeleton(ribbon_width, draft);
