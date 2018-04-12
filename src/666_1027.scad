@@ -497,13 +497,13 @@ echo(floor (C));
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
         
         //matka horní
-        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,1.5*main_tube_outer_diameter,-height_of_accumulator])
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance/2,-height_of_accumulator])
             rotate([90,0,0])
-               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+               cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
     
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, 1.5 * main_tube_outer_diameter,-height_of_accumulator])
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance/2,-height_of_accumulator])
             rotate([90,0,0])
-               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+               cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
 
         }
 
@@ -535,13 +535,13 @@ echo(floor (C));
                cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
 
         //matka horní
-        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,1.5*main_tube_outer_diameter,-height_of_accumulator])
+        translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance/2,-height_of_accumulator])
             rotate([90,0,0])
-               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+               cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
     
-        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, 1.5 * main_tube_outer_diameter,-height_of_accumulator])
+        translate([move_of_accumulator + width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance/2,-height_of_accumulator])
             rotate([90,0,0])
-               cylinder(h = main_tube_outer_diameter, r = Nut_diameter_M3/2, $fn = 6);
+               cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
 
         }
 
