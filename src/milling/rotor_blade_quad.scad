@@ -4,7 +4,8 @@ use <../666_1201.scad>
 
 $vpd = 680;
 
-    draft = false;
+module rotor_blade_quad(draft)
+{
     plywood_thickness = 4;
     core_thickness = 1.0;        
     length = 970;       // celková délka polotovaru
@@ -28,4 +29,6 @@ $vpd = 680;
 
     translate([material_width + 4*side_margin, 0, plywood_thickness + core_thickness/2])
         666_1201(draft = draft, holes = true);
+}
 
+projection(cut = true) translate([0,0,-5]) rotor_blade_quad(draft = true);
