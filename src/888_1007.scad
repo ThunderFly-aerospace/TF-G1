@@ -6,12 +6,12 @@ include <./lib/dimlines.scad>
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
-
+/*
 // Nastavení zobrazení
 //$vpr = [338, 0, 357];
 $vpt = [67, 182, 195];
 $vpd = 1800;
-
+*/
 draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
@@ -55,7 +55,7 @@ module 888_1007_doc(){
                         text=str("666_1026"),
                         do_circle=false);
 
-    
+
             translate([0, main_pilon_position, height_of_vertical_tube])
             rotate($vpr)
             leader_line(angle=150, radius=main_tube_outer_diameter*3, angle_length=150, horz_line_length=20,
@@ -80,6 +80,18 @@ module 888_1007_doc(){
             translate([0,-2 + length_of_main_tube,0])
                 rotate([270,180,0])
                     666_1028_drillhelper_doc();
+
+            translate([0,0.75,0])
+                rotate([0,90,90])
+                    666_1026_drillhelper_doc();
+
+            translate([0,main_pilon_position,height_of_vertical_tube + main_tube_outer_diameter/2 + 1.75])
+                rotate([0,180,90])
+                    666_1026_drillhelper_doc();
+                    
+            translate([main_tube_outer_diameter, main_pilon_position ,main_tube_outer_diameter*2 + 1])
+                rotate([90,90,90])
+                    666_1017_drillhelper_doc();
 
         }
 
