@@ -154,3 +154,7 @@ echo ("vzdalenost_y is:", vzdalenost_y);
 maximum_printable_size = 150;
 
 
+////Pitotova trubice
+Pitot_tube_diameter = 4.02 + 1;
+
+
