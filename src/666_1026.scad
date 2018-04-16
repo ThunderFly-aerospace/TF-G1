@@ -154,6 +154,8 @@ module 666_1026_drillhelper_doc(){
 
 
 
+666_1026(draft);
+
 //666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2);
 
 
