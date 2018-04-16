@@ -237,39 +237,59 @@ module 666_1029(draft){
                             cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness,hull_z_size]);
                         
                         //vyztužení dílu A
+                        difference(){
+
+                        union(){ 
+
                         union(){
 
-                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                        translate([0,- hull_wall_thickness,width_of_engine_holder/2])       // výztuha v přední části krytu
                             rotate([50,0,0])
                                 cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness, + main_tube_outer_diameter/3])       // výztuha v přední části krytu
-                            rotate([60,0,0])
-                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        translate([0, - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2, main_tube_outer_diameter/2 + thickness_between_tubes + hull_wall_thickness + global_clearance/2])    
+                            rotate([55,0,0])
+                               cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
                         
-                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness,0])       // výztuha v přední části krytu
-                            rotate([80,0,0])
+                        translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,0])       // výztuha v přední části krytu
+                            rotate([65,0,0])
                                 cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
                         }
 
+                        translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,0])
+                            rotate([90,0,0])
+                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
 
                         mirror([0,0,1])
 
                         union(){
 
-                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                        translate([0,- hull_wall_thickness,width_of_engine_holder/2])       // výztuha v přední části krytu
                             rotate([50,0,0])
                                 cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness, + main_tube_outer_diameter/3])       // výztuha v přední části krytu
-                            rotate([60,0,0])
-                                cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        translate([0, - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2, main_tube_outer_diameter/2 + thickness_between_tubes + hull_wall_thickness + global_clearance/2])    
+                            rotate([55,0,0])
+                               cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
                         
-                        translate([0,-main_tube_outer_diameter/2 - coupling_wall_thickness,0])       // výztuha v přední části krytu
-                            rotate([80,0,0])
+                        translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,0])       // výztuha v přední části krytu
+                            rotate([65,0,0])
                                 cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
+                        }
+                        // final union výztuhy v části A
+                        }
+                            
+                            //odstranění zásahu výztuh do otvorů podvozkové trubky
+                        translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 - 20])
+                            union(){    
+                                translate([main_tube_outer_diameter/2,0,0])
+                                        cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+                                            cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
+                            }
+
+                        //final difference výztuhy v části A
                         }
 
                     }
