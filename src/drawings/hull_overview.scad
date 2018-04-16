@@ -2,6 +2,12 @@ include <../../Parameters.scad>
 use <../666_1029.scad>
 use <../666_1025.scad>
 
+// Nastavení zobrazení
+$vpr = [55, 0, 25];
+$vpt = [310, 38, 0];
+$vpd = 1135;
+
+
 draft = true;
 
 
