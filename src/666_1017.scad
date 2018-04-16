@@ -1,4 +1,13 @@
 
+DOC_SCALING_FACTOR = 100;
+DOC_HEIGHT = 50;
+
+include <./lib/dimlines.scad>
+
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;  
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;  
+
+
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
@@ -198,13 +207,42 @@ difference () {
 }
 
 
+module 666_1017_drillhelper_doc(){
+width=main_tube_outer_diameter+2*coupling_wall_thickness;
+depth=width;
+height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
 
+
+    color("Black")
+        union(){
+            //screw
+            translate ([7.5,0,main_tube_outer_diameter])
+                rotate ([0,0,0])
+                    circle_center(radius=main_tube_outer_diameter/4, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+
+            translate ([27.5,0,main_tube_outer_diameter])
+                rotate ([0,0,0])
+                    circle_center(radius=main_tube_outer_diameter/4, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+
+            translate ([height - main_tube_outer_diameter + 7.65,10 - M3_screw_diameter/2,main_tube_outer_diameter])
+                rotate ([0,0,0])
+                    circle_center(radius=main_tube_outer_diameter/4, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+
+            translate ([height - main_tube_outer_diameter + 7.65,- width/2 + 9.5,main_tube_outer_diameter])
+                rotate ([0,0,0])
+                    circle_center(radius=main_tube_outer_diameter/4, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+
+        }
+}
+
+666_1017_drillhelper_doc();
 
 
 //rotate([90,0,0])
   //  666_1017(draft);
 
 //translate([70,0,0])
+rotate([0,90,0])
 666_1017_drillhelper();
 
 include <../Parameters.scad>
