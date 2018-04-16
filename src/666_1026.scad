@@ -1,3 +1,11 @@
+DOC_SCALING_FACTOR = 100;
+DOC_HEIGHT = 50;
+
+include <./lib/dimlines.scad>
+
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;  
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;   
+
 
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
@@ -124,10 +132,29 @@ module 666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
 
 }
 
+module 666_1026_drillhelper_doc(){
+
+
+    color("Black")
+        union(){
+            //screw
+            translate ([0,-150*0.4,7.5])
+                rotate ([0,90,90])
+                    circle_center(radius=main_tube_outer_diameter/4, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+
+            translate ([0,-150*0.4,42.5])
+                rotate ([0,90,90])
+                    circle_center(radius=main_tube_outer_diameter/4, size=DIM_HOLE_CENTER, line_width=DIM_LINE_WIDTH);
+        }
+}
+
+
 
 //666_1026(draft);
 
+//rotate([270,0,0])
 666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2);
+666_1026_drillhelper_doc();
 
 
 include <../Parameters.scad>
