@@ -50,7 +50,7 @@ translate([main_pilon_position,70 - coupling_wall_thickness - main_tube_outer_di
 	rotate([0,-90,90])
 		666_1017();
 
-/*
+
 ////
 translate([length_of_main_tube - 80 + global_clearance,0,0])
 	rotate([0,90,0])
@@ -59,7 +59,7 @@ translate([length_of_main_tube - 80 + global_clearance,0,0])
 translate([length_of_main_tube - 80 + global_clearance,0,0])
 	rotate([0,-90,180])
 		666_1028();
-*/
+
 ////
 translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2])
 		666_1006();
