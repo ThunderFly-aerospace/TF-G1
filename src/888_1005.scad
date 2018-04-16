@@ -32,11 +32,11 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 ////
 	rotate([90,0,90])
 		666_1026(draft);
-
+/*
 translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2 + thickness_between_tubes,0])
 	rotate([-90,0,0])
 			666_1026(draft);
-
+*/
 
 //držák akumulátor
 /*
@@ -159,6 +159,11 @@ translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_u
 			    color([1,0,0])
 				cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 
+		//otvory pro připevnění dílu 666_1032
+		translate([main_pilon_position,cover_pilon_division[1] - cover_pilon_division[1]/4,- hull_z_size/2 ])
+                cylinder(h = hull_y_size, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
+ 		translate([main_pilon_position,cover_pilon_division[2] - (cover_pilon_division[2] - cover_pilon_division[1])*0.75,- hull_z_size/2 ])
+                cylinder(h = hull_y_size, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
 		}
 	
 		//kolmá na nejdelší - pro podvozek
