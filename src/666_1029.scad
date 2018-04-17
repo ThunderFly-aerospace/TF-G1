@@ -1,9 +1,9 @@
-/*
+
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-*/
+
 
 draft = true;
 
@@ -476,14 +476,14 @@ module 666_1029(draft){
         translate([0,0,0.3])
             intersection(){
                 translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter * 0.9,- hull_z_size/2])
-                        cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 0.6]);
-                drop(draft);
+                    cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 20]);
+                drop_skin(hull_wall_thickness, draft);
             }
         translate([0,0,-0.3])
             intersection(){       
                 translate([main_tube_outer_diameter + coupling_wall_thickness, - main_tube_outer_diameter*0.9, hull_z_size/2 - hull_wall_thickness/2])
-                        cube ([main_tube_outer_diameter*2, main_tube_outer_diameter * 0.9, 0.6]);
-            drop_skin(hull_wall_thickness, draft);
+                    cube ([main_tube_outer_diameter*2, main_tube_outer_diameter * 0.9, 20]);
+                drop_skin(hull_wall_thickness, draft);
             }
 
         //zadní
