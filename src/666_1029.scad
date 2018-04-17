@@ -475,13 +475,13 @@ module 666_1029(draft){
         //přední
         translate([0,0,0.3])
             intersection(){
-                translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter * 0.9,- hull_z_size/2])
+                translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter * 0.9,- hull_z_size/2 - 10])
                     cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 20]);
                 drop_skin(hull_wall_thickness, draft);
             }
         translate([0,0,-0.3])
             intersection(){       
-                translate([main_tube_outer_diameter + coupling_wall_thickness, - main_tube_outer_diameter*0.9, hull_z_size/2 - hull_wall_thickness/2])
+                translate([main_tube_outer_diameter + coupling_wall_thickness, - main_tube_outer_diameter*0.9, hull_z_size/2 - 10])
                     cube ([main_tube_outer_diameter*2, main_tube_outer_diameter * 0.9, 20]);
                 drop_skin(hull_wall_thickness, draft);
             }
