@@ -700,6 +700,8 @@ translate([60,0,0])
 //666_1025();
 //666_1029();
 
+
+
 /*
 //jen znázornění držáku akumulátoru
 translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thickness,height_of_accumulator])
@@ -720,3 +722,4 @@ use <666_1025.scad>
 use <666_1029.scad>
 use <888_1000.scad>
 use <888_1001.scad>
+use <888_1003.scad>

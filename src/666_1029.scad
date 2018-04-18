@@ -629,5 +629,6 @@ module 666_1029_E(draft){
 
 
 use <888_1000.scad>
+use <888_1003.scad>
 use <./lib/naca4.scad>
 include <../Parameters.scad>

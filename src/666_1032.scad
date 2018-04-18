@@ -43,14 +43,14 @@ module 666_1032(draft){
         //pro připevnění Pitotovo trubice
             intersection(){
                 difference(){
-                    translate([main_tube_outer_diameter/3,-main_tube_outer_diameter*0.75,cover_pilon_division[1] + main_tube_outer_diameter*2.9])
+                    translate([0,-main_tube_outer_diameter*0.75,cover_pilon_division[1] + main_tube_outer_diameter*3])
                         intersection(){
                                 cylinder(h = main_tube_outer_diameter*1.5, r1 = 1, r2 = main_tube_outer_diameter, $fn = draft ? 100 : 200);
                             translate([-main_tube_outer_diameter,-14,-main_tube_outer_diameter])
                                 cube([main_tube_outer_diameter*2,20,main_tube_outer_diameter*3]);
                         }
 
-                    translate([main_tube_outer_diameter*0.7,0,cover_pilon_division[1] + main_tube_outer_diameter*4])
+                    translate([main_tube_outer_diameter*0.5,0,cover_pilon_division[1] + main_tube_outer_diameter*4.2])
                         rotate([90,0,0])
                             union(){
                                 cylinder(h = 30, r = M3_screw_diameter/2, $fn = $draft ? 10 :20);
@@ -68,11 +68,11 @@ module 666_1032(draft){
                 //spodní kužele
                 difference(){
                     union(){
-                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2, - main_tube_outer_diameter - hull_wall_thickness, cover_pilon_division[1] - cover_pilon_division[1]/4 - main_tube_outer_diameter/3])
-                            cylinder (h = main_tube_outer_diameter, r1 = main_tube_outer_diameter/2, r2 = 1, $fn = draft ? 100 : 200);
+                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2, - main_tube_outer_diameter - hull_wall_thickness, cover_pilon_division[1] - cover_pilon_division[1]/4 - 0.6*main_tube_outer_diameter/3])
+                            cylinder (h = main_tube_outer_diameter, r1 = main_tube_outer_diameter, r2 = 1, $fn = draft ? 100 : 200);
                     
-                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2,  main_tube_outer_diameter + hull_wall_thickness, cover_pilon_division[1] - cover_pilon_division[1]/4 - main_tube_outer_diameter/3])
-                            cylinder (h = main_tube_outer_diameter, r1 = main_tube_outer_diameter/2, r2 = 1, $fn = draft ? 100 : 200);
+                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2,  main_tube_outer_diameter + hull_wall_thickness, cover_pilon_division[1] - cover_pilon_division[1]/4 - 0.6*main_tube_outer_diameter/3])
+                            cylinder (h = main_tube_outer_diameter, r1 = main_tube_outer_diameter, r2 = 1, $fn = draft ? 100 : 200);
                    
                     }
                     
@@ -85,15 +85,26 @@ module 666_1032(draft){
                             translate([0,0,hull_y_size*0.75 - 3* Nut_height_M4])
                                 cylinder(h = Nut_height_M4*2, r = Nut_diameter_M4/2, $fn = 6);
                             }
+                //odečtení trubky
+                translate ([main_pilon_position - cover_pilon_position + 2*hull_wall_thickness,0,0])
+                    color([1,0,0])
+                        cylinder (h = height_of_vertical_tube, r = main_tube_outer_diameter/2, $fn = 200);
+                //odstranění špičatých konců    
+                translate([main_pilon_position - cover_pilon_position - main_tube_outer_diameter + hull_wall_thickness*2, - main_tube_outer_diameter/4,0])
+                        cube([main_tube_outer_diameter*2, main_tube_outer_diameter/2,340]);
+
+
+
                 }
+                
                 //horní kužele
                 difference(){
                     union(){
-                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2, - main_tube_outer_diameter - hull_wall_thickness,cover_pilon_division[2] - (cover_pilon_division[2] - cover_pilon_division[1])*0.75 - 2*main_tube_outer_diameter/3])
-                            cylinder (h = main_tube_outer_diameter, r1 = 1, r2 = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2, - main_tube_outer_diameter - hull_wall_thickness,cover_pilon_division[2] - (cover_pilon_division[2] - cover_pilon_division[1])*0.75 - 2.3*main_tube_outer_diameter/3])
+                            cylinder (h = main_tube_outer_diameter, r1 = 1, r2 = main_tube_outer_diameter, $fn = draft ? 100 : 200);
                     
-                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2,  main_tube_outer_diameter + hull_wall_thickness, cover_pilon_division[2] - (cover_pilon_division[2] - cover_pilon_division[1])*0.75 - 2*main_tube_outer_diameter/3])
-                            cylinder (h = main_tube_outer_diameter, r1 = 1, r2 = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+                    translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2,  main_tube_outer_diameter + hull_wall_thickness, cover_pilon_division[2] - (cover_pilon_division[2] - cover_pilon_division[1])*0.75 - 2.3*main_tube_outer_diameter/3])
+                            cylinder (h = main_tube_outer_diameter, r1 = 1, r2 = main_tube_outer_diameter, $fn = draft ? 100 : 200);
                    
                     }
                     
@@ -106,7 +117,17 @@ module 666_1032(draft){
                             translate([0,0,hull_y_size*0.75 - 3* Nut_height_M4])
                                     cylinder(h = Nut_height_M4*2, r = Nut_diameter_M4/2, $fn = 6);
                             }
+                //odečtení trubky
+                translate ([main_pilon_position - cover_pilon_position + 2*hull_wall_thickness,0,0])
+                    color([1,0,0])
+                        cylinder (h = height_of_vertical_tube, r = main_tube_outer_diameter/2, $fn = 200);
+                //odstranění špičatých konců    
+                translate([main_pilon_position - cover_pilon_position - main_tube_outer_diameter + hull_wall_thickness*2, - main_tube_outer_diameter/4,0])
+                        cube([main_tube_outer_diameter*2, main_tube_outer_diameter/2,340]);
+
+                //difference
                 }
+
             //union    
             }
                 
@@ -114,7 +135,9 @@ module 666_1032(draft){
             //intersection
             }
 
-
+                    //translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2, - main_tube_outer_diameter - hull_wall_thickness,cover_pilon_division[2] - (cover_pilon_division[2] - cover_pilon_division[1])*0.75 - 2*main_tube_outer_diameter/3])
+                      //     % cylinder (h = main_tube_outer_diameter, r1 = 1, r2 = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+                   /// cube ([])
         //final union
         }
     	//pro otevření
@@ -132,19 +155,19 @@ module 666_1032(draft){
                 drop(draft);
 
         //otvory pro připevnění Pitotovo trubice
-        translate([main_tube_outer_diameter*0.7,0,cover_pilon_division[1] + main_tube_outer_diameter*4])
+                    translate([main_tube_outer_diameter*0.5,0,cover_pilon_division[1] + main_tube_outer_diameter*4.2])
             rotate([90,0,0])
                 union(){
                             cylinder(h = 30, r = M3_screw_diameter/2, $fn = $draft ? 10 :20);
                     translate([0,0,18 - Nut_height_M3])
                             cylinder(h = Nut_height_M3*3, r = Nut_diameter_M3/2, $fn = $draft ? 10:20);
                     //otvor pro trubici
-                    translate([-30,0,8])
+                    translate([-30, - Distance_hole_from_tube + Pitot_tube_diameter/2,8])
                         rotate([0,90,0])
                             cylinder(h = 60, r = Pitot_tube_diameter/2, $fn = draft ? 10 : 20);
                 }
 
-        //otvory pro připevnění k horizontální trubce
+       //otvory pro připevnění k vertikální trubce
         translate([main_pilon_position - cover_pilon_position + hull_wall_thickness*2,hull_y_size/2, cover_pilon_division[1] - cover_pilon_division[1]/4])
             rotate([90,0,0])
                 union(){               
