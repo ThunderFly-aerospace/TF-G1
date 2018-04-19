@@ -97,10 +97,12 @@ module 666_1028(){
 	       }
 
         //VERTICAL
-            translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
-                rotate([90,-87,0])
-                {
-                    hollow_airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+        difference(){
+                union(){
+                    translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
+                        rotate([90,-87,0])
+                        {
+                        hollow_airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 
             //výztuhy
               	intersection(){
@@ -123,6 +125,16 @@ module 666_1028(){
 
 	            }
                 }
+                }
+            
+            translate([145- Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width])
+                    cube([Rudder_depth, Rudder_length,Rudder_height + global_clearance + gap_width]);
+
+            }
+
+
+
+
 
 	    } // end of union
         // Start of substraction objects
@@ -233,9 +245,9 @@ module 666_1028_drillhelper_doc(){
 
 //rotate([270,-90,0])
 //666_1028_drillhelper();
-
-
-
+translate([150 - Rudder_depth + gap_width*1.5,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,- gap_width/2])
+rotate([90,-87 ,0])
+888_1010();
 
 666_1028();
 //666_1028_drillhelper_doc();
@@ -245,6 +257,7 @@ module 666_1028_drillhelper_doc(){
   //cube ([150,150,150]);
 
 
+use <888_1010.scad>
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
