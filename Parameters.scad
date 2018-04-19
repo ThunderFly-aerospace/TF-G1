@@ -156,6 +156,11 @@ maximum_printable_size = 150;
 
 ////Pitotova trubice
 Pitot_tube_diameter = 4.02 + 1;
-Distance_hole_from_tube = 11.92;
+Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samotné trubičky
 
 
+////směrové kormidlo
+Rudder_length = 4*main_tube_outer_diameter;
+Rudder_height = 2*main_tube_outer_diameter;
+Rudder_depth = main_tube_outer_diameter/2;
+gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
