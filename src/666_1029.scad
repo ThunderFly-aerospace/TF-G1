@@ -1,9 +1,9 @@
-/*
+
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
 $vpt = [180, 25, -18];
 $vpd = 1280;
-*/
+
 
 draft = true;
 
@@ -350,7 +350,6 @@ module 666_1029(draft){
                     }  
 
                     //uzavření seshora + výztuhy
-                    /*
                     union(){
 
                         translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])  
@@ -374,7 +373,6 @@ module 666_1029(draft){
                         translate([bottom_cover_division[2],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width, - hull_z_size/2])
                             cube([hull_wall_thickness, ribbon_width, hull_z_size]);
                     }
-                    */
             }
             //odstranění z vnější strany
             drop(draft);
@@ -475,15 +473,15 @@ module 666_1029(draft){
         //přední
         translate([0,0,0.3])
             intersection(){
-                translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter * 0.9,- hull_z_size/2])
-                        cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 0.6]);
-                drop(draft);
+                translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter * 0.9,- hull_z_size/2 - 10])
+                    cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 20]);
+                drop_skin(hull_wall_thickness, draft);
             }
         translate([0,0,-0.3])
             intersection(){       
-                translate([main_tube_outer_diameter + coupling_wall_thickness, - main_tube_outer_diameter*0.9, hull_z_size/2 - hull_wall_thickness/2])
-                        cube ([main_tube_outer_diameter*2, main_tube_outer_diameter * 0.9, 0.6]);
-            drop_skin(hull_wall_thickness, draft);
+                translate([main_tube_outer_diameter + coupling_wall_thickness, - main_tube_outer_diameter*0.9, hull_z_size/2 - 10])
+                    cube ([main_tube_outer_diameter*2, main_tube_outer_diameter * 0.9, 20]);
+                drop_skin(hull_wall_thickness, draft);
             }
 
         //zadní
