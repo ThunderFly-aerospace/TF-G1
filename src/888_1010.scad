@@ -2,7 +2,7 @@
 draft = true;
 
 module 888_1010(){
-
+union(){
 
 difference(){
 	union(){
@@ -32,6 +32,35 @@ difference(){
 			}
 }
 
+		//výstupek
+
+	translate([115,- 3.5,35])	
+		difference(){
+			rotate([-20,0,0])
+
+			difference(){
+				union(){
+						cube([15,4*hull_wall_thickness,25]);
+				translate([15/2,4*hull_wall_thickness, 25])
+					rotate([90,0,0])
+						cylinder(h = 4*hull_wall_thickness, r = 15/2, $fn = draft ? 50 : 100);
+				}
+
+			translate([15/2, 5*hull_wall_thickness,25])
+				rotate([90,0,0])
+					cylinder(h = 6*hull_wall_thickness, r = 2, $fn = draft ? 50 : 100);
+
+			}
+
+			translate([-10,0,-10])
+				cube([50, 4.3*hull_wall_thickness,45]);
+		}
+
+
+
+
+//final union
+}
 //final module
 }
 
