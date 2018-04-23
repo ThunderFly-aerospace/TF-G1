@@ -144,12 +144,8 @@ GPS_middle_length = GPS_diameter + GPS_inner_length;      //Střední rozměr
 ////podzvozek
 
 radius_undercarriage = 25;
-
 vzdalenost_x = tan(20) * 131;
-echo ("vzdalenost_x is:", vzdalenost_x);
-
 vzdalenost_y = (131 - radius_undercarriage)/tan(79);
-echo ("vzdalenost_y is:", vzdalenost_y);
 
 maximum_printable_size = 150;
 

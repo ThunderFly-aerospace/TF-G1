@@ -1,7 +1,6 @@
 //vyvažovací přípravek
-draft = true;
 
-module 888_1009_base(draft){		//základna
+module 888_1009_base(){		//základna
 
 			cube([150,150,20]);			//základní plocha
 	
@@ -47,36 +46,53 @@ module 888_1009_base(draft){		//základna
 }
 
 
-module 888_1009_shape(draft){
+module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 
-union(){
-difference(){
-	//základní deska
+    airfoil_NACA = 0016;    // typ použitého profilu
+    airfoil_depth = 50; // hloubka profilu
+    length = 200;       // celková délka polotovaru
+    bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
+    airfoil_thickness = (airfoil_NACA/100) * (airfoil_depth + bridge_thickness); // vypočtená maximální tloušťka profilu
+
+    render()
+    difference(){
+        //základní materiál
 		color([0,0.5,0])
-			cube([130,60,20]);
-	//otvor pro rotorový list
-	translate([75,-60,-5])
-		rotate([0,0,30])
-			%cube([70,20,40]);
-}
-
-//výstupek pro nasazení rysky vlevo
-	translate([10,30,20])
-		cylinder(h = 10, r = 5, $fn = draft ? 50 : 100);
-
-//výstupek pro nasazení rysky vpravo
-	translate([120,30,20])
-		cylinder(h = 10, r = 5, $fn = draft ? 50 : 100);
+			cube([x_size,y_size,z_size], center = true);
+        //otvor pro rotorový list
+		rotate([0,0,45])
+			cube([45,150,40], center = true);
+               
+/*\        rotate([0,0,45])
+            666_1201(draft = true, holes = true);*/
+        rotate([0,0,45])
+            translate ([ -airfoil_depth/2, length/2, 0])
+                rotate([90, 0, 0])
+                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
 
-}
+    //otvory pro šrouby
+    translate([x_size/2 - x_size/10, 0, 0])
+        cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+
+    translate([-x_size/2 + x_size/10, 0, 0])
+        cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+
+    }
+
+/*    color([1,0.5,0])
+        rotate([0,0,45])
+            translate ([ -airfoil_depth/2, length/2, 0])
+                rotate([90, 0, 0])
+                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
+*/
 
 
 //final module tvar
 }
 
 
-module 888_1009_cradle(draft){		//kolébka
+module 888_1009_cradle(){		//kolébka
 		//základní deska
 		color([0.5,0,0])
 			cube([125,80,10]);
@@ -100,18 +116,16 @@ module 888_1009_cradle(draft){		//kolébka
 //final module kolébka	
 }
 
-
 translate([10 + 2.5,35,55])
 		%888_1009_cradle(draft);
 
 
 translate([10,45,100])
-		888_1009_shape(draft);
+		888_1009_shape();
 
 		888_1009_base(draft);
 
 
-
-use <./lib/naca4.scad>
 include <../Parameters.scad>
-
+use <./lib/naca4.scad>
+use <./666_1201.scad>
