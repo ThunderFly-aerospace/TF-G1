@@ -1,49 +1,44 @@
 //vyvažovací přípravek
-draft = true;
+
+
+module 888_1009_base_half(x_size = 180, y_size = 120, z_size = 20, thickness = 10){     //základna
+
+    translate([-x_size/2,-y_size/2,0])
+        cube([x_size/2,y_size,thickness], center = false);         //základní plocha
+    
+    //podpěra
+    render()
+    translate([x_size/2 - thickness,-y_size/2,0])
+        rotate([90,0,90])           
+            difference(){
+                    cube([120,80,thickness]);          //základní plocha pro zkosení
+                translate([0,0,-5])
+                    rotate([0,0,45])
+                        cube([120,120,20]);     //zkosení
+                translate([120,0,-5])
+                    rotate([0,0,45])
+                        cube([120,120,20]);     //zkosení
+                //vyskousnutí
+                translate([60,31.73,-5])
+                    rotate([0,0,30])
+                        cube([40,40,20]);    
+                translate([60,31.73,-5])
+                    rotate([0,0,45+15])
+                        cube([40,40,20]);       
+
+
+            }
+
+//final module základna
+}
+
+
 
 module 888_1009_base(){		//základna
 
-			cube([150,150,20]);			//základní plocha
-	
-//podpěra vpravo
-	translate([140,15,20])
-		rotate([90,0,90])
-			
-			difference(){
-					cube([120,80,10]);			//základní plocha pro zkosení
-				translate([0,0,-5])
-					rotate([0,0,45])
-						cube([120,120,20]);		//zkosení
-				translate([120,0,-5])
-					rotate([0,0,45])
-						cube([120,120,20]);		//zkosení
-				translate([60,31.73,-5])
-					rotate([0,0,45])
-						cube([20,20,20]);		//vyskousnutí
-
-
-			}
-
-//podpěra vlevo
-	translate([0,15,20])
-		rotate([90,0,90])
-			
-			difference(){
-					cube([120,80,10]);			//základní plocha pro zkosení
-				translate([0,0,-5])
-					rotate([0,0,45])
-						cube([120,120,20]);		//zkosení
-				translate([120,0,-5])
-					rotate([0,0,45])
-						cube([120,120,20]);		//zkosení
-				translate([60,31.73,-5])
-					rotate([0,0,45])
-						cube([20,20,20]);		//vyskousnutí
-
-
-			}
-
-//final module základna
+    888_1009_base_half();
+    mirror([1,0,0])
+        888_1009_base_half();
 }
 
 
@@ -73,7 +68,7 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 
 //výstupek pro nasazení rysky vlevo
 	translate([10,30,20])
-		cylinder(h = 10, r = 5, $fn = draft ? 50 : 100);
+		cylinder(h = 10, r = 5, $fn = 50);
 
         //otvory pro šrouby
         translate([x_size/2 - x_size/10, 0, 0])
@@ -152,13 +147,13 @@ module 888_1009_cradle(){		//kolébka
 //final module kolébka	
 }
 
-
+/*
 translate([10 + 2.5,34.972,50.063])
 		888_1009_cradle();
 
 translate([10,45,100])
 		888_1009_shape();
-
+*/
 		888_1009_base();
 
 
