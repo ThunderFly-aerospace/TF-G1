@@ -1,4 +1,5 @@
 //vyvažovací přípravek
+draft = true;
 
 module 888_1009_base(){		//základna
 
@@ -70,6 +71,9 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
+//výstupek pro nasazení rysky vlevo
+	translate([10,30,20])
+		cylinder(h = 10, r = 5, $fn = draft ? 50 : 100);
 
         //otvory pro šrouby
         translate([x_size/2 - x_size/10, 0, 0])
@@ -101,35 +105,64 @@ module 888_1009_cradle(){		//kolébka
 		color([0.5,0,0])
 			cube([125,80,10]);
 
-	union(){
 		//zábrana vlevo
 		translate([0,0,10])
 			color([0.5,0,0])
 				cube([10,80,40]);				//zábrana
-		translate([-12.5,40 - 12.5/2,10 + 50/3 - 10])
-				cube([12.5,12.5,5]);				//koska pro hrot
-		translate([-12.5/2 - 2.5,40,10 + 50/3 - 10 - 20])
-			rotate([0,0,45])
-				cylinder(h = 20, r1 = 0, r2 = 12.5/2, $fn = 4);
+		
+	difference(){
+		translate([-10.5,40 - 12.5/2,10 + 50/3 - 25])
+				cube([11.5,12.5,27]);				//koska pro hrot
+		
+		translate([-14,31.25,-4])
+			rotate([16,0,0])
+				cube([15,10,35]);
 
+		translate([-14,39.55,0])
+			rotate([-16,0,0])
+				cube([15,10,35]);
+
+		translate([-5,30,-1.45])
+				cube([6,20,25]);
+	}
+		
 		//zábrana vpravo
 		translate([115,0,10])
 			color([0.5,0,0])
 				cube([10,80,40]);
+	
+
+	difference(){
+		translate([ + 124,40 - 12.5/2,10 + 50/3 - 25])
+				cube([11.5,12.5,27]);				//koska pro hrot
+		
+		translate([ + 124,31.25,-4])
+			rotate([16,0,0])
+				cube([15,10,35]);
+
+		translate([124,39.55,0])
+			rotate([-16,0,0])
+				cube([15,10,35]);
+
+		translate([124,30,-1.45])
+				cube([6,20,25]);
 	}
+
+
 //final module kolébka	
 }
 
-translate([10 + 2.5,35,55])
-		%888_1009_cradle(draft);
 
+translate([10 + 2.5,34.972,50.063])
+		888_1009_cradle();
 
 translate([10,45,100])
 		888_1009_shape();
 
-		888_1009_base(draft);
+		888_1009_base();
 
 
 include <../Parameters.scad>
 use <./lib/naca4.scad>
-use <./666_1201.scad>
+include <../Parameters.scad>
+
