@@ -1,6 +1,8 @@
 //vyvažovací přípravek
 
 
+wall_thickness=10; 
+
 module 888_1009_base_half(x_size = 180, y_size = 120, z_size = 20, thickness = 10){     //základna
 
     translate([-x_size/2,-y_size/2,0])
@@ -96,36 +98,17 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 
 
 module 888_1009_cradle(){		//kolébka
-		//základní deska
+	//základní deska
+	color([0.5,0,0])
+		cube([125,80,10]);
+
+	//zábrana vpravo
+	translate([115,0,10])
 		color([0.5,0,0])
-			cube([125,80,10]);
-
-		//zábrana vlevo
-		translate([0,0,10])
-			color([0.5,0,0])
-				cube([10,80,40]);				//zábrana
-		
-	difference(){
-		translate([-10.5,40 - 12.5/2,10 + 50/3 - 25])
-				cube([11.5,12.5,27]);				//koska pro hrot
-		
-		translate([-14,31.25,-4])
-			rotate([16,0,0])
-				cube([15,10,35]);
-
-		translate([-14,39.55,0])
-			rotate([-16,0,0])
-				cube([15,10,35]);
-
-		translate([-5,30,-1.45])
-				cube([6,20,25]);
-	}
-		
-		//zábrana vpravo
-		translate([115,0,10])
-			color([0.5,0,0])
-				cube([10,80,40]);
+			cube([10,80,40]);
 	
+
+    translate([0,0,wall_thickness + 4])
 
 	difference(){
 		translate([ + 124,40 - 12.5/2,10 + 50/3 - 25])
@@ -139,18 +122,15 @@ module 888_1009_cradle(){		//kolébka
 			rotate([-16,0,0])
 				cube([15,10,35]);
 
-		translate([124,30,-1.45])
-				cube([6,20,25]);
 	}
-
 
 //final module kolébka	
 }
 
-/*
+
 translate([10 + 2.5,34.972,50.063])
 		888_1009_cradle();
-
+/*
 translate([10,45,100])
 		888_1009_shape();
 */
