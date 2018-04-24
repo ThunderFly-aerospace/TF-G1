@@ -3,7 +3,7 @@
 
 wall_thickness=10; 
 
-module 888_1009_base_half(x_size = 300, y_size = 120, z_size = 20, thickness = 10){     //základna
+module 888_1009_base_half(x_size = 160, y_size = 100, z_size = 20, thickness = 10){     //základna
 
     translate([-x_size/2,-y_size/2,0])
         cube([x_size/2,y_size,thickness], center = false);         //základní plocha
@@ -16,7 +16,7 @@ module 888_1009_base_half(x_size = 300, y_size = 120, z_size = 20, thickness = 1
         rotate([90,0,90])           
             difference(){
 
-                    cube([120,80,thickness]);          //základní plocha pro zkosení
+                   cube([120,80,thickness]);          //základní plocha pro zkosení
 
                 translate([0,0,-5])
                     rotate([0,0,45])
@@ -166,7 +166,7 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 }
 
 
-module 888_1009_cradle_half(x_size = 300, y_size = 80, z_size = 20, thickness = 10){		//kolébka
+module 888_1009_cradle_half(x_size = 160, y_size = 80, z_size = 20, thickness = 10){		//kolébka
 	//základní deska
 	translate([0,-y_size/2,0])
 	color([0.5,0,0])
@@ -180,7 +180,7 @@ module 888_1009_cradle_half(x_size = 300, y_size = 80, z_size = 20, thickness = 
 		
 		translate([x_size/2 - wall_thickness/2,25,25/2])
 			rotate([-16,0,0])
-				cube([wall_thickness*2,50,50], center = true);
+				cube([wall_thickness*2 - 5,50,50], center = true);
 
 		translate([x_size/2 - wall_thickness/2,-25,25/2])
 			rotate([16,0,0])
