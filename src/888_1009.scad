@@ -44,6 +44,52 @@ module 888_1009_base(){		//základna
 }
 
 
+module 888_1009_shape_A(x_size = 130, y_size = 60, z_size = 8){
+
+    airfoil_NACA = 0016;    // typ použitého profilu
+    airfoil_depth = 50; // hloubka profilu
+    length = 200;       // celková délka polotovaru
+    bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
+    airfoil_thickness = (airfoil_NACA/100) * (airfoil_depth + bridge_thickness); // vypočtená maximální tloušťka profilu
+
+    render()
+    difference(){
+        //základní materiál
+		color([0,0.5,0])
+		translate ([160/2 - 25, 0, 0])
+			minkowski(){
+				cube([x_size/2-25,y_size/2 - 25,z_size-1], center = true);
+	            cylinder(h = 1, r =  25, $fn = 50, center = true);
+			}
+        //otvor pro rotorový list
+		rotate([0,0,45])
+			cube([45,150,40], center = true);
+
+        translate ([ 0, 0, 20])
+			rotate([0,0,45])
+				cube([50,150,40], center = true);
+
+               
+/*        rotate([0,0,45])
+            666_1201(draft = true, holes = true);*/
+        rotate([0,0,45])
+            translate ([ -airfoil_depth/2, length/2, 0])
+                rotate([90, 0, 0])
+                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
+
+        //otvory pro šrouby
+        translate([110/2 - x_size/10, 0, 0])
+            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
+    }
+
+/*    color([1,0.5,0])
+        rotate([0,0,45])
+            translate ([ -airfoil_depth/2, length/2, 0])
+                rotate([90, 0, 0])
+                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
+*/
+}
+
 module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 
     airfoil_NACA = 0016;    // typ použitého profilu
@@ -56,7 +102,10 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
     difference(){
         //základní materiál
 		color([0,0.5,0])
-			cube([x_size,y_size,z_size], center = true);
+		minkowski(){
+			cube([x_size/2-25,y_size/2 - 25,z_size], center = true);
+            cylinder(h = 1, r =  25, $fn = 50, center = true);
+		}
         //otvor pro rotorový list
 		rotate([0,0,45])
 			cube([45,150,40], center = true);
@@ -68,20 +117,12 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
-//výstupek pro nasazení rysky vlevo
-	translate([10,30,20])
-		cylinder(h = 10, r = 5, $fn = 50);
-
         //otvory pro šrouby
-        translate([x_size/2 - x_size/10, 0, 0])
-            cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+        translate([110/2 - x_size/10, 0, 0])
+            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
 
-        hull(){
-            translate([-x_size/2 + x_size/10, -M3_screw_diameter, 0])
-                cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
-            translate([-x_size/2 + x_size/10, M3_screw_diameter, 0])
-                cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
-        }
+        translate([-110/2, 0, 0])
+            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
 
     }
 
@@ -91,6 +132,7 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 */
+
 
 
 //final module tvar
@@ -138,10 +180,10 @@ module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){	
 
 translate([0,0,20])
 		888_1009_cradle();
-/*
-translate([10,45,100])
-		888_1009_shape();
-*/
+
+translate([0,0,100])
+		888_1009_shape_A();
+
 		888_1009_base();
 
 
