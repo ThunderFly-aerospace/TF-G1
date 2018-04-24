@@ -17,7 +17,6 @@ module 888_1009_base_half(x_size = 300, y_size = 120, z_size = 20, thickness = 1
             difference(){
 
                     cube([120,80,thickness]);          //základní plocha pro zkosení
-            	//otvory pro šrouby M3
 
                 translate([0,0,-5])
                     rotate([0,0,45])
@@ -200,9 +199,33 @@ module 888_1009_cradle_half(x_size = 300, y_size = 80, z_size = 20, thickness = 
 
 module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){		//kolébka
 
+difference(){
 	888_1009_cradle_half();
+
+translate([- global_clearance - 160, 80/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+
+translate([- global_clearance - 160,- 80/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+
+
+}	
     mirror([1,0,0])
-        888_1009_cradle_half();
+difference(){
+	888_1009_cradle_half();
+
+translate([- global_clearance - 160, 80/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+
+translate([- global_clearance - 160,- 80/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+
+
+}
 }
 
 
