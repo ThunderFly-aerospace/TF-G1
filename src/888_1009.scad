@@ -3,17 +3,22 @@
 
 wall_thickness=10; 
 
-module 888_1009_base_half(x_size = 100, y_size = 120, z_size = 20, thickness = 10){     //základna
+module 888_1009_base_half(x_size = 300, y_size = 120, z_size = 20, thickness = 10){     //základna
 
     translate([-x_size/2,-y_size/2,0])
         cube([x_size/2,y_size,thickness], center = false);         //základní plocha
-    
+
+
     //podpěra
+
     render()
     translate([x_size/2 - thickness,-y_size/2,0])
         rotate([90,0,90])           
             difference(){
+
                     cube([120,80,thickness]);          //základní plocha pro zkosení
+            	//otvory pro šrouby M3
+
                 translate([0,0,-5])
                     rotate([0,0,45])
                         cube([120,120,20]);     //zkosení
@@ -38,9 +43,32 @@ module 888_1009_base_half(x_size = 100, y_size = 120, z_size = 20, thickness = 1
 
 module 888_1009_base(){		//základna
 
+difference(){
     888_1009_base_half();
-    mirror([1,0,0])
-        888_1009_base_half();
+//otvory pro šrouby M3
+translate([- global_clearance - 160, 120/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+
+translate([- global_clearance - 160,- 120/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+}
+mirror([1,0,0])
+
+difference(){
+    888_1009_base_half();
+//otvory pro šrouby M3
+translate([- global_clearance - 160, 120/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+
+translate([- global_clearance - 160,- 120/4,10/2])
+	rotate([0,90,0])	
+		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+}
+
+
 }
 
 
@@ -139,7 +167,7 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 }
 
 
-module 888_1009_cradle_half(x_size = 100, y_size = 80, z_size = 20, thickness = 10){		//kolébka
+module 888_1009_cradle_half(x_size = 300, y_size = 80, z_size = 20, thickness = 10){		//kolébka
 	//základní deska
 	translate([0,-y_size/2,0])
 	color([0.5,0,0])
