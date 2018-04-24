@@ -71,12 +71,16 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
 
-    //otvory pro šrouby
-    translate([x_size/2 - x_size/10, 0, 0])
-        cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+        //otvory pro šrouby
+        translate([x_size/2 - x_size/10, 0, 0])
+            cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
 
-    translate([-x_size/2 + x_size/10, 0, 0])
-        cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+        hull(){
+            translate([-x_size/2 + x_size/10, -M3_screw_diameter, 0])
+                cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+            translate([-x_size/2 + x_size/10, M3_screw_diameter, 0])
+                cylinder(h = 10, d =  M3_screw_diameter, $fn = 20, center = true);
+        }
 
     }
 
