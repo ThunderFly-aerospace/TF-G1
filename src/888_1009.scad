@@ -3,7 +3,7 @@
 
 wall_thickness=10; 
 
-module 888_1009_base_half(x_size = 180, y_size = 120, z_size = 20, thickness = 10){     //základna
+module 888_1009_base_half(x_size = 100, y_size = 120, z_size = 20, thickness = 10){     //základna
 
     translate([-x_size/2,-y_size/2,0])
         cube([x_size/2,y_size,thickness], center = false);         //základní plocha
@@ -97,38 +97,46 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 }
 
 
-module 888_1009_cradle(){		//kolébka
+module 888_1009_cradle_half(x_size = 100, y_size = 80, z_size = 20, thickness = 10){		//kolébka
 	//základní deska
+	translate([0,-y_size/2,0])
 	color([0.5,0,0])
-		cube([125,80,10]);
+		cube([x_size/2 - wall_thickness*1.5,y_size,thickness]);
 
-	//zábrana vpravo
-	translate([115,0,10])
-		color([0.5,0,0])
-			cube([10,80,40]);
-	
-
-    translate([0,0,wall_thickness + 4])
 
 	difference(){
-		translate([ + 124,40 - 12.5/2,10 + 50/3 - 25])
-				cube([11.5,12.5,27]);				//koska pro hrot
+		translate([x_size/2 - wall_thickness*2.5,-y_size/2,0])
+			color([0.5,0,0])
+				cube([wall_thickness*3.5,80,wall_thickness*3]);
 		
-		translate([ + 124,31.25,-4])
-			rotate([16,0,0])
-				cube([15,10,35]);
-
-		translate([124,39.55,0])
+		translate([x_size/2 - wall_thickness/2,25,25/2])
 			rotate([-16,0,0])
-				cube([15,10,35]);
+				cube([wall_thickness*2,50,50], center = true);
+
+		translate([x_size/2 - wall_thickness/2,-25,25/2])
+			rotate([16,0,0])
+				cube([wall_thickness*2,50,50],center = true);
+
+		// zůžení přesahující kostky
+		translate([x_size/2,-25,25/2])
+			cube([wall_thickness*2,30,50],center = true);
+
+		translate([x_size/2,25,25/2])
+			cube([wall_thickness*2,30,50],center = true);
 
 	}
-
-//final module kolébka	
 }
 
 
-translate([10 + 2.5,34.972,50.063])
+module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){		//kolébka
+
+	888_1009_cradle_half();
+    mirror([1,0,0])
+        888_1009_cradle_half();
+}
+
+
+translate([0,0,20])
 		888_1009_cradle();
 /*
 translate([10,45,100])
