@@ -84,41 +84,32 @@ module 888_1009_shape_A(x_size = 130, y_size = 60, z_size = 8){
     difference(){
         //základní materiál
 		color([0,0.5,0])
-		translate ([160/2 - 25, 0, 0])
+		translate ([110/2 - x_size/4, -y_size/2, 0])
 			minkowski(){
-				cube([x_size/2-25,y_size/2 - 25,z_size-1], center = true);
-	            cylinder(h = 1, r =  25, $fn = 50, center = true);
+				cube([x_size/2,y_size,z_size-1], center = true);
+	            cylinder(h = 1, r = 25 - global_clearance, $fn = 100, center = true);
 			}
         //otvor pro rotorový list
-		rotate([0,0,45])
-			cube([45,150,40], center = true);
+        rotate([0,0,45])
+        translate ([ -100/2 + 45/2, 0, 0])
+    			cube([100, 250, 40], center = true);
 
         translate ([ 0, 0, 20])
 			rotate([0,0,45])
-				cube([50,150,40], center = true);
-
-               
-/*        rotate([0,0,45])
-            666_1201(draft = true, holes = true);*/
+				cube([50,250,40], center = true);
+              
         rotate([0,0,45])
             translate ([ -airfoil_depth/2, length/2, 0])
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
         //otvory pro šrouby
-        translate([110/2 - x_size/10, 0, 0])
-            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
+        translate([110/2, 0, 0])
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
     }
-
-/*    color([1,0.5,0])
-        rotate([0,0,45])
-            translate ([ -airfoil_depth/2, length/2, 0])
-                rotate([90, 0, 0])
-                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
-*/
 }
 
-module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
+module 888_1009_shape_B(x_size = 130, y_size = 60, z_size = 8){
 
     airfoil_NACA = 0016;    // typ použitého profilu
     airfoil_depth = 50; // hloubka profilu
@@ -126,48 +117,33 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
     bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
     airfoil_thickness = (airfoil_NACA/100) * (airfoil_depth + bridge_thickness); // vypočtená maximální tloušťka profilu
 
-    color("orange")
-    %    cube([160,100,8], center = true);
-    
-
     render()
     difference(){
         //základní materiál
-		color([0,0.5,0])
-		minkowski(){
-			cube([x_size/2-25,y_size/2 - 25,z_size], center = true);
-            cylinder(h = 1, r =  25, $fn = 50, center = true);
-		}
+        color([0,0.5,0])
+        translate ([-110/2 + x_size/4, y_size/2, 0])
+            minkowski(){
+                cube([x_size/2,y_size,z_size-1], center = true);
+                cylinder(h = 1, r = 25 - global_clearance, $fn = 100, center = true);
+            }
         //otvor pro rotorový list
-		rotate([0,0,45])
-			cube([45,150,40], center = true);
-               
-/*\        rotate([0,0,45])
-            666_1201(draft = true, holes = true);*/
+        rotate([0,0,45])
+        translate ([ 100/2 - 45/2, 0, 0])
+                cube([100, 250, 40], center = true);
+
+        translate ([ 0, 0, 20])
+            rotate([0,0,45])
+                cube([50,250,40], center = true);
+              
         rotate([0,0,45])
             translate ([ -airfoil_depth/2, length/2, 0])
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
         //otvory pro šrouby
-        translate([110/2 - x_size/10, 0, 0])
-            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
-
         translate([-110/2, 0, 0])
-            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
-
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
     }
-
-/*    color([1,0.5,0])
-        rotate([0,0,45])
-            translate ([ -airfoil_depth/2, length/2, 0])
-                rotate([90, 0, 0])
-                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
-*/
-
-
-
-//final module tvar
 }
 
 
@@ -275,13 +251,13 @@ module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){	
 }
 
 
-translate([0,0,30])
-		888_1009_cradle();
+//translate([0,0,30])
+//		888_1009_cradle();
 
-/*translate([0,0,100])
-		888_1009_shape_A();
-*/
-		888_1009_base();
+translate([0,0,100])
+		888_1009_shape_B();
+
+//		888_1009_base();
 
 
 include <../Parameters.scad>
