@@ -147,6 +147,33 @@ module 888_1009_shape_B(x_size = 130, y_size = 60, z_size = 8){
 }
 
 
+
+module 888_1009_scale(){
+
+    difference(){
+
+        union(){        
+            translate([-110/2, 0, 0])
+                cylinder(h = 1, d =  3*M6_screw_diameter, $fn = 40);
+
+            translate([110/2, 0, 0])
+                cylinder(h = 1, d =  3*M6_screw_diameter, $fn = 40);
+
+            translate([-110/2, 0, 0])
+                cube([110, 1.5*M6_screw_diameter,1]);
+
+        }
+        //otvory pro šrouby
+        translate([-110/2, 0, 0])
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
+
+        translate([110/2, 0, 0])
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
+    }
+}
+
+
+
 module 888_1009_cradle_half(x_size = 210, y_size = 100, z_size = 20, thickness = 10){		//kolébka
 
 render()
@@ -159,9 +186,9 @@ render()
 
 
         	difference(){
-        		translate([x_size/2 - thickness*2.5,-y_size/2,0])
+        		translate([x_size/2 - thickness*2.5,-y_size*3/8,0])
         			color([0.5,0,0])
-        				cube([wall_thickness*(1.5+2),y_size,wall_thickness*3]);
+        				cube([wall_thickness*(1.5+2),y_size*3/4,wall_thickness*3]);
         		
         		translate([x_size/2 - thickness, 0, thickness + 4])
         			rotate([-16,0,0])
@@ -258,9 +285,13 @@ translate([0,0,44.5])
 {
     888_1009_shape_A();
     888_1009_shape_B();
+
+    translate([0,0,5])
+        888_1009_scale();
 }
 
 888_1009_base();
+
 
 
 include <../Parameters.scad>
