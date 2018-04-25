@@ -241,23 +241,26 @@ module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){	
         888_1009_cradle_half();
 
 
-    translate([0,0,thickness+4])
+    /*translate([0,0,thickness+4])
         %cube([160, 100, 8],center = true);
 
     translate([160/2 + 7.5, 0, 3*thickness+7.5])
         %cube([15, 55, 15],center = true);
-
+    */
 
 }
 
 
-//translate([0,0,30])
-//		888_1009_cradle();
+translate([0,0,30])
+		888_1009_cradle();
 
-translate([0,0,100])
-		888_1009_shape_B();
+translate([0,0,44.5])
+{
+    888_1009_shape_A();
+    888_1009_shape_B();
+}
 
-//		888_1009_base();
+888_1009_base();
 
 
 include <../Parameters.scad>
