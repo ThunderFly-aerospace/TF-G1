@@ -169,6 +169,14 @@ module 888_1009_scale(){
 
         translate([110/2, 0, 0])
             cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
+
+        // otvor u šroubu pro otevření
+        translate([110/2, 0, 0])
+            rotate([0,0,-3])
+                translate([0, M6_screw_diameter, 0])
+                    cube([M6_screw_diameter, 2*M6_screw_diameter,10], center = true);
+
+
     }
 }
 
