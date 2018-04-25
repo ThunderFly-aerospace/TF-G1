@@ -3,7 +3,7 @@
 
 wall_thickness=10; 
 
-module 888_1009_base_half(x_size = 170, y_size = 100, z_size = 20, thickness = 10){     //základna
+module 888_1009_base_half(x_size = 215, y_size = 100, z_size = 20, thickness = 10){     //základna
 
 render()
     difference(){
@@ -14,25 +14,21 @@ render()
 
             //podpěra
 
-            translate([x_size/2 - thickness, -y_size/2,0])
                     difference(){
 
-                        cube([thickness,y_size,5*thickness]);          //základní plocha pro zkosení
+                        translate([x_size/2 - thickness, -y_size/6,0])
+                            cube([thickness,y_size/3,5*thickness]);          //základní plocha pro zkosení
 
-                        rotate([45,0,0])
-                            cube([thickness,120,50]);     //zkosení
+                        //vyskousnutí
+                        translate([x_size/2 - thickness,0,4*thickness])
+                            rotate([30,0,0])
+                                cube([thickness,y_size/3,20]);
 
-             %               rotate([-45,0,0])
-                                cube([thickness,120,50]);     //zkosení
+                        mirror([0,1,0])
+                        translate([x_size/2 - thickness,0,4*thickness])
+                            rotate([30,0,0])
+                                cube([thickness,y_size/3,20]);    
 
-                        /*//vyskousnutí
-                        translate([60,31.73,-5])
-                            rotate([0,0,30])
-                                cube([40,40,20]);    
-                        translate([60,31.73,-5])
-                            rotate([0,0,45+15])
-                                cube([40,40,20]);       
-*/
 
                     }
         }
@@ -53,7 +49,14 @@ render()
                 cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
             cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
         }
+
+    // odlehčení podložky
+    translate([0, -y_size/10, 0])
+        cube([x_size/5, y_size/5, thickness], center = false);         //základní plocha
+
+
     }
+
 //final module základna
 }
 
@@ -168,7 +171,7 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
 }
 
 
-module 888_1009_cradle_half(x_size = 160, y_size = 80, z_size = 20, thickness = 10){		//kolébka
+module 888_1009_cradle_half(x_size = 210, y_size = 100, z_size = 20, thickness = 10){		//kolébka
 
 render()
     difference(){
@@ -182,27 +185,26 @@ render()
         	difference(){
         		translate([x_size/2 - thickness*2.5,-y_size/2,0])
         			color([0.5,0,0])
-        				cube([wall_thickness*(1.5+2+0.5),80,wall_thickness*3]);
+        				cube([wall_thickness*(1.5+2),y_size,wall_thickness*3]);
         		
         		translate([x_size/2 - thickness, 0, thickness + 4])
         			rotate([-16,0,0])
                         translate([0, 0, -thickness - 4])
-        				    cube([thickness*2, 50,50]);
+        				    cube([thickness*1.5, y_size,y_size/2]);
 
                 mirror([0,1,0])
                     translate([x_size/2 - thickness, 0, thickness + 4])
                         rotate([-16,0,0])
                             translate([0, 0, -thickness - 4])
-                                cube([thickness*2, 50,50]);
-
-
+                                cube([thickness*1.5, y_size,50]);
 
         		// zůžení přesahující kostky
-        		translate([x_size/2 + thickness, -25, 25/2])
-        			cube([thickness*1.5, 30, 50],center = true);
+        		translate([x_size/2 + thickness, -y_size/3, 25/2])
+        			cube([thickness*1.5, y_size/2, 50],center = true);
 
-        		translate([x_size/2 + thickness, 25, 25/2])
-        			cube([thickness*1.5, 30, 50],center = true);
+        		translate([x_size/2 + thickness, y_size/3, 25/2])
+        			cube([thickness*1.5, y_size/2, 50],center = true);
+                
 
         	}
         }
@@ -222,6 +224,11 @@ render()
                     cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
                 cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
             }
+
+        //otvor pro šrouby k uchycení listu
+        translate([110/2, 0, 0])
+            cylinder(h = 3*thickness, d =  6.5, $fn = 20, center = true);
+
     }
 }
 
@@ -233,16 +240,21 @@ module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){	
     mirror([1,0,0])
         888_1009_cradle_half();
 
+
+    translate([0,0,thickness+4])
+        %cube([160, 100, 8],center = true);
+
+
 }
 
 
-translate([0,0,20])
-		888_1009_cradle_half();
+translate([0,0,30])
+		888_1009_cradle();
 
-translate([0,0,100])
+/*translate([0,0,100])
 		888_1009_shape_A();
-
-		888_1009_base_half();
+*/
+		888_1009_base();
 
 
 include <../Parameters.scad>
