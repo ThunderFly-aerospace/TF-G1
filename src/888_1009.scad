@@ -226,9 +226,33 @@ render()
             }
 
         //otvor pro šrouby k uchycení listu
+        translate([110/2, 0, Nut_height_M6 + global_clearance])
+            cylinder(h = 3*thickness, d =  M6_screw_diameter, $fn = 20);
         translate([110/2, 0, 0])
-            cylinder(h = 3*thickness, d =  6.5, $fn = 20, center = true);
+            cylinder(h = Nut_height_M6, d =  Nut_diameter_M6, $fn = 6);
 
+
+        //otvory pro šrouby k uchycení libely
+        translate([x_size/2 - thickness*1.75, 20, thickness *2])
+            rotate([0,0,-90])
+                union(){
+                    cylinder(h = thickness*2, r = M3_screw_diameter/2, $fn = 20, center = true);
+                    translate([- Nut_diameter_M3/2, 0, 0])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
+                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                //final union
+                }
+
+
+        translate([x_size/2 - thickness*1.75, -20, thickness *2])
+            rotate([0,0,-90])
+                union(){
+                    cylinder(h = thickness*2, r = M3_screw_diameter/2, $fn = 20, center = true);
+                    translate([- Nut_diameter_M3/2, 0, 0])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
+                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                //final union
+                }
     }
 }
 
@@ -243,6 +267,9 @@ module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){	
 
     translate([0,0,thickness+4])
         %cube([160, 100, 8],center = true);
+
+    translate([160/2 + 7.5, 0, 3*thickness+7.5])
+        %cube([15, 55, 15],center = true);
 
 
 }
