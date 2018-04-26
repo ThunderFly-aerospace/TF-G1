@@ -128,7 +128,7 @@ module 888_1009_shape_B(x_size = 130, y_size = 60, z_size = 8){
             }
         //otvor pro rotorový list
         rotate([0,0,45])
-        translate ([ 100/2 - 45/2, 0, 0])
+        translate ([ 100/2 - 50/2, 0, 0])
                 cube([100, 250, 40], center = true);
 
         translate ([ 0, 0, 20])
