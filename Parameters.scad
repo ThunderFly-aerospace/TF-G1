@@ -20,6 +20,13 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
+
+//Screw diameter and nut for M6 [mm]
+M6_screw_diameter=6.5;
+Nut_height_M6 = 4.9;
+Nut_diameter_M6 = 11.8;
+
+
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;

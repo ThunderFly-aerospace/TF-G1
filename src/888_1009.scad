@@ -3,37 +3,59 @@
 
 wall_thickness=10; 
 
-module 888_1009_base_half(x_size = 160, y_size = 100, z_size = 20, thickness = 10){     //základna
+module 888_1009_base_half(x_size = 215, y_size = 100, z_size = 20, thickness = 10){     //základna
 
-    translate([-x_size/2,-y_size/2,0])
-        cube([x_size/2,y_size,thickness], center = false);         //základní plocha
-
-
-    //podpěra
-
-    render()
-    translate([x_size/2 - thickness,-y_size/2,0])
-        rotate([90,0,90])           
-            difference(){
-
-                   cube([120,80,thickness]);          //základní plocha pro zkosení
-
-                translate([0,0,-5])
-                    rotate([0,0,45])
-                        cube([120,120,20]);     //zkosení
-                translate([120,0,-5])
-                    rotate([0,0,45])
-                        cube([120,120,20]);     //zkosení
-                //vyskousnutí
-                translate([60,31.73,-5])
-                    rotate([0,0,30])
-                        cube([40,40,20]);    
-                translate([60,31.73,-5])
-                    rotate([0,0,45+15])
-                        cube([40,40,20]);       
+render()
+    difference(){
+        union(){
+            translate([0, -y_size/2, 0])
+                cube([x_size/2, y_size, thickness], center = false);         //základní plocha
 
 
-            }
+            //podpěra
+
+                    difference(){
+
+                        translate([x_size/2 - thickness, -y_size/6,0])
+                            cube([thickness,y_size/3,5*thickness]);          //základní plocha pro zkosení
+
+                        //vyskousnutí
+                        translate([x_size/2 - thickness,0,4*thickness])
+                            rotate([30,0,0])
+                                cube([thickness,y_size/3,20]);
+
+                        mirror([0,1,0])
+                        translate([x_size/2 - thickness,0,4*thickness])
+                            rotate([30,0,0])
+                                cube([thickness,y_size/3,20]);    
+
+
+                    }
+        }
+
+    //otvory pro šrouby M3
+    translate([thickness, 120/4, thickness/2])
+        rotate([0,90,0])
+        {   
+            rotate([0,0,30]) // srovnání matky s povrchem placatou stranou
+                cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+            cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
+        }
+
+    translate([thickness,- 120/4, thickness/2])
+        rotate([0,90,0])
+        {   
+            rotate([0,0,30])
+                cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+            cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
+        }
+
+    // odlehčení podložky
+    translate([0, -y_size/10, 0])
+        cube([x_size/5, y_size/5, thickness], center = false);         //základní plocha
+
+
+    }
 
 //final module základna
 }
@@ -42,30 +64,9 @@ module 888_1009_base_half(x_size = 160, y_size = 100, z_size = 20, thickness = 1
 
 module 888_1009_base(){		//základna
 
-difference(){
     888_1009_base_half();
-//otvory pro šrouby M3
-translate([- global_clearance - 160, 120/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
-
-translate([- global_clearance - 160,- 120/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
-}
-mirror([1,0,0])
-
-difference(){
-    888_1009_base_half();
-//otvory pro šrouby M3
-translate([- global_clearance - 160, 120/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
-
-translate([- global_clearance - 160,- 120/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
-}
+    mirror([1,0,0])
+        888_1009_base_half();
 
 
 }
@@ -83,41 +84,32 @@ module 888_1009_shape_A(x_size = 130, y_size = 60, z_size = 8){
     difference(){
         //základní materiál
 		color([0,0.5,0])
-		translate ([160/2 - 25, 0, 0])
+		translate ([110/2 - x_size/4, -y_size/2, 0])
 			minkowski(){
-				cube([x_size/2-25,y_size/2 - 25,z_size-1], center = true);
-	            cylinder(h = 1, r =  25, $fn = 50, center = true);
+				cube([x_size/2,y_size,z_size-1], center = true);
+	            cylinder(h = 1, r = 25 - global_clearance, $fn = 100, center = true);
 			}
         //otvor pro rotorový list
-		rotate([0,0,45])
-			cube([45,150,40], center = true);
+        rotate([0,0,45])
+        translate ([ -100/2 + 45/2, 0, 0])
+    			cube([100, 250, 40], center = true);
 
         translate ([ 0, 0, 20])
 			rotate([0,0,45])
-				cube([50,150,40], center = true);
-
-               
-/*        rotate([0,0,45])
-            666_1201(draft = true, holes = true);*/
+				cube([50,250,40], center = true);
+              
         rotate([0,0,45])
             translate ([ -airfoil_depth/2, length/2, 0])
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
         //otvory pro šrouby
-        translate([110/2 - x_size/10, 0, 0])
-            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
+        translate([110/2, 0, 0])
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
     }
-
-/*    color([1,0.5,0])
-        rotate([0,0,45])
-            translate ([ -airfoil_depth/2, length/2, 0])
-                rotate([90, 0, 0])
-                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
-*/
 }
 
-module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
+module 888_1009_shape_B(x_size = 130, y_size = 60, z_size = 8){
 
     airfoil_NACA = 0016;    // typ použitého profilu
     airfoil_depth = 50; // hloubka profilu
@@ -128,114 +120,186 @@ module 888_1009_shape(x_size = 130, y_size = 60, z_size = 8){
     render()
     difference(){
         //základní materiál
-		color([0,0.5,0])
-		minkowski(){
-			cube([x_size/2-25,y_size/2 - 25,z_size], center = true);
-            cylinder(h = 1, r =  25, $fn = 50, center = true);
-		}
+        color([0,0.5,0])
+        translate ([-110/2 + x_size/4, y_size/2, 0])
+            minkowski(){
+                cube([x_size/2,y_size,z_size-1], center = true);
+                cylinder(h = 1, r = 25 - global_clearance, $fn = 100, center = true);
+            }
         //otvor pro rotorový list
-		rotate([0,0,45])
-			cube([45,150,40], center = true);
-               
-/*\        rotate([0,0,45])
-            666_1201(draft = true, holes = true);*/
+        rotate([0,0,45])
+        translate ([ 100/2 - 50/2, 0, 0])
+                cube([100, 250, 40], center = true);
+
+        translate ([ 0, 0, 20])
+            rotate([0,0,45])
+                cube([50,250,40], center = true);
+              
         rotate([0,0,45])
             translate ([ -airfoil_depth/2, length/2, 0])
                 rotate([90, 0, 0])
                     airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
 
         //otvory pro šrouby
-        translate([110/2 - x_size/10, 0, 0])
-            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
-
         translate([-110/2, 0, 0])
-            cylinder(h = 10, d =  6.5, $fn = 20, center = true);
-
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
     }
-
-/*    color([1,0.5,0])
-        rotate([0,0,45])
-            translate ([ -airfoil_depth/2, length/2, 0])
-                rotate([90, 0, 0])
-                    airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = 100, h = length, open = false);  
-*/
-
-
-
-//final module tvar
 }
 
 
-module 888_1009_cradle_half(x_size = 160, y_size = 80, z_size = 20, thickness = 10){		//kolébka
-	//základní deska
-	translate([0,-y_size/2,0])
-	color([0.5,0,0])
-		cube([x_size/2 - wall_thickness*1.5,y_size,thickness]);
+
+module 888_1009_scale(){
+
+    difference(){
+
+        union(){        
+            translate([-110/2, 0, 0])
+                cylinder(h = 1, d =  3*M6_screw_diameter, $fn = 40);
+
+            translate([110/2, 0, 0])
+                cylinder(h = 1, d =  3*M6_screw_diameter, $fn = 40);
+
+            translate([-110/2, 0, 0])
+                cube([110, 1.5*M6_screw_diameter,1]);
+
+        }
+        //otvory pro šrouby
+        translate([-110/2, 0, 0])
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
+
+        translate([110/2, 0, 0])
+            cylinder(h = 10, d =  M6_screw_diameter, $fn = 20, center = true);
+
+        // otvor u šroubu pro otevření
+        translate([110/2, 0, 0])
+            rotate([0,0,-3])
+                translate([0, M6_screw_diameter, 0])
+                    cube([M6_screw_diameter, 2*M6_screw_diameter,10], center = true);
 
 
-	difference(){
-		translate([x_size/2 - wall_thickness*2.5,-y_size/2,0])
-			color([0.5,0,0])
-				cube([wall_thickness*3.5,80,wall_thickness*3]);
-		
-		translate([x_size/2 - wall_thickness/2,25,25/2])
-			rotate([-16,0,0])
-				cube([wall_thickness*2 - 5,50,50], center = true);
+    }
+}
 
-		translate([x_size/2 - wall_thickness/2,-25,25/2])
-			rotate([16,0,0])
-				cube([wall_thickness*2,50,50],center = true);
 
-		// zůžení přesahující kostky
-		translate([x_size/2,-25,25/2])
-			cube([wall_thickness*2,30,50],center = true);
 
-		translate([x_size/2,25,25/2])
-			cube([wall_thickness*2,30,50],center = true);
+module 888_1009_cradle_half(x_size = 210, y_size = 100, z_size = 20, thickness = 10){		//kolébka
 
-	}
+render()
+    difference(){
+        union(){
+        	//základní deska
+        	translate([0,-y_size/2,0])
+        	color([0.5,0,0])
+        		cube([x_size/2 - thickness*1.5, y_size, thickness]);
+
+
+        	difference(){
+        		translate([x_size/2 - thickness*2.5,-y_size*3/8,0])
+        			color([0.5,0,0])
+        				cube([wall_thickness*(1.5+2),y_size*3/4,wall_thickness*3]);
+        		
+        		translate([x_size/2 - thickness, 0, thickness + 4])
+        			rotate([-16,0,0])
+                        translate([0, 0, -thickness - 4])
+        				    cube([thickness*1.5, y_size,y_size/2]);
+
+                mirror([0,1,0])
+                    translate([x_size/2 - thickness, 0, thickness + 4])
+                        rotate([-16,0,0])
+                            translate([0, 0, -thickness - 4])
+                                cube([thickness*1.5, y_size,50]);
+
+        		// zůžení přesahující kostky
+        		translate([x_size/2 + thickness, -y_size/3, 25/2])
+        			cube([thickness*1.5, y_size/2, 50],center = true);
+
+        		translate([x_size/2 + thickness, y_size/3, 25/2])
+        			cube([thickness*1.5, y_size/2, 50],center = true);
+                
+
+        	}
+        }
+
+        translate([thickness, 80/4, thickness/2])
+            rotate([0,90,0])
+            {    
+                rotate([0,0,30])
+                    cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+                cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
+            }
+
+        translate([thickness,- 80/4,thickness/2])
+            rotate([0,90,0])    
+            {    
+                rotate([0,0,30])
+                    cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+                cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
+            }
+
+        //otvor pro šrouby k uchycení listu
+        translate([110/2, 0, Nut_height_M6 + global_clearance])
+            cylinder(h = 3*thickness, d =  M6_screw_diameter, $fn = 20);
+        translate([110/2, 0, 0])
+            cylinder(h = Nut_height_M6, d =  Nut_diameter_M6, $fn = 6);
+
+
+        //otvory pro šrouby k uchycení libely
+        translate([x_size/2 - thickness*1.75, 20, thickness *2])
+            rotate([0,0,-90])
+                union(){
+                    cylinder(h = thickness*2, r = M3_screw_diameter/2, $fn = 20, center = true);
+                    translate([- Nut_diameter_M3/2, 0, 0])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
+                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                //final union
+                }
+
+
+        translate([x_size/2 - thickness*1.75, -20, thickness *2])
+            rotate([0,0,-90])
+                union(){
+                    cylinder(h = thickness*2, r = M3_screw_diameter/2, $fn = 20, center = true);
+                    translate([- Nut_diameter_M3/2, 0, 0])        
+                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
+                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                //final union
+                }
+    }
 }
 
 
 module 888_1009_cradle(x_size = 180, y_size = 80, z_size = 20, thickness = 10){		//kolébka
 
-difference(){
 	888_1009_cradle_half();
 
-translate([- global_clearance - 160, 80/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
-
-translate([- global_clearance - 160,- 80/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
-
-
-}	
     mirror([1,0,0])
-difference(){
-	888_1009_cradle_half();
+        888_1009_cradle_half();
 
-translate([- global_clearance - 160, 80/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
 
-translate([- global_clearance - 160,- 80/4,10/2])
-	rotate([0,90,0])	
-		cylinder(h = 320 + 2*global_clearance, r = M3_screw_diameter/2, $fn = 6);
+    /*translate([0,0,thickness+4])
+        %cube([160, 100, 8],center = true);
 
+    translate([160/2 + 7.5, 0, 3*thickness+7.5])
+        %cube([15, 55, 15],center = true);
+    */
 
 }
-}
 
 
-translate([0,0,20])
+translate([0,0,30])
 		888_1009_cradle();
 
-translate([0,0,100])
-		888_1009_shape_A();
+translate([0,0,44.5])
+{
+    888_1009_shape_A();
+    888_1009_shape_B();
 
-		888_1009_base();
+    translate([0,0,5])
+        888_1009_scale();
+}
+
+888_1009_base();
+
 
 
 include <../Parameters.scad>
