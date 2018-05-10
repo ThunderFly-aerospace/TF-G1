@@ -153,6 +153,8 @@ GPS_middle_length = GPS_diameter + GPS_inner_length;      //Střední rozměr
 radius_undercarriage = 25;
 vzdalenost_x = tan(20) * 131;
 vzdalenost_y = (131 - radius_undercarriage)/tan(79);
+uhel_y = 90 - 20;
+uhel_x = 90 - 79;
 
 maximum_printable_size = 150;
 
