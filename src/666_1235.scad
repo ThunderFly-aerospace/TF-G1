@@ -18,7 +18,7 @@ $vpd = 1960;
 */
 
 
-module 333_1035(twosided = true, draft = false){
+module 333_1035_shape(twosided = true, draft = false){
 
     airfoil_NACA = 0016;    // typ použitého profilu
     airfoil_depth = 50; // hloubka profilu
@@ -196,13 +196,89 @@ module 333_1035_B(twosided = true, draft = false){
 }
 
 
-333_1035_A();
-//333_1037_doc(length=970);
+module 333_1035(twosided = true, draft = true){
+
+    airfoil_NACA = 0016;    // typ použitého profilu
+    airfoil_depth = 50; // hloubka profilu
+    length = 40;       // celková délka polotovaru
+    material_width = 70;
+    thickness = 0.5;       // tloušťka jádra
+    airfoil_thickness = (airfoil_NACA/100) * airfoil_depth; // vypočtená maximální tloušťka profilu
+    bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
+    milling_cutter_radius = 1.5;
+
+
+
+
+
+    difference(){
+        union(){
+
+            translate ([ -airfoil_depth/2, 150/2, 0])
+                rotate([90, 0, 0])
+                    airfoil(naca = airfoil_NACA, L = airfoil_depth, N = 100, h = 150, open = false); 
+            
+
+            difference (){ // profil listu
+
+                translate ([ -airfoil_depth/2 - 10, length/2, 0])
+                    rotate([90, 0, 0])
+                        hollow_airfoil(naca = airfoil_NACA, L = airfoil_depth, N = 100, h = length, open = true, wall_thickness = -thickness); 
+
+                translate([ airfoil_depth/4 - 15, 0, 0])
+                    cube([airfoil_depth, length, 20], center = true);
+            }
+
+            difference (){ // profil závaží
+
+                translate ([ -airfoil_depth/2 - 15, length/2, 0])
+                    rotate([90, 0, 0])
+                        hollow_airfoil(naca = airfoil_NACA, L = airfoil_depth, N = 100, h = length, open = true, wall_thickness = thickness); 
+
+                translate([ airfoil_depth/4, 0, 0])
+                    cube([airfoil_depth, length, 20], center = true);
+            }
+
+
+            difference (){  // odečet tloušťky plechu v rovné části
+                translate ([-airfoil_depth/4 - 5, 0, 0])
+                    cube([15, length, 8 + 2*thickness], center = true);
+
+                translate ([-airfoil_depth/4 - 5, 0, 0])
+                    cube([15, length, 8], center = true);
+
+            }
+
+        }
+
+        translate([-airfoil_depth/4,0,0])
+            rotate([0,0,90])
+                union(){
+                    // díry pro uchycení rotorového listu
+                    translate([-15,0,0])
+                        cylinder (h = 50, r = 3/2, $fn = 50, center = true);
+
+                    translate([0,0,0])   
+                        cylinder (h = 50, r = 3/2, $fn = 50, center = true);
+
+                    translate([15, 0, 0])  
+                        cylinder (h = 50, r = 3/2, $fn = 50, center = true);
+                }
+    }
+
+}
+
+
+
+//333_1035_A();
 
 /*probe(volume=true) {
     sphere(20);
     echo("volume is ",volume);
 }*/
+
+
+333_1035();
 
 
 
