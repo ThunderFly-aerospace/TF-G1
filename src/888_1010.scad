@@ -64,8 +64,37 @@ difference(){
 //final module
 }
 
+//ukázka připevnění serva
+module 888_1010_A(){
+	difference(){
+				hollow_airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+		translate([54.75,-6,40 + 20])
+			rotate([-90,0,90])
+					888_1012_D();			
+	}
+
+
+
+
+}
+
+
 888_1010();
 
+
+translate([0,0,0])
+		888_1010_A();
+
+//servo s upevněním
+translate([32 + 0.25,8,60])
+	rotate([-90,0,-90])
+	union(){
+		888_1012_A();
+		888_1012_B();
+		888_1012_C();
+}
+
+use <888_1012.scad>
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 
