@@ -245,11 +245,16 @@ module 666_1028_drillhelper_doc(){
 
 //rotate([270,-90,0])
 //666_1028_drillhelper();
+
+
 translate([150 - Rudder_depth + gap_width*1.5,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,- gap_width/2])
-rotate([90,-87 ,0])
-888_1010();
+    rotate([90,-87 ,0])
+        888_1010();
 
 666_1028();
+
+
+
 //666_1028_drillhelper_doc();
 
 //For printing size limits check.

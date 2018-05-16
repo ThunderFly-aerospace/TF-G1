@@ -39,6 +39,9 @@ Nut_height_M3 = 2.7;
 Nut_diameter_M3 = 6.6; 
 
 
+//šroub servo
+Servo_screw = 1.5;
+
 //The tube for help
 Help_main_tube_outer = 25;
 Help_main_tube_inner = 23; 
