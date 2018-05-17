@@ -15,8 +15,10 @@ p5=[0,second_undercarriage_hole];
 
 points=[p0,p1,p2,p3,p4,p5];
 
-w = polomer;
+w = polomer + tube_for_undercarriage_outer_diameter/4;
 
+
+//horní žlutá část
 	difference(){
 		rotate([0,-uhel_x,0])
 			union(){
@@ -27,30 +29,32 @@ w = polomer;
 							cube([polomer*2,120,20]);
 				//zaoblení
 				translate(p2)
-					translate([0.4,0,0])
+					//translate([0.4,0,0])
+					translate([tube_for_undercarriage_outer_diameter/4 + 1,tube_for_undercarriage_outer_diameter/4 - 0.6,0])
 							cylinder(h=20,r=w, $fn = 50);
 				//druhá rovná hrana
 				translate(p3)
-					translate([-19.9,-277,0])
-							cube([40,277,20]);
+					translate([-14,-270,0])
+							cube([40,278,20]);
 				//druhé zaoblení
 						translate(p3)
-							translate([0.5,2,0])
+							translate([1 + tube_for_undercarriage_outer_diameter/4,4.7 + tube_for_undercarriage_outer_diameter/2,0])
 							cylinder(h=20,r=w, $fn = 50);
 				//třetí rovná hrana
 				translate(p3)
-					translate([-4,- polomer + 2.3,0])
+					translate([-4,- tube_for_undercarriage_outer_diameter/2,0])
 						rotate([0,0,uhel_y + 0.2])
 							cube([polomer*2,120,20]);
 
 			}
+		//odstranění přesahů přes hlavní kostku	
 		translate([-50,-60,-50])
 					cube([50,500,120]);
 
-		translate([-global_clearance/2,0,8.5 - global_clearance/2])
-			rotate([0,-uhel_x,-20])
-				color([0,0,0.5])
-					cube([20 + global_clearance,60 + global_clearance/2,5 + global_clearance]);
+	
+		translate([114,-30,-62])
+			rotate([0,-90,0])
+				888_1008_C();
 
 
 	}
@@ -62,37 +66,31 @@ w = polomer;
 	difference(){
 		translate([0,-20,-50])
 			difference(){
+				//hlavní kostka
 						color([0,0.5,0])
 							cube([150,400,80]);
 
+				//uříznutí pro sešikmení
 				translate([-5,-10,50])
 					rotate([0,- uhel_x,0])
 						color([0.5,0,0])
-							cube([170,500,80]);		//uříznutí pro sešikmení
+							cube([170,500,80]);		
 
 			}
 
-	translate([114,-35.5,-68])
-		rotate([0,-90,0])
-			888_1008_C();
-		
-
-	}
-
-	difference(){
-		translate([0,-0.5,0])
+		//otvory pro upínky	
+		translate([4 + 0.5,19 - 0.4,-10])
 			rotate([0,-uhel_x,-20])
-				color([0,0,0.5])
-					cube([25,20,8]);
-
-		translate([0,0,8.5])
-				rotate([0,-uhel_x,-20])
-					translate([5 - global_clearance/2,4 - global_clearance/2,-6 - global_clearance/2])
-							cube([10 + global_clearance,3 + global_clearance,15]);
-
-
+					cube([15 + 0.5,5 + 0.5,18 + 5]);
+		translate([50 + 0.5,2.5 - 0.5,-1])
+			rotate([0,-uhel_x,-20])
+					cube([15 + 0.5,5 + 0.5,18 + 5]);
 
 	}
+
+
+
+
 
 }
 
@@ -101,11 +99,11 @@ module 888_1013_A(){
 
 	rotate([0,-uhel_x,-20])
 		union(){
-				color([0.5,0,0])
-					cube([20,60,4]);
-			translate([5,4,-6])
-				color([0.5,0,0])
-					cube([10,3,6]);
+					color([0,0,0.5])
+						cube([15,5,18 + 5]);
+			translate([0,0,18 - 5 + 5])
+					color([0,0,0.5])
+						cube([15,10,5]);
 		}
 }
 
@@ -128,9 +126,11 @@ translate([114,-35.5,-68])
 	rotate([0,-90,0])
 		888_1008_C();
 */
-translate([0,0,8.5])
-		888_1013_A();
 
+translate([4,19,-5])
+		888_1013_A();
+translate([50,2.5,4])
+		888_1013_A();
 
 		888_1013_B();
 
