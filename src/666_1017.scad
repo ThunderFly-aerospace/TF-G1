@@ -235,14 +235,15 @@ height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickne
         }
 }
 
-666_1017_drillhelper_doc();
+//666_1017_drillhelper_doc();
 
 
-//rotate([90,0,0])
-  //  666_1017(draft);
+rotate([90,0,0])
+    666_1017(draft);
 
 //translate([70,0,0])
+/*
 rotate([0,90,0])
 666_1017_drillhelper();
-
+*/
 include <../Parameters.scad>
