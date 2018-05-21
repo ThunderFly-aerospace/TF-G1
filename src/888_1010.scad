@@ -7,7 +7,7 @@ union(){
 difference(){
 	union(){
 		intersection(){
-					hollow_airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+					hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
     		translate([150 - Rudder_height + gap_width/2,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
         		rotate([90,0,90])
                       cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
@@ -67,33 +67,43 @@ difference(){
 //ukázka připevnění serva
 module 888_1010_A(){
 	difference(){
-				hollow_airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
-		translate([54.75,-6,40 + 20])
-			rotate([-90,0,90])
-					888_1012_D();			
+				hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+		
+		//otvor pro servo
+		translate([26.5,0,60 - 35/2 - 4])
+			rotate([90,0,90])
+				cube([2 + 6,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
+			
 	}
 
-
-
+	translate([32 + 0.25,0,60])
+		rotate([-90,0,-90])
+			union(){
+				888_1012_A();
+				888_1012_B();
+				888_1012_C();
+			}
 
 }
 
 
-888_1010();
+//888_1010();
 
 
 translate([0,0,0])
 		888_1010_A();
 
+
+/*
 //servo s upevněním
-translate([32 + 0.25,8,60])
+translate([32 + 0.25,0,60])
 	rotate([-90,0,-90])
 	union(){
 		888_1012_A();
 		888_1012_B();
 		888_1012_C();
 }
-
+*/
 use <888_1012.scad>
 use <./lib/naca4.scad>
 include <../Parameters.scad>
