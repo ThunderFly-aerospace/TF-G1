@@ -58,49 +58,6 @@ difference(){
 					//cube([50,500,120]);
 		}
 		
-		difference(){
-			union(){
-
-				difference(){
-					translate([1,150 - 20,-25 + tube_for_undercarriage_outer_diameter*0.75])
-							rotate([90,0,0])
-								cylinder(h=150,r=w, $fn = 50);
-					translate([2,-20,-50])
-							cube([20,150,70]);
-
-					translate([-16 + 7,23 -global_clearance/2,-50 - 1 - global_clearance ])
-						rotate([0,uhel_x - 90,0])
-								cube([20 + global_clearance,10 + global_clearance,18 + 5 + 2 + 8]);
-
-
-				}
-				difference(){
-					translate([-polomer*2 - 1,polomer/4 + 10 - 35,-100 - polomer + 7])
-						rotate([0,uhel_x,0])
-								cube([35,150,100]);
-
-					translate([-16 + 7,23 -global_clearance/2,-50 - 1 - global_clearance ])
-						rotate([0,uhel_x - 90,0])
-								cube([20 + global_clearance,10 + global_clearance,18 + 5 + 2 + 8]);
-
-				}
-
-				difference(){
-					translate([-40 - 10 - 10,47.5 + 7,-80])
-						rotate([0,0,-20])
-								cube([35 + 20,40,100]);
-					translate([-16,23,-50])
-						rotate([0,uhel_x - 90,0])
-							translate([- global_clearance/2,10,18 - 5 + 4 - 5])
-								cube([20 + global_clearance,10 + global_clearance/2 + 2,8 + 6]);
-				}
-			
-			}
-				
-			translate([-150,0,-150 - 58])
-					cube([150,150,150]);
-
-		}
 }
 
 		translate([100,-30,-83.5])
@@ -154,9 +111,9 @@ difference(){
 	difference(){
 		
 		//hlavní kostka
-		translate([0,-20,-40 - 40])
+		translate([0,-20,-40])
 			color([0,0.5,0])
-				cube([150,400,40 + 40]);
+				cube([150,400,40]);
 
 		//otvory pro upínky	
 		translate([4 - global_clearance/2,14 - global_clearance/2,-13])
@@ -270,39 +227,12 @@ module 888_1013_A(){
 
 module 888_1013_B(){
 
-difference(){
 	intersection(){
 				888_1013();
 		translate([2,-20,-100])
 				cube([150,150,150]);
 	}
-//otvory pro šrouby pro připevnění 888_1013_F
-		translate([-25 + Nut_height_M3,10,-30])
-			rotate([0,90,0])
-				union(){
-						cylinder(h = 200, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-				translate([0,0,-Nut_height_M3 - global_clearance])
-						cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
-				}
 
-		translate([-25 -10 + Nut_height_M3*1.5,60,-15])
-			rotate([0,90,0])
-				union(){
-						cylinder(h = 200, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-				translate([0,0,-Nut_height_M3 - global_clearance])
-						cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
-				}
-
-		translate([-25 - 10+ Nut_height_M3 * 1.5,60,-40])
-			rotate([0,90,0])
-				union(){
-						cylinder(h = 200, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-				translate([0,0,-Nut_height_M3 - global_clearance])
-						cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
-				}
-
-
-}
 //upínky
 
 	translate([4,14,-5])
@@ -357,74 +287,121 @@ module 888_1013_E(){
 }
 
 
+
 module 888_1013_F(){
+w = radius_undercarriage - tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/4;
 
 difference(){
-	intersection(){
-			888_1013();
-		translate([-35 + 2,-75,-150 + 20 + 10 + 30 + 30 + 2])
-			cube([35,150,150 - 10 - 30 - 30 - 2]);
+	union(){
+		translate([0,0,-40])
+				color([0.8,0,0])	
+					cube([150,150,40]);
+
+		//pravá trubka//
+		//druhá rovná hrana
+		translate([20 + 6,-0.5 - 10,0])
+			rotate([0,0,11])
+					cube([w*2,50,20]);
+		translate([-2,17.5,0])
+					cube([40, w*2, 20]);
+		//druhé zaoblení
+		translate([10 + 7+ w,40 - 0.2,0])
+					cylinder(h=20,r=w, $fn = 50);
+		//konec pravá trubka//
+
+		//levá trubka//
+
+		translate([100 + 8 - 1,80 + 6 - 1,0])
+			rotate([0,0,-11])
+				color([0,0.8,0])
+					cube([50,w*2,20]);
+		translate([90 - 1.2,110 - 5,0])
+				color([0,0.8,0])
+					cube([w*2, 50, 20]);
+		//druhé zaoblení
+		translate([100 + w/2,100 + 10 - 2.5 - 0.5,0])
+				color([0,0.8,0])
+					cylinder(h=20,r=w, $fn = 50);
+
+
 	}
-	translate([-25 + Nut_height_M3,10,-30])
-		rotate([0,90,0])
-			union(){
-					cylinder(h = 200, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-			translate([0,0,-Nut_height_M3 - global_clearance])
-					cylinder(h = Nut_height_M3 + 2*global_clearance, r = Nut_diameter_M3/2, $fn = 6);
-			}
+	
+	translate([-75,-26 - 3,-19.5 + 4])
+			rotate([90 + 20,0, + 90 + 11])
+				888_1008_C();
+
+	translate([180,200 + 20,-14.5])
+			rotate([90 + 20,0,-11])
+				888_1008_D();
 
 
-	translate([-25 -10 + Nut_height_M3*1.5,60,-15])
-		rotate([0,90,0])
-			union(){
-					cylinder(h = 200, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-			translate([0,0,-Nut_height_M3 + global_clearance])
-					cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
-			}
-
-	translate([-25 - 10+ Nut_height_M3 * 1.5,60,-40])
-		rotate([0,90,0])
-			union(){
-					cylinder(h = 200, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-			translate([0,0,-Nut_height_M3 + global_clearance])
-					cylinder(h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
-			}
-
+	//odstranění převisů
+	translate([-20,-50,-50])
+				cube([200,50,100]);
+	translate([-50,-20,-50])
+				cube([50,200,100]);
+	translate([150,-20,-50])
+				cube([50,200,100]);
+	translate([-20,150,-50])
+				cube([200,50,100]);
 
 }
-	translate([-16,23,-50])
-		rotate([0,uhel_x - 90,0])
-			888_1013_A();
 
+/*
+//pro znázornění
+//trubka pravá - zaoblení 1
+	translate([-75,-26 - 3,-19.5 + 4])
+			rotate([90 + 20,0, + 90 + 11])
+				888_1008_A();
 
+				
+//trubka pravá - zaoblení 4
+	translate([-185,-50,-325])
+			rotate([90 + 20,0, + 90 + 11])
+				888_1008_A();
 
-}
-		//888_1013();
-	/*
-translate([114,-35.5,-68])
-	rotate([0,-90,0])
-		888_1008_C();
+//trubka levá - zaoblení 1
+	translate([180,200 + 20,-14.5])
+			rotate([90 + 20,0,-11])
+				888_1008_B();
+
+//trubka levá - zaoblení 4
+	translate([180 + 20,200 + 20 + 110,-325])
+			rotate([90 + 20,0,-11])
+				888_1008_B();
 */
+
+
+}
+
+
+//888_1013();
+
+translate([100,-30,-83.5])
+	rotate([0,-90 + uhel_x,0])
+		888_1008_C();
 
 
 //přípravky pravá podvozková noha
 		888_1013_B();
 
 		888_1013_C();
-/*
+
+
 //přípravky levá podvozková noha
 translate([-50,0,0])
 		888_1013_D();
 
 translate([-50,0,0])
 		888_1013_E();
-*/
 
-translate([-100,0,0])
+
+//přípravek zaoblení 1 a 4
+translate([-400,0,0])
 		888_1013_F();
 
 use <888_1008.scad>
 use <./lib/curvedPipe.scad>
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../Parameters.scad> 

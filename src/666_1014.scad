@@ -53,17 +53,17 @@ mirror([1,0,0])
             cylinder(h = width, r = M3_screw_diameter/2, $fn = draft ? 10 :20 );
 
 	//nut
-	translate([-width/2 - Nut_height_M3/2, 0, height/2])
+	translate([-width/2 - global_clearance, 0, height/2])
 	   rotate([0,90,0])
-	       cylinder (h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+	      cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
     
-    translate([width/2 - Nut_height_M3/2, 0, height/2])
+    translate([width/2 - Nut_height_M3, 0, height/2])
 	   rotate([0,90,0])
-	       cylinder (h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+	       cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
 
 	translate([width/2 - Nut_height_M4,-(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + M4_screw_diameter/2), height/2])
 	   rotate([0,90,0])
-	       cylinder (h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+	      cylinder (h = Nut_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
 
     }
 }
