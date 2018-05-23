@@ -34,7 +34,7 @@ Nut_diameter_M6 = 11.8;
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;
 Nut_diameter_M4 = 8.4;
-
+Screw_head_height_M4 = 4;
 
 //Screw diameter and nut for M3 [mm]
 M3_screw_diameter = 3.2;
