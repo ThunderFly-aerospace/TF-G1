@@ -21,6 +21,9 @@ coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
 
+basic_screw_length = 5;
+
+
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
 Nut_height_M6 = 4.9;
@@ -37,6 +40,7 @@ Nut_diameter_M4 = 8.4;
 M3_screw_diameter = 3.2;
 Nut_height_M3 = 2.7;	
 Nut_diameter_M3 = 6.6; 
+Screw_head_height_M3 = 3;
 
 
 //šroub servo
