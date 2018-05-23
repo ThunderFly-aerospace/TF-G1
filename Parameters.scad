@@ -17,7 +17,7 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
-
+// screw lenght step - minimum difference in lenght between two types of screws
 basic_screw_length = 5;
 
 
