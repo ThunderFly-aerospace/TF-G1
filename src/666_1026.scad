@@ -27,7 +27,7 @@ module 666_1026(draft)
     coupling_screw_length = (ceil(depth)) * basic_screw_length;
         echo("coupling_screw_length is", coupling_screw_length);
 
-        coupling_depth = coupling_screw_length;      //zde je screw_head_height_M3 pro určení délky potřebné pro matku
+        coupling_depth = coupling_screw_length - Screw_head_height_M4;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
             echo("coupling_depth is", coupling_depth);
 
     height = coupling_depth;
