@@ -9,9 +9,6 @@ tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;
 
 
-//umístění podvozkových trubek
-
-second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
 
 // Parameters of tube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
@@ -19,6 +16,9 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
+
+
+basic_screw_length = 5;
 
 
 //Screw diameter and nut for M6 [mm]
@@ -31,12 +31,13 @@ Nut_diameter_M6 = 11.8;
 M4_screw_diameter=4.5;
 Nut_height_M4 = 3.2;
 Nut_diameter_M4 = 8.4;
-
+Screw_head_height_M4 = 4;
 
 //Screw diameter and nut for M3 [mm]
 M3_screw_diameter = 3.2;
 Nut_height_M3 = 2.7;	
 Nut_diameter_M3 = 6.6; 
+Screw_head_height_M3 = 3;
 
 
 //šroub servo
@@ -83,8 +84,9 @@ bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
 // zkrácená část pro payload pro testovací tisk
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
-//Base Divison - dělení podložky
-base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter,second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness + main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_x_size];
+
+
+
 
 //Cover pilon division - na výšku (v ose Z)
 cover_pilon_division = [0,170,height_of_vertical_tube + main_tube_outer_diameter + coupling_wall_thickness];
@@ -172,3 +174,68 @@ Rudder_length = 4*main_tube_outer_diameter;
 Rudder_height = 2*main_tube_outer_diameter;
 Rudder_depth = main_tube_outer_diameter/2;
 gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
+
+
+/////spojka 666_1004
+
+    width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+        echo("width_666_1004 is", width_666_1004);
+    
+        echo("ceil_666_1004 is", ceil(width_666_1004));
+
+    coupling_screw_length_666_1004 = (ceil(width_666_1004)) * basic_screw_length;
+        echo("coupling_screw_length_666_1004 is", coupling_screw_length_666_1004);
+
+    coupling_width_666_1004 = coupling_screw_length_666_1004 + Screw_head_height_M3;
+        echo("coupling_width_666_1004 is", coupling_width_666_1004);
+
+    height_666_1004 = coupling_width_666_1004;
+        echo("height_666_1004 is", height_666_1004);
+
+/////spojka 666_1026
+
+    width_666_1026 = main_tube_outer_diameter + 2*thickness_between_tubes;
+    
+    depth_666_1026 = (main_tube_outer_diameter*2)/basic_screw_length;
+        echo("depth_666_1026 is", depth_666_1026);
+    
+        echo("ceil_666_1026 is", ceil(depth_666_1026));
+
+    coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
+        echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
+
+        coupling_depth_666_1026 = coupling_screw_length_666_1026 - Screw_head_height_M4;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
+            echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
+
+    height_666_1026 = coupling_depth_666_1026;
+        echo("height_666_1026 is", height_666_1026);
+
+////spojka 666_1017
+
+    width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+        echo("width_666_1017 is", width_666_1017);
+    
+        echo("ceil_666_1017 is", ceil(width_666_1017));
+
+    coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
+        echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
+
+    coupling_width_666_1017 = coupling_screw_length_666_1017 + Screw_head_height_M3;
+        echo("coupling_width_666_1017 is", coupling_width_666_1017);
+
+    depth_666_1017 = coupling_width_666_1017;
+
+    height_666_1017= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
+
+
+
+
+
+
+//umístění podvozkových trubek
+
+second_undercarriage_hole = main_tube_outer_diameter*2 + coupling_width_666_1004 + 170 + 160;
+
+
+//Base Divison - dělení podložky
+base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter,second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness + main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_x_size];
