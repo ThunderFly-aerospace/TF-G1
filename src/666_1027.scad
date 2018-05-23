@@ -301,6 +301,49 @@ echo(floor (C));
             //888_1001();
     
 
+
+/////údaje ke spojce 666_1004
+    width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+        echo("width_666_1004 is", width_666_1004);
+    
+        echo("ceil_666_1004 is", ceil(width_666_1004));
+
+    coupling_screw_length_666_1004 = (ceil(width_666_1004)) * basic_screw_length;
+        echo("coupling_screw_length_666_1004 is", coupling_screw_length_666_1004);
+
+    coupling_width_666_1004 = coupling_screw_length_666_1004 + Screw_head_height_M3;
+        echo("coupling_width_666_1004 is", coupling_width_666_1004);
+
+    height_666_1004 = coupling_width_666_1004;
+        echo("height_666_1004 is", height_666_1004);
+
+    depth_666_1004 = main_tube_outer_diameter*2+2*coupling_wall_thickness+thickness_between_tubes;
+  
+
+
+////údaje ke spojce 666_1017
+
+    width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+        echo("width_666_1017 is", width_666_1017);
+    
+        echo("ceil_666_1017 is", ceil(width_666_1017));
+
+    coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
+        echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
+
+    coupling_width_666_1017 = coupling_screw_length_666_1017 + Screw_head_height_M3;
+        echo("coupling_width_666_1017 is", coupling_width_666_1017);
+
+    depth_663_1017 = coupling_width_666_1017;
+
+    height_666_1017= 70;
+
+
+
+
+
+
+
     union(){
 //samotná podložka
 
@@ -435,16 +478,16 @@ echo(floor (C));
         //odečtení spojek trubek
 
         //666_1004 - přední
-        translate([main_tube_outer_diameter*2,-hull_y_size/2,- main_tube_outer_diameter/2 - coupling_wall_thickness - global_clearance/2])
-            cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_y_size, main_tube_outer_diameter + 2*coupling_wall_thickness + global_clearance]);
+        translate([2*main_tube_outer_diameter + global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+                cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
 
         //666_1004 - zadní
-        translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness,- hull_y_size/2,- main_tube_outer_diameter/2 - coupling_wall_thickness - global_clearance/2])
-                cube([main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_y_size, main_tube_outer_diameter + 2*coupling_wall_thickness + global_clearance]);
-
+        translate([second_undercarriage_hole - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+                cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
+        
         //666_1017 - prostředek
-        translate([main_pilon_position - (3*main_tube_outer_diameter)/2, - hull_y_size/2, -36/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
-                cube ([3 * main_tube_outer_diameter, hull_y_size, 36 + global_clearance]);
+        translate([main_pilon_position - (3*main_tube_outer_diameter)/2, - hull_y_size/2, - coupling_width_666_1017/2 - global_clearance/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
+                cube ([3 * main_tube_outer_diameter, hull_y_size, coupling_width_666_1017 + global_clearance]);
 
 
 
