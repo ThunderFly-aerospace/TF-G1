@@ -17,7 +17,7 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
-
+// screw lenght step - minimum difference in lenght between two types of screws
 basic_screw_length = 5;
 
 
@@ -63,7 +63,7 @@ hull_scale_x = 1;
 hull_scale_y = 1.5;
 hull_scale_z = 1.5;
 
-main_pilon_position = 170+68;
+main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od přední části krytu
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky. 
 
@@ -129,7 +129,7 @@ accumulator_holder_width = 18;
 accumulator_holder_thickness = 10; 
 
 //posunutí akumálátoru na podložce
-move_of_accumulator = 165;   // pozice akumulátoru (ovlivňuje těžiště)
+move_of_accumulator = 75;   // pozice akumulátoru (ovlivňuje těžiště)
 
 
 ////////////////
@@ -238,4 +238,4 @@ second_undercarriage_hole = main_tube_outer_diameter*2 + coupling_width_666_1004
 
 
 //Base Divison - dělení podložky
-base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter,second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness + main_tube_outer_diameter+2*(main_tube_outer_diameter/5) + global_clearance, hull_x_size];
+base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter, second_undercarriage_hole - coupling_width_666_1004/2, hull_x_size];
