@@ -174,7 +174,7 @@ Rudder_length = 4*main_tube_outer_diameter;
 Rudder_height = 2*main_tube_outer_diameter;
 Rudder_depth = main_tube_outer_diameter/2;
 gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
-
+Rudder_attachment = 2.5; //otočné uchycení směrovky - průměr 2 mm
 
 /////spojka 666_1004
 
