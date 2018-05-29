@@ -137,14 +137,14 @@ move_of_accumulator = 75;   // pozice akumulátoru (ovlivňuje těžiště)
 ///////////////////
 
 //opticalFlow
-    width_optical_flow_senzor = 45.5;
-    depth_optical_flow_senzor = 6;
-    height_optical_flow_senzor = 35;
-    sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
-    M3_optical_flow_senzor_Z = 30.4;
-    M3_optical_flow_senzor_X = 24;
-    M3_optical_flow_senzor_Z_alone = 9.1;
-    M3_optical_flow_senzor_X_alone = 16.7;
+width_optical_flow_senzor = 45.5;
+depth_optical_flow_senzor = 6;
+height_optical_flow_senzor = 35;
+sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
+M3_optical_flow_senzor_Z = 30.4;
+M3_optical_flow_senzor_X = 24;
+M3_optical_flow_senzor_Z_alone = 9.1;
+M3_optical_flow_senzor_X_alone = 16.7;
 
 //GPS anténa
 GPS_outer_length = 48.01;   //Vnější rozměr
@@ -239,3 +239,6 @@ second_undercarriage_hole = main_tube_outer_diameter*2 + coupling_width_666_1004
 
 //Base Divison - dělení podložky
 base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter, second_undercarriage_hole - coupling_width_666_1004/2, hull_x_size];
+
+// šrouby pro připevnění podložky k hlavní trubce
+base_mounting_screw_length = 50;
