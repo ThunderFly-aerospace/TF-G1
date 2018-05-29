@@ -593,7 +593,7 @@ echo(floor (C));
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                 translate([0,0, main_tube_outer_diameter])           
-                    cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
+                   cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
                 translate([0,0, - hull_z_size - main_tube_outer_diameter])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
             }
