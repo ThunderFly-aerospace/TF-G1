@@ -91,7 +91,7 @@ module 666_1201(draft = false, holes = true){
                         translate([63-14, 0, -1])  
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([83-14, 16, -1]) 
+                        translate([83-14, 21.6-5, -1]) 
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
                         translate([103-14, 0, -1]) 

@@ -35,14 +35,23 @@ module hollow_airfoil(lnaca=12, L = 100, N = 81, h = 1, open = false, wall_thick
 {
     if (open){
         linear_extrude(height = h)
+
+        if (wall_thickness>0){
             difference(){
                 polygon(points = airfoil_data(naca, L, N, false));
                 offset(delta = - wall_thickness, chamfer = false) polygon(points = airfoil_data(naca, L, N, open = false));
             }
+        }
+        else{
+            difference(){
+                offset(delta = - wall_thickness, chamfer = false) polygon(points = airfoil_data(naca, L, N, open = false));
+                polygon(points = airfoil_data(naca, L, N, false));
+            }
+        }
     }
     else{
 
-        linear_extrude(height = wall_thickness)
+        linear_extrude(height = abs(wall_thickness))
             polygon(points = airfoil_data(naca, L, N, false)); 
 
         linear_extrude(height = h)
@@ -52,7 +61,7 @@ module hollow_airfoil(lnaca=12, L = 100, N = 81, h = 1, open = false, wall_thick
             }
 
         translate([0,0, h - wall_thickness])
-            linear_extrude(height = wall_thickness)
+            linear_extrude(height = abs(wall_thickness))
                 polygon(points = airfoil_data(naca, L, N, false)); 
 
     }

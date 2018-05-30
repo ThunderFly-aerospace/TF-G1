@@ -489,7 +489,7 @@ module 888_1012_D(){
 //translate([-5,0,0])
 		888_1012_C();
 //translate([-(2+6+0.5 + 2 + 1),0,0])
-    888_1012_D();
+//    888_1012_D();
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
