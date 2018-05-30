@@ -13,26 +13,23 @@ difference(){
                       cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
 		}
 
-   	translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
-			cylinder(h = Rudder_length - gap_width, r = 4.85, $fn = draft ? 100:200);
+    translate([150 - Rudder_height + gap_width*1.5,0, + gap_width/2 + (150 - Rudder_length)/2])
+			cylinder(h = Rudder_length - gap_width, r = 2.38, $fn = draft ? 100:200);
 	}
 
 
-    translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
+    translate([150 - Rudder_height + gap_width*1.5,0, + gap_width/2 + (150 - Rudder_length)/2])
 			union(){
 				difference(){
 					translate([0,0,- gap_width])
-							cylinder(h = Rudder_length + gap_width, r = 5, $fn = draft ? 100:200);
+							cylinder(h = Rudder_length + gap_width, r = 4, $fn = draft ? 100:200);
 					translate([0,0,-gap_width])
-							cylinder(h = Rudder_length + 2*gap_width, r = 4.87, $fn = draft ? 100:200);
+							cylinder(h = Rudder_length + 2*gap_width, r = 2.38, $fn = draft ? 100:200);
 					translate([0,-10,-2*gap_width])
 						rotate([0,0,0])
 							cube([Rudder_depth, 35, Rudder_length + 4*gap_width]);
 				}
 			}
-    translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
-		cylinder(h = Rudder_length + gap_width, r= Rudder_attachment, $fn = draft ? 100 : 200);
-
 }
 
 		//výstupek
@@ -70,7 +67,6 @@ difference(){
 //ukázka připevnění serva
 module 888_1010_A(){
 	difference(){
-		
 				hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 		
 		//otvor pro servo
@@ -91,12 +87,12 @@ module 888_1010_A(){
 }
 
 
-888_1010();
-/*
+//888_1010();
+
 
 translate([0,0,0])
 		888_1010_A();
-*/
+
 
 /*
 //servo s upevněním

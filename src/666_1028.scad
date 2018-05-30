@@ -102,11 +102,11 @@ module 666_1028(){
                     translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
                         rotate([90,-87,0])
                         {
-                        hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+                        hollow_airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 
             //výztuhy
               	intersection(){
-                    airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false);
+                    airfoil(naca = 0005, L = 150, N = draft ? 50 : 100, h = 150, open = false);
                     union(){
                         translate([70,-15,-55])
                        		rotate([45,0,90])
@@ -124,29 +124,12 @@ module 666_1028(){
                     }
 
 	            }
-                
-                }
-        translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
-            rotate([90,0,0])
-                difference(){
-                    cylinder(h = 150, r = 4.87, $fn = draft ? 100:200);
-                   translate([0,0,-3])
-                    cylinder(h = 150 + 6, r= Rudder_attachment, $fn = draft ? 100 : 200);
-  
                 }
                 }
-            //vyříznutí otvoru pro směrovku
-            translate([145- Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
-                cube([Rudder_depth, Rudder_length,Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
+            
+            translate([145- Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width])
+                    cube([Rudder_depth, Rudder_length,Rudder_height + global_clearance + gap_width]);
 
-            translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
-                rotate([90,0,0])
-                   translate([0,0,-3])
-                   cylinder(h = 150 + 6, r= Rudder_attachment, $fn = draft ? 100 : 200);
-
-translate([142.5,19.8,30])
-    rotate([0,3,0])
-    888_1012_D();
             }
 
 
@@ -264,16 +247,14 @@ module 666_1028_drillhelper_doc(){
 //666_1028_drillhelper();
 
 
-translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
+translate([150 - Rudder_depth + gap_width*1.5,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,- gap_width/2])
     rotate([90,-87 ,0])
         888_1010();
 
 666_1028();
-/*
-translate([131,20,30.5])
-    rotate([0,3,0])
-    888_1012_D();
-*/
+
+
+
 //666_1028_drillhelper_doc();
 
 //For printing size limits check.
@@ -281,20 +262,7 @@ translate([131,20,30.5])
   //cube ([150,150,150]);
 
 
-//servo
-
-/*
-translate([142.1,20,30])
-    rotate([0,3,0])
-        union(){
-                888_1012_A();
-                888_1012_B();
-                888_1012_C();
-        }
-
-*/
 use <888_1010.scad>
-use <888_1012.scad>
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
