@@ -102,11 +102,11 @@ module 666_1028(draft){
                 translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                     {
-                        hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 
                         //výztuhy
                       	intersection(){
-                            airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false);
+                            airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false);
                             union(){
                                 translate([70,-15,-55])
                                		rotate([45,0,90])
@@ -126,24 +126,25 @@ module 666_1028(draft){
     	            }
                 
                 }
-                translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
+                // vyztužení pro čepy 
+                translate([150 - 4.87 + 0.14, 75, 150 - Rudder_height + gap_width/2])
                     rotate([90,0,0])
                         difference(){
-                            cylinder(h = 150, r = 4.87, $fn = draft ? 100:200);
-                           translate([0,0,-3])
-                            cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 100 : 200);
+                            cylinder(h = 150, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
+                            translate([0,0,-3])
+                                cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50);
           
                         }
             }
 
             //vyříznutí otvoru pro směrovku
             translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
-                cube([Rudder_depth, Rudder_length,Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
+                cube([Rudder_depth, Rudder_length, Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
 
             translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
                 rotate([90,0,0])
                    translate([0,0,-3])
-                   cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 100 : 200);
+                   cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50);
 
             
             // otvor pro servo
@@ -207,6 +208,8 @@ module 666_1028(draft){
         /*translate ([-75,-75,-10])
         	cube ([150,150,150]);*/
 
+
+
     }	
  
 }
@@ -252,6 +255,8 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = tru
                         cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
                 }
 
+
+
     }
 }	
 
@@ -276,36 +281,37 @@ module 666_1028_drillhelper_doc(){
 
 
 
-module 666_1028_rudder(){
+module 666_1028_rudder(draft){
 
     difference(){
         union(){
             intersection(){
-                        hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
                 translate([150 - Rudder_height + gap_width/2,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
                     rotate([90,0,90])
                           cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
             }
 
-        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
-                cylinder(h = Rudder_length - gap_width, r = 4.85, $fn = draft ? 100:200);
+            translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
+                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
+
         }
 
-
-        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
+        /*translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
                 union(){
                     difference(){
                         translate([0,0,- gap_width])
-                                cylinder(h = Rudder_length + gap_width, r = 5, $fn = draft ? 100:200);
+                                cylinder(h = Rudder_length + gap_width, r = 5, $fn = draft ? 10:20);
                         translate([0,0,-gap_width])
-                                cylinder(h = Rudder_length + 2*gap_width, r = 4.87, $fn = draft ? 100:200);
+                                cylinder(h = Rudder_length + 2*gap_width, r = 4.87, $fn = draft ? 10:20);
                         translate([0,-10,-2*gap_width])
                             rotate([0,0,0])
                                 cube([Rudder_depth, 35, Rudder_length + 4*gap_width]);
                     }
                 }
+        */
         translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
-            cylinder(h = Rudder_length + gap_width, d = ruder_shaft_diameter, $fn = draft ? 100 : 200);
+            cylinder(h = Rudder_length + gap_width, d = ruder_shaft_diameter, $fn = draft ? 10 : 20);
 
     }
 
@@ -338,9 +344,12 @@ module 666_1028_rudder(){
 
 translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
     rotate([90,-87 ,0])
-        666_1028_rudder();
+        666_1028_rudder(draft);
+
 
 666_1028();
+
+
 /*
 translate([131,20,30.5])
     rotate([0,3,0])
@@ -350,7 +359,7 @@ translate([131,20,30.5])
 
 //For printing size limits check.
 //translate([0,-75,0])
-  //cube ([150,150,150]);
+//  cube([150,150,150]);
 
 
 //servo
