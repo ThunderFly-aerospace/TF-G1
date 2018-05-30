@@ -10,7 +10,7 @@ DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
 draft = true;
 
-module 666_1028(){
+module 666_1028(draft){
 
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -98,56 +98,67 @@ module 666_1028(){
 
         //VERTICAL
         difference(){
-                union(){
-                    translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
-                        rotate([90,-87,0])
-                        {
+            union(){
+                translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
+                    rotate([90,-87,0])
+                    {
                         hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 
-            //výztuhy
-              	intersection(){
-                    airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false);
-                    union(){
-                        translate([70,-15,-55])
-                       		rotate([45,0,90])
-                        		for (i = [0:17]) { // opakovani cyklu
-                                		translate([0, i * 25,-15])  //sude prorezy
-                                    		cube([30, wall_thickness, 220]); 
-    		       	            }
+                        //výztuhy
+                      	intersection(){
+                            airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false);
+                            union(){
+                                translate([70,-15,-55])
+                               		rotate([45,0,90])
+                                		for (i = [0:17]) { // opakovani cyklu
+                                        		translate([0, i * 25,-15])  //sude prorezy
+                                            		cube([30, wall_thickness, 220]); 
+            		       	            }
 
-    		       	    translate([-60,-15,85])
-                       		rotate([135,0,90])
-                        		for (i = [0:17]) { // opakovani cyklu
-                                		translate([0, i * 25,-15])  //sude prorezy
-                                    		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-    		       	            }
-                    }
+            		       	    translate([-60,-15,85])
+                               		rotate([135,0,90])
+                                		for (i = [0:17]) { // opakovani cyklu
+                                        		translate([0, i * 25,-15])  //sude prorezy
+                                            		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+            		       	            }
+                            }
 
-	            }
+    	            }
                 
                 }
-        translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
-            rotate([90,0,0])
-                difference(){
-                    cylinder(h = 150, r = 4.87, $fn = draft ? 100:200);
-                   translate([0,0,-3])
-                    cylinder(h = 150 + 6, r= Rudder_attachment, $fn = draft ? 100 : 200);
-  
-                }
-                }
+                translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
+                    rotate([90,0,0])
+                        difference(){
+                            cylinder(h = 150, r = 4.87, $fn = draft ? 100:200);
+                           translate([0,0,-3])
+                            cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 100 : 200);
+          
+                        }
+            }
+
             //vyříznutí otvoru pro směrovku
-            translate([145- Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
+            translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
                 cube([Rudder_depth, Rudder_length,Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
 
             translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
                 rotate([90,0,0])
                    translate([0,0,-3])
-                   cylinder(h = 150 + 6, r= Rudder_attachment, $fn = draft ? 100 : 200);
+                   cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 100 : 200);
 
-translate([142.5,19.8,30])
-    rotate([0,3,0])
-    888_1012_D();
-            }
+            
+            // otvor pro servo
+            translate([142.5,19.8,30])
+                rotate([0,3,0])
+                    union(){
+                        translate([-13.5/2,- (22.8 - 19.3) - 0.25,-4.95 - 1 - 0.25])
+                                color([0.5,0,0])
+                                    cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
+
+                        translate([-20,0.5, +22.6 -6 - 1])
+                            rotate([90,0,0])
+                                cube([20,7,22.8-19.3 + 1]);
+                   }
+        }
 
 
 
@@ -264,9 +275,70 @@ module 666_1028_drillhelper_doc(){
 //666_1028_drillhelper();
 
 
+
+module 666_1028_rudder(){
+
+    difference(){
+        union(){
+            intersection(){
+                        hollow_airfoil(naca = 0010, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+                translate([150 - Rudder_height + gap_width/2,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
+                    rotate([90,0,90])
+                          cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
+            }
+
+        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
+                cylinder(h = Rudder_length - gap_width, r = 4.85, $fn = draft ? 100:200);
+        }
+
+
+        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2])
+                union(){
+                    difference(){
+                        translate([0,0,- gap_width])
+                                cylinder(h = Rudder_length + gap_width, r = 5, $fn = draft ? 100:200);
+                        translate([0,0,-gap_width])
+                                cylinder(h = Rudder_length + 2*gap_width, r = 4.87, $fn = draft ? 100:200);
+                        translate([0,-10,-2*gap_width])
+                            rotate([0,0,0])
+                                cube([Rudder_depth, 35, Rudder_length + 4*gap_width]);
+                    }
+                }
+        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
+            cylinder(h = Rudder_length + gap_width, d = ruder_shaft_diameter, $fn = draft ? 100 : 200);
+
+    }
+
+    
+    //páka pro táhlo
+    translate([115,- 3.5,35])   
+        difference(){
+            rotate([-20,0,0])
+
+            difference(){
+                union(){
+                        cube([15,4*hull_wall_thickness,25]);
+                translate([15/2,4*hull_wall_thickness, 25])
+                    rotate([90,0,0])
+                        cylinder(h = 4*hull_wall_thickness, r = 15/2, $fn = draft ? 50 : 100);
+                }
+
+            translate([15/2, 5*hull_wall_thickness,25])
+                rotate([90,0,0])
+                    cylinder(h = 6*hull_wall_thickness, r = 2, $fn = draft ? 50 : 100);
+
+            }
+
+            translate([-10,0,-10])
+                cube([50, 4.3*hull_wall_thickness,45]);
+        }
+}
+
+
+
 translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
     rotate([90,-87 ,0])
-        888_1010();
+        666_1028_rudder();
 
 666_1028();
 /*
@@ -293,7 +365,6 @@ translate([142.1,20,30])
         }
 
 */
-use <888_1010.scad>
 use <888_1012.scad>
 
 use <./lib/naca4.scad>
