@@ -15,7 +15,7 @@ module 666_1028(draft){
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
 
-    wall_thickness = 0.6;
+    wall_thickness = 0.65;
 
     //BASIC DROP
     //render(convexity = 2) 
@@ -39,7 +39,7 @@ module 666_1028(draft){
     	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
     	                rotate ([0,-90, 160])
                         {			//rotate([0,-90,152.5])
-    	                    hollow_airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
+    	                    hollow_airfoil(naca = 0006, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
 
     					//výztuhy
         					intersection(){
@@ -68,7 +68,7 @@ module 666_1028(draft){
                 	translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
                     	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                         {
-                            hollow_airfoil(naca = 0005, L =95, N = draft ? 50 : 100, h = 152, open = true);
+                            hollow_airfoil(naca = 0006, L =95, N = draft ? 50 : 100, h = 152, open = true);
                     //výztuhy
                           	intersection(){
                                 airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
@@ -99,7 +99,7 @@ module 666_1028(draft){
         //VERTICAL
         difference(){
             union(){
-                translate ([140,75,-0.5]) // elementar Z shift to improve adhesion on the printig surface
+                translate ([140,75,-0.3]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                     {
                         hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
@@ -148,7 +148,7 @@ module 666_1028(draft){
 
             
             // otvor pro servo
-            translate([142.5,19.8,30])
+            translate([143,19.8,30])
                 rotate([0,3,0])
                     union(){
                         translate([-13.5/2,- (22.8 - 19.3) - 0.25,-4.95 - 1 - 0.25])
@@ -311,12 +311,12 @@ module 666_1028_rudder(draft){
                 }
         */
         translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
-            cylinder(h = Rudder_length + gap_width, d = ruder_shaft_diameter, $fn = draft ? 10 : 20);
+            cylinder(h = Rudder_length + gap_width, d = ruder_shaft_diameter, $fn = 10);
 
     }
 
     
-    //páka pro táhlo
+    /*//páka pro táhlo
     translate([115,- 3.5,35])   
         difference(){
             rotate([-20,0,0])
@@ -337,7 +337,7 @@ module 666_1028_rudder(draft){
 
             translate([-10,0,-10])
                 cube([50, 4.3*hull_wall_thickness,45]);
-        }
+        }*/
 }
 
 
