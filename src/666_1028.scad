@@ -148,7 +148,7 @@ module 666_1028(draft){
 
             
             // otvor pro servo
-            %translate([143,19.8,30])
+            translate([143,19.8,30])
                 rotate([0,3,0])
                     union(){
                         translate([-6 , -(22.8 - 19.3) - 0.25, -4.95 - 1 - 0.25])
