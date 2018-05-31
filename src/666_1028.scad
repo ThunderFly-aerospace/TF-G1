@@ -91,9 +91,18 @@ module 666_1028(draft){
                     }
                 }
 
+            // odečtení výztuh z profilů výškovky
 			translate ([140,-75,0]) 
                 rotate([0,3,0])
-            	   cube ([15,150,150]);
+            	{
+            	   	cube ([15,150,150]);
+
+            	   	translate ([0,150,0])
+            	   		rotate([90,-90,0])
+			        		linear_extrude(height = 150)
+			       				offset(delta = -wall_thickness) 
+			                		polygon(points = airfoil_data(naca = 0009, L = 150, N = draft ? 50 : 100, open = false));
+            	}
 	       }
 
         //VERTICAL
@@ -102,7 +111,7 @@ module 666_1028(draft){
                 translate ([140,75,-0.3]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                     {
-                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = true); //dutý profil
 
                         //výztuhy
                       	intersection(){
@@ -121,20 +130,31 @@ module 666_1028(draft){
                                         		translate([0, i * 25,-15])  //sude prorezy
                                             		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
             		       	            }
-                            }
+			                
+			                	// vyztužení pro čepy
+			                	rotate([-90,0,-90])
+				                	translate([0, -75, 150 - Rudder_height + gap_width/2])
+				                        difference(){
+				                        	union(){
+				                				translate([0, 75, 0])
+					                            	rotate([45,0,0])
+						                            	cube([15, 40, 40], center = true);
 
+				                				translate([0, -75, 0])
+					                            	rotate([45,0,0])
+						                            	cube([15, 40, 40], center = true);
+					                        }
+
+				            				translate([0, 0, 25])
+				                            	cube([25, 200, 40], center = true);
+
+				                            rotate([90,0,0])
+				                                cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50, center = true);
+				          
+				                        }
+                            }
     	            }
-                
                 }
-                // vyztužení pro čepy 
-                translate([150 - 4.87 + 0.14, 75, 150 - Rudder_height + gap_width/2])
-                    rotate([90,0,0])
-                        difference(){
-                            cylinder(h = 150, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
-                            translate([0,0,-3])
-                                cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50);
-          
-                        }
             }
 
             //vyříznutí otvoru pro směrovku
