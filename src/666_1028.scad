@@ -39,11 +39,11 @@ module 666_1028(draft){
     	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
     	                rotate ([0,-90, 160])
                         {			//rotate([0,-90,152.5])
-    	                    hollow_airfoil(naca = 0006, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
+    	                    hollow_airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
 
     					//výztuhy
         					intersection(){
-                                airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+                                airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = false);
                                 union(){
                 					translate([-50,0,90])
                                 		rotate([135,0,80])	
@@ -68,10 +68,10 @@ module 666_1028(draft){
                 	translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
                     	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                         {
-                            hollow_airfoil(naca = 0006, L =95, N = draft ? 50 : 100, h = 152, open = true);
+                            hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true);
                     //výztuhy
                           	intersection(){
-                                airfoil(naca = 0005, L = 95, N = draft ? 50 : 100, h = 152, open = false);
+                                airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = false);
                                 union(){
                                     translate([150,30,80])
                                    		rotate([135,0,-80])
@@ -148,16 +148,15 @@ module 666_1028(draft){
 
             
             // otvor pro servo
-            translate([143,19.8,30])
+            %translate([143,19.8,30])
                 rotate([0,3,0])
                     union(){
-                        translate([-13.5/2,- (22.8 - 19.3) - 0.25,-4.95 - 1 - 0.25])
-                                color([0.5,0,0])
+                        translate([-6 , -(22.8 - 19.3) - 0.25, -4.95 - 1 - 0.25])
+                                color("red")
                                     cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
 
-                        translate([-20,0.5, +22.6 -6 - 1])
-                            rotate([90,0,0])
-                                cube([20,7,22.8-19.3 + 1]);
+                        translate([-20, -5, 5])
+                                cube([20,8,25]);
                    }
         }
 
