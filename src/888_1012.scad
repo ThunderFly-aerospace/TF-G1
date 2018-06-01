@@ -396,11 +396,9 @@ module 888_1012_C(){
 				union(){
 					//zobáček
 					translate([-4.5,0,-5])
-							color([0,0.5,0])
 								cube([4.4,1.8,4]);
 					//menší zobáček určený do otvoru
 					translate([-0.1,0.4,-5 + 0.5])
-						color([0,0.5,0])
 							cube([1,1,3]);
 				}
 		
@@ -456,9 +454,8 @@ module 888_1012_C(){
 	    		color([0.5,0,0])
 	    			cube([8,3,6]);
 //otvor pro táhlo
-      translate([-20,0.5, +22.6 -6 - 1])
-        rotate([90,0,0])
-           cube([20,7,22.8-19.3 + 1]);
+      translate([-20,-5,0])
+           cube([20,7,22.6]);
 
 	}
 

@@ -111,7 +111,7 @@ module 666_1028(draft){
                 translate ([140,75,-0.3]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                     {
-                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = true); //dutý profil
+                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 
                         //výztuhy
                       	intersection(){
