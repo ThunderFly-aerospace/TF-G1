@@ -584,15 +584,13 @@ echo(floor (C));
 
         //připevnění horizontální trubky
         //A
-
-        
         translate([base_division[1]*0.75,0,0])
             union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                translate([0,0, main_tube_outer_diameter])           
+                translate([0,0, base_mounting_screw_length/2 - Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
-                translate([0,0, - hull_z_size - main_tube_outer_diameter])           
+                translate([0,0, - hull_z_size - base_mounting_screw_length/2 + Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
             }
                     
@@ -603,10 +601,10 @@ echo(floor (C));
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([0,0, main_tube_outer_diameter])           
+                translate([0,0, base_mounting_screw_length/2 - Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
 
-                translate([0,0, - hull_z_size - main_tube_outer_diameter])           
+                translate([0,0, - hull_z_size - base_mounting_screw_length/2 + Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
             }        
 
@@ -617,10 +615,10 @@ echo(floor (C));
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([0,0, main_tube_outer_diameter])           
+                translate([0,0, base_mounting_screw_length/2 - Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
 
-                translate([0,0, - hull_z_size - main_tube_outer_diameter])           
+                translate([0,0,  - hull_z_size - base_mounting_screw_length/2 + Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
             }        
         //D
@@ -629,10 +627,10 @@ echo(floor (C));
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([0,0, main_tube_outer_diameter])           
+                translate([0,0, (base_mounting_screw_length - 10)/2 - Screw_head_height_M3])       // TODO, poslední šroub je zatím uměle o 10mm kratší  
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
 
-                translate([0,0, - hull_z_size - main_tube_outer_diameter])           
+                translate([0,0, - hull_z_size - (base_mounting_screw_length - 10)/2 + Screw_head_height_M3])   // TODO, poslední šroub je zatím uměle o 10mm kratší
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
             }        
 
