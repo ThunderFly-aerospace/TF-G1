@@ -114,6 +114,22 @@ difference(){
 	            	rotate ([0,90,0])
 	                	cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
 	     	}
+////šrouby pro připevnění dílu 666_1027 k horizontální trubce
+	rotate([0,-90,0])
+		union(){
+			//A
+	        translate([base_division[1]*0.75,0,-hull_z_size/2])
+                    cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+	        //B
+	        translate([base_division[1] + (base_division[2] - base_division[1])/4,0,-hull_z_size/2])
+	                cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+	        //C
+	        translate([base_division[2]*1.15,0,- hull_z_size/2])
+	                cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+	        //D
+	        translate([base_division[4]*0.86,0,- hull_z_size/2])
+	                cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+		}    
 
 
 }
@@ -154,8 +170,6 @@ translate([0,0,length_of_main_tube - 80 + global_clearance])
 
 
 }
-
-
 
 
 
