@@ -10,6 +10,7 @@ global_clearance = 0.5;
 
 
 
+
 // Parameters of tube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
 thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
@@ -195,6 +196,8 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 /////spojka 666_1026
 
+
+
     width_666_1026 = main_tube_outer_diameter + 2*thickness_between_tubes;
     
     depth_666_1026 = (main_tube_outer_diameter*2)/basic_screw_length;
@@ -205,11 +208,19 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
     coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
         echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
 
-        coupling_depth_666_1026 = coupling_screw_length_666_1026 - Screw_head_height_M4;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
+
+thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50; //50 mm je konstatní šířka spojky 666_1026
+    echo("thickness_of_plate is", thickness_of_plate);
+
+        coupling_depth_666_1026 = coupling_screw_length_666_1026 - Screw_head_height_M4 - thickness_of_plate;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
             echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
 
     height_666_1026 = coupling_depth_666_1026;
         echo("height_666_1026 is", height_666_1026);
+
+//tloušťka plechu pro zajištění konstatní šířky spojky 50 mm
+
+
 
 ////spojka 666_1017
 

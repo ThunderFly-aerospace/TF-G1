@@ -12,70 +12,55 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
+/////spojka 666_1026
+
 
 
 module 666_1026(draft)
 {
 
-    width = main_tube_outer_diameter + 2*thickness_between_tubes;
-    
-    depth = (main_tube_outer_diameter*2)/basic_screw_length;
-        echo("depth is", depth);
-    
-        echo("ceil is", ceil(depth));
-
-    coupling_screw_length = (ceil(depth)) * basic_screw_length;
-        echo("coupling_screw_length is", coupling_screw_length);
-
-        coupling_depth = coupling_screw_length - Screw_head_height_M4;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
-            echo("coupling_depth is", coupling_depth);
-
-    height = coupling_depth;
-        echo("height is", height);
-
-
     difference (){
 
-        translate([-(width/2),-(coupling_depth/2),0])
+        translate([-(width_666_1026/2),-(coupling_depth_666_1026/2),0])
             color([0,0.5,0])
 
-            cube ([width,coupling_depth,height]);
+            cube ([width_666_1026,coupling_depth_666_1026,height_666_1026]);
         
         //tube
         translate([0,0,- global_clearance/2])
-           cylinder(h = height + global_clearance,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+           cylinder(h = height_666_1026 + global_clearance,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
         //screw
-        translate([0,coupling_depth/2 + global_clearance/2,7.5])
+        translate([0,coupling_depth_666_1026/2 + global_clearance/2,7.5])
            rotate([90,0,0])
-               cylinder(h = coupling_depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
+               cylinder(h = coupling_depth_666_1026 + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
 
 
-        translate([0,coupling_depth/2 + global_clearance/2,42.5])
+        translate([0,coupling_depth_666_1026/2 + global_clearance/2,42.5])
            rotate([90,0,0])
-               cylinder(h = coupling_depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
+               cylinder(h = coupling_depth_666_1026 + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
         
         //bevelled edge
 
-           translate([width/2, coupling_depth/2 - 1,- global_clearance/2])
+           translate([width_666_1026/2, coupling_depth_666_1026/2 - 1,- global_clearance/2])
                rotate([0,0,45])
-                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height + global_clearance]);
+                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height_666_1026 + global_clearance]);
 
         mirror([1,0,0])
-           translate([width/2, coupling_depth/2 - 1,- global_clearance/2])
+           translate([width_666_1026/2, coupling_depth_666_1026/2 - 1,- global_clearance/2])
                rotate([0,0,45])
-                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height + global_clearance]);
+                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height_666_1026 + global_clearance]);
         
         mirror([0,1,0])
-           translate([width/2, coupling_depth/2 - 1,- global_clearance/2])
+           translate([width_666_1026/2, coupling_depth_666_1026/2 - 1,- global_clearance/2])
                rotate([0,0,45])
-                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height + global_clearance]);
+                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height_666_1026 + global_clearance]);
 
         mirror([1,0,0])
           mirror([0,1,0])
-           translate([width/2, coupling_depth/2 - 1,- global_clearance/2])
+           translate([width_666_1026/2, coupling_depth_666_1026/2 - 1,- global_clearance/2])
                rotate([0,0,45])
-                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height + global_clearance]);
+                   cube([main_tube_outer_diameter,main_tube_outer_diameter,height_666_1026 + global_clearance]);
     }
 }
 
