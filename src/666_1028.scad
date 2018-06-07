@@ -313,8 +313,8 @@ module 666_1028_rudder(draft){
             translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
                 cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
 		    
-		    translate([109,0, 30 + 34 - height/2])   
-		        cube([11,150*surface_distance(x = 65/150),10], center = true);
+		    translate([112,0, 30 + 34 - height/2])   
+		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
 
 
         }
@@ -338,7 +338,7 @@ module 666_1028_rudder(draft){
 	    screw_xposition = (lenght/diagonal)*(screws_distance/2);
 	    screw_yposition = (height/diagonal)*(screws_distance/2);
 
-		translate([109,0,30 + 34 - height/2]){
+		translate([112,0,30 + 34 - height/2]){
 
 		    translate([screw_xposition, 0, screw_yposition])
 		        rotate([90,0,0])
@@ -358,7 +358,7 @@ translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width -
         666_1028_rudder(draft);
 
 
-666_1028();
+//666_1028();
 
 
 /*
