@@ -347,6 +347,16 @@ module 666_1028_rudder(draft){
 		    translate([-screw_xposition, 0, -screw_yposition])
 		        rotate([90,0,0])
 		            cylinder(h = 100, d = 2.3, $fn = 10, center = true);
+
+            translate([screw_xposition, 0, -screw_yposition])
+                rotate([90,0,0])
+                    cylinder(h = 100, d = 2.3, $fn = 10, center = true);
+
+            translate([-screw_xposition, 0, screw_yposition])
+                rotate([90,0,0])
+                    cylinder(h = 100, d = 2.3, $fn = 10, center = true);
+
+
 		}
     }
 }
