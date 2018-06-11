@@ -41,8 +41,8 @@ difference () {
       cube ([coupling_width,depth,height]);
 
     //middle cut
-    translate ([-0.1,-depth/2 - global_clearance/2,- global_clearance/2])
-       cube ([0.2,depth + global_clearance,height + global_clearance]);
+    translate ([-2,-depth/2 - global_clearance/2,- global_clearance/2])
+       cube ([4,depth + global_clearance,height + global_clearance]);
 
     //main tube
     translate([0,depth/2 + global_clearance/2, height - main_tube_outer_diameter/2 - coupling_wall_thickness])   
