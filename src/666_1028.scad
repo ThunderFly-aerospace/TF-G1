@@ -106,6 +106,7 @@ module 666_1028(draft){
 	       }
 
         //VERTICAL
+    union(){
         difference(){
             union(){
                 translate ([140,75,-0.3]) // elementar Z shift to improve adhesion on the printig surface
@@ -171,15 +172,38 @@ module 666_1028(draft){
             translate([143,19.8,30])
                 rotate([0,3,0])
                     union(){
+
+                        //stará verze
+
+                        /*
                         translate([-6 , -(22.8 - 19.3) - 0.25, -4.95 - 1 - 0.25])
                                 color("red")
                                     cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
 
                         translate([-20, -5, 5])
                                 cube([20,8,25]);
-                   }
-        }
+                               */ 
 
+
+                        translate([-13.5/2,- (22.8 - 19.3),-4.95 - 1])
+                            color([0.5,0,0])
+                                cube([13.5,22.8 + 2 + 1, 32.5 + 2]);
+
+                        translate([-20,-5,0])
+                            //rotate([90,0,0])
+                               cube([20,7,22.6]);
+
+                   }
+
+
+        }
+        //integrovaný rámeček pro servo
+            translate([143,19.8,30])
+                rotate([0,3,0])
+                    888_1012_C();
+
+
+    }
 
 
 
@@ -311,7 +335,7 @@ module 666_1028_rudder(draft){
                           cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
             }
             translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
-                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
+                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 50:100);
 		    
 		    translate([112,0, 30 + 34 - height/2])   
 		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
@@ -368,7 +392,7 @@ translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width -
         666_1028_rudder(draft);
 
 
-//666_1028();
+666_1028();
 
 
 /*
@@ -395,6 +419,7 @@ translate([142.1,20,30])
         }
 
 */
+
 use <888_1012.scad>
 
 use <./lib/naca4.scad>
