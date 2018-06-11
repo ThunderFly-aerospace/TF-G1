@@ -298,29 +298,29 @@ module 888_1012_B(){
 						cube([2,22.8 + 2, 32.5 + 2]);
 				difference(){
 					//zobáček
-					translate([0.1,0,-5])
+					translate([-0.5,0,-5])
 						color([0,0.5,0])
-							cube([4.5,1.8,4]);
+							%cube([5,1.8,4]);
 					//otvor v zobáčku
-					translate([-1 - 0.05,0.4 - 0.05,-5 + 0.5 - 0.05])
-								cube([1 + 1,1 + 0.1,3 + 0.1]);
+					translate([-1 - 0.05 - 0.4,0.4 - 0.05,-5 + 0.5 - 0.05])
+								%cube([1 + 1,1 + 0.1,3 + 0.1]);
 				}
 
 			translate([0,0,28.5])
 				difference(){
 					//zobáček
-					translate([0.1,0,-5])
+					translate([-0.5,0,-5])
 						color([0,0.5,0])
-							cube([4.5,1.8,4]);
+							cube([5,1.8,4]);
 					//otvor v zobáčku
-					translate([-1 - 0.05,0.4 - 0.05,-5 + 0.5 - 0.05])
+					translate([-1 - 0.05 - 0.4,0.4 - 0.05,-5 + 0.5 - 0.05])
 								cube([1 + 1,1 + 0.1,3 + 0.1]);
 				}
 			
 			difference(){
-				translate([0.1,2 +0.2 + 2,-5])
+				translate([-0.5,2 +0.2 + 2,-5])
 						color([0,0.5,0])
-							cube([4.4,1.8 + Servo_screw,4]);
+							cube([5,1.8 + Servo_screw,4]);
 				translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
 					rotate([0,90,0])
 							cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
@@ -328,9 +328,9 @@ module 888_1012_B(){
 
 			translate([0,0,28.5])
 				difference(){
-					translate([0.1,2 +0.2 + 2,-5])
+					translate([-0.5,2 +0.2 + 2,-5])
 							color([0,0.5,0])
-								cube([4.4,1.8 + Servo_screw,4]);
+								%cube([5,1.8 + Servo_screw,4]);
 					translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
 						rotate([0,90,0])
 								cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
@@ -380,14 +380,14 @@ module 888_1012_C(){
 		union(){
 			translate([-2 - 5 + 0.5,- (22.8 - 19.3),-4.95 - 1])
 					color([0,0.5,0])
-						cube([2,22.8 + 2, 32.5 + 2]);
+						cube([2,22.8 + 2 + 1, 32.5 + 2]);
 				union(){
 					//zobáček
 					translate([-4.5,0,-5])
 							color([0,0.5,0])
-								cube([4.4,1.8,4]);
+								cube([5,1.8,4]);
 					//menší zobáček určený do otvoru
-					translate([-0.1,0.4,-5 + 0.5])
+					translate([0.4,0.4,-5 + 0.5])
 						color([0,0.5,0])
 							cube([1,1,3]);
 				}
@@ -396,16 +396,16 @@ module 888_1012_C(){
 				union(){
 					//zobáček
 					translate([-4.5,0,-5])
-								cube([4.4,1.8,4]);
+								cube([5,1.8,4]);
 					//menší zobáček určený do otvoru
-					translate([-0.1,0.4,-5 + 0.5])
+					translate([0.4,0.4,-5 + 0.5])
 							cube([1,1,3]);
 				}
 		
 			difference(){
 				translate([-4.5,2 +0.2 + 2,-5])
 						color([0,0.5,0])
-							cube([4.4,1.8 + Servo_screw,4]);
+							cube([5,1.8 + Servo_screw,4]);
 				translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
 					rotate([0,90,0])
 							cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
@@ -415,7 +415,7 @@ module 888_1012_C(){
 				difference(){
 					translate([0,2 +0.2 + 2,-5])
 							color([0,0.5,0])
-								cube([4.4,1.8 + Servo_screw,4]);
+								cube([5,1.8 + Servo_screw,4]);
 					translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
 						rotate([0,90,0])
 								cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
@@ -432,24 +432,25 @@ module 888_1012_C(){
 					cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
 
 		
-		translate([-15,0,0])
-	        		cube([30, 19.3 ,22.6]);
+		translate([-15,1,0])
+	        		cube([30, 20 ,23]);	//základní otvor
 		translate([-5,4 - 2,-4.95])
 	            	cube([10, 2 ,32.5]);
-	    
+	    /*
 	    difference(){
 		    	translate([-5,-3,0])
 		    			color([0.5,0,0])
 		    				cube([10,3 + 1 ,8.5]);
-		        translate([0,0,13.5 - 2])
+		        translate([0,2,13.5 - 2])
 		        	rotate([90,45,0])
 		        			cube([10,5,10]);
 			mirror([1,0,0])
-			    translate([0,0,13.5 - 2])
+			    translate([0,2,13.5 - 2])
 					rotate([90,45,0])
 							cube([10,5,10]);
 	    }
-	    
+	    */
+
 	    translate([-4,19.3 - 3 - 1,22.6])
 	    		color([0.5,0,0])
 	    			cube([8,3,6]);
@@ -464,29 +465,33 @@ module 888_1012_C(){
 //pro vytvoření otvoru pro servo v dílu 666_1028, prozatím znázorněno v dílu 888_1010_A
 module 888_1012_D(){
 
-			translate([-13.5/2,- (22.8 - 19.3) - 0.25,-4.95 - 1 - 0.25])
+			translate([-13.5/2,- (22.8 - 19.3),-4.95 - 1])
 					color([0.5,0,0])
-						cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
+						cube([13.5,22.8 + 2 + 1, 32.5 + 2]);
 
-      translate([-20,0.5, +22.6 -6 - 1])
-        rotate([90,0,0])
-           cube([20,7,22.8-19.3 + 1]);
+      translate([-20,-5,0])
+        //rotate([90,0,0])
+           cube([20,7,22.6]);
 
 
 }
 
 //náš servo motor
 //translate([0,-50,0])
-			//888_1012_A();
+			888_1012_A();
 
 
 //upevnění serva
-//translate([5,0,0])
-			//888_1012_B/();
-//translate([-5,0,0])
+translate([0.5,0,0])
+			888_1012_B();
+
+translate([-0.5,0,0])
 		888_1012_C();
+
+
+
 //translate([-(2+6+0.5 + 2 + 1),0,0])
-//    888_1012_D();
+ 	//888_1012_D();
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
