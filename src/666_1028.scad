@@ -172,29 +172,12 @@ module 666_1028(draft){
             translate([143,19.8,30])
                 rotate([0,3,0])
                     union(){
+                        translate([-6 , -(22.8 - 19.3) - 1.25, -4.95 - 1 - 0.25])
+                            cube([13.5,22.8 + 4.5, 32.5 + 2 + 0.5]);
 
-                        //stará verze
-                    
-                        translate([-6 , -(22.8 - 19.3) - 0.25, -4.95 - 1 - 0.25])
-                                color("red")
-                                    cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
-
-                        translate([-20, -5, 5])
-                                cube([20,8,25]);
-                            
-
-
-                        /*translate([-13.5/2,- (22.8 - 19.3),-4.95 - 1])
-                            color([0.5,0,0])
-                                cube([13.5,22.8 + 2 + 1, 32.5 + 2]);
-
-                        translate([-20,-5,0])
-                            //rotate([90,0,0])
-                               cube([20,7,22.6]);*/
-
-                   }
-
-
+                        translate([-20, -5, 0])
+                            cube([20,8,30]);
+                   	}
         }
         //integrovaný rámeček pro servo
         // TODO - Je potřeba, aby rámeček byl součástí stěny směrovky aby nezvětšoval potřebnou tloušťku směrovky, nutnou pro vložení serva
@@ -239,14 +222,20 @@ module 666_1028(draft){
             rotate([0,90,0])
                 cylinder (h = Nut_height_M3+10, r = Nut_diameter_M3/2, $fn = 6);
 
-        tensile_thickness = 1.8;
+        // provizorní prostupy pro kabely serva
+        translate([135,50,45])
+                cube([5,5,15]);
+
+        translate([0,0,80])
+            rotate([0,45,0])
+                cube([15,5,50], center = true);
 
         //cleanup for printing
         translate ([-149.9,-75,-1])
-        		 cube ([150,150,170]);
+        	cube([150,150,170]);
 
         translate ([-50,-100,-200])
-            cube ([200,200,200]);
+            cube([200,200,200]);
     
         /*translate ([-75,-75,-10])
         	cube ([150,150,150]);*/
@@ -254,7 +243,6 @@ module 666_1028(draft){
 
 
     }	
- 
 }
 
 module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = true)
