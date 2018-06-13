@@ -36,7 +36,7 @@ module 666_1028(draft){
         //UPPER - od osy x do minus y
             difference (){
                 union(){
-    	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
+    	            translate([0, -10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
     	                rotate ([0,-90, 160])
                         {			//rotate([0,-90,152.5])
     	                    hollow_airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
@@ -65,7 +65,7 @@ module 666_1028(draft){
 
 
             //LOWER - od osy x do plus y
-                	translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
+                	translate([0, 10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
                     	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                         {
                             hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true);
@@ -109,7 +109,7 @@ module 666_1028(draft){
     union(){
         difference(){
             union(){
-                translate ([140,75,-0.3]) // elementar Z shift to improve adhesion on the printig surface
+                translate ([140,75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                     {
                         hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
@@ -172,36 +172,19 @@ module 666_1028(draft){
             translate([143,19.8,30])
                 rotate([0,3,0])
                     union(){
+                        translate([-6 , -(22.8 - 19.3) - 1.25, -4.95 - 1 - 0.25])
+                            cube([13.5,22.8 + 4.5, 32.5 + 2 + 0.5]);
 
-                        //stará verze
-
-                        /*
-                        translate([-6 , -(22.8 - 19.3) - 0.25, -4.95 - 1 - 0.25])
-                                color("red")
-                                    cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
-
-                        translate([-20, -5, 5])
-                                cube([20,8,25]);
-                               */ 
-
-
-                        translate([-13.5/2,- (22.8 - 19.3),-4.95 - 1])
-                            color([0.5,0,0])
-                                cube([13.5,22.8 + 2 + 1, 32.5 + 2]);
-
-                        translate([-20,-5,0])
-                            //rotate([90,0,0])
-                               cube([20,7,22.6]);
-
-                   }
-
-
+                        translate([-20, -5, 0])
+                            cube([20,8,30]);
+                   	}
         }
         //integrovaný rámeček pro servo
-            translate([143,19.8,30])
+        // TODO - Je potřeba, aby rámeček byl součástí stěny směrovky aby nezvětšoval potřebnou tloušťku směrovky, nutnou pro vložení serva
+        /*    translate([143,19.8,30])
                 rotate([0,3,0])
                     888_1012_C();
-
+        */
 
     }
 
@@ -239,14 +222,20 @@ module 666_1028(draft){
             rotate([0,90,0])
                 cylinder (h = Nut_height_M3+10, r = Nut_diameter_M3/2, $fn = 6);
 
-        tensile_thickness = 1.8;
+        // provizorní prostupy pro kabely serva
+        translate([135,50,45])
+                cube([5,5,15]);
+
+        translate([0,0,80])
+            rotate([0,45,0])
+                cube([15,5,50], center = true);
 
         //cleanup for printing
         translate ([-149.9,-75,-1])
-        		 cube ([150,150,170]);
+        	cube([150,150,170]);
 
         translate ([-50,-100,-200])
-            cube ([200,200,200]);
+            cube([200,200,200]);
     
         /*translate ([-75,-75,-10])
         	cube ([150,150,150]);*/
@@ -254,7 +243,6 @@ module 666_1028(draft){
 
 
     }	
- 
 }
 
 module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = true)
@@ -335,7 +323,7 @@ module 666_1028_rudder(draft){
                           cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
             }
             translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
-                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 50:100);
+                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
 		    
 		    translate([112,0, 30 + 34 - height/2])   
 		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
