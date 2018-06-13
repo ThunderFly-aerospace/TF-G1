@@ -17,7 +17,7 @@ $fa = 10;
 module 888_1026(draft)
 {
     width = main_tube_outer_diameter+2*thickness_between_tubes;	
-    depth = 52.5;   // šířka plechu držáku motoru
+    depth = 53.5;   // šířka plechu držáku motoru
     height = main_tube_outer_diameter*2;
 
 

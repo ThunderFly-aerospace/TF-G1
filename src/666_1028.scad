@@ -36,7 +36,7 @@ module 666_1028(draft){
         //UPPER - od osy x do minus y
             difference (){
                 union(){
-    	            translate([0, -10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
+    	            translate([0, -10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
     	                rotate ([0,-90, 160])
                         {			//rotate([0,-90,152.5])
     	                    hollow_airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
@@ -65,7 +65,7 @@ module 666_1028(draft){
 
 
             //LOWER - od osy x do plus y
-                	translate([0, 10, -0.5]) // elementary negative Z shift to improve adhesion on the printig surface
+                	translate([0, 10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
                     	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                         {
                             hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true);
@@ -109,7 +109,7 @@ module 666_1028(draft){
     union(){
         difference(){
             union(){
-                translate ([140,75,-0.3]) // elementar Z shift to improve adhesion on the printig surface
+                translate ([140,75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
                     rotate([90,-87,0])
                     {
                         hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
@@ -198,10 +198,11 @@ module 666_1028(draft){
 
         }
         //integrovaný rámeček pro servo
-            translate([143,19.8,30])
+        // TODO - Je potřeba, aby rámeček byl součástí stěny směrovky aby nezvětšoval potřebnou tloušťku směrovky, nutnou pro vložení serva
+        /*    translate([143,19.8,30])
                 rotate([0,3,0])
                     888_1012_C();
-
+        */
 
     }
 
