@@ -174,24 +174,23 @@ module 666_1028(draft){
                     union(){
 
                         //stará verze
-
-                        /*
+                    
                         translate([-6 , -(22.8 - 19.3) - 0.25, -4.95 - 1 - 0.25])
                                 color("red")
                                     cube([13.5,22.8 + 2 + 0.5, 32.5 + 2 + 0.5]);
 
                         translate([-20, -5, 5])
                                 cube([20,8,25]);
-                               */ 
+                            
 
 
-                        translate([-13.5/2,- (22.8 - 19.3),-4.95 - 1])
+                        /*translate([-13.5/2,- (22.8 - 19.3),-4.95 - 1])
                             color([0.5,0,0])
                                 cube([13.5,22.8 + 2 + 1, 32.5 + 2]);
 
                         translate([-20,-5,0])
                             //rotate([90,0,0])
-                               cube([20,7,22.6]);
+                               cube([20,7,22.6]);*/
 
                    }
 
@@ -336,7 +335,7 @@ module 666_1028_rudder(draft){
                           cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
             }
             translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
-                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 50:100);
+                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
 		    
 		    translate([112,0, 30 + 34 - height/2])   
 		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
