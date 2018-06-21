@@ -66,7 +66,7 @@ difference(){
 				888_1008_C();
 
 		//zobáček
-		translate([4,14,-5])
+/*		translate([4,14,-5])
 			rotate([0,0,-20])
 				translate([- global_clearance/2,10,18 - 5 + 4 - 5])
 					cube([20 + global_clearance,10 + global_clearance/2 + 2,8 + 6]);
@@ -96,6 +96,18 @@ difference(){
 				translate([- global_clearance/2,10,18 - 5 + 4 - 5])
 					cube([20 + global_clearance,10 + global_clearance/2 + 2,8 + 6]);
 
+*/
+
+
+        translate([30,43,0])
+            cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
+
+        translate([95,110,0])
+            cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
+
+        translate([95,20,0])
+            cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
+
 
 
 	}
@@ -103,7 +115,7 @@ difference(){
 
 
 
-//hlavní čtverec
+/*//hlavní čtverec
 	difference(){
 		
 		//hlavní kostka
@@ -192,7 +204,7 @@ difference(){
 
 	}		
 
-
+*/
 
 
 
@@ -220,7 +232,7 @@ module 888_1013_B(){
 	}
 
 //upínky
-
+/*
 	translate([4,14,-5])
 		rotate([0,0,-20])
 			888_1013_A();
@@ -236,7 +248,7 @@ module 888_1013_B(){
 	translate([133,100,-5])
 		rotate([0,0,90])
 			888_1013_A();
-
+*/
 }
 
 module 888_1013_C(){
