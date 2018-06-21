@@ -37,11 +37,11 @@ difference(){
 				//druhá rovná hrana
 				translate(p3)
 					translate([-14,-288,0])
-							cube([40,296,20]);
+						cube([40,296,20]);
 				//druhé zaoblení
-						translate(p3)
-							translate([1 + tube_for_undercarriage_outer_diameter/4,4.7 + tube_for_undercarriage_outer_diameter/2,0])
-							cylinder(h=20,r=w, $fn = 50);
+				translate(p3)
+					translate([1 + tube_for_undercarriage_outer_diameter/4,4.7 + tube_for_undercarriage_outer_diameter/2,0])
+						cylinder(h=20,r=w, $fn = 50);
 				//třetí rovná hrana
 				translate(p3)
 					translate([-4,- tube_for_undercarriage_outer_diameter/2,0])
@@ -60,7 +60,7 @@ difference(){
 		
 }
 
-		translate([100,-30,-83.5])
+		translate([100,-30,-78.5])
 		//translate([114,-30,-62])
 			rotate([0,-90 + uhel_x,0])
 				888_1008_C();
@@ -106,6 +106,16 @@ difference(){
             cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
 
         translate([95,20,0])
+            cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
+
+
+        translate([95,260,0])
+            cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
+
+        translate([95,325,0])
+            cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
+
+        translate([25,355,0])
             cylinder(h = 50, d = M4_screw_diameter, $fn = 20);
 
 
@@ -259,7 +269,7 @@ module 888_1013_C(){
 				cube([150,150,150]);
 	}
 
-	translate([133,255,-5])
+/*	translate([133,255,-5])
 		rotate([0,0,90])
 			888_1013_A();
 
@@ -267,7 +277,7 @@ module 888_1013_C(){
 		rotate([0,0,90 + uhel_y])
 			888_1013_A();
 
-
+*/
 
 }
 
@@ -287,14 +297,14 @@ module 888_1013_E(){
 //přípravek pro zaoblení 1 a 4
 module 888_1013_F(){
 w = radius_undercarriage - tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/4;
+render()
 	difference(){
 		union(){
 			
-			translate([11.1 -21,-40,41.1])
-			rotate([0,90,0])
-					color([0.8,0,0])	
-						cube([151,500,71]);
-
+/*			translate([30,-40,41.1])
+				rotate([0,90,0])
+					cube([151,500,35]);
+*/
 			//pravá trubka//
 			//druhá rovná hrana
 			translate([165,0,130])
@@ -332,13 +342,13 @@ w = radius_undercarriage - tube_for_undercarriage_outer_diameter/2 + tube_for_un
 					}
 		}
 
-	//žlábek	
+	//žlábek
 	translate([-75.5,430,-6])
 		rotate([0,-90,180])
 			888_1008_C();
 
 	//otvory pro šrouby
-	translate([-10 + Nut_height_M3,-20,15])
+	translate([-10 + Nut_height_M3,30,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
@@ -346,7 +356,7 @@ w = radius_undercarriage - tube_for_undercarriage_outer_diameter/2 + tube_for_un
 					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
 			}
 
-	translate([-10 + Nut_height_M3,80,15])
+/*	translate([-10 + Nut_height_M3,80,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
@@ -354,7 +364,7 @@ w = radius_undercarriage - tube_for_undercarriage_outer_diameter/2 + tube_for_un
 					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
 			}
 
-	translate([-10 + Nut_height_M3,325,15])
+	/*translate([-10 + Nut_height_M3,325,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
@@ -369,6 +379,8 @@ w = radius_undercarriage - tube_for_undercarriage_outer_diameter/2 + tube_for_un
 					cylinder(h = 80, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
 					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
 			}
+
+	*/
 	}
 
 }
@@ -406,7 +418,7 @@ module 888_1013_J(){
 
 //888_1013();
 
-translate([100,-30,-83.5])
+/*translate([100,-30,-83.5])
 	rotate([0,-90 + uhel_x,0])
 		888_1008_C();
 /*
@@ -416,26 +428,26 @@ translate([-70 - 400,430,-6])
 */
 //přípravky zaoblení 2 a 3
 //pravá podvozková noha
-		888_1013_B();
+//		888_1013_B();
 
-		888_1013_C();
+//		888_1013_C();
 
 //levá podvozková noha
-translate([-50,0,0])
+/*translate([-50,0,0])
 		888_1013_D();
-
-translate([-50,0,0])
+*/
+/*translate([-50,0,0])
 		888_1013_E();
-
+*/
 
 //přípravky zaoblení 1 a 4
 translate([-400,0,0])
-		888_1013_G();
+	888_1013_G();
 
-translate([-400,0,0])
+/*translate([-400,0,0])
 		888_1013_H();
 
-translate([-500,0,0])
+/*translate([-500,0,0])
 		888_1013_I();
 
 translate([-500,0,0])
