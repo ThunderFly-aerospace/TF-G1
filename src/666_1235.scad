@@ -88,19 +88,19 @@ module 333_1035_A(twosided = true, draft = false){
 
     airfoil_NACA = 0016;    // typ použitého profilu
     airfoil_depth = 50; // hloubka profilu
-    length = 40;       // celková délka polotovaru
+    length = 60;       // celková délka polotovaru
     material_width = 70;
     thickness = 0.5;       // tloušťka jádra
     airfoil_thickness = (airfoil_NACA/100) * airfoil_depth; // vypočtená maximální tloušťka profilu
     bridge_thickness = 0.6;  // tloušťka spojení mezi rotorovým listem a rámečkem
-    weight_thickness = 4;
+    weight_thickness = 4/5 * airfoil_depth - airfoil_depth/4 ;
 
 
     difference (){
        //color("Blue",0.5)
 
-        translate ([ -airfoil_depth/2, 0, 0])
-            cube([airfoil_depth - airfoil_depth/4, length, 30], center = true);
+        translate ([ -airfoil_depth +  airfoil_depth/8 , 0, 0])
+            cube([airfoil_depth * 1.5, length, airfoil_depth], center = true);
 
 
         difference (){ // profil závaží
@@ -269,8 +269,16 @@ module 333_1035(twosided = true, draft = true){
 }
 
 
+333_1035_A();
 
-//333_1035_A();
+/*translate([0,50,0])
+
+333_1035_B();
+*/
+
+/*translate([0,-50,0])
+
+333_1035_shape();*/
 
 /*probe(volume=true) {
     sphere(20);
