@@ -246,7 +246,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 //umístění podvozkových trubek
 
-second_undercarriage_hole = main_tube_outer_diameter*2 + coupling_width_666_1004 + 170 + 160;
+second_undercarriage_hole = main_tube_outer_diameter*2 + 2*coupling_wall_thickness + main_tube_outer_diameter + 170 + 160;
 
 
 //Base Divison - dělení podložky

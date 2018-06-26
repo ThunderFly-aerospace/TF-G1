@@ -18,124 +18,142 @@ module 666_1017(draft) {
 width=main_tube_outer_diameter+2*coupling_wall_thickness;
 
 
-width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+    width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
         echo("width_666_1017 is", width_666_1017);
     
-        echo("ceil is", ceil(width_666_1017));
+        echo("ceil_666_1017 is", ceil(width_666_1017));
 
-coupling_screw_length = (ceil(width_666_1017)) * basic_screw_length;
-        echo("coupling_screw_length is", coupling_screw_length);
+    coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
+        echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
 
-coupling_width = coupling_screw_length + Screw_head_height_M3;
-        echo("coupling_width is", coupling_width);
+    coupling_width_666_1017 = coupling_screw_length_666_1017 + Screw_head_height_M3;
+        echo("coupling_width_666_1017 is", coupling_width_666_1017);
 
-depth = coupling_width;
+    depth_666_1017 = coupling_width_666_1017;
 
-height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
+    height_666_1017= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
+
+
+
+material_plus = 10;
 
 bevelled_width = main_tube_outer_diameter + 2*coupling_wall_thickness;
 
 
 difference () {
-    translate([-(coupling_width/2),- depth/2,0])
-      cube ([coupling_width,depth,height]);
+    translate([-(coupling_width_666_1017/2),- depth_666_1017/2,0])
+      cube ([coupling_width_666_1017,depth_666_1017,height_666_1017 + material_plus]);
 
     //middle cut
-    translate ([-1,-depth/2 - global_clearance/2,- global_clearance/2])
-       cube ([2,depth + global_clearance,height + global_clearance]);
+    translate ([-1,-depth_666_1017/2 - global_clearance/2,- global_clearance/2])
+       cube ([2,depth_666_1017 + global_clearance,height_666_1017 + material_plus + global_clearance]);
 
     //main tube
-    translate([0,depth/2 + global_clearance/2, height - main_tube_outer_diameter/2 - coupling_wall_thickness])   
+    translate([0,depth_666_1017/2 + global_clearance/2, height_666_1017 - main_tube_outer_diameter/2 - coupling_wall_thickness])   
         rotate([90,0,0])
-           cylinder(h = depth + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+           cylinder(h = depth_666_1017 + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
     //vertical tube
     translate ([0,0, - thickness_between_tubes])
-        cylinder(h = height - coupling_wall_thickness - main_tube_outer_diameter,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+        cylinder(h = height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
             
 
     //screws
-    translate ([- coupling_width/2 - global_clearance/2,10 - M3_screw_diameter/2,height - coupling_wall_thickness - main_tube_outer_diameter/2])
+    translate ([- coupling_width_666_1017/2 - global_clearance/2,10 - M4_screw_diameter/2,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
         rotate ([0,90,0])
-            cylinder (h = coupling_width + global_clearance, d = M4_screw_diameter, $fn = draft ? 10 : 20);
+           cylinder (h = coupling_width_666_1017 + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
 
-    translate([- coupling_width/2 - global_clearance/2,- 10 + M3_screw_diameter/2,height - coupling_wall_thickness - main_tube_outer_diameter/2])
+    translate([- coupling_width_666_1017/2 - global_clearance/2,- 10 + M4_screw_diameter/2,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
         rotate([0,90,0])
-            cylinder(h = coupling_width + global_clearance, d = M4_screw_diameter, $fn = draft ? 10 : 20);
+            cylinder(h = coupling_width_666_1017 + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
 
-    translate([- coupling_width/2 - global_clearance/2,0,27.5])
+    translate([- coupling_width_666_1017/2 - global_clearance/2,0,27.5])
         rotate([0,90,0])
-            cylinder(h = coupling_width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            cylinder(h = coupling_width_666_1017 + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-    translate([- coupling_width/2 - global_clearance/2,0,7.5])
+    translate([- coupling_width_666_1017/2 - global_clearance/2,0,7.5])
         rotate([0,90,0])
-            cylinder(h = coupling_width + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            cylinder(h = coupling_width_666_1017 + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+   
+   //šroub úplně navrchu
+    translate([- coupling_width_666_1017/2 - global_clearance/2,0,height_666_1017 + material_plus/4])
+        rotate([0,90,0])
+           cylinder(h = coupling_width_666_1017 + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     //nut
-    translate ([- coupling_width/2 - global_clearance,10 - M3_screw_diameter/2,height- coupling_wall_thickness - main_tube_outer_diameter/2])
+    translate ([- coupling_width_666_1017/2 - global_clearance,10 - M4_screw_diameter/2,height_666_1017- coupling_wall_thickness - main_tube_outer_diameter/2])
         rotate ([0,90,0])
-            cylinder (h = Screw_head_height_M3 + global_clearance, d = Nut_diameter_M4, $fn = 6);
+            cylinder (h = Screw_head_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
     
-    translate([- coupling_width/2 - global_clearance,- 10 + M3_screw_diameter/2,height- coupling_wall_thickness - main_tube_outer_diameter/2])
+    translate([- coupling_width_666_1017/2 - global_clearance,- 10 + M4_screw_diameter/2,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
         rotate([0,90,0])
-            cylinder (h = Screw_head_height_M3 + global_clearance, d = Nut_diameter_M4, $fn = 6);
+            cylinder (h = Screw_head_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
 
-    translate ([coupling_width/2 - Screw_head_height_M3,10 - M3_screw_diameter/2,height- coupling_wall_thickness - main_tube_outer_diameter/2])
+    translate ([coupling_width_666_1017/2 - Screw_head_height_M4,10 - M4_screw_diameter/2,height_666_1017- coupling_wall_thickness - main_tube_outer_diameter/2])
         rotate ([0,90,0])
-            cylinder (h = Screw_head_height_M3 + global_clearance, d = Nut_diameter_M4, $fn = 6);
+            cylinder (h = Screw_head_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
     
-    translate([coupling_width/2 - Screw_head_height_M3,- 10 + M3_screw_diameter/2,height- coupling_wall_thickness - main_tube_outer_diameter/2])
+    translate([coupling_width_666_1017/2 - Screw_head_height_M4,- 10 + M4_screw_diameter/2,height_666_1017- coupling_wall_thickness - main_tube_outer_diameter/2])
         rotate([0,90,0])
-            cylinder (h = Screw_head_height_M3 + global_clearance, d = Nut_diameter_M4, $fn = 6);
+            cylinder (h = Screw_head_height_M4 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
 
-    translate([- coupling_width/2 - global_clearance,0,27.5])
+    translate([- coupling_width_666_1017/2 - global_clearance,0,27.5])
         rotate ([0,90,0])
             cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
 
-    translate([- coupling_width/2 - global_clearance,0,7.5])
+    translate([- coupling_width_666_1017/2 - global_clearance,0,7.5])
         rotate ([0,90,0])
             cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
 
-    translate([coupling_width/2 - Screw_head_height_M3,0,27.5])
+    translate([coupling_width_666_1017/2 - Screw_head_height_M3,0,27.5])
         rotate ([0,90,0])
             cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
 
-    translate([coupling_width/2 - Screw_head_height_M3,0,7.5])
+    translate([coupling_width_666_1017/2 - Screw_head_height_M3,0,7.5])
         rotate ([0,90,0])
             cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+
+    translate([coupling_width_666_1017/2  - sqrt(2)*coupling_wall_thickness,0,height_666_1017 + material_plus/4])
+        rotate ([0,90,0])
+            cylinder (h = Screw_head_height_M3 *3+ global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+
+    translate([-3*Screw_head_height_M3 - coupling_width_666_1017/2 +   sqrt(2)*coupling_wall_thickness,0,height_666_1017 + material_plus/4])
+        rotate ([0,90,0])
+           cylinder (h = Screw_head_height_M3 *3+ global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+
 
     //horizontal bevelled edge
-        translate([0,-(depth/2) - global_clearance/2,height+sqrt(2)*coupling_wall_thickness])
+        translate([0,-(depth_666_1017/2) - global_clearance/2,height_666_1017 + material_plus+sqrt(2)*coupling_wall_thickness])
             rotate([0,45,0])
-               cube([bevelled_width,coupling_width + global_clearance,bevelled_width]);
+               cube([bevelled_width,coupling_width_666_1017 + global_clearance,bevelled_width]);
 
     mirror([1,0,0])
-        translate([0,-(depth/2) - global_clearance/2,height+sqrt(2)*coupling_wall_thickness])
+        translate([0,-(depth_666_1017/2) - global_clearance/2,height_666_1017 + material_plus+sqrt(2)*coupling_wall_thickness])
             rotate([0,45,0])
-               cube([bevelled_width,coupling_width + global_clearance,bevelled_width]);
+               cube([bevelled_width,coupling_width_666_1017 + global_clearance,bevelled_width]);
 
     //vertical bevelled edge
 
-        translate([-coupling_width + 2,0,- global_clearance/2])
+        translate([-coupling_width_666_1017 + 2,0,- global_clearance/2])
             rotate([0,0,45])
-               cube([height,height,height + global_clearance]);
+               cube([height_666_1017 + material_plus,height_666_1017 + material_plus,height_666_1017 + material_plus + global_clearance]);
 
     mirror([1,0,0])
-        translate([-coupling_width + 2,0,- global_clearance/2])
+        translate([-coupling_width_666_1017 + 2,0,- global_clearance/2])
             rotate([0,0,45])
-                cube([height,height,height + global_clearance]);
+                cube([height_666_1017 + material_plus,height_666_1017 + material_plus,height_666_1017 + material_plus + global_clearance]);
 
     mirror([0,1,0])
-        translate([-coupling_width + 2,0,- global_clearance/2])
+        translate([-coupling_width_666_1017 + 2,0,- global_clearance/2])
             rotate([0,0,45])
-                cube([height,height,height + global_clearance]);
+                cube([height_666_1017 + material_plus,height_666_1017 + material_plus,height_666_1017 + material_plus + global_clearance]);
 
     mirror([0,1,0])
         mirror([1,0,0])
-            translate([-coupling_width + 2,0,- global_clearance/2])
+            translate([-coupling_width_666_1017 + 2,0,- global_clearance/2])
                 rotate([0,0,45])
-                    cube([height,height,height + global_clearance]);
+                    cube([height_666_1017 + material_plus,height_666_1017 + material_plus,height_666_1017 + material_plus + global_clearance]);
     }    
 }
 
@@ -270,9 +288,9 @@ height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickne
 rotate([90,0,0])
     666_1017(draft);
 
-/*translate([70,0,0])
-	rotate([90,0,0])
-		666_1017_drillhelper();
-*/
+translate([70,0,0])
+
+rotate([90,0,0])
+666_1017_drillhelper();
 
 include <../Parameters.scad>
