@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<path>asi-gauge.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>ASIface</object-name>
+        <object-name>ASIneedle</object-name>
+        <emission>
+              <red>0.05</red>
+            <green>0.02</green>
+            <blue>0.01</blue>
+			<factor-prop>/systems/electrical/outputs/instrument-lights-norm</factor-prop>
+			
+        </emission>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>ASIneedle</object-name>
+        <property>/instrumentation/airspeed-indicator/indicated-speed-kt</property>
+        
+		<interpolation>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>20.0</ind><dep>14.0</dep></entry>
+            <entry><ind>50.0</ind><dep>112.0</dep></entry>
+            <entry><ind>80.0</ind><dep>229.5</dep></entry>
+            <entry><ind>100.0</ind><dep>308.0</dep></entry>
+            <entry><ind>115.0</ind><dep>360.0</dep></entry>
+        </interpolation>
+        
+		<axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+    </animation>
+
+</PropertyList>

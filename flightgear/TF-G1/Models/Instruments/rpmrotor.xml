@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<path>rpmrotor.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>AMPgauge_001</object-name>
+        <object-name>AMPneedle</object-name>
+        <emission>
+              <red>0.05</red>
+            <green>0.02</green>
+            <blue>0.01</blue>
+			<factor-prop>/systems/electrical/outputs/instrument-lights-norm</factor-prop>
+        </emission>
+    </animation>
+
+<!--
+temp degrees
+F to C
+
+122 - 50
+176 - 80
+212 - 100
+230 - 110
+248 - 120
+302 - 150
+
+-->
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AMPneedle</object-name>
+        <property>/rotors/main/rpm</property>
+        <interpolation>
+            <entry><ind> 0</ind><dep> -70</dep></entry>
+	  <entry><ind> 200</ind><dep> -60</dep></entry>
+	  <entry><ind> 400</ind><dep> -30</dep></entry>
+	  <entry><ind> 450</ind><dep> 0</dep></entry>
+	  <entry><ind> 500</ind><dep> 30</dep></entry>
+	  <entry><ind> 600</ind><dep> 60</dep></entry>
+        </interpolation>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.006</z-m>
+        </center>
+    </animation>
+
+</PropertyList>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<path>fuel-g.ac</path>
+
+    <animation>
+        <type>material</type>
+        <object-name>AMPgauge_001</object-name>
+        <object-name>AMPneedle</object-name>
+        <emission>
+            <red>0.05</red>
+            <green>0.02</green>
+            <blue>0.01</blue>
+			
+            <factor-prop>/systems/electrical/outputs/instrument-lights-norm</factor-prop>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AMPneedle</object-name>
+        <property>/consumables/fuel/tank/level-lbs</property>
+        <interpolation>
+            <entry><ind> 0</ind><dep> -60</dep></entry>
+            <entry><ind> 25</ind><dep> 0</dep></entry>
+            <entry><ind> 50</ind><dep> 60</dep></entry>
+        </interpolation>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.006</z-m>
+        </center>
+    </animation>
+
+</PropertyList>

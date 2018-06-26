@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<path>switches.ac</path>
+
+    <animation>
+		<type>rotate</type>
+        <object-name>trigger1</object-name>
+        <property>controls/engines/engine/starter</property>
+        <factor>40</factor>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+    </animation>
+	
+	  <animation>
+		<type>rotate</type>
+        <object-name>trigger2</object-name>
+        <property>controls/engines/engine/master-bat</property>
+        <factor>40</factor>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+    </animation>
+	
+	  <animation>
+		<type>rotate</type>
+        <object-name>trigger3</object-name>
+        <property>controls/engines/engine/fuel-pump</property>
+        <factor>40</factor>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+    </animation>
+	
+	  <animation>
+		<type>rotate</type>
+        <object-name>trigger4</object-name>
+        <property>controls/lighting/instruments-norm</property>
+        <factor>40</factor>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>0</z-m>
+        </center>
+    </animation>
+	
+	<!-- -->
+	 <animation>
+		<type>rotate</type>
+        <object-name>trigger5</object-name>
+        <property>controls/engines/engine/magnetos</property>
+        <factor>10</factor>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+           <z-m>-0.03438</z-m>
+        </center>
+    </animation>
+	
+	
+	 <animation>
+		<type>rotate</type>
+        <object-name>trigger6</object-name>
+        <property>controls/engines/engine/magnetos</property>
+        <factor>10</factor>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0</y-m>
+            <z-m>-0.03438</z-m>
+        </center>
+    </animation>
+	
+    <animation>
+		<type>rotate</type>
+        <object-name>triggerONOFF</object-name>
+        <property>controls/engines/engine/magnetos</property>
+        <factor>20</factor>
+        <axis>
+            <x>-1.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </axis>
+        <center>
+            <x-m>0</x-m>
+            <y-m>0.02952</y-m>
+            <z-m>-0.03438</z-m>
+        </center>
+    </animation>
+	
+</PropertyList>
+
+
