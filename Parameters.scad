@@ -224,7 +224,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 ////spojka 666_1017
 
-    width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+    width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
         echo("width_666_1017 is", width_666_1017);
     
         echo("ceil_666_1017 is", ceil(width_666_1017));

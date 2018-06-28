@@ -17,24 +17,6 @@ module 666_1017(draft) {
 
 width=main_tube_outer_diameter+2*coupling_wall_thickness;
 
-
-    width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
-        echo("width_666_1017 is", width_666_1017);
-    
-        echo("ceil_666_1017 is", ceil(width_666_1017));
-
-    coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
-        echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
-
-    coupling_width_666_1017 = coupling_screw_length_666_1017 + Screw_head_height_M3;
-        echo("coupling_width_666_1017 is", coupling_width_666_1017);
-
-    depth_666_1017 = coupling_width_666_1017;
-
-    height_666_1017= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
-
-
-
 material_plus = 10;
 
 bevelled_width = main_tube_outer_diameter + 2*coupling_wall_thickness;

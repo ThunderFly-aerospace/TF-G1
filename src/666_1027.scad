@@ -441,7 +441,7 @@ echo(floor (C));
 
         //666_1004 - zadní
         translate([second_undercarriage_hole - coupling_width_666_1004/2 - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-               % cube([coupling_width_666_1004 + coupling_width_666_1004/2 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
+                cube([coupling_width_666_1004 + coupling_width_666_1004/2 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
         
         //666_1017 - prostředek
         translate([main_pilon_position - main_tube_outer_diameter, - hull_y_size/2, - coupling_width_666_1017/2 - global_clearance/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
@@ -543,7 +543,7 @@ echo(floor (C));
         //připevnění horizontální trubky
         //A
         translate([base_division[1]*0.75,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                 translate([0,0, base_mounting_screw_length/2 - Screw_head_height_M3])           
@@ -555,7 +555,7 @@ echo(floor (C));
 
         //B
         translate([base_division[1] + (base_division[2] - base_division[1])/4,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
@@ -569,7 +569,7 @@ echo(floor (C));
 
         //C
         translate([base_division[2]*1.15,0,0])
-            %union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
@@ -581,7 +581,7 @@ echo(floor (C));
             }        
         //D
         translate([base_division[4]*0.86,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
