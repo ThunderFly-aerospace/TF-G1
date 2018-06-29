@@ -2,12 +2,12 @@
 
 <PropertyList>
 
-  <path>JT-5B.ac</path>
+  <path>TF-G1.ac</path>
   
   
 	<nasal>
         <load>
-            var livery_update = aircraft.livery_update.new("Aircraft/JT-5B/Models/Liveries", 10);
+            var livery_update = aircraft.livery_update.new("Aircraft/TF-G1/Models/Liveries", 10);
         </load>
 
         <unload>
@@ -716,13 +716,13 @@
  
 
 	<model>
-		<path>Aircraft/JT-5B/Models/Effects/shadow.xml</path>
+		<path>Aircraft/TF-G1/Models/Effects/shadow.xml</path>
 	</model>
 
  
     <model>
         <name>panel1</name>
-        <path>Aircraft/JT-5B/Models/panel1.xml</path>
+        <path>Aircraft/TF-G1/Models/panel1.xml</path>
         <offsets>
             <x-m>0</x-m>
             <y-m>0</y-m>
@@ -733,7 +733,7 @@
 
    <model>
     <name>pilot</name>
-    <path>Aircraft/JT-5B/Models/pilot.xml</path>
+    <path>Aircraft/TF-G1/Models/pilot.xml</path>
     <offsets>
       <x-m>0</x-m>
       <y-m>0</y-m>
