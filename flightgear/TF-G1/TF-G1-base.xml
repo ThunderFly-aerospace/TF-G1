@@ -2,27 +2,27 @@
 
 <PropertyList>
 
-  <sim include="JT-5B_views.xml">
+  <sim include="TF-G1_views.xml">
   
     <fuel-fraction>0.8</fuel-fraction>
         
   
     <startup>
-      <splash-texture>Aircraft/JT-5B/splash.png</splash-texture>
+      <splash-texture>Aircraft/TF-G1/splash.png</splash-texture>
     </startup>
 
     <sound>
-      <path>Aircraft/JT-5B/Sounds/JT-5B-sound.xml</path>
+      <path>Aircraft/TF-G1/Sounds/TF-G1-sound.xml</path>
     </sound>
     
     <model>
-      <path>Aircraft/JT-5B/Models/JT-5B.xml</path>
+      <path>Aircraft/TF-G1/Models/TF-G1.xml</path>
       <livery>
         <file type="string">default</file>
       </livery>
-      <JT-5B>
+      <TF-G1>
         <rotor-step-deg type="float">-1.0</rotor-step-deg>
-      </JT-5B>
+      </TF-G1>
     </model>
 
     <multiplay>
@@ -83,7 +83,7 @@
                 <desc>Toggle Look Down</desc>
             </key>
 			
-      <title>JT-5B (Autogyro)</title>
+      <title>TF-G1 (Autogyro)</title>
       <line>   Start And Take Off</line>
       <line>1:Start engine (S-Key)</line>
       <line>2:Prerotate rotor to 250 rpm (hold S-Key)</line>
@@ -116,7 +116,7 @@
 	  </help>
 
     <hud>
-      <path n="1">Aircraft/JT-5B/JT-5B_hud.xml</path>
+      <path n="1">Aircraft/TF-G1/TF-G1_hud.xml</path>
             <visibility n="1">false</visibility>
             <enable3d n="1">false</enable3d>
 			
@@ -145,7 +145,7 @@
   <menubar>
         <default>
             <menu n="10">
-                <label>JT-5B Autogyro</label>
+                <label>TF-G1 Autogyro</label>
                 <enabled type="bool">true</enabled>
                 <item>
                     <label>Select Livery</label>
@@ -179,7 +179,7 @@
 
 
   <input>
-    <keyboard include="JT-5B-keyboard.xml"/>
+    <keyboard include="TF-G1-keyboard.xml"/>
   </input>
 
   
@@ -230,17 +230,17 @@
         </systems>
 	<nasal>
 		 
-	<JT-5B>
-		<file>Aircraft/JT-5B/Nasal/Liveries.nas</file>
+	<TF-G1>
+		<file>Aircraft/TF-G1/Nasal/Liveries.nas</file>
 	
-	</JT-5B>
+	</TF-G1>
 	
 	<gyro>
-		<file>Aircraft/JT-5B/Nasal/gyro.nas</file>
+		<file>Aircraft/TF-G1/Nasal/gyro.nas</file>
 	</gyro>
 	
 	<heli>
-		<file>Aircraft/JT-5B/Nasal/heli.nas</file>
+		<file>Aircraft/TF-G1/Nasal/heli.nas</file>
 	</heli>
 	
 	</nasal>
