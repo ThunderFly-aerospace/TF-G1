@@ -3,7 +3,7 @@ include <../Parameters.scad>
 
 AOA = 2.0; // set Angle of Attact of the airfoil
 
-module 666_1247(){
+module 666_1247(angle_of_attact){
 	union(){
 		difference(){
 			cube([100,35,12]);
@@ -24,7 +24,7 @@ module 666_1247(){
 					cylinder (h = 20, r = 3.6/2, $fn = 10);
 
 			translate([-1,0,(12-8)/4])		// set AOA
-				rotate([AOA,0,0])		
+				rotate([angle_of_attact,0,0])		
 					cube([200, 100, 8]);
 
             translate([50, 15, 11.5])
@@ -33,7 +33,7 @@ module 666_1247(){
 
             translate([30, 25, 11.5])
                             linear_extrude(0.5) 
-                                text( str("AOA: ", AOA), size = 5, halign = "center", valign = "center", font = "PT Sans");
+                                text( str("AOA: ", angle_of_attact), size = 5, halign = "center", valign = "center", font = "PT Sans");
 
             translate([50, 15, 0])
                             linear_extrude(0.5) 
@@ -41,32 +41,32 @@ module 666_1247(){
 
             translate([30, 25, 0])
                             linear_extrude(0.5) 
-                                text(str("AOA: ", AOA), size = 5, halign = "center", valign = "center", font = "PT Sans");
+                                text(str("AOA: ", angle_of_attact), size = 5, halign = "center", valign = "center", font = "PT Sans");
 
 
 		}
 	}
 }
 
-module 666_1247_H(){
+module 666_1247_H(angle_of_attact){
     intersection(){
         translate([-1,0,5])      
             cube([200, 100, 20]);
-        666_1247();
+        666_1247(angle_of_attact);
 
     }
 }
 
-module 666_1247_D(){
+module 666_1247_D(angle_of_attact){
     intersection(){
         translate([-1,0,0])      
             cube([200, 100, 5]);
-        666_1247();
+        666_1247(angle_of_attact);
 
     }
 }
 
 
-666_1247_H();
+666_1247_H(AOA);
 
-666_1247_D();
+666_1247_D(AOA);
