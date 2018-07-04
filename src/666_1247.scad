@@ -1,7 +1,7 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 
-AOA = 3.0; // set Angle of Attact of the airfoil
+AOA = 2.0; // set Angle of Attact of the airfoil
 
 module 666_1247(){
 	union(){
@@ -31,9 +31,18 @@ module 666_1247(){
                             linear_extrude(0.5) 
                                 text("H", size = 10, halign = "center", valign = "center", font = "PT Sans");
 
+            translate([30, 25, 11.5])
+                            linear_extrude(0.5) 
+                                text( str("AOA: ", AOA), size = 5, halign = "center", valign = "center", font = "PT Sans");
+
             translate([50, 15, 0])
                             linear_extrude(0.5) 
                                 text("D", size = 10, halign = "center", valign = "center", font = "PT Sans");
+
+            translate([30, 25, 0])
+                            linear_extrude(0.5) 
+                                text(str("AOA: ", AOA), size = 5, halign = "center", valign = "center", font = "PT Sans");
+
 
 		}
 	}
@@ -59,3 +68,5 @@ module 666_1247_D(){
 
 
 666_1247_H();
+
+666_1247_D();
