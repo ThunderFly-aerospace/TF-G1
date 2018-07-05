@@ -1,8 +1,6 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 
-AOA = 2.0; // set Angle of Attact of the airfoil
-
 module 666_1247(angle_of_attact){
 	union(){
 		difference(){
@@ -67,6 +65,6 @@ module 666_1247_D(angle_of_attact){
 }
 
 
-666_1247_H(AOA);
+666_1247_H(rotor_blade_AOA);
 
-666_1247_D(AOA);
+666_1247_D(rotor_blade_AOA);

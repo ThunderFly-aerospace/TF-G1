@@ -8,7 +8,11 @@ tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;
 
+// Nastavení parametrů rotoru
 
+rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
+rotor_blade_length = 970;   // délka rotorového listu
+rator_blade_depth = 50;     // hloubka rotorového listu
 
 
 // Parameters of tube couplings
@@ -18,7 +22,7 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
-// screw lenght step - minimum difference in lenght between two types of screws
+// screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
 
@@ -59,7 +63,7 @@ hull_y_size = 120;
 hull_z_size = 150;
 hull_x_size = 580;
 hull_corner_radius = 4;
-hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of lenght.
+hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of length.
 hull_scale_x = 1;
 hull_scale_y = 1.5;
 hull_scale_z = 1.5;
