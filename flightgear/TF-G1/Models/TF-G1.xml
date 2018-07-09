@@ -27,8 +27,6 @@
     <object-name>controlstick</object-name>
     <object-name>controlstick_brake</object-name>
     
-    <object-name>pedalL</object-name>
-    <object-name>pedalR</object-name>
     <object-name>rudder</object-name>
     
     <object-name>gearF</object-name>
@@ -44,10 +42,6 @@
     <object-name>rotorPitchBase</object-name>
     <object-name>rotorYawBase</object-name>
    
-    <object-name>rotorLinkL</object-name>
-    <object-name>rotorLinkR</object-name>
-    <object-name>rotorLinkPre</object-name>
-
     <object-name>throttle</object-name>
 	<object-name>prerotator</object-name>
 	
@@ -268,133 +262,7 @@
       <z>  0 </z>
     </axis>
   </animation>
-
-
-  <animation>
-    <type>translate</type>
-    <object-name>rotorLinkR</object-name>
-    <property>rotors/main/tilt/pitch-deg</property>
-    <factor>-0.0035 </factor>
-    <axis>
-      <x1-m> -0.2452</x1-m>
-      <y1-m>0.04034</y1-m>
-      <z1-m> -0.2671</z1-m>
-      <x2-m> 0.3014</x2-m>
-      <y2-m>0.1265</y2-m>
-      <z2-m>1.0638</z2-m>
-    </axis>
-</animation>
-
-  <animation>
-    <type>translate</type>
-    <object-name>rotorLinkL</object-name>
-    <property>rotors/main/tilt/pitch-deg</property>
-    <factor>-0.0035</factor>
-    <axis>
-      <x1-m>-0.2452</x1-m>
-      <y1-m>-0.0403</y1-m>
-      <z1-m> -0.2671</z1-m>
-      <x2-m>0.3014</x2-m>
-      <y2-m>-0.1265</y2-m>
-      <z2-m>1.0638</z2-m>
-    </axis>
-  </animation>
-
-  <animation>
-    <type>rotate</type>
-    <object-name>rotorLinkR</object-name>
-    <object-name>rotorLinkL</object-name>
-    <property>rotors/main/tilt/pitch-deg</property>
-    <factor>-0.01 </factor>
-    <axis>
-      <x1-m> -0.2452</x1-m>
-      <y1-m>0.04034</y1-m>
-      <z1-m> -0.2671</z1-m>
-      <x2-m> -0.2452</x2-m>
-      <y2-m>-0.04034</y2-m>
-      <z2-m> -0.2671</z2-m>
-    </axis>
-</animation>
-
-
-  <animation>
-    <type>rotate</type>
-    <object-name>rotorLinkR</object-name>
-    <object-name>rotorLinkL</object-name>
-    <property>rotors/main/tilt/pitch-deg</property>
-    <factor>-0.01 </factor>
-    <axis>
-      <x1-m> -0.2452</x1-m>
-      <y1-m>0.04034</y1-m>
-      <z1-m> -0.2671</z1-m>
-      <x2-m> -0.2452</x2-m>
-      <y2-m>-0.04034</y2-m>
-      <z2-m> -0.2671</z2-m>
-    </axis>
-</animation>
-
-
-  <animation>
-    <type>translate</type>
-    <object-name>rotorLinkR</object-name>
-    <property>rotors/main/tilt/roll-deg</property>
-    <factor>0.0028</factor>
-    <axis>
-	<x>  0 </x>
-	<y>  0 </y>
-	<z>  1 </z>
-    </axis>
-</animation>
-
-  <animation>
-    <type>translate</type>
-    <object-name>rotorLinkL</object-name>
-   <property>rotors/main/tilt/roll-deg</property>
-    <factor>-0.0028</factor>
-    <axis>
-	<x>  0 </x>
-	<y>  0 </y>
-	<z>  1 </z>
-    </axis>
-  </animation>
-  
-  
-
-    <animation>
-    <type>rotate</type>
-    <object-name>rotorLinkPre</object-name>
-	<property>rotors/main/tilt/roll-deg</property>
-    <factor> 0.2</factor>
-    <center>
-      <x-m>  -0.1831 </x-m>
-      <y-m>  0.00000 </y-m>
-      <z-m>  0.4925 </z-m>
-    </center>
-    <axis>
-      <x> -1 </x>
-      <y> 0 </y>
-      <z> 0 </z>
-    </axis>
-  </animation>
-  
-  
-    <animation>
-    <type>rotate</type>
-    <object-name>rotorLinkPre</object-name>
-	 <property>rotors/main/tilt/pitch-deg</property>
-    <factor> 0.2</factor>
-    <center>
-      <x-m>  -0.1831 </x-m>
-      <y-m>  0.00000 </y-m>
-      <z-m>  0.4925 </z-m>
-    </center>
-    <axis>
-      <x> 0 </x>
-      <y> -1 </y>
-      <z> 0 </z>
-    </axis>
-  </animation>
-  
+    
 
  <animation>
 	<type>spin</type>
@@ -518,7 +386,7 @@
 
  <animation>
     <type>rotate</type>
-    <object-name>rudder</object-name>
+    <object-name>rudderL</object-name>
     <property>surface-positions/rudder-pos-norm</property>
     <factor> 40</factor>
     <center>
@@ -530,41 +398,6 @@
       <x> 0 </x>
       <y> 0 </y>
       <z> 1 </z>
-    </axis>
-  </animation>
-
-
-<animation>
-    <type>rotate</type>
-    <object-name>pedalL</object-name>
-    <property>surface-positions/rudder-pos-norm</property>
-    <factor> 20 </factor>
-    <center>
-       <x-m> -1.3445 </x-m>
-      <y-m>0.0900</y-m>
-      <z-m> -0.2457</z-m>
-    </center>
-    <axis>
-      <x> 0 </x>
-      <y> 1 </y>
-      <z> 0 </z>
-    </axis>
-  </animation>
-
-  <animation>
-    <type>rotate</type>
-    <object-name>pedalR</object-name>
-    <property>surface-positions/rudder-pos-norm</property>
-    <factor> 20 </factor>
-    <center>
-      <x-m> -1.3445 </x-m>
-      <y-m>-0.0900</y-m>
-      <z-m> -0.2457</z-m>
-    </center>
-    <axis>
-      <x>  0 </x>
-      <y> -1 </y>
-      <z>  0 </z>
     </axis>
   </animation>
 
@@ -730,17 +563,6 @@
             <pitch-deg>-8</pitch-deg>
         </offsets>
     </model>
-
-   <model>
-    <name>pilot</name>
-    <path>Aircraft/TF-G1/Models/pilot.xml</path>
-    <offsets>
-      <x-m>0</x-m>
-      <y-m>0</y-m>
-      <z-m>0</z-m>
-    </offsets>
-  </model>
-  
  
 </PropertyList>
 
