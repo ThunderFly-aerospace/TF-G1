@@ -24,26 +24,17 @@
     <object-name>rotorBlade2B</object-name>
 
     <object-name>rudder</object-name>
-    <object-name>controlstick</object-name>
-    <object-name>controlstick_brake</object-name>
     
     <object-name>rudder</object-name>
     
-    <object-name>gearF</object-name>
-    <object-name>gearFLeg</object-name>
-    <object-name>gearFLegUp</object-name>
-    
-    <object-name>gearL</object-name>
-    <object-name>gearLLeg</object-name>
-    <object-name>gearR</object-name>
-    <object-name>gearRLeg</object-name>
+    <object-name>gearFL</object-name>
+    <object-name>gearFR</object-name>
+    <object-name>gearRL</object-name>
+    <object-name>gearRR</object-name>
 
     <object-name>rotorHead</object-name>
     <object-name>rotorPitchBase</object-name>
     <object-name>rotorYawBase</object-name>
-   
-    <object-name>throttle</object-name>
-	<object-name>prerotator</object-name>
 	
 	<object-name>rotorBlade1Fblur</object-name>
 	<object-name>rotorBlade2Bblur</object-name>
@@ -64,26 +55,6 @@
 	<object-name>rotorBlade2BblurHigh2</object-name>
 	
 </effect>
-
-
-<animation>
-    <type>rotate</type>
-    <object-name>throttle</object-name>
-    <object-name>prerotator</object-name>
-	<property>/controls/engines/engine[0]/throttle</property>
-    <factor> 50 </factor>
-    <center>
-      <x-m> -0.7722 </x-m>
-      <y-m> -0.2583 </y-m>
-      <z-m> -0.04885</z-m>
-    </center>
-    <axis>
-      <x>  0 </x>
-      <y>  1 </y>
-      <z>  0 </z>
-    </axis>
-  </animation>
-
   
 <animation>
   <type>spin</type>
@@ -161,45 +132,6 @@
     </axis>
  </animation> 
  
- 
-  <animation>
-    <type>rotate</type>
-    <object-name>controlstick</object-name>
-    <object-name>controlstick_brake</object-name>
-    <property>rotors/main/tilt/roll-deg</property>
-    <factor> 1 </factor>
-    <center>
-      <x-m>  -0.7139</x-m>
-      <y-m> 0.000005 </y-m>
-      <z-m> -0.3565 </z-m>
-    </center>
-    <axis>
-      <x> 1 </x>
-      <y> 0 </y>
-      <z> 0 </z>
-    </axis>
-  </animation>
-  
-  <animation>
-    <type>rotate</type>
-    <object-name>controlstick</object-name>
-    <object-name>controlstick_brake</object-name>
-    <property>rotors/main/tilt/pitch-deg</property>
-    <factor> 1 </factor>
-    <offset-deg>-16</offset-deg>
-    <center>
-      <x-m>  -0.7139</x-m>
-      <y-m> 0.000005 </y-m>
-      <z-m> -0.3565 </z-m>
-    </center>
-    <axis>
-      <x> 0 </x>
-      <y> 1 </y>
-      <z> 0 </z>
-    </axis>
-  </animation>
-
-
    <animation>
     <type>rotate</type>
     <object-name>rotorMiddle</object-name>
@@ -400,102 +332,18 @@
       <z> 1 </z>
     </axis>
   </animation>
-
-<animation>
-    <type>rotate</type>
-    <object-name>gearF</object-name>
-    <object-name>gearFLeg</object-name>
-    <object-name>gearFLegUp</object-name>
-    <property>surface-positions/rudder-pos-norm</property>
-    <factor> 20 </factor>
-    <center>
-      <x-m> -1.0799</x-m>
-      <y-m> 0.0000</y-m>
-      <z-m> -0.5957</z-m>
-    </center>
-    <axis>
-      <x>  0 </x>
-      <y>  0 </y>
-      <z> -1 </z>
-    </axis>
-  </animation>
-  
-  
-  
-   <animation>
-    <type>rotate</type>
-    <object-name>gearL</object-name>
-    <object-name>gearLLeg</object-name>
-    <property>gear/gear[1]/compression-norm</property>
-    <center>
-      <x-m> -0.03969 </x-m>
-      <y-m>  0.1061 </y-m>
-      <z-m> -0.18558 </z-m>
-    </center>
-    <axis>
-      <x> -1 </x>
-      <y> 0 </y>
-      <z> 0 </z>
-    </axis>
-	<interpolation>
-		<entry>
-		<ind> 0.0</ind>
-		<dep> -4.0</dep>
-		</entry>
-		<entry>
-		<ind> 0.01</ind>
-		<dep> -1.0</dep>
-		</entry>
-		<entry>
-		<ind> 1.0</ind>
-		<dep> 0.0</dep>
-		</entry>
-	</interpolation>
-  </animation>
-
-    <animation>
-    <type>rotate</type>
-    <object-name>gearR</object-name>
-    <object-name>gearRLeg</object-name>
-    <property>gear/gear[2]/compression-norm</property>
-    <center>
-      <x-m> -0.03969 </x-m>
-      <y-m>  -0.10611 </y-m>
-      <z-m>  -0.18559 </z-m>
-    </center>
-    <axis>
-      <x> 1 </x>
-      <y> 0 </y>
-      <z> 0 </z>
-    </axis>
-	<interpolation>
-		<entry>
-		<ind> 0.0</ind>
-		<dep> -4.0</dep>
-		</entry>
-		<entry>
-		<ind> 0.01</ind>
-		<dep> -1.0</dep>
-		</entry>
-		<entry>
-		<ind> 1.0</ind>
-		<dep> 0.0</dep>
-		</entry>
-	</interpolation>
-  </animation>
-  
   
 <!-- gears -->
 
   <animation>
     <type>spin</type>
-    <object-name>gearF</object-name>
+    <object-name>gearFL</object-name>
     <property>gear/gear[0]/rollspeed-ms</property>
     <factor> 30 </factor>
     <center>
-      <x-m>-1.0146</x-m>
-      <y-m> 0.000000 </y-m>
-      <z-m> -0.6211 </z-m>
+      <x-m> 0.06843</x-m>
+      <y-m> -0.1646</y-m>
+      <z-m> 0.2273</z-m>
     </center>
     <axis>
       <x>  0 </x>
@@ -507,13 +355,13 @@
 
   <animation>
     <type>spin</type>
-    <object-name>gearR</object-name>
+    <object-name>gearFR</object-name>
     <property>gear/gear[1]/rollspeed-ms</property>
     <factor> 30 </factor>
     <center>
-	<x-m> 0.0496 </x-m> 
-	<y-m> 0.7828</y-m>
-	<z-m> -0.5985</z-m>
+      <x-m> 0.06626</x-m>
+      <y-m> -0.1646</y-m>
+      <z-m> -0.2273</z-m>
     </center>
     <axis>
       <x>  0 </x>
