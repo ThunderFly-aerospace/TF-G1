@@ -50,15 +50,19 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 
 
 	//// úchytky na kolečka
-	union(){
 	translate([2*main_tube_outer_diameter + coupling_wall_thickness, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage])
 		rotate([0,90,0])
 			666_1014();
 
+	echo("Front gear position:", 2*main_tube_outer_diameter + coupling_wall_thickness + (tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage)/2, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage);
+
 	translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_undercarriage + second_undercarriage_hole - vzdalenost_x - radius_undercarriage , - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage])
 		rotate([0,90,0])
 			666_1014();
-	}
+
+	echo("Rear gear position:", - tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_undercarriage + second_undercarriage_hole - vzdalenost_x - radius_undercarriage + (tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage)/2, - 131 - Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2 + vzdalenost_y + radius_undercarriage);
+
+
 
 	mirror([0,0,1])
 	union(){
