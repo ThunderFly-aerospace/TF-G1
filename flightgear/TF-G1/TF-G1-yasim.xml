@@ -207,7 +207,7 @@ version="2018.1"
 
  
  
- <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+ <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/> -->
  
   <gear x="-0.06471" y="0.225" z="-0.205" compression="0.05">
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
@@ -231,29 +231,6 @@ version="2018.1"
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
 
-  -->
-
-  <gear x="1.0" y="0.000" z="-0.7452" 
-    compression="0.051" >
-        <control-input axis="/controls/flight/rudder" control="STEER" square="false" src0="-1.0" src1="1.0" dst0="-0.3" dst1="0.3"/>
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-  </gear>
-
-
-
-<gear x="-0.05" y="0.78" z="-0.7956"    
-    compression="0.051" >
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-  </gear>
-
-  <gear x="-0.05" y="-0.78" z="-0.7956"     
-    compression="0.051">
-        <control-input axis="/controls/gear/brake-right" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-  </gear>
-
 
 
   <!-- tail gear  
@@ -268,8 +245,8 @@ version="2018.1"
  
 <weight x="-0.06471" y="0.225" z="-0.2"    mass-prop="/sim/weight[0]/weight-kg"/>
 <weight x="-0.06471" y="-0.225" z="-0.2"     mass-prop="/sim/weight[1]/weight-kg"/>
-<weight x="1.34368" y="0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
-<weight x="1.34368" y="-0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
+<weight x="-0.34368" y="0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
+<weight x="-0.34368" y="-0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
   
  <tank x="-0.1" y="0.0" z="-0.05" capacity="0.5"/>
 
@@ -277,7 +254,7 @@ version="2018.1"
 
 
   
- <ballast  x="1" y="0.0" z="-0.20" mass-kg="3.8"/>
+ <ballast  x="-0.1" y="0.0" z="-0.20" mass-kg="3.8"/>
 
 <!-- tail gear -->
 
