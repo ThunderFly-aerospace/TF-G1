@@ -33,6 +33,7 @@ var check_gear = func{
 	var wow0 = getprop("gear/gear[0]/wow");
 	var wow1 = getprop("gear/gear[1]/wow");
 	var wow2 = getprop("gear/gear[2]/wow");
+	var wow3 = getprop("gear/gear[3]/wow");
 	
 	var kias = getprop("velocities/airspeed-kt");
 	var rotrpm = getprop("rotors/main/rpm");
@@ -40,14 +41,14 @@ var check_gear = func{
 	
 	if (rotrpm<450) 
 	{
-		var wght = 70;
+		var wght = 5;
 		
 		#scale weight depending on airspeed
 		#important if sliding forward on the ground
 		
 		if (rotrpm>0)
 		{
-		wght = wght* ( 1 - (rotrpm/450) );
+			wght = wght* ( 1 - (rotrpm/450) );
 		}
 		
 		if (wght<0) {wght=0;}
@@ -58,34 +59,34 @@ var check_gear = func{
 		
 		if (wow0==1) 
 		{
-			setprop("/sim/weight[0]/weight-lb",wght);
+			setprop("/sim/weight[0]/weight-kg",wght);
+			setprop("/sim/weight[1]/weight-kg",wght);
 		}
 		else
 		{
-			setprop("/sim/weight[0]/weight-lb",0);
+			setprop("/sim/weight[0]/weight-kg",0);
+			setprop("/sim/weight[1]/weight-kg",0);
 		
 		}
 		
-		if  ( (wow1==1) or (wow2==1) )
+		if  ( (wow2==1) or (wow3==1) )
 		{
-			setprop("/sim/weight[1]/weight-lb",wght);
-			setprop("/sim/weight[2]/weight-lb",wght);
+			setprop("/sim/weight[2]/weight-kg",wght);
+			setprop("/sim/weight[3]/weight-kg",wght);
 		}
 		else
 		{
-			setprop("/sim/weight[1]/weight-lb",0);
-			setprop("/sim/weight[2]/weight-lb",0);
-		
+			setprop("/sim/weight[2]/weight-kg",0);
+			setprop("/sim/weight[3]/weight-kg",0);
 		}
-		
 		
 	}
 	else 
 	{
-		setprop("/sim/weight[0]/weight-lb",0);
-		setprop("/sim/weight[1]/weight-lb",0);
-		setprop("/sim/weight[2]/weight-lb",0);
-	
+		setprop("/sim/weight[0]/weight-kg",0);
+		setprop("/sim/weight[1]/weight-kg",0);
+		setprop("/sim/weight[2]/weight-kg",0);
+		setprop("/sim/weight[3]/weight-kg",0);	
 	}
 	
 }

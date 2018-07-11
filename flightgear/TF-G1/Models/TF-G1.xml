@@ -23,10 +23,9 @@
     <object-name>rotorBlade1F</object-name>
     <object-name>rotorBlade2B</object-name>
 
-    <object-name>rudder</object-name>
-    
-    <object-name>rudder</object-name>
-    
+    <object-name>rudderL</object-name>
+    <object-name>rudderR</object-name>
+        
     <object-name>gearFL</object-name>
     <object-name>gearFR</object-name>
     <object-name>gearRL</object-name>
@@ -67,10 +66,10 @@
        </condition>
  <property>engines/engine[0]/rpm</property>
   <factor>0.05</factor>
-  <center>
-      <x-m> 0.5817 </x-m>
-      <y-m> -0.000075 </y-m>
-      <z-m> 0.2388 </z-m>
+    <center>
+      <x-m> -0.02952 </x-m>
+      <y-m> -0.00127 </y-m>
+      <z-m> 0.00125 </z-m>
     </center>
     <axis>
       <x>  1 </x>
@@ -96,10 +95,10 @@
     </condition>
      <property>engines/engine[0]/rpm</property>
   <factor>1</factor>
-  <center>
-      <x-m> 0.5817 </x-m>
-      <y-m> -0.000075 </y-m>
-      <z-m> 0.2388 </z-m>
+    <center>
+      <x-m> -0.02952 </x-m>
+      <y-m> -0.00127 </y-m>
+      <z-m> 0.00125 </z-m>
     </center>
     <axis>
       <x>  1 </x>
@@ -120,10 +119,10 @@
     </condition>
      <property>engines/engine[0]/rpm</property>
   <factor>0.02</factor>
-  <center>
-      <x-m> 0.5817 </x-m>
-      <y-m> -0.000075 </y-m>
-      <z-m> 0.2388 </z-m>
+    <center>
+      <x-m> -0.02952 </x-m>
+      <y-m> -0.00127 </y-m>
+      <z-m> 0.00125 </z-m>
     </center>
     <axis>
       <x>  -1 </x>
@@ -322,9 +321,9 @@
     <property>surface-positions/rudder-pos-norm</property>
     <factor> 40</factor>
     <center>
-      <x-m> 1.2432 </x-m>
-      <y-m>  0.000008 </y-m>
-      <z-m> -0.120 </z-m>
+      <x-m> 0.936085 </x-m>
+      <y-m>  -0.15 </y-m>
+      <z-m> 0.075 </z-m>
     </center>
     <axis>
       <x> 0 </x>
@@ -332,6 +331,24 @@
       <z> 1 </z>
     </axis>
   </animation>
+
+ <animation>
+    <type>rotate</type>
+    <object-name>rudderR</object-name>
+    <property>surface-positions/rudder-pos-norm</property>
+    <factor> 40</factor>
+    <center>
+      <x-m> 0.936085 </x-m>
+      <y-m>  -0.15 </y-m>
+      <z-m> 0.075 </z-m>
+    </center>
+    <axis>
+      <x> 0 </x>
+      <y> 0 </y>
+      <z> 1 </z>
+    </axis>
+  </animation>
+
   
 <!-- gears -->
 
@@ -340,15 +357,13 @@
     <object-name>gearFL</object-name>
     <property>gear/gear[0]/rollspeed-ms</property>
     <factor> 30 </factor>
-    <center>
-      <x-m> 0.06843</x-m>
-      <y-m> -0.1646</y-m>
-      <z-m> 0.2273</z-m>
-    </center>
-    <axis>
-      <x>  0 </x>
-      <y> -1 </y>
-      <z>  0 </z>
+    <axis>   
+      <x1-m> 0.06471 </x1-m>
+      <y1-m> 0.225 </y1-m>
+      <z1-m> -0.15 </z1-m>
+      <x2-m> 0.06471</x2-m>
+      <y2-m> -0.225 </y2-m>
+      <z2-m> -0.15 </z2-m>
     </axis>
   </animation>
 
@@ -358,34 +373,47 @@
     <object-name>gearFR</object-name>
     <property>gear/gear[1]/rollspeed-ms</property>
     <factor> 30 </factor>
-    <center>
-      <x-m> 0.06626</x-m>
-      <y-m> -0.1646</y-m>
-      <z-m> -0.2273</z-m>
-    </center>
-    <axis>
-      <x>  0 </x>
-      <y> -1 </y>
-      <z>  0 </z>
+    <axis>   
+      <x1-m> 0.06471 </x1-m>
+      <y1-m> 0.225 </y1-m>
+      <z1-m> -0.15 </z1-m>
+      <x2-m> 0.06471</x2-m>
+      <y2-m> -0.225 </y2-m>
+      <z2-m> -0.15 </z2-m>
     </axis>
   </animation>
 
   <animation>
     <type>spin</type>
-    <object-name>gearL</object-name>
+    <object-name>gearRL</object-name>
     <property>gear/gear[2]/rollspeed-ms</property>
     <factor> 30 </factor>
-    <center>
-	<x-m> 0.0496 </x-m>
-          <y-m> -0.7827</y-m>
-          <z-m> -0.5985</z-m>
-    </center>
-    <axis>
-      <x>  0 </x>
-      <y> -1 </y>
-      <z>  0 </z>
+    <axis>   
+      <x1-m> 0.34368 </x1-m>
+      <y1-m> 0.225 </y1-m>
+      <z1-m> -0.15 </z1-m>
+      <x2-m> 0.34368</x2-m>
+      <y2-m> -0.225 </y2-m>
+      <z2-m> -0.15 </z2-m>
     </axis>
   </animation>
+
+
+  <animation>
+    <type>spin</type>
+    <object-name>gearRR</object-name>
+    <property>gear/gear[2]/rollspeed-ms</property>
+    <factor> 30 </factor>
+    <axis>   
+      <x1-m> 0.34368 </x1-m>
+      <y1-m> 0.225 </y1-m>
+      <z1-m> -0.15 </z1-m>
+      <x2-m> 0.34368</x2-m>
+      <y2-m> -0.225 </y2-m>
+      <z2-m> -0.15 </z2-m>
+    </axis>
+  </animation>
+
 
 
   <animation>
@@ -400,17 +428,5 @@
 		<path>Aircraft/TF-G1/Models/Effects/shadow.xml</path>
 	</model>
 
- 
-    <model>
-        <name>panel1</name>
-        <path>Aircraft/TF-G1/Models/panel1.xml</path>
-        <offsets>
-            <x-m>0</x-m>
-            <y-m>0</y-m>
-            <z-m>0.14</z-m>
-            <pitch-deg>-8</pitch-deg>
-        </offsets>
-    </model>
- 
 </PropertyList>
 

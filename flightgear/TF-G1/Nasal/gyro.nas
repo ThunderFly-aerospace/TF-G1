@@ -90,9 +90,9 @@ var	check_rotor_rpm = func {
 	}
 	else {
 		var rpm = getprop("/rotors/main/rpm");
-		if(rpm!=nil and rpm>600){
+		if(rpm!=nil and rpm>1000){
 			#setprop("/sim/sound/crash",1);
-			#setprop("/sim/messages/copilot","Rotor overspeed !!!!!!!!!!!!!");
+			#setprop("/sim/messages/copilot","Rotor overspeed !!!");
 			screen.log.write("Rotor overspeed !!!", 1, 0, 0);
 			
 			#uncomment when you want to crash

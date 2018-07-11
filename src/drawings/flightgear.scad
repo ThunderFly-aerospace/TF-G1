@@ -30,6 +30,9 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	translate([main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2 + thickness_between_tubes,0])
 		rotate([-90,0,0])
 			666_1026(draft);
+	
+	echo("Rotor position:", main_pilon_position,height_of_vertical_tube - main_tube_outer_diameter*2 + main_tube_outer_diameter/2 + thickness_between_tubes,0);
+
 
 	translate([length_of_main_tube - 80 + global_clearance,0,0])
 		rotate([0,90,0])
@@ -91,9 +94,14 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	    color([1,0,0])
 			cylinder (h = length_of_undercarriage_tube, r = Help_main_tube_outer/2, $fn = 200);
 
+	echo("Front undercarrige tube position:", Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes, -length_of_undercarriage_tube/2);
+
 	translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2])
 	    color([1,0,0])
 			cylinder (h = length_of_undercarriage_tube, r = Help_main_tube_outer/2, $fn = 200);
+
+	echo("Rear undercarrige tube position:", second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2);
+
 //final module
 }
 
