@@ -35,7 +35,7 @@ Range: 250 km
 version="2018.1"
 -->
 
-<airplane  mass-kg="5.1"> 
+<airplane  mass-kg="5.8"> 
 
   <approach speed="60" aoa="0">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="0.60"/>
@@ -114,7 +114,7 @@ version="2018.1"
              max-power-rotor-brake="50"
              rotorgear-friction="0.5"
              engine-prop-factor="0.02" 
-	     engine-accel-limit="5"
+	         engine-accel-limit="5"
              yasimdragfactor="30"
              yasimliftfactor="140"
 	     >
@@ -125,8 +125,8 @@ version="2018.1"
   </rotorgear>
   
  
-  <propeller x="0" y="0" z="0.03"
-			 mass="0.1"
+  <propeller x="0.02" y="0" z="0.03"
+			 mass="0.0"
              moment="0.1"
              radius="0.203"
              cruise-speed="70"
@@ -152,17 +152,21 @@ version="2018.1"
 
   
 
- <!-- main fuselage--> 
+ <!-- main fuselage -->
  <fuselage ax="0" ay="0" az="0" bx="-0.62" by="0" bz="0" width="0.2" taper="0" midpoint="0.25"/>
+
  
-  <!-- main tube-->
+
+  <!-- main tube -->
+ <!--
  <fuselage ax="0" ay="0" az="0" bx="-0.92" by="0" bz="0" width="0.03" taper="1" midpoint="0.6"/>
+ -->
 
 <!-- gear tubes -->
+<!--
  <fuselage ax="-0.06838" ay="-0.15" az="-0.02754" bx="-0.06838" by="0.15" bz="-0.02754" width="0.03" taper="1" midpoint="0.6"/>
  <fuselage ax="-0.41636" ay="-0.15" az="-0.02754" bx="-0.41636" by="0.15" bz="-0.02754" width="0.03" taper="1" midpoint="0.6"/>
-
- 
+-->
   
   <hstab x="-0.91" y="0.0" z="0"
          taper="1"
@@ -203,41 +207,82 @@ version="2018.1"
 
  
  
- <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>-->
+ <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
  
-  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.05"> </gear>
+  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.05">
+        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+  </gear>
 
 
-  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.05"> </gear>
+  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.05"> 
+        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+  </gear>
 
 
-  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.05"> </gear>
+  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.05">
+        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>      
+  </gear>
 
-  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.05"> </gear>
+  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.05">
+        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+  </gear>
+
+  -->
+
+  <gear x="1.0" y="0.000" z="-0.7452" 
+    compression="0.051" >
+        <control-input axis="/controls/flight/rudder" control="STEER" square="false" src0="-1.0" src1="1.0" dst0="-0.3" dst1="0.3"/>
+        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+  </gear>
 
 
-  <!-- tail gear   -->
+
+<gear x="-0.05" y="0.78" z="-0.7956"    
+    compression="0.051" >
+        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+  </gear>
+
+  <gear x="-0.05" y="-0.78" z="-0.7956"     
+    compression="0.051">
+        <control-input axis="/controls/gear/brake-right" control="BRAKE" split="true"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
+  </gear>
+
+
+
+  <!-- tail gear  
   <gear x="-1.12" y="0.000" z="-0.09"
 		compression="0.005"
         ignored-by-solver="1" >
   </gear>
 
+ -->
 
+<!-- -->
+ 
 <weight x="-0.06471" y="0.225" z="-0.2"    mass-prop="/sim/weight[0]/weight-kg"/>
 <weight x="-0.06471" y="-0.225" z="-0.2"     mass-prop="/sim/weight[1]/weight-kg"/>
-<weight x="-0.34368" y="0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
-<weight x="-0.34368" y="-0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
+<weight x="1.34368" y="0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
+<weight x="1.34368" y="-0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
   
  <tank x="-0.1" y="0.0" z="-0.05" capacity="0.5"/>
 
- <!-- -->
- <ballast  x="-0.1" y="0.0" z="-0.20" mass-kg="4.8"/>
 
 
-<!-- tail gear 
 
- <ballast  x="-0.98" y="0.0" z="0.02" mass-kg="-0.5"/>
--->
+  
+ <ballast  x="1" y="0.0" z="-0.20" mass-kg="3.8"/>
+
+<!-- tail gear -->
+
+
+ <ballast  x="-0.98" y="0.0" z="0.02" mass-kg="0.1"/>
 
 </airplane>
 
