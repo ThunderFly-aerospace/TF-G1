@@ -32,10 +32,9 @@ Takeoff Run 10 m
 Landing Run: 5 m 
 Range: 250 km
 
-version="2018.1"
 -->
 
-<airplane  mass-kg="5.8"> 
+<airplane version="2018.1" mass-kg="5.8"> 
 
   <approach speed="60" aoa="0">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="0.60"/>
@@ -48,31 +47,31 @@ version="2018.1"
 
   <rotor name="main" 
 	 x="-0.24" y="0.0" z="0.33"
-         nx="-0.0" ny="0" nz="1"  
+         nx="0" ny="0" nz="1"  
          fx="1" fy="0" fz="0"  ccw="1"
          maxcollective="0.0" mincollective="0.0"
          diameter="2"
          numblades="2"
          weightperblade="0.855"
-         twist="-4"
-         chord="0.18"
-         rpm="400"
-         tiltcenterx="-0.2125" tiltcentery="0" tiltcenterz="1.1307"
+         twist="0"
+         chord="0.05"
+         rpm="300"
+         tiltcenterx="-0.24" tiltcentery="0" tiltcenterz="0.30"
          mintiltpitch=" 0" 
          maxtiltpitch="20"
          mintiltroll="-8" 
          maxtiltroll=" 8" 
-         relbladecenter="0.5"
+         relbladecenter="0.25"
          dynamic="1"
-         sharedflaphinge="1"
+         sharedflaphinge="0"
          rellenflaphinge="0.0"
-         delta3="0"
+         delta3="1"
          delta=".8"
-         pitch-a="10"
-         pitch-b="15"
+         pitch-a="5.5"
+         pitch-b="5.5"
          flapmin="-8"
          flapmax="8"
-         flap0="0"
+         flap0="3"
          flap0factor="0"
          notorque="0"
          dragfactor="0.30"
@@ -82,14 +81,12 @@ version="2018.1"
          taper="1"
 	     number-of-segments="8"
 	     number-of-parts="8"
-	     rel-len-where-incidence-is-measured="0.7"
-	     rel-len-blade-start="0.025"
-	
-	
-		 airfoil-lift-coefficient="6.3"
+	     rel-len-where-incidence-is-measured="0.5"
+	     rel-len-blade-start="0.125"
+		 airfoil-lift-coefficient="2.75"
 		 airfoil-drag-coefficient0="0.0075"
-		 airfoil-drag-coefficient1="0.425"
-		 airfoil-incidence-no-lift="-0.75"
+		 airfoil-drag-coefficient1="0.325"
+		 airfoil-incidence-no-lift="0"
 		 incidence-stall-zero-speed="15"
 		 incidence-stall-half-sonic-speed="14.5"
 		 lift-factor-stall="0.18"
@@ -249,10 +246,10 @@ version="2018.1"
 <weight x="-0.34368" y="0.225" z="-0.2"  mass-prop="/sim/weight[2]/weight-kg"/>
 <weight x="-0.34368" y="-0.225" z="-0.2" mass-prop="/sim/weight[2]/weight-kg"/>
 
-<ballast  x="-0.06471" y="0.225" z="-0.2" mass-kg="0.1"/>
-<ballast  x="-0.06471" y="-0.225" z="-0.2" mass-kg="0.1"/>
-<ballast  x="-0.34368" y="0.225" z="-0.2" mass-kg="0.1"/>
-<ballast  x="-0.34368" y="-0.225" z="-0.2" mass-kg="0.1"/>
+<ballast  x="-0.06471" y="0.225" z="-0.2" mass-kg="0.15"/>
+<ballast  x="-0.06471" y="-0.225" z="-0.2" mass-kg="0.15"/>
+<ballast  x="-0.34368" y="0.225" z="-0.2" mass-kg="0.15"/>
+<ballast  x="-0.34368" y="-0.225" z="-0.2" mass-kg="0.15"/>
   
 
 <!-- engine balast -->  
@@ -266,8 +263,8 @@ version="2018.1"
 
 
 <!-- tail balasts -->
-<ballast  x="-0.98" y="0.075" z="0.00" mass-kg="0.15"/>
-<ballast  x="-0.98" y="-0.075" z="0.00" mass-kg="0.15"/>
+<ballast  x="-0.98" y="0.15" z="0.00" mass-kg="0.15"/>
+<ballast  x="-0.98" y="-0.15" z="0.00" mass-kg="0.15"/>
 
 
 
