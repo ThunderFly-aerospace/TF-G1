@@ -202,29 +202,10 @@ Range: 250 km
  
  <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/> -->
  
-  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.03">
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-  </gear>
-
-
-  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.03"> 
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-  </gear>
-
-
-  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.03">
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>      
-  </gear>
-
-  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.03">
-        <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
-        <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
-  </gear>
-
-
+  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.03"></gear>
+  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.03"></gear>
+  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.03"></gear>
+  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.03"></gear>
 
   <!-- tail gear  
   <gear x="-1.12" y="0.000" z="-0.09"
