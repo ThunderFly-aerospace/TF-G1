@@ -152,13 +152,15 @@
     <object-name>rotorYawBase</object-name>
     <property>rotors/main/tilt/roll-deg</property>
     <factor> -1 </factor>
+    <center>
+       <x-m> 0.25342  </x-m>
+       <y-m> -0.0000  </y-m>
+       <z-m> 0.34141 </z-m>
+    </center>
     <axis>
-      <x1-m> 0.1501 	</x1-m>
-      <y1-m> 0.000005	</y1-m>
-      <z1-m> 1.0934	</z1-m>
-      <x2-m> 0.0935 	</x2-m>
-      <y2-m> 0.000005 	</y2-m>
-      <z2-m>  1.1051	</z2-m>
+      <x>  -1 </x>
+      <y>  0 </y>
+      <z>  0 </z>
     </axis>
   </animation>
   
@@ -183,9 +185,9 @@
     <property>rotors/main/tilt/pitch-deg</property>
     <factor> -1 </factor>
     <center>
-	<x-m>0.1350	</x-m>
-	<y-m>-0.0000	</y-m>
-	<z-m>1.1288	</z-m>
+	     <x-m> 0.25342	</x-m>
+	     <y-m> -0.0000	</y-m>
+	     <z-m> 0.34141 </z-m>
     </center>
     <axis>
       <x>  0 </x>
@@ -220,9 +222,9 @@
 		<z>1</z>
 	</axis>
 	<center>
-		<x-m>0.1652</x-m>
-		<y-m>0.000005</y-m>
-		<z-m>1.1887</z-m>
+		<x-m>0.25343</x-m>
+		<y-m>0.0</y-m>
+		<z-m>0.35895</z-m>
 	</center>
 </animation>
 

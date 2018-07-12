@@ -80,25 +80,25 @@ version="2018.1"
          translift-maxfactor="1"
          ground-effect-constant="0.2"
          taper="1"
-	number-of-segments="8"
-	number-of-parts="8"
-	rel-len-where-incidence-is-measured="0.7"
-	rel-len-blade-start="0.025"
+	     number-of-segments="8"
+	     number-of-parts="8"
+	     rel-len-where-incidence-is-measured="0.7"
+	     rel-len-blade-start="0.025"
 	
 	
-		airfoil-lift-coefficient="6.3"
-		airfoil-drag-coefficient0="0.0075"
-		airfoil-drag-coefficient1="0.425"
-		airfoil-incidence-no-lift="-0.75"
-		incidence-stall-zero-speed="15"
-		incidence-stall-half-sonic-speed="14.5"
-		lift-factor-stall="0.18"
-		stall-change-over="10"
-		drag-factor-stall="2.0" 
+		 airfoil-lift-coefficient="6.3"
+		 airfoil-drag-coefficient0="0.0075"
+		 airfoil-drag-coefficient1="0.425"
+		 airfoil-incidence-no-lift="-0.75"
+		 incidence-stall-zero-speed="15"
+		 incidence-stall-half-sonic-speed="14.5"
+		 lift-factor-stall="0.18"
+		 stall-change-over="10"
+		 drag-factor-stall="2.0" 
 		 
          cyclic-factor="0.8"
          rotor-correction-factor="0.95"
-	 downwashfactor="0.0"
+	     downwashfactor="0.0"
          balance="0.99998"
 	 > 
          <control-input axis="/controls/flight/aileron-trim" control="TILTROLL" split="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
@@ -110,11 +110,11 @@ version="2018.1"
 
  
 
-  <rotorgear max-power-engine="2"
-             max-power-rotor-brake="50"
-             rotorgear-friction="0.5"
+  <rotorgear max-power-engine="0.750"
+             max-power-rotor-brake="0.350"
+             rotorgear-friction="0.005"
              engine-prop-factor="0.02" 
-	         engine-accel-limit="5"
+	         engine-accel-limit="20"
              yasimdragfactor="30"
              yasimliftfactor="140"
 	     >
@@ -140,9 +140,7 @@ version="2018.1"
 	      >
 	<actionpt x="0" y="0" z="0.03"/>
 	    
-	<piston-engine eng-power="2"
-                        eng-rpm="3800"
-                        displacement="2000" >
+	<piston-engine eng-power="2" eng-rpm="3800" displacement="20" >
 		<control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
 		<control-input axis="/controls/engines/engine[0]/starter" control="STARTER"/>
 		<control-input axis="/controls/engines/engine[0]/magnetos" control="MAGNETOS"/>
@@ -207,24 +205,24 @@ version="2018.1"
  
  <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/> -->
  
-  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.05">
+  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.03">
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
 
 
-  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.05"> 
+  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.03"> 
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
 
 
-  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.05">
+  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.03">
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>      
   </gear>
 
-  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.05">
+  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.03">
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
