@@ -34,7 +34,7 @@ Range: 250 km
 
 -->
 
-<airplane version="2018.1" mass-kg="5.8"> 
+<airplane version="2018.1" mass-kg="4.9"> 
 
   <approach speed="60" aoa="0">
     <control-setting axis="/controls/engines/engine[0]/throttle" value="0.60"/>
@@ -83,7 +83,7 @@ Range: 250 km
 	     number-of-parts="8"
 	     rel-len-where-incidence-is-measured="0.5"
 	     rel-len-blade-start="0.125"
-		 airfoil-lift-coefficient="2.75"
+		 airfoil-lift-coefficient="3.75"
 		 airfoil-drag-coefficient0="0.0075"
 		 airfoil-drag-coefficient1="0.325"
 		 airfoil-incidence-no-lift="0"
@@ -253,7 +253,7 @@ Range: 250 km
   
 
 <!-- engine balast -->  
-<ballast  x="0.0" y="0.0" z="0.02" mass-kg="0.8"/>
+<ballast  x="0.0" y="0.0" z="0.02" mass-kg="0.7"/>
 
 <!-- accumulator balasts -->  
 <ballast  x="-0.15" y="0.1" z="0.0" mass-kg="0.7"/>
