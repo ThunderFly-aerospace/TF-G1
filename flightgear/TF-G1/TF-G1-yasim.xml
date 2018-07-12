@@ -160,8 +160,8 @@ version="2018.1"
  
 <!-- gear tubes -->
 <!--
- <fuselage ax="-0.06838" ay="-0.15" az="-0.02754" bx="-0.06838" by="0.15" bz="-0.02754" width="0.03" taper="1" midpoint="0.6"/>
- <fuselage ax="-0.41636" ay="-0.15" az="-0.02754" bx="-0.41636" by="0.15" bz="-0.02754" width="0.03" taper="1" midpoint="0.6"/>
+ <fuselage ax="-0.06838" ay="-0.15" az="-0.02754" bx="-0.06838" by="0.15" bz="-0.02754" width="0.03" taper="0" midpoint="0.5"/>
+ <fuselage ax="-0.41636" ay="-0.15" az="-0.02754" bx="-0.41636" by="0.15" bz="-0.02754" width="0.03" taper="0" midpoint="0.5"/>
 -->
   
   <hstab x="-0.91" y="0.0" z="0"
@@ -237,25 +237,39 @@ version="2018.1"
 
  -->
 
-<!-- -->
- 
-<weight x="-0.06471" y="0.225" z="-0.2"    mass-prop="/sim/weight[0]/weight-kg"/>
-<weight x="-0.06471" y="-0.225" z="-0.2"     mass-prop="/sim/weight[1]/weight-kg"/>
-<weight x="-0.34368" y="0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
-<weight x="-0.34368" y="-0.225" z="-0.2"    mass-prop="/sim/weight[2]/weight-kg"/>
-  
+<!-- fuel tank for moddeled engine-->
  <tank x="-0.1" y="0.0" z="-0.05" capacity="0.5"/>
 
+<!-- rotor head ballast -->
+<ballast  x="-0.24" y="0.0" z="0.33" mass-kg="0.9"/>
 
+<!-- gear weights and balasts --> 
+<weight x="-0.06471" y="0.225" z="-0.2"  mass-prop="/sim/weight[0]/weight-kg"/>
+<weight x="-0.06471" y="-0.225" z="-0.2" mass-prop="/sim/weight[1]/weight-kg"/>
+<weight x="-0.34368" y="0.225" z="-0.2"  mass-prop="/sim/weight[2]/weight-kg"/>
+<weight x="-0.34368" y="-0.225" z="-0.2" mass-prop="/sim/weight[2]/weight-kg"/>
 
-
+<ballast  x="-0.06471" y="0.225" z="-0.2" mass-kg="0.1"/>
+<ballast  x="-0.06471" y="-0.225" z="-0.2" mass-kg="0.1"/>
+<ballast  x="-0.34368" y="0.225" z="-0.2" mass-kg="0.1"/>
+<ballast  x="-0.34368" y="-0.225" z="-0.2" mass-kg="0.1"/>
   
- <ballast  x="-0.1" y="0.0" z="-0.20" mass-kg="3.8"/>
 
-<!-- tail gear -->
+<!-- engine balast -->  
+<ballast  x="0.0" y="0.0" z="0.02" mass-kg="0.8"/>
+
+<!-- accumulator balasts -->  
+<ballast  x="-0.15" y="0.1" z="0.0" mass-kg="0.7"/>
+
+<!-- accumulator balasts -->  
+<ballast  x="-0.15" y="-0.1" z="0.0" mass-kg="0.7"/>
 
 
- <ballast  x="-0.98" y="0.0" z="0.02" mass-kg="0.1"/>
+<!-- tail balasts -->
+<ballast  x="-0.98" y="0.075" z="0.00" mass-kg="0.15"/>
+<ballast  x="-0.98" y="-0.075" z="0.00" mass-kg="0.15"/>
+
+
 
 </airplane>
 
