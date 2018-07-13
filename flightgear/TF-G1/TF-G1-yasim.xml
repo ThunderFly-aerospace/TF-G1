@@ -207,13 +207,12 @@ Range: 250 km
   <gear x="-0.34368" y="0.225" z="-0.205" compression="0.03"></gear>
   <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.03"></gear>
 
-  <!-- tail gear  
+  <!-- tail gear --> 
   <gear x="-1.12" y="0.000" z="-0.09"
 		compression="0.005"
         ignored-by-solver="1" >
   </gear>
 
- -->
 
 <!-- fuel tank for moddeled engine-->
  <tank x="-0.1" y="0.0" z="-0.05" capacity="0.2"/>
@@ -222,13 +221,15 @@ Range: 250 km
 <ballast  x="-0.24" y="0.0" z="0.33" mass-kg="0.9"/>
 
 <!-- gear weights and balasts --> 
+<!--
 <weight x="-0.06471" y="0.225" z="-0.2"  mass-prop="/sim/weight[0]/weight-kg"/>
 <weight x="-0.06471" y="-0.225" z="-0.2" mass-prop="/sim/weight[1]/weight-kg"/>
 <weight x="-0.34368" y="0.225" z="-0.2"  mass-prop="/sim/weight[2]/weight-kg"/>
 <weight x="-0.34368" y="-0.225" z="-0.2" mass-prop="/sim/weight[2]/weight-kg"/>
+-->
 
-<ballast  x="-0.06471" y="0.225" z="-0.2" mass-kg="0.15"/>
-<ballast  x="-0.06471" y="-0.225" z="-0.2" mass-kg="0.15"/>
+<ballast  x="-0.06471" y="0.225" z="-0.2" mass-kg="0.25"/>
+<ballast  x="-0.06471" y="-0.225" z="-0.2" mass-kg="0.25"/>
 <ballast  x="-0.34368" y="0.225" z="-0.2" mass-kg="0.15"/>
 <ballast  x="-0.34368" y="-0.225" z="-0.2" mass-kg="0.15"/>
   
