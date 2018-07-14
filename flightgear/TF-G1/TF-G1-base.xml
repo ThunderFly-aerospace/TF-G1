@@ -116,10 +116,9 @@
 	  </help>
 
     <hud>
-      <path n="1">Aircraft/TF-G1/TF-G1_hud.xml</path>
-            <visibility n="1">false</visibility>
-            <enable3d n="1">false</enable3d>
-			
+      <path n="1">Huds/minimal.xml</path>
+            <visibility n="1">true</visibility>
+            <enable3d n="1">true</enable3d>
     </hud>
 
 
@@ -161,22 +160,8 @@
     </menubar>
 
    <!-- Payload  -->
-   <weight>
-   <name type="string">Pilot</name>
-   <weight-lb alias="/yasim/jt5b/pilot-lb"/>
-   <min-lb type="double">0.0</min-lb>
-   <max-lb type="double">210.0</max-lb>
-  </weight> 
-  
 
   </sim>
-
-  <yasim>
-    <jt5b>
-	  <pilot-lb>180.0</pilot-lb>
-    </jt5b>
-  </yasim>
-
 
   <input>
     <keyboard include="TF-G1-keyboard.xml"/>
@@ -194,6 +179,7 @@
     <gear>
       <brake-parking>1</brake-parking>
     </gear>
+
     <lighting>
       <strobe type="bool">true</strobe>
       <beacon type="bool">true</beacon>
@@ -210,18 +196,18 @@
   
   <rotors>
     <main>
-      <rpm type="double">0</rpm>
+      <rpm type="double">400</rpm>
     </main>
   </rotors>
 
-    <engines>
+  <engines>
 		<engine>
-		<rpm type="double">0</rpm>
+		  <rpm type="double">900</rpm>
 		</engine>
-   </engines>
+  </engines>
   
-    <systems>
-            <electrical>
+  <systems>
+      <electrical>
                 <outputs>
     <instrument-lights-norm type="int">20
 	</instrument-lights-norm>
@@ -231,7 +217,7 @@
 	<nasal>
 		 
 	<TF-G1>
-		<file>Aircraft/TF-G1/Nasal/Liveries.nas</file>
+		<file>Aircraft/TF-G1/Nasal/liveries.nas</file>
 	
 	</TF-G1>
 	
