@@ -62,7 +62,7 @@ var check_g_load = func {
 	
 	var g_load = getprop("/accelerations/pilot-g");
 	
-	if(g_load!=nil and g_load>3.1 )
+	if(g_load!=nil and g_load>4.1 )
 	{
 		screen.log.write("Too much G load !!!", 1, 0, 0);
 	}

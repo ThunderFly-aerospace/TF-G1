@@ -91,43 +91,6 @@ var check_gear = func{
 	
 }
 
-
-#view 
-var	look_up = func{
-	
-	if (getprop("sim/current-view/internal"))
-	{
-		var angle= getprop("sim/current-view/goal-pitch-offset-deg");
-		if (angle==def_look_angle+24) {
-			angle=angle-24;
-			setprop("sim/current-view/goal-pitch-offset-deg", angle);
-		} 
-		else {
-			angle=def_look_angle+24;
-			setprop("sim/current-view/goal-pitch-offset-deg", angle);
-		}
-	}	
-}
-
-
-var	look_down = func{
-	
-	if (getprop("sim/current-view/internal"))
-	{
-		var angle= getprop("sim/current-view/goal-pitch-offset-deg");
-		if (angle==def_look_angle-24) {
-			angle=angle+24;
-			setprop("sim/current-view/goal-pitch-offset-deg", angle);
-			
-		} 
-		else {
-			angle=def_look_angle-24;
-			setprop("sim/current-view/goal-pitch-offset-deg", angle);
-		}
-	}	
-	
-}
-
 # vne 110 mph
 # 110 mph = 95.5873866 kts
 # max rotor = 600 rpm
