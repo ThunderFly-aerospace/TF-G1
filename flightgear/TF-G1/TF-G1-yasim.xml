@@ -55,12 +55,12 @@ Range: 250 km
          weightperblade="0.855"
          twist="0"
          chord="0.05"
-         rpm="300"
+         rpm="350"
          tiltcenterx="-0.24" tiltcentery="0" tiltcenterz="0.30"
          mintiltpitch=" 0" 
          maxtiltpitch="20"
-         mintiltroll="-4" 
-         maxtiltroll=" 4" 
+         mintiltroll="-2" 
+         maxtiltroll=" 2" 
          relbladecenter="0.25"
          dynamic="1"
          sharedflaphinge="0"
@@ -83,7 +83,7 @@ Range: 250 km
 	     number-of-parts="8"
 	     rel-len-where-incidence-is-measured="0.5"
 	     rel-len-blade-start="0.125"
-		 airfoil-lift-coefficient="3.75"
+		 airfoil-lift-coefficient="3.1"
 		 airfoil-drag-coefficient0="0.0075"
 		 airfoil-drag-coefficient1="0.325"
 		 airfoil-incidence-no-lift="0"
@@ -202,29 +202,29 @@ Range: 250 km
  
  <!--         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/> -->
  
-  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.03">
+  <gear x="-0.06471" y="0.225" z="-0.205" compression="0.04">
         <control-input axis="/controls/gear/brake-right" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
 
-  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.03">
+  <gear x="-0.06471" y="-0.225" z="-0.205" compression="0.04">
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
   
-  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.03">
+  <gear x="-0.34368" y="0.225" z="-0.205" compression="0.04">
         <control-input axis="/controls/gear/brake-right" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
 
-  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.03">
+  <gear x="-0.34368" y="-0.225" z="-0.205" compression="0.04">
         <control-input axis="/controls/gear/brake-left" control="BRAKE" split="true"/>
         <control-input axis="/controls/gear/brake-parking" control="BRAKE" split="true"/>
   </gear>
 
   <!-- tail gear --> 
   <gear x="-1.12" y="0.000" z="-0.09"
-		compression="0.005"
+		compression="0.08"
         ignored-by-solver="1" >
   </gear>
 

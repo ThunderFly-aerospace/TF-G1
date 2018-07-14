@@ -4,7 +4,7 @@ Model vírníku TF-G1 pro simulátor flightgear.  Je určen k neletovému testov
 
 ![Flightgear simulator in action](./docs/img/fly2.png "Flightgear simulator in action")
 
-## Instalace a použití
+## Instalace a spuštění
 
 ### Linux
 Složka TF-G1 obsahuje komletní model. Instalace do simulátoru se provede zkopírováním složky mezi ostatní modely Flightgearu. V OS Linux je tato složka umístěna na adrese: /usr/share/games/flightgear/Aircraft/
@@ -18,6 +18,15 @@ K instalaci modelu lze použít i simlink do naklonovaného repozitáře.  Fligh
 
 Ve Windows je model potřeba zkopírovat do odpovídající složky mezi modely letadel. 
 
+
+## Ovládání
+
+Základní návod k ovládání lze otevřít přímo v okně simulátoru volbou Help z nabídky.
+
+  * klávesa "v" přepíná různé pohledy
+  * klávesa "s" roztáčí rotor
+  * klávesa "B" Velké B (se shiftem), ovládá parkovací brzdy
+  * Page-Up a Page-Down ovládají přípust motoru
 
 
 
