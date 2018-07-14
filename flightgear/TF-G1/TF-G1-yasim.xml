@@ -96,7 +96,7 @@ Range: 250 km
          cyclic-factor="0.8"
          rotor-correction-factor="0.95"
 	     downwashfactor="0.0"
-         balance="0.99998"
+         balance="0.995"
 	 > 
          <control-input axis="/controls/flight/aileron-trim" control="TILTROLL" split="true" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
          <control-input axis="/controls/flight/aileron" control="TILTROLL" src0="-1.0" src1="1.0" dst0="1.0" dst1="-1.0"/>
