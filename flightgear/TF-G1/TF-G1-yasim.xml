@@ -83,7 +83,7 @@ Range: 250 km
 	     number-of-parts="8"
 	     rel-len-where-incidence-is-measured="0.5"
 	     rel-len-blade-start="0.125"
-		 airfoil-lift-coefficient="3.1"
+		 airfoil-lift-coefficient="5.1"
 		 airfoil-drag-coefficient0="0.0075"
 		 airfoil-drag-coefficient1="0.325"
 		 airfoil-incidence-no-lift="0"
@@ -109,9 +109,9 @@ Range: 250 km
 
   <rotorgear max-power-engine="0.750"
              max-power-rotor-brake="0.350"
-             rotorgear-friction="0.005"
+             rotorgear-friction="0.0005"
              engine-prop-factor="0.02" 
-	         engine-accel-limit="20"
+	         engine-accel-limit="50"
              yasimdragfactor="30"
              yasimliftfactor="140"
 	     >
@@ -123,7 +123,7 @@ Range: 250 km
   
  
   <propeller x="0.02" y="0" z="0.03"
-			 mass="0.0"
+			 mass="0.2"
              moment="0.1"
              radius="0.203"
              cruise-speed="70"
@@ -131,10 +131,9 @@ Range: 250 km
              cruise-alt="2000"
              cruise-power="1"
              takeoff-power="2"
-             takeoff-rpm="3400"
-	     contra="1"
-	    
-	      >
+             takeoff-rpm="3600"
+	         contra="1" 
+	   >
 	<actionpt x="0" y="0" z="0.03"/>
 	    
 	<piston-engine eng-power="2" eng-rpm="3800" displacement="20" >
@@ -149,8 +148,6 @@ Range: 250 km
 
  <!-- main fuselage -->
  <fuselage ax="0" ay="0" az="0" bx="-0.62" by="0" bz="0" width="0.2" taper="0" midpoint="0.25"/>
-
- 
 
   <!-- main tube -->
  <fuselage ax="0" ay="0" az="0" bx="-0.92" by="0" bz="0" width="0.03" taper="1" midpoint="0.6"/>

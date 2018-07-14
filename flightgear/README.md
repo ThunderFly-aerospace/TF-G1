@@ -1,6 +1,6 @@
 # TF-G1 autogyro flightgear simulator model
 
-Model vírníku TF-G1 pro simulátor flightgear.  Je určen k neletovému testování letových konfigurací, misí a změn. 
+Model vírníku TF-G1 pro simulátor [Flightgear](https://home.flightgear.org/).  Je určen k neletovému testování letových konfigurací, misí a změn. 
 
 ![Flightgear simulator in action](./docs/img/fly2.png "Flightgear simulator in action")
 
@@ -21,13 +21,15 @@ Ve Windows je model potřeba zkopírovat do odpovídající složky mezi modely 
 
 ## Ovládání
 
-Základní návod k ovládání lze otevřít přímo v okně simulátoru volbou Help z nabídky.
+Základní návod k ovládání lze otevřít přímo v okně simulátoru volbou Help z nabídky.  Samotné ovládání bez joysticku, nebo jiného pákového ovladače je velmi těžké. Kromě několika funkcí ovládaných klávesami: 
 
   * klávesa "v" přepíná různé pohledy
   * klávesa "s" roztáčí rotor
   * klávesa "B" Velké B (se shiftem), ovládá parkovací brzdy
   * Page-Up a Page-Down ovládají přípust motoru
+  * Tabulátor přepíná režim myši
 
+Všechny ostatní vstupy je potřeba ovládat proporcionálně, je možné omezeně použít myš.  A nebo [RC ovladač v režimu joysticku](https://opentx.gitbooks.io/manual-for-opentx-2-2/radio_joystick.html).
 
 
 
