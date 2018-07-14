@@ -1,4 +1,4 @@
-# TF-G1 autogyro flightgear simulator model
+# TF-G1 UAV electric autogyro flightgear simulator model
 
 Model vírníku TF-G1 pro simulátor [Flightgear](https://home.flightgear.org/).  Je určen k neletovému testování letových konfigurací, misí a změn. 
 
@@ -32,6 +32,13 @@ Základní návod k ovládání lze otevřít přímo v okně simulátoru volbou
 Všechny ostatní vstupy je potřeba ovládat proporcionálně, je možné omezeně použít myš.  A nebo [RC ovladač v režimu joysticku](https://opentx.gitbooks.io/manual-for-opentx-2-2/radio_joystick.html).
 
 
+## Vlastnosti modelu
+
+Model zatím zanedbává několik poměrně zásadních vlastností. 
+
+    * Reálný rotor má asi 1/3 hmotnosti uloženou v závaží, které je ve 3/4 délky listu. Model ale předpokládá rovnoměrné rozložení hmotnosti po délce listu. V důsledku toho je v simulátoru energie rotoru nižší, než skutečná.
+    * Model využívá na místo elektromotoru spalovací motor, který nemá tak vysokou dynamiku jako elektrický.
+    * Tah vrtule je zatím přesně v ose motoru. Reálný kus má vrtuli skloněnou asi 10stupňů dolů. 
 
 
 
