@@ -36,10 +36,10 @@ Všechny ostatní vstupy je potřeba ovládat proporcionálně, je možné omeze
 
 Model zatím zanedbává několik poměrně zásadních vlastností. 
 
-    * Reálný rotor má asi 1/3 hmotnosti uloženou v závaží, které je ve 3/4 délky listu. Model ale předpokládá rovnoměrné rozložení hmotnosti po délce listu. V důsledku toho je v simulátoru energie rotoru nižší, než skutečná.
-    * Model využívá na místo elektromotoru spalovací motor, který nemá tak vysokou dynamiku jako elektrický.
-    * Tah vrtule je zatím přesně v ose motoru. Reálný kus má vrtuli skloněnou asi 10stupňů dolů
-    * Ocas je podepřen uprostřed jedním virtuálním podvozkovým kolečkem pro usnadnění startu a přistání.  Vhodnější by zřejmě bylo model upravit pro dvě kolečka pod každou polovinou ocasní plochy. 
+  * Reálný rotor má asi 1/3 hmotnosti uloženou v závaží, které je ve 3/4 délky listu. Model ale předpokládá rovnoměrné rozložení hmotnosti po délce listu. V důsledku toho je v simulátoru energie rotoru nižší, než skutečná.
+  * Model využívá na místo elektromotoru spalovací motor, který nemá tak vysokou dynamiku jako elektrický.
+  * Tah vrtule je zatím přesně v ose motoru. Reálný kus má vrtuli skloněnou asi 10stupňů dolů
+  * Ocas je podepřen uprostřed jedním virtuálním podvozkovým kolečkem pro usnadnění startu a přistání.  Vhodnější by zřejmě bylo model upravit pro dvě kolečka pod každou polovinou ocasní plochy. 
 
 
 
