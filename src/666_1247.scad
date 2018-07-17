@@ -21,10 +21,6 @@ module 666_1247(angle_of_attact){
 			translate([9,35-7,-1])	
 					cylinder (h = 20, r = 3.6/2, $fn = 10);
 
-			translate([-1,0,(12-8)/4])		// set AOA
-				rotate([angle_of_attact,0,0])		
-					cube([200, 100, 8]);
-
             translate([50, 15, 11.5])
                             linear_extrude(0.5) 
                                 text("H", size = 10, halign = "center", valign = "center", font = "PT Sans");
@@ -41,6 +37,9 @@ module 666_1247(angle_of_attact){
                             linear_extrude(0.5) 
                                 text(str("AOA: ", angle_of_attact), size = 5, halign = "center", valign = "center", font = "PT Sans");
 
+            translate([0,35/2,12/2])      // set AOA
+                rotate([angle_of_attact,0,0])       
+                    cube([400, 400, 8], center = true);
 
 		}
 	}

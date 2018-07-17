@@ -329,20 +329,8 @@ echo(floor (C));
                         cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
             }
         
-//otvory pro šrouby k připevnění k horizontální trubce
-
-
-
-/*
-        translate([base_division[1]*0.75,0,0])
-
-        translate([base_division[1] + (base_division[2] - base_division[1])/4,0,0])
-
-        translate([base_division[2]*1.15,0,0])
-
-        translate([base_division[4]*0.86,0,0])
-*/
-			intersection(){
+            //otvory pro šrouby k připevnění k horizontální trubce  Mylsím, že to je mrtvý kus kódu, nebo nevím co má dělat.
+			/*%intersection(){
            		union(){
            			translate([base_division[1]*0.75 - Nut_diameter_M3, - hull_y_size/2 + Nut_diameter_M3/2, main_tube_outer_diameter/2])
         				cube([Nut_diameter_M3*2, hull_y_size/2, hull_z_size]);
@@ -378,7 +366,7 @@ echo(floor (C));
                 	translate([main_tube_outer_diameter,-main_tube_outer_diameter/2 - thickness_between_tubes, - hull_z_size/2]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
                    		cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size]);
             	}
-			}
+			}*/  
 
 		//union	
         }
