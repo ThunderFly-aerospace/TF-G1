@@ -156,8 +156,8 @@ union(){
             for (position_number = [1:5])
             {
                 screw_top(position_number, draft);
-            mirror([0,0,1])
-                screw_top(position_number, draft);
+                mirror([0,0,1])
+                    screw_top(position_number, draft);
             }
 
             //spojení částí C a D
@@ -218,8 +218,15 @@ union(){
                     cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                 //pro rovnou horní hranu předního lemu
-                translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter, -width_of_engine_holder/2 - hull_wall_thickness])
-                    cube([hull_wall_thickness, hull_y_size, width_of_engine_holder + 2* hull_wall_thickness]);
+                difference()
+                {
+                    translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter, -width_of_engine_holder/2 - hull_wall_thickness])
+                        cube([hull_wall_thickness, hull_y_size, width_of_engine_holder + 2* hull_wall_thickness]);
+                    
+                    // otvor pro prostup přívodů k motoru
+                    translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter, width_of_engine_holder/2 - 10])
+                        cube([hull_wall_thickness*2, 400, 7]);
+                }
 
                 // lem pro výztuhu a slepení dílu A    
                 difference(){
