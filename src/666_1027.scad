@@ -428,12 +428,17 @@ echo(floor (C));
                 cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
 
         //666_1004 - zadní
-        translate([second_undercarriage_hole - coupling_width_666_1004/2 - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-                cube([coupling_width_666_1004 + coupling_width_666_1004/2 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
+        translate([second_undercarriage_hole - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+                cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
         
         //666_1017 - prostředek
-        translate([main_pilon_position - main_tube_outer_diameter, - hull_y_size/2, - coupling_width_666_1017/2 - global_clearance/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
-                cube ([3 * main_tube_outer_diameter, hull_y_size, coupling_width_666_1017 + global_clearance]);
+        translate([main_pilon_position - coupling_width_666_1017/2 - global_clearance/2, - hull_y_size/2, - coupling_width_666_1017/2 - global_clearance/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
+                cube ([coupling_width_666_1017 + global_clearance, hull_y_size, coupling_width_666_1017 + global_clearance]);
+
+
+        //průchod kabelů od serv na ocasu
+        translate([second_undercarriage_hole - 2*coupling_width_666_1004, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+                cube([coupling_width_666_1004/2, hull_y_size, height_666_1004 + global_clearance ]);
 
 
 
