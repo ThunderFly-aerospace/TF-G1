@@ -45,13 +45,13 @@ translate([0,0,coupling_wall_thickness])
 		translate([0,height_666_1017 - main_tube_outer_diameter/2 - coupling_wall_thickness,main_pilon_position])
 			rotate([90,0,0])
 				union(){
-					translate ([- coupling_width_666_1017*2 - global_clearance/2,10 - M3_screw_diameter/2,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
+					translate ([- coupling_width_666_1017*2 - global_clearance/2,depth_666_1017/4,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
 		        		rotate ([0,90,0])
-		            		cylinder (h = coupling_width_666_1017*4 + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+		            		cylinder (h = coupling_width_666_1017*4 + global_clearance, d = M4_screw_diameter, $fn = draft ? 10 : 20);
 
-		   			translate([- coupling_width_666_1017*2 - global_clearance/2,- 10 + M3_screw_diameter/2,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
+		   			translate([- coupling_width_666_1017*2 - global_clearance/2,-depth_666_1017/4,height_666_1017 - coupling_wall_thickness - main_tube_outer_diameter/2])
 		        		rotate([0,90,0])
-		            		cylinder(h = coupling_width_666_1017*4 + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+		            		cylinder(h = coupling_width_666_1017*4 + global_clearance, d = M4_screw_diameter, $fn = draft ? 10 : 20);
 				    
 				    translate([- coupling_width_666_1017*2 - global_clearance/2,0,27.5])
 				        rotate([0,90,0])
@@ -203,13 +203,13 @@ translate([0,40,20])
 		888_1014_part(8, draft);
 
 
-use<666_1028.scad>
-use<666_1027.scad>
-use<666_1004.scad>
-use<666_1017.scad>
-use<666_1026.scad>
-use <888_1012.scad>
+use<../666_1028.scad>
+use<../666_1027.scad>
+use<../666_1004.scad>
+use<../666_1017.scad>
+use<../666_1026.scad>
+use<../888_1012.scad>
 
-use <./lib/naca4.scad>
-include <../Parameters.scad>
+use <./../lib/naca4.scad>
+include <../../Parameters.scad>
 
