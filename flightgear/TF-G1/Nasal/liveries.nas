@@ -1,2 +1,2 @@
-aircraft.livery.init("Aircraft/JT-5B/Models/Liveries");
+aircraft.livery.init("Aircraft/TF-G1/Models/Liveries");
 
