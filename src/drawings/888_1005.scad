@@ -20,9 +20,8 @@ module 888_1005(draft){
 ////		
 //		666_1025(draft);
 
-////
-translate([0,0,0])
-		666_1029(draft);
+//// spodní kryt
+//translate([0,0,0]) 666_1029(draft);
 
 ////
 translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
