@@ -461,8 +461,8 @@ translate([-400,0,0])
 		888_1013_F();
 */
 
-use <888_1008.scad>
-use <./lib/curvedPipe.scad>
+use <../888_1008.scad>
+use <../lib/curvedPipe.scad>
 
-use <./lib/naca4.scad>
-include <../Parameters.scad> 
+use <../lib/naca4.scad>
+include <../../Parameters.scad> 

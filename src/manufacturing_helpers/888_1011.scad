@@ -122,8 +122,8 @@ translate([-130,0,-20])
 */
 
 
-use <888_1008.scad>
-use <./lib/curvedPipe.scad>
+use <../888_1008.scad>
+use <../lib/curvedPipe.scad>
 
-use <./lib/naca4.scad>
-include <../Parameters.scad>
+use <../lib/naca4.scad>
+include <../../Parameters.scad>
