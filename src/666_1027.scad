@@ -329,20 +329,8 @@ echo(floor (C));
                         cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
             }
         
-//otvory pro šrouby k připevnění k horizontální trubce
-
-
-
-/*
-        translate([base_division[1]*0.75,0,0])
-
-        translate([base_division[1] + (base_division[2] - base_division[1])/4,0,0])
-
-        translate([base_division[2]*1.15,0,0])
-
-        translate([base_division[4]*0.86,0,0])
-*/
-			intersection(){
+            //otvory pro šrouby k připevnění k horizontální trubce  Mylsím, že to je mrtvý kus kódu, nebo nevím co má dělat.
+			/*%intersection(){
            		union(){
            			translate([base_division[1]*0.75 - Nut_diameter_M3, - hull_y_size/2 + Nut_diameter_M3/2, main_tube_outer_diameter/2])
         				cube([Nut_diameter_M3*2, hull_y_size/2, hull_z_size]);
@@ -378,7 +366,7 @@ echo(floor (C));
                 	translate([main_tube_outer_diameter,-main_tube_outer_diameter/2 - thickness_between_tubes, - hull_z_size/2]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
                    		cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size]);
             	}
-			}
+			}*/  
 
 		//union	
         }
@@ -440,12 +428,17 @@ echo(floor (C));
                 cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
 
         //666_1004 - zadní
-        translate([second_undercarriage_hole - coupling_width_666_1004/2 - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-               % cube([coupling_width_666_1004 + coupling_width_666_1004/2 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
+        translate([second_undercarriage_hole - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+                cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004 + global_clearance ]);
         
         //666_1017 - prostředek
-        translate([main_pilon_position - main_tube_outer_diameter, - hull_y_size/2, - coupling_width_666_1017/2 - global_clearance/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
-                cube ([3 * main_tube_outer_diameter, hull_y_size, coupling_width_666_1017 + global_clearance]);
+        translate([main_pilon_position - coupling_width_666_1017/2 - global_clearance/2, - hull_y_size/2, - coupling_width_666_1017/2 - global_clearance/2])        // rozměr v podélné ose zvětšen, aby byla možnost přesněji nastavit těžiště posouváním pilonu po hlavní trubce. 
+                cube ([coupling_width_666_1017 + global_clearance, hull_y_size, coupling_width_666_1017 + global_clearance]);
+
+
+        //průchod kabelů od serv na ocasu
+        translate([second_undercarriage_hole - 2*coupling_width_666_1004, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+                cube([coupling_width_666_1004/2, hull_y_size, height_666_1004 + global_clearance ]);
 
 
 
@@ -543,7 +536,7 @@ echo(floor (C));
         //připevnění horizontální trubky
         //A
         translate([base_division[1]*0.75,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                 translate([0,0, base_mounting_screw_length/2 - Screw_head_height_M3])           
@@ -555,7 +548,7 @@ echo(floor (C));
 
         //B
         translate([base_division[1] + (base_division[2] - base_division[1])/4,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
@@ -569,7 +562,7 @@ echo(floor (C));
 
         //C
         translate([base_division[2]*1.15,0,0])
-            %union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
@@ -581,7 +574,7 @@ echo(floor (C));
             }        
         //D
         translate([base_division[4]*0.86,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                     cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 

@@ -4,22 +4,16 @@ draft = true;
 module 666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true){
 
 
-    width = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
-        echo("width is", width);
-    
-        echo("ceil is", ceil(width));
+    width = width_666_1004;
 
-    coupling_screw_length = (ceil(width)) * basic_screw_length;
-        echo("coupling_screw_length is", coupling_screw_length);
+    coupling_screw_length = coupling_screw_length_666_1004;
 
-    coupling_width = coupling_screw_length + Screw_head_height_M3;
-        echo("coupling_width is", coupling_width);
-
+    coupling_width = coupling_width_666_1004;
     height=coupling_width;
-        echo("height is", height);
 
     depth=main_tube_outer_diameter*2+2*coupling_wall_thickness+thickness_between_tubes;
-        radius=main_tube_outer_diameter/2;
+    
+    radius=main_tube_outer_diameter/2;
 
     bevelled_width = main_tube_outer_diameter + 2*coupling_wall_thickness;
 

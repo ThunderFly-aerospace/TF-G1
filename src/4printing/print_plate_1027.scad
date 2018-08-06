@@ -1,7 +1,9 @@
 include <../../Parameters.scad>
 use <../666_1027.scad>
 
-draft = false;
+//draft = false;
+
+draft = true;
 
 $vpd = 680;
 

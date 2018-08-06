@@ -68,7 +68,7 @@ module 666_1028(draft){
                 	translate([0, 10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
                     	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                         {
-                            hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true);
+                            hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
                     //výztuhy
                           	intersection(){
                                 airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = false);
@@ -245,6 +245,74 @@ module 666_1028(draft){
     }	
 }
 
+module 666_1028_flightgear(draft){
+
+    beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
+    trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
+
+    wall_thickness = 0.65;
+
+    //BASIC DROP
+    //render(convexity = 2) 
+    difference (){
+        union (){
+            translate([0,0,-8.5])
+                rotate_extrude($fn = 50)
+                    rotate([0,0,90])
+                        difference()
+                        {
+                            polygon(points = airfoil_data(naca=0030, L = 140)); 
+                            square(200, 200); 
+                        }
+
+
+        //TRIANGLE PROFILE
+
+        //UPPER - od osy x do minus y
+            difference (){
+                union(){
+                    translate([0, -10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
+                        rotate ([0,-90, 160])
+                            airfoil(naca = 0007, L = 95, N = 50, h = 152, open = true);
+
+
+            //LOWER - od osy x do plus y
+                    translate([0, 10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
+                        rotate ([0,-90,-160])       //rotate([0,-90,-152.5])
+                            airfoil(naca = 0007, L =95, N = 50, h = 152, open = true);
+                }
+
+            // odečtení výztuh z profilů výškovky
+            translate ([140,-75,0]) 
+                rotate([0,3,0])
+                {
+                    cube ([15,150,150]);
+
+                    translate ([0,150,0])
+                        rotate([90,-90,0])
+                            linear_extrude(height = 150)
+                                offset(delta = -wall_thickness) 
+                                    polygon(points = airfoil_data(naca = 0009, L = 150, N = 50, open = false));
+                }
+           }
+
+        //VERTICAL
+        difference(){
+            translate ([140,75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
+                rotate([90,-87,0])
+                    airfoil(naca = 0009, L = 150, N = 50, h = 150, open = false); //dutý profil
+
+            //vyříznutí otvoru pro směrovku
+            translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
+                cube([Rudder_depth, Rudder_length, Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
+
+        }
+
+        } // end of union
+    }   
+}
+
+
 module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = true)
 {
     width=main_tube_outer_diameter+4*thickness_between_tubes;    
@@ -374,13 +442,33 @@ module 666_1028_rudder(draft){
 }
 
 
+module 666_1028_rudder_flightgear(draft){
+
+            intersection(){
+                airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false);
+                translate([150 - Rudder_height + gap_width/2,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
+                    rotate([90,0,90])
+                          cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
+            }
+            translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
+                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
+}
+
+
+
+
+/*translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
+    rotate([90,-87 ,0])
+        666_1028_rudder(draft);
+*/
+
 
 translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
     rotate([90,-87 ,0])
-        666_1028_rudder(draft);
+        666_1028_rudder_flightgear(draft);
 
 
-666_1028();
+666_1028_flightgear();
 
 
 /*

@@ -8,7 +8,11 @@ tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;
 
+// Nastavení parametrů rotoru
 
+rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
+rotor_blade_length = 970;   // délka rotorového listu
+rator_blade_depth = 50;     // hloubka rotorového listu
 
 
 // Parameters of tube couplings
@@ -18,7 +22,7 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
-// screw lenght step - minimum difference in lenght between two types of screws
+// screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
 
@@ -59,17 +63,17 @@ hull_y_size = 120;
 hull_z_size = 150;
 hull_x_size = 580;
 hull_corner_radius = 4;
-hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of lenght.
+hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of length.
 hull_scale_x = 1;
 hull_scale_y = 1.5;
 hull_scale_z = 1.5;
 
-main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od přední části krytu
+main_pilon_position = 170+68+30;       // pozice rotorového pilonu měřená od přední části krytu
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky. 
 
 //délka hlavní dlouhé trubky
-length_of_main_tube = 920;
+length_of_main_tube = 820;
 length_of_undercarriage_tube = 300;
 
 ribbon_width = 5; // šířka vyztužovacích lemů. 
@@ -224,7 +228,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 ////spojka 666_1017
 
-    width_666_1017 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+    width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
         echo("width_666_1017 is", width_666_1017);
     
         echo("ceil_666_1017 is", ceil(width_666_1017));
@@ -246,11 +250,11 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 //umístění podvozkových trubek
 
-second_undercarriage_hole = main_tube_outer_diameter*2 + 2*coupling_wall_thickness + main_tube_outer_diameter + 170 + 160;
+second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
 
 
 //Base Divison - dělení podložky
-base_division = [0, 140, main_pilon_position - (3*main_tube_outer_diameter)/2 + 3 * main_tube_outer_diameter, second_undercarriage_hole - coupling_width_666_1004/2, hull_x_size];
+base_division = [0, 159, main_pilon_position + coupling_width_666_1017/2 + global_clearance/2, second_undercarriage_hole + coupling_width_666_1004/2 + global_clearance/2, hull_x_size];
 
 // šrouby pro připevnění podložky k hlavní trubce
 base_mounting_screw_length = 50;

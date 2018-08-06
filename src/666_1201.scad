@@ -42,7 +42,7 @@ module 666_1201(draft = false, holes = true){
                         airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = draft ? 50 : 300, h = length, open = false);  
             }
 
-            // kořen rotorevého listu
+            // kořen rotorového listu
             translate ([0, -length/2 + 110/2, 0])
                 cube([airfoil_depth, 110, airfoil_thickness], center = true);
 

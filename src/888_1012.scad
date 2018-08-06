@@ -299,11 +299,11 @@ module 888_1012_B(){
 				difference(){
 					//zobáček
 					translate([-0.5,0,-5])
-						color([0,0.5,0])
-							%cube([5,1.8,4]);
+						  color([0,0.5,0])
+                cube([5,1.8,4]);
 					//otvor v zobáčku
 					translate([-1 - 0.05 - 0.4,0.4 - 0.05,-5 + 0.5 - 0.05])
-								%cube([1 + 1,1 + 0.1,3 + 0.1]);
+						cube([1 + 1,1 + 0.1,3 + 0.1]);
 				}
 
 			translate([0,0,28.5])
@@ -330,7 +330,7 @@ module 888_1012_B(){
 				difference(){
 					translate([-0.5,2 +0.2 + 2,-5])
 							color([0,0.5,0])
-								%cube([5,1.8 + Servo_screw,4]);
+								cube([5,1.8 + Servo_screw,4]);
 					translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
 						rotate([0,90,0])
 								cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
