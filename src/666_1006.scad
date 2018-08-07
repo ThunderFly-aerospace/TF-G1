@@ -5,7 +5,7 @@ $fs = draft ? 5 : 0.5;
 $fa = 10;
 
 
-module 666_1006(height = 45, height_of_mini_cylinder = 2)
+module 666_1006(height = 45, height_of_mini_cylinder = 2, draft = true)
 {
 	difference ()
     {
