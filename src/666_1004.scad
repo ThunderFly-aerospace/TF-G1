@@ -22,6 +22,10 @@ module 666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true){
         translate([-(coupling_width/2), - depth + main_tube_outer_diameter/2 + coupling_wall_thickness,0])
               cube([coupling_width,depth,height]);
 
+        // middle cut
+        translate ([-0.5, 0, - global_clearance/2])
+            cube ([1,depth,height + global_clearance]);
+
         //tubes
         translate([0,0,- global_clearance/2])
                 cylinder(h=height + global_clearance,r = main_tube_outer_diameter/2, $fn= draft ? 50 : 200);

@@ -22,12 +22,12 @@ difference(){
 
 	//tube
     translate ([0,0,- global_clearance/2])
-        cylinder(h = height + global_clearance,r = tube_for_undercarriage_outer_diameter/2, $fn = draft ? 50 : 100);
+        cylinder(h = height + global_clearance,d = tube_for_undercarriage_outer_diameter, $fn = draft ? 20 : 50);
 
 
     // middle cut
-    translate ([-0.25,- depth/2,- global_clearance/2])
-        cube ([0.5,depth,height + global_clearance]);
+    translate ([-0.5,- depth/2,- global_clearance/2])
+        cube ([1,depth,height + global_clearance]);
 
     //screw
     translate([-width/2,0,height/2])
