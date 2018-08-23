@@ -436,9 +436,9 @@ echo(floor (C));
                 cube ([coupling_width_666_1017 + global_clearance, hull_y_size, coupling_width_666_1017 + global_clearance]);
 
 
-        //průchod kabelů od serv na ocasu
-        translate([second_undercarriage_hole - 2*coupling_width_666_1004, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-                cube([coupling_width_666_1004/2, hull_y_size, height_666_1004 + global_clearance ]);
+        //průchod kabelů od serv na ocasu hned za středním pilonem
+        translate([main_pilon_position + coupling_width_666_1017/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+            cube([coupling_width_666_1004/2, hull_y_size, height_666_1004 + global_clearance ]);
 
 
 
