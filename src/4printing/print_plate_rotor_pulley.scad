@@ -2,5 +2,6 @@ include <../../Parameters.scad>
 
 use <../milling/rotor_pulley.scad>
 
-rotor_pulley(draft = false);
+rotate([0,180,0])
+    rotor_pulley(draft = false);
 
