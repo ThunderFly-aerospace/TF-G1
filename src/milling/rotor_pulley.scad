@@ -111,6 +111,14 @@ module rotor_pulley(draft)
         translate([0, -32/2, 0])
             cylinder(h = 20, d = M4_screw_diameter, $fn = draft ? 10 : 20);
 
+        //magnets
+        translate([0, 35, 0])
+            cylinder(h = 2.1, d = 10.5, $fn = draft ? 10 : 50);
+
+        //magnets
+        translate([0, -35, 0])
+            cylinder(h = 2.1, d = 10.5, $fn = draft ? 10 : 50);
+
     }
 }
 
