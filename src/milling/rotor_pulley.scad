@@ -113,11 +113,10 @@ module rotor_pulley(draft)
 
         //magnets
         translate([0, 35, 0])
-            cylinder(h = 2.1, d = 10.5, $fn = draft ? 10 : 50);
+            cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
 
-        //magnets
         translate([0, -35, 0])
-            cylinder(h = 2.1, d = 10.5, $fn = draft ? 10 : 50);
+            cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
 
     }
 }
