@@ -41,6 +41,12 @@ no_of_nuts = 0;		// number of captive nuts required, standard = 1
 nut_angle = 90;		// angle between nuts, standard = 90
 nut_shaft_distance = 0;	// distance between inner face of nut and shaft, can be negative.
 
+hole_for_rubber_X = 11;
+hole_for_rubber_Y =31;
+hole_for_rubber_Z = 49;
+thickness = 10;
+position_of_rubber = 30;
+
 
 //	********************************
 //	** Scaling tooth for good fit **
@@ -118,6 +124,13 @@ module rotor_pulley(draft)
         translate([0, -35, 0])
             cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
 
+        rotate([0,0,20])
+        {
+            translate([position_of_rubber,- hole_for_rubber_Y/2, pulley_t_ht - 6])
+                cube([hole_for_rubber_X, hole_for_rubber_Y, hole_for_rubber_Z]);
+            translate([- position_of_rubber - hole_for_rubber_X, - hole_for_rubber_Y/2,  pulley_t_ht - 6])
+                cube([hole_for_rubber_X,hole_for_rubber_Y,hole_for_rubber_Z]);
+        }
     }
 }
 
