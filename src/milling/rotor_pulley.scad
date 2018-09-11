@@ -23,7 +23,7 @@
 teeth = 60;			// Number of teeth, standard Mendel T5 belt = 8, gives Outside Diameter of 11.88mm
 profile = 6;		// 1=MXL 2=40DP 3=XL 4=H 5=T2.5 6=T5 7=T10 8=AT5 9=HTD_3mm 10=HTD_5mm 11=HTD_8mm 12=GT2_2mm 13=GT2_3mm 14=GT2_5mm
 
-motor_shaft = 40;	// NEMA17 motor shaft exact diameter = 5
+motor_shaft = 26.3;	// NEMA17 motor shaft exact diameter = 5
 m3_dia = 3.2;		// 3mm hole diameter
 m3_nut_hex = 1;		// 1 for hex, 0 for square nut
 m3_nut_flats = 5.7;	// normal M3 hex nut exact width = 5.5
@@ -34,12 +34,18 @@ retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 11;	// length of toothed part of pulley, standard = 12
-pulley_b_ht = 1;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
-pulley_b_dia = 20;	// pulley base diameter, standard = 20
-no_of_nuts = 1;		// number of captive nuts required, standard = 1
+pulley_t_ht = 13;	// length of toothed part of pulley, standard = 12
+pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
+pulley_b_dia = 0;	// pulley base diameter, standard = 20
+no_of_nuts = 0;		// number of captive nuts required, standard = 1
 nut_angle = 90;		// angle between nuts, standard = 90
 nut_shaft_distance = 0;	// distance between inner face of nut and shaft, can be negative.
+
+hole_for_rubber_X = 11;
+hole_for_rubber_Y =31;
+hole_for_rubber_Z = 49;
+thickness = 10;
+position_of_rubber = 30;
 
 
 //	********************************
@@ -77,20 +83,56 @@ GT2_5mm_pulley_dia = tooth_spacing (5,0.5715);
 
 // The following calls the pulley creation part, and passes the pulley diameter and tooth width to that module
 
-if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
-if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
-if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
-if ( profile == 4 ) { pulley ( "H" , H_pulley_dia ,1.905 , 5.359 ); }
-if ( profile == 5 ) { pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678 ); }
-if ( profile == 6 ) { pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264 ); }
-if ( profile == 7 ) { pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13 ); }
-if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
-if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
-if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
-if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
-if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
-if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
-if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
+module rotor_pulley(draft)
+{
+    difference(){
+        if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
+        if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
+        if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
+        if ( profile == 4 ) { pulley ( "H" , H_pulley_dia ,1.905 , 5.359 ); }
+        if ( profile == 5 ) { pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678 ); }
+        if ( profile == 6 ) { pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264 ); }
+        if ( profile == 7 ) { pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13 ); }
+        if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
+        if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
+        if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
+        if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
+        if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
+        if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
+        if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
+
+        // osazení pro kroužek
+        cylinder(h = 6, d=42.5,  $fn = draft ? 50 : 200);
+
+        //šrouby
+        translate([-32/2, 0, 0])
+            cylinder(h = 20, d = M4_screw_diameter, $fn = draft ? 10 : 20);
+
+        translate([32/2, 0, 0])
+            cylinder(h = 20, d = M4_screw_diameter, $fn = draft ? 10 : 20);
+
+        translate([0, 32/2, 0])
+            cylinder(h = 20, d = M4_screw_diameter, $fn = draft ? 10 : 20);
+
+        translate([0, -32/2, 0])
+            cylinder(h = 20, d = M4_screw_diameter, $fn = draft ? 10 : 20);
+
+        //magnets
+        translate([0, 35, 0])
+            cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
+
+        translate([0, -35, 0])
+            cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
+
+        rotate([0,0,20])
+        {
+            translate([position_of_rubber,- hole_for_rubber_Y/2, pulley_t_ht - 6])
+                cube([hole_for_rubber_X, hole_for_rubber_Y, hole_for_rubber_Z]);
+            translate([- position_of_rubber - hole_for_rubber_X, - hole_for_rubber_Y/2,  pulley_t_ht - 6])
+                cube([hole_for_rubber_X,hole_for_rubber_Y,hole_for_rubber_Z]);
+        }
+    }
+}
 
 // Functions
 
@@ -281,3 +323,8 @@ module GT2_5mm()
 	{
 	linear_extrude(height=pulley_t_ht+2) polygon([[-1.975908,-0.75],[-1.975908,0],[-1.797959,0.03212],[-1.646634,0.121224],[-1.534534,0.256431],[-1.474258,0.426861],[-1.446911,0.570808],[-1.411774,0.712722],[-1.368964,0.852287],[-1.318597,0.989189],[-1.260788,1.123115],[-1.195654,1.25375],[-1.12331,1.380781],[-1.043869,1.503892],[-0.935264,1.612278],[-0.817959,1.706414],[-0.693181,1.786237],[-0.562151,1.851687],[-0.426095,1.9027],[-0.286235,1.939214],[-0.143795,1.961168],[0,1.9685],[0.143796,1.961168],[0.286235,1.939214],[0.426095,1.9027],[0.562151,1.851687],[0.693181,1.786237],[0.817959,1.706414],[0.935263,1.612278],[1.043869,1.503892],[1.123207,1.380781],[1.195509,1.25375],[1.26065,1.123115],[1.318507,0.989189],[1.368956,0.852287],[1.411872,0.712722],[1.447132,0.570808],[1.474611,0.426861],[1.534583,0.256431],[1.646678,0.121223],[1.798064,0.03212],[1.975908,0],[1.975908,-0.75]]);
 	}
+
+
+include <../../Parameters.scad>
+
+rotor_pulley(draft=true);

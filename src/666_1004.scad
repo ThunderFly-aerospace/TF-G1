@@ -22,6 +22,10 @@ module 666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true){
         translate([-(coupling_width/2), - depth + main_tube_outer_diameter/2 + coupling_wall_thickness,0])
               cube([coupling_width,depth,height]);
 
+        // middle cut
+        translate ([-0.5, 0, - global_clearance/2])
+            cube ([1,depth,height + global_clearance]);
+
         //tubes
         translate([0,0,- global_clearance/2])
                 cylinder(h=height + global_clearance,r = main_tube_outer_diameter/2, $fn= draft ? 50 : 200);
@@ -73,5 +77,32 @@ module 666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true){
 }
 
 
+module 666_1004_drillhelper(coupling_wall_thickness, thickness_between_tubes, draft = true){
+
+    coupling_width = coupling_width_666_1004;
+    height=coupling_width;
+
+    depth=main_tube_outer_diameter*3;
+    
+    difference(){
+
+        translate([-(coupling_width/2), -depth/4,0])
+              cube([coupling_width,depth/2,height]);
+
+        //tubes
+        translate([0,0,- global_clearance/2])
+                cylinder(h=height + global_clearance,r = main_tube_outer_diameter/2, $fn= draft ? 50 : 200);
+        
+        //screw
+        translate([-coupling_width/2 - global_clearance/2,0,height/2])
+           rotate ([0,90,0])   
+                cylinder(h = coupling_width + global_clearance, r = M3_screw_diameter/2, $fn = 15);
+                
+    }
+}
+
+
 666_1004(coupling_wall_thickness, thickness_between_tubes, draft);
 
+translate([50,0,0])
+    666_1004_drillhelper(coupling_wall_thickness, thickness_between_tubes, draft);

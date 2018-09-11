@@ -3,7 +3,7 @@
 main_tube_outer_diameter = 25.4;
 main_tube_inner_diameter = 23.5;
 
-//Tube for undercarriage - hole [mm]
+//Tube for undercarriage - rendered hole [mm]
 tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
 global_clearance = 0.5;

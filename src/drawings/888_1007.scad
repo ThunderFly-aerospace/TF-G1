@@ -1,7 +1,7 @@
 DOC_SCALING_FACTOR = 100;
 DOC_HEIGHT = 50;
 
-include <./lib/dimlines.scad>
+include <../lib/dimlines.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
@@ -105,9 +105,9 @@ module 888_1007_doc(){
 888_1007_doc();
 
 
-use <./lib/naca4.scad>
-include <../Parameters.scad>
+use <../lib/naca4.scad>
+include <../../Parameters.scad>
 
-use<666_1026.scad>
-use<666_1028.scad>
-use<666_1017.scad>
+use<../666_1026.scad>
+use<../666_1028.scad>
+use<../666_1017.scad>
