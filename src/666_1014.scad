@@ -93,16 +93,16 @@ height = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_under
 difference(){
 
     translate([-(width/2),-(depth - tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_undercarriage),-5])
-        cube([width,depth,height + 10]);
+       		cube([width,depth,height + 10]);
 
     //tube
     translate ([0,0,- global_clearance/2 - 5])
-        cylinder(h = height + global_clearance + 10,r = tube_for_undercarriage_outer_diameter/2, $fn = draft ? 100 : 200);
+       		cylinder(h = height + global_clearance + 10,r = tube_for_undercarriage_outer_diameter/2, $fn = draft ? 100 : 200);
 
 
     // middle cut
     translate ([-global_clearance,- depth,- global_clearance/2 - 5])
-        cube ([2* global_clearance, depth*2,height + global_clearance + 10]);
+        	cube ([2* global_clearance, depth*2,height + global_clearance + 10]);
 
     //screw
     translate([-width/2 - global_clearance/2,-(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + M4_screw_diameter/2), height/2])
