@@ -1,4 +1,3 @@
-include <../../Parameters.scad>
 use <../888_1013.scad>
 
 draft = false;
