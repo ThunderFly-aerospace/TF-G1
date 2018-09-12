@@ -302,7 +302,6 @@ translate([0,0,44.5])
 
 
 
-include <../Parameters.scad>
-use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../../Parameters.scad>
+use <../lib/naca4.scad>
 
