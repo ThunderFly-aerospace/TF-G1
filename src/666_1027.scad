@@ -686,7 +686,6 @@ translate([60,0,0])
 //666_1029();
 
 
-
 /*
 //jen znázornění držáku akumulátoru
 translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thickness,height_of_accumulator])
@@ -696,7 +695,6 @@ translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thick
     rotate([-90,0,0])
         888_1001();
 */
-
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 use <666_1032.scad>
