@@ -15,7 +15,6 @@ $fa = 10;
 
 module 666_1017(draft) {
 
-width=main_tube_outer_diameter+2*coupling_wall_thickness;
 
 material_plus = 10;
 
@@ -146,14 +145,12 @@ difference () {
 
 module 666_1017_drillhelper(height = 70 - coupling_wall_thickness + main_tube_outer_diameter/2, height_of_cap_cylinder = 2){
 
-width=main_tube_outer_diameter+4*thickness_between_tubes;
-depth=main_tube_outer_diameter*2;
 
 difference () {
 
-    translate([-(width/2),-(depth/2),0])
+    translate([-(width_666_1017_drillhelper/2),-(depth_666_1017_drillhelper/2),0])
     color([1,0,0])
-       cube ([width,depth,height]);
+       cube ([width_666_1017_drillhelper,depth_666_1017_drillhelper,height]);
 
 
     //main tube
@@ -185,8 +182,8 @@ difference () {
             cylinder(h = coupling_width_666_1017 + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
     //prořezy pro zajištění
-    translate([- (3*global_clearance)/2,-depth/2 - global_clearance,height - main_tube_outer_diameter/2 - global_clearance])
-           cube([3*global_clearance,depth + 2*global_clearance, main_tube_outer_diameter]);
+    translate([- (3*global_clearance)/2,-depth_666_1017_drillhelper/2 - global_clearance,height - main_tube_outer_diameter/2 - global_clearance])
+           cube([3*global_clearance,depth_666_1017_drillhelper + 2*global_clearance, main_tube_outer_diameter]);
     translate([-(3*global_clearance)/2, -2*main_tube_outer_diameter, -global_clearance])
             cube([3*global_clearance, 4*main_tube_outer_diameter, 1.5*main_tube_outer_diameter]);
     //šrouby

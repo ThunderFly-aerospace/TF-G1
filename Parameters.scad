@@ -198,6 +198,11 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
     height_666_1004 = coupling_width_666_1004;
         echo("height_666_1004 is", height_666_1004);
 
+    depth_666_1004 = main_tube_outer_diameter*2+2*coupling_wall_thickness+thickness_between_tubes;
+        echo("depth_666_1004 is", depth_666_1004);
+
+    depth_666_1004_drillhelper = main_tube_outer_diameter*3;
+
 /////spojka 666_1026
 
 
@@ -224,6 +229,9 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 //tloušťka plechu pro zajištění konstatní šířky spojky 50 mm
 
+    width_666_1026_drillhelper = main_tube_outer_diameter*2; 
+
+    depth_666_1026_drillhelper = main_tube_outer_diameter + 4*thickness_between_tubes;
 
 
 ////spojka 666_1017
@@ -242,6 +250,22 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
     depth_666_1017 = coupling_width_666_1017;
 
     height_666_1017= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
+
+    width_666_1017_drillhelper = main_tube_outer_diameter+4*thickness_between_tubes;
+    
+    depth_666_1017_drillhelper = main_tube_outer_diameter*2;
+
+
+////spojka 666_1014
+
+    width_666_1014 = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
+
+    depth_666_1014 = tube_for_undercarriage_outer_diameter + M3_screw_diameter + 2*coupling_wall_thickness_undercarriage + thickness_between_tubes_undercarriage;
+
+    height_666_1014 = width_666_1014;
+
+
+    width_666_1014_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
 
 
 
