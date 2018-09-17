@@ -3,7 +3,6 @@ draft = true;
 
 module 888_1014(draft){
 
-translate([0,0,coupling_wall_thickness])
 	difference(){
 		//hlavní díly
 		union(){
@@ -111,7 +110,7 @@ translate([0,0,coupling_wall_thickness])
 			union(){
 				//A
 		        translate([base_division[1]*0.75,0,-hull_z_size/2])
-	                    cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+	                   %cylinder(h = hull_z_size*2, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 		        //B
 		        translate([base_division[1] + (base_division[2] - base_division[1])/4,0,-hull_z_size/2])
 		                cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
@@ -181,9 +180,12 @@ module 888_1014_part(part_number, draft){
 	}
 }
 
-//888_1014();
+rotate([0,90,0])
+888_1014();
 
+666_1027();
 
+/*
 		888_1014_part(0, draft);
 translate([0,0,20])
 		888_1014_part(1, draft);
@@ -202,13 +204,14 @@ translate([0,20,20])
 translate([0,40,20])
 		888_1014_part(8, draft);
 
-
+*/
 use<../666_1028.scad>
 use<../666_1027.scad>
 use<../666_1004.scad>
 use<../666_1017.scad>
 use<../666_1026.scad>
 use<../888_1012.scad>
+
 
 use <./../lib/naca4.scad>
 include <../../Parameters.scad>
