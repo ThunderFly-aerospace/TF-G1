@@ -2,8 +2,6 @@
 DOC_SCALING_FACTOR = 100;
 DOC_HEIGHT = 250;
 
-include <./lib/dimlines.scad>
-
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
@@ -290,7 +288,7 @@ module 333_1035(twosided = true, draft = true){
 
 
 
-use <./lib/naca4.scad>
-use <./lib/bevel.scad>
-use <./lib/dimlines.scad>
-include <../Parameters.scad>
+use <../lib/naca4.scad>
+use <../lib/bevel.scad>
+use <../lib/dimlines.scad>
+include <../../Parameters.scad>
