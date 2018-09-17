@@ -224,7 +224,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
         coupling_depth_666_1026 = coupling_screw_length_666_1026 - Screw_head_height_M4 - thickness_of_plate;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
             echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
 
-    height_666_1026 = coupling_depth_666_1026;
+    height_666_1026 = 2*main_tube_outer_diameter;
         echo("height_666_1026 is", height_666_1026);
 
 //tloušťka plechu pro zajištění konstatní šířky spojky 50 mm
@@ -274,7 +274,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 //umístění podvozkových trubek
 
-second_undercarriage_hole = main_tube_outer_diameter*2 + main_tube_outer_diameter/5 + main_tube_outer_diameter/2 + 170 + 160;
+second_undercarriage_hole =height_666_1026 + height_666_1004/2 + 170 + 160;
 
 
 //Base Divison - dělení podložky

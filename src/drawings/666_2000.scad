@@ -10,20 +10,21 @@ module 888_1005(draft){
 		rotate([0,90,0])
 			666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
 	
-	translate([second_undercarriage_hole - main_tube_outer_diameter/2 - coupling_wall_thickness,0,0])
+	translate([second_undercarriage_hole - height_666_1004/2,0,0])
 		rotate([0,90,0])
 			666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
 
 ////
-		666_1027(draft);
+		//666_1027(draft);
 
 ////		
-		666_1025(draft);
+		//666_1025(draft);
 
 ////
+/*
 translate([0,0,0])
 		666_1029(draft);
-
+*/
 ////
 translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 	rotate([-90,0,0])
@@ -72,17 +73,17 @@ translate([length_of_main_tube - 80 + global_clearance,0,0])
 	}
 
 ////
-translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2])
+translate([height_666_1026 + height_666_1004/2,- main_tube_outer_diameter - thickness_between_tubes,- length_of_undercarriage_tube/2])
 		666_1006();
 
-translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,length_of_undercarriage_tube/2])
+translate([height_666_1026 + height_666_1004/2,- main_tube_outer_diameter - thickness_between_tubes,length_of_undercarriage_tube/2])
 	rotate([180,0,0])	
 		666_1006();
 
-translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2])
+translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, - length_of_undercarriage_tube/2])
 		666_1006();
 
-translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube/2])
+translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, length_of_undercarriage_tube/2])
 	rotate([180,0,0])	
 		666_1006();
 
@@ -181,20 +182,20 @@ translate([- tube_for_undercarriage_outer_diameter/2 - coupling_wall_thickness_u
 			//přední
 			
 		difference(){
-			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2])
+			translate([height_666_1026 + height_666_1004/2,-main_tube_outer_diameter- thickness_between_tubes,- length_of_undercarriage_tube/2])
 			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube, r = Help_main_tube_outer/2, $fn = 200);
-			translate([Help_main_tube_outer/2 + coupling_wall_thickness + 2*main_tube_outer_diameter,- Help_main_tube_outer - thickness_between_tubes,- length_of_undercarriage_tube/2 - global_clearance/2])
+			translate([height_666_1026 + height_666_1004/2,- main_tube_outer_diameter - thickness_between_tubes,- length_of_undercarriage_tube/2 - global_clearance/2])
 			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 		}	
 
 			//zadní
 		difference(){
-			translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2])
+			translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, - length_of_undercarriage_tube/2])
 			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube, r = Help_main_tube_outer/2, $fn = 200);
-			translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube/2 - global_clearance/2])
+			translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, - length_of_undercarriage_tube/2 - global_clearance/2])
 			    color([1,0,0])
 					cylinder (h = length_of_undercarriage_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
 		}

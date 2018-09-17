@@ -2,9 +2,9 @@
 module 888_1008_A(){
 
 
-    curvedPipe([[0,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],        //body ohybu
-                [radius_undercarriage + 45 - tube_for_undercarriage_outer_diameter/2,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],
-                [radius_undercarriage + 45 + vzdalenost_y,- vzdalenost_x + 2* main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,0],
+    curvedPipe([[0,height_666_1026 + height_666_1004/2,131],        //body ohybu
+                [radius_undercarriage + 45 - tube_for_undercarriage_outer_diameter/2,height_666_1026 + height_666_1004/2,131],
+                [radius_undercarriage + 45 + vzdalenost_y,- vzdalenost_x + height_666_1026 + height_666_1004/2,0],
                 [radius_undercarriage + 45 + vzdalenost_y, second_undercarriage_hole - vzdalenost_x, 0],
                 [+ vzdalenost_y + 45, second_undercarriage_hole, 131],
                 [0,second_undercarriage_hole, 131],
@@ -20,9 +20,9 @@ module 888_1008_A(){
 
 module 888_1008_B(){
 
-    curvedPipe([[0,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],        //body ohybu
-                [- radius_undercarriage - 45 + tube_for_undercarriage_outer_diameter/2,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],
-                [- radius_undercarriage - 45 - vzdalenost_y,- vzdalenost_x + 2* main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,0],
+    curvedPipe([[0,height_666_1026 + height_666_1004/2,131],        //body ohybu
+                [- radius_undercarriage - 45 + tube_for_undercarriage_outer_diameter/2,height_666_1026 + height_666_1004/2,131],
+                [- radius_undercarriage - 45 - vzdalenost_y,- vzdalenost_x + height_666_1026 + height_666_1004/2,0],
                 [- radius_undercarriage - 45 - vzdalenost_y, second_undercarriage_hole - vzdalenost_x, 0],
                 [- vzdalenost_y - 45, second_undercarriage_hole, 131],
                 [0,second_undercarriage_hole, 131],
@@ -40,9 +40,9 @@ module 888_1008_B(){
 
 module 888_1008_C(){
 
-                curvedPipe([[0,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],        //body ohybu
-                [radius_undercarriage + 45 - tube_for_undercarriage_outer_diameter/2,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],
-                [radius_undercarriage + 45 + vzdalenost_y,- vzdalenost_x + 2* main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,0],
+                curvedPipe([[0,height_666_1026 + height_666_1004/2,131],        //body ohybu
+                [radius_undercarriage + 45 - tube_for_undercarriage_outer_diameter/2,height_666_1026 + height_666_1004/4,131],
+                [radius_undercarriage + 45 + vzdalenost_y,- vzdalenost_x + height_666_1026 + height_666_1004/2,0],
                 [radius_undercarriage + 45 + vzdalenost_y, second_undercarriage_hole - vzdalenost_x, 0],
                 [+ vzdalenost_y + 45, second_undercarriage_hole, 131],
                 [0,second_undercarriage_hole, 131],
@@ -60,9 +60,9 @@ module 888_1008_C(){
 
 module 888_1008_D(){
 
-    curvedPipe([[0,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],        //body ohybu
-                [- radius_undercarriage - 45 + tube_for_undercarriage_outer_diameter/2,2 * main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,131],
-                [- radius_undercarriage - 45 - vzdalenost_y,- vzdalenost_x + 2* main_tube_outer_diameter + coupling_wall_thickness + main_tube_outer_diameter/2,0],
+    curvedPipe([[0,height_666_1026 + height_666_1004/2,131],        //body ohybu
+                [- radius_undercarriage - 45 + tube_for_undercarriage_outer_diameter/2,height_666_1026 + height_666_1004/2,131],
+                [- radius_undercarriage - 45 - vzdalenost_y,- vzdalenost_x + height_666_1026 + height_666_1004/2,0],
                 [- radius_undercarriage - 45 - vzdalenost_y, second_undercarriage_hole - vzdalenost_x, 0],
                 [- vzdalenost_y - 45, second_undercarriage_hole, 131],
                 [0,second_undercarriage_hole, 131],

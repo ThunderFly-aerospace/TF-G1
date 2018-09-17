@@ -424,8 +424,8 @@ echo(floor (C));
         //odečtení spojek trubek
 
         //666_1004 - přední
-        translate([2*main_tube_outer_diameter + global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-                cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
+        translate([height_666_1026 + global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
+               cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
 
         //666_1004 - zadní
         translate([second_undercarriage_hole - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
@@ -438,7 +438,7 @@ echo(floor (C));
 
         //průchod kabelů od serv na ocasu hned za středním pilonem
         translate([main_pilon_position + coupling_width_666_1017/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-            cube([coupling_width_666_1004/2, hull_y_size, height_666_1004 + global_clearance ]);
+           cube([coupling_width_666_1004/2, hull_y_size, height_666_1004 + global_clearance ]);
 
 
 
@@ -536,9 +536,9 @@ echo(floor (C));
         //připevnění horizontální trubky
         //A
         translate([base_division[1]*0.75,0,0])
-            union(){
+           % union(){
                 translate([0,0, -hull_z_size/2 - 20])           
-                    cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+                   cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                 translate([0,0, base_mounting_screw_length/2 - Screw_head_height_M3])           
                     cylinder(h = hull_z_size, r = Nut_diameter_M3/2, $fn = 6);
                 translate([0,0, - hull_z_size - base_mounting_screw_length/2 + Screw_head_height_M3])           
