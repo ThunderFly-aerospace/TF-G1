@@ -6,7 +6,7 @@ module 888_3000(draft){    /////// 1. díl (AZ, YAW)
 cone_radius_one = 50;
 cone_radius_two = 30;
 cone_height = 40;
-cylinder_height = 11;
+cylinder_height = 10;
 
 whole_length = cone_height + cylinder_height;
 
@@ -16,8 +16,8 @@ whole_screw_length  = 56; 		//celková délka
 thread_length = 11;				//délka závitu
 thread_diameter = 6; 
 length_screw_behind_nut = 3;
-head_screw_diameter = 10 + 0.2;		//průměr válcové hlavy šroubu
-head_screw_height = 6 + 0.2;		//výška válcové hlavy šroubu
+head_screw_diameter = 13 + 0.2;		//průměr válcové hlavy šroubu
+head_screw_height = 8 + 0.2;		//výška válcové hlavy šroubu
 
 //samojistná šestihranná matice ISO 7040 - M6
 lock_nut_diameter = 11.05; //výška samojistné matice pro průměr M6
@@ -36,13 +36,13 @@ difference(){
 	}
 
 //šrouby pro uchycení
-	translate([- cone_radius_one/2, - cone_radius_one/2,-global_clearance])	
+	translate([- cone_radius_one/2 - 3, - cone_radius_one/2 - 3,-global_clearance])	
 			cylinder (h = whole_length + 2*global_clearance, r = M6_screw_diameter/2, $fn = draft ? 10 : 20);
-	translate([ - cone_radius_one/2, cone_radius_one/2,-global_clearance])	
+	translate([ - cone_radius_one/2 - 3, cone_radius_one/2 + 3,-global_clearance])	
 			cylinder (h = whole_length + 2*global_clearance, r = M6_screw_diameter/2, $fn = draft ? 10 : 20);
-	translate([cone_radius_one/2,cone_radius_one/2,-global_clearance])	
+	translate([cone_radius_one/2 + 3,cone_radius_one/2 + 3,-global_clearance])	
 			cylinder (h = whole_length + 2*global_clearance, r = M6_screw_diameter/2, $fn = draft ? 10 : 20);
-	translate([cone_radius_one/2, - cone_radius_one/2,-global_clearance])	
+	translate([cone_radius_one/2 + 3, - cone_radius_one/2 - 3,-global_clearance])	
 			cylinder (h = whole_length +  2*global_clearance, r = M6_screw_diameter/2, $fn = draft ? 10 : 20);
 
 
@@ -56,7 +56,7 @@ difference(){
 
 //otvor pro lícovaný šroub
 	translate ([0,0,- global_clearance/2])
-			%cylinder (h = whole_screw_length + global_clearance, r = shank_diameter/2, $fn = draft ? 50 : 100);
+			cylinder (h = whole_screw_length + global_clearance, r = shank_diameter/2, $fn = draft ? 50 : 100);
 
 //žebra
 	difference(){
@@ -73,25 +73,11 @@ difference(){
 			}
 
 	//kulateé uprostřed	
-				cylinder(h = whole_length, r = (608_bearing_outer_diameter + 10)/2, $fn = draft ? 50 : 100);
+				cylinder(h = whole_length, r = cone_radius_two, $fn = draft ? 50 : 100);
 
 	}
 
-	//zkosení žeber
-		translate([-6,cone_radius_one,cylinder_height])
-			rotate([40.5,0,0])
-				cube([cone_radius_one, 15, 2*cone_radius_one]);
-		translate([cone_radius_one, -6, cylinder_height])
-			rotate([0,-40.5,0])
-				cube([15, cone_radius_one, 2*cone_radius_one]);
-		translate([-cone_radius_one - 15,-6,cylinder_height + 5.5])
-			rotate([0,40.5,0])
-				cube([15, cone_radius_one, 2*cone_radius_one]);
-		translate([-6,-15 - cone_radius_one,cylinder_height+5.5])
-			rotate([-40.5,0,0])
-				cube([cone_radius_one, 15, 2*cone_radius_one]);
-
-}
+	}
 
 
 }
