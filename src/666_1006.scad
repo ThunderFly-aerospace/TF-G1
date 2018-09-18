@@ -11,7 +11,7 @@ module 666_1006(height = 45, height_of_mini_cylinder = 2, draft = true)
     {
 
         translate([0,0,height_of_mini_cylinder])
-            cylinder (h = height, r = (main_tube_inner_diameter - global_clearance)/2, $fn = draft ? 100 : 200);
+            cylinder (h = height, d = main_tube_inner_diameter, $fn = draft ? 100 : 200);
 
         translate([0,0, height_of_mini_cylinder - global_clearance/2])
             cylinder (h= height + global_clearance, r = tube_for_undercarriage_outer_diameter/2,$fn = draft ? 50 : 100);

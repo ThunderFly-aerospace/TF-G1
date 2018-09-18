@@ -1,7 +1,7 @@
 
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
-main_tube_inner_diameter = 23.5;
+main_tube_inner_diameter = 23.1;
 
 //Tube for undercarriage - rendered hole [mm]
 tube_for_undercarriage_outer_diameter = 10.6;
@@ -22,7 +22,7 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
-608_bearing_outer_diameter = 22.5;
+608_bearing_outer_diameter = 22;
 608_bearing_thickness = 7.1;
 
 
