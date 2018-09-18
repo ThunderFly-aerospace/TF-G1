@@ -11,11 +11,13 @@ cylinder_height = 11;
 whole_length = cone_height + cylinder_height;
 
 //lícovaný šroub  M6
-shank_diameter = 8 + 1 ;	//průměr dříku + tolerance pro díru
-whole_screw_length  = 51; //celková délka
-thread_length = 11;	//délka závitu
+shank_diameter = 8 + 1 ;		//průměr dříku + tolerance pro díru
+whole_screw_length  = 56; 		//celková délka
+thread_length = 11;				//délka závitu
 thread_diameter = 6; 
 length_screw_behind_nut = 3;
+head_screw_diameter = 10 + 0.2;		//průměr válcové hlavy šroubu
+head_screw_height = 6 + 0.2;		//výška válcové hlavy šroubu
 
 //samojistná šestihranná matice ISO 7040 - M6
 lock_nut_diameter = 11.05; //výška samojistné matice pro průměr M6
@@ -54,7 +56,7 @@ difference(){
 
 //otvor pro lícovaný šroub
 	translate ([0,0,- global_clearance/2])
-			cylinder (h = whole_length + global_clearance, r = shank_diameter/2, $fn = draft ? 50 : 100);
+			%cylinder (h = whole_screw_length + global_clearance, r = shank_diameter/2, $fn = draft ? 50 : 100);
 
 //žebra
 	difference(){
