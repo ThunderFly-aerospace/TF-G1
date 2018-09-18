@@ -3,6 +3,7 @@ draft = true;
 
 module 888_1014(draft){
 
+//translate([0,0,coupling_wall_thickness])
 	difference(){
 		//hlavní díly
 		union(){
