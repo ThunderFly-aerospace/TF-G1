@@ -35,7 +35,7 @@ difference(){
 //otvor pro lícovaný šroub z dílu 2
 	translate([0,width/2 + global_clearance/2,height])
 		rotate([90,0,0])
-			cylinder (h = width + global_clearance, d = 608_bearing_outer_diameter-6,, $fn = draft ? 50 : 100);
+			cylinder (h = width + global_clearance, d = shank_diameter, $fn = draft ? 50 : 100);
 
 //otvor pro závitovou tyč M8
 	translate([0,0,height*0.4])
