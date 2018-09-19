@@ -29,6 +29,9 @@ thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
+//Screw diameter for M8 [mm]
+M8_screw_diameter = 8 + 1;
+
 
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
@@ -47,6 +50,7 @@ M3_screw_diameter = 3.2;
 Nut_height_M3 = 2.7;	
 Nut_diameter_M3 = 6.6; 
 Screw_head_height_M3 = 3;
+
 
 
 //šroub servo
