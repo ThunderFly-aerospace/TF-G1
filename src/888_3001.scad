@@ -49,10 +49,10 @@ echo(height_of_base);
 
 
                 translate([0,0,whole_length + height_of_base ]) rotate([0,90,0]) union(){
-                    translate([0, 0, -screw_length/2]) cylinder(h = screw_length, d = 608_bearing_outer_diameter-6, $fn = draft ? 50 : 100);
-                    translate([0,0, screw_length/2 - 608_bearing_thickness +0.5])
+                    translate([0, 0, -screw_length/2]) cylinder(h = screw_length, d = shank_diameter, $fn = draft ? 50 : 100);
+                    translate([0,0, screw_length/2])
                         cylinder (h = 100, d = 608_bearing_outer_diameter, $fn = draft ? 50 : 100);
-                    translate([0,0, -100-screw_length/2 + 608_bearing_thickness -0.5])
+                    translate([0,0, -100-screw_length/2 -0.5])
                         cylinder (h = 100, d = 608_bearing_outer_diameter, $fn = draft ? 50 : 100);
                 }
 
