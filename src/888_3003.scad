@@ -53,9 +53,9 @@ translate([0,0,whole_length+0.8])
 	color([1,0,0])		
 			888_3001();
 
-translate([0,0, whole_length + height_3001 - 608_bearing_outer_diameter])
+translate([0,0, whole_length + height_3001/2 - 608_bearing_outer_diameter/2])
 	color([0,0.5,0])
-		rotate([0,0,90])
+		rotate([0,200,90])
 			888_3002();
 }
 cube(200);

@@ -53,8 +53,20 @@ echo(height_of_base);
                    cube([width, cone_radius_two*2, whole_length+height_of_base+whole_screw_length+global_clearance]);
 
 
-                translate([0,0, height_3001-608_bearing_outer_diameter ]) rotate([0,90,0]) union(){
-                   # translate([0, 0, -screw2_length/2]) cylinder(h = screw2_length+global_clearance*2, d = shank_diameter, $fn = draft ? 50 : 100);
+    // Horni dira pro sroub
+                translate([0, 0, height_3001-608_bearing_outer_diameter ]) rotate([0,90,0]) union(){
+                    translate([0, 0, -global_clearance-screw2_length/2]) cylinder(h = screw2_length+global_clearance*2, d = shank_diameter, $fn = draft ? 50 : 100);
+                    translate([0,0, screw2_length/2])
+                        cylinder (h = 100, d = 608_bearing_outer_diameter, $fn = draft ? 50 : 100);
+                    translate([0,0, -100-screw2_length/2 -0.5])
+                        cylinder (h = 100, d = 608_bearing_outer_diameter, $fn = draft ? 50 : 100);
+                }
+                
+                
+                
+    // spodni dira pro sroub
+                translate([0, 0, height_3001/2-608_bearing_outer_diameter/2 ]) rotate([0,90,0]) union(){
+                    translate([0, 0, -global_clearance-screw2_length/2]) cylinder(h = screw2_length+global_clearance*2, d = shank_diameter, $fn = draft ? 50 : 100);
                     translate([0,0, screw2_length/2])
                         cylinder (h = 100, d = 608_bearing_outer_diameter, $fn = draft ? 50 : 100);
                     translate([0,0, -100-screw2_length/2 -0.5])
