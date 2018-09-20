@@ -31,6 +31,8 @@ basic_screw_length = 5;
 
 //Screw diameter for M8 [mm]
 M8_screw_diameter = 8 + 1;
+Nut_height_M8 = 7.5;
+Nut_diameter_M8 = 14.4 + 0.5;
 
 
 //Screw diameter and nut for M6 [mm]
