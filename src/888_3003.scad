@@ -4,8 +4,8 @@ draft = true;
 module licovany_sroub_m6(delka = 70){
     translate([0,0,(11-5.5)/2]) color([0,0,1]){
         cylinder(d=13, h=5.5);
-        cylinder(d=8, h=5.5+70);
-        cylinder(d=6, h=5.5+70+11);
+        cylinder(d=8, h=5.5+delka);
+        cylinder(d=6, h=5.5+delka+11);
     }
 }
 
@@ -13,7 +13,7 @@ module 888_3003(){
 
 cone_radius_one = 65;
 cone_radius_two = 45;
-cone_height = 60;
+cone_height = 25;
 cylinder_height = 10;
 
 whole_length = cone_height + cylinder_height;
@@ -21,7 +21,7 @@ height_3001 = 90;
 
 //lícovaný šroub  M6
 shank_diameter = 8 + 1 ;		//průměr dříku + tolerance pro díru
-screw_length = 70; // délka lícovaného sroubu
+screw_length = 30; // délka lícovaného sroubu
 whole_screw_length = screw_length + 11+6; 		//celková délka
 thread_length = 11;				//délka závitu
 thread_diameter = 6; 
@@ -65,8 +65,8 @@ cube(200);
 
 
 888_3003();
-translate([0,0,91]) rotate([180, 0, 0]) licovany_sroub_m6(70);
-translate([-(70+5.5+11)/2,0, 90+49]) rotate([0, 90, 0]) licovany_sroub_m6(70);
+translate([0,0,5]) rotate([180, 180, 0]) licovany_sroub_m6(30);
+translate([-(70+5.5+11)/2,0, 90+14]) rotate([0, 90, 0]) licovany_sroub_m6(70);
 
 
 use <./lib/naca4.scad>

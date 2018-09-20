@@ -5,14 +5,14 @@ module 888_3000(draft){    /////// 1. díl (AZ, YAW)
 
 cone_radius_one = 65;
 cone_radius_two = 45;
-cone_height = 60;
+cone_height = 25;
 cylinder_height = 10;
 
 whole_length = cone_height + cylinder_height;
 
 //lícovaný šroub  M6
 shank_diameter = 8 + 1 ;		//průměr dříku + tolerance pro díru
-screw_length = 70; // délka lícovaného sroubu
+screw_length = 30; // délka lícovaného sroubu
 whole_screw_length = screw_length + 11+6; 		//celková délka
 thread_length = 11;				//délka závitu
 thread_diameter = 6; 
