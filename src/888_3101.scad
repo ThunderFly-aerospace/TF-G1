@@ -9,7 +9,7 @@ module licovany_sroub_m6(delka = 70){
     }
 }
 
-module 888_3003(){
+module 888_3101(){
 
 cone_radius_one = 65;
 cone_radius_two = 45;
@@ -46,7 +46,9 @@ height_of_base = whole_screw_length - whole_length + head_screw_height;
 
 ////////// MODEL
 
-difference(){union(){
+difference(){
+
+	union(){
 			888_3000();
 
 translate([0,0,whole_length+0.8])
@@ -58,13 +60,25 @@ translate([0,0, whole_length + height_3001/2 - 608_bearing_outer_diameter/2])
 		rotate([0,200,90])
 			888_3002();
 }
+
+
 cube(200);
 }
+
+translate([100,0,0])
+	rotate([0,0,-90])
+		888_3003();
+translate([100,0,90])
+	rotate([0,0,-90])
+		888_3004();
+translate([130,0,140])
+	rotate([90,0,-90])
+		888_3005();
 }
 
 
 
-888_3003();
+888_3101();
 translate([0,0,5]) rotate([180, 180, 0]) licovany_sroub_m6(30);
 translate([-(70+5.5+11)/2,0, 90+14]) rotate([0, 90, 0]) licovany_sroub_m6(70);
 
@@ -76,3 +90,6 @@ include <../Parameters.scad>
 use <888_3000.scad>
 use <888_3001.scad>
 use <888_3002.scad>
+use <888_3003.scad>
+use <888_3004.scad>
+use <888_3005.scad>
