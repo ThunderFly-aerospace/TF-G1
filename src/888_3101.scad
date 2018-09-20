@@ -65,13 +65,13 @@ translate([0,0, whole_length + height_3001/2 - 608_bearing_outer_diameter/2])
 cube(200);
 }
 
-translate([100,0,0])
-	rotate([0,0,-90])
+translate([100,0,40])
+	rotate([0,0,180])
 		888_3003();
-translate([100,0,90])
+translate([100,0,40 - 16])
 	rotate([0,0,-90])
 		888_3004();
-translate([130,0,140])
+translate([130,0,70])
 	rotate([90,0,-90])
 		888_3005();
 }

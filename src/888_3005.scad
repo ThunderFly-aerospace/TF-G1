@@ -2,23 +2,36 @@ draft = true;
 
 module 888_3005(){
 
+width = 608_bearing_outer_diameter*1.5;
+
+
 magnet_diameter = 63;
 
 difference(){
 	union(){
-		cylinder (h = coupling_wall_thickness, r = magnet_diameter/2, $fn = draft ? 50 :100);
+	//velikost magnetu
+				cylinder (h = coupling_wall_thickness, r = magnet_diameter/2, $fn = draft ? 50 :100);
+	//osazení uprostřed	
 		translate([0,0,coupling_wall_thickness])
-		cylinder (h = coupling_wall_thickness/4, r = 608_bearing_outer_diameter/4, $fn = draft ? 50 : 100);
+				cylinder (h = coupling_wall_thickness/4, r = 608_bearing_outer_diameter/4, $fn = draft ? 50 : 100);
+	//trn
+		translate([-width/4,magnet_diameter/2 - width/2,0])
+				cube([width/2,width/3,width/2]);
 	}
 	
-
+	//otvor uprostřed
 	translate([0,0,-global_clearance])
-		cylinder (h = 20, r = M8_screw_diameter/2, $fn = draft ? 50 : 100);
+			cylinder (h = 20, r = M8_screw_diameter/2, $fn = draft ? 50 : 100);
 
+	//otvor v trnu
+	translate([0,magnet_diameter/2 - (width/2)/2,-width/8])
+			cylinder (h = width/2, r = M6_screw_diameter/2, $fn = draft ? 50 : 100);
+	translate([0,magnet_diameter/2 - (width/2)/2,width/6])
+			cylinder(h = Nut_height_M6, r = Nut_diameter_M6/2, $fn = 6);
+	translate([-Nut_diameter_M6/2,magnet_diameter/2 - (width/2)/2,width/6])
+			cube([Nut_diameter_M6, 20, Nut_height_M6]);
 }
 
-translate([-5,magnet_diameter/2 - 4,0])
-cube([10,4,15]);
 
 }
 
