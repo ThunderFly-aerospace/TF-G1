@@ -7,7 +7,6 @@ cone_radius_two = 30;
 cone_height = 40;
 cylinder_height = 10;
 
-whole_length = cone_height + cylinder_height;
 
 //lícovaný šroub  M6
 shank_diameter = 8 + 1 ;		//průměr dříku + tolerance pro díru
@@ -19,10 +18,10 @@ head_screw_diameter = 13 + 0.2;		//průměr válcové hlavy šroubu
 head_screw_height = 8 + 0.2;		//výška válcové hlavy šroubu
 
 width = 608_bearing_outer_diameter*1.5;
-height = whole_length;
+height = 30;
 w_space = 1.5; // mezera mezi dilem 8001 a tímto
 
-difference(){
+translate([0,0,-height]) difference(){
 
 //základní kostka
 			union(){

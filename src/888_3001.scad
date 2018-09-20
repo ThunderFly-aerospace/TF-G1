@@ -8,6 +8,7 @@ cone_height = 60;
 cylinder_height = 10;
 
 whole_length = cone_height + cylinder_height;
+height_3001 = 90;
 
 //lícovaný šroub  M6
 shank_diameter = 8 + 1 ;		//průměr dříku + tolerance pro díru
@@ -17,9 +18,11 @@ thread_length = 11;				//délka závitu
 thread_diameter = 6; 
 length_screw_behind_nut = 3;
 head_screw_diameter = 13 + 0.2;		//průměr válcové hlavy šroubu
-head_screw_height = 8 + 0.2;		//výška válcové hlavy šroubu
+head_screw_height = 5.5 + 0.2;		//výška válcové hlavy šroubu
+    
 
-washer_diameter = 16;				//průměr podložky pod lícovaný šroub 
+washer_diameter = 20;				//průměr podložky pod lícovaný šroub
+washer_thickness = 1.5;
 
 //rozměry dle dílu 888_3002
 width = 608_bearing_outer_diameter*1.5;
@@ -32,13 +35,14 @@ echo(height_of_base);
 
 		difference (){
 			//hlavní podstavec
-				cylinder(h = whole_length + height_of_base + width*0.6, r = cone_radius_two, $fn = draft ? 50 : 100);
+				cylinder(h = height_3001, r = cone_radius_two, $fn = draft ? 50 : 100);
             
-                    translate([0,0, whole_screw_length - whole_length - 6])		
-                    //průměr otvoru pro šroub BEZ podložky
-                    cylinder(h = head_screw_height + global_clearance, r = head_screw_diameter/2, $fn = draft ? 50 : 100);
-                    ////průměr otvoru, pokud BUDE pod hlavou šroubu podložka
-                    //cylinder (h = head_screw_height + global_clearance, r = washer_diameter/2, $fn = draft ? 50 : 100);
+                //průměr otvoru pro šroub BEZ podložky
+                    //translate([0,0, whole_screw_length - whole_length - 6])
+                    //cylinder(h = head_screw_height + global_clearance, r = head_screw_diameter/2, $fn = draft ? 50 : 100);
+               ////průměr otvoru, pokud BUDE pod hlavou šroubu podložka
+                    translate([0,0, whole_screw_length - whole_length-head_screw_height-washer_thickness])
+                    cylinder (h = head_screw_height + washer_thickness + global_clearance, r = washer_diameter/2, $fn = draft ? 50 : 100);
 
                 //otvor pro lícovaný šroub od dílu 1
                 translate([0,0,-global_clearance])
@@ -48,8 +52,8 @@ echo(height_of_base);
                    cube([width, cone_radius_two*2, whole_length+height_of_base+whole_screw_length+global_clearance]);
 
 
-                translate([0,0,whole_length + height_of_base ]) rotate([0,90,0]) union(){
-                    translate([0, 0, -screw_length/2]) cylinder(h = screw_length, d = shank_diameter, $fn = draft ? 50 : 100);
+                translate([0,0, height_3001-608_bearing_outer_diameter ]) rotate([0,90,0]) union(){
+                   # translate([0, 0, -screw_length/2]) cylinder(h = screw_length, d = shank_diameter, $fn = draft ? 50 : 100);
                     translate([0,0, screw_length/2])
                         cylinder (h = 100, d = 608_bearing_outer_diameter, $fn = draft ? 50 : 100);
                     translate([0,0, -100-screw_length/2 -0.5])
