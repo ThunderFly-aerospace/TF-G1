@@ -290,6 +290,17 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
     width_666_1015_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
 
+////spojka 666_1016
+
+    width_666_1016 = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
+
+    depth_666_1016 = tube_for_undercarriage_outer_diameter + M6_screw_diameter + 2*coupling_wall_thickness_undercarriage + thickness_between_tubes_undercarriage;
+
+    height_666_1016 = width_666_1016;
+
+
+    width_666_1016_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
+
 
 
 
