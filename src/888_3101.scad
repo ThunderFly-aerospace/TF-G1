@@ -65,18 +65,28 @@ translate([0,0, whole_length + height_3001/2 - 608_bearing_outer_diameter/2])
 cube(200);
 }
 
-translate([100,0,40])
-	rotate([0,0,180])
-		888_3003();
-translate([100,0,40 - 16])
-	rotate([0,0,-90])
-		888_3004();
-translate([130,0,70])
-	rotate([90,0,-90])
-		888_3005();
+translate([0, -200, 0]){difference(){union(){
+
+    translate([0,0,50])
+        rotate([0,0, 90])
+            888_3003();
+    translate([0,0,33])
+        rotate([0,0,0]) color([1,0,0])
+            888_3004();
+    translate([0,23,85])
+        rotate([90,0,0]) color([0,1,0])
+            888_3005();
+    }
+
+    cube(200);
+    }
+
+    translate([-(70+5.5+11)/2,0, 50]) rotate([0, 90, 0]) licovany_sroub_m6(70);
+    translate([0,-25, 80]) rotate([-90, 90, 0]) licovany_sroub_m6(50-11);
+
 }
 
-
+}
 
 888_3101();
 translate([0,0,5]) rotate([180, 180, 0]) licovany_sroub_m6(30);

@@ -22,7 +22,7 @@ thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance be
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
-608_bearing_outer_diameter = 22.1;
+608_bearing_outer_diameter = 22.3;
 608_bearing_thickness = 7.1;
 
 
@@ -278,6 +278,28 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
     width_666_1014_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
 
 
+
+////spojka 666_1015
+
+    width_666_1015 = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
+
+    depth_666_1015 = tube_for_undercarriage_outer_diameter*2 + 2*coupling_wall_thickness_undercarriage + thickness_between_tubes_undercarriage;
+
+    height_666_1015 = width_666_1015;
+
+
+    width_666_1015_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
+
+////spojka 666_1016
+
+    width_666_1016 = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
+
+    depth_666_1016 = tube_for_undercarriage_outer_diameter + M6_screw_diameter + 2*coupling_wall_thickness_undercarriage + thickness_between_tubes_undercarriage;
+
+    height_666_1016 = width_666_1016;
+
+
+    width_666_1016_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
 
 
 
