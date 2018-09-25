@@ -25,7 +25,7 @@ bearing_screw_length = 30;
             cylinder (h = 2*height, d = M6_screw_diameter, $fn = draft ? 50 : 100);
 
         translate([0, 0, bearing_screw_length - 2 * 608_bearing_thickness - 6])  /// 1.5 mm je tloušťka podložky
-            cylinder (h = 2*height, d = Nut_diameter_M6, $fn = 6);
+            cylinder (h = 2*height, d = M6_nut_diameter, $fn = 6);
 
         translate([0, 0, -global_clearance])  /// 1.5 mm je tloušťka podložky
             cylinder (h= bearing_screw_length - 2 * 608_bearing_thickness - 10 - 1.5, d = 8.5, $fn = draft ? 50 : 100);

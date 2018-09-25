@@ -66,33 +66,33 @@ module 666_1015(draft){
     	//nut
     	translate([-width_666_1015/2 - global_clearance, 0, height_666_1015/4])
     	   rotate([0,90,0])
-    	      cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+    	      cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
         
-        translate([width_666_1015/2 - Nut_height_M3, 0, height_666_1015/4])
+        translate([width_666_1015/2 - M3_nut_height, 0, height_666_1015/4])
     	   rotate([0,90,0])
-    	       cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+    	       cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
     	translate([-width_666_1015/2 - global_clearance, 0, height_666_1015 - height_666_1015/4])
             rotate([0,90,0])
-                cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
         
-        translate([width_666_1015/2 - Nut_height_M3, 0, height_666_1015 - height_666_1015/4])
+        translate([width_666_1015/2 - M3_nut_height, 0, height_666_1015 - height_666_1015/4])
             rotate([0,90,0])
-                cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
 
     	//nut
     	translate([-width_666_1015/4,  -(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/2) ,-global_clearance])
-            cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+            cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
         
     	translate([width_666_1015/4,  -(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/2), -global_clearance])
-            cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+            cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
-    	translate([-width_666_1015/4,  -(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/2) ,width_666_1015-Nut_height_M3])
-            cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+    	translate([-width_666_1015/4,  -(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/2) ,width_666_1015-M3_nut_height])
+            cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
         
-    	translate([width_666_1015/4,  -(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/2) ,width_666_1015-Nut_height_M3])
-    	       cylinder (h = Nut_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+    	translate([width_666_1015/4,  -(thickness_between_tubes_undercarriage + tube_for_undercarriage_outer_diameter/2 + tube_for_undercarriage_outer_diameter/2) ,width_666_1015-M3_nut_height])
+    	       cylinder (h = M3_nut_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
     }
 }

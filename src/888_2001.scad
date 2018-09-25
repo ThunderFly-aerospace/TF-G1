@@ -31,40 +31,40 @@ module 888_2001(height = 10, height_of_cap_cylinder = 2){
             rotate([90,0,0])
                 union(){
                         cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M3])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M3_nut_height])
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 }
 
         translate([-width/2 + width/8,0,height/4])
             rotate([90,0,0])
                 union(){
                         cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M3])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M3_nut_height])
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 }
 
         translate([-width/2 + width/8,0,height - height/4])
             rotate([90,0,0])
                 union(){
                         cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M3])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M3_nut_height])
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 }
 
         translate([width/2 - width/8,0,height - height/4])
             rotate([90,0,0])
                 union(){
                         cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M3])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M3_nut_height])
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 }
 
         translate([-width/2 + width/8, -depth + depth/2, height/2])
@@ -72,7 +72,7 @@ module 888_2001(height = 10, height_of_cap_cylinder = 2){
                 union(){
                         cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 }
 
         translate([width/2 - width/8, -depth + depth/2, height/2])
@@ -80,7 +80,7 @@ module 888_2001(height = 10, height_of_cap_cylinder = 2){
                 union(){
                         cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M3*2 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                        cylinder(h = M3_nut_height*2 + global_clearance, r = M3_nut_diameter/2, $fn = 6);
                 }
 
         

@@ -70,16 +70,16 @@ difference(){
 
     translate([wheel_width/2 + 7, -wheel_diameter/2 - tube_for_undercarriage_outer_diameter/2, wheel_diameter/2 + 1.2*tube_for_undercarriage_outer_diameter])
         rotate([0,90,0])
-            cylinder(h = height, d = Nut_diameter_M4, $fn = 6);
+            cylinder(h = height, d = M4_nut_diameter, $fn = 6);
 
 
 
 	//nut
     translate([0, main_tube_outer_diameter, height/2])
-        cylinder (h = height, r = Nut_diameter_M3/2, $fn = 6);
+        cylinder (h = height, r = M3_nut_diameter/2, $fn = 6);
 
     translate([0, 1.5* main_tube_outer_diameter, height/2])
-        cylinder (h = height, r = Nut_diameter_M3/2, $fn = 6);
+        cylinder (h = height, r = M3_nut_diameter/2, $fn = 6);
     
     }
 }

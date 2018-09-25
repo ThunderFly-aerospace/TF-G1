@@ -38,7 +38,7 @@ render()
         rotate([0,90,0])
         {   
             rotate([0,0,30]) // srovnání matky s povrchem placatou stranou
-                cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+                cylinder(h = x_size, d = M3_nut_diameter, $fn = 6);
             cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
         }
 
@@ -46,7 +46,7 @@ render()
         rotate([0,90,0])
         {   
             rotate([0,0,30])
-                cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+                cylinder(h = x_size, d = M3_nut_diameter, $fn = 6);
             cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
         }
 
@@ -224,7 +224,7 @@ render()
             rotate([0,90,0])
             {    
                 rotate([0,0,30])
-                    cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+                    cylinder(h = x_size, d = M3_nut_diameter, $fn = 6);
                 cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
             }
 
@@ -232,15 +232,15 @@ render()
             rotate([0,90,0])    
             {    
                 rotate([0,0,30])
-                    cylinder(h = x_size, d = Nut_diameter_M3, $fn = 6);
+                    cylinder(h = x_size, d = M3_nut_diameter, $fn = 6);
                 cylinder(h = x_size, d = M3_screw_diameter, $fn = 20, center = true);
             }
 
         //otvor pro šrouby k uchycení listu
-        translate([110/2, 0, Nut_height_M6 + global_clearance])
+        translate([110/2, 0, M6_nut_height + global_clearance])
             cylinder(h = 3*thickness, d =  M6_screw_diameter, $fn = 20);
         translate([110/2, 0, 0])
-            cylinder(h = Nut_height_M6, d =  Nut_diameter_M6, $fn = 6);
+            cylinder(h = M6_nut_height, d =  M6_nut_diameter, $fn = 6);
 
 
         //otvory pro šrouby k uchycení libely
@@ -248,9 +248,9 @@ render()
             rotate([0,0,-90])
                 union(){
                     cylinder(h = thickness*2, r = M3_screw_diameter/2, $fn = 20, center = true);
-                    translate([- Nut_diameter_M3/2, 0, 0])        
-                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
-                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                    translate([- M3_nut_diameter/2, 0, 0])        
+                        cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                    cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                 //final union
                 }
 
@@ -259,9 +259,9 @@ render()
             rotate([0,0,-90])
                 union(){
                     cylinder(h = thickness*2, r = M3_screw_diameter/2, $fn = 20, center = true);
-                    translate([- Nut_diameter_M3/2, 0, 0])        
-                        cube([Nut_diameter_M3,Nut_diameter_M3+20,Nut_height_M3]);
-                    cylinder(h = Nut_height_M3, r = Nut_diameter_M3/2, $fn = 6);
+                    translate([- M3_nut_diameter/2, 0, 0])        
+                        cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                    cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                 //final union
                 }
     }

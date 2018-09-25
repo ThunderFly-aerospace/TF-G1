@@ -26,10 +26,10 @@ difference () {
     //nut
 
     translate ([-main_tube_outer_diameter/2,-main_tube_outer_diameter/2,-3])
-        cylinder(h = Nut_height_M4+3, d = Nut_diameter_M4, $fn=6);
+        cylinder(h = M4_nut_height+3, d = M4_nut_diameter, $fn=6);
 
     translate ([-main_tube_outer_diameter/2,main_tube_outer_diameter/2,-3])
-        cylinder(h = Nut_height_M3+3, d = Nut_diameter_M3, $fn=6);
+        cylinder(h = M3_nut_height+3, d = M3_nut_diameter, $fn=6);
 
 }
 

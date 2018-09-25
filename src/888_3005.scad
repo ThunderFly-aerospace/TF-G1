@@ -27,9 +27,9 @@ difference(){
 	translate([0,magnet_diameter/2 - (width/2)/2,-width/8])
 			cylinder (h = width/2, r = M6_screw_diameter/2, $fn = draft ? 50 : 100);
 	translate([0,magnet_diameter/2 - (width/2)/2,width/6])
-			cylinder(h = Nut_height_M6, r = Nut_diameter_M6/2, $fn = 6);
-	translate([-Nut_diameter_M6/2,magnet_diameter/2 - (width/2)/2,width/6])
-			cube([Nut_diameter_M6, 20, Nut_height_M6]);
+			cylinder(h = M6_nut_height, r = M6_nut_diameter/2, $fn = 6);
+	translate([-M6_nut_diameter/2,magnet_diameter/2 - (width/2)/2,width/6])
+			cube([M6_nut_diameter, 20, M6_nut_height]);
 }
 
 

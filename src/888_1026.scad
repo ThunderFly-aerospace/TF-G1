@@ -87,10 +87,10 @@ module 888_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
             rotate([90,0,0])
                 union(){
                         cylinder(h = 50, r = M4_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M4])
-                        cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M4_nut_height])
+                        cylinder(h = M4_nut_height*2 + global_clearance, r = M4_nut_diameter/2, $fn = 6);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                        cylinder(h = M4_nut_height*2 + global_clearance, r = M4_nut_diameter/2, $fn = 6);
                 }
         
         mirror([1,0,0])
@@ -98,10 +98,10 @@ module 888_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
             rotate([90,0,0])
                 union(){
                         cylinder(h = 50, r = M4_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*Nut_height_M4])
-                        cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M4_nut_height])
+                        cylinder(h = M4_nut_height*2 + global_clearance, r = M4_nut_diameter/2, $fn = 6);
                 translate([0,0, - main_tube_outer_diameter/2 - 2*thickness_between_tubes - global_clearance])
-                        cylinder(h = Nut_height_M4*2 + global_clearance, r = Nut_diameter_M4/2, $fn = 6);
+                        cylinder(h = M4_nut_height*2 + global_clearance, r = M4_nut_diameter/2, $fn = 6);
                 }
     }
 

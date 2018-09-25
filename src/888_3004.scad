@@ -59,15 +59,15 @@ translate([cube_Width/2,width/4,height + width/4])
 			
             translate([0,0,coupling_wall_thickness/2-limit_offset])
 				rotate([0,0,90])
-					cylinder (h = Nut_height_M6, r = Nut_diameter_M6/2, $fn = 6);
-			translate([0,-Nut_diameter_M6/2,  coupling_wall_thickness/2+limit_offset])
-					cube([20, Nut_diameter_M6, Nut_height_M6]);
+					cylinder (h = M6_nut_height, r = M6_nut_diameter/2, $fn = 6);
+			translate([0,-M6_nut_diameter/2,  coupling_wall_thickness/2+limit_offset])
+					cube([20, M6_nut_diameter, M6_nut_height]);
 
 			translate([0,0,cube_Width - coupling_wall_thickness*1.5-limit_offset])
 				rotate([0,0,90])
-					cylinder (h = Nut_height_M6, r = Nut_diameter_M6/2, $fn = 6);
-			translate([0,-Nut_diameter_M6/2, cube_Width -coupling_wall_thickness*1.5])
-					cube([20, Nut_diameter_M6, Nut_height_M6]);*/
+					cylinder (h = M6_nut_height, r = M6_nut_diameter/2, $fn = 6);
+			translate([0,-M6_nut_diameter/2, cube_Width -coupling_wall_thickness*1.5])
+					cube([20, M6_nut_diameter, M6_nut_height]);*/
 		}
 
 }
