@@ -1,20 +1,14 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 draft = true;
+$fs =  draft ? 50 :100;
 
 
 
 module 888_3006(draft){    /////// 1. díl (AZ, YAW)
 
-cone_radius_one = 65;
-cone_radius_two = 45;
-cone_height = 25;
-cylinder_height = 10;
-
-whole_length = cone_height + cylinder_height;
-
 //lícovaný šroub  M6
-shank_diameter = 8 + 1 ;		//průměr dříku + tolerance pro díru
+8_shank_diameter = 8.4;		//průměr dříku + tolerance pro díru
 screw_length = 30; // délka lícovaného sroubu
 whole_screw_length = screw_length + 11+6; 		//celková délka
 thread_length = 11;				//délka závitu
@@ -28,24 +22,30 @@ head_screw_height = 8 + 0.2;		//výška válcové hlavy šroubu
 lock_nut_diameter = 11.05; //výška samojistné matice pro průměr M6
 lock_nut_height = 8; 
 
-//šířka žebra
-rib_thickness = 7;
-
-rotate_angle = 40;
-
-//výška podstavy počítaná z celkové délky použitého lícovaného šroubu
-height_of_base = whole_screw_length - whole_length + head_screw_height;
-
-base_thickness = 30-18-6; // sila materialu pod srouby pro pridelani
 
 difference(){
     union (){
-        cylinder(r1=g3_0_cone1, r2=g3_0_cone2, h = g3_0_cone_height);
-    
+        cylinder(r1=g3_0_cone1, r2=g3_0_cone2, h = g3_0_cone_height, $fn=draft?50:100);
+        cylinder(r=g3_0_cone2, h = g3_0_height-g3_0_cone_top_height, $fn=draft?50:100);
+        translate([0,0,g3_0_height-g3_0_cone_top_height]) cylinder(r1=g3_0_cone2, r2=8+1, h = g3_0_cone_top_height, $fn=draft?50:100);
+        
+        // omezeni pro osu yaw
+        difference(){
+            translate([0,0,g3_0_height-g3_0_cone_top_height]) cylinder(r=g3_0_cone2, h = 20, $fn=draft?50:100);
+            translate([-50,-g3_1_yaw_width/2,g3_0_height-g3_0_cone_top_height]) cube([100, g3_1_yaw_width, 30+1]);
+        }
     }
+    
+    // srouby pri pridelani na strechu
+    for (i = [0:3]){
+        rotate([0, 0, i*90]) translate([50, 0, -global_clearance]) cylinder(h=100, d=M6_screw_diameter, $fn=draft?50:100);
+        rotate([0, 0, i*90]) translate([50, 0, 30-18-5]) cylinder(h=100, d=M6_nut_diameter, $fn=6, $fn=6);
+    }
+    
+    // kapsa pro matici s podlozkou
+    translate([-M6_nut_diameter, -g3_1_service_holl_width/2, g3_0_height-g3_1_service_holl_height-(g3_0_bearing_bolt_len-g3_7_height/2-bearing_efsm_12_ag/2)-1]) cube([200, g3_1_service_holl_width, g3_1_service_holl_height]);
+    cylinder(h=1000, d=8_shank_diameter, $fn=draft?50:100);
 }
-
 }
-
 
 888_3006(draft);

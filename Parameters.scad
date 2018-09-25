@@ -328,14 +328,22 @@ base_mounting_screw_length = 50;
 bearing_efsm_12_width = 40;
 bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
 bearing_efsm_12_db = 25;
+bearing_efsm_12_ag = 13;
 bearing_efsm_space = 1;
 
 
 // pro dily ze skupiny 3 (888_30**)
-g3_7_cone1 = 65;
-g3_7_cone2 = 45;
-g3_7_cone_height = 25;
-g3_7_height = g3_0_cone_height + 30;
+g3_0_cone1 = 65;
+g3_0_cone2 = 45;
+g3_0_cone_height = 25;
+g3_0_cone_top_height = 11;
+g3_0_height = g3_0_cone_height + 40;
+g3_0_bearing_bolt_len = 30;
+//pro zakladnu na strechu auta
+g3_1_yaw_width = 60;
+g3_1_service_holl_height = 8;
+g3_1_service_holl_width = 20;
+//pro druhy dil
 g3_7_length = bearing_efsm_12_width +2*(1+3+30);
 g3_7_width = bearing_efsm_12_width + 2*1+ 2*3;
 g3_7_height = M8_screw_diameter*2.5;
