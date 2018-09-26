@@ -37,6 +37,8 @@ M8_nut_pocket = 13 + 0.5;
 
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
+M6_head_diameter = 10+0.5;
+M6_head_height = 6;
 M6_nut_height = 4.9;
 M6_nut_diameter = 11.8;
 
@@ -335,8 +337,15 @@ bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
 bearing_efsm_12_db = 25;
 bearing_efsm_12_ag = 13;
 bearing_efsm_12_a1 = 7;
+bearing_efsm_12_n = M5_screw_diameter;
 bearing_efsm_space = 1;
 
+bearing_efsm_17_width = 54;
+bearing_efsm_17_boltd = 38/2; // polovina vzdalenosti mezi srouby
+bearing_efsm_17_db = 35;
+bearing_efsm_17_ag = 18;
+bearing_efsm_17_n = M6_screw_diameter;
+bearing_efsm_17_a1 = 10;
 
 // pro dily ze skupiny 3 (888_30**)
 g3_0_cone1 = 65;
@@ -349,10 +358,11 @@ g3_0_bearing_bolt_len = 30;
 g3_1_yaw_width = 60;
 g3_1_service_holl_height = 8;
 g3_1_service_holl_width = 20;
+
 //pro druhy dil
-g3_7_length = bearing_efsm_12_width +2*(1+3+30);
-g3_7_width = bearing_efsm_12_width + 2*1+ 2*3;
-g3_7_height = M8_screw_diameter*2.5;
+g3_7_length = bearing_efsm_17_width +2*(1+3+30);
+g3_7_width = bearing_efsm_17_width + 2*1+ 2*3;
+g3_7_height = M8_screw_diameter*4;
 
 g3_8_magnet_wall_thickness = 7;  // tloustka steny u magnetu
 g3_8_bearing_wall_thickness = bearing_efsm_12_ag-bearing_efsm_12_a1;
