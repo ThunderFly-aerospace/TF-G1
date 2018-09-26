@@ -163,48 +163,48 @@ difference(){
 
 	
 		//otvor pro šroub
-		translate([30,100,-Nut_height_M3])
+		translate([30,100,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}
-		translate([10,0,-Nut_height_M3])
+		translate([10,0,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}	
-		translate([20 + 120,0,-Nut_height_M3])
+		translate([20 + 120,0,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}
-		translate([20 + 120,110,-Nut_height_M3])
+		translate([20 + 120,110,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}
 
-		translate([30,280,-Nut_height_M3])
+		translate([30,280,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}	
-		translate([20 + 120,250,-Nut_height_M3])
+		translate([20 + 120,250,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}
-		translate([20 + 110,370,-Nut_height_M3])
+		translate([20 + 110,370,-M3_nut_height])
 				union(){
 					translate([0,0,-49])
 						cylinder(h = 50, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-						cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+						cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 				}
 
 
@@ -348,36 +348,36 @@ render()
 			888_1008_C();
 
 	//otvory pro šrouby
-	translate([-10 + Nut_height_M3,30,15])
+	translate([-10 + M3_nut_height,30,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
 					cylinder(h = 80, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+					cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 			}
 
-/*	translate([-10 + Nut_height_M3,80,15])
+/*	translate([-10 + M3_nut_height,80,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
 					cylinder(h = 80, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+					cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 			}
 
-	/*translate([-10 + Nut_height_M3,325,15])
+	/*translate([-10 + M3_nut_height,325,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
 					cylinder(h = 80, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+					cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 			}
 
-	translate([-10 + Nut_height_M3,425,15])
+	translate([-10 + M3_nut_height,425,15])
 		rotate([0,-90,0])
 			union(){
 				translate([0,0,-49 - 10 - 20])
 					cylinder(h = 80, r = M3_screw_diameter/2, $fn = draft ? 50 : 100);
-					cylinder(h = Nut_height_M3 + global_clearance,r = Nut_diameter_M3/2, $fn = 6);
+					cylinder(h = M3_nut_height + global_clearance,r = M3_nut_diameter/2, $fn = 6);
 			}
 
 	*/

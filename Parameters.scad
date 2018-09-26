@@ -31,27 +31,34 @@ basic_screw_length = 5;
 
 //Screw diameter for M8 [mm]
 M8_screw_diameter = 8 + 1;
-Nut_height_M8 = 7.5;
-Nut_diameter_M8 = 14.4 + 0.5;
-
+M8_nut_height = 7.5;
+M8_nut_diameter = 14.4 + 0.5;
+M8_nut_pocket = 13 + 0.5;
 
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
-Nut_height_M6 = 4.9;
-Nut_diameter_M6 = 11.8;
+M6_nut_height = 4.9;
+M6_nut_diameter = 11.8;
 
+
+//Screw diameter and nut for M5 [mm]
+M5_screw_diameter=5.5;
+M5_head_height = 5;
+M5_head_diameter = 13+0.5;
+M5_nut_height = 4.5;
+M5_nut_diameter = 9.4;
 
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
-Nut_height_M4 = 3.2;
-Nut_diameter_M4 = 8.4;
-Screw_head_height_M4 = 4;
+M4_screw_head_height = 4;
+M4_nut_height = 3.2;
+M4_nut_diameter = 8.4;
 
 //Screw diameter and nut for M3 [mm]
 M3_screw_diameter = 3.2;
-Nut_height_M3 = 2.7;	
-Nut_diameter_M3 = 6.6; 
-Screw_head_height_M3 = 3;
+M3_nut_height = 2.7;	
+M3_nut_diameter = 6.6; 
+M3_screw_head_height = 3;
 
 
 
@@ -137,7 +144,7 @@ width_of_accumulator = 129.4;//45+1;
 depth_of_accumulator = 40.61;
 height_of_accumulator = 43.65;
 //Zapuštění akumulátoru
-sink_of_accumulator = 5; //main_tube_outer_diameter/5 - Nut_height_M3*1.5;
+sink_of_accumulator = 5; //main_tube_outer_diameter/5 - M3_nut_height*1.5;
 
 //tloušťka hrany spojky
 accumulator_holder_width = 18; 
@@ -194,7 +201,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 /////spojka 666_1004
 
-    width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+    width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
         echo("width_666_1004 is", width_666_1004);
     
         echo("ceil_666_1004 is", ceil(width_666_1004));
@@ -202,7 +209,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
     coupling_screw_length_666_1004 = (ceil(width_666_1004)) * basic_screw_length;
         echo("coupling_screw_length_666_1004 is", coupling_screw_length_666_1004);
 
-    coupling_width_666_1004 = coupling_screw_length_666_1004 + Screw_head_height_M3;
+    coupling_width_666_1004 = coupling_screw_length_666_1004 + M3_screw_head_height;
         echo("coupling_width_666_1004 is", coupling_width_666_1004);
 
     height_666_1004 = coupling_width_666_1004;
@@ -228,10 +235,10 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
         echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
 
 
-thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50; //50 mm je konstatní šířka spojky 666_1026
+thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50; //50 mm je konstatní šířka spojky 666_1026
     echo("thickness_of_plate is", thickness_of_plate);
 
-        coupling_depth_666_1026 = coupling_screw_length_666_1026 - Screw_head_height_M4 - thickness_of_plate;      //zde je odečten screw_head_height_M4 pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
+        coupling_depth_666_1026 = coupling_screw_length_666_1026 - M4_screw_head_height - thickness_of_plate;      //zde je odečten M4_screw_head_height pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
             echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
 
     height_666_1026 = 2*main_tube_outer_diameter;
@@ -246,7 +253,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
 
 ////spojka 666_1017
 
-    width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - Screw_head_height_M3)/basic_screw_length;
+    width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
         echo("width_666_1017 is", width_666_1017);
     
         echo("ceil_666_1017 is", ceil(width_666_1017));
@@ -254,7 +261,7 @@ thickness_of_plate = coupling_screw_length_666_1026 - Screw_head_height_M4 - 50;
     coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
         echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
 
-    coupling_width_666_1017 = coupling_screw_length_666_1017 + Screw_head_height_M3;
+    coupling_width_666_1017 = coupling_screw_length_666_1017 + M3_screw_head_height;
         echo("coupling_width_666_1017 is", coupling_width_666_1017);
 
     depth_666_1017 = coupling_width_666_1017;
@@ -314,3 +321,30 @@ base_division = [0, 159, main_pilon_position + coupling_width_666_1017/2 + globa
 
 // šrouby pro připevnění podložky k hlavní trubce
 base_mounting_screw_length = 50;
+
+
+// kulove lozisko
+
+bearing_efsm_12_width = 40;
+bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
+bearing_efsm_12_db = 25;
+bearing_efsm_12_ag = 13;
+bearing_efsm_space = 1;
+
+
+// pro dily ze skupiny 3 (888_30**)
+g3_0_cone1 = 65;
+g3_0_cone2 = 45;
+g3_0_cone_height = 25;
+g3_0_cone_top_height = 11;
+g3_0_height = g3_0_cone_height + 40;
+g3_0_bearing_bolt_len = 30;
+//pro zakladnu na strechu auta
+g3_1_yaw_width = 60;
+g3_1_service_holl_height = 8;
+g3_1_service_holl_width = 20;
+//pro druhy dil
+g3_7_length = bearing_efsm_12_width +2*(1+3+30);
+g3_7_width = bearing_efsm_12_width + 2*1+ 2*3;
+g3_7_height = M8_screw_diameter*2.5;
+

@@ -56,13 +56,13 @@ union (){
         
 	//šrouby pro uchycení
 		translate([- cone_radius_one/2 - 3, - cone_radius_one/2 - 3,base_thickness-global_clearance])	
-				cylinder (h = whole_length + 2*global_clearance, r = Nut_diameter_M6/2, $fn = draft ? 10 : 20);
+				cylinder (h = whole_length + 2*global_clearance, r = M6_nut_diameter/2, $fn = draft ? 10 : 20);
 		translate([ - cone_radius_one/2 - 3, cone_radius_one/2 + 3, base_thickness-global_clearance])	
-				cylinder (h = whole_length + 2*global_clearance, d = Nut_diameter_M6, $fn = draft ? 10 : 20);
+				cylinder (h = whole_length + 2*global_clearance, d = M6_nut_diameter, $fn = draft ? 10 : 20);
 		translate([cone_radius_one/2 + 3,cone_radius_one/2 + 3, base_thickness-global_clearance])	
-				cylinder (h = whole_length + 2*global_clearance, d = Nut_diameter_M6, $fn = draft ? 10 : 20);
+				cylinder (h = whole_length + 2*global_clearance, d = M6_nut_diameter, $fn = draft ? 10 : 20);
 		translate([cone_radius_one/2 + 3, - cone_radius_one/2 - 3, base_thickness-global_clearance])	
-				cylinder (h = whole_length +  2*global_clearance, d = Nut_diameter_M6, $fn = draft ? 10 : 20);
+				cylinder (h = whole_length +  2*global_clearance, d = M6_nut_diameter, $fn = draft ? 10 : 20);
 
 
 	//otvory pro ložiska
@@ -115,9 +115,9 @@ union (){
 							translate([0,0,whole_screw_length/2 - rib_thickness/3])
 								rotate([0,0,90])
 									union(){
-												//cylinder(h = Nut_height_M6, r = Nut_diameter_M6/2, $fn = 6);
-										//translate([-Nut_diameter_M6/2 - global_clearance/2,0,0])
-												//cube([Nut_diameter_M6 + global_clearance, 20, Nut_height_M6]);
+												//cylinder(h = M6_nut_height, r = M6_nut_diameter/2, $fn = 6);
+										//translate([-M6_nut_diameter/2 - global_clearance/2,0,0])
+												//cube([M6_nut_diameter + global_clearance, 20, M6_nut_height]);
 									}
 						}
 	}		

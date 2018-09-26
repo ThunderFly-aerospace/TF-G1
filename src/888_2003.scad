@@ -45,20 +45,20 @@ module 888_2003(draft = true){
         //nut
         translate([-coupling_width/2 - global_clearance/2,0, height/2])
             rotate ([0,90,0])
-                cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = M3_screw_head_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
         
-        translate([coupling_width/2 - Screw_head_height_M3,0,height/2])
+        translate([coupling_width/2 - M3_screw_head_height,0,height/2])
            rotate ([0,90,0])
-                cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = M3_screw_head_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
 
-        translate([coupling_width/2 - Screw_head_height_M3, -(main_tube_outer_diameter+thickness_between_tubes), height/2])
+        translate([coupling_width/2 - M3_screw_head_height, -(main_tube_outer_diameter+thickness_between_tubes), height/2])
             rotate ([0,90,0])
-                cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = M3_screw_head_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
         
         translate([-coupling_width/2 - global_clearance/2, -(main_tube_outer_diameter+thickness_between_tubes),height/2])
            rotate ([0,90,0])
-                cylinder (h = Screw_head_height_M3 + global_clearance, r = Nut_diameter_M3/2, $fn = 6);
+                cylinder (h = M3_screw_head_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
     }
 }
