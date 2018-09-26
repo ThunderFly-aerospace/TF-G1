@@ -47,6 +47,7 @@ M5_head_height = 5;
 M5_head_diameter = 13+0.5;
 M5_nut_height = 4.5;
 M5_nut_diameter = 9.4;
+M5_nut_pocket = 8.4;
 
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
@@ -329,6 +330,7 @@ bearing_efsm_12_width = 40;
 bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
 bearing_efsm_12_db = 25;
 bearing_efsm_12_ag = 13;
+bearing_efsm_12_a1 = 7;
 bearing_efsm_space = 1;
 
 
@@ -348,3 +350,10 @@ g3_7_length = bearing_efsm_12_width +2*(1+3+30);
 g3_7_width = bearing_efsm_12_width + 2*1+ 2*3;
 g3_7_height = M8_screw_diameter*2.5;
 
+g3_8_magnet_wall_thickness = 7;  // tloustka steny u magnetu
+g3_8_bearing_wall_thickness = bearing_efsm_12_ag-bearing_efsm_12_a1;
+g3_8_magnet_diameter = 63; 
+g3_8_cylinder_d = 55; // prumer valce
+g3_8_cylinder_h = 30 + g3_8_magnet_wall_thickness;
+g3_8_m5_lenght = 40; // delka sroubu pro pridelani kuloveho loziska
+g3_8_pocket_wall = g3_8_cylinder_h-(g3_8_m5_lenght-bearing_efsm_12_a1-M5_nut_height-5);
