@@ -27,7 +27,7 @@ key_width = flange_width;
 key_depth = flange_depth;
 key_height = M5_nut_height;
 
-M5_screw_length = 15;
+M5_screw_length = 20;
 M2_5_screw_length = 10;
 
 		
@@ -173,13 +173,22 @@ translate([0,0,48 + 9])
 								cylinder(h = M5_screw_length + global_clearance, r = M5_screw_diameter/2, $fn = draft ? 50 : 100);
 						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws, - M5_screw_length])
 								cylinder(h = M5_screw_length + global_clearance, r = M5_screw_diameter/2, $fn = draft ? 50 : 100);
-			
+					//otvory pro matky
+						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + 2])
+								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+						translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + 2])
+								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+						translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + 2])
+								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + 2])
+								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+
 					//otvor pro klíč k přírubě
-						translate([-M5_nut_diameter/2 - 20,-M5_nut_diameter/2,- flange_height - key_height*2.6])
-								cube([key_width + M5_nut_diameter + 20, key_depth + M5_nut_diameter,key_height*2]);
-						translate([key_width + 4.8, + key_depth + M5_nut_diameter/2,- flange_height - key_height - M5_screw_length*0.45])
-							rotate([0,rake_angle,180])
-								cube([key_width + M5_nut_diameter + 20, key_depth + M5_nut_diameter,key_height*1.8]);
+						translate([-M5_nut_diameter/2-30,M5_nut_diameter/2,- flange_height - key_height*3.2])
+								cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2]);
+						//translate([key_width + 4.8, + key_depth + M5_nut_diameter/2,- flange_height - key_height - M5_screw_length*0.45])
+							//rotate([0,rake_angle,180])
+							//	cube([key_width + M5_nut_diameter + 20, key_depth + M5_nut_diameter,key_height*1.8]);
 				}
 	//otvor na čep
 		translate([flange_width/2 - global_clearance - width/2 + 10 - 2.5 + 32,0,height - 30])
