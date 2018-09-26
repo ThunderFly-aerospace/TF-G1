@@ -13,6 +13,7 @@ use <888_3005.scad>
 use <888_3006.scad>
 use <888_3007.scad>
 use <888_3008.scad>
+use <888_3009.scad>
 
 module licovany_sroub_m6(delka = 70){
     translate([0,0,(11-5.5)/2]) color([0,0,1]){
@@ -24,8 +25,9 @@ module licovany_sroub_m6(delka = 70){
 
 module 888_3102(){
     translate([0,0,0]) 888_3006();
-    translate([0,0,77]) 888_3007();
+    translate([0,0,78]) 888_3007();
     translate([0,0,77]) translate([150, 0, 0]) rotate([0,-90,0]) 888_3008();
+    translate([0,0,-25]) 888_3009();
 
 }
 difference(){

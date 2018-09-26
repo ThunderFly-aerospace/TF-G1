@@ -35,18 +35,24 @@ difference(){
             translate([0,0,g3_0_height-g3_0_cone_top_height]) cylinder(r=g3_0_cone2, h = 20, $fn=draft?50:100);
             translate([-50,-g3_1_yaw_width/2,g3_0_height-g3_0_cone_top_height]) cube([100, g3_1_yaw_width, 30+1]);
         }
+        
+        // omezeni pro osu yaw
+        difference(){
+            translate([0,0,g3_0_height]) cylinder(d=16.7, h = bearing_efsm_12_ag, $fn=draft?50:100);
+            translate([-50,-g3_1_yaw_width/2,g3_0_height])  cylinder(r=1, h = 20, $fn=draft?50:100);
+        }
     }
     
     // srouby pri pridelani na strechu
     for (i = [0:3]){
-        rotate([0, 0, i*90]) translate([50, 0, -global_clearance]) cylinder(h=100, d=M6_screw_diameter, $fn=draft?50:100);
-        rotate([0, 0, i*90]) translate([50, 0, -global_clearance]) cylinder(h=1, d1=M6_screw_diameter+2, d2=M6_screw_diameter, $fn=draft?50:100);
-        rotate([0, 0, i*90]) translate([50, 0, 30-18-5]) rotate([0,0,30]) cylinder(h=20, d=M6_nut_diameter, $fn=6, $fn=6);
+        rotate([0, 0, i*90]) translate([g3_0_srcew_dist, 0, -global_clearance]) cylinder(h=100, d=M6_screw_diameter, $fn=draft?50:100);
+        rotate([0, 0, i*90]) translate([g3_0_srcew_dist, 0, -global_clearance]) cylinder(h=1, d1=M6_screw_diameter+2, d2=M6_screw_diameter, $fn=draft?50:100);
+        rotate([0, 0, i*90]) translate([g3_0_srcew_dist, 0, 30-18-5]) rotate([0,0,30]) cylinder(h=20, d=M6_nut_diameter, $fn=6, $fn=6);
     }
     
     // kapsa pro matici s podlozkou
-    translate([-M6_nut_diameter, -g3_1_service_holl_width/2, g3_0_height-g3_1_service_holl_height-(g3_0_bearing_bolt_len-g3_7_height/2-bearing_efsm_12_ag/2)-1]) cube([200, g3_1_service_holl_width, g3_1_service_holl_height]);
-    cylinder(h=1000, d=8_shank_diameter, $fn=draft?50:100);
+    translate([-M10_nut_diameter, -g3_1_service_holl_width/2, g3_0_height-g3_1_service_holl_height-(g3_0_bearing_bolt_len-g3_7_height/2-bearing_efsm_12_ag/2)-1]) cube([200, g3_1_service_holl_width, g3_1_service_holl_height]);
+    cylinder(h=1000, d=M10_screw_diameter, $fn=draft?50:100);
 }
 }
 

@@ -29,6 +29,15 @@ thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
+
+//Screw diameter and nut for M10 [mm]
+M10_screw_diameter=10.4;
+M10_head_height = 10;
+M10_head_diameter = 16+0.5;
+M10_nut_height = 10.5;
+M10_nut_diameter = 25.5;
+M10_nut_pocket = 22.3;
+
 //Screw diameter for M8 [mm]
 M8_screw_diameter = 8 + 1;
 M8_nut_height = 7.5;
@@ -348,21 +357,23 @@ bearing_efsm_17_n = M6_screw_diameter;
 bearing_efsm_17_a1 = 10;
 
 // pro dily ze skupiny 3 (888_30**)
-g3_0_cone1 = 65;
-g3_0_cone2 = 45;
+g3_0_cone1 = 70;
+g3_0_cone2 = 50;
 g3_0_cone_height = 25;
 g3_0_cone_top_height = 11;
 g3_0_height = g3_0_cone_height + 40;
 g3_0_bearing_bolt_len = 30;
+g3_0_srcew_dist = 55;
+
 //pro zakladnu na strechu auta
-g3_1_yaw_width = 60;
+g3_1_yaw_width = 75;
 g3_1_service_holl_height = 8;
 g3_1_service_holl_width = 20;
 
 //pro druhy dil
 g3_7_length = bearing_efsm_17_width +2*(1+3+30);
 g3_7_width = bearing_efsm_17_width + 2*1+ 2*3;
-g3_7_height = M8_screw_diameter*4;
+g3_7_height = M8_screw_diameter*3;
 
 g3_8_magnet_wall_thickness = 7;  // tloustka steny u magnetu
 g3_8_bearing_wall_thickness = bearing_efsm_12_ag-bearing_efsm_12_a1;
