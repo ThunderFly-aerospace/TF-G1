@@ -25,7 +25,8 @@ lock_nut_height = 8;
 
 difference(){
     union (){
-        cylinder(r1=g3_0_cone1, r2=g3_0_cone2, h = g3_0_cone_height, $fn=draft?50:100);
+        cylinder(r=g3_0_cone1, h=5, $fn=draft?50:100);
+        translate([0,0,5]) cylinder(r1=g3_0_cone1, r2=g3_0_cone2, h = g3_0_cone_height-5, $fn=draft?50:100);
         cylinder(r=g3_0_cone2, h = g3_0_height-g3_0_cone_top_height, $fn=draft?50:100);
         translate([0,0,g3_0_height-g3_0_cone_top_height]) cylinder(r1=g3_0_cone2, r2=8+1, h = g3_0_cone_top_height, $fn=draft?50:100);
         
@@ -39,7 +40,8 @@ difference(){
     // srouby pri pridelani na strechu
     for (i = [0:3]){
         rotate([0, 0, i*90]) translate([50, 0, -global_clearance]) cylinder(h=100, d=M6_screw_diameter, $fn=draft?50:100);
-        rotate([0, 0, i*90]) translate([50, 0, 30-18-5]) cylinder(h=100, d=M6_nut_diameter, $fn=6, $fn=6);
+        rotate([0, 0, i*90]) translate([50, 0, -global_clearance]) cylinder(h=1, d1=M6_screw_diameter+2, d2=M6_screw_diameter, $fn=draft?50:100);
+        rotate([0, 0, i*90]) translate([50, 0, 30-18-5]) rotate([0,0,30]) cylinder(h=20, d=M6_nut_diameter, $fn=6, $fn=6);
     }
     
     // kapsa pro matici s podlozkou
