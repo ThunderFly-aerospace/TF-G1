@@ -60,6 +60,10 @@ M3_nut_height = 2.7;
 M3_nut_diameter = 6.6; 
 M3_screw_head_height = 3;
 
+//Screw diameter and nut for M2,5 [mm]
+M2_5_screw_diameter = 2.7;
+M2_5_nut_height = 2.3;
+M2_5_nut_diameter = 6;
 
 
 //šroub servo
