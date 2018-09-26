@@ -27,7 +27,7 @@ key_width = flange_width;
 key_depth = flange_depth;
 key_height = M5_nut_height;
 
-M5_screw_length = 20;
+M5_screw_length = 19;
 M2_5_screw_length = 10;
 
 		
@@ -174,13 +174,13 @@ translate([0,0,48 + 9])
 						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws, - M5_screw_length])
 								cylinder(h = M5_screw_length + global_clearance, r = M5_screw_diameter/2, $fn = draft ? 50 : 100);
 					//otvory pro matky
-						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + 2])
+						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + key_height + M5_nut_height - global_clearance])
 								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
-						translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + 2])
+						translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + key_height + M5_nut_height - global_clearance])
 								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
-						translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + 2])
+						translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + key_height + M5_nut_height - global_clearance])
 								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
-						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + 2])
+						translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + key_height + M5_nut_height - global_clearance])
 								cylinder(h = M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
 
 					//otvor pro klíč k přírubě
