@@ -13,7 +13,7 @@ module fork_half(height, wheel_width, fork_angle)
         cylinder(h = height, d = 608_bearing_outer_diameter * 1.5, $fn = draft ? 10 :50 );
         translate([wheel_width/2, - 2*tube_for_undercarriage_outer_diameter, 1.8 * tube_for_undercarriage_outer_diameter])
             rotate([45,0,0])
-                cube([10,15,height/2]);
+                cube([10,15,height/4]);
     }
 
     translate([wheel_width/2, - 2*tube_for_undercarriage_outer_diameter, 1.8 * tube_for_undercarriage_outer_diameter])
