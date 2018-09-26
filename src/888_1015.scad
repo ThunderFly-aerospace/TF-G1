@@ -61,11 +61,11 @@ module 888_1015(draft){
 		translate([width/2 - servo_width + global_clearance,-depth/2 + 3*plate_thickness,7.5 + 3*plate_thickness])
 			cube([servo_width, depth - 6*plate_thickness, servo_height - 6*plate_thickness]);
 		//otvor pro kabely od serv
-		translate([servo_width - 5,-5,-global_clearance])
-			cube([15,15,20]);
+		translate([width/2 - servo_width + servo_width/4- 4,-10,-global_clearance])
+			cube([servo_width/2,20,20]);
 		//otvory pro šrouby pro připevnění serva
 		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5])
-			rotate([0,90,-90])
+			rotate([0,-90,90])
 				union(){
 							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
 					translate([0,0,3])
@@ -75,7 +75,7 @@ module 888_1015(draft){
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
 		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5])
-			rotate([0,90,-90])
+			rotate([0,-90,90])
 				union(){
 							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
 					translate([0,0,3])
@@ -130,7 +130,7 @@ module 888_1015(draft){
 							}
 
 					translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48])
-						rotate([0,-90, 90])
+						rotate([0, 90, -90])
 							union(){
 										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
 								translate([0,0,3])
@@ -140,7 +140,7 @@ module 888_1015(draft){
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
 					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48])
-						rotate([0,-90, 90])
+						rotate([0, 90, -90])
 							union(){
 										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
 								translate([0,0,3])
@@ -182,15 +182,16 @@ module 888_1015(draft){
 				//otvor pro klíč na matku nosníku rotoru
 					translate([-M5_nut_diameter/2-30, M5_nut_diameter/2, - flange_height - key_height*3.2])
 						cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2]);
-				}
+
 		//otvor na čep
-		translate([flange_width/2 - global_clearance - width/2 + 10 - 2.5 + 32, 0, height - 30])
-			rotate([0,rake_angle,0])
-				hull(){
-						cylinder (h = 22, r1 = 8, r2 = 1.5, $fn = draft ? 50 : 100);
-					translate([5,0,0])
-						cylinder (h = 22, r1 = 8, r2 = 1.5, $fn = draft ? 50 : 100);
-				}
+		translate([flange_width/2 + 32, flange_depth/2, -20])
+			hull(){
+				translate([1.5,0,0])
+					cylinder (h = 25, r1 = 8, r2 = 2.55, $fn = draft ? 50 : 100);
+				translate([-1.5,0,0])
+					cylinder (h = 25, r1 = 8, r2 = 2.55, $fn = draft ? 50 : 100);
+			}
+		}
 		//otvor pro klíč k přírubě
 		translate([- global_clearance - width/2 + 10 -M5_nut_diameter/2-30, M5_nut_diameter/2 -flange_depth/2 - global_clearance, height - flange_height - flange_height - key_height*4.5])
 			cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2.3]);
