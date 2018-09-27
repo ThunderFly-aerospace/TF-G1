@@ -58,11 +58,9 @@ module 888_1015(draft){
 		//otvory pro serva
 		translate([width/2 - servo_width - 4,-depth/2 - global_clearance/2,7.5])
 			cube([servo_width, depth + global_clearance,servo_height]);
-		translate([width/2 - servo_width + global_clearance,-depth/2 + 3*plate_thickness,7.5 + 3*plate_thickness])
-			cube([servo_width, depth - 6*plate_thickness, servo_height - 6*plate_thickness]);
 		//otvor pro kabely od serv
-		translate([width/2 - servo_width + servo_width/4- 4,-10,-global_clearance])
-			cube([servo_width/2,20,20]);
+		translate([width/2 - servo_width + servo_width/4- 4,-15,-global_clearance])
+			cube([servo_width/2,30,20]);
 		//otvory pro šrouby pro připevnění serva
 		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5])
 			rotate([0,-90,90])
@@ -170,14 +168,14 @@ module 888_1015(draft){
 					translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws, - M5_screw_length])
 						cylinder(h = M5_screw_length + global_clearance, r = M5_screw_diameter/2, $fn = draft ? 50 : 100);
 				//otvory pro matky
-					translate([(flange_width - flange_length_beteween_screws)/2, (flange_width - flange_length_beteween_screws)/2, -M5_screw_length + key_height])
-						cylinder(h = 2*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
-					translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + key_height])
-						cylinder(h = 2*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
-					translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + key_height])
-						cylinder(h = 2*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
-					translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + key_height])
-						cylinder(h = 2*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+					translate([(flange_width - flange_length_beteween_screws)/2, (flange_width - flange_length_beteween_screws)/2, -M5_screw_length + key_height - 2*M5_nut_height])
+						cylinder(h = 4*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+					translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2,-M5_screw_length + key_height - M5_nut_height])
+						cylinder(h = 3*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+					translate([(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + key_height - M5_nut_height])
+						cylinder(h = 3*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
+					translate([(flange_width - flange_length_beteween_screws)/2,(flange_width - flange_length_beteween_screws)/2 + flange_length_beteween_screws,-M5_screw_length + key_height - 2*M5_nut_height])
+						cylinder(h = 4*M5_nut_height, r = M5_nut_diameter/2, $fn = 6);
 
 				//otvor pro klíč na matku nosníku rotoru
 					translate([-M5_nut_diameter/2-30, M5_nut_diameter/2, - flange_height - key_height*3.2])
