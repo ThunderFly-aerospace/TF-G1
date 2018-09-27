@@ -41,7 +41,7 @@ module 888_1015(draft){
 				cube([width + 2*global_clearance, depth + 2*global_clearance,20]);
 
 		//otvory z dílu 666_1026
-		translate([-width/2 + width_666_1026/2,0,0])
+		translate([17.5 - width/2,0,0])
 			union(){
 			//vertikální trubka
 				translate([0,0,-global_clearance])
@@ -62,7 +62,7 @@ module 888_1015(draft){
 		translate([width/2 - servo_width + servo_width/4- 4,-15,-global_clearance])
 			cube([servo_width/2,30,20]);
 		//otvory pro šrouby pro připevnění serva
-		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5])
+		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4])
 			rotate([0,-90,90])
 				union(){
 							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -72,7 +72,7 @@ module 888_1015(draft){
 					translate([0,-M2_5_nut_diameter/2,3])
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
-		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5])
+		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4])
 			rotate([0,-90,90])
 				union(){
 							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -83,7 +83,7 @@ module 888_1015(draft){
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
 
-		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48])
+		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 			rotate([0,-90, 90])
 				union(){
 							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -93,7 +93,7 @@ module 888_1015(draft){
 					translate([0,-M2_5_nut_diameter/2,3])
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
-		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48])
+		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 			rotate([0,-90, 90])
 				union(){
 							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -106,7 +106,7 @@ module 888_1015(draft){
 		translate([0,0,48 + 9])
 			rotate([180,0,0])
 				union(){
-						translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5])
+					translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4])
 						rotate([0,90,-90])
 							union(){
 										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -116,7 +116,7 @@ module 888_1015(draft){
 								translate([0,-M2_5_nut_diameter/2,3])
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
-					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5])
+					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4])
 						rotate([0,90,-90])
 							union(){
 										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -127,7 +127,7 @@ module 888_1015(draft){
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
 
-					translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48])
+					translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 						rotate([0, 90, -90])
 							union(){
 										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
@@ -137,7 +137,7 @@ module 888_1015(draft){
 								translate([0,-M2_5_nut_diameter/2,3])
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
-					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48])
+					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 						rotate([0, 90, -90])
 							union(){
 										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
