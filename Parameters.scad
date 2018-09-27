@@ -362,7 +362,7 @@ g3_0_cone2 = 50;
 g3_0_cone_height = 25;
 g3_0_cone_top_height = 11;
 g3_0_height = g3_0_cone_height + 40;
-g3_0_bearing_bolt_len = 30;
+g3_0_bearing_bolt_len = 50;
 g3_0_srcew_dist = 55;
 
 //pro zakladnu na strechu auta
