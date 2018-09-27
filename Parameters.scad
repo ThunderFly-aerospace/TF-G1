@@ -385,3 +385,8 @@ g3_8_pocket_wall = g3_8_cylinder_h-(g3_8_m5_lenght-bearing_efsm_12_a1-M5_nut_hei
 
 // podlozka na strechu auta
 g3_9_height = 20;
+
+
+
+servo_20kg_width = 21;   //šřka otvoru pro servo
+servo_20kg_height = 42;  //výška otvoru pro servo
