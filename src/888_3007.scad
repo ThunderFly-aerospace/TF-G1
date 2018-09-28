@@ -2,7 +2,7 @@ use <./lib/naca4.scad>
 include <../Parameters.scad>
 draft = true;
 
-$fs =  draft ? 50 :100;
+$fs =  draft? 50:100;
 //$fa  = 10;
 
 
@@ -15,18 +15,18 @@ difference(){
     
     
     // zapusteni kuloveho loziska
-    translate([-(bearing_efsm_17_width+bearing_efsm_space)/2, -(bearing_efsm_17_width+bearing_efsm_space)/2, 0]) cube([bearing_efsm_17_width+bearing_efsm_space, bearing_efsm_17_width+bearing_efsm_space, g3_7_height]);
+    translate([-(bearing_efsm_17_width+bearing_efsm_space)/2, -(bearing_efsm_17_width+bearing_efsm_space)/2, g3_7_height/2-bearing_efsm_17_ag]) cube([bearing_efsm_17_width+bearing_efsm_space, bearing_efsm_17_width+bearing_efsm_space, g3_7_height]);
     
     // dira skrz pro lozisko
     translate([0,0, -(g3_7_height+global_clearance)/2])
-        cylinder(d = bearing_efsm_17_db, h = g3_7_height+global_clearance, $fn =  draft ? 50 :100);
+        cylinder(d = bearing_efsm_17_db, h = g3_7_height+global_clearance, $fn=draft?50:100);
     
     // diry pro pridelani loziska
     for (i=[0:3]) rotate([0, 0, 90*i]){
     translate([bearing_efsm_17_boltd, bearing_efsm_17_boltd, -(g3_7_height+global_clearance)/2])
         cylinder(h=g3_7_height+global_clearance, d=bearing_efsm_17_n, $fn=draft? 50:100);
     translate([bearing_efsm_17_boltd, bearing_efsm_17_boltd, -(g3_7_height+global_clearance)/2])
-        cylinder(h=M6_head_height, d=M6_head_diameter, $fn=draft? 50:100);
+        cylinder(h=M6_head_height, d=M6_head_diameter, $fn=6);
     }
         
     for (i=[0:1]) rotate([0,0,180*i]){
@@ -38,6 +38,5 @@ difference(){
 }
 
 }
-
 
 888_3007(draft);
