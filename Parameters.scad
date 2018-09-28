@@ -351,7 +351,7 @@ bearing_efsm_space = 1;
 
 bearing_efsm_17_width = 54;
 bearing_efsm_17_boltd = 38/2; // polovina vzdalenosti mezi srouby
-bearing_efsm_17_db = 35;
+bearing_efsm_17_db = 36;
 bearing_efsm_17_ag = 18;
 bearing_efsm_17_n = M6_screw_diameter;
 bearing_efsm_17_a1 = 10;
