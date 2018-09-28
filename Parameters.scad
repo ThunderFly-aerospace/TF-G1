@@ -359,6 +359,61 @@ bearing_efsm_17_ag = 18;
 bearing_efsm_17_n = M6_screw_diameter;
 bearing_efsm_17_a1 = 10;
 
+
+// 20 KG servo parameters
+
+
+servo_20kg_axis_offset = 9.375; // jak je osa mimo stredu
+servo_20kg_body_x = 42;
+servo_20kg_body_y = 21;
+servo_20kg_body_z = 40;
+servo_20kg_thread_x = 49/2;
+servo_20kg_thread_y = 10/2;
+servo_20kg_body_below = 10; // jak hluboko je tělo serva pod drzaky na srouby
+servo_20kg_below = 25.8; // jak hluboko je páka serva pod drzaky na srouby
+
+servo_20kg_bolt_d = 2.5+0.3;
+servo_20kg_nut_d = 5+0.3;
+
+
+
+//  888_2***
+//    G2
+//
+
+
+g2_0_part_space = 2; // mezera mezi zadni a predni casti
+
+g2_5_height = 608_bearing_outer_diameter*1.5;
+g2_5_width = 70+5.5+11;
+g2_5_threads = 2; // kolik ma byt sroubu skrz nosnou tyc
+
+g2_5_m3_length = base_mounting_screw_length; // sroub, ktery se pouziva na sesroubovani s nosnou tyci
+g2_5_servo_shift = 30; 
+g2_5_servo_wall = 5;
+
+g2_5_m8_length = 60; // sroub, ktery se pouziva jako osa pro podlozku
+g2_5_front_l = main_tube_outer_diameter + 608_bearing_outer_diameter*2;// jak moc ma byt magnet v predu
+
+g2_5_zapusteni_serva = 30;
+g2_5_length = g2_5_zapusteni_serva + 2*main_tube_outer_diameter + 30;
+g2_5_length_offset = -10;
+
+g2_5_bearing_space = 2; // mezera pro podlozku mezi loziskem a stenou..
+
+
+g2_0_vertical_bolts = 2;
+g2_0_space_btw_wheel_holder = 25.8;
+
+g2_6_plate_thickness = 8;
+g2_6_servo_distance = 54; // jak je daleko servo pred tyci kola
+g2_6_servo_shift = 0; // jak je osa serva mimo stredu
+g2_6_servo_bolt_l = 8; // delka sroubu od konce serva po zacatek matky
+g2_6_min_wall_around = 8; // minimalni material okolo serva
+
+
+
+
 // pro dily ze skupiny 3 (888_30**)
 g3_0_cone1 = 70;
 g3_0_cone2 = 50;

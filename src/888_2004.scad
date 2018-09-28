@@ -1,3 +1,4 @@
+include <../Parameters.scad>
 
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
@@ -7,8 +8,9 @@ $fa = 10;
 
 module 888_2004(height = 45, height_of_mini_cylinder = 2, draft = true)
 {
-
-bearing_screw_length = 30;
+    height = height_of_mini_cylinder+g2_0_space_btw_wheel_holder+g2_5_height;
+    
+    bearing_screw_length = 30;
 
 	difference ()
     {
@@ -31,9 +33,16 @@ bearing_screw_length = 30;
             cylinder (h= bearing_screw_length - 2 * 608_bearing_thickness - 10 - 1.5, d = 8.5, $fn = draft ? 50 : 100);
 
         //screw
-        translate([-main_tube_inner_diameter/2 - global_clearance/2, 0, height/2 + height_of_mini_cylinder])
-            rotate([0,90,0])
-                cylinder(h = main_tube_inner_diameter + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        //translate([-main_tube_inner_diameter/2 - global_clearance/2, 0, height/2 + height_of_mini_cylinder])
+        //    rotate([0,90,0])
+        //        cylinder(h = main_tube_inner_diameter + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+ 
+        for (i = [1:2]){
+            translate([0,main_tube_outer_diameter + global_clearance/2, height - i*g2_5_height/3])
+                rotate([90,0,0])
+                    cylinder(h = 2 * main_tube_outer_diameter + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+        }
+
     }
 }
 
@@ -41,6 +50,9 @@ bearing_screw_length = 30;
 
 module 888_2004_drillhelper(height = 45, height_of_mini_cylinder = 2)
 {
+    
+    height = height_of_mini_cylinder+g2_0_space_btw_wheel_holder+g2_5_height;
+    
     difference (){
 
     translate([-(main_tube_outer_diameter + 2* thickness_between_tubes)/2,- main_tube_outer_diameter,0])
@@ -51,10 +63,17 @@ module 888_2004_drillhelper(height = 45, height_of_mini_cylinder = 2)
                     cylinder(h=height + global_clearance,r = main_tube_outer_diameter/2,$fn = draft ? 100 : 200);
 
             //screw
-            translate([0,main_tube_outer_diameter + global_clearance/2, height/2 + height_of_mini_cylinder])
-                rotate([90,0,0])
-                    cylinder(h = 2 * main_tube_outer_diameter + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            //translate([0,main_tube_outer_diameter + global_clearance/2, height/2 + height_of_mini_cylinder])
+            //    rotate([90,0,0])
+            //        cylinder(h = 2 * main_tube_outer_diameter + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
             
+            for (i = [1:2]){
+                translate([0,main_tube_outer_diameter + global_clearance/2, height - i*g2_5_height/3])
+                    rotate([90,0,0])
+                        cylinder(h = 2 * main_tube_outer_diameter + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
+            }
+        
+        
             //bevelled edge
             translate([(main_tube_outer_diameter + 2*thickness_between_tubes)/2, main_tube_outer_diameter - 1,- global_clearance/2])
                 rotate([0,0,45])
