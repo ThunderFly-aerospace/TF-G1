@@ -1,7 +1,7 @@
 include <../Parameters.scad>
 
 g2_7_length = 50;
-module 888_2007(draft = true){
+module (draft = true){
     difference(){
         union(){
             translate([0,0,0])
@@ -9,6 +9,9 @@ module 888_2007(draft = true){
                     cylinder(d=2*608_bearing_outer_diameter, h=main_tube_outer_diameter);
             translate([0,-main_tube_outer_diameter, -608_bearing_outer_diameter])
                     cube([g2_7_length, main_tube_outer_diameter, 2*608_bearing_outer_diameter]);
+            translate([g2_7_length, 0, 0])
+                rotate([0, 90, 0])
+                    cylinder(d=70, h=3);
         }
         
         rotate([90, 0, 0])

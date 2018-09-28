@@ -56,16 +56,17 @@ module 888_2005(draft = true){
         
         
         
+        // diry na pridelani podlozky pro magnet
         translate([g2_5_front_l-g2_0_part_space/2-20, 42/2, g2_5_height/2])
             rotate([0, 90, 0])
-                cylinder(d=M3_screw_diameter, h=25, $fn=draft?50:100);
+                cylinder(d=M4_screw_diameter, h=25, $fn=draft?50:100);
         
         translate([g2_5_front_l-g2_0_part_space/2-20, -42/2, g2_5_height/2])
             rotate([0, 90, 0])
-                cylinder(d=M3_screw_diameter, h=25, $fn=draft?50:100);
+                cylinder(d=M4_screw_diameter, h=25, $fn=draft?50:100);
         
-        translate([g2_5_front_l-g2_0_part_space/2-10, -42/2-M3_nut_diameter, g2_5_height/2])
-            cube([M3_nut_height, 42+M3_nut_diameter*2, M3_nut_diameter]);
+        translate([g2_5_front_l-g2_0_part_space/2-10, -42/2-M4_nut_diameter, g2_5_height/2-M4_nut_diameter/2])
+            cube([M4_nut_height, 42+M4_nut_diameter*2, M4_nut_diameter]);
         
         
         // okomentuj pro kontrolu matic
