@@ -42,16 +42,10 @@ module 888_2005(draft = true){
                 rotate([0, 90, 0])
                     cylinder(h=g2_5_m3_length/2+5, d=M3_screw_diameter, $fn=draft?50:100);
             // tvar matice
-            // tvar matice
             translate([g2_5_m3_length/2-5, 0, i*g2_5_height/(bolts+1)])
                 rotate([0, 90, 0])
                     rotate([0,0,0])
-                        cylinder(h=M3_nut_height+0.5, d=M3_nut_diameter, $fn=6);
-            // kapsa
-            translate([g2_5_m3_length/2-5, 0, i*g2_5_height/(bolts+1)])
-                rotate([0, 0, 0])
-                    translate([0, -M3_nut_diameter/2,-2])
-                        cube([M3_nut_height+0.5, M3_nut_diameter, 100]);
+                        cylinder(h=100, d=M3_nut_diameter, $fn=6);
         }
         
         
