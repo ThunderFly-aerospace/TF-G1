@@ -4,7 +4,7 @@ include <../Parameters.scad>
 g2_0_part_space = 2; // mezera mezi zadni a predni casti
 
 g2_5_height = 608_bearing_outer_diameter*2;
-g2_5_width = 70;
+g2_5_width = 70+5.5+11;
 g2_5_threads = 2; // kolik ma byt sroubu skrz nosnou tyc
 
 g2_5_m3_length = 50; // sroub, ktery se pouziva na sesroubovani s nosnou tyci
@@ -50,6 +50,12 @@ module 888_2006(draft = true){
                 cylinder(d=g2_5_width, h=g2_5_height, $fn=draft?50:100);
             }
             hull(){
+                
+                intersection(){
+                    translate([g2_0_part_space/2, -g2_5_width/2, 0])
+                        cube([g2_5_front_l-g2_0_part_space/2, g2_5_width, g2_5_height]);
+                    cylinder(d=g2_5_width, h=g2_6_plate_thickness, $fn=draft?50:100);
+                }
                 translate([g2_0_part_space/2, -g2_5_width/2, 0])
                     cube([g2_0_part_space/2, g2_5_width, g2_6_plate_thickness]);
                 
