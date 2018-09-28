@@ -341,6 +341,13 @@ base_mounting_screw_length = 50;
 
 // kulove lozisko
 
+bearing_efsm_08_h = 33;
+bearing_efsm_08_m = 22;
+bearing_efsm_08_db = 18;
+bearing_efsm_08_ag = 10.5;
+bearing_efsm_08_n = M4_screw_diameter;
+bearing_efsm_08_a1 = 5.5;
+
 bearing_efsm_12_width = 40;
 bearing_efsm_12_h = bearing_efsm_12_width;
 bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
