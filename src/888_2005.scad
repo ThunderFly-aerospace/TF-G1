@@ -83,4 +83,24 @@ module 888_2005(draft = true){
     }
 }
 
+module 888_2005_drill_helper(draft = true)
+{
+        difference(){
+            translate([-40,-40,0])
+                cube([80,80,10]);
+
+            difference(){
+                cylinder(h=5, d=72, $fn=draft?50:100);
+                cylinder(h=5, d=21, $fn=draft?50:100);
+            }
+            translate([-46/2,0,0])
+                cylinder(h=10, d=4, $fn=20);
+            translate([46/2,0,0])
+                cylinder(h=10, d=4, $fn=20);
+        }
+}
+/*
+translate([0,0,100])
+    888_2005_drill_helper(draft = true);
+*/
 888_2005();
