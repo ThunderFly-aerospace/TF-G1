@@ -67,7 +67,7 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
         }
         
         // kapsa pro matici s podlozkou
-        translate([-M10_nut_diameter, -g3_1_service_holl_width/2, g3_0_height-g3_1_service_holl_height-(g3_0_bearing_bolt_len-g3_7_height/2-bearing_efsm_12_ag/2)-1])
+        translate([-M10_nut_diameter, -g3_1_service_holl_width/2, g3_0_height-g3_1_service_holl_height-(g3_0_bearing_bolt_len-g3_7_height/2-bearing_efsm_12_ag/2)])
             cube([200, g3_1_service_holl_width, g3_1_service_holl_height]);
         cylinder(h = 1000, d = M10_screw_diameter, $fn = draft?50:100);
     }

@@ -370,13 +370,13 @@ g3_0_srcew_dist = 55;
 
 //pro zakladnu na strechu auta
 g3_1_yaw_width = 75;
-g3_1_service_holl_height = 8;
-g3_1_service_holl_width = 20;
+g3_1_service_holl_height = 8.4 + 2;
+g3_1_service_holl_width = 16 + 1.5;
 
 //pro druhy dil
 g3_7_length = bearing_efsm_17_width +2*(1+3+30);
 g3_7_width = bearing_efsm_17_width + 2*1+ 2*3;
-g3_7_height = M8_screw_diameter*4;
+g3_7_height = M8_screw_diameter*3;
 
 g3_8_magnet_wall_thickness = 7;  // tloustka steny u magnetu
 g3_8_bearing_wall_thickness = bearing_efsm_12_ag-bearing_efsm_12_a1;
