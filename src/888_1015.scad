@@ -29,7 +29,7 @@ module 888_1015(draft){
 
 	M5_screw_length = 19;
 	M2_5_screw_length = 10;
-
+	M2_5_pocket_depth = 5;
 		
 	difference (){
 		//základní kostka
@@ -59,48 +59,48 @@ module 888_1015(draft){
 		translate([width/2 - servo_width - 4,-depth/2 - global_clearance/2,7.5])
 			cube([servo_width, depth + global_clearance,servo_height]);
 		//otvor pro kabely od serv
-		translate([width/2 - servo_width + servo_width/4- 4,-15,-global_clearance])
-			cube([servo_width/2,30,20]);
+		translate([width/2 - servo_width + servo_width/4- 4,-20,-global_clearance])
+			cube([servo_width/2,40,20]);
 		//otvory pro šrouby pro připevnění serva
 		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4])
 			rotate([0,-90,90])
 				union(){
-							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-					translate([0,0,3])
+					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+					translate([0,0,M2_5_pocket_depth])
 						rotate([0,0,90])
 							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-					translate([0,-M2_5_nut_diameter/2,3])
+					translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
 		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4])
 			rotate([0,-90,90])
 				union(){
-							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-					translate([0,0,3])
+					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+					translate([0,0,M2_5_pocket_depth])
 						rotate([0,0,90])
 							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-					translate([0,-M2_5_nut_diameter/2,3])
+					translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
 
 		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 			rotate([0,-90, 90])
 				union(){
-							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-					translate([0,0,3])
+					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+					translate([0,0,M2_5_pocket_depth])
 						rotate([0,0,90])
 							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-					translate([0,-M2_5_nut_diameter/2,3])
+					translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
 		translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 			rotate([0,-90, 90])
 				union(){
-							cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-					translate([0,0,3])
+					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+					translate([0,0,M2_5_pocket_depth])
 						rotate([0,0,90])
 							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-					translate([0,-M2_5_nut_diameter/2,3])
+					translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 							cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 				}
 		translate([0,0,48 + 9])
@@ -109,42 +109,42 @@ module 888_1015(draft){
 					translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4])
 						rotate([0,90,-90])
 							union(){
-										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-								translate([0,0,3])
+								cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+								translate([0,0,M2_5_pocket_depth])
 									rotate([0,0,90])
 										cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-								translate([0,-M2_5_nut_diameter/2,3])
+								translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
 					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4])
 						rotate([0,90,-90])
 							union(){
-										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-								translate([0,0,3])
+								cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+								translate([0,0,M2_5_pocket_depth])
 									rotate([0,0,90])
 										cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-								translate([0,-M2_5_nut_diameter/2,3])
+								translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
 
 					translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 						rotate([0, 90, -90])
 							union(){
-										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-								translate([0,0,3])
+								cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+								translate([0,0,M2_5_pocket_depth])
 									rotate([0,0,90])
 										cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-								translate([0,-M2_5_nut_diameter/2,3])
+								translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
 					translate([width/2 - 4 - 15.5,-depth/2 + M2_5_screw_length,4.5 + 48.5])
 						rotate([0, 90, -90])
 							union(){
-										cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
-								translate([0,0,3])
+								cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+								translate([0,0,M2_5_pocket_depth])
 									rotate([0,0,90])
 										cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-								translate([0,-M2_5_nut_diameter/2,3])
+								translate([0,-M2_5_nut_diameter/2,M2_5_pocket_depth])
 										cube([30,M2_5_nut_diameter,M2_5_nut_height]);
 							}
 				}
