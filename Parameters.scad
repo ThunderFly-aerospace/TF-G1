@@ -430,6 +430,14 @@ g3_0_height = g3_0_cone_height + 40;
 g3_0_bearing_bolt_len = 50;
 g3_0_srcew_dist = 55;
 
+
+// Nastavní volností skupiny dílů 888_30**
+// Nastavení rozsahů je v deg
+    g3_0_pitch_limit = [-5:5];
+    g3_0_roll_limit = [-5:5];
+    g3_0_yaw_limit = [-5:5];
+
+
 //pro zakladnu na strechu auta
 g3_1_yaw_width = 75;
 g3_1_service_holl_height = 8.4 + 2;

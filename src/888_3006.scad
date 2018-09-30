@@ -32,21 +32,37 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
 
             cylinder(r=g3_0_cone2, h = g3_0_height-g3_0_cone_top_height, $fn=draft?50:100);
 
-            translate([0,0,g3_0_height-g3_0_cone_top_height]) 
-                cylinder(r1=g3_0_cone2, r2=8+1, h = g3_0_cone_top_height, $fn=draft?50:100);
+            // Kuzel v horni casti
+            //translate([0,0,g3_0_height-g3_0_cone_top_height]) 
+            //    cylinder(r1=g3_0_cone2, r2=8+1, h = g3_0_cone_top_height, $fn=draft?50:100);
             
             // omezeni pro osu yaw
             difference(){
                 translate([0,0,g3_0_height-g3_0_cone_top_height])
                     cylinder(r=g3_0_cone2, h = 20, $fn=draft?50:100);
-                translate([-50,-g3_1_yaw_width/2,g3_0_height-g3_0_cone_top_height])
-                    cube([100, g3_1_yaw_width, 30+1]);
+                
+                
+                center = bearing_efsm_12_ag - bearing_efsm_12_a1;
+                for(pitch = g3_0_pitch_limit){
+                    for(yaw = g3_0_yaw_limit){
+                        for(roll = g3_0_roll_limit){
+                            translate([0, 0, g3_0_height+center])
+                                rotate([roll, pitch, yaw])
+                                    translate([-g3_7_length/2,-g3_7_width/2,-center])
+                                        cube([g3_7_length, g3_7_width, 30]);
+                        }
+                    }
+                }
             }
             
-            // omezeni pro osu yaw
             difference(){
-                translate([0,0,g3_0_height])
-                    cylinder(d=16.7, h = bearing_efsm_12_ag, $fn=draft?50:100);
+                union(){
+                    translate([0,0,g3_0_height])
+                        cylinder(d=16.7, h = bearing_efsm_12_ag, $fn=draft?50:100);
+                  
+                    translate([0,0,g3_0_height-bearing_efsm_12_ag])
+                        cylinder(d=16.7+3, h = bearing_efsm_12_ag, $fn=draft?50:100);
+                }
                 translate([-50,-g3_1_yaw_width/2,g3_0_height]) 
                     cylinder(r=1, h = 20, $fn=draft?50:100);
             }
