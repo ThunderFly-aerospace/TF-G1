@@ -34,7 +34,7 @@ retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 13;	// length of toothed part of pulley, standard = 12
+pulley_t_ht = 11;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 0;	// pulley base diameter, standard = 20
 no_of_nuts = 0;		// number of captive nuts required, standard = 1
@@ -102,7 +102,7 @@ module rotor_pulley(draft)
         if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
         // osazení pro kroužek
-        cylinder(h = 6, d=42.5,  $fn = draft ? 50 : 200);
+        cylinder(h = 4, d=42.5,  $fn = draft ? 50 : 200);
 
         //šrouby
         translate([-32/2, 0, 0])
