@@ -433,9 +433,9 @@ g3_0_srcew_dist = 55;
 
 // Nastavní volností skupiny dílů 888_30**
 // Nastavení rozsahů je v deg
-    g3_0_pitch_limit = [-5:5];
-    g3_0_roll_limit = [-5:5];
-    g3_0_yaw_limit = [-5:5];
+g3_0_pitch_limit = [-20:5:20];
+g3_0_roll_limit = [-15:5:15];
+g3_0_yaw_limit = [-10:5:10];
 
 
 //pro zakladnu na strechu auta
@@ -457,7 +457,7 @@ g3_8_m5_lenght = 40; // delka sroubu pro pridelani kuloveho loziska
 g3_8_pocket_wall = g3_8_cylinder_h-(g3_8_m5_lenght-bearing_efsm_12_a1-M5_nut_height-5);
 
 // podlozka na strechu auta
-g3_9_height = 20;
+g3_9_height = 80;
 
 
 
