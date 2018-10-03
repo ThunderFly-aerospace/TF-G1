@@ -30,16 +30,13 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
             translate([0,0,5]) 
                 cylinder(r1=g3_0_cone1, r2=g3_0_cone2, h = g3_0_cone_height-5, $fn=draft?50:100);
 
-            cylinder(r=g3_0_cone2, h = g3_0_height-g3_0_cone_top_height, $fn=draft?50:100);
+            cylinder(r=g3_0_cone2, h=g3_0_height-g3_0_cone_top_height-20, $fn=draft?50:100);
 
-            // Kuzel v horni casti
-            //translate([0,0,g3_0_height-g3_0_cone_top_height]) 
-            //    cylinder(r1=g3_0_cone2, r2=8+1, h = g3_0_cone_top_height, $fn=draft?50:100);
             
             // omezeni pro osu yaw
             difference(){
-                translate([0,0,g3_0_height-g3_0_cone_top_height])
-                    cylinder(r=g3_0_cone2, h = 20, $fn=draft?50:100);
+                translate([0,0,g3_0_height-g3_0_cone_top_height-20])
+                    cylinder(r=g3_0_cone2, h = 20+20, $fn=draft?50:100);
                 
                 union (){
                 center = bearing_efsm_12_ag - bearing_efsm_12_a1;
