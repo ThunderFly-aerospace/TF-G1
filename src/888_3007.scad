@@ -10,7 +10,7 @@ module 888_3007(draft){    /////// 1. díl (AZ, YAW)
 
     difference(){
         union (){
-            translate([-g3_7_length/2, -g3_7_width/2, -g3_7_height/2])
+            translate([-g3_7_length/2 - 15, -g3_7_width/2, -g3_7_height/2])
             cube([g3_7_length, g3_7_width, g3_7_height]);
         }
         
@@ -29,16 +29,19 @@ module 888_3007(draft){    /////// 1. díl (AZ, YAW)
                 translate([bearing_efsm_17_boltd, bearing_efsm_17_boltd, -(g3_7_height+global_clearance)/2])
                     cylinder(h=g3_7_height+global_clearance, d=bearing_efsm_17_n, $fn=draft? 50:100);
             translate([bearing_efsm_17_boltd, bearing_efsm_17_boltd, -(g3_7_height+global_clearance)/2])
-                cylinder(h=M6_head_height, d=M6_head_diameter, $fn=6);
+                cylinder(h=M6_head_height, d=M6_nut_diameter, $fn=6);
         }
             
-        for (i=[0:1]) rotate([0,0,180*i]){
-            translate([bearing_efsm_17_width/2 + 2, 0, 0]) 
+            translate([-g3_7_length, 0, 0]) 
                 rotate([0, 90, 0]) 
-                    cylinder(d=M8_screw_diameter, h=100, $fn=draft? 50:100);
+                    cylinder(d=M8_screw_diameter, h = 2 * g3_7_length, $fn = draft ? 20:50);
             translate([bearing_efsm_17_width/2+ 2 + 5, -M8_nut_pocket/2, -M8_nut_diameter/2])
                 cube([M8_nut_height, M8_nut_pocket, 30]);
-        }
+
+            translate([-g3_7_length/2  , -M8_nut_pocket/2, -g3_7_height])
+                cube([30, M8_nut_pocket, 2 * g3_7_height]);
+
+
     }
 }
 

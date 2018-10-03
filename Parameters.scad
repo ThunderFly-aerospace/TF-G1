@@ -444,7 +444,7 @@ g3_1_service_holl_height = 8.4 + 2;
 g3_1_service_holl_width = 16 + 1.5;
 
 //pro druhy dil
-g3_7_length = bearing_efsm_17_width +2*(1+3+30);
+g3_7_length = maximum_printable_size;
 g3_7_width = bearing_efsm_17_width + 2*1+ 2*3;
 g3_7_height = M8_screw_diameter*3;
 
