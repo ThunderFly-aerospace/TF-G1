@@ -24,16 +24,25 @@ module licovany_sroub_m6(delka = 70){
 }
 
 module 888_3102(){
-    translate([0,0,0]) 888_3006();
-    translate([0,0,78]) 888_3007();
+    translate([0,0,0]) 
+        888_3006();
+    translate([0,0,78]) 
+        888_3007();
     translate([0,0,77]) 
         translate([-130, 0, 0])
-            rotate([0,90,0]) 888_3008();
-    translate([0,0,-80]) 888_3009();
+            rotate([0,90,0]) 
+                888_3008();
+    translate([0,0,-80]) 
+        888_3009();
 
     translate([0,0,77])
         translate([-130, 0, 0])
-            rotate([0,90,0]) 888_3008();
+            rotate([0,90,0]) 
+                888_3008();
+
+    translate([30, 0, 77])
+        rotate([0,90,0]) 
+            cylinder( h = 300, d = M8_screw_diameter, $fn = 50 );
 
 
 }
