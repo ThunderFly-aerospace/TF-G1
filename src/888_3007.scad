@@ -38,8 +38,8 @@ module 888_3007(draft){    /////// 1. díl (AZ, YAW)
             translate([bearing_efsm_17_width/2+ 2 + 5, -M8_nut_pocket/2, -M8_nut_diameter/2])
                 cube([M8_nut_height, M8_nut_pocket, 30]);
 
-            translate([-g3_7_length/2  , -M8_nut_pocket/2, -g3_7_height])
-                cube([30, M8_nut_pocket, 2 * g3_7_height]);
+            translate([-g3_7_length/2  , -M8_nut_pocket, -g3_7_height])
+                cube([30, 2 * M8_nut_pocket, 2 * g3_7_height]);
 
 
     }
