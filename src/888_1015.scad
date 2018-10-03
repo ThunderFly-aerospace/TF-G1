@@ -6,7 +6,7 @@ module 888_1015(draft){
 	plate_thickness = 1.5;
 
 	width = 70;
-	depth = 2*plate_thickness + 2*main_tube_outer_diameter + 2*thickness_between_tubes;
+	depth = 2*plate_thickness + coupling_depth_666_1026;
 	height = 68.5 + 10;
 
 	rake_angle = 9;		//úhel horního zkosení
@@ -61,6 +61,15 @@ module 888_1015(draft){
 		//otvor pro kabely od serv
 		translate([width/2 - servo_width + servo_width/4- 4,-20,-global_clearance])
 			cube([servo_width/2,40,20]);
+		//zkosení otvoru pro kabely od servo
+		translate([width/2 - servo_width + servo_width/4- 4,-3,0])
+			rotate([70,0,0])
+				cube([servo_width/2,20,40]);
+
+		translate([width/2 - servo_width + servo_width/4- 4,-4.5,18.5])
+			rotate([-70,0,0])
+				cube([servo_width/2,20,40]);
+
 		//otvory pro šrouby pro připevnění serva
 		translate([width/2 - 4 - 5.5,-depth/2 + M2_5_screw_length,4])
 			rotate([0,-90,90])
@@ -185,9 +194,9 @@ module 888_1015(draft){
 		translate([flange_width/2 + 32, flange_depth/2, -20])
 			hull(){
 				translate([1.5,0,0])
-					cylinder (h = 25, r1 = 8, r2 = 2.55, $fn = draft ? 50 : 100);
+					cylinder (h = 25, r1 = 8, r2 = 3, $fn = draft ? 50 : 100);
 				translate([-1.5,0,0])
-					cylinder (h = 25, r1 = 8, r2 = 2.55, $fn = draft ? 50 : 100);
+					cylinder (h = 25, r1 = 8, r2 = 3, $fn = draft ? 50 : 100);
 			}
 		}
 		//otvor pro klíč k přírubě
