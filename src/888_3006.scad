@@ -54,7 +54,7 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
             }
             
             difference(){
-                union(){
+                translate([0,0,0]) union(){
                     translate([0,0,g3_0_height])
                         cylinder(d=16.7, h = (bearing_efsm_12_ag-bearing_efsm_12_a1)*2, $fn=draft?50:100);
                   
