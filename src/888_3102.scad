@@ -26,12 +26,19 @@ module licovany_sroub_m6(delka = 70){
 module 888_3102(){
     translate([0,0,0]) 888_3006();
     translate([0,0,78]) 888_3007();
-    translate([0,0,77]) translate([150, 0, 0]) rotate([0,-90,0]) 888_3008();
-    translate([0,0,-25]) 888_3009();
+    translate([0,0,77]) 
+        translate([-130, 0, 0])
+            rotate([0,90,0]) 888_3008();
+    translate([0,0,-80]) 888_3009();
+
+    translate([0,0,77])
+        translate([-130, 0, 0])
+            rotate([0,90,0]) 888_3008();
+
 
 }
-difference(){
-888_3102();
-cube(500);
 
+difference(){
+    888_3102();
+    cube(500);
 }

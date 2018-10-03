@@ -73,22 +73,22 @@ module 888_2006(draft = true){
                     cylinder(r=15, h=1);
                 
                 translate([servo_20kg_thread_y, servo_20kg_thread_x, 0])
-                    cylinder(h=50, d=servo_20kg_bolt_d, $fn=draft?50:100);
+                    cylinder(h=5, d=servo_20kg_bolt_d, $fn=draft?50:100);
                 translate([servo_20kg_thread_y, -servo_20kg_thread_x, 0])
-                    cylinder(h=50, d=servo_20kg_bolt_d, $fn=draft?50:100);
+                    cylinder(h=5, d=servo_20kg_bolt_d, $fn=draft?50:100);
                 translate([-servo_20kg_thread_y, servo_20kg_thread_x, 0])
-                    cylinder(h=50, d=servo_20kg_bolt_d, $fn=draft?50:100);
+                    cylinder(h=5, d=servo_20kg_bolt_d, $fn=draft?50:100);
                 translate([-servo_20kg_thread_y, -servo_20kg_thread_x, 0])
-                    cylinder(h=50, d=servo_20kg_bolt_d, $fn=draft?50:100);
+                    cylinder(h=5, d=servo_20kg_bolt_d, $fn=draft?50:100);
                 
                 translate([servo_20kg_thread_y, servo_20kg_thread_x, g2_6_servo_bolt_l])
-                    cylinder(h=50, d=servo_20kg_nut_d, $fn=6);
+                    cylinder(h=5, d=servo_20kg_nut_d, $fn=6);
                 translate([servo_20kg_thread_y, -servo_20kg_thread_x, g2_6_servo_bolt_l])
-                    cylinder(h=50, d=servo_20kg_nut_d, $fn=6);
+                    cylinder(h=5, d=servo_20kg_nut_d, $fn=6);
                 translate([-servo_20kg_thread_y, servo_20kg_thread_x, g2_6_servo_bolt_l])
-                    cylinder(h=50, d=servo_20kg_nut_d, $fn=6);
+                    cylinder(h=5, d=servo_20kg_nut_d, $fn=6);
                 translate([-servo_20kg_thread_y, -servo_20kg_thread_x, g2_6_servo_bolt_l])
-                    cylinder(h=50, d=servo_20kg_nut_d, $fn=6);
+                    cylinder(h=5, d=servo_20kg_nut_d, $fn=6);
             }
         } 
 }
