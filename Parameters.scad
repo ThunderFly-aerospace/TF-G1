@@ -29,6 +29,15 @@ thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
+
+//Screw diameter and nut for M10 [mm]
+M10_screw_diameter=10.4;
+M10_head_height = 10;
+M10_head_diameter = 16+0.5;
+M10_nut_height = 10.5;
+M10_nut_diameter = 25.5;
+M10_nut_pocket = 22.3;
+
 //Screw diameter for M8 [mm]
 M8_screw_diameter = 8 + 1;
 M8_nut_height = 7.5;
@@ -37,6 +46,8 @@ M8_nut_pocket = 13 + 0.5;
 
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
+M6_head_diameter = 10+0.5;
+M6_head_height = 6;
 M6_nut_height = 4.9;
 M6_nut_diameter = 11.8;
 
@@ -47,6 +58,7 @@ M5_head_height = 5;
 M5_head_diameter = 13+0.5;
 M5_nut_height = 4.5;
 M5_nut_diameter = 9.4;
+M5_nut_pocket = 8.4;
 
 //Screw diameter and nut for M4 [mm]
 M4_screw_diameter=4.5;
@@ -329,26 +341,125 @@ base_mounting_screw_length = 50;
 
 // kulove lozisko
 
+bearing_efsm_08_h = 33;
+bearing_efsm_08_m = 22;
+bearing_efsm_08_db = 18;
+bearing_efsm_08_ag = 10.5;
+bearing_efsm_08_n = M4_screw_diameter;
+bearing_efsm_08_a1 = 5.5;
+
 bearing_efsm_12_width = 40;
+bearing_efsm_12_h = bearing_efsm_12_width;
 bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
 bearing_efsm_12_db = 25;
 bearing_efsm_12_ag = 13;
+bearing_efsm_12_a1 = 7;
+bearing_efsm_12_n = M5_screw_diameter;
 bearing_efsm_space = 1;
+
+bearing_efsm_17_width = 54;
+bearing_efsm_17_h = bearing_efsm_17_width;
+bearing_efsm_17_boltd = 38/2; // polovina vzdalenosti mezi srouby
+bearing_efsm_17_m = bearing_efsm_17_boltd*2;
+bearing_efsm_17_db = 35;
+bearing_efsm_17_ag = 18;
+bearing_efsm_17_n = M6_screw_diameter;
+bearing_efsm_17_a1 = 10;
+
+
+// 20 KG servo parameters
+
+
+servo_20kg_axis_offset = 9.375; // jak je osa mimo stredu
+servo_20kg_body_x = 42;
+servo_20kg_body_y = 21;
+servo_20kg_body_z = 40;
+servo_20kg_thread_x = 49/2;
+servo_20kg_thread_y = 10/2;
+servo_20kg_body_below = 10; // jak hluboko je tělo serva pod drzaky na srouby
+servo_20kg_below = 25.8; // jak hluboko je páka serva pod drzaky na srouby
+
+servo_20kg_bolt_d = 2.5+0.3;
+servo_20kg_nut_d = 5+0.3;
+
+
+
+//  888_2***
+//    G2
+//
+
+
+g2_0_part_space = 2; // mezera mezi zadni a predni casti
+
+g2_5_height = 608_bearing_outer_diameter*1.5;
+g2_5_width = 70+5.5+11;
+g2_5_threads = 2; // kolik ma byt sroubu skrz nosnou tyc
+
+g2_5_m3_length = base_mounting_screw_length; // sroub, ktery se pouziva na sesroubovani s nosnou tyci
+g2_5_servo_shift = 30; 
+g2_5_servo_wall = 5;
+
+g2_5_m8_length = 60; // sroub, ktery se pouziva jako osa pro podlozku
+g2_5_front_l = main_tube_outer_diameter + 608_bearing_outer_diameter*2;// jak moc ma byt magnet v predu
+
+g2_5_zapusteni_serva = 30;
+g2_5_length = g2_5_zapusteni_serva + 2*main_tube_outer_diameter + 30;
+g2_5_length_offset = -10;
+
+g2_5_bearing_space = 2; // mezera pro podlozku mezi loziskem a stenou..
+
+
+g2_0_vertical_bolts = 2;
+g2_0_space_btw_wheel_holder = 25.8;
+
+g2_6_plate_thickness = 8;
+g2_6_servo_distance = 54; // jak je daleko servo pred tyci kola
+g2_6_servo_shift = 0; // jak je osa serva mimo stredu
+g2_6_servo_bolt_l = 8; // delka sroubu od konce serva po zacatek matky
+g2_6_min_wall_around = 8; // minimalni material okolo serva
+
+
 
 
 // pro dily ze skupiny 3 (888_30**)
-g3_0_cone1 = 65;
-g3_0_cone2 = 45;
+g3_0_cone1 = 70;
+g3_0_cone2 = 50;
 g3_0_cone_height = 25;
 g3_0_cone_top_height = 11;
 g3_0_height = g3_0_cone_height + 40;
-g3_0_bearing_bolt_len = 30;
-//pro zakladnu na strechu auta
-g3_1_yaw_width = 60;
-g3_1_service_holl_height = 8;
-g3_1_service_holl_width = 20;
-//pro druhy dil
-g3_7_length = bearing_efsm_12_width +2*(1+3+30);
-g3_7_width = bearing_efsm_12_width + 2*1+ 2*3;
-g3_7_height = M8_screw_diameter*2.5;
+g3_0_bearing_bolt_len = 50;
+g3_0_srcew_dist = 55;
 
+
+// Nastavní volností skupiny dílů 888_30**
+// Nastavení rozsahů je v deg
+g3_0_pitch_limit = [-20:5:20];
+g3_0_roll_limit = [-15:5:15];
+g3_0_yaw_limit = [-10:5:10];
+
+
+//pro zakladnu na strechu auta
+g3_1_yaw_width = 75;
+g3_1_service_holl_height = 8.4 + 2;
+g3_1_service_holl_width = 16 + 1.5;
+
+//pro druhy dil
+g3_7_length = maximum_printable_size;
+g3_7_width = bearing_efsm_17_width + 2*1+ 2*3;
+g3_7_height = M8_screw_diameter*3;
+
+g3_8_magnet_wall_thickness = 7;  // tloustka steny u magnetu
+g3_8_bearing_wall_thickness = bearing_efsm_12_ag-bearing_efsm_12_a1;
+g3_8_magnet_diameter = 63; 
+g3_8_cylinder_d = 55; // prumer valce
+g3_8_cylinder_h = 30 + g3_8_magnet_wall_thickness;
+g3_8_m5_lenght = 40; // delka sroubu pro pridelani kuloveho loziska
+g3_8_pocket_wall = g3_8_cylinder_h-(g3_8_m5_lenght-bearing_efsm_12_a1-M5_nut_height-5);
+
+// podlozka na strechu auta
+g3_9_height = 80;
+
+
+
+servo_20kg_width = 21;   //šřka otvoru pro servo
+servo_20kg_height = 42;  //výška otvoru pro servo
