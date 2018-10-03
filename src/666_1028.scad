@@ -212,6 +212,15 @@ module 666_1028(draft){
             rotate ([0,90,0])
                 cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
 
+        //otvory pro snadnější montáž
+        translate ([-150*0.4 + 100,0,150*0.4/2])
+            rotate ([0,90,0])
+                cylinder (h = 200, r = M3_screw_diameter, $fn = 20);
+
+        translate ([-150*0.4 + 100,0,150*0.4])
+            rotate ([0,90,0])
+                cylinder (h = 200, r = M3_screw_diameter, $fn = 20);
+
         //nut
         translate([17.5,0,150*0.4])
             rotate([0,90,0])
@@ -468,7 +477,7 @@ translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width -
         666_1028_rudder_flightgear(draft);
 
 
-666_1028_flightgear();
+//666_1028_flightgear();
 
 
 /*
@@ -495,6 +504,9 @@ translate([142.1,20,30])
         }
 
 */
+
+
+666_1028();
 
 use <888_1012.scad>
 
