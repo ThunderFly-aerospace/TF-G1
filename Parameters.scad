@@ -433,9 +433,9 @@ g3_0_srcew_dist = 55;
 
 // Nastavní volností skupiny dílů 888_30**
 // Nastavení rozsahů je v deg
-g3_0_pitch_limit = [-20:5:20];
-g3_0_roll_limit = [-15:5:15];
-g3_0_yaw_limit = [-10:5:10];
+g3_0_pitch_limit = [-20:2:20];
+g3_0_roll_limit = [-15:2:15];
+g3_0_yaw_limit = [-10:2:10];
 
 
 //pro zakladnu na strechu auta

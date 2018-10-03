@@ -41,7 +41,7 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
                 translate([0,0,g3_0_height-g3_0_cone_top_height])
                     cylinder(r=g3_0_cone2, h = 20, $fn=draft?50:100);
                 
-                
+                union (){
                 center = bearing_efsm_12_ag - bearing_efsm_12_a1;
                 for(pitch = g3_0_pitch_limit){
                     for(yaw = g3_0_yaw_limit){
@@ -52,6 +52,7 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
                                         cube([g3_7_length, g3_7_width, 30]);
                         }
                     }
+                }
                 }
             }
             
