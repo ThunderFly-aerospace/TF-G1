@@ -218,21 +218,21 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 /////spojka 666_1004
 
     width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
-        echo("width_666_1004 is", width_666_1004);
+//        echo("width_666_1004 is", width_666_1004);
     
-        echo("ceil_666_1004 is", ceil(width_666_1004));
+//        echo("ceil_666_1004 is", ceil(width_666_1004));
 
     coupling_screw_length_666_1004 = (ceil(width_666_1004)) * basic_screw_length;
         echo("coupling_screw_length_666_1004 is", coupling_screw_length_666_1004);
 
     coupling_width_666_1004 = coupling_screw_length_666_1004 + M3_screw_head_height;
-        echo("coupling_width_666_1004 is", coupling_width_666_1004);
+//        echo("coupling_width_666_1004 is", coupling_width_666_1004);
 
     height_666_1004 = coupling_width_666_1004;
-        echo("height_666_1004 is", height_666_1004);
+//        echo("height_666_1004 is", height_666_1004);
 
     depth_666_1004 = main_tube_outer_diameter*2+2*coupling_wall_thickness+thickness_between_tubes;
-        echo("depth_666_1004 is", depth_666_1004);
+//        echo("depth_666_1004 is", depth_666_1004);
 
     depth_666_1004_drillhelper = main_tube_outer_diameter*3;
 
@@ -243,22 +243,22 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
     width_666_1026 = main_tube_outer_diameter + 2*thickness_between_tubes;
     
     depth_666_1026 = (main_tube_outer_diameter*2)/basic_screw_length;
-        echo("depth_666_1026 is", depth_666_1026);
+//        echo("depth_666_1026 is", depth_666_1026);
     
-        echo("ceil_666_1026 is", ceil(depth_666_1026));
+//        echo("ceil_666_1026 is", ceil(depth_666_1026));
 
     coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
         echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
 
 
-thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50; //50 mm je konstatní šířka spojky 666_1026
+    thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50; //50 mm je konstatní šířka spojky 666_1026
     echo("thickness_of_plate is", thickness_of_plate);
 
-        coupling_depth_666_1026 = coupling_screw_length_666_1026 - M4_screw_head_height - thickness_of_plate;      //zde je odečten M4_screw_head_height pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
-            echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
+    coupling_depth_666_1026 = coupling_screw_length_666_1026 - M4_screw_head_height - thickness_of_plate;      //zde je odečten M4_screw_head_height pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
+//        echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
 
     height_666_1026 = 2*main_tube_outer_diameter;
-        echo("height_666_1026 is", height_666_1026);
+//        echo("height_666_1026 is", height_666_1026);
 
 //tloušťka plechu pro zajištění konstatní šířky spojky 50 mm
 
@@ -270,15 +270,15 @@ thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50;
 ////spojka 666_1017
 
     width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
-        echo("width_666_1017 is", width_666_1017);
+//        echo("width_666_1017 is", width_666_1017);
     
-        echo("ceil_666_1017 is", ceil(width_666_1017));
+//        echo("ceil_666_1017 is", ceil(width_666_1017));
 
     coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
         echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
 
     coupling_width_666_1017 = coupling_screw_length_666_1017 + M3_screw_head_height;
-        echo("coupling_width_666_1017 is", coupling_width_666_1017);
+//        echo("coupling_width_666_1017 is", coupling_width_666_1017);
 
     depth_666_1017 = coupling_width_666_1017;
 
