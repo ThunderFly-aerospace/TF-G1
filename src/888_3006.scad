@@ -56,7 +56,7 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
                     }
                      union(){
                         for(pitch = [-20, 20]){
-                            for(yaw = [0: 1: 10]){
+                            for(yaw = [0: 3: 10]){
                                 for(roll = [-15, 15]){
                                     
                                     translate([0, 0, g3_0_height+center + 4.5]){
