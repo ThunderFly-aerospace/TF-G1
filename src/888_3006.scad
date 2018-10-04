@@ -4,6 +4,12 @@ draft = true;
 $fs =  draft ? 50 :100;
 
 
+module kostka(p, r, y, h){
+    rotate([r, p, y])
+        translate([-g3_7_length/2,-g3_7_width/2,-h])
+            cube([g3_7_length, g3_7_width, 30]);
+}
+
 
 module 888_3006(draft){    /////// 1. díl (AZ, YAW)
 
@@ -33,19 +39,34 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
                 translate([0,0,g3_0_height-g3_0_cone_top_height-20])
                     cylinder(r=g3_0_cone2, h = 20+20, $fn=draft?50:100);
                 
-                union(){
-                    center = bearing_efsm_12_ag - bearing_efsm_12_a1;
-                    for(pitch = g3_0_pitch_limit){
-                        for(yaw = g3_0_yaw_limit){
-                            for(roll = g3_0_roll_limit){
-                                translate([0, 0, g3_0_height+center + 4.5])
-                                    rotate([roll, pitch, yaw])
-                                        translate([-g3_7_length/2,-g3_7_width/2,-center])
-                                            cube([g3_7_length, g3_7_width, 30]);
+                    
+                   center = bearing_efsm_12_ag - bearing_efsm_12_a1;
+                
+                    union(){
+                        for(pitch = [-20, 20]){
+                            for(yaw = [-10, 10]){
+                                for(roll = [0:1:15]){
+                                    translate([0, 0, g3_0_height+center + 4.5]){
+                                        kostka(pitch, roll, yaw, center);
+                                        kostka(pitch, -roll, yaw, center);
+                                    }
+                                }
                             }
                         }
                     }
-                }
+                     union(){
+                        for(pitch = [-20, 20]){
+                            for(yaw = [0: 1: 10]){
+                                for(roll = [-15, 15]){
+                                    
+                                    translate([0, 0, g3_0_height+center + 4.5]){
+                                        kostka(pitch, roll, yaw, center);
+                                        kostka(pitch, roll, -yaw, center);
+                                    }
+                                }
+                            }
+                        }
+                    }
                translate([0,0,g3_0_height])
                     cylinder(d=30, h = bearing_efsm_12_ag, $fn=draft?50:100);
  
