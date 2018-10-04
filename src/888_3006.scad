@@ -18,11 +18,6 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
     head_screw_height = 8 + 0.2;		//výška válcové hlavy šroubu
 
 
-    //samojistná šestihranná matice ISO 7040 - M6
-    lock_nut_diameter = 11.05; //výška samojistné matice pro průměr M6
-    lock_nut_height = 8; 
-
-
     difference(){
         union(){
             cylinder(r=g3_0_cone1, h=5, $fn=draft?50:100);
@@ -38,32 +33,27 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
                 translate([0,0,g3_0_height-g3_0_cone_top_height-20])
                     cylinder(r=g3_0_cone2, h = 20+20, $fn=draft?50:100);
                 
-                union (){
-                center = bearing_efsm_12_ag - bearing_efsm_12_a1;
-                for(pitch = g3_0_pitch_limit){
-                    for(yaw = g3_0_yaw_limit){
-                        for(roll = g3_0_roll_limit){
-                            translate([0, 0, g3_0_height+center])
-                                rotate([roll, pitch, yaw])
-                                    translate([-g3_7_length/2,-g3_7_width/2,-center])
-                                        cube([g3_7_length, g3_7_width, 30]);
+                union(){
+                    center = bearing_efsm_12_ag - bearing_efsm_12_a1;
+                    for(pitch = g3_0_pitch_limit){
+                        for(yaw = g3_0_yaw_limit){
+                            for(roll = g3_0_roll_limit){
+                                translate([0, 0, g3_0_height+center + 4.5])
+                                    rotate([roll, pitch, yaw])
+                                        translate([-g3_7_length/2,-g3_7_width/2,-center])
+                                            cube([g3_7_length, g3_7_width, 30]);
+                            }
                         }
                     }
                 }
-                }
+               translate([0,0,g3_0_height])
+                    cylinder(d=30, h = bearing_efsm_12_ag, $fn=draft?50:100);
+ 
             }
             
-            difference(){
-                translate([0,0,0]) union(){
-                    translate([0,0,g3_0_height])
-                        cylinder(d=16.7, h = (bearing_efsm_12_ag-bearing_efsm_12_a1)*2, $fn=draft?50:100);
-                  
-                    translate([0,0,g3_0_height-bearing_efsm_12_ag])
-                        cylinder(d=16.7+3, h = bearing_efsm_12_ag, $fn=draft?50:100);
-                }
-                translate([-50,-g3_1_yaw_width/2,g3_0_height]) 
-                    cylinder(r=1, h = 20, $fn=draft?50:100);
-            }
+                translate([0,0,g3_0_height])
+                    cylinder(d=17, h = (bearing_efsm_12_ag-bearing_efsm_12_a1)*2, $fn=draft?50:100);
+              
         }
         
         // srouby pri pridelani na strechu
