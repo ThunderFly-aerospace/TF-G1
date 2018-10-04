@@ -29,13 +29,13 @@ module 666_1247(angle_of_attact){
                 linear_extrude(0.5) 
                     text( str("AOA: ", angle_of_attact), size = 5, halign = "center", valign = "center", font = "PT Sans");
 
-            translate([50, 15, 0])
-                rotate([0,180,0])       
+            translate([50, 15, 0.5])
+                rotate([0,180, 0])       
                 linear_extrude(0.5) 
                     text("D", size = 10, halign = "center", valign = "center", font = "PT Sans");
 
-            translate([30, 25, 0])
-                rotate([0,180,0])       
+            translate([30, 25, 0.5])
+                rotate([0,180, 0])       
                 linear_extrude(0.5) 
                     text(str("AOA: ", angle_of_attact), size = 5, halign = "center", valign = "center", font = "PT Sans");
 
