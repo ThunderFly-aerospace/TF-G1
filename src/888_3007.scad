@@ -11,7 +11,7 @@ module 888_3007(draft){    /////// 1. díl (AZ, YAW)
     difference(){
         union (){
             translate([-g3_7_length/2 - 15, -g3_7_width/2, -g3_7_height/2])
-            cube([g3_7_length, g3_7_width, g3_7_height]);
+                cube([g3_7_length, g3_7_width, g3_7_height]);
         }
         
         // zapusteni kuloveho loziska
