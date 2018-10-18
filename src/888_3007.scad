@@ -31,14 +31,20 @@ module 888_3007(draft){    /////// 1. díl (AZ, YAW)
                 cylinder(h=M6_head_height, d=M6_nut_diameter, $fn=6);
         }
             
-            translate([-g3_7_length, 0, 0]) 
-                rotate([0, 90, 0]) 
-                    cylinder(d=M8_screw_diameter, h = 2 * g3_7_length, $fn = draft ? 20:50);
-            translate([bearing_efsm_17_width/2+ 2 + 5, -M8_nut_pocket/2, -M8_nut_diameter/2])
-                cube([M8_nut_height, M8_nut_pocket, 30]);
+        translate([-g3_7_length, 0, 0]) 
+            rotate([0, 90, 0]) 
+                cylinder(d=M8_screw_diameter, h = 2 * g3_7_length, $fn = draft ? 20:50);
+        translate([bearing_efsm_17_width/2+ 2 + 5, -M8_nut_pocket/2, -M8_nut_diameter/2])
+            cube([M8_nut_height, M8_nut_pocket, 30]);
 
-            translate([-g3_7_length/2 - 4 , -M8_nut_pocket, -g3_7_height])
-                cube([38, 2 * M8_nut_pocket, 2 * g3_7_height]);
+        translate([-g3_7_length/2 - 15 + 10 + M8_nut_height, -M8_nut_pocket, -g3_7_height])
+            cube([35, 2 * M8_nut_pocket, 2 * g3_7_height]);
+
+        translate([-g3_7_length/2 - 5, 0, 0]) 
+            rotate([0, 90, 0]) 
+                cylinder(d=M8_nut_diameter, h = 2 * M8_nut_height, $fn = 6);
+
+
     }
 }
 
