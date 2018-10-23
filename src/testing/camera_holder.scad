@@ -1,5 +1,5 @@
 include <../../Parameters.scad>
-draft = true;
+draft = false;
 
 $fs = draft?50:100;
 //$fa  = 10;
@@ -7,14 +7,14 @@ $fs = draft?50:100;
 
 
 camera_angle = 30; 
-camera_diameter = 120; 
+camera_diameter = 116; 
 camera_holder_height = 50 ;
 
 module 888_3008(draft){    /////// 1. díl (AZ, YAW)
 
     difference(){
-        translate([0,0,-camera_holder_height])
-            cylinder(d = camera_diameter, h = 3 * camera_holder_height, $fn=draft?50:100, center = true);
+        translate([0,0,-camera_holder_height/2])
+            cylinder(d = camera_diameter, h = 2 * camera_holder_height, $fn=draft?50:100, center = true);
         
                     
         // diry pro pripevneni kamery
@@ -37,7 +37,7 @@ module 888_3008(draft){    /////// 1. díl (AZ, YAW)
 
         // diry pro pripevneni kamery
         // prumer kruznice na ktere jsou umisteny srouby
-        camera_screws_position2 = 110 - 2*5.5 - 5.5;
+        camera_screws_position2 = 116 - 2*9 - 4.5;
 
         for (i=[0:3]) 
             rotate([0, 0, 90*i]){
@@ -56,8 +56,8 @@ module 888_3008(draft){    /////// 1. díl (AZ, YAW)
 
         rotate([0, camera_angle, -45])
         {
-            translate([0,0, -camera_diameter/2   - 20])
-                cube([2*camera_diameter, 2*camera_diameter, camera_diameter], center = true);
+            translate([0,0, -camera_holder_height   - 20])
+                cube([2*camera_diameter, 2*camera_diameter, 2*camera_holder_height], center = true);
 
             // dira skrz pro upevnovaci sroub
             translate([0,0, -10])
