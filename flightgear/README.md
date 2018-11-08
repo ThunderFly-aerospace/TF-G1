@@ -42,5 +42,8 @@ Model zatím zanedbává několik poměrně zásadních vlastností.
   * Ocas je podepřen uprostřed jedním virtuálním podvozkovým kolečkem pro usnadnění startu a přistání.  Vhodnější by zřejmě bylo model upravit pro dvě kolečka pod každou polovinou ocasní plochy. 
 
 
+## TODO
 
+  * Publikovat model v [seznamu modelů](http://wiki.flightgear.org/Table_of_models)
+  * Doplnit reálné textury
 
