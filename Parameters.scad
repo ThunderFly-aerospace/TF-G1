@@ -52,7 +52,7 @@ M6_head_diameter = 10+0.5;
 M6_head_height = 6;
 M6_nut_height = 4.9;
 M6_nut_diameter = 11.8;
-
+M6_nut_pocket = 10.4;
 
 //Screw diameter and nut for M5 [mm]
 M5_screw_diameter=5.5;
@@ -460,7 +460,7 @@ g3_8_m5_lenght = 40; // delka sroubu pro pridelani kuloveho loziska
 g3_8_pocket_wall = g3_8_cylinder_h-(g3_8_m5_lenght-bearing_efsm_12_a1-M5_nut_height-5);
 
 // podlozka na strechu auta
-g3_9_height = 10;
+g3_9_height = 145;
 
 
 
