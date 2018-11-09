@@ -341,6 +341,7 @@ base_division = [0, 159, main_pilon_position + coupling_width_666_1017/2 + globa
 // šrouby pro připevnění podložky k hlavní trubce
 base_mounting_screw_length = 50;
 
+
 // kulove lozisko
 
 bearing_efsm_08_h = 33;
@@ -353,6 +354,7 @@ bearing_efsm_08_a1 = 5.5;
 bearing_efsm_12_width = 40;
 bearing_efsm_12_h = bearing_efsm_12_width;
 bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
+bearing_efsm_12_m = bearing_efsm_12_boltd*2;
 bearing_efsm_12_db = 25;
 bearing_efsm_12_ag = 13;
 bearing_efsm_12_a1 = 7;
