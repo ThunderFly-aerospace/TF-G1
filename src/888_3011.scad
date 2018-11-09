@@ -4,7 +4,7 @@ unasec_diameter = 10.5;
 unasec_kuzel_diameter = 18;
 unasec_wall = 6;
 888_height = 30;
-888_nut_distance = 888_height-15;
+888_nut_distance = 888_height-10;
 
 
 podlozka_vnitrni_prumer = 30;
@@ -73,24 +73,24 @@ module 888_3011(draft = true){
 
 
   // Diry pro srouby skrz podlozku
-      translate([0, podlozka_diry_vzdalenost/2, 10]){
+      translate([0, podlozka_diry_vzdalenost/2, 0]){
         cylinder(h=888_height+1, d=M4_screw_diameter, $fn=draft?50:100);
-        translate([-M4_nut_pocket/2, 0, 888_height-888_nut_distance-10]) 
+        translate([-M4_nut_pocket/2, 0, 888_height-888_nut_distance]) 
             cube([M4_nut_pocket, 25, M4_nut_height+0.5 ]);
 
         rotate(30)
-          translate([0, 0, 888_height-888_nut_distance-10])
+          translate([0, 0, 888_height-888_nut_distance])
             cylinder(h = M4_nut_height+0.5 , d = M4_nut_diameter, $fn = 6);
       }
 
-      translate([0, -podlozka_diry_vzdalenost/2, 10]){
+      translate([0, -podlozka_diry_vzdalenost/2, 0]){
         cylinder(h=888_height+1, d=M4_screw_diameter, $fn=draft?50:100);
         rotate(180)
-          translate([-M4_nut_pocket/2, 0, 888_height-888_nut_distance-10]) 
+          translate([-M4_nut_pocket/2, 0, 888_height-888_nut_distance]) 
               cube([M4_nut_pocket, 25, M4_nut_height+0.5]);
 
         rotate(30)
-          translate([0, 0, 888_height-888_nut_distance-10])
+          translate([0, 0, 888_height-888_nut_distance])
             cylinder(h = M4_nut_height+0.5, d = M4_nut_diameter, $fn = 6);
       }
 
