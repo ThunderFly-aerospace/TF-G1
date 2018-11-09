@@ -3,8 +3,8 @@ include <../Parameters.scad>
 unasec_diameter = 10.5;
 unasec_kuzel_diameter = 18;
 unasec_wall = 6;
-888_height = 30;
-888_nut_distance = 888_height-10;
+888_height = 20;
+888_nut_distance = 888_height-7.5;
 
 
 podlozka_vnitrni_prumer = 30;
