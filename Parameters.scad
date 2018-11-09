@@ -341,7 +341,6 @@ base_division = [0, 159, main_pilon_position + coupling_width_666_1017/2 + globa
 // šrouby pro připevnění podložky k hlavní trubce
 base_mounting_screw_length = 50;
 
-
 // kulove lozisko
 
 bearing_efsm_08_h = 33;
