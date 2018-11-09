@@ -16,7 +16,7 @@ module 888_3011(draft = true){
       hull(){
       	translate([0,0,888_height-0.05])
 	      	cylinder(d=podlozka_vnejsi_prumer, h=0.1, $fn=draft?50:100);
-  		cube([bearing_efsm_12_h+4, bearing_efsm_12_h+4, 0.1], center=true);
+  		cube([bearing_efsm_12_h+5, bearing_efsm_12_h+5, 0.1], center=true);
       }
 
       cube([bearing_efsm_12_h, bearing_efsm_12_h, bearing_efsm_12_a1*2], center=true);
