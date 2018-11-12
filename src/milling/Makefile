@@ -1,5 +1,6 @@
 STL_DIR=../../STL
 IMG_DIR=../../images
+DXF_DIR=./DXF
 SRC_DIR=./
 PLATE_DIMMENSIONS=120
 SIMARRANGE=/usr/local/bin/simarrange
