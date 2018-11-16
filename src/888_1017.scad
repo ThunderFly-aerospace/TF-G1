@@ -38,10 +38,10 @@ module 888_1016(draft){
 
 
     // otvor pro senzor
-        #translate([-hall_width/2, plate_length + hall_distance - plate_axis_from_end - hall_length/2 + hall_length_offset, plate_thickness - hall_thickness])
+        translate([-hall_width/2, plate_length + hall_distance - plate_axis_from_end - hall_length/2 + hall_length_offset, plate_thickness - hall_thickness])
             cube([hall_width, hall_length, hall_thickness + global_clearance]);
 
-        #translate([-5/2, plate_length + hall_distance - plate_axis_from_end + hall_length/2 + hall_length_offset - 0.1, 0])
+        translate([-5/2, plate_length + hall_distance - plate_axis_from_end + hall_length/2 + hall_length_offset - 0.1, 0])
             cube([5, 2.5, plate_thickness + global_clearance]);
 
 
