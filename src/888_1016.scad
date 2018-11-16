@@ -22,6 +22,8 @@ module 888_1016(draft){
 
     difference(){
         
+
+    // zakladni tvar
         hull(){
             translate([-(plate_width + 2* hall_holder_wall_thickness)/2, 0, 0])
                 cube([plate_width + 2* hall_holder_wall_thickness, plate_length, plate_thickness]);
@@ -30,12 +32,19 @@ module 888_1016(draft){
                 cube([hall_width, holder_length, plate_thickness]);
         }
 
+    // dira pro osu
+        translate([0, plate_length - plate_axis_from_end,0])
+            cylinder(d = 20, h = plate_thickness)
+
+
+    // otvor pro senzor
         translate([-hall_width/2, plate_length + hall_distance - plate_axis_from_end - hall_length/2 + hall_length_offset, plate_thickness - hall_thickness])
             cube([hall_width, hall_length, hall_thickness + global_clearance]);
 
-
         translate([-5/2, plate_length + hall_distance - plate_axis_from_end + hall_length/2 + hall_length_offset - 0.1, 0])
             cube([5, 2.5, plate_thickness + global_clearance]);
+
+
 
         translate([0,0,-global_clearance/2 + bottom_wall])
             // tento rozdil napodobuje tvar hlinikove desky
