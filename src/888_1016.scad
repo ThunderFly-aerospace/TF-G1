@@ -2,7 +2,7 @@ include <../Parameters.scad>
 
 module 888_3016(draft = true){
 
-    inner_diameter = 6.5;
+    inner_diameter = 6.3;
     outer_diameter = bearing_efsm_12_d + 3;
     rim_height = 1;
     bearng_ball_height = 10.1/2;
