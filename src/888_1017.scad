@@ -3,8 +3,8 @@ draft = true;
 
 module 888_1016(draft){
 
-    plate_thickness = 5.4;
-    plate_width = 50 + 0.52;
+    plate_thickness = 5.5;
+    plate_width = 50 + 0.32;
     plate_corners = 10 - 0.6;
     plate_length = 20; // vzdalenost, jak daleko bude drzak od okraje
     plate_axis_from_end = 20;
@@ -18,7 +18,7 @@ module 888_1016(draft){
     hall_thickness = 3;
     holder_length = plate_length + hall_distance - plate_axis_from_end + hall_length/2 + hall_holder_wall_thickness + hall_length_offset; 
 
-    bottom_wall = 0.4;
+    bottom_wall = 0.5;
 
     difference(){
         
@@ -38,7 +38,7 @@ module 888_1016(draft){
 
 
     // otvor pro senzor
-        %translate([-hall_width/2, plate_length + hall_distance - plate_axis_from_end - hall_length/2 + hall_length_offset, plate_thickness - hall_thickness])
+        translate([-hall_width/2, plate_length + hall_distance - plate_axis_from_end - hall_length/2 + hall_length_offset, plate_thickness - hall_thickness])
             cube([hall_width, hall_length, hall_thickness + global_clearance]);
 
         translate([-7/2, plate_length + hall_distance - plate_axis_from_end + hall_length/2 + hall_length_offset - 0.1, 0])

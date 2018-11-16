@@ -34,7 +34,7 @@ retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 11;	// length of toothed part of pulley, standard = 12
+pulley_t_ht = 20;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 0;	// pulley base diameter, standard = 20
 no_of_nuts = 0;		// number of captive nuts required, standard = 1
@@ -103,6 +103,15 @@ module rotor_pulley(draft)
 
         // osazení pro kroužek
         cylinder(h = 4, d=42.5,  $fn = draft ? 50 : 200);
+
+        // osazení pro domek
+        translate([0, 0, pulley_t_ht - 5])
+            cylinder(h = 5, d=42.5,  $fn = draft ? 50 : 200);
+
+        // osazení pro  šikmou část domku
+        translate([0, 0, pulley_t_ht - 5 - 8])
+            cylinder(h = 8, d2=42.5, d1=26.5,  $fn = draft ? 50 : 200);
+
 
         //šrouby
         translate([-32/2, 0, 0])
