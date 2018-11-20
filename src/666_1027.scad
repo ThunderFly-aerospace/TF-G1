@@ -536,7 +536,7 @@ echo(floor (C));
         //připevnění horizontální trubky
         //A
         translate([base_division[1]*0.75,0,0])
-           % union(){
+            union(){
                 translate([0,0, -hull_z_size/2 - 20])           
                    cylinder(h = hull_z_size, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
                 translate([0,0, base_mounting_screw_length/2 - M3_screw_head_height])           
