@@ -106,89 +106,105 @@ module 666_1028(draft){
 	       }
 
         //VERTICAL
-    union(){
-        difference(){
-            union(){
-                translate ([140,75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
-                    rotate([90,-87,0])
-                    {
-                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
 
-                        //výztuhy
-                      	intersection(){
-                            airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false);
-                            union(){
-                                translate([70,-15,-55])
-                               		rotate([45,0,90])
-                                		for (i = [0:17]) { // opakovani cyklu
-                                        		translate([0, i * 25,-15])  //sude prorezy
-                                            		cube([30, wall_thickness, 220]); 
-            		       	            }
+    intersection(){
+     //zkosení o 10 stupňů       
+        union(){    
+            translate([0,-47,0])
+                rotate([0,0,-10])
+                    cube([400,100,300]);
 
-            		       	    translate([-60,-15,85])
-                               		rotate([135,0,90])
-                                		for (i = [0:17]) { // opakovani cyklu
-                                        		translate([0, i * 25,-15])  //sude prorezy
-                                            		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
-            		       	            }
-			                
-			                	// vyztužení pro čepy
-			                	rotate([-90,0,-90])
-				                	translate([0, -75, 150 - Rudder_height + gap_width/2])
-				                        difference(){
-				                        	union(){
-				                				translate([0, 75, 0])
-					                            	rotate([45,0,0])
-						                            	cube([15, 40, 40], center = true);
-
-				                				translate([0, -75, 0])
-					                            	rotate([45,0,0])
-						                            	cube([15, 40, 40], center = true);
-					                        }
-
-				            				translate([0, 0, 25])
-				                            	cube([25, 200, 40], center = true);
-
-				                            rotate([90,0,0])
-				                                cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50, center = true);
-				          
-				                        }
-                            }
-    	            }
-                }
-            }
-
-            //vyříznutí otvoru pro směrovku
-            translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
-                cube([Rudder_depth, Rudder_length, Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
-
-            translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
-                rotate([90,0,0])
-                   translate([0,0,-3])
-                   cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50);
-
-            
-            // otvor pro servo
-            translate([143,19.8,30])
-                rotate([0,3,0])
-                    union(){
-                        translate([-6 , -(22.8 - 19.3) - 1.25, -4.95 - 1 - 0.25])
-                            cube([13.5,22.8 + 4.5, 32.5 + 2 + 0.5]);
-
-                        translate([-20, -5, 0])
-                            cube([20,8,30]);
-                   	}
+            translate([0,-100+45,0])
+                rotate([0,0,10])
+                    cube([400,100,300]);
         }
-        //integrovaný rámeček pro servo
-        // TODO - Je potřeba, aby rámeček byl součástí stěny směrovky aby nezvětšoval potřebnou tloušťku směrovky, nutnou pro vložení serva
-        /*    translate([143,19.8,30])
-                rotate([0,3,0])
-                    888_1012_C();
-        */
 
+            union(){
+                difference(){
+                    union(){
+                        translate ([140,75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
+                            rotate([90,-87,0])
+                            {
+
+                                hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+
+                                //výztuhy
+                              	intersection(){
+                                    airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false);
+                                    union(){
+                                        translate([70,-15,-55])
+                                       		rotate([45,0,90])
+                                        		for (i = [0:17]) { // opakovani cyklu
+                                                		translate([0, i * 25,-15])  //sude prorezy
+                                                    		cube([30, wall_thickness, 220]); 
+                    		       	            }
+
+                    		       	    translate([-60,-15,85])
+                                       		rotate([135,0,90])
+                                        		for (i = [0:17]) { // opakovani cyklu
+                                                		translate([0, i * 25,-15])  //sude prorezy
+                                                    		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                    		       	            }
+        			                
+        			                	// vyztužení pro čepy
+        			                	rotate([-90,0,-90])
+        				                	translate([0, -75, 150 - Rudder_height + gap_width/2])
+        				                        difference(){
+        				                        	union(){
+        				                				translate([0, 75, 0])
+        					                            	rotate([45,0,0])
+        						                            	cube([15, 40, 40], center = true);
+
+        				                				translate([0, -75, 0])
+        					                            	rotate([45,0,0])
+        						                            	cube([15, 40, 40], center = true);
+        					                        }
+
+        				            				translate([0, 0, 25])
+        				                            	cube([25, 200, 40], center = true);
+
+        				                            rotate([90,0,0])
+        				                                cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50, center = true);
+        				          
+        				                        }
+                                    }
+            	            }
+                        }
+
+
+
+                    }
+
+                    //vyříznutí otvoru pro směrovku
+                    translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
+                        cube([Rudder_depth, Rudder_length, Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
+
+                    translate([150 - 4.87 + 0.14,75,150 - Rudder_height + gap_width/2])
+                        rotate([90,0,0])
+                           translate([0,0,-3])
+                           cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50);
+
+                    
+                    // otvor pro servo
+                    translate([143,19.8,30])
+                        rotate([0,3,0])
+                            union(){
+                                translate([-6 , -(22.8 - 19.3) - 1.25, -4.95 - 1 - 0.25])
+                                    cube([13.5,22.8 + 4.5, 32.5 + 2 + 0.5]);
+
+                                translate([-20, -5, 0])
+                                    cube([20,8,30]);
+                           	}
+                }
+                //integrovaný rámeček pro servo
+                // TODO - Je potřeba, aby rámeček byl součástí stěny směrovky aby nezvětšoval potřebnou tloušťku směrovky, nutnou pro vložení serva
+                /*    translate([143,19.8,30])
+                        rotate([0,3,0])
+                            888_1012_C();
+                */
+
+            }
     }
-
-
 
 
 	    } // end of union
