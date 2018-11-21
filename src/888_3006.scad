@@ -1,5 +1,6 @@
 use <./lib/naca4.scad>
 include <../Parameters.scad>
+use <./lib/curvedPipe.scad>
 draft = true;
 $fs =  draft ? 50 :100;
 
@@ -13,75 +14,40 @@ module kostka(p, r, y, h){
 
 module 888_3006(draft){    /////// 1. díl (AZ, YAW)
 
-    //lícovaný šroub  M6
-    8_shank_diameter = 8.4;		//průměr dříku + tolerance pro díru
-    screw_length = 30; // délka lícovaného sroubu
-    whole_screw_length = screw_length + 11+6; 		//celková délka
-    thread_length = 11;				//délka závitu
-    thread_diameter = 6; 
-    length_screw_behind_nut = 3;
-    head_screw_diameter = 13 + 0.2;		//průměr válcové hlavy šroubu
-    head_screw_height = 8 + 0.2;		//výška válcové hlavy šroubu
-
+    height = 50;
+    magnet_d = 80;
+    cylinder_height = magnet_d/2;
 
     difference(){
         union(){
             cylinder(r=g3_0_cone1, h=5, $fn=draft?50:100);
 
             translate([0,0,5]) 
-                cylinder(r1=g3_0_cone1, r2=g3_0_cone2, h = g3_0_cone_height-5, $fn=draft?50:100);
+                cylinder(r1=g3_0_cone1, r2 = magnet_d/2 , h = height/2 - 5, $fn=draft?50:100);
 
-            cylinder(r=g3_0_cone2, h=g3_0_height-g3_0_cone_top_height-20, $fn=draft?50:100);
+            cylinder(r = magnet_d/2 , h = height, $fn=draft?50:100);
 
-            
-            // omezeni pro osu yaw
-            difference(){
-                translate([0,0,g3_0_height-g3_0_cone_top_height-20])
-                    cylinder(r=g3_0_cone2, h = 20+20, $fn=draft?50:100);
-                
-                    
-                   center = bearing_efsm_12_ag - bearing_efsm_12_a1;
-                
-                    union(){
-                        for(pitch = [-20, 20]){
-                            for(yaw = [-10, 10]){
-                                for(roll = [0:1:15]){
-                                    translate([0, 0, g3_0_height+center + 4.5]){
-                                        kostka(pitch, roll, yaw, center);
-                                        kostka(pitch, -roll, yaw, center);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                     union(){
-                        for(pitch = [-20, 20]){
-                            for(yaw = [0: 3: 10]){
-                                for(roll = [-15, 15]){
-                                    
-                                    translate([0, 0, g3_0_height+center + 4.5]){
-                                        kostka(pitch, roll, yaw, center);
-                                        kostka(pitch, roll, -yaw, center);
-                                    }
-                                }
-                            }
-                        }
-                    }
-               translate([0,0,g3_0_height])
-                    cylinder(d=30, h = bearing_efsm_12_ag, $fn=draft?50:100);
- 
-            }
-            
-                translate([0,0,g3_0_height])
-                    cylinder(d=17, h = (bearing_efsm_12_ag-bearing_efsm_12_a1)*2, $fn=draft?50:100);
               
         }
+
         
+        for (i=[0:3]) rotate([0, 0, 90*i]){
+            translate([0, 70/2, 0])
+                cylinder(h = 2*cylinder_height, d = M4_screw_diameter, $fn = 50);
+            
+            translate([0, 70/2, 0])
+               cylinder(h = height - 10, d = M4_nut_diameter, $fn = 6);
+        }
+
+        // otvor pro vývody
+        rotate([0,0,45])
+           curvedPipe([[0,57/2,height], [0,57/2,height / 2], [0,100,height / 2]], 2, [20], 8, 0);
+
         // srouby pri pridelani na strechu
         for (i = [0:3]){
             rotate([0, 0, i*90]) 
                 translate([g3_0_srcew_dist, 0, -global_clearance]) 
-                    cylinder(h=100, d=M6_screw_diameter, $fn=draft?50:100);
+                    cylinder(h = 100, d = M6_screw_diameter, $fn = 50);
             rotate([0, 0, i*90]) 
                 translate([g3_0_srcew_dist, 0, -global_clearance])
                     cylinder(h=1, d1=M6_screw_diameter+2, d2=M6_screw_diameter, $fn=draft?50:100);
@@ -91,10 +57,6 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
                         cylinder(h=20, d=M6_nut_diameter, $fn=6, $fn=6);
         }
         
-        // kapsa pro matici s podlozkou
-        translate([-M10_nut_diameter, -g3_1_service_holl_width/2, g3_0_height-g3_1_service_holl_height-(g3_0_bearing_bolt_len-g3_7_height/2-bearing_efsm_12_ag/2)])
-            cube([200, g3_1_service_holl_width, g3_1_service_holl_height]);
-        cylinder(h = 1000, d = M10_screw_diameter, $fn = draft?50:100);
     }
 }
 
