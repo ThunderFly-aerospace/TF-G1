@@ -20,28 +20,29 @@ module 888_3006(draft){    /////// 1. díl (AZ, YAW)
 
     difference(){
         union(){
-            cylinder(r=g3_0_cone1, h=5, $fn=draft?50:100);
+            hull(){
+                cylinder(r=g3_0_cone1, h=5, $fn=draft?50:100);
+                translate([10,0,5]) 
+                    cylinder(r = magnet_d/2 , h = height/2 - 5, $fn=draft?50:100);
+            }
 
-            translate([0,0,5]) 
-                cylinder(r1=g3_0_cone1, r2 = magnet_d/2 , h = height/2 - 5, $fn=draft?50:100);
-
-            cylinder(r = magnet_d/2 , h = height, $fn=draft?50:100);
-
-              
+            translate([10,0,5]) 
+                cylinder(r = magnet_d/2 , h = height, $fn=draft?50:100);
         }
 
-        
-        for (i=[0:3]) rotate([0, 0, 90*i]){
-            translate([0, 70/2, 0])
-                cylinder(h = 2*cylinder_height, d = M4_screw_diameter, $fn = 50);
-            
-            translate([0, 70/2, 0])
-               cylinder(h = height - 10, d = M4_nut_diameter, $fn = 6);
-        }
+        translate([10,0,0])         
+            rotate([0,0,45])
+                for (i=[0:3]) rotate([0, 0, 90*i]){
+                    translate([0, 70/2, 0])
+                        cylinder(h = 2*cylinder_height, d = M4_screw_diameter, $fn = 50);
+                    
+                    translate([0, 70/2, 0])
+                       cylinder(h = height - 10, d = M4_nut_diameter, $fn = 6);
+                }
 
         // otvor pro vývody
-        rotate([0,0,45])
-           curvedPipe([[0,57/2,height], [0,57/2,height / 2], [0,100,height / 2]], 2, [20], 8, 0);
+        translate([10,0,0]) 
+               curvedPipe([[- 57/2 ,0,2 * height], [-57/2, 0,height / 2], [-100,0,height / 2]], 2, [20], 8, 0);
 
         // srouby pri pridelani na strechu
         for (i = [0:3]){
