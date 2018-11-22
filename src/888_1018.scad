@@ -22,13 +22,20 @@ rotate([0, 180, 180])
             cube([accumulator_plate_length, accumulator_plate_width, accumulator_plate_thickness]);
       }
 
-      union (){
+      #union (){
       //šrouby pro připevnění k letadlu
           translate([-width_of_accumulator/2 - accumulator_holder_width/2 - accumulator_holder_thickness/2, -height_of_accumulator, 0])
               cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
           translate([width_of_accumulator/2 + accumulator_holder_width/2 + accumulator_holder_thickness/2, -height_of_accumulator, 0])
               cylinder(h = 100, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+
+      //Zapuštění hlav šroubů pro připevnění k letadlu
+          translate([-width_of_accumulator/2 - accumulator_holder_width/2 - accumulator_holder_thickness/2, -height_of_accumulator, accumulator_plate_thickness])
+              cylinder(h = M3_screw_head_height, d = M3_nut_diameter, $fn = draft ? 10 : 20, center = true);
+
+          translate([width_of_accumulator/2 + accumulator_holder_width/2 + accumulator_holder_thickness/2, -height_of_accumulator, accumulator_plate_thickness])
+              cylinder(h = M3_screw_head_height, d = M3_nut_diameter, $fn = draft ? 10 : 20, center = true);
 
       // odecteni kostky, v miste, kde je pripevnene kolecko
           translate([height_666_1026 - move_of_accumulator - width_of_accumulator/2 - 5, -5 - height_666_1004/2, - hull_y_size/2])
