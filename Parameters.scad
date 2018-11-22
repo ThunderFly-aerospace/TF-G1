@@ -11,16 +11,12 @@ global_clearance = 0.5;
 
 // Nastavení parametrů rotoru
 
-gliding_aggle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti. 
+gliding_aggle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
 
 
 rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 rotor_blade_length = 970;   // délka rotorového listu
 rotor_blade_depth = 50;     // hloubka rotorového listu
-
-
-rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30;
-center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
 // Parameters of tube couplings
@@ -134,6 +130,10 @@ bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
 
+
+
+rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30;
+center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
 
