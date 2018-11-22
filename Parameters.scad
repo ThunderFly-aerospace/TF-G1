@@ -16,7 +16,7 @@ rator_blade_depth = 50;     // hloubka rotorového listu
 
 
 // Parameters of tube couplings
-coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls 
+coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls
 thickness_between_tubes = main_tube_outer_diameter/10;    // minimum distance between tubes in couplings
 
 coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
@@ -71,8 +71,8 @@ M4_nut_pocket = 7.5;
 
 //Screw diameter and nut for M3 [mm]
 M3_screw_diameter = 3.2;
-M3_nut_height = 2.7;	
-M3_nut_diameter = 6.6; 
+M3_nut_height = 2.7;
+M3_nut_diameter = 6.6;
 M3_screw_head_height = 3;
 
 //Screw diameter and nut for M2,5 [mm]
@@ -86,7 +86,7 @@ Servo_screw = 1.5;
 
 //The tube for help
 Help_main_tube_outer = 25;
-Help_main_tube_inner = 23; 
+Help_main_tube_inner = 23;
 Help_tube_for_undercarriage_outer = 10;
 Help_tube_for_undercarriage_inner = 5;
 
@@ -106,13 +106,13 @@ hull_scale_z = 1.5;
 
 main_pilon_position = 170+68+30;       // pozice rotorového pilonu měřená od přední části krytu
 cover_pilon_position = 180;
-height_of_vertical_tube = 275; //278mm je změřená délka trubky. 
+height_of_vertical_tube = 275; //278mm je změřená délka trubky.
 
 //délka hlavní dlouhé trubky
 length_of_main_tube = 820;
 length_of_undercarriage_tube = 300;
 
-ribbon_width = 5; // šířka vyztužovacích lemů. 
+ribbon_width = 5; // šířka vyztužovacích lemů.
 
 // šířka otvoru v přední části kapoty pro držák motoru.
 width_of_engine_holder = 63;
@@ -142,9 +142,9 @@ top_screw_position = [0,
                     (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3];
 	//spodní kryt
 bottom_screw_position = [0,
-                        (bottom_cover_division[0] + bottom_cover_division[1])*(2/6), 
-                        bottom_cover_division[1]*(9/10), 
-                        bottom_cover_division[3] + bottom_cover_division[1]*(1/10), 
+                        (bottom_cover_division[0] + bottom_cover_division[1])*(2/6),
+                        bottom_cover_division[1]*(9/10),
+                        bottom_cover_division[3] + bottom_cover_division[1]*(1/10),
                         bottom_cover_division[3] + bottom_cover_division[1]*(3/5)];
 
 
@@ -166,8 +166,8 @@ height_of_accumulator = 43.65;
 sink_of_accumulator = 5; //main_tube_outer_diameter/5 - M3_nut_height*1.5;
 
 //tloušťka hrany spojky
-accumulator_holder_width = 18; 
-accumulator_holder_thickness = 10; 
+accumulator_holder_width = 18;
+accumulator_holder_thickness = 10;
 
 //posunutí akumálátoru na podložce
 move_of_accumulator = 75;   // pozice akumulátoru (ovlivňuje těžiště)
@@ -181,7 +181,7 @@ move_of_accumulator = 75;   // pozice akumulátoru (ovlivňuje těžiště)
 width_optical_flow_senzor = 45.5;
 depth_optical_flow_senzor = 6;
 height_optical_flow_senzor = 35;
-sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5; 
+sink_of_optical_flow_senzor = depth_optical_flow_senzor - 5;
 M3_optical_flow_senzor_Z = 30.4;
 M3_optical_flow_senzor_X = 24;
 M3_optical_flow_senzor_Z_alone = 9.1;
@@ -222,7 +222,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
     width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
 //        echo("width_666_1004 is", width_666_1004);
-    
+
 //        echo("ceil_666_1004 is", ceil(width_666_1004));
 
     coupling_screw_length_666_1004 = (ceil(width_666_1004)) * basic_screw_length;
@@ -244,10 +244,10 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 
     width_666_1026 = main_tube_outer_diameter + 2*thickness_between_tubes;
-    
+
     depth_666_1026 = (main_tube_outer_diameter*2)/basic_screw_length;
 //        echo("depth_666_1026 is", depth_666_1026);
-    
+
 //        echo("ceil_666_1026 is", ceil(depth_666_1026));
 
     coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
@@ -265,7 +265,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 //tloušťka plechu pro zajištění konstatní šířky spojky 50 mm
 
-    width_666_1026_drillhelper = main_tube_outer_diameter*2; 
+    width_666_1026_drillhelper = main_tube_outer_diameter*2;
 
     depth_666_1026_drillhelper = main_tube_outer_diameter + 4*thickness_between_tubes;
 
@@ -274,7 +274,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
     width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
 //        echo("width_666_1017 is", width_666_1017);
-    
+
 //        echo("ceil_666_1017 is", ceil(width_666_1017));
 
     coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
@@ -288,7 +288,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
     height_666_1017= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
 
     width_666_1017_drillhelper = main_tube_outer_diameter+4*thickness_between_tubes;
-    
+
     depth_666_1017_drillhelper = main_tube_outer_diameter*2;
 
 
@@ -344,14 +344,21 @@ base_mounting_screw_length = 50;
 
 // kulove lozisko
 
-bearing_efsm_08_h = 33;
+bearing_efsm_08_h = 33+1;
 bearing_efsm_08_m = 22;
 bearing_efsm_08_db = 18;
 bearing_efsm_08_ag = 10.5;
 bearing_efsm_08_n = M4_screw_diameter;
 bearing_efsm_08_a1 = 5.5;
 
-bearing_efsm_12_width = 40;
+bearing_efsm_10_h = 38+1;
+bearing_efsm_10_m = 26;
+bearing_efsm_10_db = 21.9;
+bearing_efsm_10_ag = 12+0.2;
+bearing_efsm_10_n = M5_screw_diameter;
+bearing_efsm_10_a1 = 6.5;
+
+bearing_efsm_12_width = 40+1;
 bearing_efsm_12_h = bearing_efsm_12_width;
 bearing_efsm_12_boltd = 28/2; // polovina vzdalenosti mezi srouby
 bearing_efsm_12_m = bearing_efsm_12_boltd*2;
@@ -362,7 +369,7 @@ bearing_efsm_12_n = M5_screw_diameter;
 bearing_efsm_12_d = 12.15;
 bearing_efsm_space = 1;
 
-bearing_efsm_17_width = 54;
+bearing_efsm_17_width = 54+1;
 bearing_efsm_17_h = bearing_efsm_17_width;
 bearing_efsm_17_boltd = 38/2; // polovina vzdalenosti mezi srouby
 bearing_efsm_17_m = bearing_efsm_17_boltd*2;
@@ -401,7 +408,7 @@ g2_5_width = 70+5.5+11;
 g2_5_threads = 2; // kolik ma byt sroubu skrz nosnou tyc
 
 g2_5_m3_length = base_mounting_screw_length; // sroub, ktery se pouziva na sesroubovani s nosnou tyci
-g2_5_servo_shift = 30; 
+g2_5_servo_shift = 30;
 g2_5_servo_wall = 5;
 
 g2_5_m8_length = 60; // sroub, ktery se pouziva jako osa pro podlozku
@@ -455,7 +462,7 @@ g3_7_height = M8_screw_diameter*3;
 
 g3_8_magnet_wall_thickness = 7;  // tloustka steny u magnetu
 g3_8_bearing_wall_thickness = bearing_efsm_12_ag-bearing_efsm_12_a1;
-g3_8_magnet_diameter = 63; 
+g3_8_magnet_diameter = 63;
 g3_8_cylinder_d = 55; // prumer valce
 g3_8_cylinder_h = 30 + g3_8_magnet_wall_thickness;
 g3_8_m5_lenght = 40; // delka sroubu pro pridelani kuloveho loziska
