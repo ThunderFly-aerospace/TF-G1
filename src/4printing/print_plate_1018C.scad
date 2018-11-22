@@ -3,9 +3,12 @@ use <../888_1018.scad>
 
 draft = false;
 
+posuv = move_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2 + height_666_1026 + global_clearance/2;
+
 mirror([0,1,0])
-    difference(){
+  difference(){
+    rotate([180, 0, 0])
       888_1018(1, draft);
-      translate([-500 + global_clearance, -500 + global_clearance, -global_clearance])
-        cube(500);
-    }
+    translate([-500+posuv, -500+ global_clearance, -global_clearance])
+      cube(500);
+  }
