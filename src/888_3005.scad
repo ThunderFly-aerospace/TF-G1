@@ -2,7 +2,7 @@ include <../Parameters.scad>
 
 module 888_3016(draft = true){
 
-    inner_diameter = M6_screw_diameter;
+    inner_diameter = M6_screw_diameter - 0.25;
     outer_diameter = bearing_efsm_10_d + 3;
     rim_height = 1;
     bearng_ball_height = 9/2;

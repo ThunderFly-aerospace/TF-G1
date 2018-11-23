@@ -365,7 +365,7 @@ bearing_efsm_10_db = 21.9;
 bearing_efsm_10_ag = 12+0.2;
 bearing_efsm_10_n = M5_screw_diameter;
 bearing_efsm_10_a1 = 6.5;
-bearing_efsm_10_d = 10.05;
+bearing_efsm_10_d = 10.25;
 
 
 bearing_efsm_12_width = 40+1;
