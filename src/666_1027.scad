@@ -425,7 +425,7 @@ echo(floor (C));
 
         //666_1004 - přední
         translate([height_666_1026 + global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-               cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
+               #cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
 
         //666_1004 - zadní
         translate([second_undercarriage_hole - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
@@ -465,7 +465,7 @@ echo(floor (C));
         union (){
             //akumulátor
             translate([move_of_accumulator,main_tube_outer_diameter/2 + coupling_wall_thickness - sink_of_accumulator,-height_of_accumulator*1.5])
-               		#cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
+               		cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
 
             //šrouby pro připevnění akumulátorů
             translate([move_of_accumulator - accumulator_holder_width/2 - accumulator_holder_thickness/2,0,-height_of_accumulator])

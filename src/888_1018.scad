@@ -45,8 +45,8 @@ rotate([0, 180, 180])
       translate([accumulator_plate_move, 0, 0])
       union (){
         //akumulátor
-          translate([-width_of_accumulator/2, -accumulator_plate_accumulator_axis_offset-depth_of_accumulator/2, accumulator_plate_thickness - sink_of_accumulator])
-              cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator]);
+          translate([-width_of_accumulator/2, -accumulator_plate_accumulator_axis_offset-height_of_accumulator/2, accumulator_plate_thickness - sink_of_accumulator])
+              cube([width_of_accumulator, height_of_accumulator, depth_of_accumulator]);
 
         //šrouby pro připevnění akumulátorů
           translate([width_of_accumulator/2 + accumulator_holder_width/2 + accumulator_holder_thickness/2, -accumulator_plate_accumulator_axis_offset, 0])
