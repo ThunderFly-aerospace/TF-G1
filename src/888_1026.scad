@@ -12,6 +12,10 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
+engine_angle = -8;
+engine_diameter = 50; 
+wall_thickness = 5;
+engine_screws_radius = 15;   
 
 
 module 888_1026(draft)
@@ -22,11 +26,20 @@ module 888_1026(draft)
 
 
     difference (){
+        hull(){
+            translate([-(width/2),-(depth/2),0])
+                cube ([width,depth,height]);
 
-        translate([-(width/2),-(depth/2),0])
-            color([0,0.5,0])
+            translate([32,0,height])
+                rotate([0, engine_angle,0])
+                    cylinder(h = height + global_clearance, d = engine_diameter + 2*wall_thickness,  $fn = draft ? 100 : 200);
+       }
 
-            cube ([width,depth,height]);
+
+            translate([32,0,height])
+                rotate([0, engine_angle,0])
+                    cylinder(h = height * 5, d = 50, $fn = draft ? 100 : 200);
+
     	
     	//tube
     	translate([0,0,- global_clearance/2])
