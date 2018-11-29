@@ -13,11 +13,12 @@ $fs = draft ? 5 : 0.5;
 $fa = 10;
 
 engine_angle = -8;
-engine_diameter = 50;
+engine_diameter = 55;
 engine_offset = 42; 
 wall_thickness = 5;
-engine_screws_radius = 15;   
-engine_shatf_hole_diameter = 10; 
+engine_screws_radius = 15;
+engine_holes_radius = (24 + 44)/4;
+engine_shatf_hole_diameter = 13; 
 
 module 888_1026(draft)
 {
@@ -70,18 +71,30 @@ module 888_1026(draft)
         // otvory pro chlazení
         translate([engine_offset,0,height])
             rotate([0, engine_angle,0])
-                translate([0,0,height])
+                translate([0,0,height - global_clearance])
                     rotate([0, 0,45])
                         for (i=[0:3]) rotate([0, 0, 90*i]){
-                            translate([0, engine_screws_radius, 0])
+                            translate([0, engine_holes_radius, 0])
                                 cylinder(h = 15, d1 = 10, d2 = 20, $fn = 50);
                             
+                        }
+
+
+        //octvor pro vývody motoru
+        translate([engine_offset,0,height])
+            rotate([0, engine_angle, 0])
+                translate([0, 0, height - 8])
+                    rotate([90, 0, 45])
+                        hull(){
+                            cylinder(h = depth + global_clearance, d = 15 , $fn = draft ? 10 : 50);
+                            translate([0,-25,0])
+                                cylinder(h = depth + global_clearance, d = 15 , $fn = draft ? 10 : 50);
                         }
 
         	
     	//tube
     	translate([0,0,- global_clearance/2])
-    	   cylinder(h = height + global_clearance,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+    	   cylinder(h = height + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
     	//screw
     	translate([0,depth/2 + global_clearance/2,7.5])
