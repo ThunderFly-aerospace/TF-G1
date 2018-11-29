@@ -18,6 +18,15 @@ rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 rotor_blade_length = 970;   // délka rotorového listu
 rotor_blade_depth = 50;     // hloubka rotorového listu
 
+// nastavení parametrů motoru
+
+engine_angle = -8;
+engine_diameter = 55;
+engine_offset = 42; 
+
+engine_screws_radius = 15;
+engine_holes_radius = (24 + 44)/4;
+engine_shatf_hole_diameter = 13; 
 
 // Parameters of tube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls

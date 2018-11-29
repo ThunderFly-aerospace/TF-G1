@@ -12,20 +12,13 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
-engine_angle = -8;
-engine_diameter = 55;
-engine_offset = 42; 
-wall_thickness = 5;
-engine_screws_radius = 15;
-engine_holes_radius = (24 + 44)/4;
-engine_shatf_hole_diameter = 13; 
-
 module 888_1026(draft)
 {
+
     width = main_tube_outer_diameter+2*thickness_between_tubes;	
     depth = 53.5;   // šířka plechu držáku motoru
     height = main_tube_outer_diameter*2;
-
+    wall_thickness = 5;
 
     difference (){
         union(){
