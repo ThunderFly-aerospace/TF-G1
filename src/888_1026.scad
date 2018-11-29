@@ -12,35 +12,107 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
-
-
 module 888_1026(draft)
 {
+
     width = main_tube_outer_diameter+2*thickness_between_tubes;	
     depth = 53.5;   // šířka plechu držáku motoru
     height = main_tube_outer_diameter*2;
-
+    wall_thickness = 5;
 
     difference (){
+        union(){
+            hull(){
+                translate([-(width/2),-(depth/2),0])
+                    cube ([width,depth,height]);
 
-        translate([-(width/2),-(depth/2),0])
-            color([0,0.5,0])
+                translate([engine_offset,0,height])
+                    rotate([0, engine_angle,0])
+                        cylinder(h = height, d = engine_diameter + 2*wall_thickness,  $fn = draft ? 100 : 200);
+           }
 
-            cube ([width,depth,height]);
-    	
+            translate([engine_offset,0, height])
+                rotate([0, engine_angle,0])
+                    translate([0,0, height])
+                        cylinder(h = wall_thickness, d1 = engine_diameter + 2*wall_thickness, d2 = engine_diameter + wall_thickness,  $fn = draft ? 100 : 200);
+
+       }
+
+
+        translate([engine_offset,0,height])
+            rotate([0, engine_angle,0])
+                translate([0,0,- 4 * height])
+                    cylinder(h = height * 5, d = engine_diameter, $fn = draft ? 100 : 200);
+
+        // otvor pro osu motoru
+        translate([engine_offset,0,height])
+            rotate([0, engine_angle,0])
+                cylinder(h = height * 3, d = engine_shatf_hole_diameter, $fn = draft ? 100 : 200);
+
+        // otvory pro šrouby motoru
+        translate([engine_offset,0,height])
+            rotate([0, engine_angle,0])
+                translate([0,0,height])
+                    for (i=[0:3]) rotate([0, 0, 90*i]){
+                        translate([0, engine_screws_radius, 0])
+                            cylinder(h = 2*height, d = M4_screw_diameter, $fn = 50);
+                        
+                        translate([0, engine_screws_radius, wall_thickness])
+                           cylinder(h = height - 10, d = M4_nut_diameter, $fn = 6);
+                    }
+
+        // otvory pro chlazení
+        translate([engine_offset,0,height])
+            rotate([0, engine_angle,0])
+                translate([0,0,height - global_clearance])
+                    rotate([0, 0,45])
+                        for (i=[0:3]) rotate([0, 0, 90*i]){
+                            translate([0, engine_holes_radius, 0])
+                                cylinder(h = 15, d1 = 10, d2 = 20, $fn = 50);
+                            
+                        }
+
+
+        //octvor pro vývody motoru
+        translate([engine_offset,0,height])
+            rotate([0, engine_angle, 0])
+                translate([0, 0, height - 8])
+                    rotate([90, 0, 45])
+                        hull(){
+                            cylinder(h = depth + global_clearance, d = 15 , $fn = draft ? 10 : 50);
+                            translate([0,-25,0])
+                                cylinder(h = depth + global_clearance, d = 15 , $fn = draft ? 10 : 50);
+                        }
+
+        	
     	//tube
     	translate([0,0,- global_clearance/2])
-    	   cylinder(h = height + global_clearance,r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+    	   cylinder(h = height + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
     	//screw
     	translate([0,depth/2 + global_clearance/2,7.5])
     	   rotate([90,0,0])
     	       cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
 
+        translate([0,-20,7.5])
+           rotate([90,0,0])
+               cylinder(h = depth + global_clearance, d = M4_nut_diameter, $fn = 6);
+
+        translate([0,20,7.5])
+           rotate([-90,0,0])
+               cylinder(h = depth + global_clearance, d = M4_nut_diameter, $fn = 6);
 
     	translate([0,depth/2 + global_clearance/2,42.5])
     	   rotate([90,0,0])
     	       cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
+
+        translate([0,-20,42.5])
+           rotate([90,0,0])
+               cylinder(h = depth, d = M4_nut_diameter, $fn = 6);
+
+        translate([0,20,42.5])
+           rotate([-90,0,0])
+               cylinder(h = depth, d = M4_nut_diameter, $fn = 6);
     }
 }
 
@@ -104,9 +176,6 @@ module 888_1026_drillhelper(height = 60, height_of_cap_cylinder = 2){
                         cylinder(h = M4_nut_height*2 + global_clearance, r = M4_nut_diameter/2, $fn = 6);
                 }
     }
-
-
-
 }
 
 module 888_1026_drillhelper_doc(){

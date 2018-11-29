@@ -109,20 +109,20 @@ translate([cover_pilon_position - 2*hull_wall_thickness,0,0])
 overview(draft);
 
 
-use <../666_1004.scad>
-use <../666_1026.scad>
-use <../666_1027.scad>
-use <../666_1029.scad>
-use <../666_1025.scad>
-use <../666_1032.scad>
-use <../888_1000.scad>
-use <../666_1017.scad>
-use <../666_1028.scad>
-use <../666_1006.scad>
-use <../333_1037.scad>
-use <../666_1232.scad>
-use <../888_1008.scad>
-use <../666_1014.scad>
+use <../../666_1004.scad>
+use <../../666_1026.scad>
+use <../../666_1027.scad>
+use <../../666_1029.scad>
+use <../../666_1025.scad>
+use <../../666_1032.scad>
+use <../../888_1000.scad>
+use <../../666_1017.scad>
+use <../../666_1028.scad>
+use <../../666_1006.scad>
+use <../../333_1037.scad>
+use <../../666_1232.scad>
+use <../../888_1008.scad>
+use <../../666_1014.scad>
 
 use <../lib/naca4.scad>
 include <../../Parameters.scad>
