@@ -18,6 +18,7 @@ module 888_1026(draft)
     width = main_tube_outer_diameter+2*thickness_between_tubes;	
     depth = 53.5;   // šířka plechu držáku motoru
     height = main_tube_outer_diameter*2;
+    engine_displacement = maximum_printable_size -  1.2 * height;
     wall_thickness = 5;
 
     difference (){
@@ -26,12 +27,12 @@ module 888_1026(draft)
                 translate([-(width/2),-(depth/2),0])
                     cube ([width,depth,height]);
 
-                translate([engine_offset,0,height])
+                translate([engine_offset,0,engine_displacement])
                     rotate([0, engine_angle,0])
                         cylinder(h = height, d = engine_diameter + 2*wall_thickness,  $fn = draft ? 100 : 200);
            }
 
-            translate([engine_offset,0, height])
+            translate([engine_offset,0, engine_displacement])
                 rotate([0, engine_angle,0])
                     translate([0,0, height])
                         cylinder(h = wall_thickness, d1 = engine_diameter + 2*wall_thickness, d2 = engine_diameter + wall_thickness,  $fn = draft ? 100 : 200);
@@ -39,18 +40,18 @@ module 888_1026(draft)
        }
 
 
-        translate([engine_offset,0,height])
+        translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle,0])
                 translate([0,0,- 4 * height])
                     cylinder(h = height * 5, d = engine_diameter, $fn = draft ? 100 : 200);
 
         // otvor pro osu motoru
-        translate([engine_offset,0,height])
+        translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle,0])
                 cylinder(h = height * 3, d = engine_shatf_hole_diameter, $fn = draft ? 100 : 200);
 
         // otvory pro šrouby motoru
-        translate([engine_offset,0,height])
+        translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle,0])
                 translate([0,0,height])
                     for (i=[0:3]) rotate([0, 0, 90*i]){
@@ -62,7 +63,7 @@ module 888_1026(draft)
                     }
 
         // otvory pro chlazení
-        translate([engine_offset,0,height])
+        translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle,0])
                 translate([0,0,height - global_clearance])
                     rotate([0, 0,45])
@@ -74,7 +75,7 @@ module 888_1026(draft)
 
 
         //octvor pro vývody motoru
-        translate([engine_offset,0,height])
+        translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle, 0])
                 translate([0, 0, height - 8])
                     rotate([90, 0, 45])

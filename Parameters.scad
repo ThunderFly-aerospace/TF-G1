@@ -141,7 +141,7 @@ bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
 
 
 
-rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30;
+rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30; // změřená výška rotoru je 367mm
 center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
