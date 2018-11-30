@@ -13,16 +13,11 @@ accumulator_threads_distance = (width_of_accumulator/2 + accumulator_holder_widt
 
 
 module 888_1019(draft){
-  posun = move_of_accumulator + accumulator_holder_width/2 + accumulator_spacer_thickness/2 + height_666_1026 + global_clearance/2;
-  posun = 0;
 rotate([0, 180, 180])
-  translate([posun, 0, 0])
     difference(){
-
-      hull(){
         translate([-accumulator_spacer_wall, -accumulator_spacer_wall, 0])
             cube([accumulator_spacer_length, accumulator_spacer_width, accumulator_spacer_thickness]);
-      }
+
 
 
       //akumulátor
