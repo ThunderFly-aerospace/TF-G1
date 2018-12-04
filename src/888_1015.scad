@@ -5,7 +5,7 @@ draft = true;
     plate_angle_x = 10;
     plate_angle_y = 10;
     plate_angle_res = 1;
-    plate_size_y = 50+1;
+    plate_size_y = 50;
     plate_size_x = 100;
 
     plate_bearing_center_distance = 7+2;

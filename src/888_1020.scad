@@ -12,17 +12,21 @@ module 888_1020(draft = true){
 
     rotor_axis_diameter = 6.2;
 
+
+    // 666_1236
+    // 666_1007
+    // 666_1212
     motor_distance = 70; // vzdalenost prerotatoru od hlavni pos_y
-    motor_diameter = 35;
+    motor_diameter = 35+2;
     motor_axis_diameter = 6.2;
     motor_screw_diameter = M3_screw_diameter;
     motor_mounting_diameter = 25; // vzdalenost protejsich sroubu pro pridelani prerotatoru
-    motor_sink = 5;
+    motor_sink = 15 - 11.5; // pro zapusteni bez podlozek na motoru...
 
     plate_overlap =  35; // jak moc velký má být přesah směrem k motoru..
 
     servo_join_y = 65; // vzdalenost kloubu pro servo
-    servo_join_x = 25; // vzdalenost kloubku od osy rotoru
+    servo_join_x = 45; // vzdalenost kloubku od osy rotoru
     servo_join_size = 15;
 
     plate_size_y = 50;
