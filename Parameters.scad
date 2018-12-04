@@ -22,11 +22,11 @@ rotor_blade_depth = 50;     // hloubka rotorového listu
 
 engine_angle = -8;
 engine_diameter = 55;
-engine_offset = 42; 
+engine_offset = 42;
 
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
-engine_shatf_hole_diameter = 13; 
+engine_shatf_hole_diameter = 13;
 
 // Parameters of tube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls
@@ -92,6 +92,7 @@ M3_screw_head_height = 3;
 M2_5_screw_diameter = 2.7;
 M2_5_nut_height = 2.3;
 M2_5_nut_diameter = 6;
+M2_5_nut_pocket = 5.5;
 
 
 //šroub servo
