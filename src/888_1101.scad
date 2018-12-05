@@ -1,8 +1,8 @@
 draft = true;
 include <../Parameters.scad>
 
-rotx = -0;      //  -10 .. +10
-roty = -5;       //   -5 .. +5
+rotx = ($t)*20 - 10;      //  -10 .. +10
+roty = -(($t)*10 - 5);       //   -5 .. +5
 
 
 use <888_1015.scad>
@@ -41,6 +41,6 @@ difference(){
                 translate([0,0,7])
                     efsm_12();
     }
-    translate([-250, 0, 0]) cube(500);
-    cube(500);
+    //translate([-250, 0, 0]) cube(500);
+    //cube(500);
 }
