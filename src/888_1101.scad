@@ -4,6 +4,8 @@ include <../Parameters.scad>
 rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5
 
+rotx = 0;
+
 
 use <888_1015.scad>
 use <888_1020.scad>

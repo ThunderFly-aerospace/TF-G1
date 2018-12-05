@@ -66,7 +66,6 @@ module 888_1020(draft = true){
                         cube([joint_size_x + joint_wall_thickness*2, joint_size_y + joint_wall_thickness*2, 7]);
                 }
 
-
                 // rameno, na kterem jsou kloubky pro servo
                 translate([servo_join_x-servo_join_size/2, -servo_join_y/2, 0])
                     cube([servo_join_size, servo_join_y ,plate_size_z]);
@@ -117,14 +116,14 @@ module 888_1020(draft = true){
                 rotate([90, 0, 0])
                     cylinder(d = M2_5_screw_diameter, h=100);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z/2])
+            translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z/2- M2_5_nut_height])
                 cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z]);
 
             translate([servo_join_x, servo_join_y/2 - 20, plate_size_z/2])
                 rotate([-90, 0, 0])
                     cylinder(d = M2_5_screw_diameter, h=100);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - 5, plate_size_z/2])
+            translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - 5, plate_size_z/2- M2_5_nut_height])
                 cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z]);
 
             //Otvor na hallovu sondu
