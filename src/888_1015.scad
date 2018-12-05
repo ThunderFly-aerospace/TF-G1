@@ -26,22 +26,6 @@ Nese 2x servo a kulove lozisko pro rotor.
     rotx = 20/2;
     roty = 10/2;
 
-module efsm_12(){
-    translate([-20, -20, 0])
-        cube([40, 40, 7]);
-
-    cylinder(h = 10, d = 25);
-
-    translate([0,0,10])
-        cylinder(h = 2, d1 = 25, d2 = 20);
-
-    translate([0,0,0])
-        cylinder(h = 14, d = 12);
-
-    translate([0,0,7])
-        sphere(r=8);
-}
-
 
     joint_size_x = 60; // delka dorazu podle osy x
     joint_size_y = 50; //delka dorazu podle osy y
@@ -52,7 +36,7 @@ module efsm_12(){
 
 module 888_1015_platesape(){
 
-        translate([0,0,10]) difference(){
+        translate([-1,0,10]) difference(){
             union(){
 
 
@@ -74,8 +58,9 @@ module 888_1015_platesape(){
                     for (i=[[rotx, 0, 0], [-rotx, 0, 0], [0, roty, 0], [0, -roty, 0],
                             [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                             [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
+                        translate([0, 0, bearing_efsm_ag - bearing_efsm_a1-1])
                         rotate(i)
-                            translate([-50, -50, bearing_efsm_ag - bearing_efsm_a1])
+                            translate([-50, -50, 0])
                                 cube(100);
                     }
                 }

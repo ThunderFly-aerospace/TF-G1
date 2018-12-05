@@ -16,7 +16,7 @@ module 888_1020(draft = true){
     // 666_1236
     // 666_1007
     // 666_1212
-    motor_distance = 70; // vzdalenost prerotatoru od hlavni pos_y
+    motor_distance = 80.66; // vzdalenost prerotatoru od hlavni pos_y
     motor_diameter = 35+2;
     motor_axis_diameter = 6.2;
     motor_screw_diameter = M3_screw_diameter;
@@ -36,9 +36,9 @@ module 888_1020(draft = true){
     plate_bearing_center_distance = 7;
 
 
-    joint_size_x = 60+2; // delka dorazu podle osy x
-    joint_size_y = 45+2; //delka dorazu podle osy y
-    joint_wall_thickness = 5;
+    joint_size_x = 60+1; // delka dorazu podle osy x
+    joint_size_y = 50+1; //delka dorazu podle osy y
+    joint_wall_thickness = 4;
 
     bearing_inner_diameter = 12.2;
     outer_diameter = bearing_efsm_12_d + 3;
