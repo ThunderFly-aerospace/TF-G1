@@ -21,6 +21,15 @@ Nese 2x servo a kulove lozisko pro rotor.
     bearing_efsm_ag = bearing_efsm_12_ag;
     bearing_efsm_a1 = bearing_efsm_12_a1;
     bearing_efsm_h = bearing_efsm_12_h;
+    bearing_efsm_m = bearing_efsm_12_m;
+    bearing_efsm_db = bearing_efsm_12_db;
+
+
+    bearing_efsm_ag = bearing_efsm_08_ag;
+    bearing_efsm_a1 = bearing_efsm_08_a1;
+    bearing_efsm_h = bearing_efsm_08_h;
+    bearing_efsm_m = bearing_efsm_08_m;
+    bearing_efsm_db = bearing_efsm_08_db;
 
 
     rotx = 20/2;
@@ -116,7 +125,7 @@ module 888_1015(draft){
                     translate([-width/2-5,-depth/2,height+20])
                         cube ([width+5, depth, 10]);
                 }
-                translate([-5,0,height+bearing_efsm_12_a1])
+                translate([-5,0,height+bearing_efsm_a1])
                     for (i=[[rotx, rake_angle, 0], [-rotx, rake_angle, 0], [0, roty + rake_angle, 0], [0, -roty + rake_angle, 0],
                             [rotx, roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [rotx, roty + rake_angle, 0], [rotx, -roty + rake_angle, 0],
                             [rotx, -roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0]]) {
@@ -207,12 +216,12 @@ module 888_1015(draft){
                     cube([bearing_efsm_h, bearing_efsm_h, 30]);
 
                 translate([0, 0, -20])
-                    cylinder(h=15 + global_clearance, d=bearing_efsm_12_db);
+                    cylinder(h=15 + global_clearance, d=bearing_efsm_db);
 
-                for (i=[[bearing_efsm_12_m/2, bearing_efsm_12_m/2, -25], [-bearing_efsm_12_m/2, bearing_efsm_12_m/2, -25], [-bearing_efsm_12_m/2, -bearing_efsm_12_m/2, -25], [bearing_efsm_12_m/2, -bearing_efsm_12_m/2, -25]]) {
+                for (i=[[bearing_efsm_m/2, bearing_efsm_m/2, -25], [-bearing_efsm_m/2, bearing_efsm_m/2, -25], [-bearing_efsm_m/2, -bearing_efsm_m/2, -25], [bearing_efsm_m/2, -bearing_efsm_m/2, -25]]) {
                     translate(i){
-                        cylinder(h = 50, d = M5_screw_diameter, $fn = draft ? 50 : 100);
-                        cylinder(h = M5_nut_height+8, d = M5_nut_diameter, $fn = 6);
+                        cylinder(h = 50, d = M4_screw_diameter, $fn = draft ? 50 : 100);
+                        cylinder(h = M4_nut_height+8, d = M5_nut_diameter, $fn = 6);
                     }
                 }
 
@@ -241,7 +250,7 @@ module 888_1015(draft){
         //translate([- global_clearance - width/2 +8 ,-flange_depth/2 - global_clearance, height - flange_height + 7])
         //    rotate([0,rake_angle,0])
         //        translate([20, 20, 0])
-        //            efsm_12();
+        //            efsm();
 
 
 }

@@ -368,6 +368,7 @@ bearing_efsm_08_db = 18;
 bearing_efsm_08_ag = 10.5;
 bearing_efsm_08_n = M4_screw_diameter;
 bearing_efsm_08_a1 = 5.5;
+bearing_efsm_08_d = 8.25;
 
 bearing_efsm_10_h = 38+1;
 bearing_efsm_10_m = 26;

@@ -10,7 +10,7 @@ module 888_1020(draft = true){
     hall_width = 25+2;
     hall_thickness = 3;
 
-    rotor_axis_diameter = 8.2;
+    rotor_axis_diameter = 6.2;
 
 
     // 666_1236
@@ -44,6 +44,16 @@ module 888_1020(draft = true){
     outer_diameter = bearing_efsm_12_d + 3;
     bearing_ball_height = 10.1;
     rim_height = 1;
+
+
+    // pro EFSM-8
+
+    bearing_inner_diameter = 8;
+    outer_diameter = bearing_efsm_08_d + 3;
+    bearing_ball_height = 10.1;
+    rim_height = 1;
+
+
 
     difference(){
 
@@ -143,7 +153,7 @@ module 888_1020(draft = true){
 
         difference(){
             union(){
-                translate([0, 0, -rim_height + plate_bearing_center_distance])
+                translate([0, 0, -rim_height + plate_bearing_center_distance + 0.05])
                     cylinder(h = rim_height, d = outer_diameter, $fn = 50);
 
                 translate([0, 0, -bearing_ball_height/2 + plate_bearing_center_distance])
@@ -151,8 +161,8 @@ module 888_1020(draft = true){
             }
 
             // otvor pro sroub rotoru
-            translate([0, 0, -global_clearance/2])
-                cylinder(d = rotor_axis_diameter, h = plate_size_z + global_clearance);
+            translate([0, 0, -50])
+                cylinder(d = rotor_axis_diameter, h = 100);
         }
 }
 888_1020();
