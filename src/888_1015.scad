@@ -43,7 +43,7 @@ Nese 2x servo a kulove lozisko pro rotor.
 
 
 
-module 888_1015_platesape(){
+module 888_1015_platesape(draft){
 
         translate([-1,0,10]) difference(){
             union(){
@@ -53,11 +53,11 @@ module 888_1015_platesape(){
                     intersection(){
                         rotate([0, 90, 0])
                             translate([0,0,-50])
-                                cylinder(d=joint_size_y, h=100, $fn=60);
+                                cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
 
                         rotate([90, 0, 0])
                             translate([0, 0, -50])
-                                cylinder(d=joint_size_x, h=100, $fn=60);
+                                cylinder(d=joint_size_x, h=100, , $fn = draft ? 10 : 150);
 
                         //translate([-joint_size_x/2, -joint_size_y/2, -20])
                         //    cube([joint_size_x, joint_size_y, 20]);

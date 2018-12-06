@@ -69,7 +69,7 @@ module 888_1020(draft = true){
 
                     // cast nad motorem
                     translate([motor_distance, 0, 0])
-                        cylinder(d = motor_diameter+10, h=plate_size_z);
+                        cylinder(d = motor_diameter+10, h=plate_size_z, $fn = draft ? 10 : 100);
 
                     // ramecek pro dil 888_1015
                     translate([-(joint_size_x + joint_wall_thickness*2)/2, - (joint_size_y  + joint_wall_thickness*2)/2, -plate_bearing_center_distance])
@@ -87,11 +87,11 @@ module 888_1020(draft = true){
 
             // otvor pro sroub rotoru
             translate([0, 0, -global_clearance/2])
-                cylinder(d = rotor_axis_diameter, h = plate_size_z + global_clearance);
+                cylinder(d = rotor_axis_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 50);
 
             // otvor pro osu motoru
             translate([motor_distance, 0, -global_clearance/2])
-                cylinder(d = motor_axis_diameter, h = plate_size_z + global_clearance);
+                cylinder(d = motor_axis_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 100);
 
             // Otvory pro pridelani motoru
             translate([motor_distance, 0, -global_clearance/2])
@@ -99,39 +99,39 @@ module 888_1020(draft = true){
                     translate([motor_mounting_diameter/2, 0, 0]){
                         cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance);
                         translate([0,0, plate_bearing_center_distance - 4])
-                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height);
+                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height, $fn = draft ? 10 : 50);
                     }
 
                     translate([-motor_mounting_diameter/2, 0, 0]){
-                        cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance);
+                        cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 30);
                         translate([0,0, plate_bearing_center_distance - 4])
-                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height);
+                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height, $fn = draft ? 10 : 30);
                     }
 
                     translate([0, motor_mounting_diameter/2, 0]){
-                        cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance);
+                        cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 30);
                         translate([0,0, plate_bearing_center_distance - 4])
-                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height);
+                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height, $fn = draft ? 10 : 30);
                     }
 
                     translate([0, -motor_mounting_diameter/2, 0]){
-                        cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance);
+                        cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 30);
                         translate([0,0, plate_bearing_center_distance - 4])
-                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height);
+                            cylinder(d = M3_nut_diameter, h = M3_screw_head_height, $fn = draft ? 10 : 30);
                     }
                 }
 
             // diry pro pridelani kloubku
             translate([servo_join_x, -servo_join_y/2 + 20, plate_size_z/2])
                 rotate([90, 0, 0])
-                    cylinder(d = M2_5_screw_diameter, h=100);
+                    cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
 
             translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z/2- M2_5_nut_height])
                 cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z]);
 
             translate([servo_join_x, servo_join_y/2 - 20, plate_size_z/2])
                 rotate([-90, 0, 0])
-                    cylinder(d = M2_5_screw_diameter, h=100);
+                    cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
 
             translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - 5, plate_size_z/2- M2_5_nut_height])
                 cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z]);
@@ -146,7 +146,7 @@ module 888_1020(draft = true){
             // zapusteni motoru
             translate([motor_distance, 0, 0])
                 rotate([180, 0, 0])
-                    cylinder(d = motor_diameter, h=50);
+                    cylinder(d = motor_diameter, h=50, $fn = draft ? 10 : 30);
 
         }
 
@@ -156,13 +156,13 @@ module 888_1020(draft = true){
                 translate([0, 0, -rim_height + plate_bearing_center_distance + 0.05])
                     cylinder(h = rim_height, d = outer_diameter, $fn = 50);
 
-                translate([0, 0, -bearing_ball_height/2 + plate_bearing_center_distance])
-                    cylinder(h = bearing_ball_height/2, d = bearing_inner_diameter, $fn = 50);
+                translate([0, 0, -bearing_ball_height/2 + plate_bearing_center_distance - rim_height])
+                    cylinder(h = bearing_ball_height/2 + rim_height, d = bearing_inner_diameter, $fn = 50);
             }
 
             // otvor pro sroub rotoru
             translate([0, 0, -50])
-                cylinder(d = rotor_axis_diameter, h = 100);
+                cylinder(d = rotor_axis_diameter, h = 100, $fn = draft ? 10 : 50);
         }
 }
 888_1020();
