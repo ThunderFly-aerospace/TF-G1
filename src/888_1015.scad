@@ -135,6 +135,12 @@ module 888_1015(draft){
                 }
             }
 
+
+            #translate([-5,0,height+8])
+                rotate([0, rake_angle, 0])
+                    translate([0,0,0])
+                        sphere(r=3);
+
             intersection(){
                 translate([-5,0,height])
                     rotate([0, rake_angle, 0])
@@ -208,7 +214,7 @@ module 888_1015(draft){
             }
         }
 
-        translate([-5,0,height+6])
+        translate([-4.6,0,height+8.2])
             rotate([0, rake_angle, 0]){
 
                 // základní tvar pro prirubu
@@ -257,5 +263,5 @@ module 888_1015(draft){
 
 difference(){
     888_1015(draft);
-    //cube(500);
+    cube(500);
 }
