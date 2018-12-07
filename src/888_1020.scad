@@ -77,8 +77,13 @@ module 888_1020(draft = true){
                 }
 
                 // rameno, na kterem jsou kloubky pro servo
-                translate([servo_join_x-servo_join_size/2, -servo_join_y/2, 0])
-                    cube([servo_join_size, servo_join_y ,plate_size_z]);
+                hull(){
+                    translate([servo_join_x-servo_join_size/2, -servo_join_y/2, 0])
+                        cube([servo_join_size, servo_join_y ,plate_size_z]);
+                    translate([servo_join_x-servo_join_size, -plate_size_y/2, -plate_size_z+2])
+                        cube([servo_join_size*2, plate_size_y ,plate_size_z*2-2]);
+
+                }
             }
 
             // vyrez pro dil 888_1015
@@ -150,6 +155,21 @@ module 888_1020(draft = true){
 
         }
 
+        difference(){
+            translate([-(joint_size_x + joint_wall_thickness*2)/2, - (joint_size_y  + joint_wall_thickness*2)/2, 0])
+                cube([joint_size_x + joint_wall_thickness*2, joint_size_y + joint_wall_thickness*2, 7]);
+
+            translate([0, 0, 1.7])
+            intersection(){
+                rotate([90,0,0])
+                    translate([0, 0, -100])
+                        cylinder(h=200, d=joint_size_x, $fn = draft ? 100 : 100);
+                        //#cylinder(h=200, d=6, $fn = draft ? 100 : 100);
+                rotate([0,90,0])
+                    translate([0, 0, -100])
+                        cylinder(h=200, d=joint_size_y, $fn = draft ? 100 : 100);
+            }
+        }
 
         difference(){
             union(){
