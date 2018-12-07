@@ -92,7 +92,7 @@ module 888_1020(draft = true){
 
             // otvor pro sroub rotoru
             translate([0, 0, -global_clearance/2])
-                cylinder(d = rotor_axis_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 50);
+                cylinder(d = rotor_axis_diameter, h = plate_size_z + global_clearance, $fn = draft ? 10 : 80);
 
             // otvor pro osu motoru
             translate([motor_distance, 0, -global_clearance/2])
@@ -163,11 +163,11 @@ module 888_1020(draft = true){
             intersection(){
                 rotate([90,0,0])
                     translate([0, 0, -100])
-                        cylinder(h=200, d=joint_size_x, $fn = draft ? 100 : 100);
+                        cylinder(h=200, d=joint_size_x, $fn = draft ? 100 : 200);
                         //#cylinder(h=200, d=6, $fn = draft ? 100 : 100);
                 rotate([0,90,0])
                     translate([0, 0, -100])
-                        cylinder(h=200, d=joint_size_y, $fn = draft ? 100 : 100);
+                        cylinder(h=200, d=joint_size_y, $fn = draft ? 100 : 200);
             }
         }
 
@@ -182,7 +182,7 @@ module 888_1020(draft = true){
 
             // otvor pro sroub rotoru
             translate([0, 0, -50])
-                cylinder(d = rotor_axis_diameter, h = 100, $fn = draft ? 10 : 50);
+                cylinder(d = rotor_axis_diameter, h = 100, $fn = draft ? 10 : 80);
         }
 }
 888_1020();
