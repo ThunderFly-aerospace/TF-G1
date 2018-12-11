@@ -85,14 +85,25 @@ module 888_1020(draft = true){
                 }
 
     // Vymezovaci podlozka pod motor, misto hlinikove 6.5mm silne podlozky
-                translate([motor_distance, 0, 0])
+                /* translate([motor_distance, 0, 0])
                     hull(){
                         rotate([180, 0, 0])
                             cylinder(d = motor_diameter, h=6.5, $fn = draft ? 20 : 50);
 
                         rotate([180, 0, 0])
                             cylinder(d = motor_diameter+10, h=0.1, $fn = draft ? 20 : 50);
-                    }
+                    } */
+
+
+                    // Otvory pro pridelani motoru
+                    translate([motor_distance, 0, -global_clearance/2])
+                        rotate([0,0,45]){
+                            for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
+                                translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -6.5]){
+                                        cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = 6.5, $fn = draft?10:60);
+                                }
+                            }
+                        }
             }
 
             // vyrez pro dil 888_1015
@@ -157,11 +168,11 @@ module 888_1020(draft = true){
             intersection(){
                 rotate([90,0,0])
                     translate([0, 0, -100])
-                        cylinder(h=200, d=joint_size_x, $fn = draft ? 100 : 200);
+                        cylinder(h=200, d=joint_size_x, $fn = draft ? 20 : 200);
                         //#cylinder(h=200, d=6, $fn = draft ? 100 : 100);
                 rotate([0,90,0])
                     translate([0, 0, -100])
-                        cylinder(h=200, d=joint_size_y, $fn = draft ? 100 : 200);
+                        cylinder(h=200, d=joint_size_y, $fn = draft ? 20 : 200);
             }
         }
 
