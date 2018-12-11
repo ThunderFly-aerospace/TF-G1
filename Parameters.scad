@@ -369,6 +369,7 @@ bearing_efsm_08_ag = 10.5;
 bearing_efsm_08_n = M4_screw_diameter;
 bearing_efsm_08_a1 = 5.5;
 bearing_efsm_08_d = 8.25;
+bearing_efsm_08_B = 8; // ball height
 
 bearing_efsm_10_h = 38+1;
 bearing_efsm_10_m = 26;
@@ -388,6 +389,7 @@ bearing_efsm_12_ag = 13;
 bearing_efsm_12_a1 = 7;
 bearing_efsm_12_n = M5_screw_diameter;
 bearing_efsm_12_d = 12.15;
+bearing_efsm_12_B = 10; // ball height
 bearing_efsm_space = 1;
 
 bearing_efsm_17_width = 54+1;
@@ -398,6 +400,7 @@ bearing_efsm_17_db = 35;
 bearing_efsm_17_ag = 18;
 bearing_efsm_17_n = M6_screw_diameter;
 bearing_efsm_17_a1 = 10;
+bearing_efsm_17_B = 17; // ball height
 
 
 // 20 KG servo parameters

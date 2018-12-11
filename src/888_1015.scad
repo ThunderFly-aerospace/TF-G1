@@ -25,12 +25,12 @@ Nese 2x servo a kulove lozisko pro rotor.
     bearing_efsm_db = bearing_efsm_12_db;
 
 
-    bearing_efsm_ag = bearing_efsm_08_ag;
+    /* bearing_efsm_ag = bearing_efsm_08_ag;
     bearing_efsm_a1 = bearing_efsm_08_a1;
     bearing_efsm_h = bearing_efsm_08_h;
     bearing_efsm_m = bearing_efsm_08_m;
     bearing_efsm_db = bearing_efsm_08_db;
-
+ */
 
     rotx = 20/2;
     roty = 10/2;
@@ -199,16 +199,17 @@ module 888_1015(draft){
 // dira na sroub + kapsa na matice
         for (m=[0, 1]) {
             mirror([0, m, 0]){
-                for (i=[[0, 0], [10, 0], [0, 48.5], [10, 48.5]])
+                for (i=[[0, 0, 0], [10, 0, 0], [0, 48.5, -42], [10, 48.5, -42]])
 
                 translate([width/2 - 4 - 5.5-i[0],-depth/2 + M2_5_screw_length,4 + i[1]]){
                     rotate([0, -90, 90]){
         					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
         					translate([0, 0, M2_5_pocket_depth])
-        						rotate([0, 0, 90])
+        						rotate([0, 0, 90+i[2]])
         							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
-        					translate([0, -M2_5_nut_diameter/2, M2_5_pocket_depth])
-        							cube([40, M2_5_nut_diameter, M2_5_nut_height]);
+                            rotate([0,0,i[2]])
+                                translate([0, -M2_5_nut_diameter/2, M2_5_pocket_depth])
+				                    cube([40, M2_5_nut_diameter, M2_5_nut_height]);
                     }
                 }
             }
@@ -241,7 +242,7 @@ module 888_1015(draft){
 			rotate([0,rake_angle,0])
 				union(){
 				//otvor pro klíč na matku nosníku rotoru
-					translate([-M5_nut_diameter/2-30, M5_nut_diameter/2, - key_height*3.2])
+					translate([-M5_nut_diameter/2-35, M5_nut_diameter/2, - key_height*2.5])
 						cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2]);
 		}
 

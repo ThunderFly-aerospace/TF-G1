@@ -4,7 +4,7 @@ include <../Parameters.scad>
 rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5
 
-rotx = 0;
+//rotx = 0;
 roty = 0;
 
 use <888_1015.scad>
@@ -12,19 +12,22 @@ use <888_1020.scad>
 
 
 module efsm_12(){
-    translate([-20, -20, 0])
-        cube([40, 40, 7]);
 
-    cylinder(h = 10, d = 25);
+    difference(){
+        union(){
+            //translate([-20, -20, 0])
+                //cube([40, 40, 7]);
 
-    translate([0,0,10])
-        cylinder(h = 2, d1 = 25, d2 = 20);
+            intersection(){
+                translate([0,0,0])
+                    cylinder(h = bearing_efsm_12_ag, d = 12);
 
-    translate([0,0,0])
-        cylinder(h = 14, d = 12);
-
-    translate([0,0,7])
-        sphere(r=6);
+                translate([0,0, bearing_efsm_12_ag - bearing_efsm_12_B/2])
+                    sphere(d=12, $fn = 50);
+            }
+        }
+        //cylinder(h=20, d=12);
+    }
 }
 
 
@@ -34,8 +37,8 @@ module efsm_8(){
 
     //cylinder(h = 8.5, d = 18);
 
-    //translate([0,0,8.5])
-    //    cylinder(h = 2, d1 = 18, d2 = 15);
+    translate([0,0,8.5])
+        cylinder(h = 2, d1 = 18, d2 = 15);
 
     translate([0,0,6.5])
         #cylinder(h = 7.94/2, d = 2);
@@ -54,8 +57,8 @@ module efsm_8(){
 color([0.2, 0.2, 0.8, 0.6])
     translate([-6.8,0, 63])
         rotate([0,9,0])
-            translate([0,0,8.5])
-                efsm_8();
+            translate([0,0,7])
+                efsm_12();
 
 difference(){
     union(){
@@ -64,7 +67,7 @@ difference(){
     color([0.2, 0.8, 0.2, 0.9])
         translate([-4.5,0, 78])
             rotate([rotx,9+roty,0])
-                translate([0,0,-2])
+                translate([0,0,-1])
                     888_1020();
 
     }
