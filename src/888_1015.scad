@@ -110,6 +110,8 @@ module 888_1015(draft){
 	key_depth = flange_depth;
 	key_height = M5_nut_height;
 
+    M4_screw_length = 45;
+
 	M5_screw_length = 19;
 	M2_5_screw_length = 10;
 	M2_5_pocket_depth = 5;
@@ -165,18 +167,21 @@ module 888_1015(draft){
 			            cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
 
     			//otvory pro upevnění vertikální trubky
-    				translate([0, depth/2 - M4_screw_head_height - global_clearance/2, 7.5])
-    			        rotate([-90, 0, 0])
-    			            cylinder(h = 100, d = M4_nut_diameter, $fn = draft ? 10 : 20);
-    				translate([0, -depth/2 + M4_screw_head_height + global_clearance/2, 7.5])
-    			        rotate([90, 0, 0])
-	                          cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
-                    translate([0, depth/2 - M4_screw_head_height - global_clearance/2, 42.5])
-    			        rotate([-90, 0, 0])
-    			            cylinder(h = 100, d = M4_nut_diameter, $fn = draft ? 10 : 20);
-    				translate([0, -depth/2 + M4_screw_head_height + global_clearance/2, 42.5])
-    			        rotate([90, 0, 0])
-    			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+				translate([0, M4_screw_length / 2, 7.5])
+			        rotate([-90, 0, 0])
+			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+
+				translate([0, -M4_screw_length / 2, 7.5])
+			        rotate([90, 0, 0])
+                          cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+
+                translate([0, M4_screw_length /2, 42.5])
+			        rotate([-90, 0, 0])
+			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+
+				translate([0, -M4_screw_length /2, 42.5])
+			        rotate([90, 0, 0])
+			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
 
 			}
 		//otvory pro serva
