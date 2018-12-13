@@ -30,7 +30,7 @@ module 888_2008(draft = true){
 
         for (i=[1,-1]) {
             translate([0, i*height_of_accumulator, 0])
-                cylinder(d = M3_screw_diameter, h=base_height);
+                cylinder(d = M3_screw_diameter, h=base_height, $fn=20);
             translate([0, i*height_of_accumulator, base_height-global_clearance])
                 cylinder(d1 = M3_screw_diameter+10, d2 = M3_screw_diameter+35, h=height);
         }
@@ -47,7 +47,7 @@ module 888_2008(draft = true){
         // diry pro prisroubovani EFSM
             for (p=[[bearing_efsm_12_m/2, bearing_efsm_12_m/2, 0], [bearing_efsm_12_m/2, -bearing_efsm_12_m/2, 0], [-bearing_efsm_12_m/2, bearing_efsm_12_m/2, 0], [-bearing_efsm_12_m/2, -bearing_efsm_12_m/2, 0]]) {
                 translate(p)
-                    cylinder(d=5.5, h=100);
+                    cylinder(d=5.5, h=100, $fn=20);
             }
 
 
@@ -57,7 +57,7 @@ module 888_2008(draft = true){
                         cylinder(d=M5_nut_diameter, h= M5_nut_height, $fn=6);
                     rotate([0, 0, p[2]+90])
                         translate([-M5_nut_pocket/2, 0, 0])
-                        cube([M5_nut_pocket, 100, M5_nut_height]);
+                            cube([M5_nut_pocket, 100, M5_nut_height]);
                     }
             }
 
