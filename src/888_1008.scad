@@ -78,15 +78,55 @@ module 888_1008_D(){
 
 }
 
+//správna trubka pro nový trojkolový model
+module 888_1008_E(){
+
+
+    curvedPipe([[0,0,175 +19],        //body ohybu
+                [radius_undercarriage + 45 - tube_for_undercarriage_outer_diameter/2,0,175 + 19],
+                [radius_undercarriage + 45 + vzdalenost_y,+ vzdalenost_x*2,0], 
+                [ +radius_undercarriage + 45 + vzdalenost_y, 110, 0],
+                                ],
+
+                3,
+                [radius_undercarriage,radius_undercarriage/4],     // radiusy
+                tube_for_undercarriage_outer_diameter,
+                8);
+
+
+
+}
+
+//správná trubka pro nový trojkolový model
+
+module 888_1008_F(){
+
+    curvedPipe([[0,0,175 + 19],        //body ohybu
+                [- radius_undercarriage - 45 + tube_for_undercarriage_outer_diameter/2,0,175 + 19],
+                [- radius_undercarriage - 45 - vzdalenost_y,+ vzdalenost_x*2,0],
+                [ -radius_undercarriage - 45 - vzdalenost_y, 110, 0],
+
+               ],
+                3,
+                [radius_undercarriage,radius_undercarriage/4],     // radiusy
+                tube_for_undercarriage_outer_diameter,
+                8);
+
+
+}
+
+
+/*
 translate([length_of_undercarriage_tube/2,0,0])
 		888_1008_A();
 
 translate([- length_of_undercarriage_tube/2,0,0])
 		888_1008_B();
 
+*/
 
-
-
+888_1008_E();
+888_1008_F();
 
 
 use <./lib/naca4.scad>

@@ -100,8 +100,10 @@ module 666_1029(draft){
             }
         
         //holes for undercarriage
+        //SMAZAT
+        /*
             translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 - 20])
-                union(){    
+                %union(){    
                     translate([main_tube_outer_diameter/2,0,0])
                             cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                             cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
@@ -121,27 +123,34 @@ module 666_1029(draft){
                         rotate([0,45,0])
                             cube([15,2*hull_wall_thickness,15]);
                 }
-            
+            */
+            //PŘEDNÍ podvozková část
+            translate ([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2, - main_tube_outer_diameter/2,0,])
+                rotate ([90,0,0])
+                    cylinder (h = length_of_undercarriage_tube_front, r = main_tube_outer_diameter/2, $fn = 200);
+
+
+            //ZADNÍ podvozková část
             union(){
-            translate([second_undercarriage_hole,-thickness_between_tubes- main_tube_outer_diameter,-hull_z_size/2 - 20])
-                    cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
-            translate([second_undercarriage_hole - main_tube_outer_diameter/2,-thickness_between_tubes- main_tube_outer_diameter,-hull_z_size/2 - 20])
-                    cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
+                translate([second_undercarriage_hole,-thickness_between_tubes- main_tube_outer_diameter,-hull_z_size/2 - 20])
+                        cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
+                translate([second_undercarriage_hole - main_tube_outer_diameter/2,-thickness_between_tubes- main_tube_outer_diameter,-hull_z_size/2 - 20])
+                        cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
             
                     //zkosení
-                    translate([second_undercarriage_hole ,- thickness_between_tubes + 2*hull_wall_thickness,hull_z_size/2 - sqrt(15)*6 - hull_wall_thickness*2])
-                        rotate([0,45,0])
-                           cube([15,2*hull_wall_thickness,15]);
-                    translate([-15 - 15 + 15/2 + second_undercarriage_hole,- thickness_between_tubes + 2*hull_wall_thickness,15 + 15 + sqrt(15) + ribbon_width + 15 + 3*hull_wall_thickness])
-                        rotate([0,45,0])
-                           cube([15,2*hull_wall_thickness,15]);
-            
-                    translate([ + second_undercarriage_hole, - thickness_between_tubes + 2*hull_wall_thickness, - hull_z_size/2 + sqrt(15) + sqrt(15) + 15 +hull_wall_thickness*2])
-                        rotate([0,45,0])
-                            cube([15,2*hull_wall_thickness,15]);
-                    translate([-15 - sqrt(15) - 15/2 + second_undercarriage_hole + sqrt(15),- thickness_between_tubes + 2*hull_wall_thickness,sqrt(15) + ribbon_width - hull_z_size/2 + 15 - ribbon_width])
-                        rotate([0,45,0])
-                           cube([15,2*hull_wall_thickness,15]);
+                translate([second_undercarriage_hole ,- thickness_between_tubes + 2*hull_wall_thickness,hull_z_size/2 - sqrt(15)*6 - hull_wall_thickness*2])
+                    rotate([0,45,0])
+                       cube([15,2*hull_wall_thickness,15]);
+                translate([-15 - 15 + 15/2 + second_undercarriage_hole,- thickness_between_tubes + 2*hull_wall_thickness,15 + 15 + sqrt(15) + ribbon_width + 15 + 3*hull_wall_thickness])
+                    rotate([0,45,0])
+                       cube([15,2*hull_wall_thickness,15]);
+        
+                translate([ + second_undercarriage_hole, - thickness_between_tubes + 2*hull_wall_thickness, - hull_z_size/2 + sqrt(15) + sqrt(15) + 15 +hull_wall_thickness*2])
+                    rotate([0,45,0])
+                        cube([15,2*hull_wall_thickness,15]);
+                translate([-15 - sqrt(15) - 15/2 + second_undercarriage_hole + sqrt(15),- thickness_between_tubes + 2*hull_wall_thickness,sqrt(15) + ribbon_width - hull_z_size/2 + 15 - ribbon_width])
+                    rotate([0,45,0])
+                       cube([15,2*hull_wall_thickness,15]);
             }
 
             //hollow front
@@ -288,6 +297,11 @@ module 666_1029(draft){
                                         cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                                             cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
                             }
+                        //odečtení otvoru pro přední podvozkovou trubku
+                        translate ([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2, - main_tube_outer_diameter/2,0,])
+                            rotate ([90,0,0])
+                                cylinder (h = length_of_undercarriage_tube_front, r = main_tube_outer_diameter/2, $fn = 200);
+
 
                         //final difference výztuhy v části A
                         }

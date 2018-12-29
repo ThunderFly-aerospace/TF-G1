@@ -310,7 +310,7 @@ echo(floor (C));
             intersection (){
                 hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
                 translate([main_tube_outer_diameter,-main_tube_outer_diameter/2 - thickness_between_tubes, - (hull_z_size - 2*hull_wall_thickness - 2*global_clearance)/2 ]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
-                   cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*global_clearance]);
+                 cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*global_clearance]);
             }
 
 
@@ -425,7 +425,7 @@ echo(floor (C));
 
         //666_1004 - přední
         translate([height_666_1026 + global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
-               #cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
+               cube([coupling_width_666_1004 + global_clearance, hull_y_size, height_666_1004]);
 
         //666_1004 - zadní
         translate([second_undercarriage_hole - coupling_width_666_1004/2 - global_clearance/2, - hull_y_size/2, - height_666_1004/2 - global_clearance/2])
