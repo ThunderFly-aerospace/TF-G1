@@ -16,7 +16,7 @@ module 888_1020(draft = true){
     // 666_1236
     // 666_1007
     // 666_1212
-    motor_distance = 82.5; // vzdalenost prerotatoru od hlavni pos_y
+    motor_distance = 83; // vzdalenost prerotatoru od hlavni pos_y
     motor_diameter = 35+2;
     motor_axis_diameter = 6.3;
     motor_screw_diameter = M3_screw_diameter;
