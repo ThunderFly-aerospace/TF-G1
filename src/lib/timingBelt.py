@@ -24,7 +24,7 @@ belt_T5 = {
 
 belt = belt_T5
 belt['l'] = 420
-ratio = 5.2
+ratio = 5.15
 
 pulley_small = 15
 
@@ -43,6 +43,9 @@ if C < (pulley_small*belt['p']/math.pi/2 + pulley_big*belt['p']/math.pi/2):
 print("Kola s pomerem 1:{} maji {} a {} zubu".format(pulley_big/pulley_small, pulley_small, pulley_big))
 print("Vzdalenost remenic je {}".format(C))
 print("Prumery remenic jsou {} a {}".format(pulley_small_d, pulley_big_d))
-print("Prumery remenic jsou {} a {}".format(pulley_small_d-belt['u']*2, pulley_big_d-belt['u']*2))
+print("Prumery obrysu remenic jsou {} a {}".format(pulley_small_d-belt['u']*2, pulley_big_d-belt['u']*2))
 print("Polomery jsou {} a {}".format(pulley_small_d/2-belt['u'], pulley_big_d/2-belt['u']))
 print("mezera mezi koly je {}".format(C-pulley_big_d/2-pulley_small_d/2))
+
+
+79.0 - 23.87/2 - 122.55/2
