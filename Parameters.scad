@@ -124,7 +124,8 @@ height_of_vertical_tube = 275; //278mm je změřená délka trubky.
 
 //délka hlavní dlouhé trubky
 length_of_main_tube = 820;
-length_of_undercarriage_tube = 300;
+length_of_undercarriage_tube_front = 150;
+length_of_undercarriage_tube_rear = 300;
 
 ribbon_width = 5; // šířka vyztužovacích lemů.
 
