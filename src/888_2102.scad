@@ -6,6 +6,7 @@ include <../Parameters.scad>
 
 use <666_1027.scad>
 use <888_1018.scad>
+use <888_1019.scad>
 
 use <888_2002.scad>
 use <888_2003.scad>
@@ -47,3 +48,13 @@ color([1, 0.6, 0.2, 1])
         mirror([0,1,0])
             888_1018(draft);
     }
+
+
+    color([1, 0.6, 0.8, 1])
+        translate([-4,122,50])
+            888_1019();
+
+
+//translate([20,22,72])
+//rotate([180,0,0])
+//    888_1019();

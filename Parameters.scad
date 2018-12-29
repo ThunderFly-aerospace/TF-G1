@@ -22,11 +22,11 @@ rotor_blade_depth = 50;     // hloubka rotorového listu
 
 engine_angle = -8;
 engine_diameter = 55;
-engine_offset = 42; 
+engine_offset = 55;
 
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
-engine_shatf_hole_diameter = 13; 
+engine_shatf_hole_diameter = 13;
 
 // Parameters of tube couplings
 coupling_wall_thickness = main_tube_outer_diameter/5;  //width of coupling walls
@@ -92,6 +92,7 @@ M3_screw_head_height = 3;
 M2_5_screw_diameter = 2.7;
 M2_5_nut_height = 2.3;
 M2_5_nut_diameter = 6;
+M2_5_nut_pocket = 5.5;
 
 
 //šroub servo
@@ -141,7 +142,7 @@ bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
 
 
 
-rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30;
+rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30; // změřená výška rotoru je 367mm
 center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
 
 
@@ -367,6 +368,8 @@ bearing_efsm_08_db = 18;
 bearing_efsm_08_ag = 10.5;
 bearing_efsm_08_n = M4_screw_diameter;
 bearing_efsm_08_a1 = 5.5;
+bearing_efsm_08_d = 8.25;
+bearing_efsm_08_B = 8; // ball height
 
 bearing_efsm_10_h = 38+1;
 bearing_efsm_10_m = 26;
@@ -386,6 +389,7 @@ bearing_efsm_12_ag = 13;
 bearing_efsm_12_a1 = 7;
 bearing_efsm_12_n = M5_screw_diameter;
 bearing_efsm_12_d = 12.15;
+bearing_efsm_12_B = 10; // ball height
 bearing_efsm_space = 1;
 
 bearing_efsm_17_width = 54+1;
@@ -396,6 +400,7 @@ bearing_efsm_17_db = 35;
 bearing_efsm_17_ag = 18;
 bearing_efsm_17_n = M6_screw_diameter;
 bearing_efsm_17_a1 = 10;
+bearing_efsm_17_B = 17; // ball height
 
 
 // 20 KG servo parameters
