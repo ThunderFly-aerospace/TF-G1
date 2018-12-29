@@ -25,7 +25,6 @@ module 888_3006(draft){
         cylinder(d = M5_screw_diameter, h=100, $fn=draft?50:100);
         cylinder(d = M5_head_diameter, h= 50-20-15, $fn=6);
 
-        rotate([0,0,45])
             translate([-50, -31/2, 50-15])
                 cube([100, 31, 31]);
 
