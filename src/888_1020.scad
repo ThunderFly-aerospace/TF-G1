@@ -16,9 +16,9 @@ module 888_1020(draft = true){
     // 666_1236
     // 666_1007
     // 666_1212
-    motor_distance = 80.66; // vzdalenost prerotatoru od hlavni pos_y
+    motor_distance = 82.5; // vzdalenost prerotatoru od hlavni pos_y
     motor_diameter = 35+2;
-    motor_axis_diameter = 6.2;
+    motor_axis_diameter = 6.3;
     motor_screw_diameter = M3_screw_diameter;
     motor_mounting_diameter = 25; // vzdalenost protejsich sroubu pro pridelani prerotatoru
     motor_sink = 15 - 11.5; // pro zapusteni bez podlozek na motoru...
@@ -123,8 +123,8 @@ module 888_1020(draft = true){
                 rotate([0,0,45]){
                     for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
                         translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, 0]){
-                            translate([0,0,-10])
-                            cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance + 10, , $fn = draft ? 10 : 50);
+                            #translate([0,0,-13.3])
+                                cylinder(d = motor_screw_diameter, h = plate_size_z + global_clearance + 10, , $fn = draft ? 10 : 50);
                             translate([0,0, plate_bearing_center_distance - 4.7])
                                 cylinder(d = M3_nut_diameter, h = M3_screw_head_height, $fn = draft ? 10 : 50);
                         }
@@ -151,7 +151,10 @@ module 888_1020(draft = true){
                 cube([hall_length, hall_width, hall_thickness+global_clearance]);
 
             translate([hall_distance + hall_length/2 + 2, -3, - plate_bearing_center_distance])
-                cube([3, 6, 50]);
+                translate([0,0, plate_size_z+3])
+                    rotate([0,-40,0])
+                        translate([0,0,-20])
+                            cube([3, 6, 50]);
 
             // zapusteni motoru
             //translate([motor_distance, 0, 0])
@@ -190,4 +193,4 @@ module 888_1020(draft = true){
                 cylinder(d = rotor_axis_diameter, h = 100, $fn = draft ? 10 : 80);
         }
 }
-888_1020();
+888_1020(false);
