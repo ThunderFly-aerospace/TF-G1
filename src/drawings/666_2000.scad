@@ -203,7 +203,7 @@ module 666_2000(draft){
 
 
 
-	rotate ([90,0,45])
+	rotate ([90,0,0])
 		666_2000(draft);
 
 
