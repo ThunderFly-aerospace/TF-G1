@@ -13,7 +13,7 @@ module screw_bottom (position_number,draft){
             //funkce
 
             distance_bottom = - hull_drop_length * surface_distance(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
-            echo (distance_bottom);
+            //echo (distance_bottom);
 
         if (position_number > 1 && position_number < 3)
         {
