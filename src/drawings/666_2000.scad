@@ -17,34 +17,34 @@ module 666_2000(draft){
 				666_1029(draft);
 
 	////
-	666_1027();
+	666_1027(draft);
 
 	////
 		//spojka přední část
 		translate([main_tube_outer_diameter*2,0,0])
 			rotate([0,90,0])
-				888_2003(coupling_wall_thickness, thickness_between_tubes, draft = true);
+				888_2003(coupling_wall_thickness, thickness_between_tubes, draft);
 
 	//spojka zadní část
 		translate([second_undercarriage_hole - coupling_width_666_1004/2,0,0])
 			rotate([0,90,0])
-					666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true);
+					666_1004(coupling_wall_thickness, thickness_between_tubes, draft);
 	////
 	//spojka prostřední část
 		translate([main_pilon_position,70 - coupling_wall_thickness - main_tube_outer_diameter/2,0])
 			rotate([0,-90,90])
-					666_1017();
+					666_1017(draft);
 
 	////
 		translate([cover_pilon_position - hull_wall_thickness,0,0])
 			rotate([-90,0,0])
-					666_1032();
+					666_1032(draft);
 
 	////
 		translate([main_pilon_position + width_666_1026 - main_tube_outer_diameter/2 - thickness_between_tubes,height_of_vertical_tube + main_tube_outer_diameter/2 + thickness_between_tubes - height_666_1026, 0])
 			rotate([-90,0,0])
 				color([0,0.7,0])
-					888_1015();
+					888_1015(draft);
 
 	////
 	//akumulátory s držáky
@@ -60,51 +60,51 @@ module 666_2000(draft){
 		translate([move_of_accumulator,main_tube_outer_diameter/2,-height_of_accumulator])
 			rotate([-90,0,0])
 				color([0,0.8,0.8])
-					888_1001();
+					888_1001(draft);
 
 		translate([move_of_accumulator,main_tube_outer_diameter/2,height_of_accumulator])
 			rotate([-90,0,0])
 				color([0,0.8,0.8])
-					888_1001();
+					888_1001(draft);
 
 	////
 		translate([height_666_1026,0,0])
 			rotate([-90,0,90])
 				color([0.4,0,0.8])
-					888_1026();
+					888_1026(draft);
 
 	////
 		translate([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2,0])
 		    rotate([0,90,-90])
 		        color([0,1,1])
-		            888_2002();
+		            888_2002(draft);
 		translate([main_tube_outer_diameter*2.5 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2 + 25.8,0])
 		    rotate([-90,0,0])
 		        color([0,0.5,0.5])
-		            888_2005();
+		            888_2005(draft);
 		translate([main_tube_outer_diameter*2.5 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2 + 25.8,0])
 		    rotate([90,0,180])
 		      	color([0,0.5,0.5])
-		            888_2006();
+		            888_2006(draft);
 
 	////
 		translate([length_of_main_tube - 80 + global_clearance,0,0])
 			rotate([0,90,0])
-					666_1028();
+					666_1028(draft);
 
 		translate([length_of_main_tube - 80 + global_clearance,0,0])
 			rotate([0,-90,180])
-					666_1028();
+					666_1028(draft);
 
 	////
 		translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube_rear/2 - global_clearance/2])
 				color([0,0,0.8])
-					666_1006();
+					666_1006(draft = draft);
 
 		translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube_rear/2 + global_clearance/2])
 			rotate([180,0,0])
 				color([0,0,0.8])
-					666_1006();
+					666_1006(draft = draft);
 
 	////
 	//podvozkové trubky
@@ -123,11 +123,11 @@ module 666_2000(draft){
 	//úchytky na podvozková kolečka
 		translate([second_undercarriage_hole + vzdalenost_x*2.1,- 175 - 19 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 - 90])
 			rotate([0,90,0])
-					666_1014();
+					666_1014(draft);
 
 		translate([second_undercarriage_hole + vzdalenost_x*2.1,- 175 - 19 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 + 90])
 			rotate([0,90,0])
-					666_1014();
+					666_1014(draft);
 
 	//trubky
 
@@ -135,11 +135,11 @@ module 666_2000(draft){
 		difference(){
 				rotate ([0,90,0])
 				    color([1,0,0])
-						cylinder (h = length_of_main_tube, r = Help_main_tube_outer/2, $fn = 200);
+						cylinder (h = length_of_main_tube, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
 			translate([- global_clearance/2,0,0])
 				rotate ([0,90,0])
 				    color([1,0,0])
-						cylinder (h = length_of_main_tube + global_clearance/2, r = Help_main_tube_inner/2, $fn = 200);
+						cylinder (h = length_of_main_tube + global_clearance/2, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
 		}
 
 		//přední podvozková
@@ -147,21 +147,21 @@ module 666_2000(draft){
 					difference(){
 							rotate ([90,0,0])
 							    color([0,1,0])
-									cylinder (h = length_of_undercarriage_tube_front, r = Help_main_tube_outer/2, $fn = 200);
+									cylinder (h = length_of_undercarriage_tube_front, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
 						translate([- global_clearance/2,0,0])
 							rotate ([90,0,0])
 							    color([0,1,0])
-									cylinder (h = length_of_undercarriage_tube_front + global_clearance/2, r = Help_main_tube_inner/2, $fn = 200);
+									cylinder (h = length_of_undercarriage_tube_front + global_clearance/2, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
 					}
 
 		//zadní podvozková
 					difference(){
 						translate([second_undercarriage_hole,- main_tube_outer_diameter- thickness_between_tubes, - length_of_undercarriage_tube_rear/2])
 							    color([0,1,0])
-									cylinder (h = length_of_undercarriage_tube_rear, r = Help_main_tube_outer/2, $fn = 200);
+									cylinder (h = length_of_undercarriage_tube_rear, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
 						translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, - length_of_undercarriage_tube_rear/2 - global_clearance/2])
 							    color([0,1,0])
-									cylinder (h = length_of_undercarriage_tube_rear + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
+									cylinder (h = length_of_undercarriage_tube_rear + global_clearance, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
 					}
 
 		//kolmá na nejdelší
@@ -169,33 +169,33 @@ module 666_2000(draft){
 						translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes,0])
 							rotate([-90,0,0])
 							    color([1,0,0])
-									cylinder (h = height_of_vertical_tube, r = Help_main_tube_outer/2, $fn = 200);
+									cylinder (h = height_of_vertical_tube, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
 						translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes + global_clearance/2,0])
 							rotate([-90,0,0])
 							    color([1,0,0])
-									cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
+									cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
 					}
 	////
 	//kolečka
 	//přední
 		color([0.1,0.1,0.1])
 			translate([10,-210 - 19,0])
-				rotate_extrude (convexity = 10, $fn = 100)
+				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
 					translate ([26,0,0])
-						circle (r = 13, $fn = 100);
+						circle (r = 13, $fn = draft ? 50 : 100);
 
 	//zadní
 		color([0.1,0.1,0.1])
-			translate([8 + second_undercarriage_hole + vzdalenost_x*2.1,-210 - 19,-length_of_undercarriage_tube_rear/2 - 113])
-				rotate_extrude (convexity = 10, $fn = 100)
+			translate([8 + second_undercarriage_hole + vzdalenost_x * 2.1,-210 - 19,-length_of_undercarriage_tube_rear/2 - 113])
+				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
 					translate ([26,0,0])
-						circle (r = 13, $fn = 100);
+						circle (r = 13, $fn = draft ? 50 : 100);
 
 		color([0.1,0.1,0.1])
-			translate([8 + second_undercarriage_hole + vzdalenost_x*2.1,-210 - 19,length_of_undercarriage_tube_rear/2 + 113])
-				rotate_extrude (convexity = 10, $fn = 100)
+			translate([8 + second_undercarriage_hole + vzdalenost_x * 2.1,-210 - 19,length_of_undercarriage_tube_rear/2 + 113])
+				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
 					translate ([26,0,0])
-						circle (r = 13, $fn = 100);
+						circle (r = 13, $fn = draft ? 50 : 100);
 }
 
 rotate ([90,0,0])
