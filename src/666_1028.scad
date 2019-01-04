@@ -4,8 +4,8 @@ DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
 
-DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;  
-DIM_SPACE = .1 * DOC_SCALING_FACTOR;            
+DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
+DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
 
 draft = true;
@@ -18,7 +18,7 @@ module 666_1028(draft){
     wall_thickness = 0.65;
 
     //BASIC DROP
-    //render(convexity = 2) 
+    //render(convexity = 2)
     difference (){
         union (){
             translate([0,0,-8.5])
@@ -26,8 +26,8 @@ module 666_1028(draft){
                     rotate([0,0,90])
                         difference()
                         {
-                            polygon(points = airfoil_data(naca=0030, L = 140)); 
-                            square(200, 200); 
+                            polygon(points = airfoil_data(naca=0030, L = 140));
+                            square(200, 200);
                         }
 
 
@@ -46,22 +46,22 @@ module 666_1028(draft){
                                 airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = false);
                                 union(){
                 					translate([-50,0,90])
-                                		rotate([135,0,80])	
+                                		rotate([135,0,80])
                                     		for (i = [0:13]){ // opakovani cyklu
                                         		translate([0, i * 25, -15])  //zebra
-                                            		cube([30, wall_thickness, 180]); 
+                                            		cube([30, wall_thickness, 180]);
                        	            		}
 
                        	            translate([50,-15,-10])
-                                		rotate([45,0,80])	
-                                    		for (i = [0:13]){ 
-                                            		translate([0, i * 25, -15])  
-                                                		cube([30, wall_thickness, 180]); 
+                                		rotate([45,0,80])
+                                    		for (i = [0:13]){
+                                            		translate([0, i * 25, -15])
+                                                		cube([30, wall_thickness, 180]);
                        	            		}
                                 }
                             }
                         }
-    			
+
 
 
             //LOWER - od osy x do plus y
@@ -77,14 +77,14 @@ module 666_1028(draft){
                                    		rotate([135,0,-80])
                                     		for (i = [0:13]) { // opakovani cyklu
                                         		translate([0, i * 25,-15])  //sude prorezy
-                                            		cube([30, wall_thickness, 180]); 
+                                            		cube([30, wall_thickness, 180]);
                 		       	            }
 
                 		       	    translate([50,20,-20])
                                    		rotate([45,0,-80])
                                     		for (i = [0:13]) { // opakovani cyklu
                                         		translate([0, i * 25,-15])  //sude prorezy
-                                            		cube([30, wall_thickness, 180]); 
+                                            		cube([30, wall_thickness, 180]);
                 		       	            }
                                 }
         		            }
@@ -92,7 +92,7 @@ module 666_1028(draft){
                 }
 
             // odečtení výztuh z profilů výškovky
-			translate ([140,-75,0]) 
+			translate ([140,-75,0])
                 rotate([0,3,0])
             	{
             	   	cube ([15,150,150]);
@@ -100,7 +100,7 @@ module 666_1028(draft){
             	   	translate ([0,150,0])
             	   		rotate([90,-90,0])
 			        		linear_extrude(height = 150)
-			       				offset(delta = -wall_thickness) 
+			       				offset(delta = -wall_thickness)
 			                		polygon(points = airfoil_data(naca = 0009, L = 150, N = draft ? 50 : 100, open = false));
             	}
 	       }
@@ -108,8 +108,8 @@ module 666_1028(draft){
         //VERTICAL
 
     intersection(){
-     //zkosení o 10 stupňů       
-        union(){    
+     //zkosení o 10 stupňů
+        union(){
             translate([0,-47,0])
                 rotate([0,0,-10])
                     cube([400,100,300]);
@@ -136,7 +136,7 @@ module 666_1028(draft){
                                        		rotate([45,0,90])
                                         		for (i = [0:17]) { // opakovani cyklu
                                                 		translate([0, i * 25,-15])  //sude prorezy
-                                                    		cube([30, wall_thickness, 220]); 
+                                                    		cube([30, wall_thickness, 220]);
                     		       	            }
 
                     		       	    translate([-60,-15,85])
@@ -145,7 +145,7 @@ module 666_1028(draft){
                                                 		translate([0, i * 25,-15])  //sude prorezy
                                                     		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     		       	            }
-        			                
+
         			                	// vyztužení pro čepy
         			                	rotate([-90,0,-90])
         				                	translate([0, -75, 150 - Rudder_height + gap_width/2])
@@ -165,7 +165,7 @@ module 666_1028(draft){
 
         				                            rotate([90,0,0])
         				                                cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50, center = true);
-        				          
+
         				                        }
                                     }
             	            }
@@ -184,7 +184,7 @@ module 666_1028(draft){
                            translate([0,0,-3])
                            cylinder(h = 150 + 6, d = ruder_shaft_diameter, $fn = draft ? 10 : 50);
 
-                    
+
                     // otvor pro servo
                     translate([143,19.8,30])
                         rotate([0,3,0])
@@ -212,13 +212,13 @@ module 666_1028(draft){
 
 
         //tube
-        
+
         translate([0,0,-10])
             cylinder (h = 90, r = main_tube_outer_diameter/2, $fn= draft ? 50 : 200);
-		
+
         translate ([0,0,80])
             cylinder (h = 15, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = draft ? 50 : 200);
-        
+
         //screw
         translate ([-150*0.4,0,150*0.4/2])
             rotate ([0,90,0])
@@ -261,13 +261,13 @@ module 666_1028(draft){
 
         translate ([-50,-100,-200])
             cube([200,200,200]);
-    
+
         /*translate ([-75,-75,-10])
         	cube ([150,150,150]);*/
 
 
 
-    }	
+    }
 }
 
 module 666_1028_flightgear(draft){
@@ -278,7 +278,7 @@ module 666_1028_flightgear(draft){
     wall_thickness = 0.65;
 
     //BASIC DROP
-    //render(convexity = 2) 
+    //render(convexity = 2)
     difference (){
         union (){
             translate([0,0,-8.5])
@@ -286,8 +286,8 @@ module 666_1028_flightgear(draft){
                     rotate([0,0,90])
                         difference()
                         {
-                            polygon(points = airfoil_data(naca=0030, L = 140)); 
-                            square(200, 200); 
+                            polygon(points = airfoil_data(naca=0030, L = 140));
+                            square(200, 200);
                         }
 
 
@@ -308,7 +308,7 @@ module 666_1028_flightgear(draft){
                 }
 
             // odečtení výztuh z profilů výškovky
-            translate ([140,-75,0]) 
+            translate ([140,-75,0])
                 rotate([0,3,0])
                 {
                     cube ([15,150,150]);
@@ -316,7 +316,7 @@ module 666_1028_flightgear(draft){
                     translate ([0,150,0])
                         rotate([90,-90,0])
                             linear_extrude(height = 150)
-                                offset(delta = -wall_thickness) 
+                                offset(delta = -wall_thickness)
                                     polygon(points = airfoil_data(naca = 0009, L = 150, N = 50, open = false));
                 }
            }
@@ -334,13 +334,13 @@ module 666_1028_flightgear(draft){
         }
 
         } // end of union
-    }   
+    }
 }
 
 
 module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = true)
 {
-    width=main_tube_outer_diameter+4*thickness_between_tubes;    
+    width=main_tube_outer_diameter+4*thickness_between_tubes;
     depth=main_tube_outer_diameter*2;
     //height=depth;
 
@@ -351,7 +351,7 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = tru
         translate([-(width/2),-(depth/2),height_of_cap_cylinder])
             color([0,0,0.5])
                 cube ([width,depth,height]);
-            
+
             //tube
         translate([0,0,-1])
                 cylinder(h = height+1, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
@@ -364,14 +364,14 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = tru
         translate ([-150*0.4,0,150*0.4 - 20])
             rotate ([0,90,0])
                 cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
-            
+
     	//prořezy pro zajištění
     	translate([-(3*global_clearance)/2,-main_tube_outer_diameter/2 + global_clearance ,0])
     			cube([global_clearance*3, main_tube_outer_diameter*2, depth*2]);
 	//šrouby
-        translate([0, main_tube_outer_diameter/2 + main_tube_outer_diameter/4, height/2])   
+        translate([0, main_tube_outer_diameter/2 + main_tube_outer_diameter/4, height/2])
             rotate([0,90,0])
-                union(){ 
+                union(){
                        cylinder(h = 50, r = M4_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                 translate([0,0, main_tube_outer_diameter/2 + 2*thickness_between_tubes - 2*M4_nut_height])
                         cylinder(h = M4_nut_height*2 + global_clearance, r = M4_nut_diameter/2, $fn = 6);
@@ -382,7 +382,7 @@ module 666_1028_drillhelper(height = 60, height_of_cap_cylinder = 2, draft = tru
 
 
     }
-}	
+}
 
 module 666_1028_drillhelper_doc(){
 
@@ -417,8 +417,8 @@ module 666_1028_rudder(draft){
             }
             translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
                 cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
-		    
-		    translate([112,0, 30 + 34 - height/2])   
+
+		    translate([112,0, 30 + 34 - height/2])
 		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
 
 
@@ -528,8 +528,3 @@ use <888_1012.scad>
 
 use <./lib/naca4.scad>
 include <../Parameters.scad>
-
-
-
-
-
