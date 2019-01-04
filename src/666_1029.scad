@@ -24,17 +24,17 @@ module screw_bottom (position_number,draft){
 
                 translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size/2])
                             cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            
+
             //final if
             }
-            
+
             else
             {
                 distance_bottom = distance_bottom;
 
                 translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size])
                             cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            
+
             //final if
             }
 
@@ -46,18 +46,18 @@ module screw_bottom (position_number,draft){
             if (distance_bottom <= - maximum_printable_size/2)
             {
                 distance_bottom = - maximum_printable_size/2;
-                
+
                 translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
                     rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            
+
             //fianl if
             }
-            
+
             else
             {
                 distance_bottom = distance_bottom;
-               
+
                 translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
                     rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
@@ -82,12 +82,12 @@ module 666_1029(draft){
                 intersection(){
                     drop_skin(draft);
                 translate([0,-hull_y_size,-hull_z_size/2])
-                    cube([hull_drop_length, hull_y_size, hull_z_size]); 
+                    cube([hull_drop_length, hull_y_size, hull_z_size]);
                 }
                 //lem
                 intersection(){
                     difference(){
-                        translate([0,- hull_wall_thickness,-hull_z_size/2])       
+                        translate([0,- hull_wall_thickness,-hull_z_size/2])
                                 cube([hull_x_size, hull_wall_thickness, hull_z_size]);
                         //odebrání dna
                         translate([ribbon_width,0,0])
@@ -98,16 +98,16 @@ module 666_1029(draft){
                         drop(draft);
                 }
             }
-        
+
         //holes for undercarriage
         //SMAZAT
         /*
             translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 - 20])
-                %union(){    
+                %union(){
                     translate([main_tube_outer_diameter/2,0,0])
                             cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                             cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
-                    
+
                     //zkosení
                     translate([15 - 0.2,main_tube_outer_diameter + 2*hull_wall_thickness,15 + 15 + hull_wall_thickness])
                         rotate([0,45,0])
@@ -115,7 +115,7 @@ module 666_1029(draft){
                     translate([- 15 + sqrt(15)+0.5,main_tube_outer_diameter + 2*hull_wall_thickness,+ 15 + 15 + hull_wall_thickness])
                         rotate([0,45,0])
                             cube([15,2*hull_wall_thickness,15]);
-            
+
                     translate([15 -0.1,main_tube_outer_diameter + 2*hull_wall_thickness, + sqrt(15) + ribbon_width+ hull_z_size])
                         rotate([0,45,0])
                             cube([15,2*hull_wall_thickness,15]);
@@ -136,7 +136,7 @@ module 666_1029(draft){
                         cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                 translate([second_undercarriage_hole - main_tube_outer_diameter/2,-thickness_between_tubes- main_tube_outer_diameter,-hull_z_size/2 - 20])
                         cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
-            
+
                     //zkosení
                 translate([second_undercarriage_hole ,- thickness_between_tubes + 2*hull_wall_thickness,hull_z_size/2 - sqrt(15)*6 - hull_wall_thickness*2])
                     rotate([0,45,0])
@@ -144,7 +144,7 @@ module 666_1029(draft){
                 translate([-15 - 15 + 15/2 + second_undercarriage_hole,- thickness_between_tubes + 2*hull_wall_thickness,15 + 15 + sqrt(15) + ribbon_width + 15 + 3*hull_wall_thickness])
                     rotate([0,45,0])
                        cube([15,2*hull_wall_thickness,15]);
-        
+
                 translate([ + second_undercarriage_hole, - thickness_between_tubes + 2*hull_wall_thickness, - hull_z_size/2 + sqrt(15) + sqrt(15) + 15 +hull_wall_thickness*2])
                     rotate([0,45,0])
                         cube([15,2*hull_wall_thickness,15]);
@@ -178,13 +178,13 @@ module 666_1029(draft){
         translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
           rotate([0,90 +  2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                 union(){
-                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
+                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                 translate([0,0,- M3_nut_height - 5])
-                    rotate([0,0,90])    
+                    rotate([0,0,90])
                         cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                 translate([-20,- M3_nut_diameter/2,- M3_nut_height - 5])
                         cube([20,M3_nut_diameter, M3_nut_height]);
-                translate([0,0,2])   
+                translate([0,0,2])
                         cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                 }
 
@@ -193,13 +193,13 @@ module 666_1029(draft){
         translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
           rotate([0,90 + 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                 union(){
-                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
+                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                 translate([0,0,- M3_nut_height - 5])
-                    rotate([0,0,90])    
+                    rotate([0,0,90])
                         cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                 translate([-20,- M3_nut_diameter/2,- M3_nut_height - 5])
                         cube([20,M3_nut_diameter, M3_nut_height]);
-                translate([0,0,2])   
+                translate([0,0,2])
                         cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                 }
 
@@ -221,15 +221,15 @@ module 666_1029(draft){
                                 translate([bottom_cover_division[2], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
                                         cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
                                 }
-                                
+
                                 translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                                     rotate([0,90 + 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
-                                mirror([0,0,1])  
+                                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                                mirror([0,0,1])
                                 translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length *surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                                     rotate([0,90 + 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
-                        }   
+                                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                        }
 
                         //čtverce pro slepení dílů - rantly
                         translate([bottom_cover_division[1] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
@@ -244,11 +244,11 @@ module 666_1029(draft){
                         //podélná výztuha
                         translate([bottom_cover_division[1],-hull_y_size/3, -hull_z_size/2])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness,hull_z_size]);
-                        
+
                         //vyztužení dílu A
                         difference(){
 
-                        union(){ 
+                        union(){
 
                             union(){
 
@@ -256,10 +256,10 @@ module 666_1029(draft){
                                 rotate([50,0,0])
                                     cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                            translate([0, - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2, main_tube_outer_diameter/2 + thickness_between_tubes + hull_wall_thickness + global_clearance/2])    
+                            translate([0, - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2, main_tube_outer_diameter/2 + thickness_between_tubes + hull_wall_thickness + global_clearance/2])
                                 rotate([55,0,0])
                                    cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
-                            
+
                             translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,0])       // výztuha v přední části krytu
                                 rotate([65,0,0])
                                     cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
@@ -278,10 +278,10 @@ module 666_1029(draft){
                                 rotate([50,0,0])
                                     cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                            translate([0, - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2, main_tube_outer_diameter/2 + thickness_between_tubes + hull_wall_thickness + global_clearance/2])    
+                            translate([0, - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2, main_tube_outer_diameter/2 + thickness_between_tubes + hull_wall_thickness + global_clearance/2])
                                 rotate([55,0,0])
                                    cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
-                            
+
                             translate([0,-main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,0])       // výztuha v přední části krytu
                                 rotate([65,0,0])
                                     cube([bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
@@ -289,10 +289,10 @@ module 666_1029(draft){
                             }
                         // final union výztuhy v části A
                         }
-                            
+
                             //odstranění zásahu výztuh do otvorů podvozkové trubky
                         translate([main_tube_outer_diameter*2 + coupling_wall_thickness,- thickness_between_tubes - main_tube_outer_diameter,- hull_z_size/2 - 20])
-                            union(){    
+                            union(){
                                 translate([main_tube_outer_diameter/2,0,0])
                                         cylinder (h = hull_z_size+40, r = main_tube_outer_diameter/2, $fn = draft ? 50 : 100);
                                             cube ([main_tube_outer_diameter, 2*main_tube_outer_diameter, hull_z_size+40]);
@@ -311,16 +311,16 @@ module 666_1029(draft){
                 //dutý tvar
                 translate([ribbon_width,0,0])
                     hollowing_skeleton(ribbon_width, draft);
-        
+
                     }
-                
+
                 //pro uzavření dílu 2 a 3
-                   
-                   //přepážka díl B   
-                    union(){          
+
+                   //přepážka díl B
+                    union(){
                         translate([bottom_cover_division[1], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                        
+
                         /*translate([bottom_cover_division[1],- hull_y_size/1.5,- hull_z_size/2])
                             cube([ribbon_width, hull_wall_thickness, hull_z_size]);
                         translate([bottom_cover_division[1],- hull_y_size/6,- hull_z_size/2])
@@ -329,7 +329,7 @@ module 666_1029(draft){
                             cube([ribbon_width, hull_wall_thickness, hull_z_size]);
                         translate([bottom_cover_division[1],- hull_y_size/2,- hull_z_size/2])
                             cube([ribbon_width, hull_wall_thickness, hull_z_size]);*/
-                   
+
 
                         translate([bottom_cover_division[1], - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness, hull_z_size/9])
                             cube([ribbon_width, hull_y_size, hull_wall_thickness]);
@@ -345,7 +345,7 @@ module 666_1029(draft){
                     union(){
                         translate([bottom_cover_division[3] - hull_wall_thickness, - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                        
+
                         /*translate([bottom_cover_division[3] - hull_wall_thickness - ribbon_width,- hull_y_size/6,- hull_z_size/2])
                             cube([ribbon_width, hull_wall_thickness, hull_z_size]);
                         translate([bottom_cover_division[3] - hull_wall_thickness - ribbon_width,- hull_y_size/3,- hull_z_size/2])
@@ -361,29 +361,29 @@ module 666_1029(draft){
                             cube([ribbon_width, hull_y_size, hull_wall_thickness]);
                         translate([bottom_cover_division[3] - hull_wall_thickness - ribbon_width, - hull_y_size - main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness,- hull_z_size/3])
                             cube([ribbon_width, hull_y_size, hull_wall_thickness]);
-                    }  
+                    }
 
                     //uzavření seshora + výztuhy
                     union(){
 
-                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])  
+                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2,-hull_z_size/2])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width,-hull_z_size/3])  
+                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width,-hull_z_size/3])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], ribbon_width, hull_wall_thickness]);
 
-                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width,-hull_z_size/9])  
+                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width,-hull_z_size/9])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], ribbon_width, hull_wall_thickness]);
-               
-                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width,hull_z_size/9])  
+
+                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width,hull_z_size/9])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], ribbon_width, hull_wall_thickness]);
-                
-                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width, hull_z_size/3])  
+
+                        translate([bottom_cover_division[1],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width, hull_z_size/3])
                             cube([bottom_cover_division[3] - bottom_cover_division[1], ribbon_width, hull_wall_thickness]);
 
                         translate([bottom_cover_division[2] - hull_wall_thickness,- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width, - hull_z_size/2])
                             cube([hull_wall_thickness, ribbon_width, hull_z_size]);
-                    
+
                         translate([bottom_cover_division[2],- main_tube_outer_diameter/2 - thickness_between_tubes - hull_wall_thickness - global_clearance/2 - ribbon_width, - hull_z_size/2])
                             cube([hull_wall_thickness, ribbon_width, hull_z_size]);
                     }
@@ -403,7 +403,7 @@ module 666_1029(draft){
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 20, r = 18, $fn = draft ? 100 : 200);
-                                            translate([0,0,20])    
+                                            translate([0,0,20])
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                         }
@@ -412,7 +412,7 @@ module 666_1029(draft){
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 15, r = 18, $fn = draft ? 100 : 200);
-                                            translate([0,0,15])    
+                                            translate([0,0,15])
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                         }
@@ -420,13 +420,13 @@ module 666_1029(draft){
                     translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                         rotate([0,90 + 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             union(){
-                                    cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
+                                    cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                             translate([0,0,- M3_nut_height - 5])
-                                rotate([0,0,90])    
+                                rotate([0,0,90])
                                     cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                             translate([-20,- M3_nut_diameter/2,- M3_nut_height - 5])
                                     cube([20,M3_nut_diameter, M3_nut_height]);
-                            translate([0,0,2])   
+                            translate([0,0,2])
                                     cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                             }
                 }
@@ -448,7 +448,7 @@ module 666_1029(draft){
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 20, r = 18, $fn = draft ? 100 : 200);
-                                            translate([0,0,20])    
+                                            translate([0,0,20])
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                         }
@@ -457,7 +457,7 @@ module 666_1029(draft){
                                     rotate([0,-75,0])
                                         union(){
                                                 cylinder(h = 15, r = 18, $fn = draft ? 100 : 200);
-                                            translate([0,0,15])    
+                                            translate([0,0,15])
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                                 sphere (r = 18,$fs = 0.5, $fa = 10);
                                         }
@@ -466,13 +466,13 @@ module 666_1029(draft){
                     translate([hull_drop_length * (bottom_cover_division[2]/hull_drop_length) + 2, - main_tube_outer_diameter, hull_drop_length * surface_distance(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 26])
                         rotate([0,90 + 2*surface_angle(x = bottom_cover_division[2]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             union(){
-                                    cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);   
+                                    cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                             translate([0,0,- M3_nut_height - 5])
-                                rotate([0,0,90])    
+                                rotate([0,0,90])
                                     cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                             translate([-20,- M3_nut_diameter/2,- M3_nut_height - 5])
                                     cube([20,M3_nut_diameter, M3_nut_height]);
-                            translate([0,0,2])   
+                            translate([0,0,2])
                                     cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                             }
                 }
@@ -489,28 +489,28 @@ module 666_1029(draft){
             intersection(){
                 translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter * 0.9,- hull_z_size/2 - 10])
                     cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 20]);
-                drop_skin(hull_wall_thickness, draft);
+                drop_skin(draft);
             }
         translate([0,0,-0.3])
-            intersection(){       
+            intersection(){
                 translate([main_tube_outer_diameter*2 + coupling_wall_thickness, - main_tube_outer_diameter*0.9, hull_z_size/2 - 10])
                    cube ([main_tube_outer_diameter, main_tube_outer_diameter * 0.9, 20]);
-                drop_skin(hull_wall_thickness, draft);
+                drop_skin(draft);
             }
 
         //zadní
         translate([0,0,0.3])
-            intersection(){      
+            intersection(){
                 translate([second_undercarriage_hole - main_tube_outer_diameter/2, - main_tube_outer_diameter * 0.9, - hull_z_size/2 + 5])
                     cube ([main_tube_outer_diameter, main_tube_outer_diameter*0.9, 20]);
-                drop_skin(hull_wall_thickness, draft);
+                drop_skin(draft);
             }
 
         translate([0,0,-0.3])
             intersection(){
                 translate([second_undercarriage_hole - main_tube_outer_diameter/2, - main_tube_outer_diameter * 0.9,  hull_z_size/2 - 20])
                     cube ([main_tube_outer_diameter, main_tube_outer_diameter*0.9 ,20]);
-                drop_skin(hull_wall_thickness, draft);
+                drop_skin(draft);
             }
 
 //final union
@@ -539,7 +539,7 @@ module 666_1029_B(draft){
             translate([bottom_cover_division[1], - hull_y_size, - hull_z_size/2])
                 cube([bottom_cover_division[2] - bottom_cover_division[1], hull_y_size, hull_z_size]);
         }
-    }    
+    }
 }
 
 module 666_1029_C(draft){
@@ -548,7 +548,7 @@ module 666_1029_C(draft){
         intersection(){
                 666_1029(draft);
             translate([bottom_cover_division[2], - hull_y_size, - hull_z_size/2])
-                cube([bottom_cover_division[3] - bottom_cover_division[2], hull_y_size, hull_z_size]);    
+                cube([bottom_cover_division[3] - bottom_cover_division[2], hull_y_size, hull_z_size]);
         }
     }
 }
@@ -558,15 +558,15 @@ module 666_1029_D(draft){
         union(){
             intersection(){
                     666_1029(draft);
-                translate([bottom_cover_division[3] + global_clearance/100, -hull_y_size,- hull_z_size/2])   //přidána tolerance global_clearance/100 pro odstranění zbytku rantlu od protichůdného dílu pro tisk    
-                    cube([bottom_cover_division[4] - bottom_cover_division[3] - 2*global_clearance/100, hull_y_size, hull_z_size]);    
+                translate([bottom_cover_division[3] + global_clearance/100, -hull_y_size,- hull_z_size/2])   //přidána tolerance global_clearance/100 pro odstranění zbytku rantlu od protichůdného dílu pro tisk
+                    cube([bottom_cover_division[4] - bottom_cover_division[3] - 2*global_clearance/100, hull_y_size, hull_z_size]);
             }
 
-            //zámky přidané 
+            //zámky přidané
             union(){
                 intersection(){
-                    drop_skin(draft);   
-            
+                    drop_skin(draft);
+
                     union(){
                        //čtverec pro zámek horní
                         translate([bottom_cover_division[4] - hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2])
@@ -578,14 +578,14 @@ module 666_1029_D(draft){
                             translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness, - hull_z_size - main_tube_outer_diameter])
                                    cube([lock_length, lock_width, hull_z_size]);
                         //union
-                        }   
+                        }
                     //intersection
                     }
                 //union zámky
-                }   
+                }
 
         }
-}            
+}
 
 module 666_1029_E(draft){
     translate([80,0,0])
@@ -599,8 +599,8 @@ module 666_1029_E(draft){
         //zámky odečtené
                 union(){
                     intersection(){
-                        drop_skin(draft);   
-                    
+                        drop_skin(draft);
+
                         union(){
                        //čtverec pro zámek horní
                         translate([bottom_cover_division[4] - hull_wall_thickness,  - main_tube_outer_diameter*5, -lock_width/2 - global_clearance/2])
@@ -612,12 +612,12 @@ module 666_1029_E(draft){
                             translate([bottom_cover_division[4] - hull_wall_thickness, - main_tube_outer_diameter/2 - thickness_between_tubes - lock_width - 3*hull_wall_thickness - global_clearance/2, - hull_z_size - main_tube_outer_diameter])
                                    cube([lock_length + global_clearance/2, lock_width + global_clearance, hull_z_size]);
                         //union
-                        }   
+                        }
                     //intersection
                     }
                 //union zámky
-                }   
-    }    
+                }
+    }
 }
 
 
