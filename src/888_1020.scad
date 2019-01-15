@@ -55,14 +55,9 @@ module 888_1020(draft = true){
 
 
 
-    difference(){
-
-    }
-
       translate([0,0, plate_bearing_center_distance])
         difference(){
             union(){
-
                 hull(){
                     translate([-plate_overlap, -plate_size_y/2, 0])
                         cube([plate_size_x - motor_diameter, plate_size_y, plate_size_z]);
@@ -78,8 +73,8 @@ module 888_1020(draft = true){
 
                 // rameno, na kterem jsou kloubky pro servo
                 hull(){
-                    translate([servo_join_x-servo_join_size/2, -servo_join_y/2, 0])
-                        cube([servo_join_size, servo_join_y ,plate_size_z]);
+                    translate([servo_join_x-servo_join_size/2, -servo_join_y/2, -plate_size_z-1])
+                        cube([servo_join_size, servo_join_y ,plate_size_z*2+1]);
                     translate([servo_join_x-servo_join_size, -plate_size_y/2, -plate_size_z+2])
                         cube([servo_join_size*2, plate_size_y ,plate_size_z*2-2]);
                 }
@@ -132,19 +127,19 @@ module 888_1020(draft = true){
                 }
 
             // diry pro pridelani kloubku
-            translate([servo_join_x, -servo_join_y/2 + 20, plate_size_z/2])
+            translate([servo_join_x, -servo_join_y/2 + 20, -plate_size_z/2])
                 rotate([90, 0, 0])
                     cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z/2- M2_5_nut_height])
-                cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z]);
+            translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z*-2.5 + M2_5_nut_height])
+                cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z*2]);
 
-            translate([servo_join_x, servo_join_y/2 - 20, plate_size_z/2])
+            translate([servo_join_x, servo_join_y/2 - 20, -plate_size_z/2])
                 rotate([-90, 0, 0])
                     cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - 5, plate_size_z/2- M2_5_nut_height])
-                cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z]);
+            translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - M2_5_nut_height - 5, plate_size_z*-2.5 + M2_5_nut_height])
+                cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z*2]);
 
             //Otvor na hallovu sondu
             translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, plate_size_z - hall_thickness])
