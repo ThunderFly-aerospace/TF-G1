@@ -18,7 +18,7 @@ kloub_diameter = depth/3;
 					union(){
 								cylinder (h = height + global_clearance, r = M6_screw_diameter/2, $fn = 20);
 						translate([0,0,height - M6_nut_height])
-								cylinder (h = M6_nut_height + global_clearance, r = M6_nut_diameter/2, $fn = 6);
+								cylinder (h = M6_nut_height + global_clearance + 10, r = M6_nut_diameter/2, $fn = 6);
 					}
 		}
 		//kloub
@@ -85,8 +85,8 @@ angle = 10;
 
 translate([0,0,-20])
 888_3011_A();
-translate([0,0,20/3 - 20/7])
-888_3011_B();
+//translate([0,0,20/3 - 20/7])
+//888_3011_B();
 
 translate([0,0,-40])
 mirror ([0,0,1])
