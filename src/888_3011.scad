@@ -11,12 +11,11 @@ kloub_diameter = depth/3;
 		difference(){
                 hull(){
                     cube ([width, depth, height]);
-                    translate()
-                        cube ([width, depth - kloub_diameter, height+ (height/3 - height/7)]);
+                    cube ([width, depth - kloub_diameter, height+ (height/3 - height/7)]);
                 }
 			translate([width/2,depth/4,-global_clearance/2])
 					union(){
-								cylinder (h = height + global_clearance, r = M6_screw_diameter/2, $fn = 20);
+						cylinder (h = height + global_clearance, r = M6_screw_diameter/2, $fn = 20);
 						translate([0,0,height - M6_nut_height])
 								cylinder (h = M6_nut_height + global_clearance + 10, r = M6_nut_diameter/2, $fn = 6);
 					}
@@ -41,7 +40,7 @@ kloub_diameter = depth/3;
 
 }
 
-module 888_3011_B(){
+module 888_3011_B(draft){
 
 width = 45;
 depth = 70;
@@ -74,12 +73,12 @@ angle = 30;
 
                 translate([width-width/8, depth - kloub_diameter/4 - kloub_height/2, kloub_height/2 + kloub_diameter/4])
 					rotate([0,90,0])
-						cylinder (h = 10, r = M4_nut_diameter/2, $fn = 20);
+						cylinder (h = 10, r = M4_nut_diameter/2, $fn = 6);
 
             	translate([0,0,10])
             		rotate([0,angle,0])
         				translate([width/2,(depth - kloub_diameter/4 - kloub_height/2)/3,kloub_height + kloub_diameter/2 - tube_height/3])
-    						cylinder(h = tube_height, d = main_tube_outer_diameter, $fn = 50);
+    						cylinder(h = tube_height, d = main_tube_outer_diameter, $fn = 200);
 
 			}
 
@@ -87,22 +86,22 @@ angle = 30;
 		rotate([0,angle,0])
 			translate([width/2,(depth - kloub_diameter/4 - kloub_height/2)/3,kloub_height + kloub_diameter/2 - tube_height/3])
 				difference(){
-					cylinder(h = tube_height, r1 = main_tube_outer_diameter*0.8, r2 = main_tube_outer_diameter*0.8, $fn = 50);
+					cylinder(h = tube_height, r = main_tube_outer_diameter*0.8, $fn = 200);
 					translate([0,0,-global_clearance/2+10])
 						cylinder(h = tube_height + global_clearance, d = main_tube_outer_diameter, $fn = 50);
 
                     // dira + zapusteni pro sroub skrz trubku
-                    translate([0, main_tube_outer_diameter,tube_height/2+10])
+                    translate([0, main_tube_outer_diameter, tube_height/2+10])
 						rotate([90,0,0])
-							cylinder(h = main_tube_outer_diameter*2, d = M3_screw_diameter, $fn = 50);
+							cylinder(h = main_tube_outer_diameter*2, d = M3_screw_diameter, $fn = 200);
                     translate([0, 0,tube_height/2+10])
                         rotate([-90,0,0])
-                            translate([0, 0, main_tube_outer_diameter*0.8 - M4_nut_height])
-                                cylinder(h = main_tube_outer_diameter*2, d = M4_nut_diameter, $fn = 6);
+                            translate([0, 0, main_tube_outer_diameter*0.8 - M3_nut_height])
+                                cylinder(h = main_tube_outer_diameter*2, d = M3_nut_diameter, $fn = 6);
                     translate([0, 0,tube_height/2+10])
                         rotate([90,0,0])
-                            translate([0, 0, main_tube_outer_diameter*0.8 - M4_nut_height])
-                                cylinder(h = main_tube_outer_diameter*2, d = M4_nut_diameter, $fn = 50);
+                            translate([0, 0, main_tube_outer_diameter*0.8 - M3_nut_height])
+                                cylinder(h = main_tube_outer_diameter*2, d = M3_nut_diameter, $fn = 6);
 
                     // precnivajici casti casti
                     rotate([0,-angle, 0])

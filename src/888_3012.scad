@@ -48,7 +48,7 @@ tube_height = 50;
                             translate([0, 0,tube_height/2+10])
                                 rotate([-90,0,0])
                                     translate([0, 0, main_tube_outer_diameter*0.8 - M3_nut_height])
-                                        cylinder(h = main_tube_outer_diameter*2, d = M3_nut_diameter, $fn = 50);
+                                        cylinder(h = main_tube_outer_diameter*2, d = M3_nut_diameter, $fn = 6);
                         }
 
                 translate([-main_tube_outer_diameter/2.2, 0,10])
@@ -69,7 +69,7 @@ tube_height = 50;
                             translate([0, 0,tube_height/2+10])
                                 rotate([-90,0,0])
                                     translate([0, 0, main_tube_outer_diameter*0.8 - M3_nut_height])
-                                        cylinder(h = main_tube_outer_diameter*2, d = M3_nut_diameter, $fn = 50);
+                                        cylinder(h = main_tube_outer_diameter*2, d = M3_nut_diameter, $fn = 6);
                         }
             }
             translate([-width/2, -depth/2, -40])
@@ -122,7 +122,7 @@ slit_width = 10;
                 }
                 rotate([0, -90, 0]){
                     translate([0, 0, slit_width*0.5])
-                        cylinder(d=M3_nut_diameter, h = 100, $fn=20);
+                        cylinder(d=M3_nut_diameter, h = 100, $fn=6);
                 }
 
             }
@@ -131,14 +131,14 @@ slit_width = 10;
     			cylinder (h = height + global_clearance, r = M3_screw_diameter/2, $fn = 20);
     			translate([0,0,height - M3_nut_height])
                     rotate([0, 0, 30])
-                        cylinder (h = M3_nut_height + global_clearance + 10, r = M3_nut_diameter/2, $fn = 20);
+                        cylinder (h = M3_nut_height + global_clearance + 10, r = M3_nut_diameter/2, $fn = 6);
     		}
 
             translate([width/2 - 5,0 ,-global_clearance/2]){
     			cylinder (h = height + global_clearance, r = M3_screw_diameter/2, $fn = 20);
     			translate([0,0,height - M3_nut_height])
                     rotate([0, 0, 30])
-                        cylinder (h = M3_nut_height + global_clearance + 10, r = M3_nut_diameter/2, $fn = 20);
+                        cylinder (h = M3_nut_height + global_clearance + 10, r = M3_nut_diameter/2, $fn = 6);
     		}
         }
 }
