@@ -49,7 +49,7 @@ height = 20;
 kloub_height = height/3;
 kloub_diameter = depth/3;
 tube_height = 50;
-angle = 10;
+angle = 30;
 
 
 			difference(){
@@ -78,15 +78,23 @@ angle = 10;
 									cylinder(h = tube_height + global_clearance, d = main_tube_outer_diameter, $fn = 50);
 							translate([0, main_tube_outer_diameter,tube_height/2+10])
 								rotate([90,0,0])
-									cylinder(h = main_tube_outer_diameter*2, d = M4_screw_diameter, $fn = 50);
+									cylinder(h = main_tube_outer_diameter*2, d = M3_screw_diameter, $fn = 50);
+                            translate([0, 0,tube_height/2+10])
+                                rotate([-90,0,0])
+                                    translate([0, 0, main_tube_outer_diameter*0.8 - M4_nut_height])
+                                        cylinder(h = main_tube_outer_diameter*2, d = M4_nut_diameter, $fn = 6);
+                            translate([0, 0,tube_height/2+10])
+                                rotate([90,0,0])
+                                    translate([0, 0, main_tube_outer_diameter*0.8 - M4_nut_height])
+                                        cylinder(h = main_tube_outer_diameter*2, d = M4_nut_diameter, $fn = 50);
 						}
 			}
 }
 
 translate([0,0,-20])
 888_3011_A();
-//translate([0,0,20/3 - 20/7])
-//888_3011_B();
+translate([0,0,20/3 - 20/7])
+888_3011_B();
 
 translate([0,0,-40])
 mirror ([0,0,1])
