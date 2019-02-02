@@ -695,6 +695,10 @@ translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thick
     rotate([-90,0,0])
         888_1001();
 */
+
+
+
+
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 use <666_1032.scad>
