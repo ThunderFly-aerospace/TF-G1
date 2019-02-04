@@ -39,7 +39,7 @@ module 666_1201(draft = false, holes = true){
 
                 translate ([ -airfoil_depth/2, length/2, 0])
                     rotate([90, 0, 0])
-                        airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = draft ? 50 : 300, h = length, open = false);  
+                        airfoil(naca = airfoil_NACA, L = airfoil_depth + bridge_thickness, N = draft ? 50 : 300, h = length, open = false);
             }
 
             // kořen rotorového listu
@@ -62,14 +62,14 @@ module 666_1201(draft = false, holes = true){
                intersection(){
                     translate ([airfoil_depth/2, 0, 0])
                         cube([airfoil_depth, length, airfoil_thickness], center = true);
-            
+
                     rotate([0,90,0])
                         rotate_extrude($fn = draft ? 50 : 200)
                             rotate([0,0,90])
                                 difference()
                                 {
-                                  polygon(points = airfoil_data(naca=airfoil_NACA, L = airfoil_depth + bridge_thickness, N=draft ? 50 : 200)); 
-                                  square(airfoil_depth + bridge_thickness); 
+                                  polygon(points = airfoil_data(naca=airfoil_NACA, L = airfoil_depth + bridge_thickness, N=draft ? 50 : 200));
+                                  square(airfoil_depth + bridge_thickness);
                                 }
                 }
 
@@ -85,16 +85,16 @@ module 666_1201(draft = false, holes = true){
                         translate([23-14,0,-1])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([43-14,18,-1])   
+                        translate([43-14,18,-1])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([63-14, 0, -1])  
+                        translate([63-14, 0, -1])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([83-14, 21-5, -1]) 
+                        translate([83-14, 21-5, -1])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([103-14, 0, -1]) 
+                        translate([103-14, 0, -1])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
                     }
 
@@ -106,10 +106,10 @@ module 666_1201(draft = false, holes = true){
                         translate([-15,0,0])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([0,0,0])   
+                        translate([0,0,0])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
 
-                        translate([15, 0, 0])  
+                        translate([15, 0, 0])
                             cylinder (h = 2*airfoil_thickness, r = 3.6/2, $fn = 50, center = true);
                     }
 
@@ -127,17 +127,17 @@ module 666_1201_doc(length = 970, material_width = 50, twosided = true, draft = 
         union(){
             translate([-material_width / 2, length/ 2, 0])
                 rotate([0, 0, 90])
-                line(DIM_SPACE * 3, line_width=DIM_LINE_WIDTH);
+                line(DIM_SPACE * 3, width=DIM_LINE_WIDTH);
 
             translate([material_width / 2, length/ 2, 0])
                 rotate([0, 0, 90])
-                line(DIM_SPACE * 3, line_width=DIM_LINE_WIDTH);
+                line(DIM_SPACE * 3, width=DIM_LINE_WIDTH);
 
             translate([material_width / 2, length/ 2, 0])
-                line(DIM_SPACE * 3, line_width=DIM_LINE_WIDTH);
+                line(DIM_SPACE * 3, width=DIM_LINE_WIDTH);
 
             translate([material_width / 2, -length/ 2, 0])
-                line(DIM_SPACE * 3, line_width=DIM_LINE_WIDTH);
+                line(DIM_SPACE * 3, width=DIM_LINE_WIDTH);
 
             translate([-material_width / 2, length/2 + DIM_SPACE * 2 , 0])
                 dimensions(material_width, line_width=DIM_LINE_WIDTH, loc=DIM_CENTER);

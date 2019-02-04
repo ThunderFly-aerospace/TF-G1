@@ -1,4 +1,4 @@
-module 888_1001(){
+module 888_1001(draft){
 
 
     width =width_of_accumulator + accumulator_holder_width;
@@ -11,17 +11,17 @@ module 888_1001(){
 
 
     union(){
-    	
+
     	difference (){
     		translate([-(accumulator_holder_width/2),- accumulator_holder_width/2,0])
     			cube ([width,depth,height]);
-    		translate([- global_clearance,height_of_accumulator/2 + global_clearance,-2 - sink_of_accumulator - depth_of_accumulator])		
-    			rotate([90,0,0])	
+    		translate([- global_clearance,height_of_accumulator/2 + global_clearance,-2 - sink_of_accumulator - depth_of_accumulator])
+    			rotate([90,0,0])
     				cube([width_of_accumulator + global_clearance*2, depth_of_accumulator+3 + depth_of_accumulator, height_of_accumulator+1]);
      	}
 
     	difference(){
-    		translate([-accumulator_holder_thickness - accumulator_holder_width/2,-accumulator_holder_width/2,0])	
+    		translate([-accumulator_holder_thickness - accumulator_holder_width/2,-accumulator_holder_width/2,0])
     			cube([accumulator_holder_thickness, accumulator_holder_width, accumulator_holder_thickness]);
     	//šroub
     		translate([- accumulator_holder_width/2 - accumulator_holder_thickness/2,0,-10])
@@ -29,7 +29,7 @@ module 888_1001(){
     	}
 
     	difference(){
-    		translate([width_of_accumulator + accumulator_holder_width/2,-accumulator_holder_width/2,0])	
+    		translate([width_of_accumulator + accumulator_holder_width/2,-accumulator_holder_width/2,0])
     			cube([accumulator_holder_thickness, accumulator_holder_width, accumulator_holder_thickness]);
     	//šroub
     		translate([width_of_accumulator + accumulator_holder_width/2 + accumulator_holder_thickness/2,0,-10])

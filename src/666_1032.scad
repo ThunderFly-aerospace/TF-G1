@@ -53,7 +53,7 @@ module 666_1032(draft){
                     translate([main_tube_outer_diameter*0.5,0,cover_pilon_division[1] + main_tube_outer_diameter*4.2])
                         rotate([90,0,0])
                             union(){
-                                cylinder(h = 30, r = M3_screw_diameter/2, $fn = $draft ? 10 :20);
+                                cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 :20);
                             translate([0,0,18 - M3_nut_height])
                                 cylinder(h = M3_nut_height * 3, r = M3_nut_diameter/2, $fn = draft ? 10:20);
                             }
@@ -158,9 +158,9 @@ module 666_1032(draft){
                     translate([main_tube_outer_diameter*0.5,0,cover_pilon_division[1] + main_tube_outer_diameter*4.2])
             rotate([90,0,0])
                 union(){
-                            cylinder(h = 30, r = M3_screw_diameter/2, $fn = $draft ? 10 :20);
+                            cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 :20);
                     translate([0,0,18 - M3_nut_height])
-                            cylinder(h = M3_nut_height*3, r = M3_nut_diameter/2, $fn = $draft ? 10:20);
+                            cylinder(h = M3_nut_height*3, r = M3_nut_diameter/2, $fn = draft ? 10:20);
                     //otvor pro trubici
                     translate([-30, - Distance_hole_from_tube + Pitot_tube_diameter/2,8])
                         rotate([0,90,0])
