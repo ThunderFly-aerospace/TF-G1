@@ -85,7 +85,7 @@ angle = 30;
 	translate([0,0,10])
 
 
-		rotate([-angle,0,0])
+	rotate([-angle,0,0])
 			difference(){
 				translate([width/2,(depth - kloub_diameter/4 - kloub_height/2)/3,kloub_height + kloub_diameter/2 - tube_height/3])
 						difference(){
