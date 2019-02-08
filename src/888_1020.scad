@@ -134,11 +134,11 @@ module 888_1020(draft = true){
             translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z*-2.5 + M2_5_nut_height])
                 cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z*2]);
 
-            translate([servo_join_x, servo_join_y/2 - 20, -plate_size_z/2])
+            %translate([servo_join_x, servo_join_y/2 - 20, -plate_size_z/2])
                 rotate([-90, 0, 0])
                     cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - M2_5_nut_height - 5, plate_size_z*-2.5 + M2_5_nut_height])
+            %translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - M2_5_nut_height - 5, plate_size_z*-2.5 + M2_5_nut_height])
                 cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z*2]);
 
             //Otvor na hallovu sondu
