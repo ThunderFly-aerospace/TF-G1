@@ -79,7 +79,6 @@ angle = 30;
             		rotate([0,angle,0])
         				translate([width/2,(depth - kloub_diameter/4 - kloub_height/2)/3,kloub_height + kloub_diameter/2 - tube_height/3])
     						cylinder(h = tube_height, d = main_tube_outer_diameter, $fn = 200);
-
 			}
 
 	translate([0,0,10])
@@ -108,7 +107,6 @@ angle = 30;
                         translate([-100, -100, -20])
                             cube([200, 200, 20]);
         		}
-
 }
 
 translate([0,0,-20])
