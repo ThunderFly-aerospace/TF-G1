@@ -11,10 +11,7 @@ kloub_diameter = depth/3;
 	union(){
 		//základní kostka
 		difference(){
-                hull(){
                     cube ([width, depth, height]);
-                    cube ([width, depth - kloub_diameter, height + (height/3 - height/7)]);
-                }
 			translate([width/2,depth/4,-global_clearance/2])
 					union(){
 								cylinder (h = height + global_clearance, r = M6_screw_diameter/2, $fn = 20);
@@ -26,14 +23,13 @@ kloub_diameter = depth/3;
 		difference(){
 			translate([width/4,depth - kloub_height - kloub_diameter/2,height])
 					hull(){
-                            translate([0, -5, 0])
+                            translate([0, -5,0])
                                 cube([width/2, kloub_height + kloub_diameter/2 + 5, 1]);
-						translate([0,kloub_diameter/4 + kloub_height/2 - 1,kloub_height*2 + 1])
+						translate([0,kloub_diameter/4 + kloub_height/2-1,kloub_height*2-1])
 							rotate([0,90,0])
-								cylinder(h = width/2, r = kloub_height/2 + kloub_diameter/4 + 1,  $fn = 50);
+								cylinder(h = width/2, r = kloub_height/2 + kloub_diameter/4,  $fn = 50);
 					}
-			//translate([width/4 - global_clearance/2,depth - kloub_height/2 - kloub_diameter/4,height + kloub_height*2])
-			translate([width/4 - global_clearance/2,depth - kloub_diameter/4 - kloub_height/2 - 1,1 + height + kloub_height + kloub_diameter/4])			
+			translate([width/4 - global_clearance/2,depth - kloub_height/2 - kloub_diameter/4 -1,height + kloub_height*2 - 1])
 				rotate([0,90,0])
 					cylinder(h = width + global_clearance, r = M4_screw_diameter/2, $fn = 20);
 		}
@@ -112,17 +108,15 @@ angle = 30;
         		}
 }
 
-translate([0,0,- 2*5 - 4.9])
+translate([0,0,- 5*2 - 4.9])
 //translate([0,0,-20])
 888_3011_A();
-translate([0,0,(2*5+4.9)/3 - (2*5 + 4.9)/7])
-//translate([0,0,20/3 - 20/7])
 888_3011_B();
 
 translate([0,0,-40])
 mirror ([0,0,1])
 888_3011_A();
-translate([0,0,-40 - 20/3 + 20/7 - 20])
+translate([0,0,-40 - 2*5 - 4.9])
 mirror([0,0,1])
 888_3011_B();
 
