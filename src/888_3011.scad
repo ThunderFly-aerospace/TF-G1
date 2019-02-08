@@ -28,11 +28,12 @@ kloub_diameter = depth/3;
 					hull(){
                             translate([0, -5, 0])
                                 cube([width/2, kloub_height + kloub_diameter/2 + 5, 1]);
-						translate([0,kloub_diameter/4 + kloub_height/2,kloub_height*2])
+						translate([0,kloub_diameter/4 + kloub_height/2 - 1,kloub_height*2 + 1])
 							rotate([0,90,0])
-								cylinder(h = width/2, r = kloub_height/2 + kloub_diameter/4,  $fn = 50);
+								cylinder(h = width/2, r = kloub_height/2 + kloub_diameter/4 + 1,  $fn = 50);
 					}
-			translate([width/4 - global_clearance/2,depth - kloub_height/2 - kloub_diameter/4,height + kloub_height*2])
+			//translate([width/4 - global_clearance/2,depth - kloub_height/2 - kloub_diameter/4,height + kloub_height*2])
+			translate([width/4 - global_clearance/2,depth - kloub_diameter/4 - kloub_height/2 - 1,1 + height + kloub_height + kloub_diameter/4])			
 				rotate([0,90,0])
 					cylinder(h = width + global_clearance, r = M4_screw_diameter/2, $fn = 20);
 		}
