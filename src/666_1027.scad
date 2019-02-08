@@ -66,7 +66,7 @@ module screw_top (position_number, draft){
 	//funkce
 
 	distance_top = - hull_drop_length * surface_distance(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
-	echo (distance_top);
+	//echo (distance_top);
 
 	if (position_number > 1 && position_number < 5) //tato podmínka znamená, že v pozici 2,3 a 4 se šroub neotáčí podle surface_angle a ani neposouvá podle surface_distance, protože je na podložce rovná hrana. Je tam tedy dané pevné posunugí -hull_z_size/2
 	{
@@ -76,15 +76,13 @@ module screw_top (position_number, draft){
     	{
     		distance_top = - maximum_printable_size/2;
     		translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
-
            			union(){
     			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
-                    	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
-                	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
-                    	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-    			//final union
-    			}
+                    	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
+                        	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                    	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
+                        	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+    			    }
     		//final if
     		}
 
@@ -92,15 +90,13 @@ module screw_top (position_number, draft){
     	{
     		distance_top = distance_top;
     		translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size])
-
        		    	union(){
     			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                	translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
-                    	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
-                	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
-                    	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-    			//final union
-    			}
+                    	translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
+                        	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                    	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
+                        	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+    			    }
     	//final if
     	}
     //final if
@@ -112,14 +108,13 @@ module screw_top (position_number, draft){
     		distance_top = - maximum_printable_size/2;
     		translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
     			rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-
            			union(){
     			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
-                    	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
-                	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
-                    	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-    				//final union
+                    	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
+                        	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                    	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
+                        	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+        				//final union
     				}
     	//fianl if
     	}
@@ -129,16 +124,13 @@ module screw_top (position_number, draft){
     		distance_top = distance_top;
     		translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
     			rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-
-
        		    	union(){
     			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                	translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
-                    	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
-                	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
-                    	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-    			//final union
-    			}
+                	    translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
+                    	   cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                    	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
+                        	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+    			    }
     	//final if
     	}
         //final if
@@ -150,7 +142,7 @@ module screw_top (position_number, draft){
         	//funkce
 
         	distance_bottom = - hull_drop_length * surface_distance(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
-        	echo (distance_bottom);
+        	//echo (distance_bottom);
 
         	if (position_number > 1 && position_number < 3)
         	{
@@ -160,14 +152,12 @@ module screw_top (position_number, draft){
         	{
         		distance_bottom = - maximum_printable_size/2;
         		translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size/2])
-
-		       			union(){
-        			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+	       			union(){
+    			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                     	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
                         	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
                     	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
                         	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-					//final union
         			}
         		//final if
         		}
@@ -176,14 +166,12 @@ module screw_top (position_number, draft){
         	{
         		distance_bottom = distance_bottom;
         		translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size])
-
-	       		    	union(){
-        			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+       		    	union(){
+    			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                     	translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
                         	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
                     	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
                         	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-					//final union
         			}
         	//final if
         	}
@@ -196,14 +184,12 @@ module screw_top (position_number, draft){
         		distance_bottom = - maximum_printable_size/2;
         		translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
         			rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-
 		       			union(){
         			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                    	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
-                        	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
-                    	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
-                        	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-						//final union
+                        	translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
+                            	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                        	translate([0,0, M3_nut_height + 2*hull_wall_thickness])
+                            	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
         				}
         	//fianl if
         	}
@@ -213,16 +199,13 @@ module screw_top (position_number, draft){
         		distance_bottom = distance_bottom;
         		translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
         			rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-
-
 	       		    	union(){
         			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                    	translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
-                        	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
-                    	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
-                        	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-					//final union
-        			}
+                        	translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
+                            	cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                        	translate([0,0,M3_nut_height +  2*hull_wall_thickness])
+                            	cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+        			    }
         	//final if
         	}
         //final if
@@ -695,10 +678,6 @@ translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thick
     rotate([-90,0,0])
         888_1001();
 */
-
-
-
-
 use <./lib/naca4.scad>
 include <../Parameters.scad>
 use <666_1032.scad>

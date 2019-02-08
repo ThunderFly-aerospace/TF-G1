@@ -68,7 +68,6 @@ angle = 30;
 					rotate([0,90,0])
 						cylinder (h = width + global_clearance, r = M4_screw_diameter/2, $fn = 20);
                 translate([-10+width/8, depth - kloub_diameter/4 - kloub_height/2, kloub_height/2 + kloub_diameter/4])
-
 					rotate([0,90,0])
 						cylinder (h = 10, r = M4_nut_diameter/2, $fn = 6);
 
@@ -76,11 +75,13 @@ angle = 30;
 					rotate([0,90,0])
 						cylinder (h = 10, r = M4_nut_diameter/2, $fn = 6);
 
-
+            	translate([0,0,10])
+            		rotate([0,angle,0])
+        				translate([width/2,(depth - kloub_diameter/4 - kloub_height/2)/3,kloub_height + kloub_diameter/2 - tube_height/3])
+    						cylinder(h = tube_height, d = main_tube_outer_diameter, $fn = 200);
 			}
 
 	translate([0,0,10])
-
 		rotate([0,angle,0])
 			translate([width/2,(depth - kloub_diameter/4 - kloub_height/2)/3,kloub_height + kloub_diameter/2 - tube_height/3])
 				difference(){
@@ -106,8 +107,6 @@ angle = 30;
                         translate([-100, -100, -20])
                             cube([200, 200, 20]);
         		}
-
-
 }
 
 translate([0,0,-20])
