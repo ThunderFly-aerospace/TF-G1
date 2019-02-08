@@ -80,8 +80,15 @@ angle = 10;
 									cylinder(h = tube_height + global_clearance, r = main_tube_outer_diameter/2, $fn = 50);
 							translate([-main_tube_outer_diameter,0,tube_height/2])	
 								rotate([0,90,0])	
-									cylinder(h = main_tube_outer_diameter*2, r = M8_screw_diameter/2, $fn = 50);
-						}
+cylinder(h = main_tube_outer_diameter*2, d = M3_screw_diameter, $fn = 50);
+                            translate([0, 0,tube_height/2+10])
+                                rotate([-90,0,0])
+                                    translate([0, 0, main_tube_outer_diameter*0.8 - M4_nut_height])
+                                        cylinder(h = main_tube_outer_diameter*2, d = M4_nut_diameter, $fn = 6);
+                            translate([0, 0,tube_height/2+10])
+                                rotate([90,0,0])
+                                    translate([0, 0, main_tube_outer_diameter*0.8 - M4_nut_height])
+                                        cylinder(h = main_tube_outer_diameter*2, d = M4_nut_diameter, $fn = 50);						}
 			}
 }
 
