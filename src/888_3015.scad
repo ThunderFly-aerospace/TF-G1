@@ -55,30 +55,30 @@ kloub_height = height*2.5;
 tube_height = 50;
 slit_width = 10;
 
-height_cylinder = main_tube_outer_diameter;
+height_cylinder = 35;
 
 	difference(){
 		translate([-height_cylinder/2 - 10,-15,+height*0.75])
 			cube([height_cylinder+20,30,50]);
 
 		translate([- height_cylinder/2 - global_clearance,-25,-global_clearance])
-			cube([height_cylinder + global_clearance*2,50,main_tube_outer_diameter*1.2 + global_clearance]);
+			cube([height_cylinder + global_clearance*2, 50, 35]);
 
 		translate([-50,0,30/2])
 			rotate([0,90,0])
 				cylinder(h= 100, r = M3_screw_diameter/2, $fn = 20);
 
-		%translate([height_cylinder -10 - M3_nut_height,0,30/2])
+/*		%translate([height_cylinder -10 - M3_nut_height,0,30/2])
 		    rotate([0, 90,0])
 		       cylinder (h= M3_nut_height + global_clearance + 10, r = M3_nut_diameter/2, $fn = 20);
 		    			
 		%translate([-height_cylinder - M3_nut_height,0,30/2])
 		    rotate([0, 90,0])
 		        cylinder (h= M3_nut_height + global_clearance + 10, r = M3_nut_diameter/2, $fn = 20);
-
+*/
 		translate([0,50,35])
 		    rotate([90,0,0])
-				cylinder(h = 100, r = height_cylinder/2 + global_clearance,  $fn = 50);
+				cylinder(h = 100, d = main_tube_outer_diameter + global_clearance,  $fn = 50);
 	}
 }
 
