@@ -2,7 +2,9 @@ module 888_3011_A (draft = true){
 
 width = 45;
 depth = 70;
-height = 20;
+height = basic_screw_length*2 + M6_nut_height;  //původně byla výška 20
+//height = 20;
+
 kloub_height = height/3;
 kloub_diameter = depth/3;
 
@@ -11,11 +13,11 @@ kloub_diameter = depth/3;
 		difference(){
                 hull(){
                     cube ([width, depth, height]);
-                    cube ([width, depth - kloub_diameter, height+ (height/3 - height/7)]);
+                    cube ([width, depth - kloub_diameter, height + (height/3 - height/7)]);
                 }
 			translate([width/2,depth/4,-global_clearance/2])
 					union(){
-						cylinder (h = height + global_clearance, r = M6_screw_diameter/2, $fn = 20);
+								cylinder (h = height + global_clearance, r = M6_screw_diameter/2, $fn = 20);
 						translate([0,0,height - M6_nut_height])
 								cylinder (h = M6_nut_height + global_clearance + 10, r = M6_nut_diameter/2, $fn = 6);
 					}
@@ -109,9 +111,11 @@ angle = 30;
         		}
 }
 
-translate([0,0,-20])
+translate([0,0,- 2*5 - 4.9])
+//translate([0,0,-20])
 888_3011_A();
-translate([0,0,20/3 - 20/7])
+translate([0,0,(2*5+4.9)/3 - (2*5 + 4.9)/7])
+//translate([0,0,20/3 - 20/7])
 888_3011_B();
 
 translate([0,0,-40])
