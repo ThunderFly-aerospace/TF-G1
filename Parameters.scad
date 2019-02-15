@@ -97,6 +97,8 @@ M2_5_nut_pocket = 5.5;
 
 //šroub servo
 Servo_screw = 1.5;
+Servo_nut_height = 1;
+Servo_nut_diameter = 2.7;
 
 //The tube for help
 Help_main_tube_outer = 25;

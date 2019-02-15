@@ -342,6 +342,8 @@ module 888_1012_B(){
 		translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
 			rotate([0,90,0])
 					cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
+
+
 		translate([-5, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1 + 28.5])
 			rotate([0,90,0])
 					cylinder(h = 15, r = Servo_screw/2, $fn = draft ? 50 : 100);
