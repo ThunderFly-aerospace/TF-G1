@@ -210,7 +210,7 @@ module 888_1015(draft){
                     rotate([0, -90, 90]){
         					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
         					translate([0, 0, M2_5_pocket_depth])
-        						rotate([0, 0, 90+i[2]])
+        						rotate([0, 0, 90])
         							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
                             rotate([0,0,i[2]])
                                 translate([0, -M2_5_nut_diameter/2, M2_5_pocket_depth])
