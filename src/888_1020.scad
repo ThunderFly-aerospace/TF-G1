@@ -19,6 +19,7 @@ module 888_1020(draft = true){
     motor_distance = 79.03; // vzdalenost prerotatoru od hlavni pos_y
     motor_diameter = 35+2;
     motor_axis_diameter = 6.3;
+    motor_puller_diameter = 20;
     motor_screw_diameter = M3_screw_diameter;
     motor_mounting_diameter = 25; // vzdalenost protejsich sroubu pro pridelani prerotatoru
     motor_sink = 15 - 11.5; // pro zapusteni bez podlozek na motoru...
@@ -112,6 +113,11 @@ module 888_1020(draft = true){
             // otvor pro osu motoru
             translate([motor_distance, 0, -global_clearance/2-10])
                 cylinder(d = motor_axis_diameter, h = plate_size_z + global_clearance + 10, $fn = draft ? 10 : 100);
+
+            // otvor pro  remenici
+            translate([motor_distance, 0, -global_clearance/2-10])
+                cylinder(d = motor_puller_diameter, h = plate_size_z + global_clearance + 10, $fn = draft ? 10 : 100);
+
 
             // Otvory pro pridelani motoru
             translate([motor_distance, 0, -global_clearance/2])
