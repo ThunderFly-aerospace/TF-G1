@@ -154,11 +154,16 @@ module 888_1020(draft = true){
             translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, plate_size_z - hall_thickness])
                 cube([hall_length, hall_width, hall_thickness+global_clearance]);
 
+
+            translate([hall_distance + hall_length/2 + 2, -3,  plate_size_z - hall_thickness+1])
+                        cube([3, 6, 20]);
+
             translate([hall_distance + hall_length/2 + 2, -3, - plate_bearing_center_distance])
-                translate([0,0, plate_size_z+3])
+                translate([0,0, plate_size_z+8])
                     rotate([0,-40,0])
                         translate([0,0,-20])
                             cube([3, 6, 50]);
+
 
             // zapusteni motoru
             //translate([motor_distance, 0, 0])
