@@ -22,7 +22,7 @@ module 888_1020(draft = true){
     motor_puller_diameter = 20;
     motor_screw_diameter = M3_screw_diameter;
     motor_mounting_diameter = 25; // vzdalenost protejsich sroubu pro pridelani prerotatoru
-    motor_sink = 15 - 11.5; // pro zapusteni bez podlozek na motoru...
+    motor_sink = 9.5; // pro zapusteni bez podlozek na motoru...
 
     plate_overlap =  35; // jak moc velký má být přesah směrem k motoru..
 
@@ -95,8 +95,8 @@ module 888_1020(draft = true){
                     translate([motor_distance, 0, -global_clearance/2])
                         rotate([0,0,45]){
                             for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
-                                translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -6.5]){
-                                        cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = 6.5, $fn = draft?10:60);
+                                translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -motor_sink]){
+                                        cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = motor_sink, $fn = draft?10:60);
                                 }
                             }
                         }
