@@ -45,7 +45,7 @@ hole_for_rubber_X = 11;
 hole_for_rubber_Y =31;
 hole_for_rubber_Z = 49;
 thickness = 10;
-position_of_rubber = 30;
+position_of_rubber = 43;
 
 
 //	********************************
@@ -128,10 +128,17 @@ module rotor_pulley(draft)
 
         //magnets
         translate([0, 35, 0])
-            cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
+            cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
 
         translate([0, -35, 0])
-            cylinder(h = 2.1, d = 10.2, $fn = draft ? 10 : 50);
+            cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
+
+        translate([35, 0, 0])
+            cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
+
+        translate([-35, 0, 0])
+            cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
+
 
         rotate([0,0,20])
         {
@@ -334,6 +341,6 @@ module GT2_5mm()
 	}
 
 
-include <../../Parameters.scad>
+include <../Parameters.scad>
 
 rotor_pulley(draft=true);
