@@ -210,7 +210,7 @@ module 888_1015(draft){
                     rotate([0, -90, 90]){
         					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
         					translate([0, 0, M2_5_pocket_depth])
-        						rotate([0, 0, 90+i[2]])
+        						rotate([0, 0, 90])
         							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
                             rotate([0,0,i[2]])
                                 translate([0, -M2_5_nut_diameter/2, M2_5_pocket_depth])
@@ -227,19 +227,22 @@ module 888_1015(draft){
                 translate([-bearing_efsm_h/2, -bearing_efsm_h/2, -bearing_efsm_a1])
                     cube([bearing_efsm_h, bearing_efsm_h, 30]);
 
-                translate([0, 0, -20])
+                translate([0, 0, -18+0.3])
                     cylinder(h=15 + global_clearance, d=bearing_efsm_db);
 
-                for (i=[[bearing_efsm_m/2, bearing_efsm_m/2, -25], [-bearing_efsm_m/2, bearing_efsm_m/2, -25], [-bearing_efsm_m/2, -bearing_efsm_m/2, -25], [bearing_efsm_m/2, -bearing_efsm_m/2, -25]]) {
-                    translate(i){
-                        cylinder(h = 50, d = M4_screw_diameter, $fn = draft ? 50 : 100);
-                        cylinder(h = M4_nut_height+8, d = M5_nut_diameter, $fn = 6);
+                for (i=[[bearing_efsm_m/2, bearing_efsm_m/2, -25, 0], [-bearing_efsm_m/2, bearing_efsm_m/2, -25, 0], [-bearing_efsm_m/2, -bearing_efsm_m/2, -25, 1], [bearing_efsm_m/2, -bearing_efsm_m/2, -25, 1]]) {
+                    translate(i+[0,0,10]){
+                        cylinder(h = 30, d = M5_screw_diameter, $fn = draft ? 50 : 100);
+                        cylinder(h = M5_nut_height, d = M5_nut_diameter, $fn = 6);
+                        rotate([0, 0, i[3]*180]) translate([-M5_nut_diameter/2, 0, 0]) cube([M5_nut_diameter, 20, M5_nut_height]);
+                        translate([0, 0, -10-3]) cylinder(h = 10, d = M5_screw_diameter, $fn = draft ? 50 : 100);
+                        translate([0, 0, -10+7.3]) cylinder(h = 2.7-0.3, d = M5_screw_diameter, $fn = draft ? 50 : 100);
                     }
                 }
 
                 // montazni otvor
-                translate([-30/2, -30/2, -bearing_efsm_a1-20])
-                    cube([30, 30, 10]);
+                translate([-30/2-50, -30/2, -bearing_efsm_a1-20-4])
+                    cube([30+50, 30, 13]);
 
             }
 
@@ -247,15 +250,15 @@ module 888_1015(draft){
 			rotate([0,rake_angle,0])
 				union(){
 				//otvor pro klíč na matku nosníku rotoru
-					translate([-M5_nut_diameter/2-35, M5_nut_diameter/2, - key_height*2.5])
-						cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2]);
+					//translate([-M5_nut_diameter/2-35, M5_nut_diameter/2, - key_height*2.5])
+					//	cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2]);
 		}
 
 
 
         //otvor pro klíč k přírubě
-		translate([- global_clearance - width/2 + 10 -M5_nut_diameter/2-30, M5_nut_diameter/2 -flange_depth/2 - global_clearance, height - key_height*4.5])
-			cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2.3]);
+		//#translate([- global_clearance - width/2 + 10 -M5_nut_diameter/2-30, M5_nut_diameter/2 -flange_depth/2 - global_clearance, height - key_height*4.5])
+		//	cube([key_width + M5_nut_diameter + 20, key_depth - M5_nut_diameter, key_height*2.3]);
 
 	}
 
@@ -270,4 +273,5 @@ module 888_1015(draft){
 difference(){
     888_1015(draft);
     cube(500);
+    //translate([-250,-250,-460]) cube(500);
 }

@@ -19,9 +19,10 @@ module 888_1020(draft = true){
     motor_distance = 79.03; // vzdalenost prerotatoru od hlavni pos_y
     motor_diameter = 35+2;
     motor_axis_diameter = 6.3;
+    motor_puller_diameter = 20;
     motor_screw_diameter = M3_screw_diameter;
     motor_mounting_diameter = 25; // vzdalenost protejsich sroubu pro pridelani prerotatoru
-    motor_sink = 15 - 11.5; // pro zapusteni bez podlozek na motoru...
+    motor_sink = 9.5; // pro zapusteni bez podlozek na motoru...
 
     plate_overlap =  35; // jak moc velký má být přesah směrem k motoru..
 
@@ -94,8 +95,8 @@ module 888_1020(draft = true){
                     translate([motor_distance, 0, -global_clearance/2])
                         rotate([0,0,45]){
                             for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
-                                translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -6.5]){
-                                        cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = 6.5, $fn = draft?10:60);
+                                translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -motor_sink]){
+                                        cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = motor_sink, $fn = draft?10:60);
                                 }
                             }
                         }
@@ -113,6 +114,11 @@ module 888_1020(draft = true){
             translate([motor_distance, 0, -global_clearance/2-10])
                 cylinder(d = motor_axis_diameter, h = plate_size_z + global_clearance + 10, $fn = draft ? 10 : 100);
 
+            // otvor pro  remenici
+            translate([motor_distance, 0, -global_clearance/2-10])
+                cylinder(d = motor_puller_diameter, h = plate_size_z + global_clearance + 10, $fn = draft ? 10 : 100);
+
+
             // Otvory pro pridelani motoru
             translate([motor_distance, 0, -global_clearance/2])
                 rotate([0,0,45]){
@@ -126,30 +132,44 @@ module 888_1020(draft = true){
                     }
                 }
 
-            // diry pro pridelani kloubku
+            // diry pro pripojeni tahla k servu
             translate([servo_join_x, -servo_join_y/2 + 20, -plate_size_z/2])
                 rotate([90, 0, 0])
-                    cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
+                    cylinder(d = M3_screw_diameter, h=50, $fn = draft ? 10 : 30);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, -servo_join_y/2 + 5, plate_size_z*-2.5 + M2_5_nut_height])
-                cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z*2]);
+            translate([servo_join_x, -servo_join_y/2 + 5, -plate_size_z/2])
+                rotate([-90, 0, 0])
+                    cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
+
+
+            translate([servo_join_x, -servo_join_y/2 + 5,  -M3_nut_pocket/2 - plate_size_z/2])
+                cube([plate_size_z*5, M3_nut_height, M3_nut_pocket]);
 
             translate([servo_join_x, servo_join_y/2 - 20, -plate_size_z/2])
                 rotate([-90, 0, 0])
-                    cylinder(d = M2_5_screw_diameter, h=100, $fn = draft ? 10 : 30);
+                    cylinder(d = M3_screw_diameter, h=50, $fn = draft ? 10 : 30);
 
-            translate([servo_join_x - M2_5_nut_pocket/2, servo_join_y/2 - M2_5_nut_height - 5, plate_size_z*-2.5 + M2_5_nut_height])
-                cube([M2_5_nut_pocket, M2_5_nut_height, plate_size_z*2]);
+            translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, -plate_size_z/2])
+                rotate([-90, 0, 0])
+                    cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
+
+            translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, -M3_nut_pocket/2 - plate_size_z/2])
+                cube([plate_size_z*5, M3_nut_height, M3_nut_pocket]);
 
             //Otvor na hallovu sondu
             translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, plate_size_z - hall_thickness])
                 cube([hall_length, hall_width, hall_thickness+global_clearance]);
 
+
+            translate([hall_distance + hall_length/2 + 2, -3,  plate_size_z - hall_thickness+1])
+                        cube([3, 6, 20]);
+
             translate([hall_distance + hall_length/2 + 2, -3, - plate_bearing_center_distance])
-                translate([0,0, plate_size_z+3])
+                translate([0,0, plate_size_z+8])
                     rotate([0,-40,0])
                         translate([0,0,-20])
                             cube([3, 6, 50]);
+
 
             // zapusteni motoru
             //translate([motor_distance, 0, 0])
