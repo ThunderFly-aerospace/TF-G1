@@ -2,7 +2,7 @@ draft = true;
 
 module 888_3014(draft){
 
-zmenseni = 0.2;
+zmenseni = 0.2;	//zmenšení šířky víčka
 	difference(){
 
 				union(){
@@ -42,6 +42,35 @@ zmenseni = 0.2;
 											rotate([0,90,0])
 												cylinder(h = 15 + global_clearance, r = Servo_screw/2, $fn = draft ? 50 : 100);
 								}
+				//podpora
+					translate([-6,-4.65, - 6.35])
+						color([0,0.9,0])
+							cube ([12,0.9,37.8]);
+
+					translate([-5,-4.65,-3.4])
+						color([0,0.9,0])
+							cube ([3.55,9.1,0.8]);
+
+					translate([-5,-4.65,-4.5])
+						color([0,0.9,0])
+							cube ([3.55,10.4,0.8]);
+
+					translate([-5,-4.65,-2.3])
+						color([0,0.9,0])
+							cube ([3.55,10.4,0.8]);
+
+					translate([-5,-4.65,-3.4 + 28.5])
+						color([0,0.9,0])
+							cube ([5.4,9.1,0.8]);
+
+					translate([-5,-4.65,-4.5 + 28.5])
+						color([0,0.9,0])
+							cube ([5.4,10.4,0.8]);
+
+					translate([-5,-4.65,-2.3 + 28.5])
+						color([0,0.9,0])
+							cube ([5.4,10.4,0.8]);
+
 				}
 		//otvor pro šroub a matku ve víčku
 		translate([-5 - global_clearance/2, 2 + 2 + 1.8/2 + Servo_screw/2 + 0.2,-2  - 1])
