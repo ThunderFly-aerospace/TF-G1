@@ -1,4 +1,4 @@
-
+﻿
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
 main_tube_inner_diameter = 23.05;
@@ -42,6 +42,10 @@ thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
 
+
+//Square nut for M6 [mm]
+M6_square_nut_length = 10;
+M6_square_nut_height = 3.2;
 
 //Screw diameter and nut for M10 [mm]
 M10_screw_diameter=10.4;
