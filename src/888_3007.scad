@@ -39,7 +39,7 @@ module 888_3006(draft){
             rotate([0, 0, i*90])
                 translate([g3_0_srcew_dist, 0, 30-18-5])
                     rotate([0,0,30])
-                        cylinder(h=20, d=M6_nut_diameter, $fn=6, $fn=6);
+                        cylinder(h=20, d=M6_nut_diameter, $fn=6);
         }
     }
 }
