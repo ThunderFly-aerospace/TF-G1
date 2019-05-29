@@ -19,7 +19,13 @@ module 888_1026(draft)
     depth = 53.5;   // šířka plechu držáku motoru
     height = main_tube_outer_diameter*2;
     engine_displacement = maximum_printable_size -  1.2 * height;
+    magnet_displacement = 50;
+    magnet_vertical_position = -20; 
     wall_thickness = 5;
+    screw_length = 30;
+    magnet_diameter = 75;
+    distance_between_screws = 42.5;
+
 
     difference (){
         union(){
@@ -30,6 +36,11 @@ module 888_1026(draft)
                 translate([engine_offset,0,engine_displacement])
                     rotate([0, engine_angle,0])
                         cylinder(h = height, d = engine_diameter + 2*wall_thickness,  $fn = draft ? 100 : 200);
+
+                translate([magnet_vertical_position, 0, magnet_displacement])
+                    rotate([0, 90, 0])
+                        cylinder(d = magnet_diameter, h = 5, $fn = draft?50:100);
+
            }
 
             translate([engine_offset,0, engine_displacement])
@@ -38,6 +49,22 @@ module 888_1026(draft)
                         cylinder(h = wall_thickness, d1 = engine_diameter + 2*wall_thickness, d2 = engine_diameter + wall_thickness,  $fn = draft ? 100 : 200);
 
        }
+
+
+        translate([magnet_vertical_position, - distance_between_screws/2, magnet_displacement]) 
+            rotate([0, 90, 0])
+            {
+                cylinder(d = M4_screw_diameter, h = 10 + global_clearance, $fn=50);
+                translate([0,0,5])
+                   cylinder(d = M4_nut_diameter, h = 50 * M4_nut_height, $fn = 6);
+            }
+        translate([magnet_vertical_position,distance_between_screws/2, magnet_displacement])
+            rotate([0, 90, 0])
+            { 
+                cylinder(d = M4_screw_diameter, h = 10 + global_clearance, $fn = 50);
+                translate([0,0,5])
+                    cylinder(d = M4_nut_diameter, h = 50 * M4_nut_height, $fn = 6);
+            }
 
 
         translate([engine_offset,0,engine_displacement])
