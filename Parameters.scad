@@ -20,9 +20,9 @@ rotor_blade_depth = 50;     // hloubka rotorového listu
 
 // nastavení parametrů motoru
 
-engine_angle = -8;
+engine_angle = 0;
 engine_diameter = 55;
-engine_offset = 55;
+engine_offset = 66;
 
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
