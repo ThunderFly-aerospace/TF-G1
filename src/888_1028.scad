@@ -1,0 +1,38 @@
+fork_wheel_width = 50 ;
+fork_thickness = 20;
+fork_width = 10 ;
+fork_hole_diameter = 10 ;
+length = 120;
+
+pipe_diameter = 8;
+pipe_holder_length = 20;
+pipe_holder_thickness = pipe_diameter/2+3;
+
+pipe_holder1_pos = 10;
+pipe_holder2_pos = 50;
+pipe_holder_space =3;
+
+M3_screw_diameter = 3.2;
+M3_nut_height = 2.7;
+M3_nut_diameter = 6.6;
+M3_screw_head_height = 3;
+M3_screw_head_diameter = M3_nut_diameter;
+
+
+
+
+
+difference() {
+    translate([pipe_holder1_pos,fork_wheel_width/2+fork_width, 0])
+      cube ([pipe_holder_length, pipe_holder_thickness, fork_thickness]);
+    rotate ([0,90,0])
+      translate([-fork_thickness/2, fork_wheel_width/2+fork_width+pipe_diameter/2+pipe_holder_space, 0])
+        cylinder(h=length, d=pipe_diameter, $fn=50);
+    rotate ([90,0,0,])
+      translate([pipe_holder1_pos+pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
+        #cylinder (h=fork_wheel_width, d=M3_screw_diameter, $fn=50);
+        rotate ([90,0,0,])
+          translate([pipe_holder1_pos+pipe_holder_length/2,fork_thickness/2,-(fork_wheel_width/2+fork_width+M3_screw_head_height)])
+            cylinder (h=fork_width, d=M3_screw_head_diameter, $fn=50);
+
+}
