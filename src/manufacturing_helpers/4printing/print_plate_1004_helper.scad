@@ -1,6 +1,6 @@
-include <../../Parameters.scad>
+include <../../../Parameters.scad>
 
-use <../666_1004.scad>
+use <../../666_1004.scad>
 
 draft = false;
 
