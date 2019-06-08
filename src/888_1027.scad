@@ -2,7 +2,7 @@ fork_wheel_width = 50 ;
 fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;
-length = 120;
+length = 100;
 
 pipe_diameter = 8;
 pipe_holder_length = 20;

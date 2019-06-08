@@ -1,6 +1,8 @@
 # TF-G1 UAV autogyro
 
-![TF-G1 porototype](./docs/img/TF-G1_runway.JPG "TF-G1 autogiro sitting on the test runway")
+![TF-G1 in flight](./docs/img/TF-G1_flight.JPG "TF-G1 autogyro in flight during testing")
+
+![TF-G1 porototype](./docs/img/TF-G1_runway.JPG "TF-G1 autogyro sitting on the test runway")
 
 The TF-G1 autogyro created by ThunderFly s.r.o. is a [unmanned aerial vehicle (UAV)](https://en.wikipedia.org/wiki/Unmanned_aerial_vehicle) designed to be operable in almost any weather. 
 The main features of that design are:

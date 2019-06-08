@@ -1,6 +1,6 @@
-include <../../Parameters.scad>
+include <../../../Parameters.scad>
 
-use <../666_1026.scad>
+use <../../888_1026.scad>
 
 
-666_1026_drillhelper();
+888_1026_drillhelper();
