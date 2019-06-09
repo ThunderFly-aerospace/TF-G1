@@ -12,11 +12,10 @@ pipe_holder1_pos = 10;
 pipe_holder2_pos = 50;
 pipe_holder_space =3;
 
-M3_screw_diameter = 3.2;
-M3_nut_height = 2.7;
-M3_nut_diameter = 6.6;
-M3_screw_head_height = 3;
+include <../parameters.scad>
+
 M3_screw_head_diameter = M3_nut_diameter;
+
 
 module 888_1027() {
     difference() {
