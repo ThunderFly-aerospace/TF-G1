@@ -32,7 +32,7 @@ Nese 2x servo a kulove lozisko pro rotor.
     bearing_efsm_db = bearing_efsm_08_db;
  */
 
-    rotx = 15/2;
+    rotx = 20/2;
     roty = 10/2;
 
 
@@ -48,22 +48,30 @@ module 888_1015_platesape(draft){
         translate([-1,0,10]) difference(){
             union(){
                     difference(){
-                    intersection(){
-                        rotate([0, 90, 0])
-                            translate([0,0,-50])
-                                cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
+                        union(){
+                            /* intersection(){
+                                rotate([0, 90, 0])
+                                    translate([0,0,-50])
+                                        scale([0.3, 1 ,1])
+                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
 
-                        rotate([90, 0, 0])
-                            translate([0, 0, -50])
-                                cylinder(d=joint_size_x, h=100, , $fn = draft ? 10 : 150);
+                                rotate([90, 0, 0])
+                                    translate([0, 0, -50])
+                                        scale([1, 0.3 ,1])
+                                            cylinder(d=joint_size_x, h=100, , $fn = draft ? 10 : 150);
+                            } */
+                            intersection(){
+                                rotate([0, 90, 0])
+                                    translate([0,0,-50])
+                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
 
-                        rotate([0, 0, 0])
-                            translate([0, 0, -50])
-                                cylinder(d=joint_size_x+12, h=100, , $fn = draft ? 10 : 150);
+                                rotate([90, 0, 0])
+                                    translate([0, 0, -50])
+                                            cylinder(d=joint_size_x, h=100, $fn = draft ? 10 : 150);
 
-
-                        //translate([-joint_size_x/2, -joint_size_y/2, -20])
-                        //    cube([joint_size_x, joint_size_y, 20]);
+                                /* translate([-100, -100, -200])
+                                    cube(200); */
+                            }
                     }
 
             // plošky na svrchní straně
@@ -72,7 +80,7 @@ module 888_1015_platesape(draft){
                             [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                         translate([0, 0, bearing_efsm_ag - bearing_efsm_a1-1])
                         rotate(i)
-                            translate([-50, -50, 0])
+                            translate([-50, -50, 1])
                                 cube([100, 100, 50]);
                     }
                 }
