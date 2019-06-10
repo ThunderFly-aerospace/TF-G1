@@ -508,3 +508,20 @@ g3_9_height = 145;
 
 servo_20kg_width = 21;   //šřka otvoru pro servo
 servo_20kg_height = 42;  //výška otvoru pro servo
+
+
+//male servo
+servo_height = 23.2;
+servo_width = 12.2;
+servo_deepth = 30;
+
+//parametry pro serva
+//značení parametrů: https://www.servocity.com/media/wysiwyg/products/servos/hitec-servos/standard_servos/31422S/Standard_Servo_Schematic_2_1_.jpg
+
+//DS313MG
+DS313MG_A = 12.2;
+DS313MG_M = 23.2;
+DS313MG_G = 6;
+DS313MG_J = 38.2;
+DS313MG_H = 20;
+DS313MG_G = 10;
