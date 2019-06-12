@@ -47,20 +47,31 @@ module 888_1015_platesape(draft){
 
         translate([-1,0,10]) difference(){
             union(){
-
-
                     difference(){
-                    intersection(){
-                        rotate([0, 90, 0])
-                            translate([0,0,-50])
-                                cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
+                        union(){
+                            /* intersection(){
+                                rotate([0, 90, 0])
+                                    translate([0,0,-50])
+                                        scale([0.3, 1 ,1])
+                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
 
-                        rotate([90, 0, 0])
-                            translate([0, 0, -50])
-                                cylinder(d=joint_size_x, h=100, , $fn = draft ? 10 : 150);
+                                rotate([90, 0, 0])
+                                    translate([0, 0, -50])
+                                        scale([1, 0.3 ,1])
+                                            cylinder(d=joint_size_x, h=100, , $fn = draft ? 10 : 150);
+                            } */
+                            intersection(){
+                                rotate([0, 90, 0])
+                                    translate([0,0,-50])
+                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
 
-                        //translate([-joint_size_x/2, -joint_size_y/2, -20])
-                        //    cube([joint_size_x, joint_size_y, 20]);
+                                rotate([90, 0, 0])
+                                    translate([0, 0, -50])
+                                            cylinder(d=joint_size_x, h=100, $fn = draft ? 10 : 150);
+
+                                /* translate([-100, -100, -200])
+                                    cube(200); */
+                            }
                     }
 
             // plošky na svrchní straně
@@ -69,8 +80,8 @@ module 888_1015_platesape(draft){
                             [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                         translate([0, 0, bearing_efsm_ag - bearing_efsm_a1-1])
                         rotate(i)
-                            translate([-50, -50, 0])
-                                cube(100);
+                            translate([-50, -50, 1])
+                                cube([100, 100, 50]);
                     }
                 }
 
@@ -89,7 +100,8 @@ module 888_1015(draft){
 	plate_thickness = 1.5;
 
 	width = 70;
-	depth = 2*plate_thickness + coupling_depth_666_1026;
+    depth = 2*plate_thickness + coupling_depth_666_1026;
+	depth_pipe = 30;
 	height = 68.5;
 
 	rake_angle = 9;		//úhel horního zkosení
@@ -110,7 +122,7 @@ module 888_1015(draft){
 	key_depth = flange_depth;
 	key_height = M5_nut_height;
 
-    M4_screw_length = 45;
+    M4_screw_length = 40;
 
 	M5_screw_length = 19;
 	M2_5_screw_length = 10;
@@ -122,8 +134,15 @@ module 888_1015(draft){
 
             difference(){
                 hull(){
-                    translate([-width/2,-depth/2,0])
-                        cube ([width, depth, 0.1]);
+                    hull() {
+                        translate([0,-depth/2,0])
+                            cube ([width/2, depth, 0.1]);
+                        translate([-width/2, -depth_pipe/2,0])
+                            cube ([width, depth_pipe, 0.1]);
+
+                    }
+                    //translate([-width/2,-depth/2,0])
+                    //    #cube ([width, depth, 0.1]);
                     translate([-width/2-5,-depth/2,height+20])
                         cube ([width+5, depth, 10]);
                 }
@@ -133,15 +152,15 @@ module 888_1015(draft){
                             [rotx, -roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0]]) {
                         rotate(i)
                             translate([-50, -50, 0])
-                                cube(100);
+                                cube([100, 100, 50]);
                 }
             }
 
 
-            #translate([-5,0,height+8])
-                rotate([0, rake_angle, 0])
-                    translate([0,0,0])
-                        sphere(r=3);
+            //#translate([-5,0,height+8])
+            //    rotate([0, rake_angle, 0])
+            //        translate([0,0,0])
+            //            sphere(r=3);
 
             intersection(){
                 translate([-5,0,height])
@@ -169,26 +188,29 @@ module 888_1015(draft){
     			//otvory pro upevnění vertikální trubky
 				translate([0, M4_screw_length / 2, 7.5])
 			        rotate([-90, 0, 0])
-			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+			            cylinder(h = 20, d = 13);
 
-				translate([0, -M4_screw_length / 2, 7.5])
+			    translate([0, -M4_screw_length / 2, 7.5])
 			        rotate([90, 0, 0])
-                          cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+                          cylinder(h = 20, d = M4_nut_diameter, $fn = 6);
 
                 translate([0, M4_screw_length /2, 42.5])
 			        rotate([-90, 0, 0])
-			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+			            cylinder(h = 20, d = 13);
 
 				translate([0, -M4_screw_length /2, 42.5])
 			        rotate([90, 0, 0])
-			            cylinder(h = 100, d = M4_nut_diameter, $fn = 6);
+			            cylinder(h = 20, d = M4_nut_diameter, $fn = 6);
 
 			}
 		//otvory pro serva
 		translate([width/2 - servo_width - 4,-depth/2 - global_clearance/2,7.5])
 			cube([servo_width, depth + global_clearance,servo_height]);
+		//otvory pro odlehceni za servy
+		translate([width/4, -20, 7.5 + 5* global_clearance])
+			cube([servo_width, 40, servo_height - 10*global_clearance]);
 		//otvor pro kabely od serv
-		translate([width/2 - servo_width + servo_width/4- 4,-20,-global_clearance])
+		translate([width/2-servo_width + servo_width/4-4, -20, -global_clearance])
 			cube([servo_width/2,40,20]);
 		//zkosení otvoru pro kabely od servo
 		translate([width/2 - servo_width + servo_width/4- 4,-3,0])

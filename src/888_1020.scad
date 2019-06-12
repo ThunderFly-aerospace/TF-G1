@@ -185,12 +185,10 @@ module 888_1020(draft = true){
             translate([0, 0, 1.7])
             intersection(){
                 rotate([90,0,0])
-                    translate([0, 0, -100])
-                        cylinder(h=200, d=joint_size_x, $fn = draft ? 20 : 200);
+                        cylinder(h=100, d=joint_size_x, $fn = draft ? 20 : 200, center = true);
                         //#cylinder(h=200, d=6, $fn = draft ? 100 : 100);
                 rotate([0,90,0])
-                    translate([0, 0, -100])
-                        cylinder(h=200, d=joint_size_y, $fn = draft ? 20 : 200);
+                        cylinder(h=100, d=joint_size_y, $fn = draft ? 20 : 200, center = true);
             }
         }
 
