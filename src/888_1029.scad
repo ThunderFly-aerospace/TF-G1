@@ -1,6 +1,6 @@
 //Navrh disku pro mechove kolo
 
-include <../parameters.scad>
+include <../Parameters.scad>
 
 module 888_1029 () {
     difference() {
