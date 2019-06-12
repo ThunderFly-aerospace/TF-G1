@@ -36,8 +36,17 @@ coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
 608_bearing_outer_diameter = 22.3;
+608_bearing_inner_diameter = 8-0.3;
 608_bearing_thickness = 7.1;
 
+//parametry mechoveho kola
+wheel_inner_diameter = 36;
+wheel_inner_thickness = 28;
+wheel_outer_diameter = 108;
+
+wheel_disc_diameter = 51;
+wheel_disc_upper_thickness = 3;
+wheel_disc_upper_difference = 7;
 
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
