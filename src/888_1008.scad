@@ -82,10 +82,10 @@ module 888_1008_D(){
 module 888_1008_E(){
 
 
-    curvedPipe([[0,0,175 +19],        //body ohybu
-                [radius_undercarriage + 45 - tube_for_undercarriage_outer_diameter/2,0,175 + 19],
-                [radius_undercarriage + 45 + vzdalenost_y,+ vzdalenost_x*2,0], 
-                [ +radius_undercarriage + 45 + vzdalenost_y, 110, 0],
+    curvedPipe([[0,0,200],        //body ohybu
+                [radius_undercarriage + 230 - tube_for_undercarriage_outer_diameter/2,0,200],
+                [radius_undercarriage + 230 + vzdalenost_y,+ vzdalenost_x,0], 
+                [ +radius_undercarriage  + 230+ vzdalenost_y, 110 , 0],
                                 ],
 
                 3,
@@ -101,10 +101,10 @@ module 888_1008_E(){
 
 module 888_1008_F(){
 
-    curvedPipe([[0,0,175 + 19],        //body ohybu
-                [- radius_undercarriage - 45 + tube_for_undercarriage_outer_diameter/2,0,175 + 19],
-                [- radius_undercarriage - 45 - vzdalenost_y,+ vzdalenost_x*2,0],
-                [ -radius_undercarriage - 45 - vzdalenost_y, 110, 0],
+    curvedPipe([[0,0,200],        //body ohybu
+                [- radius_undercarriage - 230 + tube_for_undercarriage_outer_diameter/2,0,200],
+                [- radius_undercarriage - 230 - vzdalenost_y,+ vzdalenost_x,0],
+                [ -radius_undercarriage - 230 - vzdalenost_y, 110, 0],
 
                ],
                 3,

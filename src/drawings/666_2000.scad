@@ -40,11 +40,21 @@ module 666_2000(draft){
 			rotate([-90,0,0])
 					666_1032(draft);
 
-	////
+	////sestava rotorové hlavy
+	
 		translate([main_pilon_position + width_666_1026 - main_tube_outer_diameter/2 - thickness_between_tubes,height_of_vertical_tube + main_tube_outer_diameter/2 + thickness_between_tubes - height_666_1026, 0])
 			rotate([-90,0,0])
 				color([0,0.7,0])
-					888_1015(draft);
+					import ("D:/GIT/TF-G1/STL/888_1101.stl");
+
+	////ozubená řemenice
+	translate([main_pilon_position + width_666_1026 - main_tube_outer_diameter/2 - thickness_between_tubes,height_of_vertical_tube + main_tube_outer_diameter/2 + thickness_between_tubes +  height_666_1026 - 5, 0])
+			rotate([-90,0,-8])
+				color([1,0,1])
+						import ("D:/GIT/TF-G1/STL/rotor_pulley.stl");
+
+
+
 
 	////
 	//akumulátory s držáky
@@ -72,6 +82,7 @@ module 666_2000(draft){
 			rotate([-90,0,90])
 				color([0.4,0,0.8])
 					888_1026(draft);
+					
 
 	////
 		translate([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2,0])
@@ -108,24 +119,24 @@ module 666_2000(draft){
 
 	////
 	//podvozkové trubky
-		translate([second_undercarriage_hole,- 175 - 19 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2])
+		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 - 120])
 			rotate([-90,-90,0])
 				color([1,0,0])
 					888_1008_E();
 
 
-		translate([second_undercarriage_hole,- 175 - 19 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2])
+		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 + 120])
 			rotate([-90,-90,0])
 				color([1,0,0])
 					888_1008_F();
 
 	////
 	//úchytky na podvozková kolečka
-		translate([second_undercarriage_hole + vzdalenost_x*2.1,- 175 - 19 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 - 90])
+		translate([second_undercarriage_hole + vzdalenost_x,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2])
 			rotate([0,90,0])
 					666_1014(draft);
 
-		translate([second_undercarriage_hole + vzdalenost_x*2.1,- 175 - 19 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 + 90])
+		translate([second_undercarriage_hole + vzdalenost_x,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 +vzdalenost_x/2])
 			rotate([0,90,0])
 					666_1014(draft);
 
@@ -186,16 +197,23 @@ module 666_2000(draft){
 
 	//zadní
 		color([0.1,0.1,0.1])
-			translate([8 + second_undercarriage_hole + vzdalenost_x * 2.1,-210 - 19,-length_of_undercarriage_tube_rear/2 - 113])
+			translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2 - 15])
 				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
 					translate ([26,0,0])
 						circle (r = 13, $fn = draft ? 50 : 100);
 
 		color([0.1,0.1,0.1])
-			translate([8 + second_undercarriage_hole + vzdalenost_x * 2.1,-210 - 19,length_of_undercarriage_tube_rear/2 + 113])
+			translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 + vzdalenost_x/2 + 15])
 				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
 					translate ([26,0,0])
 						circle (r = 13, $fn = draft ? 50 : 100);
+
+	//setava rotorové listy
+
+			translate([main_pilon_position + 15,height_of_vertical_tube + height_666_1026 + 50,0])
+				rotate([90,0,-6])
+					666_2300(draft);
+
 }
 
 
@@ -204,6 +222,7 @@ module 666_2000(draft){
 
 rotate ([90,0,0])
 	666_2000(draft);
+
 
 
 
@@ -222,11 +241,13 @@ use <../888_2002.scad>
 use <../888_2004.scad>
 use <../888_2005.scad>
 use <../888_2006.scad>
-use <../888_2007.scad>
 use <../666_1028.scad>
 use <../666_1006.scad>
 use <../888_1008.scad>
 use <../666_1014.scad>
+use <./../drawings/666_2300.scad>
+
 
 use <./../lib/naca4.scad>
 include <../../Parameters.scad>
+

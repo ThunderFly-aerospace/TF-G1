@@ -133,7 +133,7 @@ height_of_vertical_tube = 275; //278mm je změřená délka trubky.
 //délka hlavní dlouhé trubky
 length_of_main_tube = 820;
 length_of_undercarriage_tube_front = 150;
-length_of_undercarriage_tube_rear = 500;
+length_of_undercarriage_tube_rear = 320; //500;
 
 ribbon_width = 5; // šířka vyztužovacích lemů.
 
@@ -224,8 +224,8 @@ GPS_middle_length = GPS_diameter + GPS_inner_length;      //Střední rozměr
 ////podzvozek
 
 radius_undercarriage = 25;
-vzdalenost_x = tan(20) * 131;
-vzdalenost_y = (131 - radius_undercarriage)/tan(79);
+vzdalenost_x = tan(20) * 200;
+vzdalenost_y = (200 - radius_undercarriage)/tan(79);
 uhel_y = 90 - 20;
 uhel_x = 90 - 79;
 
