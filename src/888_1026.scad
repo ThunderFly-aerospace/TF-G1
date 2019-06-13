@@ -2,6 +2,7 @@ DOC_SCALING_FACTOR = 100;
 DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
+include <../Parameters.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;  
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;   
@@ -26,6 +27,16 @@ module 888_1026(draft)
     magnet_diameter = 75;
     distance_between_screws = 42.5;
 
+    //vypouštěcí zařízení
+    vlecne_zarizeni = true;
+    prumer = 2;
+    vyska = 5;
+    fix_screw_distance = 3; //vzdálenost kotvícího šroubku od serva
+    servo_overhang = 10;
+    servo_lever = 15; //délka páky serva od středu otáčení ke konci
+    distance_shift = (maximum_printable_size-1.2*height+height)-(magnet_displacement+magnet_diameter/2);
+    distance_height = (engine_offset-wall_thickness-engine_diameter/2)-magnet_vertical_position;
+    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter-magnet_vertical_position)/distance_height-13;
 
     difference (){
         union(){
@@ -41,14 +52,17 @@ module 888_1026(draft)
                     rotate([0, 90, 0])
                         cylinder(d = magnet_diameter, h = 5, $fn = draft?50:100);
 
-           }
-
+            }
             translate([engine_offset,0, engine_displacement])
                 rotate([0, engine_angle,0])
                     translate([0,0, height])
                         cylinder(h = wall_thickness, d1 = engine_diameter + 2*wall_thickness, d2 = engine_diameter + wall_thickness,  $fn = draft ? 100 : 200);
 
-       }
+            if(vlecne_zarizeni) {
+                translate([width/2, -2.49, 0])
+                    cube([(main_tube_outer_diameter-vyska/2+servo_lever-DS313MG_A/2+DS313MG_A)-width/2, DS313MG_H+DS313MG_G, 50]);
+            }
+        }
 
 
         translate([magnet_vertical_position, - distance_between_screws/2, magnet_displacement]) 
@@ -115,7 +129,7 @@ module 888_1026(draft)
         	
     	//tube
     	translate([0,0,- global_clearance/2])
-    	   cylinder(h = height + global_clearance, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+    	   cylinder(h = height*100, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
 
     	//screw
     	translate([0,depth/2 + global_clearance/2,7.5])
@@ -141,6 +155,60 @@ module 888_1026(draft)
         translate([0,20,42.5])
            rotate([-90,0,0])
                cylinder(h = depth, d = M4_nut_diameter, $fn = 6);
+
+
+        //vypouštěcí zařízneí
+        if(vlecne_zarizeni) {
+            translate([main_tube_outer_diameter, 0, 0])
+                hull() {
+                    translate([vyska/2-prumer/2, 0, 5+servo_width])
+                        cylinder(d=prumer, h=1000, $fn=15);
+                    translate([vyska/-2-prumer/-2, 0, 5+servo_width])
+                        cylinder(d=prumer, h=1000, $fn=15);
+                }
+
+            translate([main_tube_outer_diameter, 0, 0])
+                hull() {
+                    translate([vyska/2-prumer/2, 0, 5+servo_width+50])
+                        cylinder(d=prumer, h=1000, $fn=15);
+                    translate([vyska/-2-prumer/-2, 0, 5+servo_width+100])
+                        cylinder(d=prumer*10, h=1000, $fn=35);
+                }
+
+
+
+            translate([main_tube_outer_diameter, 0, hole_distance])
+                rotate([90, 0, 0])
+                    cylinder(d=M3_screw_diameter, h=100, $fn=20, center=true);
+
+            translate([main_tube_outer_diameter, -15, hole_distance])
+                rotate([90, 0, 0])
+                    cylinder(d=M3_nut_diameter, h=20, $fn=6);
+            
+            translate([main_tube_outer_diameter, 15, hole_distance])
+                rotate([-90, 0, 0])
+                    cylinder(d=M3_nut_diameter, h=20, $fn=20);
+
+            translate([main_tube_outer_diameter-vyska/2+servo_lever, 0, (DS313MG_J-DS313MG_M)/2+DS313MG_M-servo_overhang+fix_screw_distance])
+                rotate([-90, 0, 0])
+                    cylinder(d=M2_5_screw_diameter, h=100, $fn=15);
+
+            translate([main_tube_outer_diameter-vyska/2+servo_lever, 2.5+DS313MG_G, (DS313MG_J-DS313MG_M)/2+DS313MG_M-servo_overhang+fix_screw_distance])
+                rotate([-90, 0, 0])
+                    cylinder(d=M2_5_nut_diameter, h=M2_5_nut_height, $fn=6);
+
+            translate([main_tube_outer_diameter-vyska/2+servo_lever, 2.5+DS313MG_G, (DS313MG_J-DS313MG_M)/2+DS313MG_M-servo_overhang-M2_5_nut_pocket/2+fix_screw_distance])
+                cube([100, M2_5_nut_height, M2_5_nut_pocket]);
+
+            translate([main_tube_outer_diameter-vyska/2+servo_lever-DS313MG_A/2, -2.5, -servo_overhang])
+                cube([DS313MG_A, DS313MG_G, DS313MG_J]);
+            
+            translate([main_tube_outer_diameter-vyska/2+servo_lever-DS313MG_A/2, 0, -servo_overhang])
+                cube([DS313MG_A+0.1, 100, (DS313MG_J-DS313MG_M)/2+DS313MG_M]);
+
+            translate([main_tube_outer_diameter-vyska/2, -2.5, -servo_overhang])
+                cube([servo_lever, 5, DS313MG_J]);
+        }
     }
 }
 
@@ -231,6 +299,3 @@ module 888_1026_drillhelper_doc(){
 888_1026(draft);
 
 //666_1026_drillhelper(height = 60, height_of_cap_cylinder = 2);
-
-
-include <../Parameters.scad>

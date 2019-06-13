@@ -36,8 +36,17 @@ coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
 608_bearing_outer_diameter = 22.3;
+608_bearing_inner_diameter = 8-0.3;
 608_bearing_thickness = 7.1;
 
+//parametry mechoveho kola
+wheel_inner_diameter = 36;
+wheel_inner_thickness = 28;
+wheel_outer_diameter = 108;
+
+wheel_disc_diameter = 51;
+wheel_disc_upper_thickness = 3;
+wheel_disc_upper_difference = 7;
 
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
@@ -508,3 +517,20 @@ g3_9_height = 145;
 
 servo_20kg_width = 21;   //šřka otvoru pro servo
 servo_20kg_height = 42;  //výška otvoru pro servo
+
+
+//male servo
+servo_height = 23.2;
+servo_width = 12.2;
+servo_deepth = 30;
+
+//parametry pro serva
+//značení parametrů: https://www.servocity.com/media/wysiwyg/products/servos/hitec-servos/standard_servos/31422S/Standard_Servo_Schematic_2_1_.jpg
+
+//DS313MG
+DS313MG_A = 12.2;
+DS313MG_M = 23.2;
+DS313MG_G = 6;
+DS313MG_J = 38.2;
+DS313MG_H = 20;
+DS313MG_G = 10;

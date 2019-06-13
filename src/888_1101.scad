@@ -4,8 +4,8 @@ include <../Parameters.scad>
 rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5
 
-//rotx = 0;
-roty = 0;
+rotx = 7.5;
+roty = 5;
 
 use <888_1015.scad>
 use <888_1020.scad>
@@ -67,10 +67,10 @@ difference(){
     color([0.2, 0.8, 0.2, 0.9])
         translate([-4.5,0, 78])
             rotate([rotx,9+roty,0])
-                translate([0,0,-1])
+                translate([0,0,-2])
                     888_1020();
 
     }
-    translate([-250, 0, 0]) cube(500);
+    //translate([-250, 0, 0]) cube(500);
     //cube(500);
 }
