@@ -16,7 +16,7 @@ module 888_1029 (nut = true) {
             //diry na srouby
             rotate([0,0,120*i])
                 translate([wheel_inner_diameter/2-M3_screw_diameter+0.5, 0, -1])
-                    cylinder(h=wheel_inner_thickness, d=M3_screw_diameter, $fn=50);
+                    cylinder(h=wheel_inner_thickness, d=M3_screw_diameter, $fn=60);
 
             //diry na matice
             rotate([0,0,120*i])
@@ -25,8 +25,8 @@ module 888_1029 (nut = true) {
         }
 
         //dira na M5 sroub
-        translate([0, 0, -1])
-            cylinder (h=wheel_inner_thickness, d=M5_screw_diameter, $fn=50);
+        translate([0, 0, 608_bearing_thickness/2+global_clearance])
+            cylinder (h=wheel_inner_thickness, d=608_bearing_outer_diameter-6, $fn=60);
 
         //dira pro lozisko 608
         translate([0, 0, -608_bearing_thickness/2])
