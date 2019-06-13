@@ -294,6 +294,6 @@ module 888_1015(draft){
 
 difference(){
     888_1015(draft);
-    cube(500);
+    //cube(500);
     //translate([-250,-250,-460]) cube(500);
 }
