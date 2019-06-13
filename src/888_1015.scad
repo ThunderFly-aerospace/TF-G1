@@ -80,7 +80,7 @@ module 888_1015_platesape(draft){
                             [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                         translate([0, 0, bearing_efsm_ag - bearing_efsm_a1-1])
                         rotate(i)
-                            translate([-50, -50, 1])
+                            translate([-50, -50, 0])
                                 cube([100, 100, 50]);
                     }
                 }
@@ -146,7 +146,7 @@ module 888_1015(draft){
                     translate([-width/2-5,-depth/2,height+20])
                         cube ([width+5, depth, 10]);
                 }
-                translate([-5,0,height+bearing_efsm_a1])
+                translate([-5,0,height+bearing_efsm_a1-5])
                     for (i=[[rotx, rake_angle, 0], [-rotx, rake_angle, 0], [0, roty + rake_angle, 0], [0, -roty + rake_angle, 0],
                             [rotx, roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [rotx, roty + rake_angle, 0], [rotx, -roty + rake_angle, 0],
                             [rotx, -roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0]]) {
