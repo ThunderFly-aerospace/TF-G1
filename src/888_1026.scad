@@ -161,17 +161,17 @@ module 888_1026(draft)
         if(vlecne_zarizeni) {
             translate([main_tube_outer_diameter, 0, 0])
                 hull() {
-                    translate([vyska/2-prumer/2, 0, 5+servo_width])
+                    translate([vyska/2-prumer/2, 0, 5+DS313MG_A])
                         cylinder(d=prumer, h=1000, $fn=15);
-                    translate([vyska/-2-prumer/-2, 0, 5+servo_width])
+                    translate([vyska/-2-prumer/-2, 0, 5+DS313MG_A])
                         cylinder(d=prumer, h=1000, $fn=15);
                 }
 
             translate([main_tube_outer_diameter, 0, 0])
                 hull() {
-                    translate([vyska/2-prumer/2, 0, 5+servo_width+50])
+                    translate([vyska/2-prumer/2, 0, 5+DS313MG_A+50])
                         cylinder(d=prumer, h=1000, $fn=15);
-                    translate([vyska/-2-prumer/-2, 0, 5+servo_width+100])
+                    translate([vyska/-2-prumer/-2, 0, 5+DS313MG_A+100])
                         cylinder(d=prumer*10, h=1000, $fn=35);
                 }
 
@@ -192,6 +192,10 @@ module 888_1026(draft)
             translate([main_tube_outer_diameter-vyska/2+servo_lever, 0, (DS313MG_J-DS313MG_M)/2+DS313MG_M-servo_overhang+fix_screw_distance])
                 rotate([-90, 0, 0])
                     cylinder(d=M2_5_screw_diameter, h=100, $fn=15);
+
+            translate([main_tube_outer_diameter-vyska/2+servo_lever, 0, (DS313MG_J-DS313MG_M)/2+DS313MG_M-servo_overhang+fix_screw_distance])
+                rotate([90, 0, 0])
+                    cylinder(d=4, h=100, $fn=15);
 
             translate([main_tube_outer_diameter-vyska/2+servo_lever, 2.5+DS313MG_G, (DS313MG_J-DS313MG_M)/2+DS313MG_M-servo_overhang+fix_screw_distance])
                 rotate([-90, 0, 0])
