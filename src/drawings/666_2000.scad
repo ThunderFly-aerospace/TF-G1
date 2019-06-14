@@ -40,18 +40,6 @@ module 666_2000(draft){
 			rotate([-90,0,0])
 					666_1032(draft);
 
-	////sestava rotorové hlavy
-	
-		translate([main_pilon_position + width_666_1026 - main_tube_outer_diameter/2 - thickness_between_tubes,height_of_vertical_tube + main_tube_outer_diameter/2 + thickness_between_tubes - height_666_1026, 0])
-			rotate([-90,0,0])
-				color([0,0.7,0])
-					import ("D:/GIT/TF-G1/STL/888_1101.stl");
-
-	////ozubená řemenice
-	translate([main_pilon_position + width_666_1026 - main_tube_outer_diameter/2 - thickness_between_tubes,height_of_vertical_tube + main_tube_outer_diameter/2 + thickness_between_tubes +  height_666_1026 - 5, 0])
-			rotate([-90,0,-8])
-				color([1,0,1])
-						import ("D:/GIT/TF-G1/STL/rotor_pulley.stl");
 
 
 
@@ -210,8 +198,8 @@ module 666_2000(draft){
 
 	//setava rotorové listy
 
-			translate([main_pilon_position + 15,height_of_vertical_tube + height_666_1026 + 50,0])
-				rotate([90,0,-6])
+			translate([main_pilon_position + 15,height_of_vertical_tube + height_666_1026 + 25,0])
+				rotate([-90,-90,0])	
 					666_2300(draft);
 
 }
