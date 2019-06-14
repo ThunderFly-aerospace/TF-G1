@@ -1,6 +1,6 @@
 //valec k disku do mechoveho kola
 
-include <../parameters.scad>
+include <../Parameters.scad>
 
 cylinder_1_thickness = 4;
 cylinder_1_diameter = 608_bearing_outer_diameter+2;
