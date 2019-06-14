@@ -3,6 +3,9 @@ include <../Parameters.scad>
 joint_size_x = 60; // delka dorazu podle osy x
 joint_size_y = 45; //delka dorazu podle osy y
 
+rotx = 25/2;
+roty = 10/2;
+
 joint_wall_thickness = 5;
 
 
@@ -17,21 +20,41 @@ module base(){
     difference(){
         union(){
 
-            rotx = 20/2;
-            roty = 10/2;
 
                 difference(){
                 intersection(){
                     rotate([0, 90, 0])
                         translate([0,0,-50])
-                            cylinder(d=joint_size_y, h=100, $fn=60);
+                            cylinder(d=joint_size_y, h=100, $fn=200);
 
                     rotate([90, 0, 0])
                         translate([0, 0, -50])
-                            cylinder(d=joint_size_x, h=100, $fn=60);
+                            cylinder(d=joint_size_x, h=100, $fn=200);
 
-                    //translate([-joint_size_x/2, -joint_size_y/2, -20])
-                    //    cube([joint_size_x, joint_size_y, 20]);
+
+                    rotate([90+rotx/2, 0, 0])
+                        translate([0, 0, -50])
+                            cylinder(d=joint_size_x, h=100, $fn=200);
+
+
+                    rotate([90+rotx, 0, 0])
+                        translate([0, 0, -50])
+                            cylinder(d=joint_size_x, h=100, $fn=200);
+
+
+                    rotate([90-rotx, 0, 0])
+                        translate([0, 0, -50])
+                            cylinder(d=joint_size_x, h=100, $fn=200);
+
+
+                    rotate([0, 90+roty, 0])
+                        translate([0, 0, -50])
+                            cylinder(d=joint_size_y, h=100, $fn=200);
+
+                    rotate([0, 90-roty, 0])
+                        translate([0, 0, -50])
+                            cylinder(d=joint_size_y, h=100, $fn=200);
+
                 }
 
         // plošky na svrchní straně
@@ -39,7 +62,7 @@ module base(){
                         [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                         [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                     rotate(i)
-                        translate([-50, -50, bearing_efsm_ag - bearing_efsm_a1 +1])
+                        translate([-50, -50, bearing_efsm_ag - bearing_efsm_a1])
                             cube(100);
                 }
             }
@@ -58,7 +81,7 @@ module base(){
                         [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                         [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                     rotate(i)
-                        translate([-40, -40, 0])
+                        translate([-40, -40, -5])
                             cube(80);
                 }
             }
@@ -79,15 +102,31 @@ module base(){
 module plate(angle = [10, 10], depth = 5){
     x = joint_size_x + joint_wall_thickness*2;
     y = joint_size_y + joint_wall_thickness*2;
+    wall = 2;
 
-    translate([-x/2,-y/2,5])
-        cube([x, y, 5]);
+
     difference(){
-        translate([-x/2,-y/2,0])
-            cube([x, y, 10]);
+        union(){
+            #translate([-x/2,-y/2, -depth/2])
+                cube([x, y, depth + wall + 2]);
 
-        translate([-joint_size_x/2, -joint_size_y/2, -0.1])
-            cube([joint_size_x, joint_size_y, 10]);
+        }
+        //#translate([-joint_size_x/2, -joint_size_y/2, -0.1])
+        //    cube([joint_size_x, joint_size_y, 10]);
+
+        intersection(){
+
+            translate([-x/2,-y/2, -depth/2])
+                cube([x, y, depth +2]);
+
+            rotate([0, 90, 0])
+                translate([0,0,-50])
+                    cylinder(d=joint_size_y + 0.8, h=100, $fn=200);
+
+            rotate([90, 0, 0])
+                translate([0, 0, -50])
+                    cylinder(d=joint_size_x + 0.8, h=100, $fn=200);
+        }
     }
 }
 
@@ -118,8 +157,12 @@ module plate_part(rotation, depth){
 
 
 union(){
-    base();
-    color([0.7, 0.5, 0.5, 0.5]) rotate([10, -0 , 0]) plate([5,5], 7);
+    //base();
+     difference(){
+        color([0.7, 0.5, 0.5, 0.85]) rotate([10, -5 , 0]) plate([5,5], 10);
+        translate([28, -50, -10]) cube(100);
+        //translate([-50, 20, -10]) cube(100);
+    }
 }
 
 //plate_part([-2,2], 7);
