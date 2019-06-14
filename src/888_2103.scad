@@ -3,7 +3,7 @@
 
 include <../Parameters.scad>
 use <888_1029.scad>
-//use <888_2006.scad>
+use <888_1030.scad>
 
 module wheel_tiere(){
     rotate([90, 0, 0]){
@@ -20,3 +20,5 @@ module wheel_tiere(){
 wheel_tiere();
 translate([0, wheel_inner_thickness/2, 0]) rotate([90, 0, 0]) 888_1029(true);
 translate([0, -wheel_inner_thickness/2, 0]) rotate([-90, 0, 0]) 888_1029(false);
+translate([0, wheel_inner_thickness/2+5, 0]) rotate([90, 0, 0]) 888_1030();
+translate([0, -wheel_inner_thickness/2-5, 0]) rotate([-90, 0, 0]) 888_1030();
