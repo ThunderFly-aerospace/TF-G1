@@ -9,7 +9,7 @@ module 888_1029 (nut = true) {
             cylinder(h=wheel_inner_thickness/2, d=wheel_inner_diameter, $fn=50);
         }
 
-        translate([0, 0, 608_bearing_thickness/2 + wheel_disc_upper_thickness])
+        translate([0, 0, 608_bearing_thickness/2 + wheel_disc_upper_thickness+2])
             cylinder(h=wheel_inner_thickness/2, d=wheel_inner_diameter-M3_nut_diameter-5, $fn=50);
 
         for (i=[0:2]) {
@@ -25,12 +25,12 @@ module 888_1029 (nut = true) {
         }
 
         //dira na M5 sroub
-        translate([0, 0, 608_bearing_thickness/2+global_clearance])
+        translate([0, 0, 608_bearing_thickness+global_clearance])
             cylinder (h=wheel_inner_thickness, d=608_bearing_outer_diameter-6, $fn=60);
 
         //dira pro lozisko 608
-        translate([0, 0, -608_bearing_thickness/2])
-            cylinder(h=608_bearing_thickness, d=608_bearing_outer_diameter, $fn=50);
+        translate([0, 0, -1])
+            cylinder(h=608_bearing_thickness+1, d=608_bearing_outer_diameter, $fn=50);
     }
 }
 
