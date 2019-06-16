@@ -16,7 +16,8 @@ translate([0,0,19.5])
 		union(){
 
 			union(){
-				translate([25,28,6.5])
+				translate([-24.4,40.7,19])
+				rotate([0,180,-20])
 				union(){
 				//list
 				
@@ -31,7 +32,7 @@ translate([0,0,19.5])
 							import ("../../STL/666_1247.stl");
 
 				//kování
-				translate([-33.5 - 33.5/3.4 - 0.6,-15 + 1,0])
+				translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,13])
 					rotate([180,0,90])
 						color([1,0,0])
 							import ("../../STL/666_1206.stl");
@@ -45,25 +46,26 @@ translate([0,0,19.5])
 
 		rotate([0,0,180])
 		union(){
-			translate([25,28,6.5])
+				translate([-24.4,40.7,19])
+			rotate([0,180,-20])
 			union(){
+				//list
 				
-			//list
-			translate([-sirka_listu/2, delka_listu/2,6])
-				rotate([0,0,0])
-						import ("../../STL/rotor_blade.stl");
-			//podložka listu
-			translate([-35/4,0,0])
-				rotate([0,0,90])
-					color([0,0,1])
-						import ("../../STL/666_1247.stl");
-			//kování
-			translate([-33.5 - 33.5/3.4 - 0.6,-15 + 1,0])
-				rotate([180,0,90])
-					color([1,0,0])
-			
-						import ("../../STL/666_1206.stl");
-						
+				translate([-sirka_listu/2, delka_listu/2,6])
+					rotate([0,0,0])
+							import ("../../STL/rotor_blade.stl");
+
+				//podložka listu
+				translate([-35/4,0,0])
+					rotate([0,0,90])
+						color([0,0,1])
+							import ("../../STL/666_1247.stl");
+
+				//kování
+				translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,13])
+					rotate([180,0,90])
+						color([1,0,0])
+							import ("../../STL/666_1206.stl");
 			}
 			//závěs
 			translate([-20,-5,18.5])
