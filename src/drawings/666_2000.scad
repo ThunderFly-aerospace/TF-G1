@@ -177,28 +177,25 @@ module 666_2000(draft){
 	////
 	//kolečka
 	//přední
-		color([0.1,0.1,0.1])
-			translate([10,-210 - 19,0])
-				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
-					translate ([26,0,0])
-						circle (r = 13, $fn = draft ? 50 : 100);
+	translate([10,-230,0])
+		rotate([90,0,0])
+			color([0.1,0.1,0.1])
+				import ("../../STL/888_2103.stl");
 
 	//zadní
-		color([0.1,0.1,0.1])
-			translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2 - 15])
-				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
-					translate ([26,0,0])
-						circle (r = 13, $fn = draft ? 50 : 100);
+	translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2 - 25])
+		rotate([90,0,0])
+			color([0.1,0.1,0.1])
+				import ("../../STL/888_2103.stl");
 
-		color([0.1,0.1,0.1])
-			translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 + vzdalenost_x/2 + 15])
-				rotate_extrude (convexity = 10, $fn = draft ? 50 : 100)
-					translate ([26,0,0])
-						circle (r = 13, $fn = draft ? 50 : 100);
+	translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 + vzdalenost_x/2 + 25])
+		rotate([90,0,0])
+			color([0.1,0.1,0.1])
+				import ("../../STL/888_2103.stl");
 
-	//setava rotorové listy
+	//setava rotorová hlava, řemenice, listy
 
-			translate([main_pilon_position + 15,height_of_vertical_tube + height_666_1026 + 25,0])
+			translate([main_pilon_position + 15,height_of_vertical_tube + height_666_1026 + 34,0])
 				rotate([-90,-90,0])	
 					666_2300(draft);
 
