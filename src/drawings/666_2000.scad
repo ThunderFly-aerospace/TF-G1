@@ -199,6 +199,11 @@ module 666_2000(draft){
 				rotate([-90,-90,0])	
 					666_2300(draft);
 
+	//vrtule
+		translate([0,-100,0])
+				import ("../../STL/APC_15x4C.stl");
+
+
 }
 
 
