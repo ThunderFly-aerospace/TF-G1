@@ -17,7 +17,7 @@ translate([0,0,19.5])
 
 			union(){
 				translate([-24.4,40.7,19])
-					rotate([0,180,-20])
+					rotate([rotor_flap0,180, - rotor_delta])
 						union(){
 						//list
 							
@@ -26,7 +26,7 @@ translate([0,0,19.5])
 										import ("../../STL/rotor_blade.stl");
 
 							//podložka listu
-							translate([-35/4,0,0])
+							%translate([-35/4,0,0])
 								rotate([0,0,90])
 									color([0,0,1])
 										import ("../../STL/666_1247.stl");
@@ -47,7 +47,7 @@ translate([0,0,19.5])
 		rotate([0,0,180])
 			union(){
 				translate([-24.4,40.7,19])
-					rotate([0,180,-20])
+					rotate([rotor_flap0,180, - rotor_delta])
 						union(){
 							//list
 							
