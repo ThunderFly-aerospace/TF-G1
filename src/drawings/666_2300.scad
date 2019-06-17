@@ -22,7 +22,7 @@ translate([0,0,19.5])
 						//list
 							
 							translate([-sirka_listu/2, delka_listu/2,6])
-								rotate([0,0,0])
+								rotate([0,rotor_blade_AOA,0])
 										import ("../../STL/rotor_blade.stl");
 
 							//podložka listu
@@ -52,7 +52,7 @@ translate([0,0,19.5])
 							//list
 							
 							translate([-sirka_listu/2, delka_listu/2,6])
-								rotate([0,0,0])
+								rotate([0,rotor_blade_AOA,0])
 										import ("../../STL/rotor_blade.stl");
 
 							//podložka listu
