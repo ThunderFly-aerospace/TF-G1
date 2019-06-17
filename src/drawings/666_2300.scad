@@ -36,6 +36,12 @@ translate([0,0,19.5])
 								rotate([180,0,90])
 									color([1,0,0])
 										import ("../../STL/666_1206.stl");
+
+							translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,0])
+								rotate([180,0,90])
+									color([1,0,0])
+										import ("../../STL/666_1206.stl");
+
 						}
 					//závěs
 					translate([-20,-5,18.5])
@@ -66,6 +72,12 @@ translate([0,0,19.5])
 								rotate([180,0,90])
 									color([1,0,0])
 										import ("../../STL/666_1206.stl");
+
+							translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,0])
+								rotate([180,0,90])
+									color([1,0,0])
+										import ("../../STL/666_1206.stl");
+
 						}
 					//závěs
 					translate([-20,-5,18.5])
