@@ -17,61 +17,61 @@ translate([0,0,19.5])
 
 			union(){
 				translate([-24.4,40.7,19])
-				rotate([0,180,-20])
-				union(){
-				//list
-				
-				translate([-sirka_listu/2, delka_listu/2,6])
-					rotate([0,0,0])
-							import ("../../STL/rotor_blade.stl");
+					rotate([0,180,-20])
+						union(){
+						//list
+							
+							translate([-sirka_listu/2, delka_listu/2,6])
+								rotate([0,0,0])
+										import ("../../STL/rotor_blade.stl");
 
-				//podložka listu
-				translate([-35/4,0,0])
-					rotate([0,0,90])
-						color([0,0,1])
-							import ("../../STL/666_1247.stl");
+							//podložka listu
+							translate([-35/4,0,0])
+								rotate([0,0,90])
+									color([0,0,1])
+										import ("../../STL/666_1247.stl");
 
-				//kování
-				translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,13])
-					rotate([180,0,90])
-						color([1,0,0])
-							import ("../../STL/666_1206.stl");
-			}
-				//závěs
-				translate([-20,-5,18.5])
-					rotate([180,0,90])
-						color([1,0,1])
-							import ("../../STL/666_1232.stl");
+							//kování
+							translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,13])
+								rotate([180,0,90])
+									color([1,0,0])
+										import ("../../STL/666_1206.stl");
+						}
+					//závěs
+					translate([-20,-5,18.5])
+						rotate([180,0,90])
+							color([1,0,1])
+								import ("../../STL/666_1232.stl");
 				}
 
 		rotate([0,0,180])
-		union(){
-				translate([-24.4,40.7,19])
-			rotate([0,180,-20])
 			union(){
-				//list
-				
-				translate([-sirka_listu/2, delka_listu/2,6])
-					rotate([0,0,0])
-							import ("../../STL/rotor_blade.stl");
+				translate([-24.4,40.7,19])
+					rotate([0,180,-20])
+						union(){
+							//list
+							
+							translate([-sirka_listu/2, delka_listu/2,6])
+								rotate([0,0,0])
+										import ("../../STL/rotor_blade.stl");
 
-				//podložka listu
-				translate([-35/4,0,0])
-					rotate([0,0,90])
-						color([0,0,1])
-							import ("../../STL/666_1247.stl");
+							//podložka listu
+							translate([-35/4,0,0])
+								rotate([0,0,90])
+									color([0,0,1])
+										import ("../../STL/666_1247.stl");
 
-				//kování
-				translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,13])
-					rotate([180,0,90])
-						color([1,0,0])
-							import ("../../STL/666_1206.stl");
-			}
-			//závěs
-			translate([-20,-5,18.5])
-				rotate([180,0,90])
-					color([1,0,1])
-						import ("../../STL/666_1232.stl");
+							//kování
+							translate([-33.5 - 33.5/3.4 - 0.8,-15 + 1,13])
+								rotate([180,0,90])
+									color([1,0,0])
+										import ("../../STL/666_1206.stl");
+						}
+					//závěs
+					translate([-20,-5,18.5])
+						rotate([180,0,90])
+							color([1,0,1])
+								import ("../../STL/666_1232.stl");
 		}
 			
 		//domek
@@ -87,15 +87,13 @@ translate([0,0,19.5])
 					import ("../../STL/rotor_pulley.stl");
 		}
 
+	//sestava rotorové hlavy
+	translate([0,0,-120])
+		rotate([0,0,90])
+			color([0.5,1,1])
+				import ("../../STL/888_1101.stl");
 
-
-//sestava rotorové hlavy
-translate([0,0,-120])
-	rotate([0,0,90])
-		color([0.5,1,1])
-			import ("../../STL/888_1101.stl");
-
-				
+					
 
 }
 
