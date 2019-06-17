@@ -8,13 +8,13 @@ $fa = 10;
 module 666_2000(draft){
 
 	////
-	//	translate([-hull_wall_thickness,0,0])
-	//		color([0,0,0.8])
-	//			666_1025(draft);
+		translate([-hull_wall_thickness,0,0])
+			color([0,0,0.8])
+				666_1025(draft);
 
-	//	translate([-hull_wall_thickness/2,0,0])
-	//		color([0,0,0.8])
-	//			666_1029(draft);
+		translate([-hull_wall_thickness/2,0,0])
+			color([0,0,0.8])
+				666_1029(draft);
 
 	////
 	//666_1027(draft);
@@ -36,9 +36,9 @@ module 666_2000(draft){
 					666_1017(draft); */
 
 	////
-		/* translate([cover_pilon_position - hull_wall_thickness,0,0])
+		 translate([cover_pilon_position - hull_wall_thickness,0,0])
 			rotate([-90,0,0])
-					666_1032(draft); */
+					666_1032(draft);
 
 
 
@@ -66,10 +66,10 @@ module 666_2000(draft){
 					888_1001(draft); */
 
 	////
-		/* translate([height_666_1026,0,0])
+		translate([height_666_1026,0,0])
 			rotate([-90,0,90])
 				color([0.4,0,0.8])
-					888_1026(draft); */
+					888_1026(draft);
 
 
 	////
@@ -87,27 +87,27 @@ module 666_2000(draft){
 	//	            888_2006(draft);
 
 	////
-	/* %	translate([length_of_main_tube - 80 + global_clearance,0,0])
-	%		rotate([0,90,0])
-	%				666_1028(draft);
+	 	translate([length_of_main_tube - 80 + global_clearance,0,0])
+			rotate([0,90,0])
+					666_1028(draft);
 
-	%	translate([length_of_main_tube - 80 + global_clearance,0,0])
-	%		rotate([0,-90,180])
-	%				666_1028(draft); */
+		translate([length_of_main_tube - 80 + global_clearance,0,0])
+			rotate([0,-90,180])
+					666_1028(draft);
 
 	////
-	/* %	translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube_rear/2 - global_clearance/2])
-	%			color([0,0,0.8])
-	%				666_1006(draft = draft);
+		translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, - length_of_undercarriage_tube_rear/2 - global_clearance/2])
+				color([0,0,0.8])
+					666_1006(draft = draft);
 
-	%	translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube_rear/2 + global_clearance/2])
-	%		rotate([180,0,0])
-	%			color([0,0,0.8])
-	%				666_1006(draft = draft); */
+		translate([second_undercarriage_hole,- Help_main_tube_outer - thickness_between_tubes, length_of_undercarriage_tube_rear/2 + global_clearance/2])
+			rotate([180,0,0])
+				color([0,0,0.8])
+					666_1006(draft = draft);
 
 	////
 	//podvozkové trubky
-		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 - 120])
+		/* translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 - 120])
 			rotate([-90,-90,0])
 				color([1,0,0])
 					888_1008_E();
@@ -116,22 +116,22 @@ module 666_2000(draft){
 		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 + 120])
 			rotate([-90,-90,0])
 				color([1,0,0])
-					888_1008_F();
+					888_1008_F(); */
 
 	////
 	//úchytky na podvozková kolečka
-	/* %	translate([second_undercarriage_hole + vzdalenost_x,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2])
-	%		rotate([0,90,0])
-	%				666_1014(draft);
+	 	translate([second_undercarriage_hole + vzdalenost_x,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2])
+			rotate([0,90,0])
+				666_1014(draft);
 
-	%	translate([second_undercarriage_hole + vzdalenost_x,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 +vzdalenost_x/2])
-	%		rotate([0,90,0])
-	%				666_1014(draft); */
+		translate([second_undercarriage_hole + vzdalenost_x,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 +vzdalenost_x/2])
+			rotate([0,90,0])
+					666_1014(draft);
 
 	//trubky
 
 		//nejdelší
-		difference(){
+		/* difference(){
 				rotate ([0,90,0])
 				    color([1,0,0])
 						cylinder (h = length_of_main_tube, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
@@ -173,14 +173,14 @@ module 666_2000(draft){
 							rotate([-90,0,0])
 							    color([1,0,0])
 									cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
-					}
+					} */
 	////
 	//kolečka
 	//přední
-	/* %translate([10,-230,0])
-	%	rotate([90,0,0])
-	%		color([0.1,0.1,0.1])
-	%			import ("../../STL/888_2103.stl");
+	translate([10,-230,0])
+		rotate([90,0,0])
+			color([0.1,0.1,0.1])
+				import ("../../STL/888_2103.stl");
 
 	%//zadní
 	%translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2 - 25])
@@ -201,7 +201,7 @@ module 666_2000(draft){
 
 	//vrtule
 	%	translate([0,-100,0])
-	%			import ("../../STL/APC_15x4C.stl"); */
+	%			import ("../../STL/APC_15x4C.stl");
 
 
 }
