@@ -70,21 +70,21 @@ module 666_2000(draft){
 			rotate([-90,0,90])
 				color([0.4,0,0.8])
 					888_1026(draft);
-					
+
 
 	////
 		translate([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2,0])
 		    rotate([0,90,-90])
 		        color([0,1,1])
 		            888_2002(draft);
-		translate([main_tube_outer_diameter*2.5 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2 + 25.8,0])
-		    rotate([-90,0,0])
-		        color([0,0.5,0.5])
-		            888_2005(draft);
-		translate([main_tube_outer_diameter*2.5 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2 + 25.8,0])
-		    rotate([90,0,180])
-		      	color([0,0.5,0.5])
-		            888_2006(draft);
+	//	translate([main_tube_outer_diameter*2.5 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2 + 25.8,0])
+	//	    rotate([-90,0,0])
+	//	        color([0,0.5,0.5])
+	//	            888_2005(draft);
+	//	translate([main_tube_outer_diameter*2.5 + (coupling_width_666_1004 - main_tube_outer_diameter)/2,-length_of_undercarriage_tube_front - main_tube_outer_diameter/2 + 25.8,0])
+	//	    rotate([90,0,180])
+	//	      	color([0,0.5,0.5])
+	//	            888_2006(draft);
 
 	////
 		translate([length_of_main_tube - 80 + global_clearance,0,0])
@@ -196,7 +196,7 @@ module 666_2000(draft){
 	//setava rotorová hlava, řemenice, listy
 
 			translate([main_pilon_position + 15,height_of_vertical_tube + height_666_1026 + 34,0])
-				rotate([-90,-90,0])	
+				rotate([-90,-90,0])
 					666_2300(draft);
 
 	//vrtule
@@ -207,8 +207,8 @@ module 666_2000(draft){
 }
 
 
-	
-	
+
+
 
 rotate ([90,0,0])
 	666_2000(draft);
@@ -240,4 +240,3 @@ use <./../drawings/666_2300.scad>
 
 use <./../lib/naca4.scad>
 include <../../Parameters.scad>
-
