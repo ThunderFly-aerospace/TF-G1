@@ -72,7 +72,7 @@ module base(){
             y = joint_size_y + joint_wall_thickness*2;
 
             difference(){
-                translate([-x/2, -y/2, -20])
+                translate([-x/2, -y/2, -25])
                     cube([x, y, 40]);
 
                 // plošky na svrchní straně
@@ -81,7 +81,7 @@ module base(){
                         [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                         [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                     rotate(i)
-                        translate([-40, -40, -5])
+                        translate([-40, -40, -13])
                             cube(80);
                 }
             }
@@ -107,8 +107,8 @@ module plate(angle = [10, 10], depth = 5){
 
     difference(){
         union(){
-            #translate([-x/2,-y/2, -depth/2])
-                cube([x, y, depth + wall + 2]);
+            translate([-x/2,-y/2, -depth+7])
+                cube([x-8, y, depth + wall + 2]);
 
         }
         //#translate([-joint_size_x/2, -joint_size_y/2, -0.1])
@@ -116,8 +116,8 @@ module plate(angle = [10, 10], depth = 5){
 
         intersection(){
 
-            translate([-x/2,-y/2, -depth/2])
-                cube([x, y, depth +2]);
+            translate([-x/2,-y/2, -depth/2-3])
+                cube([x, y, depth]);
 
             rotate([0, 90, 0])
                 translate([0,0,-50])
@@ -158,8 +158,8 @@ module plate_part(rotation, depth){
 
 union(){
     //base();
-     difference(){
-        color([0.7, 0.5, 0.5, 0.85]) rotate([10, -5 , 0]) plate([5,5], 10);
+      difference(){
+        color([0.7, 0.5, 0.5, 0.85]) rotate([10, -5 , 0]) plate([5,5], 20);
         translate([28, -50, -10]) cube(100);
         //translate([-50, 20, -10]) cube(100);
     }
