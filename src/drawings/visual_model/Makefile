@@ -1,4 +1,4 @@
-STL_DIR=../../../STL/drawings/visual_model
+STL_DIR=../../../STL/visual_models
 SRC_DIR=./
 PLATE_DIMMENSIONS=120
 SIMARRANGE=/usr/local/bin/simarrange
