@@ -144,10 +144,10 @@ module 666_2000(draft){
 		//přední podvozková
 %		translate ([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2, - main_tube_outer_diameter/2,0,])
 					difference(){
-							rotate ([90,0,0])
+%							rotate ([90,0,0])
 							    color([0,1,0])
 									cylinder (h = length_of_undercarriage_tube_front, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
-						translate([- global_clearance/2,0,0])
+%						translate([- global_clearance/2,0,0])
 							rotate ([90,0,0])
 							    color([0,1,0])
 									cylinder (h = length_of_undercarriage_tube_front + global_clearance/2, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
@@ -155,21 +155,21 @@ module 666_2000(draft){
 
 		//zadní podvozková
 					difference(){
-						translate([second_undercarriage_hole,- main_tube_outer_diameter- thickness_between_tubes, - length_of_undercarriage_tube_rear/2])
+%						translate([second_undercarriage_hole,- main_tube_outer_diameter- thickness_between_tubes, - length_of_undercarriage_tube_rear/2])
 							    color([0,1,0])
 									cylinder (h = length_of_undercarriage_tube_rear, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
-						translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, - length_of_undercarriage_tube_rear/2 - global_clearance/2])
+%						translate([second_undercarriage_hole,- main_tube_outer_diameter - thickness_between_tubes, - length_of_undercarriage_tube_rear/2 - global_clearance/2])
 							    color([0,1,0])
 									cylinder (h = length_of_undercarriage_tube_rear + global_clearance, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
 					}
 
 		//kolmá na nejdelší
 					difference(){
-						translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes,0])
+%						translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes,0])
 							rotate([-90,0,0])
 							    color([1,0,0])
 									cylinder (h = height_of_vertical_tube, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
-						translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes + global_clearance/2,0])
+%						translate ([main_pilon_position, main_tube_outer_diameter/2 + thickness_between_tubes + global_clearance/2,0])
 							rotate([-90,0,0])
 							    color([1,0,0])
 									cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = draft ? 50 : 200);
