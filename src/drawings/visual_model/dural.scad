@@ -107,13 +107,13 @@ module 666_2000(draft){
 
 	////
 	//podvozkové trubky
-%		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 - 120])
+		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,length_of_undercarriage_tube_rear/2 - 120])
 			rotate([-90,-90,0])
 				color([1,0,0])
 					888_1008_E();
 
 
-%		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 + 120])
+		translate([second_undercarriage_hole,- 200 - height_666_1004 + main_tube_outer_diameter/2 - 2,-length_of_undercarriage_tube_rear/2 + 120])
 			rotate([-90,-90,0])
 				color([1,0,0])
 					888_1008_F();
@@ -131,7 +131,7 @@ module 666_2000(draft){
 	//trubky
 
 		//nejdelší
-		difference(){
+%		difference(){
 				rotate ([0,90,0])
 				    color([1,0,0])
 						cylinder (h = length_of_main_tube, r = Help_main_tube_outer/2, $fn = draft ? 50 : 200);
@@ -142,7 +142,7 @@ module 666_2000(draft){
 		}
 
 		//přední podvozková
-		translate ([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2, - main_tube_outer_diameter/2,0,])
+%		translate ([main_tube_outer_diameter/2 + main_tube_outer_diameter*2 + (coupling_width_666_1004 - main_tube_outer_diameter)/2, - main_tube_outer_diameter/2,0,])
 					difference(){
 							rotate ([90,0,0])
 							    color([0,1,0])
