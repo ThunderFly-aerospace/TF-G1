@@ -180,18 +180,18 @@ module 666_2000(draft){
 	translate([10,-230,0])
 		rotate([90,0,0])
 			color([0.1,0.1,0.1])
-				import ("../../STL/888_2103.stl");
+				import ("../../../STL/888_2103.stl");
 
 	%//zadní
 	%translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,-length_of_undercarriage_tube_rear/2 - 120 - radius_undercarriage/2 - vzdalenost_x/2 - 25])
 	%	rotate([90,0,0])
 	%		color([0.1,0.1,0.1])
-	%			import ("../../STL/888_2103.stl");
+	%			import ("../../../STL/888_2103.stl");
 
 	%translate([8 + second_undercarriage_hole + vzdalenost_x,-210 - 19,length_of_undercarriage_tube_rear/2 + 120 + radius_undercarriage/2 + vzdalenost_x/2 + 25])
 	%	rotate([90,0,0])
 	%		color([0.1,0.1,0.1])
-	%			import ("../../STL/888_2103.stl");
+	%			import ("../../../STL/888_2103.stl");
 
 	//setava rotorová hlava, řemenice, listy
 
@@ -201,7 +201,7 @@ module 666_2000(draft){
 
 	//vrtule
 	%	translate([0,-100,0])
-	%			import ("../../STL/APC_15x4C.stl");
+	%			import ("../../../STL/APC_15x4C.stl");
 
 
 }
@@ -238,5 +238,5 @@ use <../../666_1014.scad>
 use <../../drawings/666_2300.scad>
 
 
-use <../../../lib/naca4.scad>
+use <../../lib/naca4.scad>
 include <../../../Parameters.scad>

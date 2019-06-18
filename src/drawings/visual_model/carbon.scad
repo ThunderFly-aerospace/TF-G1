@@ -238,5 +238,5 @@ use <../../666_1014.scad>
 use <../../drawings/666_2300.scad>
 
 
-use <../../../lib/naca4.scad>
+use <../../lib/naca4.scad>
 include <../../../Parameters.scad>
