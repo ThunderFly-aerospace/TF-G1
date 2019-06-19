@@ -12,7 +12,7 @@ sirka_listu = 50;
 uchytna_cast = 100;
 
 translate([0,0,19.5])
-	rotate([0,180,0])
+	rotate([14,180+8,0])
 		union(){
 
 			union(){
@@ -104,6 +104,11 @@ translate([0,0,19.5])
 		rotate([0,0,90])
 			color([0.5,1,1])
 				import ("../../STL/888_1101.stl");
+
+	//prerotator
+	translate([-7,59,-111.8])
+		rotate([-14,8,0])	
+				import ("../../STL/imitation/prerotator_imitation.stl");
 
 					
 

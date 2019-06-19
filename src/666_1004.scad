@@ -89,5 +89,6 @@ module 666_1004_drillhelper(coupling_wall_thickness, thickness_between_tubes, dr
 
 666_1004(coupling_wall_thickness, thickness_between_tubes, draft);
 
+
 translate([50,0,0])
     666_1004_drillhelper(coupling_wall_thickness, thickness_between_tubes, draft);

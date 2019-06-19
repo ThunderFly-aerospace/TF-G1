@@ -137,9 +137,9 @@ module 666_1014_B(draft){
 
 
 
-		666_1014(draft);
+		//666_1014(draft);
 
-translate([0,30,0])
+//translate([0,30,0])
 		666_1014_drillhelper(draft);
 
 include <../Parameters.scad>

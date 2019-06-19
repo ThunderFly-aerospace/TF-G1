@@ -117,7 +117,7 @@ fork_angle = 0;
             }
 
             /// vidlice pro kolo 
-            %fork_half(height, wheel_width, fork_angle);
+            fork_half(height, wheel_width, fork_angle);
             mirror([1,0,0])
                 fork_half(height, wheel_width, fork_angle);
         }
@@ -165,7 +165,7 @@ fork_angle = 0;
 
 
 
-888_2008(draft);
+888_2002(draft);
 
 include <../Parameters.scad>
 
