@@ -116,13 +116,8 @@ fork_angle = 0;
                     cylinder(h = height/2, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 :50 );
             }
 
-<<<<<<< HEAD
             /// vidlice pro kolo
             %fork_half(height, wheel_width, fork_angle);
-=======
-            /// vidlice pro kolo 
-            fork_half(height, wheel_width, fork_angle);
->>>>>>> 75724bbe6183c0da6215675bd59191ae73d86f26
             mirror([1,0,0])
                 fork_half(height, wheel_width, fork_angle);
         }
