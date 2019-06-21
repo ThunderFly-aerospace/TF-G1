@@ -18,15 +18,10 @@ module 888_1029 (nut = true) {
                 translate([wheel_inner_diameter/2-M3_screw_diameter+0.5, 0, -1])
                     cylinder(h=wheel_inner_thickness, d=M3_screw_diameter, $fn=60);
 
-            ////diry na matice
-            //rotate([0,0,120*i])
-                  //translate([wheel_inner_diameter/2-M3_screw_diameter+0.5, 0, -1])
-                    //  cylinder(h=M3_nut_height+1, d=M3_nut_diameter, $fn= nut? 6 : 50);
-
-            //zapusteni hlavy sroubu M3x35
+            //diry na matice nebo zapusteni hlavy sroubu M3x35
             rotate([0,0,120*i])
                   translate([wheel_inner_diameter/2-M3_screw_diameter+0.5, 0, -1])
-                      cylinder(h=M3_screw_head_height+2, d=M3_nut_diameter, $fn=50);
+                      cylinder(h=M3_screw_head_height+2, d=M3_nut_diameter, $fn= nut? 6 : 50);
 
           }
 
