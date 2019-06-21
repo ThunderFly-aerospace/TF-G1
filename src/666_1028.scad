@@ -39,7 +39,7 @@ module 666_1028(draft){
     	            translate([0, -10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
     	                rotate ([0,-90, 160])
                         {			//rotate([0,-90,152.5])
-    	                    hollow_airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
+    	                    hollow_airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = true,  wall_thickness=wall_thickness);
 
     					//výztuhy
         					intersection(){
@@ -68,7 +68,7 @@ module 666_1028(draft){
                 	translate([0, 10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
                     	rotate ([0,-90,-160])		//rotate([0,-90,-152.5])
                         {
-                            hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness);
+                            hollow_airfoil(naca = 0007, L =95, N = draft ? 50 : 100, h = 152, open = true, wall_thickness=wall_thickness);
                     //výztuhy
                           	intersection(){
                                 airfoil(naca = 0007, L = 95, N = draft ? 50 : 100, h = 152, open = false);

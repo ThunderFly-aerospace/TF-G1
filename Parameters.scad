@@ -17,6 +17,8 @@ gliding_aggle = 14;         // tenhle úhel by se zřejmě v budoucnu měl poč�
 rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 rotor_blade_length = 970;   // délka rotorového listu
 rotor_blade_depth = 50;     // hloubka rotorového listu
+rotor_flap0 = 2;
+rotor_delta = 20;
 
 // nastavení parametrů motoru
 

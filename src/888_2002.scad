@@ -31,10 +31,10 @@ height = width;
 
 
 wheel_width = 34;
-wheel_diameter = 110; 
+wheel_diameter = 110;
 fork_angle = 45;
 
-    
+
     difference(){
 
         union(){
@@ -46,7 +46,7 @@ fork_angle = 45;
                     cylinder(h = height/2, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 :50 );
             }
 
-            /// vidlice pro kolo 
+            /// vidlice pro kolo
             fork_half(height, wheel_width, fork_angle);
             mirror([1,0,0])
                 fork_half(height, wheel_width, fork_angle);
@@ -89,7 +89,7 @@ fork_angle = 45;
         translate([-wheel_width/2 - 7, -wheel_diameter/2 - tube_for_undercarriage_outer_diameter/2 + 1, wheel_diameter/2 + 1.2*tube_for_undercarriage_outer_diameter])
             rotate([0,-90,0])
                 cylinder(h = M4_nut_height, d = M4_nut_diameter, $fn = 6);
-        
+
     }
 }
 
@@ -101,23 +101,28 @@ height = width;
 
 
 wheel_width = 34;
-wheel_diameter = 110; 
+wheel_diameter = 110;
 fork_angle = 0;
 
-    
+
     difference(){
 
         union(){
 
 
             hull() {
-                cylinder(h = height, d = 608_bearing_outer_diameter * 1.5, $fn = draft ? 10 :50 );
+                #cylinder(h = height, d = 608_bearing_outer_diameter * 1.5, $fn = draft ? 10 :50 );
                 translate([0,1.5*main_tube_outer_diameter,0])
                     cylinder(h = height/2, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 :50 );
             }
 
-            /// vidlice pro kolo 
+<<<<<<< HEAD
+            /// vidlice pro kolo
             %fork_half(height, wheel_width, fork_angle);
+=======
+            /// vidlice pro kolo 
+            fork_half(height, wheel_width, fork_angle);
+>>>>>>> 75724bbe6183c0da6215675bd59191ae73d86f26
             mirror([1,0,0])
                 fork_half(height, wheel_width, fork_angle);
         }
@@ -159,14 +164,12 @@ fork_angle = 0;
         translate([-wheel_width/2 - 7, -wheel_diameter/2 - tube_for_undercarriage_outer_diameter/2 + 1, wheel_diameter/2 + 1.2*tube_for_undercarriage_outer_diameter])
             rotate([0,-90,0])
                 cylinder(h = M4_nut_height, d = M4_nut_diameter, $fn = 6);
-        
+
     }
 }
 
 
 
-888_2008(draft);
+888_2002(draft);
 
 include <../Parameters.scad>
-
-

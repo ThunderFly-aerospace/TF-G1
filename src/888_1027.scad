@@ -12,7 +12,7 @@ pipe_holder1_pos = 10;
 pipe_holder2_pos = 50;
 pipe_holder_space =3;
 
-include <../parameters.scad>
+include <../Parameters.scad>
 
 M3_screw_head_diameter = M3_nut_diameter;
 
