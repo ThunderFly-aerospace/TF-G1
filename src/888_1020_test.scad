@@ -3,8 +3,8 @@ include <../Parameters.scad>
 joint_size_x = 60; // delka dorazu podle osy x
 joint_size_y = 45; //delka dorazu podle osy y
 
-rotx = 25/2;
-roty = 10/2;
+rotx = 20/2;
+roty = 20/2;
 
 joint_wall_thickness = 5;
 
@@ -62,7 +62,7 @@ module base(){
                         [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                         [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                     rotate(i)
-                        translate([-50, -50, bearing_efsm_ag - bearing_efsm_a1])
+                        translate([-50, -50, bearing_efsm_ag - bearing_efsm_a1 + 5])
                             cube(100);
                 }
             }
@@ -81,7 +81,7 @@ module base(){
                         [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                         [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
                     rotate(i)
-                        translate([-40, -40, -13])
+                        translate([-40, -40, 0])
                             cube(80);
                 }
             }
@@ -108,7 +108,7 @@ module plate(angle = [10, 10], depth = 5){
     difference(){
         union(){
             translate([-x/2,-y/2, -depth+7])
-                cube([x-8, y, depth + wall + 2]);
+                cube([x-8, y, depth + wall + 2+5]);
 
         }
         //#translate([-joint_size_x/2, -joint_size_y/2, -0.1])
@@ -116,8 +116,8 @@ module plate(angle = [10, 10], depth = 5){
 
         intersection(){
 
-            translate([-x/2,-y/2, -depth/2-3])
-                cube([x, y, depth]);
+            translate([-x/2,-y/2, -depth/2-3+5])
+                cube([x, y, depth+5]);
 
             rotate([0, 90, 0])
                 translate([0,0,-50])
@@ -157,10 +157,10 @@ module plate_part(rotation, depth){
 
 
 union(){
-    //base();
+    base();
       difference(){
-        color([0.7, 0.5, 0.5, 0.85]) rotate([10, -5 , 0]) plate([5,5], 20);
-        translate([28, -50, -10]) cube(100);
+        color([0.7, 0.5, 0.5, 0.85]) rotate([0, 0 , 0]) plate([5,5], 20);
+        //translate([28, -50, -10]) cube(100);
         //translate([-50, 20, -10]) cube(100);
     }
 }

@@ -188,7 +188,7 @@ module MG995DoubleHorn()
       translate([0,0,3])
       cylinder(r=2.8, h=5, $fn=100);
     }
-    
+
   }
 }
 
@@ -209,3 +209,64 @@ module MG995WithDoubleHorn(horn_angle=0)
 }
 
 MG995WithSingleHorn(45);
+
+
+
+
+module SB_2282()
+{
+  //Model for the Savox
+
+  translate([-9.75,8.5,-30]) //align the shaft to 0-0
+  union()
+  {
+    color("Gray")
+    {
+      union()
+      {
+        //main box
+        cube([20.2, 40.3 ,38.7]);
+
+        //ears
+        difference()
+        {
+            //slate
+            translate([0,6, -(54-40.3)/2])
+            cube([20.2, 2.5 ,54]);
+
+            //hole in ears
+            translate([4,9,-(54-48)/2])
+            rotate([90,0,0])
+            cylinder(d=3, h=4, $fn=100);
+
+            translate([15.5,9,-(54-48)/2])
+            rotate([90,0,0])
+            cylinder(d=3, h=4, $fn=100);
+
+            translate([4,9,40.3+(54-48)/2])
+            rotate([90,0,0])
+            cylinder(d=3, h=4, $fn=100);
+
+            translate([15.5,9, 40.3+(54-48)/2])
+            rotate([90,0,0])
+            cylinder(d=3, h=4, $fn=100);
+        }
+
+
+      }
+    }
+
+    union()
+    {
+      //shaft
+      translate([9.75,0,30])
+      rotate([90,0,0])
+      cylinder(r=2.5, h=4, $fn=100);
+
+    }
+
+  }
+}
+
+
+translate([40, 0, 0]) SB_2282();
