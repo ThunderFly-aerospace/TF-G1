@@ -28,8 +28,8 @@ module 888_1020(draft = true){
 
     servo_join_y = 78; // vzdalenost kloubu pro servo
     servo_join_x = 45; // vzdalenost kloubku od osy rotoru
-    servo_join_size = 15;
-    servo_joint_z = 5; // jak moc nizko bude kloubek
+    servo_join_size = 12;
+    servo_joint_z = 7; // jak moc nizko bude kloubek
 
     plate_size_y = 55.5;
     plate_size_x = plate_overlap + motor_distance + motor_diameter/2;
@@ -82,7 +82,14 @@ module 888_1020(draft = true){
                 // rameno, na kterem jsou kloubky pro servo
                 hull(){
                     translate([servo_join_x-servo_join_size/2, -servo_join_y/2, -servo_joint_z - 5])
-                        cube([servo_join_size, servo_join_y ,servo_joint_z + 10]);
+                        cube([servo_join_size, servo_join_y/4 ,servo_joint_z + 10]);
+                    translate([servo_join_x-servo_join_size, -plate_size_y/2, -plate_size_z+2])
+                        cube([servo_join_size*2, plate_size_y ,plate_size_z*2-2]);
+                }
+                // rameno, na kterem jsou kloubky pro servo
+                hull(){
+                    translate([servo_join_x-servo_join_size/2, servo_join_y/2 - servo_join_y/5, -servo_joint_z - 5])
+                        cube([servo_join_size, servo_join_y/5 ,servo_joint_z + 10]);
                     translate([servo_join_x-servo_join_size, -plate_size_y/2, -plate_size_z+2])
                         cube([servo_join_size*2, plate_size_y ,plate_size_z*2-2]);
                 }

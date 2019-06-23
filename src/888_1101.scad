@@ -59,7 +59,7 @@ difference(){
             translate([4.2, 0, -78.5])
                 888_1015();
 
-    //rotate([0, -9, 0]) translate([25, -43, -55]) rotate([0, 180, 0]) SB_2282();
+    rotate([0, -9, 0]) translate([25, -43, -55]) rotate([0, 180, 0]) LW_20MG();
 
     color([0.2, 0.8, 0.2, 0.9])
         translate([0,0, 0])

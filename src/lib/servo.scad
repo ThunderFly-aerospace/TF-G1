@@ -270,3 +270,75 @@ module SB_2282()
 
 
 translate([40, 0, 0]) SB_2282();
+
+
+
+
+
+module LW_20MG()
+{
+  //Model for the POWER HD
+
+  body_height = 39.5;
+  body_thickness = 20.5;
+  body_length = 40.7;
+
+  ears_length = 54.5;
+  ear_length = (ears_length - body_length)/2;
+  holes_distance = 10;
+  holes_ears_distance = 49.0;
+
+  translate([-9.75,8.5,-30]) //align the shaft to 0-0
+  union()
+  {
+    color("Gray")
+    {
+      union()
+      {
+        //main box
+        cube([body_thickness, body_height ,body_length]);
+
+        //ears
+        difference()
+        {
+            //plate
+            translate([0,6, -ear_length])
+                cube([body_thickness, 2.5, ears_length]);
+
+            //hole in ears
+            translate([ body_thickness/2 + holes_distance/2,9,-(ears_length - holes_ears_distance)/2])
+            rotate([90,0,0])
+            cylinder(d=4, h=4, $fn=100);
+
+            translate([ body_thickness/2 - holes_distance/2,9,-(ears_length - holes_ears_distance)/2])
+            rotate([90,0,0])
+            cylinder(d=4, h=4, $fn=100);
+
+            translate([ body_thickness/2 + holes_distance/2,9, body_length+(ears_length - holes_ears_distance)/2])
+            rotate([90,0,0])
+            cylinder(d=4, h=4, $fn=100);
+
+            translate([ body_thickness/2 - holes_distance/2,9, body_length+(ears_length - holes_ears_distance)/2])
+            rotate([90,0,0])
+            cylinder(d=4, h=4, $fn=100);
+        }
+
+
+      }
+    }
+
+    union()
+    {
+      //shaft
+      translate([9.75,0,30])
+      rotate([90,0,0])
+      cylinder(r=2.5, h=4, $fn=100);
+
+    }
+
+  }
+}
+
+
+
+translate([80, 0, 0]) LW_20MG();

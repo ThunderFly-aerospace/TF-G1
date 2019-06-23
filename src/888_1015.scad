@@ -145,7 +145,7 @@ module 888_1015(draft){
 	servo_width = 21;	//šřka otvoru pro servo
 	servo_height = 42;	//výška otvoru pro servo
 
-    servo_pos_z = 13;
+    servo_pos_z = 12;
 
 	//příruba
 	flange_width = 40;						//h
@@ -263,11 +263,12 @@ module 888_1015(draft){
 // dira na sroub + kapsa na matice
         for (m=[0, 1]) {
             mirror([0, m, 0]){
-                for (i=[[0, 0, 0], [10, 0, 0], [0, 48.5, -42], [10, 48.5, -42]])
+                a = (49-40.7)/2;
+                for (i=[[0, -a, 0], [10, -a, 0], [0, 49-a, -42], [10, 49-a, -42]])
 
-                translate([width/2 - 4 - 5.5-i[0],-depth/2 + M2_5_screw_length, servo_pos_z -3.2 + i[1]]){
+                translate([width/2 - 4 - 5.5-i[0],-depth/2 + M2_5_screw_length, servo_pos_z + i[1]]){
                     rotate([0, -90, 90]){
-        					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 50 : 100 );
+        					#cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 10 : 100 );
         					translate([0, 0, M2_5_pocket_depth])
         						rotate([0, 0, 90])
         							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
