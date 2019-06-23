@@ -10,6 +10,7 @@ DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
 draft = true;
 
+
 module 666_1028(draft){
 
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
@@ -210,33 +211,6 @@ module 666_1028_flightgear(draft){
 
         //TRIANGLE PROFILE
 
-        //UPPER - od osy x do minus y
-            difference (){
-                union(){
-                    translate([0, -10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
-                        rotate ([0,-90, 160])
-                            airfoil(naca = 0007, L = 95, N = 50, h = 152, open = true);
-
-
-            //LOWER - od osy x do plus y
-                    translate([0, 10, -0.3]) // elementary negative Z shift to improve adhesion on the printig surface
-                        rotate ([0,-90,-160])       //rotate([0,-90,-152.5])
-                            airfoil(naca = 0007, L =95, N = 50, h = 152, open = true);
-                }
-
-            // odečtení výztuh z profilů výškovky
-            translate ([140,-75,0])
-                rotate([0,3,0])
-                {
-                    cube ([15,150,150]);
-
-                    translate ([0,150,0])
-                        rotate([90,-90,0])
-                            linear_extrude(height = 150)
-                                offset(delta = -wall_thickness)
-                                    polygon(points = airfoil_data(naca = 0009, L = 150, N = 50, open = false));
-                }
-           }
 
         //VERTICAL
         difference(){
@@ -438,8 +412,8 @@ translate([142.1,20,30])
 
 */
 
-
 666_1028();
+
 
 use <888_1012.scad>
 
