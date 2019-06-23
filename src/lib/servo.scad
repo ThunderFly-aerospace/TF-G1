@@ -306,19 +306,19 @@ module LW_20MG()
                 cube([body_thickness, 2.5, ears_length]);
 
             //hole in ears
-            translate([ body_thickness/2 + holes_distance/2,9,-(ears_length - holes_ears_distance)/2])
+            translate([ body_thickness/2 + holes_distance/2,9, -(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
             cylinder(d=4, h=4, $fn=100);
 
-            translate([ body_thickness/2 - holes_distance/2,9,-(ears_length - holes_ears_distance)/2])
+            translate([ body_thickness/2 - holes_distance/2,9,-(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
             cylinder(d=4, h=4, $fn=100);
 
-            translate([ body_thickness/2 + holes_distance/2,9, body_length+(ears_length - holes_ears_distance)/2])
+            translate([ body_thickness/2 + holes_distance/2,9, body_length+(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
             cylinder(d=4, h=4, $fn=100);
 
-            translate([ body_thickness/2 - holes_distance/2,9, body_length+(ears_length - holes_ears_distance)/2])
+            translate([ body_thickness/2 - holes_distance/2,9, body_length+(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
             cylinder(d=4, h=4, $fn=100);
         }

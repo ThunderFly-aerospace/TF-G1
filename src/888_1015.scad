@@ -138,7 +138,8 @@ module 888_1015(draft){
 	width = 70;
     depth = 2*plate_thickness + coupling_depth_666_1026;
 	depth_pipe = 30;
-	height = 68.5;
+	//height = 68.5;
+    height = 65;
 
 	rake_angle = 9;		//úhel horního zkosení
 
