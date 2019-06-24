@@ -276,4 +276,4 @@ module 333_1035(twosided = true, draft = true){
 use <../lib/naca4.scad>
 use <../lib/bevel.scad>
 use <../lib/dimlines.scad>
-include <../../Parameters.scad>
+include <../../parameters.scad>

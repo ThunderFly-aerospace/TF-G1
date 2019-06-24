@@ -44,4 +44,4 @@ module 888_1001(draft){
 888_1001();
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

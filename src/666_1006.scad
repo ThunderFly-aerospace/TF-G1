@@ -91,4 +91,4 @@ translate([2*main_tube_outer_diameter,0,0])
     666_1006_drillhelper();
 
 
-include <../Parameters.scad>
+include <../parameters.scad>

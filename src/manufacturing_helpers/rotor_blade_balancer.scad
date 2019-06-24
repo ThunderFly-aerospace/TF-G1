@@ -114,4 +114,4 @@ thickness = 12;
 }
 //crandle();
 
-include <../Parameters.scad>
+include <../parameters.scad>

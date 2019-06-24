@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 
 g2_5_podlozka_d = 16;

@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 joint_size_x = 60; // delka dorazu podle osy x
 joint_size_y = 45; //delka dorazu podle osy y

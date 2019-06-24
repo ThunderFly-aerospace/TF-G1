@@ -1,4 +1,4 @@
-include <../../Parameters.scad>
+include <../../parameters.scad>
 draft = true;
 
 module tube_cutter(draft = true){

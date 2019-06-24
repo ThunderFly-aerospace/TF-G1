@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 draft = true;
 
 module 666_1004(coupling_wall_thickness, thickness_between_tubes, draft = true){

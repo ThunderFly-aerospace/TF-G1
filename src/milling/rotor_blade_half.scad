@@ -1,4 +1,4 @@
-include <../../Parameters.scad>
+include <../../parameters.scad>
 use <../333_1037.scad>
 
 $vpd = 680;

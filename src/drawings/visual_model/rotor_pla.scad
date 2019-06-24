@@ -113,4 +113,4 @@ translate([0,0,19.5])
 666_2300(draft);
 
 use <./../../lib/naca4.scad>
-include <../../../Parameters.scad>
+include <../../../parameters.scad>

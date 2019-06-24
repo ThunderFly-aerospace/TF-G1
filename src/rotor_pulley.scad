@@ -341,6 +341,6 @@ module GT2_5mm()
 	}
 
 
-include <../Parameters.scad>
+include <../parameters.scad>
 
 rotor_pulley(draft=true);

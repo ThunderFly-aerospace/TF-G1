@@ -1,4 +1,4 @@
-include <../../Parameters.scad>
+include <../../parameters.scad>
 
 unasec_diameter = 10.5;
 unasec_kuzel_diameter = 18;

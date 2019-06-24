@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
@@ -109,4 +109,4 @@ translate([2*main_tube_outer_diameter,0,0])
     888_2004_drillhelper();
 
 
-include <../Parameters.scad>
+include <../parameters.scad>

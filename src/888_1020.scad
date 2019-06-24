@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 module 888_1020(draft = true){
 

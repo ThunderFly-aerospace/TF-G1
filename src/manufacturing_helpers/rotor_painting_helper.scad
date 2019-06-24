@@ -44,4 +44,4 @@ painting_helper(draft = draft, holes = true);
 use <../lib/naca4.scad>
 use <../lib/bevel.scad>
 use <../lib/dimlines.scad>
-include <../../Parameters.scad>
+include <../../parameters.scad>

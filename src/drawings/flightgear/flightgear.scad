@@ -125,5 +125,5 @@ use <../../888_1008.scad>
 use <../../666_1014.scad>
 
 use <../lib/naca4.scad>
-include <../../Parameters.scad>
+include <../../parameters.scad>
 

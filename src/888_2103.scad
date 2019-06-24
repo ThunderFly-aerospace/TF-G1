@@ -1,7 +1,7 @@
 // sestava podvozkoveho kola
 
 
-include <../Parameters.scad>
+include <../parameters.scad>
 use <888_1029.scad>
 use <888_1030.scad>
 

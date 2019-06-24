@@ -126,4 +126,4 @@ use <../888_1008.scad>
 use <../lib/curvedPipe.scad>
 
 use <../lib/naca4.scad>
-include <../../Parameters.scad>
+include <../../parameters.scad>

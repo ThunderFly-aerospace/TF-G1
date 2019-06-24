@@ -232,6 +232,6 @@ module 666_1032_B(draft){
 //666_1032_B(draft);
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>
 use <666_1025.scad>
 use <888_1000.scad>

@@ -15,4 +15,4 @@ cube([width_of_accumulator, depth_of_accumulator, height_of_accumulator - sink_o
 
 motor_imitation(draft);
 
-include <../Parameters.scad>
+include <../parameters.scad>

@@ -15,4 +15,4 @@ cylinder(h = 48, r = 35/2, $fn = 100);
 
 prerotator_imitation(draft);
 
-include <../Parameters.scad>
+include <../parameters.scad>

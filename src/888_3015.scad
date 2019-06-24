@@ -87,4 +87,4 @@ height_cylinder = 35;
 888_3015_B();
 
 
- include <../Parameters.scad>
+ include <../parameters.scad>

@@ -4,7 +4,7 @@ $fs = draft ? 5 : 0.5;
 $fa = 10;
 
 
-include <../../Parameters.scad>
+include <../../parameters.scad>
 
 
 translate(center_of_gravity_position)

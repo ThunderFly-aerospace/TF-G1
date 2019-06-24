@@ -1,4 +1,4 @@
-include <../../../Parameters.scad>
+include <../../../parameters.scad>
 use <../666_1235.scad>
 
 rotate([90,0,0])

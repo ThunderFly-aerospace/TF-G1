@@ -34,4 +34,4 @@ thickness = 12;
 666_1232();
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

@@ -16,4 +16,4 @@ use <666_1026.scad>
 use <666_1017.scad>
 use <666_1028.scad>
 
-include <../Parameters.scad>
+include <../parameters.scad>

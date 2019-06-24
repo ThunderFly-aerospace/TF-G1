@@ -1,4 +1,4 @@
-include <../../Parameters.scad>
+include <../../parameters.scad>
 use <../lib/shortcuts.scad>
 
 use <../666_1004.scad>

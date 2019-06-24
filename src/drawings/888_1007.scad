@@ -106,7 +106,7 @@ module 888_1007_doc(){
 
 
 use <../lib/naca4.scad>
-include <../../Parameters.scad>
+include <../../parameters.scad>
 
 use<../666_1026.scad>
 use<../666_1028.scad>

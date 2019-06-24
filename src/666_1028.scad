@@ -3,7 +3,7 @@ DOC_SCALING_FACTOR = 100;
 DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
-include <../Parameters.scad>
+include <../parameters.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
@@ -450,4 +450,4 @@ translate([142.1,20,30])
 use <888_1012.scad>
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 column_upper_diameter = 60;
 column_lower_diameter = 608_bearing_outer_diameter*2;

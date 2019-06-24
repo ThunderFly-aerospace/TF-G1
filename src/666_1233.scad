@@ -9,4 +9,4 @@ module 666_1233(){
 }
 666_1233();
 
-include <../Parameters.scad>
+include <../parameters.scad>

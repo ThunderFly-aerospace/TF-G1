@@ -123,4 +123,4 @@ translate([0,0,-40 - 2*5 - 4.9])
 mirror([0,0,1])
 888_3011_B();
 
-include <../Parameters.scad>
+include <../parameters.scad>

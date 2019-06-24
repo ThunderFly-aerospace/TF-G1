@@ -1,7 +1,7 @@
 draft = true;
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>
 
 use <888_2002.scad>
 use <888_2003.scad>

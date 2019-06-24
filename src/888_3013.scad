@@ -125,4 +125,4 @@ rotate([0, 180, 0])
     888_3013_A();
 888_3013_B();
 
-include <../Parameters.scad>
+include <../parameters.scad>

@@ -585,4 +585,4 @@ translate([20,0,0])
 use <888_1000.scad>
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

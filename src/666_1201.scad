@@ -156,4 +156,4 @@ module 666_1201_doc(length = 970, material_width = 50, twosided = true, draft = 
 use <./lib/naca4.scad>
 use <./lib/bevel.scad>
 use <./lib/dimlines.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

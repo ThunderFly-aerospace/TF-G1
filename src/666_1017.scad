@@ -255,4 +255,4 @@ height= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickne
 translate([70,0,0])
 666_1017_drillhelper();
 
-include <../Parameters.scad>
+include <../parameters.scad>

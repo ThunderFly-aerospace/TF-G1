@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 
 888_3010_prumer_vnitrni = 9.2;

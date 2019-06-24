@@ -69,4 +69,4 @@ module 888_1016(draft){
 
 888_1016(draft);
 
-include <../Parameters.scad>
+include <../parameters.scad>

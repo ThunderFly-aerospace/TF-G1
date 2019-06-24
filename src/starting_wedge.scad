@@ -11,4 +11,4 @@ width = 40;
 
 starting_wedge();
 
-include <../Parameters.scad>
+include <../parameters.scad>

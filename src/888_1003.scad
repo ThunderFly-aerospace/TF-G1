@@ -189,5 +189,5 @@ drop ();
 use <666_1029.scad>
 use <888_1000.scad>
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>
 

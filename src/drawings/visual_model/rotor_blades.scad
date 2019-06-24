@@ -39,4 +39,4 @@ translate([0,0,19.5])
 rotor_blades(draft);
 
 use <../../lib/naca4.scad>
-include <../../../Parameters.scad>
+include <../../../parameters.scad>

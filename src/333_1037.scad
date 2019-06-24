@@ -139,4 +139,4 @@ module 333_1037_doc(length = 970, material_width = 70, twosided = true, draft = 
 use <./lib/naca4.scad>
 use <./lib/bevel.scad>
 use <./lib/dimlines.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

@@ -8,7 +8,7 @@ $fa = 10;
 module 666_2000(draft){
 
 	////
-	
+
 		translate([-hull_wall_thickness,0,0])
 			color([0,0,0.8])
 				import ("../../STL/666_1025.stl");
@@ -95,7 +95,7 @@ module 666_2000(draft){
 		translate([length_of_main_tube - 80 + global_clearance,0,0])
 			rotate([0,90,0])
 					import ("../../STL/666_1028.stl");
-	
+
 
 		translate([length_of_main_tube - 80 + global_clearance + 10,0,0])
 			rotate([0,-90,180])
@@ -254,4 +254,4 @@ use <../motor_imitation.scad>
 
 
 use <./../lib/naca4.scad>
-include <../../Parameters.scad>
+include <../../parameters.scad>

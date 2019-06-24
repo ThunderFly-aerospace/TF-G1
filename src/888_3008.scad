@@ -1,5 +1,5 @@
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>
 draft = false;
  
 magnet_d = 85;

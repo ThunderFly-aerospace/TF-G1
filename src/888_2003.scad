@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 
 module 888_2003 (coupling_wall_thickness, thickness_between_tubes,draft = true){
 

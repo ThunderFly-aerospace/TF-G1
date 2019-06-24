@@ -239,4 +239,4 @@ use <../../drawings/666_2300.scad>
 
 
 use <../../lib/naca4.scad>
-include <../../../Parameters.scad>
+include <../../../parameters.scad>

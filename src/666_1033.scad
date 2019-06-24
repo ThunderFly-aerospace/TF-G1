@@ -16,4 +16,4 @@ module 666_1033(){
 
 use <./lib/naca4.scad>
 use <./lib/curvedPipe.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

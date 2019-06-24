@@ -142,4 +142,4 @@ module 666_1014_B(draft){
 //translate([0,30,0])
 		666_1014_drillhelper(draft);
 
-include <../Parameters.scad>
+include <../parameters.scad>

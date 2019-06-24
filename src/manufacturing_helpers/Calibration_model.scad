@@ -1,4 +1,4 @@
-include <../../Parameters.scad>
+include <../../parameters.scad>
 wall_thickness = main_tube_outer_diameter/5;
 width = wall_thickness * 3 + main_tube_outer_diameter + main_tube_inner_diameter;
 depth = main_tube_outer_diameter + wall_thickness * 2;

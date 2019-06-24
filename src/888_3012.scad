@@ -147,5 +147,5 @@ rotate([0, 180, 0])
     888_3012_A();
 888_3015_A();
 
-include <../Parameters.scad>
+include <../parameters.scad>
 use <888_3015.scad>

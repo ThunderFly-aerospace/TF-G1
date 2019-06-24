@@ -1,5 +1,5 @@
 draft = true;
-include <../Parameters.scad>
+include <../parameters.scad>
 
 rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5

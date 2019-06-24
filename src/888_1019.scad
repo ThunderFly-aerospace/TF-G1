@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 draft = true;
 
 accumulator_spacer_thickness = 22;  // 22mm napocitano na pouziti M3x30 sroubou

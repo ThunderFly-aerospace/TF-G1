@@ -496,4 +496,4 @@ translate([-0.5,0,0])
  	//888_1012_D();
 
 use <./lib/naca4.scad>
-include <../Parameters.scad>
+include <../parameters.scad>

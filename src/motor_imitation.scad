@@ -15,4 +15,4 @@ cylinder(h= 49, r = 49.5/2, $fn = 100);
 
 motor_imitation(draft);
 
-include <../Parameters.scad>
+include <../parameters.scad>

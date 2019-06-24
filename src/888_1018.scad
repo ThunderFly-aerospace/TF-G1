@@ -1,4 +1,4 @@
-include <../Parameters.scad>
+include <../parameters.scad>
 draft = true;
 
 accumulator_plate_thickness = 20;

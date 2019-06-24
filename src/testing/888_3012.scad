@@ -4,7 +4,7 @@
 //    vklada se do velkeho ozubeneho kola
 //
 
-include <../../Parameters.scad>
+include <../../parameters.scad>
 $fn = 100;
 
 difference(){

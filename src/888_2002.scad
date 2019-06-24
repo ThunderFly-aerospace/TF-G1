@@ -167,4 +167,4 @@ fork_angle = 0;
 
 888_2002(draft);
 
-include <../Parameters.scad>
+include <../parameters.scad>
