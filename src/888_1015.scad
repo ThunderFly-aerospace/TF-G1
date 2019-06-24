@@ -24,6 +24,8 @@ Nese 2x servo a kulove lozisko pro rotor.
     bearing_efsm_m = bearing_efsm_12_m;
     bearing_efsm_db = bearing_efsm_12_db;
 
+    rotor_head_limiter_above = 12;
+    rotor_head_limiter_below = 3;
 
     /* bearing_efsm_ag = bearing_efsm_08_ag;
     bearing_efsm_a1 = bearing_efsm_08_a1;
@@ -43,23 +45,13 @@ Nese 2x servo a kulove lozisko pro rotor.
 
 
 
-module 888_1015_platesape(draft){
+module 888_1015_platesape(shift_up = rotor_head_limiter_above, draft){
 
-        translate([-1,0,10]) difference(){
+        translate([0,0,0]) difference(){
             union(){
                     difference(){
                         union(){
-                            /* intersection(){
-                                rotate([0, 90, 0])
-                                    translate([0,0,-50])
-                                        scale([0.3, 1 ,1])
-                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
 
-                                rotate([90, 0, 0])
-                                    translate([0, 0, -50])
-                                        scale([1, 0.3 ,1])
-                                            cylinder(d=joint_size_x, h=100, , $fn = draft ? 10 : 150);
-                            } */
                             intersection(){
                                 intersection_for(ox=[-10, 0, 10]){
                                         rotate([ox, 90, 0])
@@ -68,7 +60,7 @@ module 888_1015_platesape(draft){
 
                                         rotate([90+ox, 0, 0])
                                             translate([0,0,-50])
-                                                cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
+                                                cylinder(d=joint_size_x, h=100, $fn = draft ? 10 : 150);
 
                                         rotate([ox, 90+ox, 0])
                                             translate([0,0,-50])
@@ -76,7 +68,7 @@ module 888_1015_platesape(draft){
 
                                         rotate([90+ox, ox, 0])
                                             translate([0,0,-50])
-                                                cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
+                                                cylinder(d=joint_size_x, h=100, $fn = draft ? 10 : 150);
 
                                 }
                                 intersection_for(oy=[-10, 0, 10]){
@@ -86,40 +78,27 @@ module 888_1015_platesape(draft){
 
                                         rotate([90, oy, 0])
                                             translate([0,0,-50])
-                                                cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
+                                                cylinder(d=joint_size_x, h=100, $fn = draft ? 10 : 150);
                                 }
                             }
 
-/*
-                                rotate([0, 90, 0])
-                                    translate([0,0,-50])
-                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
-                                rotate([0, 90+10, 0])
-                                    translate([0,0,-50])
-                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
-                                rotate([0, 90-10, 0])
-                                    translate([0,0,-50])
-                                            cylinder(d=joint_size_y, h=100, $fn = draft ? 10 : 150);
-
-                                rotate([90, 0, 0])
-                                    translate([0, 0, -50])
-                                            cylinder(d=joint_size_x, h=100, $fn = draft ? 10 : 150); */
-
-                                /* translate([-100, -100, -200])
-                                    cube(200); */
-                            //}
                     }
 
             // plošky na svrchní straně
                     for (i=[[rotx, 0, 0], [-rotx, 0, 0], [0, roty, 0], [0, -roty, 0],
                             [rotx, roty, 0], [-rotx, roty, 0], [rotx, roty, 0], [rotx, -roty, 0],
                             [rotx, -roty, 0], [-rotx, -roty, 0], [-rotx, roty, 0], [-rotx, -roty, 0]]) {
-                        translate([0, 0, bearing_efsm_ag - bearing_efsm_a1 -1 + 5])
+                        //translate([0, 0, 0])
                         rotate(i)
-                            translate([-50, -50, 0])
+                            translate([-50, -50, shift_up])
                                 cube([100, 100, 50]);
                     }
+
+            // vyrez na prostrceni hornihu dilu
+                    translate([0, -15/2, 0])
+                        cube([100, 15, 20]);
                 }
+
 
 
                 x = joint_size_x + joint_wall_thickness*2;
@@ -139,14 +118,14 @@ module 888_1015(draft){
     depth = 2*plate_thickness + coupling_depth_666_1026;
 	depth_pipe = 30;
 	//height = 68.5;
-    height = 65;
+    height = 74;
 
 	rake_angle = 9;		//úhel horního zkosení
 
 	servo_width = 21;	//šřka otvoru pro servo
 	servo_height = 42;	//výška otvoru pro servo
 
-    servo_pos_z = 12;
+    servo_pos_z = 7;
 
 	//příruba
 	flange_width = 40;						//h
@@ -185,7 +164,7 @@ module 888_1015(draft){
                     translate([-width/2-5,-depth/2,height+20])
                         cube ([width+5, depth, 10]);
                 }
-                translate([-5,0,height+bearing_efsm_a1])
+                translate([-10,0, height - rotor_head_limiter_below])
                     for (i=[[rotx, rake_angle, 0], [-rotx, rake_angle, 0], [0, roty + rake_angle, 0], [0, -roty + rake_angle, 0],
                             [rotx, roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [rotx, roty + rake_angle, 0], [rotx, -roty + rake_angle, 0],
                             [rotx, -roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0]]) {
@@ -202,10 +181,12 @@ module 888_1015(draft){
             //            sphere(r=3);
 
             intersection(){
-                translate([-5,0,height])
+                translate([-10,0,height])
                     rotate([0, rake_angle, 0])
-                        888_1015_platesape();
+                        888_1015_platesape(rotor_head_limiter_above, draft);
             }
+
+            %translate([-10, 0, height]) sphere(5);
 
         }
 
@@ -269,7 +250,7 @@ module 888_1015(draft){
 
                 translate([width/2 - 4 - 5.5-i[0],-depth/2 + M2_5_screw_length, servo_pos_z + i[1]]){
                     rotate([0, -90, 90]){
-        					#cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 10 : 100 );
+        					cylinder (h = M2_5_screw_length + global_clearance, r = M2_5_screw_diameter/2, $fn = draft ? 10 : 100 );
         					translate([0, 0, M2_5_pocket_depth])
         						rotate([0, 0, 90])
         							cylinder (h = M2_5_nut_height, r = M2_5_nut_diameter/2, $fn = 6);
@@ -281,7 +262,7 @@ module 888_1015(draft){
             }
         }
 
-        translate([-4.6,0,height+8.2])
+        translate([-10,0,height])
             rotate([0, rake_angle, 0]){
 
                 // základní tvar pro prirubu
@@ -339,6 +320,7 @@ module 888_1015(draft){
 
 difference(){
     888_1015(draft);
+    //888_1015_platesape();
     //cube(500);
     //translate([-250,-250,-460]) cube(500);
 }
