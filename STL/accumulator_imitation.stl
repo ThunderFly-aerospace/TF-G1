@@ -1,0 +1,86 @@
+solid model
+  facet normal -1 -0 0
+    outer loop
+      vertex 0 0 0
+      vertex 0 0 38.65
+      vertex 0 40.61 38.65
+    endloop
+  endfacet
+  facet normal -0 0 -1
+    outer loop
+      vertex 0 0 0
+      vertex 0 40.61 0
+      vertex 129.4 40.61 0
+    endloop
+  endfacet
+  facet normal -1 0 0
+    outer loop
+      vertex 0 0 0
+      vertex 0 40.61 38.65
+      vertex 0 40.61 0
+    endloop
+  endfacet
+  facet normal 0 -1 -0
+    outer loop
+      vertex 0 0 0
+      vertex 129.4 0 0
+      vertex 129.4 0 38.65
+    endloop
+  endfacet
+  facet normal 0 -1 0
+    outer loop
+      vertex 0 0 0
+      vertex 129.4 0 38.65
+      vertex 0 0 38.65
+    endloop
+  endfacet
+  facet normal 0 0 -1
+    outer loop
+      vertex 0 0 0
+      vertex 129.4 40.61 0
+      vertex 129.4 0 0
+    endloop
+  endfacet
+  facet normal 0 0 1
+    outer loop
+      vertex 0 0 38.65
+      vertex 129.4 0 38.65
+      vertex 0 40.61 38.65
+    endloop
+  endfacet
+  facet normal 0 1 0
+    outer loop
+      vertex 0 40.61 0
+      vertex 0 40.61 38.65
+      vertex 129.4 40.61 0
+    endloop
+  endfacet
+  facet normal -0 0 1
+    outer loop
+      vertex 0 40.61 38.65
+      vertex 129.4 0 38.65
+      vertex 129.4 40.61 38.65
+    endloop
+  endfacet
+  facet normal 0 1 -0
+    outer loop
+      vertex 0 40.61 38.65
+      vertex 129.4 40.61 38.65
+      vertex 129.4 40.61 0
+    endloop
+  endfacet
+  facet normal 1 0 0
+    outer loop
+      vertex 129.4 0 0
+      vertex 129.4 40.61 0
+      vertex 129.4 0 38.65
+    endloop
+  endfacet
+  facet normal 1 -0 0
+    outer loop
+      vertex 129.4 0 38.65
+      vertex 129.4 40.61 0
+      vertex 129.4 40.61 38.65
+    endloop
+  endfacet
+endsolid model
