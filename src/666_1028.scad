@@ -3,10 +3,13 @@ DOC_SCALING_FACTOR = 100;
 DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
+include <../Parameters.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
+//poloha sroubu, drzici tyc, od nabezne hrany
+screw_for_pipe_pos = 50;
 
 draft = true;
 
@@ -40,11 +43,19 @@ module 666_1028(draft){
             union(){
                 difference(){
                     union(){
-                        translate ([140,75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
+                        translate ([140, 75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
                             rotate([90,-87,0])
                             {
 
                                 hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
+
+																//vyztuha pro tyc d=10,6 mm
+																translate([0, 0, 75])
+																		rotate([0, 90, 0])
+																				difference() {
+																						cylinder(h=62, d=13, $fn=50);
+																						cylinder(h=60, d=tube_for_undercarriage_outer_diameter, $fn=50);
+																				}
 
                                 //výztuhy
                               	intersection(){
@@ -52,14 +63,14 @@ module 666_1028(draft){
                                     union(){
                                         translate([70,-15,-55])
                                        		rotate([45,0,90])
-                                        		for (i = [0:17]) { // opakovani cyklu
+                                        		for (i = [0:8]) { // opakovani cyklu
                                                 		translate([0, i * 25,-15])  //sude prorezy
                                                     		cube([30, wall_thickness, 220]);
                     		       	            }
 
                     		       	    translate([-60,-15,85])
                                        		rotate([135,0,90])
-                                        		for (i = [0:17]) { // opakovani cyklu
+                                        		for (i = [0:8]) { // opakovani cyklu
                                                 		translate([0, i * 25,-15])  //sude prorezy
                                                     		cube([30, wall_thickness, 230]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                     		       	            }
@@ -89,9 +100,19 @@ module 666_1028(draft){
             	            }
                         }
 
-
-
                     }
+
+										//otvor pro tyc d=10,6mm
+												translate ([140,75,-1])
+												rotate([90,-87,0])
+												translate([0, 0, 75])
+												rotate([0, 90, 0])
+														cylinder(h=60, d=tube_for_undercarriage_outer_diameter, $fn=50);
+
+										//dira na sroub M5x50 pro tyc
+										rotate([0,-87,0])
+										translate([screw_for_pipe_pos, 0, -170])
+												cylinder (h=60, d=M5_screw_diameter, $fn=50);
 
                     //vyříznutí otvoru pro směrovku
                     translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
@@ -129,13 +150,6 @@ module 666_1028(draft){
         // Start of substraction objects
 
 
-        //tube
-
-        translate([0,0,-10])
-            cylinder (h = 90, r = main_tube_outer_diameter/2, $fn= draft ? 50 : 200);
-
-        translate ([0,0,80])
-            cylinder (h = 15, r1 = main_tube_outer_diameter/2, r2 = 0, $fn = draft ? 50 : 200);
 
         //screw
         translate ([-150*0.4,0,150*0.4/2])
@@ -145,15 +159,6 @@ module 666_1028(draft){
         translate ([-150*0.4,0,150*0.4])
             rotate ([0,90,0])
                 cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
-
-        //otvory pro snadnější montáž
-        translate ([-150*0.4 + 100,0,150*0.4/2])
-            rotate ([0,90,0])
-                cylinder (h = 200, r = M3_screw_diameter, $fn = 20);
-
-        translate ([-150*0.4 + 100,0,150*0.4])
-            rotate ([0,90,0])
-                cylinder (h = 200, r = M3_screw_diameter, $fn = 20);
 
         //nut
         translate([17.5,0,150*0.4])
