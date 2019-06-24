@@ -111,6 +111,11 @@ M2_5_nut_height = 2.3;
 M2_5_nut_diameter = 6;
 M2_5_nut_pocket = 5.1;
 
+//M3 ISO7380
+M3_ISO7380_head_height = 1.5;
+M3_ISO7380_nut_height = 3;
+M3_ISO7380_nut_diameter = 5.7+0.5;
+
 
 //šroub servo
 Servo_screw = 1.5;
