@@ -2,6 +2,10 @@
 
 include <../parameters.scad>
 
+global_clearance = 0.5;
+
+layer_thickness = 0.3;
+
 module 888_1029 (nut = true) {
     difference() {
         union() {
@@ -26,7 +30,7 @@ module 888_1029 (nut = true) {
           }
 
         //dira na M5 sroub
-        translate([0, 0, 608_bearing_thickness+global_clearance])
+        translate([0, 0, 608_bearing_thickness + layer_thickness])
             cylinder (h=wheel_inner_thickness, d=608_bearing_outer_diameter-6, $fn=60);
 
         //dira pro lozisko 608
