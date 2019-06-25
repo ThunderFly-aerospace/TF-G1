@@ -29,7 +29,7 @@ module 888_1029 (nut = true) {
 
           }
 
-        //dira na M5 sroub
+        //dira na vlozku pro M4 sroub
         translate([0, 0, 608_bearing_thickness + layer_thickness])
             cylinder (h=wheel_inner_thickness, d=608_bearing_outer_diameter-6, $fn=60);
 
