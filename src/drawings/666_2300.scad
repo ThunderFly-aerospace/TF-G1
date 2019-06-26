@@ -11,8 +11,23 @@ delka_listu = 970;
 sirka_listu = 50;
 uchytna_cast = 100;
 
-translate([0,0,19.5])
-	rotate([14,180+8,0])
+//angles from 888_1015
+rake_angle = 9; 
+rotx = 20/2;
+roty = 20/2;
+
+motor_distance = 79.03; //888_1020 vzdalenost prerotatoru od hlavni pos_y
+motor_diameter = 35+2;	//888_1020
+
+
+prerotator_imitation_height = 48; 	//prerotator_imitation
+prerotator_imitation_diameter = 35; //prerotator_imitation
+
+plate_bearing_center_distance = 14;     //888_1020 vzdalenost horni spodni steny placky od stredu loziska
+
+/*
+translate([0,0,45])
+	rotate([roty/2 + rake_angle,180 + rake_angle,0])
 		union(){
 
 			union(){
@@ -98,19 +113,29 @@ translate([0,0,19.5])
 				color([0.5,0,1])
 					import ("../../STL/rotor_pulley.stl");
 		}
-
+*/
+union(){
 	//sestava rotorové hlavy
-	translate([0,0,-120])
 		rotate([0,0,90])
 			color([0.5,1,1])
 				import ("../../STL/888_1101.stl");
 
 	//prerotator
-	translate([-7,59,-111.8])
-		rotate([-14,8,0])	
+	//translate([0, motor_distance, -global_clearance/2-10])
+//translate([-prerotator_imitation_diameter/4,motor_distance - prerotator_imitation_diameter/2,0])
+	//translate([-7,59,-111.8])
+	//translate([0,motor_distance,plate_bearing_center_distance/2])
+	//rotate([-rake_angle ,rake_angle,0])	
+		//translate([-3,motor_distance - prerotator_imitation_diameter/1.5,prerotator_imitation_height/2.3])
+		translate([0,motor_distance,plate_bearing_center_distance/2])	
+			rotate([-rake_angle,rake_angle,0])	
 				import ("../../STL/imitation/prerotator_imitation.stl");
 
-					
+	//prerotator pulley motor
+	translate([0,0,50])
+				import ("../../STL/prerotator_pulley_motor.stl");
+
+}				
 
 }
 
