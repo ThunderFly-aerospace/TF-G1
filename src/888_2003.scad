@@ -11,21 +11,20 @@ module 888_2003 (coupling_wall_thickness, thickness_between_tubes,draft = true){
     screw_length = 30;
     magnet_diameter = 75;
     distance_between_screws = 42.5;
-
-
+    delka = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
     difference(){
 
         union(){
-            translate([-(coupling_width_666_1004/2), - depth_666_1004 + main_tube_outer_diameter/2 + coupling_wall_thickness,0])
-                  cube([coupling_width_666_1004, depth_666_1004, height_666_1004]);
+            translate([-(coupling_width_666_1004/2), - (main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness) + main_tube_outer_diameter/2 + coupling_wall_thickness,0])
+                cube([coupling_width_666_1004, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, height_666_1004]);
 
 
             hull(){
 
-                translate([-(coupling_width_666_1004/2), - depth_666_1004 + main_tube_outer_diameter/2 + coupling_wall_thickness,0])
+                translate([-(coupling_width_666_1004/2), - (main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness) + main_tube_outer_diameter/2 + coupling_wall_thickness - depth_666_1004/4,0])
                       cube([coupling_width_666_1004, depth_666_1004/4, height_666_1004]);
 
-                translate([0, - depth_666_1004 + main_tube_outer_diameter/2 + coupling_wall_thickness , magnet_displacement])
+                translate([0, - (main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness) + main_tube_outer_diameter/2 + coupling_wall_thickness - depth_666_1004/4, magnet_displacement])
                     rotate([90, 0, 0])
                         cylinder(d = magnet_diameter, h = 5, $fn = draft?50:100);
             }
@@ -77,4 +76,3 @@ module 888_2003 (coupling_wall_thickness, thickness_between_tubes,draft = true){
 
 
 888_2003 (coupling_wall_thickness, thickness_between_tubes, draft = true);
-
