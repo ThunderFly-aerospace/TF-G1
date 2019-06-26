@@ -10,7 +10,7 @@ roty = 0;
 use <888_1015.scad>
 use <888_1020.scad>
 use <lib/servo.scad>
-use <lib/efsm.scad>
+use <lib/igus.scad>
 
 888_1101_dev(){
 color([0.2, 0.2, 0.8])
@@ -48,7 +48,7 @@ function 888_1101_rotation() = [0, 0, 0];
 module 888_1101(){
     translate([rotor_head_bearind_x_shift, 0, rotor_head_height])
         rotate([0,rotor_head_rank_angle,0])
-            #efsm_12();
+            efsm_12();
 
     888_1015();
 
