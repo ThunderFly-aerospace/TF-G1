@@ -11,7 +11,6 @@ module 888_2003 (coupling_wall_thickness, thickness_between_tubes,draft = true){
     screw_length = 30;
     magnet_diameter = 75;
     distance_between_screws = 42.5;
-    delka = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
     difference(){
 
         union(){
