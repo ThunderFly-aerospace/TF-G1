@@ -11,6 +11,7 @@ use <888_1015.scad>
 use <888_1020.scad>
 use <lib/servo.scad>
 use <lib/igus.scad>
+use <lib/motor.scad>
 
 888_1101_dev(){
 color([0.2, 0.2, 0.8])
@@ -46,16 +47,21 @@ function 888_1101_translation() = [rotor_head_width/2 - 17.5, 0, -height_666_102
 function 888_1101_rotation() = [0, 0, 0];
 
 module 888_1101(){
-    translate([rotor_head_bearind_x_shift, 0, rotor_head_height])
+    translate([rotor_head_bearing_x_shift, 0, rotor_head_height])
         rotate([0,rotor_head_rank_angle,0])
             efsm_12();
 
     888_1015();
 
-    translate([rotor_head_bearind_x_shift,0, rotor_head_height])
-        rotate([rotx,roty,0])
+    translate([rotor_head_bearing_x_shift,0, rotor_head_height])
+        rotate([rotor_head_pitch, rotor_head_roll, 0])
             translate([0,0,0])
                 888_1020();
+
+    translate([rotor_head_bearing_x_shift, 0, rotor_head_height])
+        rotate([rotor_head_pitch, rotor_head_roll, 0])
+            translate([rotor_head_prerotator_distance, 0, 0])
+                motor_prerotator();
 
 }
 

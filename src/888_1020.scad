@@ -16,7 +16,7 @@ module 888_1020(draft = true){
     // 666_1236
     // 666_1007
     // 666_1212
-    motor_distance = 79.03; // vzdalenost prerotatoru od hlavni pos_y
+    motor_distance = rotor_head_prerotator_distance; // vzdalenost prerotatoru od hlavni pos_y
     motor_diameter = 35+2;
     motor_axis_diameter = 6.3;
     motor_puller_diameter = 20;
@@ -64,8 +64,6 @@ module 888_1020(draft = true){
 
 
 
-      //translate([0,0, plate_bearing_center_distance/2])
-      translate([0,0, 0])
         difference(){
             union(){
                 hull(){
@@ -110,15 +108,15 @@ module 888_1020(draft = true){
                     } */
 
 
-                    // Otvory pro pridelani motoru
-                    translate([motor_distance, 0, -global_clearance/2 + rotor_head_limiter_above])
-                        rotate([0,0,45]){
-                            for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
-                                translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -motor_sink]){
-                                        cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = motor_sink, $fn = draft?10:60);
-                                }
+                // Otvory pro pridelani motoru
+                translate([motor_distance, 0, -global_clearance/2 + rotor_head_limiter_above])
+                    rotate([0,0,45]){
+                        for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
+                            translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, -motor_sink]){
+                                    cylinder(d2 = M3_screw_diameter*4, d1 = M3_screw_diameter*2, h = motor_sink, $fn = draft?10:60);
                             }
                         }
+                    }
             }
 
             // vyrez pro dil 888_1015
