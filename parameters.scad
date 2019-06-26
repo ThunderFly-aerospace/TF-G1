@@ -20,6 +20,15 @@ rotor_blade_depth = 50;     // hloubka rotorového listu
 rotor_flap0 = 2;
 rotor_delta = 20;
 
+
+// parametry rotorove hlavy
+
+rotor_head_height = 78; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
+rotor_head_width = 70; // je to "sirka" v ose X
+rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
+rotor_head_bearind_x_shift = -10; // posun kuloveho loziska dopredu dozadu.
+
+
 // nastavení parametrů motoru
 
 engine_angle = 0;

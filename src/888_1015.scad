@@ -114,13 +114,11 @@ module 888_1015(draft){
 
 	plate_thickness = 1.5;
 
-	width = 70;
+	width = rotor_head_width;
     depth = 2*plate_thickness + coupling_depth_666_1026;
 	depth_pipe = 30;
-	//height = 68.5;
-    height = 74;
-
-	rake_angle = 9;		//úhel horního zkosení
+    height = rotor_head_height;
+	rake_angle = rotor_head_rank_angle;		//úhel horního zkosení
 
 	servo_width = 21;	//šřka otvoru pro servo
 	servo_height = 42;	//výška otvoru pro servo
