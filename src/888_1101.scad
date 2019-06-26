@@ -74,7 +74,7 @@ difference(){
 
 
 
-function 888_1101_translation() = [rotor_head_width/2, 0, -height_666_1026];
+function 888_1101_translation() = [rotor_head_width/2 - 17.5, 0, -height_666_1026];
 function 888_1101_rotation() = [0, 0, 0];
 
 module 888_1101(){
