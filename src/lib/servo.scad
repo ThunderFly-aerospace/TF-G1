@@ -1,3 +1,7 @@
+//parametry pro serva
+//značení parametrů: https://www.servocity.com/media/wysiwyg/products/servos/hitec-servos/standard_servos/31422S/Standard_Servo_Schematic_2_1_.jpg
+
+
 module MG995()
 {
   //Model for the TowerPro MG995 Servo
