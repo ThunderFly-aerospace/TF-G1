@@ -12,7 +12,7 @@ sirka_listu = 50;
 uchytna_cast = 100;
 
 //angles from 888_1015
-rake_angle = 9; 
+rake_angle = 9;
 rotx = 20/2;
 roty = 20/2;
 
@@ -23,7 +23,7 @@ motor_diameter = 35+2;	//888_1020
 prerotator_imitation_height = 48; 	//prerotator_imitation
 prerotator_imitation_diameter = 35; //prerotator_imitation
 
-plate_bearing_center_distance = 14;     //888_1020 vzdalenost horni spodni steny placky od stredu loziska
+//plate_bearing_center_distance = 14;     //888_1020 vzdalenost horni spodni steny placky od stredu loziska
 
 /*
 translate([0,0,45])
@@ -35,7 +35,7 @@ translate([0,0,45])
 					rotate([rotor_flap0,180, - rotor_delta])
 						union(){
 						//list
-							
+
 							translate([-sirka_listu/2, delka_listu/2,6])
 								rotate([0,rotor_blade_AOA,0])
 										import ("../../STL/rotor_blade.stl");
@@ -71,7 +71,7 @@ translate([0,0,45])
 					rotate([rotor_flap0,180, - rotor_delta])
 						union(){
 							//list
-							
+
 							translate([-sirka_listu/2, delka_listu/2,6])
 								rotate([0,rotor_blade_AOA,0])
 										import ("../../STL/rotor_blade.stl");
@@ -100,7 +100,7 @@ translate([0,0,45])
 							color([1,0,1])
 								import ("../../STL/666_1232.stl");
 		}
-			
+
 		//domek
 		translate([0,0,25])
 			rotate([0,180,90 ])
@@ -117,7 +117,7 @@ translate([0,0,45])
 union(){
 	//sestava rotorové hlavy
 		rotate([0,0,90])
-			color([0.5,1,1])
+			color([0.5,1,1, 0.5])
 				import ("../../STL/888_1101.stl");
 
 	//prerotator
@@ -125,22 +125,33 @@ union(){
 //translate([-prerotator_imitation_diameter/4,motor_distance - prerotator_imitation_diameter/2,0])
 	//translate([-7,59,-111.8])
 	//translate([0,motor_distance,plate_bearing_center_distance/2])
-	//rotate([-rake_angle ,rake_angle,0])	
+	//rotate([-rake_angle ,rake_angle,0])
 		//translate([-3,motor_distance - prerotator_imitation_diameter/1.5,prerotator_imitation_height/2.3])
-		translate([0,motor_distance,plate_bearing_center_distance/2])	
-			rotate([-rake_angle,rake_angle,0])	
-				import ("../../STL/imitation/prerotator_imitation.stl");
+		//translate([0,motor_distance,plate_bearing_center_distance/2])
+		//	rotate([-rake_angle,rake_angle,0])
+		//		import ("../../STL/imitation/prerotator_imitation.stl");
 
 	//prerotator pulley motor
-	translate([0,0,50])
-				import ("../../STL/prerotator_pulley_motor.stl");
 
-}				
 
+        rotate([0, 0, 90])
+            translate(888_1101_translation() + [rotor_head_bearing_x_shift,0, rotor_head_height])
+                rotate(888_1101_rotation())
+                    translate(888_1101_prerotpulley_translation())
+    		            import ("../../STL/prerotator_pulley_motor.stl");
+
+        rotate([0, 0, 90])
+            translate(888_1101_translation() + [rotor_head_bearing_x_shift,0, rotor_head_height])
+                rotate(888_1101_rotation())
+                    translate(888_1101_rotorpulley_translation())
+    		            import ("../../STL/rotor_pulley.stl");
+
+    }
 }
 
 //rotate([0,0,-20])
 666_2300(draft);
 
 use <./../lib/naca4.scad>
+use <./../888_1101.scad>
 include <../../parameters.scad>

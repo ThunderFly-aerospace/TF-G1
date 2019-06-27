@@ -33,6 +33,10 @@ rotor_head_bearing_x_shift = -10; // posun kuloveho loziska dopredu dozadu.
 
 rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
 
+rotor_head_plate_bearing_center_distance = 14;     // vzdalenost horni spodni steny placky od stredu loziska
+rotor_head_limiter_above = 12; // jak moc vysoko ma byt divnotvar nad stredem loziska
+rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loziska
+
 // nastavení parametrů motoru
 
 engine_angle = 0;

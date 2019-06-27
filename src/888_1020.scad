@@ -36,13 +36,6 @@ module 888_1020(draft = true){
     plate_size_z = 5;
 
 
-    plate_bearing_center_distance = 14;     // vzdalenost horni spodni steny placky od stredu loziska
-
-
-    rotor_head_limiter_above = 12; // jak moc vysoko ma byt divnotvar nad stredem loziska
-    rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loziska
-
-
     joint_size_x = 60+0.5; // delka dorazu podle osy x
     joint_size_y = 55+0.5; //delka dorazu podle osy y
     joint_wall_thickness = 4;
@@ -187,7 +180,7 @@ module 888_1020(draft = true){
                 cube([hall_length, hall_width, hall_thickness+global_clearance]);
 
             difference(){
-                translate([hall_distance + hall_length/2 + 2, -3, - plate_bearing_center_distance + rotor_head_limiter_above])
+                translate([hall_distance + hall_length/2 + 2, -3, - rotor_head_plate_bearing_center_distance + rotor_head_limiter_above])
                     translate([0,0, plate_size_z+8])
                         rotate([0,-40,0])
                             translate([0,0,-20])
