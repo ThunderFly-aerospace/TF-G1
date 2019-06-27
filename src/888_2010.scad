@@ -3,7 +3,7 @@
 include <../parameters.scad>
 
 wheel_holder_thickness = 0.9*main_tube_outer_diameter;
-wheel_holder_height = 28;
+wheel_holder_height = main_tube_outer_diameter*1.5;
 wheel_holder_diameter = main_tube_outer_diameter + wheel_holder_thickness;
 
 distance_between_parts = global_clearance*4;
