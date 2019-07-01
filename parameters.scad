@@ -55,7 +55,7 @@ coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
 608_bearing_outer_diameter = 22.3;
-608_bearing_inner_diameter = 8-0.3;
+608_bearing_inner_diameter = 8-0.3+0.4;
 608_bearing_thickness = 7.1;
 
 //parametry mechoveho kola
