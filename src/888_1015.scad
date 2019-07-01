@@ -38,7 +38,7 @@ Nese 2x servo a kulove lozisko pro rotor.
     roty = 20/2;
 
 
-    joint_size_x = 60; // delka dorazu podle osy x
+    joint_size_x = 90; // delka dorazu podle osy x
     joint_size_y = 55; //delka dorazu podle osy y
 
     joint_wall_thickness = 4;
@@ -162,7 +162,7 @@ module 888_1015(draft){
                     translate([-width/2-5,-depth/2,height+20])
                         cube ([width+5, depth, 10]);
                 }
-                translate([-10,0, height - rotor_head_limiter_below])
+                translate([rotor_head_bearing_x_shift,0, height - rotor_head_limiter_below])
                     for (i=[[rotx, rake_angle, 0], [-rotx, rake_angle, 0], [0, roty + rake_angle, 0], [0, -roty + rake_angle, 0],
                             [rotx, roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [rotx, roty + rake_angle, 0], [rotx, -roty + rake_angle, 0],
                             [rotx, -roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0], [-rotx, roty + rake_angle, 0], [-rotx, -roty + rake_angle, 0]]) {
@@ -179,7 +179,7 @@ module 888_1015(draft){
             //            sphere(r=3);
 
             intersection(){
-                translate([-10,0,height])
+                translate([rotor_head_bearing_x_shift,0,height])
                     rotate([0, rake_angle, 0])
                         888_1015_platesape(rotor_head_limiter_above, draft);
             }
@@ -260,7 +260,7 @@ module 888_1015(draft){
             }
         }
 
-        translate([-10,0,height])
+        translate([-rotor_head_bearing_x_shift,0,height])
             rotate([0, rake_angle, 0]){
 
                 // základní tvar pro prirubu
