@@ -47,7 +47,6 @@ module 888_1020(draft = true){
 
     back_part_crop = 20;
 
-
     // pro EFSM-8
 
     /* bearing_inner_diameter = 8;
