@@ -1,10 +1,12 @@
+include <../parameters.scad>
+
 fork_wheel_width = 50 ;
 fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;
 length = 120;
 
-pipe_diameter = 8;
+pipe_diameter = tube_for_undercarriage_outer_diameter;
 pipe_holder_length = 20;
 pipe_holder_thickness = pipe_diameter/2+3;
 
