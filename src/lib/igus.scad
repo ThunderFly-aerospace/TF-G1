@@ -53,7 +53,12 @@ module kstm_10(){
 data_kstm_center_height = [["5",7],["6",10],["8",10],["10",14]];
 function kstm_center_height(type) = data_kstm_center_height[search(type, data_kstm_center_height)[0]][1];
 
-echo(kstm_center_height("5"));
+data_kstm_hole_distance = [["5",25], ["6",33], ["8",33], ["10",46], , ["12",46]];
+function kstm_hole_distance(type) = data_kstm_hole_distance[search(type, data_kstm_hole_distance)[0]][1];
+
+data_kstm_thickness = [["5",25], ["6",33], ["8",33], ["10",46], , ["12",46]];
+function kstm_thickness(type) = data_kstm_thickness[search(type, data_kstm_thickness)[0]][1];
+
 
 translate([0, 0,  kstm_center_height("5")]) kstm_05();
 translate([0, 20, kstm_center_height("6")]) kstm_06();
