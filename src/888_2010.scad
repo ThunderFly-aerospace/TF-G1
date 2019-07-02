@@ -73,17 +73,17 @@ module 888_2010_2 () {
         translate([-distance_between_parts/2, -wheel_holder_diameter/2, -1])
             cube (wheel_holder_diameter);
 
-    //dira pro bocni trubku
+    //dira pro bocni trubku d=10 mm
         translate([-wheel_holder_diameter-main_tube_outer_diameter/2-5, 0, wheel_holder_height/2])
             rotate ([0,90,0])
                 cylinder (h=wheel_holder_diameter, d=tube_for_undercarriage_outer_diameter, $fn=50);
 
     //otvor na M3 sroub pro bocni trubku
-        translate([-22, 0, -1]) {
+        translate([-32, 0, -1]) {
             cylinder(h=wheel_holder_height+2, d=M3_screw_diameter, $fn=50);
             cylinder(h=M3_screw_head_height+1, d=M3_nut_diameter, $fn=50);
         }
-        translate([-22, 0, wheel_holder_height-M3_nut_height])
+        translate([-32, 0, wheel_holder_height-M3_nut_height])
             cylinder(h=M3_nut_height+1, d=M3_nut_diameter, $fn=6);
 
     //otvory pro M3x20 srouby pro dotazeni na trubku
