@@ -59,8 +59,8 @@ function kstm_hole_distance(type) = data_kstm_hole_distance[search(type, data_ks
 data_kstm_thickness = [["5",25], ["6",33], ["8",33], ["10",46], , ["12",46]];
 function kstm_thickness(type) = data_kstm_thickness[search(type, data_kstm_thickness)[0]][1];
 
-
+/*
 translate([0, 0,  kstm_center_height("5")]) kstm_05();
 translate([0, 20, kstm_center_height("6")]) kstm_06();
 translate([0, 40, kstm_center_height("8")]) kstm_08();
-translate([0, 60, kstm_center_height("10")]) kstm_10();
+translate([0, 60, kstm_center_height("10")]) kstm_10(); */

@@ -87,10 +87,30 @@ module 888_2013(draft) {
                         cylinder(d = M4_nut_diameter, h = 50, $fn =6);
                     translate([-kstm_hole_distance("10")/2, 0, 15/2-4])
                         cylinder(d = M4_nut_diameter, h = 50, $fn = 6);
-            }
+                }
     }
 }
 
+module 888_2013_drillhelper(){
+
+    difference(){
+        cube([main_tube_outer_diameter+20, main_tube_outer_diameter+20, 888_2013_width], center = true);
+
+        cylinder( d = main_tube_outer_diameter, h = 888_2013_width, center = true);
+
+        translate([0, 0, 888_2013_width/4])
+            rotate([90, 0, 0])
+                cylinder( d = M4_screw_diameter, h = 100, center = true);
+
+        translate([0, 0, -888_2013_width/4])
+            rotate([90, 0, 0])
+                cylinder( d = M4_screw_diameter, h = 100, center = true);
+
+    }
+
+}
 
 
 888_2013(draft);
+
+//888_2013_drillhelper();
