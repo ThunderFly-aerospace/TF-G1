@@ -7,7 +7,7 @@ cylinder_1_diameter = 608_bearing_outer_diameter+2;
 cylinder_2_thickness = 3;
 cylinder_2_diameter = 608_bearing_inner_diameter+5;
 
-module 888_1030 () {
+module 888_2012 () {
     difference() {
         union() {
             cylinder(h=cylinder_1_thickness, d=cylinder_1_diameter, $fn=50 );
@@ -20,4 +20,4 @@ module 888_1030 () {
     }
 }
 
-888_1030();
+888_2012();

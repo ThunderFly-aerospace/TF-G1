@@ -2,8 +2,8 @@
 
 
 include <../parameters.scad>
-use <888_1029.scad>
-use <888_1030.scad>
+use <888_2011.scad>
+use <888_2012.scad>
 use <888_1027.scad>
 
 module wheel_tiere(){
@@ -19,10 +19,10 @@ module wheel_tiere(){
 }
 
 wheel_tiere();
-translate([0, wheel_inner_thickness/2, 0]) rotate([90, 0, 0]) 888_1029(true);
-translate([0, -wheel_inner_thickness/2, 0]) rotate([-90, 0, 0]) 888_1029(false);
-translate([0, wheel_inner_thickness/2+5, 0]) rotate([90, 0, 0]) 888_1030();
-translate([0, -wheel_inner_thickness/2-5, 0]) rotate([-90, 0, 0]) 888_1030();
+translate([0, wheel_inner_thickness/2, 0]) rotate([90, 0, 0]) 888_2011(true);
+translate([0, -wheel_inner_thickness/2, 0]) rotate([-90, 0, 0]) 888_2011(false);
+translate([0, wheel_inner_thickness/2+5, 0]) rotate([90, 0, 0]) 888_2012();
+translate([0, -wheel_inner_thickness/2-5, 0]) rotate([-90, 0, 0]) 888_2012();
 
 //vidlice
 translate ([-100+0.1*100, 0, -10])

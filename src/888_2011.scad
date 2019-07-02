@@ -6,7 +6,7 @@ global_clearance = 0.5;
 
 layer_thickness = 0.3;
 
-module 888_1029 (nut = true) {
+module 888_2011 (nut = true) {
     difference() {
         union() {
             cylinder(h=wheel_disc_upper_thickness, d=wheel_disc_diameter, $fn=50);
@@ -39,4 +39,4 @@ module 888_1029 (nut = true) {
     }
 }
 
-888_1029(true);
+888_2011(true);
