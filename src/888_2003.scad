@@ -52,7 +52,7 @@ module 888_2003 (coupling_wall_thickness, thickness_between_tubes,draft = true){
            rotate ([0,90,0])
                 cylinder (h = M3_screw_head_height + global_clearance, r = M3_nut_diameter/2, $fn = 6);
 
-        translate([distance_between_screws/2, - depth_666_1004 + main_tube_outer_diameter/2, magnet_displacement]) 
+        translate([distance_between_screws/2,- (main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness) + main_tube_outer_diameter/2 + coupling_wall_thickness - depth_666_1004/4-5, magnet_displacement]) 
             rotate([-90, 0, 0])
             {
                 cylinder(d = M4_screw_diameter, h = 10 + global_clearance, $fn=50);
@@ -60,7 +60,7 @@ module 888_2003 (coupling_wall_thickness, thickness_between_tubes,draft = true){
                    cylinder(d = M4_nut_diameter, h = 50 * M4_nut_height, $fn = 6);
             }
 
-        translate([- distance_between_screws/2,- depth_666_1004 + main_tube_outer_diameter/2 , magnet_displacement])
+        translate([- distance_between_screws/2,- (main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness) + main_tube_outer_diameter/2 + coupling_wall_thickness - depth_666_1004/4-5 , magnet_displacement])
             rotate([-90, 0, 0])
             { 
                 cylinder(d = M4_screw_diameter, h = 10 + global_clearance, $fn = 50);
