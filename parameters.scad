@@ -571,9 +571,9 @@ DS313MG_X = 4;
 
 
 chassis_wheelbase = 700;        // rozvor kolecek
-chassis_height = 300;           // vyska podvozku
+chassis_height = 320;           // vyska podvozku
 chassis_baselength = 300;       // podelna roztec podvozku
-chassis_suspension_basewidth = 200;//vzdalenost prichyceni tlumicu na pricne tyci
+chassis_suspension_basewidth = 250;//vzdalenost prichyceni tlumicu na pricne tyci
 
 chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
 chassis_pipe_angle_y = 0;
