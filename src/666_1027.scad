@@ -8,12 +8,6 @@ $vpd = 1280;
 draft = true;
 
 
-
-
-
-
-
-
 module lightening(x_size, y_size, z_size){        // generování dutin pro snížení hmotnosti podložky
 
     // lightening holes list
@@ -293,24 +287,35 @@ echo(floor (C));
             intersection (){
                 hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
                 translate([main_tube_outer_diameter,-main_tube_outer_diameter/2 - thickness_between_tubes, - (hull_z_size - 2*hull_wall_thickness - 2*global_clearance)/2 ]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
-                 cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*global_clearance]);
+                    cube([hull_drop_length - main_tube_outer_diameter, main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness, hull_z_size - 2*hull_wall_thickness - 2*global_clearance]);
             }
 
-
-            translate([hull_x_size - 115 - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness, -18])
 
             //sloupky pro GPS
-            union(){
-                translate([-GPS_middle_length/2,0,0])
-                    rotate([-90,0,0])
-                        cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
-                translate([GPS_middle_length/2,0,0])
-                    rotate([-90,0,0])
-                        cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
-                translate([0,0,(GPS_middle_length*sqrt(3))/2])
-                    rotate([-90,0,0])
-                        cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
-            }
+            translate([hull_x_size - 115 - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness, 0])
+                rotate([0, 0, 0])
+                     union(){
+
+                             translate([0, 0, -GPS_middle_length/2])
+                                 rotate([-90,0,0])
+                                     cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                             translate([0, 0, GPS_middle_length/2])
+                                 rotate([-90,0,0])
+                                     cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                             translate([(-GPS_middle_length*sqrt(3))/2, 0, 0])
+                                 rotate([-90,0,0])
+                                     cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                    /*
+                        translate([-GPS_middle_length/2,0,0])
+                            rotate([-90,0,0])
+                                cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                        translate([GPS_middle_length/2,0,0])
+                            rotate([-90,0,0])
+                                cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20);
+                        translate([0,0,(GPS_middle_length*sqrt(3))/2])
+                            rotate([-90,0,0])
+                                cylinder(h = 5, r1 = 2 * M3_screw_diameter, r2 = M3_screw_diameter/2 + 2, $fn = draft ? 10 :20); */
+                    }
 
             //otvory pro šrouby k připevnění k horizontální trubce  Mylsím, že to je mrtvý kus kódu, nebo nevím co má dělat.
 			/*%intersection(){
@@ -570,25 +575,25 @@ echo(floor (C));
 
 
         //sloupky pro GPS anténu - matky a otvory pro šrouby
-        translate([hull_x_size - 115 - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness, -18])
+        translate([hull_x_size - 115 - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness, 0])
             union(){
-                translate([-GPS_middle_length/2,- main_tube_outer_diameter,0])
+                translate([0,- main_tube_outer_diameter,-GPS_middle_length/2])
                     rotate([-90,0,0])
                         cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                translate([GPS_middle_length/2,- main_tube_outer_diameter,0])
+                translate([0,- main_tube_outer_diameter,GPS_middle_length/2])
                     rotate([-90,0,0])
                         cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
-                translate([0,- main_tube_outer_diameter,(GPS_middle_length*sqrt(3))/2])
+                translate([(-GPS_middle_length*sqrt(3))/2,- main_tube_outer_diameter, 0])
                     rotate([-90,0,0])
                         cylinder (h = 54, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
-                translate([-GPS_middle_length/2,- main_tube_outer_diameter*1.5,0])
+                translate([0,- main_tube_outer_diameter*1.5, -GPS_middle_length/2])
                     rotate([-90,0,0])
                         cylinder(h = main_tube_outer_diameter, r = M3_nut_diameter/2, $fn = 6);
-                translate([GPS_middle_length/2,- main_tube_outer_diameter*1.5,0])
+                translate([0,- main_tube_outer_diameter*1.5, GPS_middle_length/2])
                     rotate([-90,0,0])
                         cylinder(h = main_tube_outer_diameter, r = M3_nut_diameter/2, $fn = 6);
-                translate([0,- main_tube_outer_diameter*1.5,(GPS_middle_length*sqrt(3))/2])
+                translate([(-GPS_middle_length*sqrt(3))/2,- main_tube_outer_diameter*1.5, 0])
                     rotate([-90,0,0])
                         cylinder(h = main_tube_outer_diameter, r = M3_nut_diameter/2, $fn = 6);
 
