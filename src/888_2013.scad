@@ -79,13 +79,13 @@ module 888_2013(draft) {
         translate(chassis_top_bearing_position)
             rotate(chassis_top_bearing_rotation)
                 rotate([-90, 0, 0]){
-                    translate([kstm_hole_distance("10")/2, 0, 0])
+                    translate([kstm_hole_distance(10)/2, 0, 0])
                         cylinder(d = M4_screw_diameter, h = 80, center = true);
-                    translate([-kstm_hole_distance("10")/2, 0, 0])
+                    translate([-kstm_hole_distance(10)/2, 0, 0])
                         cylinder(d = M4_screw_diameter, h = 80, center = true);
-                    translate([kstm_hole_distance("10")/2, 0, 15/2-4])
+                    translate([kstm_hole_distance(10)/2, 0, 15/2-4])
                         cylinder(d = M4_nut_diameter, h = 50, $fn =6);
-                    translate([-kstm_hole_distance("10")/2, 0, 15/2-4])
+                    translate([-kstm_hole_distance(10)/2, 0, 15/2-4])
                         cylinder(d = M4_nut_diameter, h = 50, $fn = 6);
                 }
     }
