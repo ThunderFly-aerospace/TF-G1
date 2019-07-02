@@ -29,7 +29,7 @@ rotor_head_roll = 0;
 rotor_head_height = 78; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
 rotor_head_width = 70; // je to "sirka" v ose X
 rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
-rotor_head_bearing_x_shift = -10; // posun kuloveho loziska dopredu dozadu.
+rotor_head_bearing_x_shift = -0; // posun kuloveho loziska dopredu dozadu.
 
 rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
 
@@ -55,7 +55,7 @@ coupling_wall_thickness_undercarriage = tube_for_undercarriage_outer_diameter/3;
 thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10;
 
 608_bearing_outer_diameter = 22.3;
-608_bearing_inner_diameter = 8-0.3;
+608_bearing_inner_diameter = 8-0.3+0.4;
 608_bearing_thickness = 7.1;
 
 //parametry mechoveho kola
@@ -557,3 +557,21 @@ DS313MG_M = 23.2;
 DS313MG_J = 38.2;
 DS313MG_H = 20;
 DS313MG_G = 7;
+
+
+
+/// Parametry podvozku
+
+
+chassis_wheelbase = 700;        // rozvor kolecek
+chassis_height = 300;           // vyska podvozku
+chassis_baselength = 300;       // podelna roztec podvozku
+chassis_suspension_basewidth = 200;//vzdalenost prichyceni tlumicu na pricne tyci
+
+chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
+chassis_pipe_angle_y = 0;
+chassis_pipe_angle_z = atan((chassis_baselength/2)/(chassis_wheelbase/2));
+
+chassis_suspinsion_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
+chassis_suspinsion_angle_y = 0;
+chassis_suspinsion_angle_z = 0;

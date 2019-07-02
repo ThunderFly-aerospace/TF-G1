@@ -31,3 +31,31 @@ module efsm_8(){
     translate([0, 0, 6.5])
         sphere(r=3, $fn = 50);
 }
+
+
+module kstm_05(){
+    import("../../STL/external/igus/KSTM_05_1.stl", convexity = 5);
+}
+
+module kstm_06(){
+    import("../../STL/external/igus/KSTM_06_2.stl", convexity = 5);
+}
+
+module kstm_08(){
+    import("../../STL/external/igus/KSTM_08_3.stl", convexity = 5);
+}
+
+module kstm_10(){
+    import("../../STL/external/igus/KSTM_10_4.stl", convexity = 5);
+}
+
+
+data_kstm_center_height = [["5",7],["6",10],["8",10],["10",14]];
+function kstm_center_height(type) = data_kstm_center_height[search(type, data_kstm_center_height)[0]][1];
+
+echo(kstm_center_height("5"));
+
+translate([0, 0,  kstm_center_height("5")]) kstm_05();
+translate([0, 20, kstm_center_height("6")]) kstm_06();
+translate([0, 40, kstm_center_height("8")]) kstm_08();
+translate([0, 60, kstm_center_height("10")]) kstm_10();

@@ -36,7 +36,7 @@ module 888_1020(draft = true){
     plate_size_z = 5;
 
 
-    joint_size_x = 60+0.5; // delka dorazu podle osy x
+    joint_size_x = 90+0.5; // delka dorazu podle osy x
     joint_size_y = 55+0.5; //delka dorazu podle osy y
     joint_wall_thickness = 4;
 
@@ -46,7 +46,6 @@ module 888_1020(draft = true){
     rim_height = 1;
 
     back_part_crop = 20;
-
 
     // pro EFSM-8
 
