@@ -553,10 +553,17 @@ servo_deepth = 30;
 
 //DS313MG
 DS313MG_A = 12.2;
-DS313MG_M = 23.2;
-DS313MG_J = 38.2;
-DS313MG_H = 20;
+DS313MG_B = 0;
+DS313MG_C = 0;
+DS313MG_D = 0;
+DS313MG_E = 0;
+DS313MG_F = 0;
 DS313MG_G = 7;
+DS313MG_H = 20;
+DS313MG_J = 38.2;
+DS313MG_K = 0;
+DS313MG_M = 23.2;
+DS313MG_X = 0;
 
 
 
@@ -571,6 +578,8 @@ chassis_suspension_basewidth = 200;//vzdalenost prichyceni tlumicu na pricne tyc
 chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
 chassis_pipe_angle_y = 0;
 chassis_pipe_angle_z = atan((chassis_baselength/2)/(chassis_wheelbase/2));
+
+echo("uhel:", chassis_pipe_angle_x);
 
 chassis_suspinsion_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
 chassis_suspinsion_angle_y = 0;
