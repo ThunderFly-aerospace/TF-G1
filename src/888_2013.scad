@@ -1,17 +1,10 @@
+// drzak podvozku za podelnou tyc virniku
+
 include <../parameters.scad>
 use <lib/igus.scad>
 
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
-
-
-//chassis_pipe_angle_x = 30;
-//chassis_pipe_angle_y = 10;
-chassis_top_bearing_position = [0, 35, -45];
-chassis_top_bearing_rotation = [chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z];
-
-
-888_2013_width = 70;
 
 module 888_2013(draft) {
     material_plus = 10;
@@ -100,14 +93,4 @@ module 888_2013(draft) {
 
 
 
-//666_1017_drillhelper_doc();
-translate(chassis_top_bearing_position)
-        rotate([chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z])
-            translate([0, -20, 0])
-                rotate([90, 0, 0])
-                    kstm_10();
-
 888_2013(draft);
-
-//translate([70,0,0])
-//666_1017_drillhelper();

@@ -579,8 +579,13 @@ chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
 chassis_pipe_angle_y = 0;
 chassis_pipe_angle_z = atan((chassis_baselength/2)/(chassis_wheelbase/2));
 
-echo("uhel:", chassis_pipe_angle_x);
-
 chassis_suspinsion_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
 chassis_suspinsion_angle_y = 0;
 chassis_suspinsion_angle_z = 0;
+
+
+// parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
+chassis_top_bearing_position = [0, 35, -45];
+chassis_top_bearing_rotation = [chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z];
+
+888_2013_width = 70;
