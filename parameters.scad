@@ -311,11 +311,11 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 //        echo("ceil_666_1026 is", ceil(depth_666_1026));
 
     coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
-        echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
+//        echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
 
 
     thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50; //50 mm je konstatní šířka spojky 666_1026
-    echo("thickness_of_plate is", thickness_of_plate);
+//    echo("thickness_of_plate is", thickness_of_plate);
 
     coupling_depth_666_1026 = coupling_screw_length_666_1026 - M4_screw_head_height - thickness_of_plate;      //zde je odečten M4_screw_head_height pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
 //        echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
