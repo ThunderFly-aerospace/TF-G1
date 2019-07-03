@@ -392,7 +392,8 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 //umístění podvozkových trubek
 
-second_undercarriage_hole =height_666_1026 + height_666_1004/2 + 170 + 160;
+//second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 160;
+second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 100;
 
 
 //Base Divison - dělení podložky
@@ -572,7 +573,7 @@ DS313MG_X = 4;
 
 chassis_wheelbase = 700;        // rozvor kolecek
 chassis_height = 320;           // vyska podvozku
-chassis_baselength = 300;       // podelna roztec podvozku
+chassis_baselength = 200;       // podelna roztec podvozku
 chassis_suspension_basewidth = 250;//vzdalenost prichyceni tlumicu na pricne tyci
 
 chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
@@ -585,7 +586,10 @@ chassis_suspinsion_angle_z = 0;
 
 
 // parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
-chassis_top_bearing_position = [0, 35, -45];
+chassis_top_bearing_position = [0, 15, -25];
+chassis_top_bearing_position_x = chassis_top_bearing_position[0];
+chassis_top_bearing_position_y = chassis_top_bearing_position[1];
+chassis_top_bearing_position_z = chassis_top_bearing_position[2];
 chassis_top_bearing_rotation = [chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z];
 
 888_2013_width = 70;

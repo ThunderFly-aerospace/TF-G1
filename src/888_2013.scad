@@ -6,7 +6,7 @@ use <lib/igus.scad>
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
 
-module 888_2013(draft) {
+module 888_2013_old(draft) {
     material_plus = 10;
 
     difference(){
@@ -91,7 +91,7 @@ module 888_2013(draft) {
     }
 }
 
-module 888_2013_drillhelper(){
+module 888_2013_old_drillhelper(){
 
     difference(){
         cube([main_tube_outer_diameter+20, main_tube_outer_diameter+20, 888_2013_width], center = true);
@@ -105,9 +105,100 @@ module 888_2013_drillhelper(){
         translate([0, 0, -888_2013_width/4])
             rotate([90, 0, 0])
                 cylinder( d = M4_screw_diameter, h = 100, center = true);
+    }
+}
+
+
+
+module 888_2013(){
+
+    chassis_arm_mount_patern = 10.16;
+    chassis_arm_mount_plate_thicknes = 8;
+
+    chassis_arm_mount_plate = [65, 70];
+
+    width = chassis_arm_mount_plate[1];
+    length = chassis_arm_mount_plate[0];
+
+    difference(){
+        intersection(){
+            translate([-length/2, -width/2, 0])
+                cube([length, width, 20]);
+
+            union(){
+                translate([-length/2, -width/2, 0])
+                    cube([length, width, chassis_arm_mount_plate_thicknes]);
+
+                translate([0, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
+                    rotate([-chassis_pipe_angle_x, 0, chassis_pipe_angle_z])
+                        translate([-50, -40, -100 - kstm_center_height(10)])
+                            cube([100, 50, 100]);
+
+                translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
+                    rotate([chassis_pipe_angle_x, 0, -chassis_pipe_angle_z])
+                        translate([-50, -40, -100 - kstm_center_height(10)])
+                            cube([100, 50, 100]);
+
+            }
+        }
+
+        translate([chassis_arm_mount_patern*2, chassis_arm_mount_patern*-1.5, 0])
+            cylinder(d = M4_screw_diameter, h = 100);
+
+        translate([chassis_arm_mount_patern*2, chassis_arm_mount_patern*1.5, 0])
+            cylinder(d = M4_screw_diameter, h = 100);
+
+        translate([chassis_arm_mount_patern*-2, chassis_arm_mount_patern*-1.5, 0])
+            cylinder(d = M4_screw_diameter, h = 100);
+
+        translate([chassis_arm_mount_patern*-2, chassis_arm_mount_patern*1.5, 0])
+            cylinder(d = M4_screw_diameter, h = 100);
+
+        // diry pro prisroubovani KSTM
+
+        translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
+            rotate([-chassis_pipe_angle_x, 0, -chassis_pipe_angle_z]){
+                translate([kstm_hole_distance(10)/2, 0, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_screw_diameter, h = 100, center = false, $fn = 100);
+                translate([-kstm_hole_distance(10)/2, 0, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_screw_diameter, h = 100, center = false, $fn = 100);
+
+
+                translate([kstm_hole_distance(10)/2, kstm_center_height(10) + 5, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
+                translate([-kstm_hole_distance(10)/2, kstm_center_height(10) + 5, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
+
+
+                translate([kstm_hole_distance(10)/2 - M4_nut_diameter/2, kstm_center_height(10) + 5, 0])
+                    cube([M4_nut_diameter, M4_nut_height, 100]);
+                translate([-kstm_hole_distance(10)/2 - M4_nut_diameter/2, kstm_center_height(10) + 5, 0])
+                    cube([M4_nut_diameter, M4_nut_height, 100]);
+            }
+
+
+        mirror([0, 1, 0])
+        translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
+            rotate([-chassis_pipe_angle_x, 0, -chassis_pipe_angle_z]){
+                translate([kstm_hole_distance(10)/2, 0, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_screw_diameter, h = 100, center = false, $fn = 100);
+                translate([-kstm_hole_distance(10)/2, 0, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_screw_diameter, h = 100, center = false, $fn = 100);
+
+                translate([kstm_hole_distance(10)/2, kstm_center_height(10) + 5, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
+                translate([-kstm_hole_distance(10)/2, kstm_center_height(10) + 5, 0])
+                    rotate([-90, 0, 0]) cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
+
+                translate([kstm_hole_distance(10)/2 - M4_nut_diameter/2, kstm_center_height(10) + 5, 0])
+                    cube([M4_nut_diameter, M4_nut_height, 100]);
+                translate([-kstm_hole_distance(10)/2 - M4_nut_diameter/2, kstm_center_height(10) + 5, 0])
+                    cube([M4_nut_diameter, M4_nut_height, 100]);
+
+            }
+
 
     }
-
 }
 
 
