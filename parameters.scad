@@ -311,11 +311,11 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 //        echo("ceil_666_1026 is", ceil(depth_666_1026));
 
     coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
-        echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
+//        echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
 
 
     thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50; //50 mm je konstatní šířka spojky 666_1026
-    echo("thickness_of_plate is", thickness_of_plate);
+//    echo("thickness_of_plate is", thickness_of_plate);
 
     coupling_depth_666_1026 = coupling_screw_length_666_1026 - M4_screw_head_height - thickness_of_plate;      //zde je odečten M4_screw_head_height pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
 //        echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
@@ -571,9 +571,9 @@ DS313MG_X = 6;
 
 
 chassis_wheelbase = 700;        // rozvor kolecek
-chassis_height = 300;           // vyska podvozku
+chassis_height = 320;           // vyska podvozku
 chassis_baselength = 300;       // podelna roztec podvozku
-chassis_suspension_basewidth = 200;//vzdalenost prichyceni tlumicu na pricne tyci
+chassis_suspension_basewidth = 250;//vzdalenost prichyceni tlumicu na pricne tyci
 
 chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
 chassis_pipe_angle_y = 0;
@@ -582,3 +582,10 @@ chassis_pipe_angle_z = atan((chassis_baselength/2)/(chassis_wheelbase/2));
 chassis_suspinsion_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
 chassis_suspinsion_angle_y = 0;
 chassis_suspinsion_angle_z = 0;
+
+
+// parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
+chassis_top_bearing_position = [0, 35, -45];
+chassis_top_bearing_rotation = [chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z];
+
+888_2013_width = 70;
