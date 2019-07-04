@@ -18,11 +18,11 @@ module wheel_tiere(){
     }
 }
 
-wheel_tiere();
-translate([0, wheel_inner_thickness/2, 0]) rotate([90, 0, 0]) 888_2011(true);
-translate([0, -wheel_inner_thickness/2, 0]) rotate([-90, 0, 0]) 888_2011(false);
-translate([0, wheel_inner_thickness/2+5, 0]) rotate([90, 0, 0]) 888_2012();
-translate([0, -wheel_inner_thickness/2-5, 0]) rotate([-90, 0, 0]) 888_2012();
+//wheel_tiere();
+translate([0, wheel_inner_thickness/2+wheel_disc_upper_thickness, 0]) rotate([90, 0, 0]) 888_2011(true);
+translate([0, -wheel_inner_thickness/2-wheel_disc_upper_thickness, 0]) rotate([-90, 0, 0]) 888_2011(false);
+translate([0, wheel_inner_thickness/2+8, 0]) rotate([90, 0, 0]) 888_2012();
+translate([0, -wheel_inner_thickness/2-8, 0]) rotate([-90, 0, 0]) 888_2012();
 
 //vidlice
 translate ([-100+0.1*100, 0, -10])

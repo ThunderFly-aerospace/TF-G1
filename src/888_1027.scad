@@ -3,7 +3,7 @@
 
 include <../parameters.scad>
 
-fork_wheel_width = 39 ;
+fork_wheel_width = 44;
 fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;
