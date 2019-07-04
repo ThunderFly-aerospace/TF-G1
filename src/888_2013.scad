@@ -115,7 +115,7 @@ module 888_2013(){
     chassis_arm_mount_patern = 10.16;
     chassis_arm_mount_plate_thicknes = 8;
 
-    chassis_arm_mount_plate = [40, 50];
+    chassis_arm_mount_plate = [50, 30];
 
     width = chassis_arm_mount_plate[1];
     length = chassis_arm_mount_plate[0];
