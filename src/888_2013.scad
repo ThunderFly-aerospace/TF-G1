@@ -120,7 +120,7 @@ module 888_2013(){
     width = chassis_arm_mount_plate[1];
     length = chassis_arm_mount_plate[0];
 
-    screw_length = 26;
+    screw_length = 25 + 3;
     column_width = screw_length+M6_nut_height*2;
 
     kstm_ball_thickness = 12;
@@ -156,7 +156,7 @@ module 888_2013(){
 
                 translate([screw_length/2, 0, 22+10])
                     rotate([0, 90, 0])
-                        cylinder(d = M8_nut_diameter, h = 40, center = false, $fn = 6);
+                        cylinder(d = M6_nut_diameter, h = 40, center = false, $fn = 6);
 
                 translate([-screw_length/2, 0, 22+10])
                     rotate([0, -90, 0])
