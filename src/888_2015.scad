@@ -1,3 +1,5 @@
+// Drzak kuloveho loziska KSTM na 10 mm trubku
+
 include <../parameters.scad>
 use <lib/igus.scad>
 
