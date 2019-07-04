@@ -7,14 +7,14 @@ fork_wheel_width = 44;
 fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;
-fork_lenght = 85;
+fork_lenght = 55;
 
 pipe_diameter = tube_for_undercarriage_outer_diameter;
 pipe_holder_length = 20;
 pipe_holder_thickness = pipe_diameter/2+3;
 
-pipe_holder1_pos = 10;
-pipe_holder2_pos = 50;
+pipe_holder1_pos = 0;
+pipe_holder2_pos = 25;
 pipe_holder_space =3;
 
 
@@ -70,14 +70,14 @@ module 888_1027() {
               translate([-fork_thickness/2, fork_wheel_width/2+fork_width+pipe_diameter/2+pipe_holder_space, 0])
                   cylinder(h=fork_lenght, d=pipe_diameter, $fn=50);
         }
-      };
+      }
       rotate ([90,0,0,]) {
           translate([pipe_holder2_pos+pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
             cylinder (h=fork_wheel_width, d=M3_screw_diameter, $fn=50);
 
           translate([pipe_holder2_pos+pipe_holder_length/2, fork_thickness/2, -(0.5*fork_wheel_width+M3_nut_height)])
             cylinder (h=fork_width, d=M3_nut_diameter, $fn=6);
-        };
+      }
       rotate ([90,0,0,]) {
           translate([pipe_holder1_pos+pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
             cylinder (h=fork_wheel_width, d=M3_screw_diameter, $fn=50);

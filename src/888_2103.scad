@@ -6,7 +6,7 @@ use <888_2011.scad>
 use <888_2012.scad>
 use <888_1027.scad>
 
-module wheel_tiere(){
+module wheel_tire(){
     rotate([90, 0, 0]){
         rotate_extrude($fn=200)
         hull(){
@@ -18,12 +18,12 @@ module wheel_tiere(){
     }
 }
 
-//wheel_tiere();
+wheel_tire();
 translate([0, wheel_inner_thickness/2+wheel_disc_upper_thickness, 0]) rotate([90, 0, 0]) 888_2011(true);
 translate([0, -wheel_inner_thickness/2-wheel_disc_upper_thickness, 0]) rotate([-90, 0, 0]) 888_2011(false);
 translate([0, wheel_inner_thickness/2+8, 0]) rotate([90, 0, 0]) 888_2012();
 translate([0, -wheel_inner_thickness/2-8, 0]) rotate([-90, 0, 0]) 888_2012();
 
 //vidlice
-translate ([-100+0.1*100, 0, -10])
+translate ([-100+0.1*100+40, 0, -10])
     888_1027() ;
