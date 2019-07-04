@@ -571,8 +571,8 @@ DS313MG_X = 4;
 /// Parametry podvozku
 
 
-chassis_wheelbase = 700;        // rozvor kolecek
-chassis_height = 320;           // vyska podvozku
+chassis_wheelbase = 800;        // rozvor kolecek
+chassis_height = 300;           // vyska podvozku
 chassis_baselength = 150;       // podelna roztec podvozku
 chassis_suspension_basewidth = 300;//vzdalenost prichyceni tlumicu na pricne tyci
 
@@ -587,13 +587,13 @@ chassis_suspinsion_angle_z = 0;
 
 // parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
 // hodnoty jsou oproti stredu podvozku
-chassis_top_bearing_position = [chassis_baselength/2, 55/2, 20];
+chassis_top_bearing_position = [chassis_baselength/2, 48/2, 0];
 chassis_top_bearing_position_x = chassis_top_bearing_position[0];
 chassis_top_bearing_position_y = chassis_top_bearing_position[1];
 chassis_top_bearing_position_z = chassis_top_bearing_position[2];
 chassis_top_bearing_rotation = [chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z];
 
 
-chassis_arm_mount_plate = [40, 25];
+//chassis_arm_mount_plate = [40, 25];
 
 888_2013_width = 70;

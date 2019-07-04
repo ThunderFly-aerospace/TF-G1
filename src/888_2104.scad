@@ -8,20 +8,18 @@ color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_ou
 
 
 module bearing_set(){
-    translate([-chassis_top_bearing_position_x, chassis_top_bearing_position_y, 0]){
-        rotate([180, 0, 0])
-            888_2013();
+    translate([chassis_top_bearing_position_x, chassis_top_bearing_position_y, -kstm_center_height(8)]){
+            rotate([-chassis_top_bearing_rotation[2],  180-chassis_top_bearing_rotation[0], 90])
+                888_2013();
 
-        translate([0, 0, -chassis_top_bearing_position_z])
-            rotate([90-chassis_pipe_angle_x, -chassis_pipe_angle_y, -chassis_pipe_angle_z+180])
-                    rotate([0, 0, 90])
-                            kstm_08();
+            rotate([180, 0, 90])
+                kstm_08();
     }
 }
 
 
 mirror([0, 0, 0])
-    bearing_set();
+    #bearing_set();
 mirror([1, 0, 0])
     bearing_set();
 mirror([0, 1, 0])
