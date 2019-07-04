@@ -6,7 +6,7 @@ use <lib/igus.scad>
 
 module 888_2015(){
     kstm_base_thickness = 8;
-    kstm_base_length = 60;
+    kstm_base_length = 47;
     wall = 3;
 
     difference(){
@@ -34,7 +34,7 @@ module 888_2015(){
         translate([kstm_hole_distance(8)/2, 0, -10])
             cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
 
-        #translate([-kstm_hole_distance(8)/2, 0, -10])
+        translate([-kstm_hole_distance(8)/2, 0, -10])
             cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
 
 

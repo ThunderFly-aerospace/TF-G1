@@ -6,7 +6,7 @@ use <lib/igus.scad>
 
 module 888_2014(){
     kstm_base_thickness = 8;
-    kstm_base_length = 60;
+    kstm_base_length = 47;
     wall = 3;
 
     difference(){
