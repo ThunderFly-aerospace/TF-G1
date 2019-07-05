@@ -28,10 +28,10 @@ module 888_2016(){
 
         // diry pro pridelani loziska
         for (i=[1,-1]) {
-            translate([kstm_hole_distance(kstm)*i/2, 0, 0])
+            translate([kstm_flange_holes_distance(kstm)*i/2, 0, 0])
                 cylinder(d = M4_screw_diameter, h = main_tube_outer_diameter+2*wall + global_clearance, $fn = 50, center = true);
 
-            translate([kstm_hole_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - global_clearance - M4_screw_head_height])
+            translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - global_clearance - M4_screw_head_height])
                 cylinder(d = M4_nut_diameter, h = M4_screw_head_height+main_tube_outer_diameter*2, $fn = 50);
         }
 

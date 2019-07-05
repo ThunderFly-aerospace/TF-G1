@@ -1,37 +1,6 @@
 include <../../parameters.scad>
 
 
-/* module efsm_12(){
-    translate([0, 0, -(bearing_efsm_12_ag - bearing_efsm_12_B/2)]){
-        translate([-bearing_efsm_12_h/2, -bearing_efsm_12_h/2, 0])
-            cube([bearing_efsm_12_h, bearing_efsm_12_h, bearing_efsm_12_a1]);
-        difference(){
-            union(){
-                intersection(){
-                    translate([0,0, bearing_efsm_12_ag - bearing_efsm_12_B/2])
-                        sphere(d=18, $fn = 50);
-                    translate([0,0,-15])
-                        cylinder(h = 30, d = 20);
-                }
-            }
-            translate([0, 0, -15])
-                cylinder(h=30, d=12);
-        }
-    }
-}
-
-
-module efsm_8(){
-    translate([-33/2, -33/2, 0])
-        cube([33, 33, 5.5]);
-    translate([0,0,8.5])
-        cylinder(h = 2, d1 = 18, d2 = 15);
-    translate([0,0,6.5])
-        cylinder(h = 7.94/2, d = 2);
-    translate([0, 0, 6.5])
-        sphere(r=3, $fn = 50);
-} */
-
 module efsm_04(){
     import("../../STL/external/igus/EFSM_04.stl", convexity = 5);
 }
@@ -69,13 +38,11 @@ module kstm_10(){
 }
 
 
-data_kstm_center_height = [[5,7],[6,10],[8,10],[10,14]];
-function kstm_center_height(type) = data_kstm_center_height[search(type, data_kstm_center_height)[0]][1];
-function kstm_ball_height(type) = data_kstm_center_height[search(type, data_kstm_center_height)[0]][1];
+data_kstm_ball_height = [[5,7],[6,10],[8,10],[10,14]];
+function kstm_ball_height(type) = data_kstm_ball_height[search(type, data_kstm_ball_height)[0]][1];
 
-data_kstm_hole_distance = [[5,25], [6,33], [8,33], [10,46], [12,46]];
-function kstm_hole_distance(type) = data_kstm_hole_distance[search(type, data_kstm_hole_distance)[0]][1];
-function kstm_flange_holes_distance(type) = data_kstm_hole_distance[search(type, data_kstm_hole_distance)[0]][1];
+data_kstm_flange_holes_distance = [[5,25], [6,33], [8,33], [10,46], [12,46]];
+function kstm_flange_holes_distance(type) = data_kstm_flange_holes_distance[search(type, data_kstm_flange_holes_distance)[0]][1];
 
 data_kstm_flange_length = [[5,34], [6,43], [8,47], [10,62], [12,65]];
 function kstm_flange_length(type) = data_kstm_flange_length[search(type, data_kstm_flange_length)[0]][1];
@@ -83,17 +50,19 @@ function kstm_flange_length(type) = data_kstm_flange_length[search(type, data_ks
 data_kstm_flange_thickness = [[5,6], [6,7], [8,9], [10,10.5], [12,12]];
 function kstm_flange_thi(type) = data_kstm_flange_thickness[search(type, data_kstm_flange_thickness)[0]][1];
 
-data_kstm_thickness = [[5,25], [6,33], [8,33], [10,46], [12,46]];
-function kstm_thickness(type) = data_kstm_thickness[search(type, data_kstm_thickness)[0]][1];
-function kstm_ball_thickness(type) = data_kstm_thickness[search(type, data_kstm_thickness)[0]][1];
+data_kstm_ball_thickness = [[5,25], [6,33], [8,33], [10,46], [12,46]];
+function kstm_ball_thickness(type) = data_kstm_ball_thickness[search(type, data_kstm_ball_thickness)[0]][1];
+
+
+
 
 
 distance = 50;
 
-translate([0, 0*distance,  kstm_center_height(5)]) kstm_05();
-translate([0, 1*distance, kstm_center_height(6)]) kstm_06();
-translate([0, 2*distance, kstm_center_height(8)]) kstm_08();
-translate([0, 3*distance, kstm_center_height(10)]) kstm_10();
+translate([0, 0*distance,  kstm_ball_height(5)]) kstm_05();
+translate([0, 1*distance, kstm_ball_height(6)]) kstm_06();
+translate([0, 2*distance, kstm_ball_height(8)]) kstm_08();
+translate([0, 3*distance, kstm_ball_height(10)]) kstm_10();
 
 
 translate([80, 0*distance, 0]) efsm_04();

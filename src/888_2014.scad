@@ -24,10 +24,10 @@ module 888_2014(){
         translate([-50, -50, -global_clearance])
             cube(100);
 
-        translate([kstm_hole_distance(8)/2, 0, 0])
+        translate([kstm_flange_holes_distance(8)/2, 0, 0])
             cylinder(d = M4_screw_diameter, h = 100, center = true, $fn = 50);
 
-        translate([-kstm_hole_distance(8)/2, 0, 0])
+        translate([-kstm_flange_holes_distance(8)/2, 0, 0])
             cylinder(d = M4_screw_diameter, h = 100, center = true, $fn = 50);
     }
 }

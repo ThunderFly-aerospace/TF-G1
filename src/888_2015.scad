@@ -24,17 +24,17 @@ module 888_2015(){
         translate([-50, -50, -global_clearance])
             cube(100);
 
-        translate([kstm_hole_distance(8)/2, 0, -10 + M4_nut_height + 0.2])
+        translate([kstm_flange_holes_distance(8)/2, 0, -10 + M4_nut_height + 0.2])
             cylinder(d = M4_screw_diameter, h = 100, center = false, $fn = 50);
 
-        translate([-kstm_hole_distance(8)/2, 0, -10 + M4_nut_height + 0.2])
+        translate([-kstm_flange_holes_distance(8)/2, 0, -10 + M4_nut_height + 0.2])
             cylinder(d = M4_screw_diameter, h = 100, center = false, $fn = 50);
 
 
-        translate([kstm_hole_distance(8)/2, 0, -10])
+        translate([kstm_flange_holes_distance(8)/2, 0, -10])
             cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
 
-        translate([-kstm_hole_distance(8)/2, 0, -10])
+        translate([-kstm_flange_holes_distance(8)/2, 0, -10])
             cylinder(d = M4_nut_diameter, h = M4_nut_height, center = false, $fn = 6);
 
 
