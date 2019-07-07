@@ -1,6 +1,6 @@
 include <../parameters.scad>
 
-fork_wheel_width = 50 ;
+fork_wheel_width = 40 ;
 fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;
@@ -16,7 +16,7 @@ pipe_holder_space =3;
 
 M3_screw_head_diameter = M3_nut_diameter;
 
-module 888_1028() {
+module 888_2015() {
     difference() {
         union () {
             translate([pipe_holder1_pos,fork_wheel_width/2+fork_width, 0])
@@ -40,4 +40,4 @@ module 888_1028() {
 }
 
 
-888_1028();
+888_2015();

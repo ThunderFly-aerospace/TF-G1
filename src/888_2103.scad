@@ -4,7 +4,7 @@
 include <../parameters.scad>
 use <888_2011.scad>
 use <888_2012.scad>
-use <888_1027.scad>
+use <888_2014.scad>
 
 module wheel_tire(){
     rotate([90, 0, 0]){
@@ -26,4 +26,4 @@ translate([0, -wheel_inner_thickness/2-8, 0]) rotate([-90, 0, 0]) 888_2012();
 
 //vidlice
 translate ([-100+0.1*100+40, 0, -10])
-    888_1027() ;
+    888_2014() ;
