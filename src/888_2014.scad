@@ -5,8 +5,8 @@ include <../parameters.scad>
 
 cylinder_2_thickness = 1.5;
 
-fork_wheel_width = wheel_inner_thickness + 2*cylinder_2_thickness + 1;
-screw_length = 45;
+fork_wheel_width = wheel_inner_thickness + 2*cylinder_2_thickness + 2* wheel_disc_upper_thickness + 0.5;
+screw_length = 55;
 fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;

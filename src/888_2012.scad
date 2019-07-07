@@ -15,7 +15,7 @@ module 888_2012 () {
             //cylinder(h=wheel_inner_thickness/2+wheel_disc_upper_thickness+cylinder_1_thickness+(cylinder_2_thickness-cylinder_1_thickness),
             //      d=608_bearing_inner_diameter, $fn=50);
 
-            cylinder(h=wheel_inner_thickness/2 + cylinder_2_thickness, d=608_bearing_inner_diameter, $fn=80);
+            cylinder(h=wheel_inner_thickness/2 + cylinder_2_thickness + wheel_disc_upper_thickness, d=608_bearing_inner_diameter, $fn=80);
         }
         translate([0,0,-1])
             cylinder(h=wheel_inner_thickness, d=M4_screw_diameter, $fn=50);

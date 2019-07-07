@@ -1,31 +1,28 @@
 //Navrh disku pro mechove kolo
-
 include <../parameters.scad>
 
-global_clearance = 0.5;
-
-layer_thickness = 0.3;
-
 module 888_2011 (nut = true) {
+    screw_length = wheel_dist_screw_length-M3_nut_pocket*1.5;
     difference() {
         union() {
-            cylinder(h=wheel_disc_upper_thickness, d=wheel_disc_diameter, $fn=50);
-            cylinder(h=wheel_disc_upper_thickness+wheel_inner_thickness/2-0.5, d=wheel_inner_diameter, $fn=50);
+            cylinder(h=wheel_disc_upper_thickness, d=wheel_disc_diameter, $fn=100);
+            cylinder(h=wheel_disc_upper_thickness+wheel_inner_thickness/2-global_clearance, d=wheel_inner_diameter, $fn=100);
         }
 
-        translate([0, 0, 608_bearing_thickness/2 + wheel_disc_upper_thickness+2])
+        translate([0, 0, 608_bearing_thickness + 3])
             cylinder(h=wheel_inner_thickness/2, d=wheel_inner_diameter-M3_nut_diameter-5, $fn=50);
 
         for (i=[0:2]) {
             //diry na srouby
             rotate([0,0,120*i])
-                translate([wheel_inner_diameter/2-M3_screw_diameter+0.5, 0, -1])
+                translate([wheel_inner_diameter/2-M3_screw_diameter, 0,  wheel_inner_thickness/2-screw_length/2 + layer_thickness])
                     cylinder(h=wheel_inner_thickness, d=M3_screw_diameter, $fn=60);
 
             //diry na matice nebo zapusteni hlavy sroubu M3x35
             rotate([0,0,120*i])
-                  translate([wheel_inner_diameter/2-M3_screw_diameter+0.5, 0, -1])
-                      cylinder(h=M3_screw_head_height+2, d=M3_nut_diameter, $fn= nut? 6 : 50);
+                  translate([wheel_inner_diameter/2-M3_screw_diameter, 0, wheel_inner_thickness/2-screw_length/2 - 30])
+                    rotate([0, 0, 30])
+                      cylinder(h=30, d=M3_nut_diameter, $fn= nut? 6 : 50);
 
           }
 
@@ -34,8 +31,8 @@ module 888_2011 (nut = true) {
             cylinder (h=wheel_inner_thickness, d=608_bearing_outer_diameter-6, $fn=60);
 
         //dira pro lozisko 608
-        translate([0, 0, -1])
-            cylinder(h=608_bearing_thickness+1, d=608_bearing_outer_diameter, $fn=50);
+        translate([0, 0, -global_clearance])
+            cylinder(h=608_bearing_thickness+global_clearance, d=608_bearing_outer_diameter, $fn=100);
     }
 }
 
