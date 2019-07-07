@@ -66,6 +66,7 @@ wheel_outer_diameter = 108;
 wheel_disc_diameter = 51;
 wheel_disc_upper_thickness = 5;
 wheel_disc_upper_difference = 7;
+wheel_dist_screw_length = 30;
 
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
