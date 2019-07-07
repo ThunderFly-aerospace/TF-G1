@@ -22,8 +22,8 @@ module 888_2015() {
         }
 
         rotate ([0,90,0])
-            translate([-fork_thickness/2, fork_wheel_width/2+pipe_diameter/2+pipe_holder_space, 0])
-                cylinder(h=pipe_holder_length, d=pipe_diameter, $fn=50);
+            translate([-fork_thickness/2, fork_wheel_width/2+pipe_diameter/2+pipe_holder_space, -global_clearance/2])
+                cylinder(h=pipe_holder_length + global_clearance, d=pipe_diameter, $fn=50);
         rotate ([90,0,0,])
             translate([pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
                 cylinder (h=fork_wheel_width, d=M3_screw_diameter, $fn=50);
