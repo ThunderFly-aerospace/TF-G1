@@ -31,14 +31,15 @@ module 888_1026(draft)
     vlecne_zarizeni = true;
     prumer = 2;
     vyska = 5;
-    servo_lever = 15; //délka páky serva od středu otáčení ke konci
-    servo_holder = 1.25; //tlouštka úchytu na servu
+    servo_lever = 20; //délka páky serva od středu otáčení ke konci
+    servo_lever_space = 3; //zvetšení místa pro páku serva
+    servo_holder = 1.3; //tlouštka úchytu na servu
     dolni_konec_y = prumer/-2; //pomocná proměnná
-    dolni_konec_x = main_tube_outer_diameter+vyska/-2; //pomocná proměnná
+    dolni_konec_x = (main_tube_outer_diameter*3/4)+vyska/-2; //pomocná proměnná
 
     distance_shift = (maximum_printable_size-1.2*height+height)-(magnet_displacement+magnet_diameter/2);
     distance_height = (engine_offset-wall_thickness-engine_diameter/2)-magnet_vertical_position;
-    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter-magnet_vertical_position)/distance_height-13;
+    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter*3/4-magnet_vertical_position)/distance_height-13;
 
     difference (){
         union(){
@@ -164,11 +165,11 @@ module 888_1026(draft)
             translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y, (DS313MG_J-DS313MG_M)/2])
                 cube([100, 100, DS313MG_M]);
 
-            translate([dolni_konec_x, dolni_konec_y, 0])
-                cube([100, DS313MG_X+DS313MG_G-DS313MG_K, DS313MG_J-(DS313MG_J-DS313MG_M)/2]);
+            translate([dolni_konec_x, dolni_konec_y-servo_lever_space, 0])
+                cube([100, DS313MG_X+DS313MG_G-DS313MG_K+servo_lever_space, DS313MG_J-(DS313MG_J-DS313MG_M)/2]);
 
             translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y+DS313MG_X+DS313MG_G-servo_holder, 0])
-                cube([DS313MG_A, servo_holder, DS313MG_J]);
+                cube([100, servo_holder, DS313MG_J]);
 
             translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y, 0])
                 cube([100, DS313MG_X+DS313MG_G, DS313MG_M]);
@@ -186,7 +187,7 @@ module 888_1026(draft)
 
             translate([dolni_konec_x+servo_lever, dolni_konec_y+DS313MG_X+DS313MG_G-3, DS313MG_J-(DS313MG_J-DS313MG_M)/4])
                 rotate([90, 0, 0])
-                    cylinder(d=3.5, h=100, $fn=20);
+                    cylinder(d=M2_5_nut_diameter, h=100, $fn=20);
 
             translate([dolni_konec_x+servo_lever, dolni_konec_y+DS313MG_X+DS313MG_G+3, DS313MG_J-(DS313MG_J-DS313MG_M)/4])
                 rotate([-90, 0, 0])
@@ -200,7 +201,7 @@ module 888_1026(draft)
                 rotate([-90, 0, 0])
                     cylinder(d=M2_5_screw_diameter, h=100, $fn=20);
 
-            translate([main_tube_outer_diameter, 0, 0])
+            translate([main_tube_outer_diameter*3/4, 0, 0])
                 hull() {
                     translate([vyska/2-prumer/2, 0, 0])
                         cylinder(d=prumer, h=1000, $fn=15);
@@ -208,7 +209,7 @@ module 888_1026(draft)
                         cylinder(d=prumer, h=1000, $fn=15);
                 }
 
-            translate([main_tube_outer_diameter, 0, 0])
+            translate([main_tube_outer_diameter*3/4, 0, 0])
                 hull() {
                     translate([vyska/2-prumer/2, 0, 5+DS313MG_A+50])
                         cylinder(d=prumer, h=1000, $fn=15);
@@ -217,15 +218,15 @@ module 888_1026(draft)
                 }
 
 
-            translate([main_tube_outer_diameter, 0, hole_distance])
+            translate([main_tube_outer_diameter*3/4, 0, hole_distance])
                 rotate([90, 0, 0])
                     cylinder(d=M3_screw_diameter, h=100, $fn=20, center=true);
 
-            translate([main_tube_outer_diameter, -15, hole_distance])
+            translate([main_tube_outer_diameter*3/4, -15, hole_distance])
                 rotate([90, 0, 0])
                     cylinder(d=M3_nut_diameter, h=20, $fn=6);
 
-            translate([main_tube_outer_diameter, 15, hole_distance])
+            translate([main_tube_outer_diameter*3/4, 15, hole_distance])
                 rotate([-90, 0, 0])
                     cylinder(d=M3_nut_diameter, h=20, $fn=20);
         }
