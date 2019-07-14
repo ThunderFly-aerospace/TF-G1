@@ -567,22 +567,36 @@ DS313MG_M = 23.2;
 DS313MG_X = 4;
 
 
-
 /// Parametry podvozku
+    2013_pipe_offset = [0, 0, 20];
 
+// Dily spojujici podvozkova ramena
+    2017_bearing_mount_offset = [0, 18, 0];                                 // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
+    2017_pipe_mount_offset = [18, 0, 7];                                    // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
+    2017_pipe_bottom = 8;                                          // Jak daleko nad zemi konci tyc
 
-chassis_wheelbase = 800;        // rozvor kolecek
-chassis_height = 300;           // vyska podvozku
+chassis_wheelbase = 600;        // rozvor kolecek
+chassis_height = 250;           // vyska podvozku
 chassis_baselength = 150;       // podelna roztec podvozku
-chassis_suspension_basewidth = 300;//vzdalenost prichyceni tlumicu na pricne tyci
+chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyci
 
-chassis_pipe_angle_x = atan((chassis_wheelbase/2)/chassis_height);
+
+calc_chassis_height = chassis_height - 2017_pipe_mount_offset[2] - 2013_pipe_offset[2];
+calc_chassis_baselength = chassis_baselength - 2017_pipe_mount_offset[0]*2;
+
+chassis_arm_pipe_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
+echo("Delka podvozkove tyce:", chassis_arm_pipe_length);
+
+chassis_arm_piston_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
+echo("Delka podvozkoveho tlumice:", chassis_arm_piston_length);
+
+chassis_pipe_angle_x = atan((chassis_wheelbase/2)/calc_chassis_height);
 chassis_pipe_angle_y = 0;
-chassis_pipe_angle_z = atan((chassis_baselength/2)/(chassis_wheelbase/2));
+chassis_pipe_angle_z = atan((calc_chassis_baselength/2)/(chassis_wheelbase/2));
 
-chassis_suspinsion_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
-chassis_suspinsion_angle_y = 0;
-chassis_suspinsion_angle_z = 0;
+chassis_suspension_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
+chassis_suspension_angle_y = 0;
+chassis_suspension_angle_z = 0;
 
 
 // parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
