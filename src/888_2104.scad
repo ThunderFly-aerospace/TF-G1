@@ -2,6 +2,7 @@ include <../parameters.scad>
 use <888_2013.scad>
 use <888_2016.scad>
 use <888_2017.scad>
+use <888_2018.scad>
 use <lib/igus.scad>
 use <666_1027.scad>
 
@@ -59,9 +60,19 @@ translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_heig
     sphere(d = 10);
 
 translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
-    rotate([-24, 0, 0])
+    rotate([-16, 0, 0])
         cylinder(d = 20, h = 200);
 
 
 translate([0, -chassis_suspension_basewidth/2, -50])
     sphere(d = 10);
+
+
+
+
+
+
+
+
+
+888_2018();

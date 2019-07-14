@@ -48,7 +48,7 @@ data_kstm_flange_length = [[5,34], [6,43], [8,47], [10,62], [12,65]];
 function kstm_flange_length(type) = data_kstm_flange_length[search(type, data_kstm_flange_length)[0]][1];
 
 data_kstm_flange_thickness = [[5,6], [6,7], [8,9], [10,10.5], [12,12]];
-function kstm_flange_thi(type) = data_kstm_flange_thickness[search(type, data_kstm_flange_thickness)[0]][1];
+function kstm_flange_width(type) = data_kstm_flange_thickness[search(type, data_kstm_flange_thickness)[0]][1];
 
 data_kstm_ball_thickness = [[5,25], [6,33], [8,33], [10,46], [12,46]];
 function kstm_ball_thickness(type) = data_kstm_ball_thickness[search(type, data_kstm_ball_thickness)[0]][1];

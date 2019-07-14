@@ -50,8 +50,8 @@ module 888_2017(){
                         cylinder(d = tube_for_undercarriage_outer_diameter, h = chassis_arm_pipe_length, $fn = 80);
             }
 
-            translate([-15, -45/2, 0])
-                cube([35-1.5, 45, 8]);
+            translate([-50, -40/2, 0])
+                cube([50, 40, 8]);
 
         }
 

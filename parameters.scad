@@ -572,7 +572,7 @@ DS313MG_X = 4;
 
 // Dily spojujici podvozkova ramena
     2017_bearing_mount_offset = [0, 18, 0];                                 // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
-    2017_pipe_mount_offset = [18, 0, 7];                                    // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
+    2017_pipe_mount_offset = [8, 0, -35];                                    // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
     2017_pipe_bottom = 8;                                          // Jak daleko nad zemi konci tyc
 
 chassis_wheelbase = 600;        // rozvor kolecek
