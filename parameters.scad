@@ -571,28 +571,39 @@ DS313MG_X = 4;
     2013_pipe_offset = [0, 0, 20];
 
 // Dily spojujici podvozkova ramena
-    2017_bearing_mount_offset = [0, 18, 0];                                 // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
-    2017_pipe_mount_offset = [8, 0, -35];                                    // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
-    2017_pipe_bottom = 8;                                          // Jak daleko nad zemi konci tyc
+    2017_bearing_mount_offset = [0, 18, 0];        // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
+    2017_pipe_mount_offset = [6, 0, -37];          // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
+    2017_pipe_bottom = 8;                          // Jak daleko nad zemi konci tyc
+
+
+    2018_thickness_above_pipe = 2;
 
 chassis_wheelbase = 600;        // rozvor kolecek
 chassis_height = 250;           // vyska podvozku
-chassis_baselength = 150;       // podelna roztec podvozku
+chassis_baselength_r = 75;       // podelna roztec podvozku dozade
+chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
+chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyci
+
+// delka ramene (trubky) podvozku rozlozena do osy X
+chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0]/2;
+chassis_pipe_baselength_f = chassis_baselength_f - 2017_pipe_mount_offset[0]/2;
 
 
 calc_chassis_height = chassis_height - 2017_pipe_mount_offset[2] - 2013_pipe_offset[2];
-calc_chassis_baselength = chassis_baselength - 2017_pipe_mount_offset[0]*2;
 
-chassis_arm_pipe_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
+//chassis_arm_pipe_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
+chassis_arm_pipe_length = 400;
 echo("Delka podvozkove tyce:", chassis_arm_pipe_length);
 
-chassis_arm_piston_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
-echo("Delka podvozkoveho tlumice:", chassis_arm_piston_length);
+//chassis_arm_piston_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
+//echo("Delka podvozkoveho tlumice:", chassis_arm_piston_length);
 
 chassis_pipe_angle_x = atan((chassis_wheelbase/2)/calc_chassis_height);
 chassis_pipe_angle_y = 0;
-chassis_pipe_angle_z = atan((calc_chassis_baselength/2)/(chassis_wheelbase/2));
+chassis_pipe_angle_r_z = atan((chassis_pipe_baselength_r)/(chassis_wheelbase/2));
+chassis_pipe_angle_f_z = atan((chassis_pipe_baselength_f)/(chassis_wheelbase/2));
+
 
 chassis_suspension_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
 chassis_suspension_angle_y = 0;
@@ -601,11 +612,13 @@ chassis_suspension_angle_z = 0;
 
 // parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
 // hodnoty jsou oproti stredu podvozku
-chassis_top_bearing_position = [chassis_baselength/2, 48/2, 0];
-chassis_top_bearing_position_x = chassis_top_bearing_position[0];
-chassis_top_bearing_position_y = chassis_top_bearing_position[1];
-chassis_top_bearing_position_z = chassis_top_bearing_position[2];
-chassis_top_bearing_rotation = [chassis_pipe_angle_x, chassis_pipe_angle_y, chassis_pipe_angle_z];
+chassis_top_bearing_position_f = [chassis_pipe_baselength_r/2, chassis_bearing_distance/2, 0];
+chassis_top_bearing_position_r = [chassis_pipe_baselength_f/2, chassis_bearing_distance/2, 0];
+//chassis_top_bearing_position_x = chassis_top_bearing_position[0];
+chassis_top_bearing_position_y = chassis_bearing_distance/2;
+chassis_top_bearing_position_z = chassis_bearing_distance/2;
+chassis_top_bearing_rotation_f = [chassis_pipe_angle_x, 0, chassis_pipe_angle_f_z];
+chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_z];
 
 
 //chassis_arm_mount_plate = [40, 25];

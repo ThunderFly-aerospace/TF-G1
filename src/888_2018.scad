@@ -33,7 +33,7 @@ module tube_part(l = 20, wall = 6, wall_below = 5, screw_length = 15){
 
 module 888_2018(){
 
-    2018_thickness_above_pipe = 2;
+    
     thickness_above = 2018_thickness_above_pipe; // tloustka materialu mezi tyci a podlozkou
 
     width = chassis_suspension_basewidth + kstm_flange_length(10) + 5;
