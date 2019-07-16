@@ -61,16 +61,36 @@ module 888_2016(){
 
         translate([0, bolt_support_length/2 + 50, main_tube_outer_diameter/2 + 4])
             rotate([90, 30, 0])
-                cylinder(d = M3_nut_diameter, h = 50, $fn = 6);;
-
-
-
+                cylinder(d = M3_nut_diameter, h = 50, $fn = 6);
     }
-
-
 }
 
+module 888_2016_drill(){
+    wall = 10;
+    length = 63;
+    space = 1.5;
+    kstm = 10;
+    bolt_length = 35;
+    bolt_support_length = 20;
 
+    difference(){
+        translate([-length/2, -main_tube_outer_diameter/2 - wall, -main_tube_outer_diameter/2 - wall])
+            cube([length, main_tube_outer_diameter + 2*wall, main_tube_outer_diameter + 2*wall]);
+
+        rotate([0, 90, 0])
+            cylinder(d = main_tube_outer_diameter, h = length + global_clearance, center = true, $fn = 90);
+
+        for (i=[1,-1]) {
+            translate([length/3*i, 0, 0])
+                rotate([90, 0, 0])
+                    cylinder(d = M3_screw_diameter, h = main_tube_outer_diameter+2*wall + global_clearance, $fn = 50, center = true);
+        }
+
+        translate([0, 0, main_tube_outer_diameter/2 + wall - 0.2])
+            linear_extrude(0.3)
+                text("drill 888_2016", size = 6, valign = "center", halign = "center");
+    }
+}
 
 
 888_2016();
