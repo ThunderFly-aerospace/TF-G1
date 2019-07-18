@@ -4,9 +4,9 @@ use <lib/igus.scad>
 
 module 888_2016(){
     wall = 10;
-    length = 63;
+    length = 45;
     space = 1.5;
-    kstm = 10;
+    kstm = 8;
     bolt_length = 35;
     bolt_support_length = 20;
 
@@ -32,7 +32,7 @@ module 888_2016(){
                 cylinder(d = M4_screw_diameter, h = main_tube_outer_diameter+2*wall + global_clearance, $fn = 50, center = true);
 
             translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - global_clearance - M4_screw_head_height])
-                cylinder(d = M4_nut_diameter, h = M4_screw_head_height+main_tube_outer_diameter*2, $fn = 50);
+                cylinder(d = M4_nut_diameter, h = M4_screw_head_height*2, $fn = 50);
         }
 
         for (i=[1,-1]) {
@@ -42,7 +42,6 @@ module 888_2016(){
 
             translate([length*i/3, -bolt_length/2 , 0])
                 rotate([90, 30, 0])
-
                         cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
 
             translate([length*i/3, bolt_length/2 + 20 , 0])
@@ -67,9 +66,9 @@ module 888_2016(){
 
 module 888_2016_drill(){
     wall = 10;
-    length = 63;
+    length = 45;
     space = 1.5;
-    kstm = 10;
+    kstm = 8;
     bolt_length = 35;
     bolt_support_length = 20;
 
@@ -88,7 +87,7 @@ module 888_2016_drill(){
 
         translate([0, 0, main_tube_outer_diameter/2 + wall - 0.2])
             linear_extrude(0.3)
-                text("drill 888_2016", size = 6, valign = "center", halign = "center");
+                text("drill 888_2016", size = 4, valign = "center", halign = "center");
     }
 }
 
