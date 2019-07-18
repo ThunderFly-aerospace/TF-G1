@@ -37,6 +37,9 @@ module 888_2013(front = true){
         translate([2013_pipe_offset[2], 0, 0])
             cylinder(d=tube_for_undercarriage_outer_diameter, h = 100, $fn = 60, center = true);
 
+        %translate([2013_pipe_offset[2], 0, 0])
+            cylinder(d=tube_for_undercarriage_outer_diameter, h = 500, $fn = 30);
+
         translate([2013_pipe_offset[2], 0, 10]){
             rotate([90, 0, 0])
                 cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 60);
