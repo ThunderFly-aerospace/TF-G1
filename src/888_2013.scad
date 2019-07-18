@@ -9,7 +9,7 @@ draft = true;   // sets rendering quality to draft.
 module 888_2013(front = true){
     tube_wall = 4;
     height = 40;
-    crop = -5;
+    crop = 0;
     kstm_ball_thickness = 12;
     shoulder_screw_length = 20+2;
 
@@ -72,7 +72,7 @@ module 888_2013(front = true){
         }
     }
 
-    rotate([0, -15, 0])
+    rotate([0, -30, 0])
     translate([0, 0, 250 + crop])
         rotate([rotation, 0, 0])
             cube(500, center = true);

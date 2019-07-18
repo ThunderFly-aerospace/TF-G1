@@ -11,6 +11,11 @@ module 888_2017(){
     pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];                                        // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
     suspension_mount_pipe_end = 2017_pipe_bottom;                                              // Jak daleko nad zemi konci tyc
 
+
+    vec_r = [chassis_height, -chassis_pipe_baselength_r, chassis_pipe_wheelbase];
+    vec_f = [chassis_height, chassis_pipe_baselength_f, chassis_pipe_wheelbase];
+
+
     difference(){
         union(){
 
@@ -35,39 +40,20 @@ module 888_2017(){
             // Vnejsi cast na pripevneni trubek
             union(){
                 translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                    //rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
-                    #rotate([0, 0, -90]) orientate(chassis_arm_r)
-                        translate([0, 0, -10])
-                            cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
-
-                /* translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                    rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
-                        translate([0, 0, -10])
-                            cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80); */
+                    orientate(vec_r)
+                        cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
 
                 translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                //rotate([-90, 90, 0])
+                    orientate(vec_f)
+                        cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
 
-                    //rotate([0, 0, 0])
-                        orientate(chassis_arm_f, [0, 0, 1])
-                            translate([0, 0, -10])
-                                #cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
+                /* %translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
+                    orientate(vec_r)
+                        cylinder(d = tube_for_undercarriage_outer_diameter, h = mod(vec_r), $fn = 80);
 
-
-                %translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                    rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
-                        translate([0, 0, 2017_pipe_bottom])
-                            cylinder(d = tube_for_undercarriage_outer_diameter, h = 300, $fn = 80);
-
-                #translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                    //rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
-                    //    translate([0, 0, 2017_pipe_bottom])
-                    //orientate([chassis_height, chassis_arm_length_r, chassis_pipe_wheelbase], [0, 1, 0])
-                    //rotate([0, 0, 180])
-                        rotate([0, 0, 0])
-                        mirror([0,0,0])
-                        orientate(chassis_arm_f, [0, 1, 0])
-                            cylinder(d = tube_for_undercarriage_outer_diameter, h = chassis_arm_pipe_length, $fn = 80);
+                %translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+                    orientate(vec_f)
+                        cylinder(d = tube_for_undercarriage_outer_diameter, h = mod(vec_f), $fn = 80); */
             }
 
             translate([-50, -40/2, 0])
@@ -98,47 +84,39 @@ module 888_2017(){
         union(){
 
             translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
+                orientate(vec_r)
                     translate([0, 0, suspension_mount_pipe_end])
-                        cylinder(d = tube_for_undercarriage_outer_diameter, h = 40, $fn = 60);
+                        cylinder(d = tube_for_undercarriage_outer_diameter, h = 50, $fn = 60);
+
             // sroub skrze trubku
             translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
+                orientate(vec_r)
                     translate([0, 0, global_clearance+suspension_mount_pipe_end + 15])
-                        rotate([90, 0, 0])
+                        rotate([90, 0, 0]){
                             cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
-            translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
-                    translate([0, -suspension_pipe_screw_length/2, global_clearance+suspension_mount_pipe_end + 15])
-                        rotate([90, 0, 0])
-                            cylinder(d = M3_nut_diameter, h = 40, $fn = 60);
-            translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
-                    translate([0, suspension_pipe_screw_length/2 + 5, global_clearance+suspension_mount_pipe_end + 15])
-                        rotate([90, 0, 0])
-                            cylinder(d = M3_nut_diameter, h = 5, $fn = 6);
+                            translate([0,0, suspension_pipe_screw_length/2])
+                                    cylinder(d = M3_nut_diameter, h = 40, $fn = 60);
+                            translate([0,0, -suspension_pipe_screw_length/2 - 5])
+                                    cylinder(d = M3_nut_diameter, h = 5, $fn = 6);
+                        }
 
 
             translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
+                orientate(vec_f)
                     translate([0, 0, suspension_mount_pipe_end])
-                        cylinder(d = tube_for_undercarriage_outer_diameter, h = 40, $fn = 60);
-            translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
-                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 15])
-                        rotate([90, 0, 0])
-                            cylinder(d = M3_screw_diameter, h = 20, center=true, $fn = 60);
-            translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
-                    translate([0, suspension_pipe_screw_length/2+20, global_clearance+suspension_mount_pipe_end + 15])
-                        rotate([90, 0, 0])
-                            cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
-            translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
-                    translate([0, -suspension_pipe_screw_length/2, global_clearance+suspension_mount_pipe_end + 15])
-                        rotate([90, 0, 0])
-                            cylinder(d = M3_nut_diameter, h = 5, $fn = 6);
+                        cylinder(d = tube_for_undercarriage_outer_diameter, h = 50, $fn = 60);
 
+            translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+                orientate(vec_f)
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 15])
+                        rotate([90, 0, 0]){
+
+                            cylinder(d = M3_screw_diameter, h = 20, center=true, $fn = 60);
+                            translate([0, 0, -suspension_pipe_screw_length/2 -20])
+                                cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
+                            translate([0, 0, suspension_pipe_screw_length/2])
+                                cylinder(d = M3_nut_diameter, h = 5, $fn = 6);
+                    }
 
             // Diry na srouby pro sesroubovani do vidlice
             translate([suspension_mount_offset[0]+10, 0, 0])

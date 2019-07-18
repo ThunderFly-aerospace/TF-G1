@@ -11,10 +11,12 @@ use <666_1027.scad>
 
 
 module bearing_set(x = 0, rot_x = 0, front = true){
+    r = atan((chassis_pipe_wheelbase)/(chassis_height+80));
     translate([x, chassis_top_bearing_position_y, -kstm_ball_height(8)]){
-            rotate([0, 90, 90+rot_x])
-                //rotate([0, chassis_pipe_angle_z, 0])
-                888_2013(front);
+            //rotate([0, 90, 90+rot_x])
+                rotate([0, 90 + r, 90+rot_x])
+                //orientate([chassis_pipe_wheelbase, chassis_baselength_f, chassis_height], [0, 0, 1])
+                    888_2013(front);
 
             rotate([180, 0, 90])
                 kstm_08();
