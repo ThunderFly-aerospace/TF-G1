@@ -4,6 +4,7 @@ use <888_2016.scad>
 use <888_2017.scad>
 use <888_2018.scad>
 use <lib/igus.scad>
+use <lib/vector.scad>
 use <666_1027.scad>
 
 //color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_outer_diameter/2+2]) rotate([90,0,0]) 666_1027();
@@ -21,15 +22,32 @@ module bearing_set(x = 0, rot_x = 0, front = true){
 }
 
 
+ch = chassis_height;
+color("red");
+    /* translate([0, 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
+        cube([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height]);
+
+color("green")
+    translate([-chassis_pipe_baselength_f - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
+        cube([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height]); */
+
+color("blue")
+    translate([ - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1] + chassis_pipe_wheelbase, -ch + 2017_pipe_mount_offset[2]])
+        rotate([0, 0, 180])
+        orientate(chassis_arm_f, [0, 0, 1])
+            cylinder(d = 10, h = 500);
+
+
+
 mirror([0, 0, 0])
-    #bearing_set(chassis_pipe_baselength_r, chassis_pipe_angle_r_z, false);
+    bearing_set(chassis_baselength_r, chassis_pipe_angle_r_z, false);
 mirror([1, 0, 0])
-    bearing_set(chassis_pipe_baselength_f, chassis_pipe_angle_f_z);
+    bearing_set(chassis_baselength_f, chassis_pipe_angle_f_z);
 mirror([0, 1, 0])
-    bearing_set(chassis_pipe_baselength_r, chassis_pipe_angle_r_z, false);
+    bearing_set(chassis_baselength_r, chassis_pipe_angle_r_z, false);
 mirror([1, 0, 0])
     mirror([0, 1, 0])
-        bearing_set(chassis_pipe_baselength_f, chassis_pipe_angle_f_z);
+        bearing_set(chassis_baselength_f, chassis_pipe_angle_f_z);
 
 translate([0, chassis_suspension_basewidth/2, -main_tube_outer_diameter/2 - 2018_thickness_above_pipe*2])
     rotate([0, 0, 90])

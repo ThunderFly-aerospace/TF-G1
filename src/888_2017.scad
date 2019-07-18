@@ -35,14 +35,23 @@ module 888_2017(){
             // Vnejsi cast na pripevneni trubek
             union(){
                 translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                    rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
+                    //rotate([chassis_pipe_angle_r_z, 90-chassis_pipe_angle_x, 0])
+                    #rotate([0, 0, -90]) orientate(chassis_arm_r)
                         translate([0, 0, -10])
                             cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
 
-                translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+                /* translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
                     rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
                         translate([0, 0, -10])
-                            cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
+                            cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80); */
+
+                translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+                //rotate([-90, 90, 0])
+
+                    //rotate([0, 0, 0])
+                        orientate(chassis_arm_f, [0, 0, 1])
+                            translate([0, 0, -10])
+                                #cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
 
 
                 %translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
@@ -50,9 +59,14 @@ module 888_2017(){
                         translate([0, 0, 2017_pipe_bottom])
                             cylinder(d = tube_for_undercarriage_outer_diameter, h = 300, $fn = 80);
 
-                %translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                    rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
-                        translate([0, 0, 2017_pipe_bottom])
+                #translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+                    //rotate([-chassis_pipe_angle_f_z, 90-chassis_pipe_angle_x, 0])
+                    //    translate([0, 0, 2017_pipe_bottom])
+                    //orientate([chassis_height, chassis_arm_length_r, chassis_pipe_wheelbase], [0, 1, 0])
+                    //rotate([0, 0, 180])
+                        rotate([0, 0, 0])
+                        mirror([0,0,0])
+                        orientate(chassis_arm_f, [0, 1, 0])
                             cylinder(d = tube_for_undercarriage_outer_diameter, h = chassis_arm_pipe_length, $fn = 80);
             }
 
