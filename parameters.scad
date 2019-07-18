@@ -1,3 +1,4 @@
+use <src/lib/vector.scad>
 
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
@@ -588,6 +589,7 @@ chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyc
 // delka ramene (trubky) podvozku rozlozena do osy X
 chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0]/2;
 chassis_pipe_baselength_f = chassis_baselength_f - 2017_pipe_mount_offset[0]/2;
+chassis_pipe_wheelbase = chassis_wheelbase/2 - 2017_bearing_mount_offset[1];
 
 
 calc_chassis_height = chassis_height - 2017_pipe_mount_offset[2] - 2013_pipe_offset[2];
@@ -596,13 +598,22 @@ calc_chassis_height = chassis_height - 2017_pipe_mount_offset[2] - 2013_pipe_off
 chassis_arm_pipe_length = 400;
 echo("Delka podvozkove tyce:", chassis_arm_pipe_length);
 
+
+
+chassis_arm_f = [chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height];
+chassis_arm_r = [chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height];
+
+chassis_arm_length_f = mod(chassis_arm_f);
+chassis_arm_length_r = mod(chassis_arm_r);
+
 //chassis_arm_piston_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
 //echo("Delka podvozkoveho tlumice:", chassis_arm_piston_length);
 
-chassis_pipe_angle_x = atan((chassis_wheelbase/2)/calc_chassis_height);
+
+chassis_pipe_angle_x = atan((chassis_pipe_wheelbase)/(chassis_height));
 chassis_pipe_angle_y = 0;
-chassis_pipe_angle_r_z = atan((chassis_pipe_baselength_r)/(chassis_wheelbase/2));
-chassis_pipe_angle_f_z = atan((chassis_pipe_baselength_f)/(chassis_wheelbase/2));
+chassis_pipe_angle_r_z = atan((chassis_pipe_baselength_r)/(chassis_pipe_wheelbase));
+chassis_pipe_angle_f_z = atan((chassis_pipe_baselength_f)/(chassis_pipe_wheelbase));
 
 
 chassis_suspension_angle_x = atan((chassis_wheelbase/2 - chassis_suspension_basewidth/2)/chassis_height);
