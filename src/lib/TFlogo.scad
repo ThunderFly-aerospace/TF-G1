@@ -9,7 +9,7 @@
 // keep the resulting .stl file manifold.
 fudge = 0.1;
 
-module poly_path14(h)
+module TF_logo(h)
 {
   scale([25.4/90, -25.4/90, 1]) union()
   {
@@ -60,4 +60,4 @@ module poly_path14(h)
   }
 }
 
-poly_path14(5);
+TF_logo(5);

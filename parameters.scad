@@ -569,7 +569,7 @@ DS313MG_X = 4;
 
 
 /// Parametry podvozku
-    2013_pipe_offset = [0, 0, 20];
+    2013_pipe_offset = [0, 0, 25];
 
 // Dily spojujici podvozkova ramena
     2017_bearing_mount_offset = [0, 18, 0];        // Umisteni osy kuloveho loziska v souradnicovem syst. dilu

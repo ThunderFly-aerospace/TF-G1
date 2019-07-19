@@ -16,7 +16,7 @@ module bearing_set(x = 0, rot_x = 0, front = true){
             //rotate([0, 90, 90+rot_x])
                 //rotate([0, 90 + r, 90+rot_x])
                 //orientate([chassis_pipe_wheelbase, chassis_baselength_f, chassis_height], [0, 0, 1])
-            translate([0, 0, -20])
+            //translate([0, 0, -20])
                     888_2013(front);
 
             rotate([180, 0, 90])
@@ -62,11 +62,11 @@ translate([0, -chassis_suspension_basewidth/2, -main_tube_outer_diameter/2 - 201
 
 translate([0, -chassis_suspension_basewidth/2, -main_tube_outer_diameter - 10 - kstm_ball_height(10)])
     rotate([0, 180, 90])
-        kstm_10();
+        kstm_08();
 
 translate([0, chassis_suspension_basewidth/2, -main_tube_outer_diameter - 10 - kstm_ball_height(10)])
     rotate([0, 180, 90])
-        kstm_10();
+        kstm_08();
 
 
 translate([0, chassis_wheelbase/2, -chassis_height])
