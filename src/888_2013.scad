@@ -85,7 +85,7 @@ module 888_2013_old(front = true){
 
 
 
-module 888_2013(front = true){
+module 888_2013(front = true, right = 1, rotate = false){
     tube_wall = 5;
     height = 40;
     crop = 0;
@@ -98,7 +98,8 @@ module 888_2013(front = true){
 
     arm_r = front ? [chassis_pipe_baselength_f, chassis_pipe_wheelbase, -chassis_height] : [-chassis_pipe_baselength_r, chassis_pipe_wheelbase, -chassis_height];
 
-    orientate([front ? chassis_baselength_f : chassis_baselength_r, chassis_pipe_wheelbase, chassis_height], [0,1,0])
+    mirror([])
+    orientate([front ? -chassis_baselength_f : chassis_baselength_r, chassis_pipe_wheelbase, chassis_height]*rotate, [0,1,0])
     difference(){
         union(){
 
@@ -141,6 +142,7 @@ module 888_2013(front = true){
                 rotate([0, 90, 90])
                     cylinder(d = tube_for_undercarriage_outer_diameter, h = 150, center = true);
 
+        // diry na srouby skrz trubku
         for (i=[10, 30]) {
             translate([0, 0, - 2013_pipe_offset[2]])
                 orientate(arm_r, [0,1,0])
@@ -152,10 +154,19 @@ module 888_2013(front = true){
                                 cylinder(d = M3_nut_diameter, h = 10, $fn = 60);
                             translate([0, 0, -screw_length/2 - 10])
                                 cylinder(d = M3_nut_diameter, h = 10, $fn = 6);
-
-
                         }
         }
+
+        translate([0, 0, - 2013_pipe_offset[2]])
+            orientate(arm_r, [0,1,0])
+                rotate([180, 0, 90])
+                    mirror([0, 1, 0]){
+                        translate([15, 3, -tube_wall - tube_for_undercarriage_outer_diameter/2 - global_clearance ])
+                            linear_extrude(0.8) text(front? "Front" : "Rear", size = 7);
+
+                            //translate([15, -8, -tube_wall - tube_for_undercarriage_outer_diameter/2 - global_clearance ])
+                            //    linear_extrude(0.8) text(right? "Right" : "Left", size = 7);
+                    }
 
     }
 
