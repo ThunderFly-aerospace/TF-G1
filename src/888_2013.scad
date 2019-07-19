@@ -2,11 +2,12 @@
 
 include <../parameters.scad>
 use <lib/igus.scad>
+use <lib/vector.scad>
 
 //improving rendering speed.
 draft = true;   // sets rendering quality to draft.
 
-module 888_2013(front = true){
+module 888_2013_old(front = true){
     tube_wall = 4;
     height = 40;
     crop = 0;
@@ -84,6 +85,32 @@ module 888_2013(front = true){
 
 
 
+module 888_2013(front = true){
+    tube_wall = 4;
+    height = 40;
+    crop = 0;
+    kstm_ball_thickness = 12;
+    shoulder_screw_length = 20+2;
+
+    length = 50;
+    screw_length = 25-4;
+    baselength = front ? chassis_pipe_baselength_f : -chassis_pipe_baselength_r;
+
+
+    difference(){
+        union(){
+            translate([-tube_for_undercarriage_outer_diameter/2-tube_wall, 0, -tube_for_undercarriage_outer_diameter/2 -tube_wall])
+                cube([tube_for_undercarriage_outer_diameter+2*tube_wall, length, tube_for_undercarriage_outer_diameter+2*tube_wall]);
+
+            orientate([chassis_height, chassis_pipe_wheelbase, -chassis_pipe_wheelbase/2])
+                //rotate([0, 90, 0])
+                    cylinder(d = 5, h = mod([chassis_height, chassis_pipe_wheelbase, -chassis_pipe_wheelbase/2]));
+        }
+
+    }
+
+
+}
 
 
 

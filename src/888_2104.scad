@@ -14,8 +14,9 @@ module bearing_set(x = 0, rot_x = 0, front = true){
     r = atan((chassis_pipe_wheelbase)/(chassis_height+80));
     translate([x, chassis_top_bearing_position_y, -kstm_ball_height(8)]){
             //rotate([0, 90, 90+rot_x])
-                rotate([0, 90 + r, 90+rot_x])
+                //rotate([0, 90 + r, 90+rot_x])
                 //orientate([chassis_pipe_wheelbase, chassis_baselength_f, chassis_height], [0, 0, 1])
+            translate([0, 0, -20])
                     888_2013(front);
 
             rotate([180, 0, 90])
@@ -42,7 +43,7 @@ color("blue")
 
 
 mirror([0, 0, 0])
-    bearing_set(chassis_baselength_r, chassis_pipe_angle_r_z, false);
+    #bearing_set(chassis_baselength_r, chassis_pipe_angle_r_z, false);
 mirror([1, 0, 0])
     bearing_set(chassis_baselength_f, chassis_pipe_angle_f_z);
 mirror([0, 1, 0])
@@ -82,9 +83,10 @@ translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_heig
     sphere(d = 10);
 
 translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
-    rotate([-16, 0, 0])
-        cylinder(d = 20, h = 200);
-
+    rotate([-38, 0, 0]){
+        cylinder(d = 20, h = 220);
+        cylinder(d = 10, h = 290);
+    }
 
 
 translate([0, -chassis_suspension_basewidth/2, -50])

@@ -579,8 +579,8 @@ DS313MG_X = 4;
 
     2018_thickness_above_pipe = 2;
 
-chassis_wheelbase = 600;        // rozvor kolecek
-chassis_height = 250;           // vyska podvozku
+chassis_wheelbase = 800;        // rozvor kolecek
+chassis_height = 280;           // vyska podvozku
 chassis_baselength_r = 75;       // podelna roztec podvozku dozade
 chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
 chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
