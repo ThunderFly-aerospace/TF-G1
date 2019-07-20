@@ -98,7 +98,7 @@ module 888_2013(front = true, right = 1, rotate = false){
 
     arm_r = front ? [chassis_pipe_baselength_f, chassis_pipe_wheelbase, -chassis_height] : [-chassis_pipe_baselength_r, chassis_pipe_wheelbase, -chassis_height];
 
-    mirror([])
+    mirror([0,1,0]*right) rotate([0, 0, 180]*right)
     orientate([front ? -chassis_baselength_f : chassis_baselength_r, chassis_pipe_wheelbase, chassis_height]*rotate, [0,1,0])
     difference(){
         union(){
@@ -164,8 +164,8 @@ module 888_2013(front = true, right = 1, rotate = false){
                         translate([15, 3, -tube_wall - tube_for_undercarriage_outer_diameter/2 - global_clearance ])
                             linear_extrude(0.8) text(front? "Front" : "Rear", size = 7);
 
-                            //translate([15, -8, -tube_wall - tube_for_undercarriage_outer_diameter/2 - global_clearance ])
-                            //    linear_extrude(0.8) text(right? "Right" : "Left", size = 7);
+                            translate([15, -8, -tube_wall - tube_for_undercarriage_outer_diameter/2 - global_clearance ])
+                                linear_extrude(0.8) text(right? "Right" : "Left", size = 7);
                     }
 
     }
