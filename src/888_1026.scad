@@ -29,9 +29,10 @@ module 888_1026(draft)
 
     //vypouštěcí zařízení
     vlecne_zarizeni = true;
+    supports = true;
     prumer = 2;
     vyska = 5;
-    servo_lever = 20; //délka páky serva od středu otáčení ke konci
+    servo_lever = 22.5; //délka páky serva od středu otáčení ke konci
     servo_lever_space = 3; //zvetšení místa pro páku serva
     servo_holder = 1.3; //tlouštka úchytu na servu
     dolni_konec_y = prumer/-2; //pomocná proměnná
@@ -41,6 +42,19 @@ module 888_1026(draft)
     distance_height = (engine_offset-wall_thickness-engine_diameter/2)-magnet_vertical_position;
     hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter*3/4-magnet_vertical_position)/distance_height-13;
 
+
+
+    if(supports) {
+        translate([dolni_konec_x+servo_lever+DS313MG_A/2-1, dolni_konec_y+DS313MG_X+DS313MG_G, (DS313MG_J-DS313MG_M)/2]) {
+            cube([1, DS313MG_H-10, DS313MG_M]);
+
+            translate([-3, 0, 0])
+                cube([3, 1, DS313MG_M]);
+        }
+
+    }
+
+    
     difference (){
         union(){
             hull(){
@@ -165,11 +179,14 @@ module 888_1026(draft)
             translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y, (DS313MG_J-DS313MG_M)/2])
                 cube([100, 100, DS313MG_M]);
 
+            translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y+DS313MG_X+DS313MG_G+DS313MG_H-10, 0])
+                cube([DS313MG_A, 10, DS313MG_M]);
+
             translate([dolni_konec_x, dolni_konec_y-servo_lever_space, 0])
                 cube([100, DS313MG_X+DS313MG_G-DS313MG_K+servo_lever_space, DS313MG_J-(DS313MG_J-DS313MG_M)/2]);
 
-            translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y+DS313MG_X+DS313MG_G-servo_holder, 0])
-                cube([100, servo_holder, DS313MG_J]);
+            translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y+DS313MG_X+DS313MG_G-servo_holder-5, 0])
+                cube([100, servo_holder+5, DS313MG_J]);
 
             translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y, 0])
                 cube([100, DS313MG_X+DS313MG_G, DS313MG_M]);
