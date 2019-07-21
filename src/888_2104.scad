@@ -27,12 +27,15 @@ module bearing_set(x = 0, rot_x = 0, front = true){
 
 ch = chassis_height;
 color("red");
-    /* translate([0, 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
+     translate([0, 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
         cube([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height]);
 
 color("green")
     translate([-chassis_pipe_baselength_f - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
-        cube([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height]); */
+        cube([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height]);
+
+        echo(str("Delka predniho ramene je ", mod([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
+        echo(str("Delka  zadniho ramene je ", mod([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
 
 color("blue")
     translate([ - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1] + chassis_pipe_wheelbase, -ch + 2017_pipe_mount_offset[2]])

@@ -584,7 +584,7 @@ chassis_height = 280;           // vyska podvozku
 chassis_baselength_r = 75;       // podelna roztec podvozku dozade
 chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
 chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
-chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyci
+chassis_suspension_basewidth = 400;//vzdalenost prichyceni tlumicu na pricne tyci
 
 // delka ramene (trubky) podvozku rozlozena do osy X
 chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0]/2;
@@ -596,8 +596,6 @@ calc_chassis_height = chassis_height - 2017_pipe_mount_offset[2] - 2013_pipe_off
 
 //chassis_arm_pipe_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
 chassis_arm_pipe_length = 400;
-echo("Delka podvozkove tyce:", chassis_arm_pipe_length);
-
 
 
 chassis_arm_f = [chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height];
