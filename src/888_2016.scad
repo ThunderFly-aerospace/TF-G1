@@ -3,18 +3,22 @@ use <lib/igus.scad>
 
 
 module 888_2016(){
-    wall = 10;
+    wall = 6;
     length = 47;
     space = 1.5;
     kstm = 8;
-    bolt_length = 35;
-    bolt_support_length = 20 - 5;
+    bolt_length = 30;
+    bolt_support_length = 15-M3_nut_height;
     bolt_bearing_length = 15;       // Delka M4 sroubu skrze prirubu
 
 
     difference(){
-        cube([length, main_tube_outer_diameter+2*wall, main_tube_outer_diameter+2*wall], center = true);
-
+        hull(){
+            rotate([0, -90, 0])
+                cylinder(d = main_tube_outer_diameter+wall*2, h = length, $fn = 80, center = true);
+                translate([-length/2, -5, -main_tube_outer_diameter/2-15])
+                    cube([length, 10, main_tube_outer_diameter/2]);
+        }
         rotate([0, -90, 0])
             cylinder(d = main_tube_outer_diameter, h = length + global_clearance, $fn = 80, center = true);
 
@@ -22,19 +26,14 @@ module 888_2016(){
         translate([-length/2 - global_clearance/2, -space/2, 0])
             cube([length + global_clearance, space, main_tube_outer_diameter+wall]);
 
-        for (i=[1:2:8]) {
-            rotate([i*45, 0, 0])
-                translate([-length/2 - global_clearance/2, main_tube_outer_diameter/2+wall, -25])
-                    cube([length+global_clearance, 50, 50]);
-        }
 
         // diry pro pridelani loziska
         for (i=[1,-1]) {
             translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - wall])
-                cylinder(d = M4_screw_diameter, h = 2*wall + global_clearance, $fn = 50, center = true);
+                cylinder(d = M4_screw_diameter, h = 40, $fn = 50, center = true);
 
-            translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - wall - global_clearance + (bolt_bearing_length-6) - M4_screw_head_height -1])
-                cylinder(d = M4_nut_diameter, h = wall*2, $fn = 6);
+            translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - wall - global_clearance + (bolt_bearing_length-6) -10])
+                cylinder(d = M4_nut_diameter, h = main_tube_inner_diameter, $fn = 6);
         }
 
         for (i=[1,-1]) {
@@ -52,11 +51,11 @@ module 888_2016(){
         }
 
 
-        translate([0, 0, main_tube_outer_diameter/2 + 4])
+        translate([0, 0, main_tube_outer_diameter/2 + 3])
             rotate([90, 0, 0])
                 cylinder(d = M3_screw_diameter, h = 50, $fn = 60, center = true);
 
-        translate([0, -bolt_support_length/2, main_tube_outer_diameter/2 + 4])
+        translate([0, -bolt_support_length/2, main_tube_outer_diameter/2 + 3])
             rotate([90, 0, 0])
                 cylinder(d = M3_nut_diameter, h = 50, $fn = 60);
 

@@ -587,8 +587,8 @@ chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyci
 
 // delka ramene (trubky) podvozku rozlozena do osy X
-chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0]/2;
-chassis_pipe_baselength_f = chassis_baselength_f - 2017_pipe_mount_offset[0]/2;
+chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0];
+chassis_pipe_baselength_f = chassis_baselength_f - 2017_pipe_mount_offset[0];
 chassis_pipe_wheelbase = chassis_wheelbase/2 - 2017_bearing_mount_offset[1];
 
 
