@@ -85,7 +85,7 @@ M10_nut_diameter = 25.5;
 M10_nut_pocket = 22.3;
 
 //Screw diameter for M8 [mm]
-M8_screw_diameter = 8 + 1;
+M8_screw_diameter = 8 + 0.5;
 M8_head_height = 8;
 M8_head_diameter = 13.5;
 M8_nut_height = 7.5;
@@ -579,12 +579,12 @@ DS313MG_X = 4;
 
     2018_thickness_above_pipe = 2;
 
-chassis_wheelbase = 800;        // rozvor kolecek
-chassis_height = 280;           // vyska podvozku
+chassis_wheelbase = 700;        // rozvor kolecek
+chassis_height = 250;           // vyska podvozku
 chassis_baselength_r = 75;       // podelna roztec podvozku dozade
 chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
 chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
-chassis_suspension_basewidth = 400;//vzdalenost prichyceni tlumicu na pricne tyci
+chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyci
 
 // delka ramene (trubky) podvozku rozlozena do osy X
 chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0]/2;
