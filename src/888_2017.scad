@@ -24,10 +24,10 @@ module 888_2017(right = 0){
                 hull(){
                     translate(suspension_mount_offset)
                         rotate([90, 0, 0])
-                            cylinder(d = suspension_bolt_diameter + 8, h = suspension_bolt_length + 10, center = true, $fn = 100);
+                            cylinder(d = suspension_bolt_diameter + 8, h = suspension_bolt_length + 18, center = true, $fn = 100);
 
                     translate([suspension_mount_offset[0], 0, 0])
-                        cube([30, 30, 2], center = true);
+                        cube([5, 30, 2], center = true);
                 //}
                 // Vnejsi cast na pripevneni trubek
                 //hull(){
@@ -103,7 +103,7 @@ module 888_2017(right = 0){
             // sroub skrze trubku
             translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
                 orientate(vec_r)
-                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 15])
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 18])
                         rotate([90, 0, 0]){
                             cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
                             translate([0,0, suspension_pipe_screw_length/2])
@@ -123,7 +123,7 @@ module 888_2017(right = 0){
 
             translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
                 orientate(vec_f)
-                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 15])
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 18])
                         rotate([90, 0, 0]){
 
                             cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
@@ -137,19 +137,23 @@ module 888_2017(right = 0){
                     }
 
             // Diry na srouby pro sesroubovani do vidlice
-            translate([suspension_mount_offset[0]+10, 0, 0])
+            translate([suspension_mount_offset[0]+10 - 25, 0, 0])
                 cylinder(h = 50, d = M3_screw_diameter, $fn = 60);
-            translate([suspension_mount_offset[0]+10, 0, 4])
+            translate([suspension_mount_offset[0]+10 - 25, 0, 4])
                 cylinder(h = 50, d = M3_nut_diameter, $fn = 60);
 
-            translate([suspension_mount_offset[0]-10, 0, 0])
+            translate([suspension_mount_offset[0]-10 - 25, 0, 0])
                 cylinder(h = 50, d = M3_screw_diameter, $fn = 60);
-            translate([suspension_mount_offset[0]-10, 0, 4])
+            translate([suspension_mount_offset[0]-10 - 25, 0, 4])
                 cylinder(h = 50, d = M3_nut_diameter, $fn = 60);
 
+            translate([0, 0, -0.1])
+                linear_extrude(0.9)
+                    translate([-20, -5, 0]) rotate([180, 0, 0]) text("888_2017", size = 5, halign = "center");
 
-            linear_extrude(0.4)
-                translate([13, -5, 0]) rotate([180, 0, 0]) text(right? "888_2017, Right": "888_2017, Left", size = 5, halign = "right");
+            translate([0, 0, -0.1])
+                linear_extrude(0.9)
+                    translate([-20, 8, 0]) rotate([180, 0, 0]) text(right? "Right": "Left", size = 5, halign = "center");
 
             translate([-250, -250, -500])
                 cube(500);
