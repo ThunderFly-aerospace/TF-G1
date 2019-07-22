@@ -1,8 +1,10 @@
 include <../parameters.scad>
 use <lib/igus.scad>
 
+$fn = 80;
 
-module 888_2016(){
+
+module 888_2016_sleeve(){
     wall = 6;
     length = 47;
     space = 1.5;
@@ -65,7 +67,7 @@ module 888_2016(){
     }
 }
 
-module 888_2016_drill(){
+module 888_2016_sleeve_drill(){
     wall = 10;
     length = 45;
     space = 1.5;
@@ -90,6 +92,46 @@ module 888_2016_drill(){
             linear_extrude(0.3)
                 text("drill 888_2016", size = 4, valign = "center", halign = "center");
     }
+}
+
+module 888_2016(){
+
+    wall = 2;
+    screw_length = 35 - M3_nut_height*1.5;
+    screw_from_end = 10+0.5;                    // Vzdalenost sroubu od konce trubky
+
+    difference(){
+
+        union(){
+            hull(){
+                translate([ kstm_flange_holes_distance(8)/2+2, 0, 0]) cylinder(d = M4_nut_diameter+4, h = 8, $fn = 60);
+                translate([-kstm_flange_holes_distance(8)/2-2, 0, 0]) cylinder(d = M4_nut_diameter+4, h = 8, $fn = 60);
+                cylinder(d = main_tube_outer_diameter+wall*2, h = 15);
+                //translate([0, 13, 0]) cylinder(d = M4_nut_diameter+4, h = 15, $fn = 60);
+                //translate([0, -13, 0]) cylinder(d = M4_nut_diameter+4, h = 15, $fn = 60);
+            }
+            hull(){
+                cylinder(d = main_tube_outer_diameter+wall*2, h = 25);
+
+                translate([0, 13, 0]) cylinder(d = M4_nut_diameter+4, h = 15, $fn = 60);
+                translate([0, -13, 0]) cylinder(d = M4_nut_diameter+4, h = 15, $fn = 60);
+
+            }
+        }
+
+        translate([0, 0, 2]) cylinder(d = main_tube_outer_diameter, h = 25);
+        translate([ kstm_flange_holes_distance(8)/2+2, 0, 5]) rotate(30) cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
+        translate([-kstm_flange_holes_distance(8)/2-2, 0, 5]) rotate(30) cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
+        translate([ kstm_flange_holes_distance(8)/2+2, 0, -global_clearance]) cylinder(d = M4_screw_diameter, h = 5, $fn = 60);
+        translate([-kstm_flange_holes_distance(8)/2-2, 0, -global_clearance]) cylinder(d = M4_screw_diameter, h = 5, $fn = 60);
+
+        translate([0, 0, 2+screw_from_end]) rotate([90, 0, 0]){
+            cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 60);
+            translate([0, 0, -screw_length/2-20]) cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
+            translate([0, 0, screw_length/2]) cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
+        }
+    }
+
 }
 
 
