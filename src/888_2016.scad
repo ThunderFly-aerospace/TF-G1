@@ -4,11 +4,13 @@ use <lib/igus.scad>
 
 module 888_2016(){
     wall = 10;
-    length = 45;
+    length = 47;
     space = 1.5;
     kstm = 8;
     bolt_length = 35;
-    bolt_support_length = 20;
+    bolt_support_length = 20 - 5;
+    bolt_bearing_length = 15;       // Delka M4 sroubu skrze prirubu
+
 
     difference(){
         cube([length, main_tube_outer_diameter+2*wall, main_tube_outer_diameter+2*wall], center = true);
@@ -28,11 +30,11 @@ module 888_2016(){
 
         // diry pro pridelani loziska
         for (i=[1,-1]) {
-            translate([kstm_flange_holes_distance(kstm)*i/2, 0, 0])
-                cylinder(d = M4_screw_diameter, h = main_tube_outer_diameter+2*wall + global_clearance, $fn = 50, center = true);
+            translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - wall])
+                cylinder(d = M4_screw_diameter, h = 2*wall + global_clearance, $fn = 50, center = true);
 
-            translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - global_clearance - M4_screw_head_height])
-                cylinder(d = M4_nut_diameter, h = M4_screw_head_height*2, $fn = 50);
+            translate([kstm_flange_holes_distance(kstm)*i/2, 0, -main_tube_outer_diameter/2 - wall - global_clearance + (bolt_bearing_length-6) - M4_screw_head_height -1])
+                cylinder(d = M4_nut_diameter, h = wall*2, $fn = 6);
         }
 
         for (i=[1,-1]) {
