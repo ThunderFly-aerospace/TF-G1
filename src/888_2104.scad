@@ -94,7 +94,7 @@ translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_heig
         cylinder(d = 10, h = 290);
     }
     translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
-        rotate([-30, 0, 0])
+        rotate([-22, 0, 0])
             piston();
 
 translate([0, -chassis_suspension_basewidth/2, -50])

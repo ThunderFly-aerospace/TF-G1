@@ -85,12 +85,12 @@ module 888_2013_old(front = true){
 
 
 
-module 888_2013(front = true, right = 1, rotate = false){
+module 888_2013(front = true, left = 1, rotate = false){
     tube_wall = 5;
     height = 40;
     crop = 0;
     kstm_ball_thickness = 12;
-    shoulder_screw_length = 25+2;
+    shoulder_screw_length = 20+2;
 
     length = 50;
     screw_length = 20-4;
@@ -98,7 +98,7 @@ module 888_2013(front = true, right = 1, rotate = false){
 
     arm_r = front ? [chassis_pipe_baselength_f, chassis_pipe_wheelbase, -chassis_height] : [-chassis_pipe_baselength_r, chassis_pipe_wheelbase, -chassis_height];
 
-    mirror([0,1,0]*right) rotate([0, 0, 180]*right)
+    mirror([0,1,0]*left) rotate([0, 0, 180]*left)
     orientate([front ? -chassis_baselength_f : chassis_baselength_r, chassis_pipe_wheelbase, chassis_height]*rotate, [0,1,0])
     difference(){
         union(){
@@ -111,7 +111,7 @@ module 888_2013(front = true, right = 1, rotate = false){
 
             hull(){
                 rotate([90, 0, 90])
-                    translate([0, 0, (30 - shoulder_screw_length)])
+                    translate([0, 0, 1])
                         cylinder(d = 17, h = 30, center = true);
 
 
@@ -135,7 +135,15 @@ module 888_2013(front = true, right = 1, rotate = false){
                 cylinder(d = M6_nut_diameter, h = 100, $fn = 6);
 
         rotate([90, 0, 90])
-                cylinder(d = 22, h = 12.5, center = true);
+            translate([0, 0, - shoulder_screw_length/2 - 100])
+                cylinder(d = 14, h = 100, $fn = 60);
+
+        rotate([90, 0, 90])
+            hull(){
+                translate([0, -2, 0]) cylinder(d = 22, h = 12.5, center = true);
+                translate([10, 0, 0]) cylinder(d = 22, h = 12.5, center = true);
+                translate([-10, 0, 0]) cylinder(d = 22, h = 12.5, center = true);
+            }
 
         translate([0, 0, - 2013_pipe_offset[2]])
             orientate(arm_r, [0,1,0])
@@ -165,7 +173,7 @@ module 888_2013(front = true, right = 1, rotate = false){
                             linear_extrude(0.8) text(front? "Front" : "Rear", size = 7);
 
                             translate([15, -8, -tube_wall - tube_for_undercarriage_outer_diameter/2 - global_clearance ])
-                                linear_extrude(0.8) text(right? "Right" : "Left", size = 7);
+                                linear_extrude(0.8) text(left? "Left" : "Right", size = 7);
                     }
 
     }
