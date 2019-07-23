@@ -30,6 +30,7 @@ module 888_1026(draft)
     //vypouštěcí zařízení
     vlecne_zarizeni = true;
     supports = true;
+    supports_thickness = 0.61;
     prumer = 2;
     vyska = 5;
     servo_lever = 22.5; //délka páky serva od středu otáčení ke konci
@@ -45,11 +46,25 @@ module 888_1026(draft)
 
 
     if(supports) {
-        translate([dolni_konec_x+servo_lever+DS313MG_A/2-1, dolni_konec_y+DS313MG_X+DS313MG_G, (DS313MG_J-DS313MG_M)/2]) {
-            cube([1, DS313MG_H-10, DS313MG_M]);
+        difference() {
+            union() {
+                intersection() {
+                    translate([dolni_konec_x+servo_lever-DS313MG_A/2, dolni_konec_y+DS313MG_X+DS313MG_G, (DS313MG_J-DS313MG_M)/2])
+                        cube([DS313MG_A, DS313MG_H-10, DS313MG_M]);
+                    translate([engine_offset,0,engine_displacement])
+                        rotate([0, engine_angle,0])
+                            translate([0,0,- 4 * height])
+                                cylinder(h = height * 5, d = engine_diameter+supports_thickness, $fn = draft ? 100 : 200);
+                }
 
-            translate([-3, 0, 0])
-                cube([3, 1, DS313MG_M]);
+                translate([dolni_konec_x+servo_lever+DS313MG_A/2-supports_thickness, dolni_konec_y+DS313MG_X+DS313MG_G, (DS313MG_J-DS313MG_M)/2])
+                    cube([supports_thickness, DS313MG_H-10, DS313MG_M]);
+            }
+
+            translate([engine_offset,0,engine_displacement])
+                rotate([0, engine_angle,0])
+                    translate([0,0,- 4 * height])
+                        cylinder(h = height * 5, d = engine_diameter, $fn = draft ? 100 : 200);
         }
 
     }
