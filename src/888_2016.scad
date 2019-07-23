@@ -113,8 +113,8 @@ module 888_2016(){
             hull(){
                 cylinder(d = main_tube_outer_diameter+wall*2, h = 25);
 
-                translate([0, 13, 0]) cylinder(d = M4_nut_diameter+4, h = 15, $fn = 60);
-                translate([0, -13, 0]) cylinder(d = M4_nut_diameter+4, h = 15, $fn = 60);
+                translate([0, 13, 2+screw_from_end]) cylinder(d = M4_nut_diameter+4, h = 8, $fn = 60, center = true);
+                translate([0, -13, 2+screw_from_end]) cylinder(d = M4_nut_diameter+4, h = 8, $fn = 60, center = true);
 
             }
         }

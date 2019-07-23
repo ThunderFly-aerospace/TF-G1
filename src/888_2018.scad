@@ -33,7 +33,7 @@ module tube_part(l = 20, wall = 6, wall_below = 5, screw_length = 15){
 
 module 888_2018(){
 
-    
+
     thickness_above = 2018_thickness_above_pipe; // tloustka materialu mezi tyci a podlozkou
 
     width = chassis_suspension_basewidth + kstm_flange_length(10) + 5;
@@ -41,16 +41,19 @@ module 888_2018(){
     height = main_tube_outer_diameter + 2018_thickness_above_pipe + 5;
 
     translate([0, -chassis_top_bearing_position_y, 0])
-        tube_part(l = 20, wall = 6, wall_below = M3_screw_head_height + 2 + global_clearance);
+        tube_part(l = 20, wall = 6, wall_below = thickness_above);
 
     translate([0, chassis_top_bearing_position_y, 0])
-        tube_part(l = 20, wall = 6, wall_below = M3_screw_head_height + 2 + global_clearance);
+        tube_part(l = 20, wall = 6, wall_below = thickness_above);
 
     difference(){
         union(){
             translate([-main_tube_outer_diameter/2-6, -chassis_top_bearing_position_y - 20/2 - M3_nut_diameter*2, 0])
                 cube([main_tube_outer_diameter+12, chassis_top_bearing_position_y*2 + 20 + M3_nut_diameter*4, 2018_thickness_above_pipe + M3_nut_height]);
         }
+        translate([0, 0, thickness_above + main_tube_outer_diameter/2])
+            rotate([90, 0, 0])
+                cylinder(d = main_tube_outer_diameter, h = 300, center = true);
 
         for (j=[1, -1])
             translate([j*main_tube_outer_diameter/2, 0, 0])

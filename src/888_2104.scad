@@ -115,24 +115,43 @@ translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_heig
         piston();
 
 
-// dil na pridelani pricne tyce k podlozce
-//#rotate([0, 180, 0])
-translate([0,0, washer_thickness])
-    888_2018();
 
 
-// trmeny k pricne trubce
-translate([0, chassis_suspension_basewidth/2, washer_thickness +main_tube_outer_diameter/2 + 2018_thickness_above_pipe*2])
-    rotate([0, 0, 90])
-        888_2016();
-translate([0, -chassis_suspension_basewidth/2, washer_thickness +main_tube_outer_diameter/2 + 2018_thickness_above_pipe*2])
-    rotate([0, 0, 90])
-        888_2016();
+
+//
+//
+//      Dily pro souvisejici s pricnou tyci
+//
+//
+
+translate([0, 0, -main_tube_outer_diameter/2 - 2018_thickness_above_pipe]){
+    color("green"){
+        // dil na pridelani pricne tyce k podlozce
+        translate([0,0, main_tube_outer_diameter/2 + 2018_thickness_above_pipe])
+            rotate([180, 0, 0])
+            888_2018();
+
+        // trmeny k pricne trubce
+        translate([0, chassis_suspension_basewidth/2, 0])
+            rotate([0, -90, 90])
+                888_2016();
+        translate([0, -chassis_suspension_basewidth/2, 0])
+            rotate([0, 90, 90])
+                888_2016();
+    }
+
+    color("Teal"){
+        translate([0,0,0])
+            rotate([90, 0, 0])
+                cylinder(d = main_tube_outer_diameter, h = chassis_suspension_basewidth, center = true);
 
 
-translate([0, -chassis_suspension_basewidth/2, washer_thickness - 2018_thickness_above_pipe - 9 - kstm_ball_height(8)])
-    rotate([0, 180, 90])
-        kstm_08();
-translate([0, chassis_suspension_basewidth/2, washer_thickness -2018_thickness_above_pipe - 9 - kstm_ball_height(8)])
-    rotate([0, 180, 90])
-        kstm_08();
+        translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
+            rotate([0, -90, 90])
+                kstm_08();
+        translate([0, chassis_suspension_basewidth/2 + kstm_ball_height(8), 0])
+            rotate([0, 90, 90])
+                kstm_08();
+
+    }
+}
