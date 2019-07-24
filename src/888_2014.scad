@@ -7,7 +7,7 @@ $fn = 50;
 
 module 888_2014(){
     difference(){
-        cylinder(d = M8_screw_diameter, h = 12-global_clearance);
+        cylinder(d = 8 - 0.5, h = 12-global_clearance);
         cylinder(d = M4_screw_diameter, h = 12);
     }
 }
