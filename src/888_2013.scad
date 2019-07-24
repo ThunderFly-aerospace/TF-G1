@@ -112,7 +112,7 @@ module 888_2013(front = true, left = 1, rotate = false){
             hull(){
                 rotate([90, 0, 90])
                     translate([0, 0, 1])
-                        cylinder(d = 17, h = 30, center = true);
+                        cylinder(d = 15, h = 30, center = true);
 
 
                 translate([0, 0, -2013_pipe_offset[2]])
@@ -128,15 +128,15 @@ module 888_2013(front = true, left = 1, rotate = false){
         }
 
         rotate([90, 0, 90])
-                cylinder(d = M8_screw_diameter, h = 100, center = true);
+                cylinder(d = M4_screw_diameter, h = 100, center = true, $fn  = 30);
 
         rotate([90, 0, 90])
             translate([0, 0, shoulder_screw_length/2])
-                cylinder(d = M6_nut_diameter, h = 100, $fn = 6);
+                cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
 
         rotate([90, 0, 90])
             translate([0, 0, - shoulder_screw_length/2 - 100])
-                cylinder(d = 14, h = 100, $fn = 60);
+                cylinder(d = M4_nut_diameter, h = 100, $fn = 60);
 
         rotate([90, 0, 90])
             hull(){

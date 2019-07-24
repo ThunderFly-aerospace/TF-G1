@@ -6,7 +6,7 @@ module 888_2017(right = 0){
     suspension_bolt_length = 20+1;
     suspension_pipe_screw_length = 20 - M3_nut_height*2;                        // delka sroubu skrz tenkou trubu
     suspension_wall_thickness = 4;                                              // tloustka materialu okolo trubky ramena podvozku
-    suspension_bolt_diameter = M8_screw_diameter;                               // prumer licovaneho sroubu
+    suspension_bolt_diameter = M4_screw_diameter;                               // prumer licovaneho sroubu
     suspension_mount_offset = [2017_bearing_mount_offset[2], 2017_bearing_mount_offset[0], 2017_bearing_mount_offset[1]];                                       // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
     pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];                                        // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
     suspension_mount_pipe_end = 2017_pipe_bottom;                                              // Jak daleko nad zemi konci tyc
@@ -70,12 +70,12 @@ module 888_2017(right = 0){
             translate(suspension_mount_offset)
                 rotate([90, 0, 0])
                     translate([0, 0, suspension_bolt_length/2])
-                        cylinder(d =M6_nut_diameter, h = 50, $fn = 6);
+                        cylinder(d =M4_nut_diameter, h = 50, $fn = 6);
 
             translate(suspension_mount_offset)
                 rotate([90, 0, 0])
                     translate([0, 0, -suspension_bolt_length/2 - 50])
-                        cylinder(d = 15, h = 50, $fn = 60);
+                        cylinder(d = M4_nut_diameter, h = 50, $fn = 60);
 
             hull(){
                 translate(suspension_mount_offset)
