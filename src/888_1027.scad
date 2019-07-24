@@ -22,7 +22,7 @@ pipe_holder2_pos = pipe_holder1_pos + pipe_holder_distance;
 pipe_holder_space =3;
 
 
-module 888_2014() {
+module 888_1027() {
 
 rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
     difference() {
@@ -50,10 +50,10 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
                   cylinder (h=2*fork_width+fork_wheel_width+20, d=M4_screw_diameter, center=true, $fn=50);
 
                 translate([fork_lenght-6,fork_thickness/2, -30 - (screw_length-5)/2])
-                  cylinder (h=30, d=M4_nut_diameter, $fn=50);
+                  cylinder (h=30, d=M4_nut_diameter, $fn=6);
 
                 translate([fork_lenght-6, fork_thickness/2,  (screw_length-5)/2])
-                  cylinder (h=30, d=M4_nut_diameter, $fn=6);
+                  cylinder (h=30, d=M4_nut_diameter, $fn=50);
             }
         }
 
@@ -90,7 +90,7 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
     }
 }
 
-module 888_2014_drill(){
+module 888_1027_drill(){
     difference(){
         cube([25, 25, pipe_holder_distance+pipe_holder_length], center = true);
 
@@ -106,5 +106,5 @@ module 888_2014_drill(){
     }
 }
 
-888_2014();
-//888_2014_drill();
+888_1027();
+//888_1027_drill();
