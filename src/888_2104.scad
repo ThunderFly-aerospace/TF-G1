@@ -5,6 +5,7 @@ use <888_2017.scad>
 use <888_2018.scad>
 use <lib/igus.scad>
 use <lib/vector.scad>
+use <lib/piston.scad>
 use <666_1027.scad>
 
 //color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_outer_diameter/2+2]) rotate([90,0,0]) 666_1027();
@@ -63,9 +64,9 @@ translate([0, -chassis_wheelbase/2, -chassis_height])
     rotate([-90, -90, 0])
         888_2017(right = 0);
 
-translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
+/* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
     rotate([-28, 0, 0])
-        piston();
+        piston(); */
 
 }
 
@@ -110,9 +111,9 @@ translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_heig
     sphere(d = 10);
 
 
-translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
+/* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
     rotate([-22, 0, 0])
-        piston();
+        piston(); */
 
 
 
@@ -138,6 +139,10 @@ translate([0, 0, -main_tube_outer_diameter/2 - 2018_thickness_above_pipe]){
         translate([0, -chassis_suspension_basewidth/2, 0])
             rotate([0, 90, 90])
                 888_2016();
+
+        translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
+            rotate([0, 180+12, 90])
+                chassis_piston_assembly();
     }
 
     color("Teal"){

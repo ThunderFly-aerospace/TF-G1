@@ -122,8 +122,8 @@ module 888_2016(){
         translate([0, 0, 2]) cylinder(d = main_tube_outer_diameter, h = 25);
         translate([ kstm_flange_holes_distance(8)/2+2, 0, 5]) rotate(30) cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
         translate([-kstm_flange_holes_distance(8)/2-2, 0, 5]) rotate(30) cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
-        translate([ kstm_flange_holes_distance(8)/2+2, 0, -global_clearance]) cylinder(d = M4_screw_diameter, h = 5, $fn = 60);
-        translate([-kstm_flange_holes_distance(8)/2-2, 0, -global_clearance]) cylinder(d = M4_screw_diameter, h = 5, $fn = 60);
+        translate([ kstm_flange_holes_distance(8)/2+2, 0, -global_clearance]) cylinder(d = M4_screw_diameter, h = 5+global_clearance*2, $fn = 60);
+        translate([-kstm_flange_holes_distance(8)/2-2, 0, -global_clearance]) cylinder(d = M4_screw_diameter, h = 5+global_clearance*2, $fn = 60);
 
         translate([0, 0, 2+screw_from_end]) rotate([90, 0, 0]){
             cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 60);
@@ -131,7 +131,27 @@ module 888_2016(){
             translate([0, 0, screw_length/2]) cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
         }
     }
+}
 
+
+module 888_2016_drill(){
+    screw_from_end = 10+0.5;                    // Vzdalenost sroubu od konce trubky
+
+    difference(){
+        translate([-main_tube_outer_diameter/2-10, -main_tube_outer_diameter/2-10, 0])
+            cube([main_tube_outer_diameter + 20, main_tube_outer_diameter+20, 25]);
+
+        translate([0, 0, 2])
+            cylinder(d = main_tube_outer_diameter, h = 100);
+
+        translate([0, 0, 2+screw_from_end]) rotate([90, 0, 0]){
+            cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 60);
+            //translate([0, 0, -screw_length/2-20]) cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
+            //translate([0, 0, screw_length/2]) cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
+        }
+
+
+    }
 }
 
 
