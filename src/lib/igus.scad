@@ -55,6 +55,13 @@ function kstm_ball_thickness(type) = data_kstm_ball_thickness[search(type, data_
 
 
 
+module kbrm_06(){
+    import("../../STL/external/igus/KBRM_06_2.stl", convexity = 5);
+}
+module kbrm_08(){
+    import("../../STL/external/igus/KBRM_08_1.stl", convexity = 5);
+}
+
 
 
 distance = 50;
