@@ -150,6 +150,9 @@ module 888_2016_drill(){
             //translate([0, 0, screw_length/2]) cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
         }
 
+        rotate([90, 0, 90]) translate([0, 14, main_tube_outer_diameter/2 + 10-0.1]) linear_extrude(0.2) text("888_2016", halign = "center", size = 6);
+        rotate([90, 0, 90]) translate([0, 5, main_tube_outer_diameter/2 + 10-0.1]) linear_extrude(0.2) text("drill", halign = "center", size = 6);
+
 
     }
 }

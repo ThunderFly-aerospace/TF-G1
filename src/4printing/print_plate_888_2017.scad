@@ -2,4 +2,4 @@ use <../888_2017.scad>
 
 
 translate([0,  23, 0]) 888_2017(right = 0);
-translate([0, -23, 0]) 888_2017(right = 1);
+translate([-40, -23, 0]) rotate([0, 0, 180]) 888_2017(right = 1);
