@@ -141,6 +141,11 @@ module 666_1028(draft){
 										translate([screw_for_pipe_pos, 0, -153])
 												cylinder (h=M3_ISO7380_head_height+1, d=M3_ISO7380_nut_diameter, $fn=6);
 
+										//otvor pro srouby M3 na spojeni smerovek do tvaru A
+										translate([130, 46, 30])
+												rotate ([0, 100, 45])
+														#cylinder (h=30, d=M3_screw_diameter, $fn=100)
+
                     //vyříznutí otvoru pro směrovku
                     translate([145 - Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
                         cube([Rudder_depth, Rudder_length, Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
