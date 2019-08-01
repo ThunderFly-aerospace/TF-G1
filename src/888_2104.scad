@@ -105,7 +105,7 @@ translate([0, -chassis_wheelbase/2, -chassis_height])
 
 translate([0, -chassis_suspension_basewidth/2, -50])
     sphere(d = 10);
-translate([-chassis_top_bearing_position_x, chassis_top_bearing_position_y, 0])
+translate([-chassis_top_bearing_position_r, chassis_top_bearing_position_y, 0])
     sphere(d = 10);
 translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
     sphere(d = 10);
