@@ -321,7 +321,6 @@ tail_airfoils_convergence = 3;
 /////spojka 666_1026
 
 
-
     width_666_1026 = main_tube_outer_diameter + 2*thickness_between_tubes;
 
     depth_666_1026 = (main_tube_outer_diameter*2)/basic_screw_length;

@@ -684,13 +684,15 @@ echo(floor (C));
 */
             chassis_arm_mount_patern = 10.16;
 
+
+//TODO: Diry pro pridelani svorek pro podelnou tyc
             //Diry pro pridelani podvozku
-            translate([second_undercarriage_hole, main_tube_outer_diameter/2 + coupling_wall_thickness, 0])
+            /* translate([second_undercarriage_hole, main_tube_outer_diameter/2 + coupling_wall_thickness, 0])
                 union(){
 
                     //predni a zadni rameno
                     for (i=[1,0,-1]) {
-                        translate([i*chassis_baselength/2, 0, 0]){
+                        translate([chassis_arm_length_f*i, 0, 0]){
                             translate([chassis_arm_mount_patern*-2, -main_tube_outer_diameter*2, chassis_arm_mount_patern*1.5])
                                 rotate([-90, 0, 0])
                                     cylinder (h = 54, d = M4_screw_diameter, $fn = draft ? 10 : 20);
@@ -725,7 +727,7 @@ echo(floor (C));
                         }
                     }
 
-                }
+                } */
 /*
 //ODLEHČENÍ
 for (position_number = [1:5]){
@@ -817,7 +819,7 @@ use <./lib/vector.scad>
 include <../parameters.scad>
 use <666_1032.scad>
 use <666_1004.scad>
-use <666_1026.scad>
+//use <666_1026.scad>
 use <888_1001.scad>
 use <666_1025.scad>
 use <666_1029.scad>
