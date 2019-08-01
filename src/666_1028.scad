@@ -181,7 +181,7 @@ module 666_1028(draft){
         //screw
         translate ([-150*0.4,0,150*0.4/2])
             rotate ([0,90,0])
-                cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
+                #cylinder (h = 100, r = M3_screw_diameter/2, $fn = 20);
 
         translate ([-150*0.4,0,150*0.4])
             rotate ([0,90,0])

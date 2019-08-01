@@ -18,7 +18,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft = true)
 
     intersection(){
 
-    resize([hull_drop_length - shell_thickness - trailing_wall* shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness], auto=true)
+    resize([hull_drop_length - shell_thickness - trailing_wall* shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness, (hull_drop_length*hull_airfoil_thickness/100) - 2*shell_thickness ], auto=true)
             rotate ([0,90,0])
             rotate_extrude($fn = draft ? 50 : 200)
                 rotate([0,0,90])
@@ -28,7 +28,7 @@ module hollowing_skeleton(shell_thickness = hull_wall_thickness, draft = true)
                       square(hull_drop_length);
                     }
 
-      translate([0,0,hull_corner_radius])
+    translate([0,0,hull_corner_radius])
         minkowski(){
             translate ([0,- hull_y_size , - hull_z_size/2 + shell_thickness])
                 cube ([hull_x_size,2*hull_y_size - shell_thickness, hull_z_size - 2*shell_thickness - 2*hull_corner_radius]);
@@ -59,7 +59,7 @@ module hollowing_skeleton_hem(ribbon_width, draft)
       translate([0,0,hull_corner_radius])
         minkowski(){
             translate ([0,- hull_y_size, - hull_z_size/2 + ribbon_width])
-                cube ([hull_x_size,2*hull_y_size - ribbon_width, hull_z_size - 2*ribbon_width - 2*hull_corner_radius]);
+                cube ([hull_x_size, 2*hull_y_size - ribbon_width, hull_z_size - 2*ribbon_width - 2*hull_corner_radius]);
                 rotate ([0,90,0])
                     cylinder (h = 1, r = hull_corner_radius, $fn = draft ? 50 : 100);
           }

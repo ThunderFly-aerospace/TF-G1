@@ -7,6 +7,11 @@ main_tube_inner_diameter = 23.05;
 //Tube for undercarriage - rendered hole [mm]
 tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
+
+//Tube for pilon - rendered hole [mm]
+pilon_pipe_diameter = 10.6;
+pilon_pipe_diameter_inner = 6;
+
 global_clearance = 0.5;
 
 
@@ -149,18 +154,24 @@ Help_tube_for_undercarriage_inner = 5;
 
 //main hull parameters
 
-hull_drop_length = 580;
+hull_drop_length = 700;
 hull_wall_thickness = 0.8;
 hull_y_size = 120;
-hull_z_size = 150;
-hull_x_size = 580;
+hull_z_size = 210;
+hull_x_size = 590;
 hull_corner_radius = 4;
 hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of length.
 hull_scale_x = 1;
 hull_scale_y = 1.5;
 hull_scale_z = 1.5;
 
+hull_strenghtening_pipe_distance = 45;
+
 main_pilon_position = 170+68+30;       // pozice rotorového pilonu měřená od přední části krytu
+pilon_pipe_base_distance_x = 160;      // souradnice dopredu dozadu
+pilon_pipe_base_distance_y = 180;
+pilon_pipe_head_distance_x = 40;
+pilon_pipe_head_distance_y = 40;
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky.
 
@@ -172,7 +183,7 @@ length_of_undercarriage_tube_rear = 320; //500;
 ribbon_width = 5; // šířka vyztužovacích lemů.
 
 // šířka otvoru v přední části kapoty pro držák motoru.
-width_of_engine_holder = 63;
+width_of_engine_holder = 83;
 
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [0, 50, 150, 280, 410, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
@@ -220,9 +231,9 @@ lock_length = 3;
 
 //accumulator
 //základní rozměry akumulátoru
-width_of_accumulator = 129.4;//45+1;
-depth_of_accumulator = 40.61;
-height_of_accumulator = 43.65;
+width_of_accumulator = 136;//45+1;
+depth_of_accumulator = 42;
+height_of_accumulator = 42;
 //Zapuštění akumulátoru
 sink_of_accumulator = 5; //main_tube_outer_diameter/5 - M3_nut_height*1.5;
 
@@ -278,6 +289,13 @@ Rudder_depth = main_tube_outer_diameter/2;
 gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
 ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
+tail_airfoils_angle = 90;
+tail_height = 140;                    // vyska smerovky (ne delka plochy kridla)
+tail_pipe_z_position = tail_height/2; // od spodniho okraje smerovky
+tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
+tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2;
+tail_pipe_convergence = 0;
+tail_airfoils_convergence = 3;
 
 /////spojka 666_1004
 
@@ -394,7 +412,7 @@ ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 //umístění podvozkových trubek
 
 //second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 160;
-second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 120;
+second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 120 + 100;
 
 
 //Base Divison - dělení podložky
@@ -579,12 +597,12 @@ DS313MG_X = 4;
 
     2018_thickness_above_pipe = 2;
 
-chassis_wheelbase = 700;        // rozvor kolecek
+chassis_wheelbase = 750;        // rozvor kolecek
 chassis_height = 250;           // vyska podvozku
-chassis_baselength_r = 75;       // podelna roztec podvozku dozade
+chassis_baselength_r = 100;       // podelna roztec podvozku dozade
 chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
 chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
-chassis_suspension_basewidth = 450;//vzdalenost prichyceni tlumicu na pricne tyci
+chassis_suspension_basewidth = 500;//vzdalenost prichyceni tlumicu na pricne tyci
 
 // delka ramene (trubky) podvozku rozlozena do osy X
 chassis_pipe_baselength_r = chassis_baselength_r - 2017_pipe_mount_offset[0];
