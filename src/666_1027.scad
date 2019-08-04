@@ -66,9 +66,9 @@ module screw_top (position_number, draft){
 	{
 
 
-    	if (distance_top <= - maximum_printable_size/2)
+    	if (distance_top <= -(hull_z_size-2*hull_corner_radius) /2)
     	{
-    		distance_top = - maximum_printable_size/2;
+    		distance_top = - (hull_z_size-2*hull_corner_radius)/2;
     		translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
            			union(){
     			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
@@ -97,9 +97,9 @@ module screw_top (position_number, draft){
     }
     else
     {
-    	if (distance_top <= - maximum_printable_size/2)
+    	if (distance_top <= -(hull_z_size-2*hull_corner_radius)/2)
     	{
-    		distance_top = - maximum_printable_size/2;
+    		distance_top = - (hull_z_size-2*hull_corner_radius)/2;
     		translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
     			rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
            			union(){
@@ -138,13 +138,13 @@ module screw_top (position_number, draft){
         	distance_bottom = - hull_drop_length * surface_distance(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
         	//echo (distance_bottom);
 
-        	if (position_number > 1 && position_number < 3)
+        	if (position_number > 2 && position_number < 3)
         	{
 
 
-        	if (distance_bottom <= - maximum_printable_size/2)
+        	if (distance_bottom <= - (hull_z_size-2*hull_corner_radius)/2)
         	{
-        		distance_bottom = - maximum_printable_size/2;
+        		distance_bottom = - (hull_z_size-2*hull_corner_radius)/2;
         		translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size/2])
 	       			union(){
     			        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
@@ -173,9 +173,9 @@ module screw_top (position_number, draft){
         }
         else
  		{
-        	if (distance_bottom <= - maximum_printable_size/2)
+        	if (distance_bottom <= - (hull_z_size-2*hull_corner_radius)/2)
         	{
-        		distance_bottom = - maximum_printable_size/2;
+        		distance_bottom = - (hull_z_size-2*hull_corner_radius)/2;
         		translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
         			rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
 		       			union(){
@@ -798,8 +798,8 @@ translate([40,0,0])
 
 translate([60,0,0])
     666_1027_part(4,draft);
-*/
 
+*/
 //666_1025();
 //666_1029();
 
