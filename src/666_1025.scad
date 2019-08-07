@@ -302,9 +302,9 @@ strana_a = (uhlopricka*(cos(45)))/2;
                         //výztuha uprostřed
                         difference(){
                             translate([0,0,-hull_wall_thickness])
-                                cube([hull_drop_length, hull_z_size*2, 2*hull_wall_thickness]);
+                                cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
                             translate ([-global_clearance,-1 - main_tube_outer_diameter/2 - hull_wall_thickness, - width_of_engine_holder/2])
-                                cube ([ top_cover_division[1] + global_clearance, hull_y_size+10, width_of_engine_holder]);
+                               cube ([ top_cover_division[1] + global_clearance, hull_y_size+10, width_of_engine_holder]);
                         }
 
                         //podélná výztuha
