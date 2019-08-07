@@ -154,11 +154,11 @@ Help_tube_for_undercarriage_inner = 5;
 
 //main hull parameters
 
-hull_drop_length = 700;
+hull_drop_length = 650;
 hull_wall_thickness = 0.8;
-hull_y_size = 120;
-hull_z_size = 210;
-hull_x_size = 590;
+hull_y_size = 150;
+hull_z_size = 200;
+hull_x_size = 650;
 hull_corner_radius = 4;
 hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of length.
 hull_scale_x = 1;
