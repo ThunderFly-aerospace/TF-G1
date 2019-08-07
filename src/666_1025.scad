@@ -302,9 +302,14 @@ strana_a = (uhlopricka*(cos(45)))/2;
                         //výztuha uprostřed
                         difference(){
                             translate([0,0,-hull_wall_thickness])
-                                cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
+                                 cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
                             translate ([-global_clearance,-1 - main_tube_outer_diameter/2 - hull_wall_thickness, - width_of_engine_holder/2])
                                cube ([ top_cover_division[1] + global_clearance, hull_y_size+10, width_of_engine_holder]);
+                                    //for tube in back
+                            translate ([hull_x_size-70,0,0])
+                                rotate ([0,90,0])
+                                    cylinder (h = 80, r =  main_tube_outer_diameter/2, $fn = draft ? 20 : 50);
+
                         }
 
                         //podélná výztuha
@@ -349,7 +354,7 @@ strana_a = (uhlopricka*(cos(45)))/2;
                             resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
                                airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
 
-                    translate([ribbon_width/2,0,0])
+                   translate([ribbon_width/2,0,0])
                         hollowing_skeleton(ribbon_width, draft);
                 }
 
