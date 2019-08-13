@@ -20,12 +20,15 @@ pitch_stop=15;//max pitch angle
 wall_height=10;//height of side wall of center part
 brit_width=5;
 plate_thickness=3;
+britstop_thickness=3;
 
 kardan_clearance=1;
 
 bearing_width=bearing_efsm_12_width;
 bearing_h=bearing_efsm_12_h;
 bearing_db=bearing_efsm_12_db;
+bearing_m=bearing_efsm_12_m;
+bearing_a_center_of_rotation=7;
 
 //computed parameters
 inner_x=bearing_width; //center part
