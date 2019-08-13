@@ -141,7 +141,7 @@ module 888_2016_drill(){
         translate([-main_tube_outer_diameter/2-10, -main_tube_outer_diameter/2-10, 0])
             cube([main_tube_outer_diameter + 20, main_tube_outer_diameter+20, 25]);
 
-        translate([0, 0, 2])
+        translate([0, 0, 2+global_clearance])
             cylinder(d = main_tube_outer_diameter, h = 100);
 
         translate([0, 0, 2+screw_from_end]) rotate([90, 0, 0]){
