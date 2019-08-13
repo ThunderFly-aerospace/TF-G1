@@ -1,24 +1,29 @@
 use <src/lib/vector.scad>
 
+global_clearance = 0.5;
+layer = 0.2;
+
+// obecne rozmery trubek
+carbon_pipe_10_outer_diameter = 10.6;
+carbon_pipe_10_inner_diameter = 6;
+
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
 main_tube_inner_diameter = 23.05;
 
 //Tube for undercarriage - rendered hole [mm]
-tube_for_undercarriage_outer_diameter = 10.6;
-tube_for_undercarriage_inner_diameter = 6;
+tube_for_undercarriage_outer_diameter = carbon_pipe_10_outer_diameter;
+tube_for_undercarriage_inner_diameter = carbon_pipe_10_inner_diameter;
 
 //Tube for pilon - rendered hole [mm]
-pilon_pipe_diameter = 10.6;
-pilon_pipe_diameter_inner = 6;
+pilon_pipe_diameter = carbon_pipe_10_outer_diameter;
+pilon_pipe_diameter_inner = carbon_pipe_10_inner_diameter;
 
-global_clearance = 0.5;
 
 
 // Nastavení parametrů rotoru
 
 gliding_aggle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
-
 
 rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
 rotor_blade_length = 970;   // délka rotorového listu
@@ -129,7 +134,6 @@ M3_nut_diameter = 6.6;
 M3_screw_head_height = 3;
 M3_nut_pocket = 5.6;
 
-
 //Screw diameter and nut for M2,5 [mm]
 M2_5_screw_diameter = 2.7;
 M2_5_nut_height = 2.3;
@@ -141,8 +145,7 @@ M3_ISO7380_head_height = 1.5;
 M3_ISO7380_nut_height = 3;
 M3_ISO7380_nut_diameter = 5.7+0.5;
 
-
-//šroub servo
+//sroub servo
 Servo_screw = 1.5;
 Servo_nut_height = 1;
 Servo_nut_diameter = 2.7;
@@ -170,15 +173,18 @@ hull_scale_z = 1.5;
 hull_strenghtening_pipe_distance = 45;
 
 main_pilon_position = 170+68+30;       // pozice rotorového pilonu měřená od přední části krytu
-pilon_pipe_base_distance_x = 160;      // souradnice dopredu dozadu
-pilon_pipe_base_distance_y = 180;
-pilon_pipe_head_distance_x = 40;
-pilon_pipe_head_distance_y = 40;
+//pilon_pipe_base_distance_x = 160;      // souradnice dopredu dozadu
+// pilon_pipe_base_distance_y = 180;
+// pilon_pipe_head_distance_x = 40;
+// pilon_pipe_head_distance_y = 40;
 
+// vzdalenosti jsou pocitany od stredu rotoru
+// vzdalenosti jednotlivych tyci u podlozky
+pilon_pipe_base_front_x = 30;
+pilon_pipe_base_front_y = 50;
+pilon_pipe_base_rear_x = 80;
 
-pilon_pipe_base_front_x = 50;
-pilon_pipe_base_front_y = 90;
-pilon_pipe_base_rear_x = 60;
+// vzhalenosti jednotlivych tyci u rotorove hlavy
 pilon_pipe_head_front_x = 20;
 pilon_pipe_head_front_y = 20;
 pilon_pipe_head_rear_x = 20;
