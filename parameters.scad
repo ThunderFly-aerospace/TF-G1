@@ -97,6 +97,8 @@ M8_nut_height = 7.5;
 M8_nut_diameter = 14.4 + 0.5;
 M8_nut_pocket = 13 + 0.5;
 
+M8_plug_diameter = 8;
+
 //Screw diameter and nut for M6 [mm]
 M6_screw_diameter=6.5;
 M6_head_diameter = 10+0.5;
@@ -172,6 +174,15 @@ pilon_pipe_base_distance_x = 160;      // souradnice dopredu dozadu
 pilon_pipe_base_distance_y = 180;
 pilon_pipe_head_distance_x = 40;
 pilon_pipe_head_distance_y = 40;
+
+
+pilon_pipe_base_front_x = 50;
+pilon_pipe_base_front_y = 90;
+pilon_pipe_base_rear_x = 60;
+pilon_pipe_head_front_x = 20;
+pilon_pipe_head_front_y = 20;
+pilon_pipe_head_rear_x = 20;
+
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky.
 
