@@ -8,8 +8,7 @@ module rotorhead_kardan_center_part() {
     outer_x = inner_x + 2*brit_width;
     outer_y = inner_y + 2*brit_width;
     outer_height = wall_height + plate_thickness;
-    //inner_diameter = (inner_a/2 - par_klb2) * pom1 / (inner_a/2);
-
+    
     difference(){     
         translate ([0,0,outer_height/2]) {
             cube([outer_x,outer_y,outer_height],center = true);
@@ -43,4 +42,4 @@ module rotorhead_kardan_center_part() {
         }
     }
 
-//rotorhead_kardan_center_part();
+rotorhead_kardan_center_part();
