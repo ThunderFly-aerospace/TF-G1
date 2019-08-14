@@ -1,4 +1,4 @@
-include <./rotorhead_kardan_parameters.scad>
+include <../parameters.scad>
 use <./rotorhead_kardan_centerpart.scad>
 
 module mirror_copy(v = [1, 0, 0]) {

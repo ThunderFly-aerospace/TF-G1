@@ -1,4 +1,4 @@
-include <./rotorhead_kardan_parameters.scad>
+include <../parameters.scad>
 
 //kloub stredná časť
 module rotorhead_kardan_center_part() {
