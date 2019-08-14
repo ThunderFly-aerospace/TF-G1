@@ -16,12 +16,12 @@ module rotorhead_kardan_bottom_testpart() {
     union(){
          mirror_copy([1,0,0]){
                 //brit
-                translate([(bearing_width+kardan_clearance)/2,0,0])
+                translate([(bearing_width+global_clearance)/2,0,0])
                     scale([a,1,1])
-                        translate([-(bearing_width+kardan_clearance)/2,0,0])
+                        translate([-inner_x/2,0,0])
                             difference(){
                                 //zakald britu
-                                translate([(bearing_width+kardan_clearance+brit_width)/2,0,sokl_height/2])
+                                translate([inner_x/2+brit_width/2,0,sokl_height/2])
                                     cube([brit_width,bearing_h,sokl_height],center = true);
                                 
                                 translate([0,0,sokl_height])
@@ -36,14 +36,14 @@ module rotorhead_kardan_bottom_testpart() {
                                 }
                 
                 //stop
-                translate([(bearing_width+kardan_clearance)/2 +a*brit_width,0, sokl_height/2])
+                translate([(bearing_width+global_clearance)/2 +a*brit_width+britstop_thickness/2,0, sokl_height/2])
                     cube([britstop_thickness, bearing_h, sokl_height],center = true);
             }
             
          difference(){
             // základní tvar pro prirubu
             translate([0,0, sokl_height/2])
-                cube([bearing_width+kardan_clearance, bearing_h, sokl_height],center = true);
+                cube([bearing_width+global_clearance, bearing_h, sokl_height],center = true);
 
             //uchycení a díra pro pohyb
             translate([0, 0, -sokl_height/2])
@@ -60,7 +60,7 @@ module rotorhead_kardan_bottom_testpart() {
                 
             //místo pro ložisko
             translate([0,0, sokl_height/2+sokl_height-bearing_a_center_of_rotation])
-                cube([bearing_width+kardan_clearance+2*global_clearance, bearing_h+1, sokl_height],center = true);
+                cube([bearing_width+global_clearance, bearing_h+1, sokl_height],center = true);
             
             }
         

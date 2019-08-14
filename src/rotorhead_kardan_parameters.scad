@@ -32,7 +32,7 @@ bearing_d=bearing_efsm_12_d;
 bearing_a_center_of_rotation=7;
 
 //computed parameters
-inner_x=bearing_width+kardan_clearance; //center part
+inner_x=bearing_width+kardan_clearance+global_clearance; //center part
 inner_y=2*(bearing_h/2*1/cos(roll_stop)+wall_height/2*tan(roll_stop)); //center part
 hole_r=(bearing_db/2*1/cos(roll_stop));
 top_brit_height=(wall_height/2+plate_thickness+(bearing_width/2+brit_width)*tan(pitch_stop))*cos(pitch_stop);
