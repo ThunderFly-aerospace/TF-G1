@@ -3,6 +3,7 @@ DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
 include <../parameters.scad>
+use <888_1004.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
@@ -16,19 +17,20 @@ $fa = 10;
 module 888_1026(draft)
 {
 
-    width = main_tube_outer_diameter+2*thickness_between_tubes;
-    depth = 53.5;   // šířka plechu držáku motoru
-    height = main_tube_outer_diameter*2;
+    width = beam_thickness+2*2;
+    depth = beam_width+10;   // šířka plechu držáku motoru
+    height = engine_holder_beam_depth+3;
     engine_displacement = maximum_printable_size -  1.2 * height;
+    //engine_displacement = 60;
     magnet_displacement = 50;
-    magnet_vertical_position = -20;
+    magnet_vertical_position = -25;
     wall_thickness = 5;
     screw_length = 30;
     magnet_diameter = 75;
     distance_between_screws = 42.5;
 
     //vypouštěcí zařízení
-    vlecne_zarizeni = true;
+    vlecne_zarizeni = false;
     prumer = 2;
     vyska = 5;
     fix_screw_distance = 3; //vzdálenost kotvícího šroubku od serva
@@ -41,16 +43,16 @@ module 888_1026(draft)
     difference (){
         union(){
             hull(){
-                translate([-(width/2),-(depth/2),0])
-                    #cube ([width,depth,height]);
+                translate([0,-(depth/2),0])
+                    cube ([width/2,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])
                     rotate([0, engine_angle,0])
                         cylinder(h = height, d = engine_diameter + 2*wall_thickness,  $fn = draft ? 100 : 200);
 
-                translate([magnet_vertical_position, 0, magnet_displacement])
-                    rotate([0, 90, 0])
-                        cylinder(d = magnet_diameter, h = 5, $fn = draft?50:100);
+                //translate([magnet_vertical_position, 0, magnet_displacement])
+                //    rotate([0, 90, 0])
+                //        cylinder(d = magnet_diameter, h = 5, $fn = draft?50:100);
 
             }
             translate([engine_offset,0, engine_displacement])
@@ -63,23 +65,6 @@ module 888_1026(draft)
                     cube([(main_tube_outer_diameter-vyska/2+servo_lever-DS313MG_A/2+DS313MG_A)-width/2, DS313MG_H+DS313MG_G, 50]);
             }
         }
-
-
-        translate([magnet_vertical_position, - distance_between_screws/2, magnet_displacement])
-            rotate([0, 90, 0])
-            {
-                cylinder(d = M4_screw_diameter, h = 10 + global_clearance, $fn=50);
-                translate([0,0,5])
-                   cylinder(d = M4_nut_diameter, h = 50 * M4_nut_height, $fn = 6);
-            }
-        translate([magnet_vertical_position,distance_between_screws/2, magnet_displacement])
-            rotate([0, 90, 0])
-            {
-                cylinder(d = M4_screw_diameter, h = 10 + global_clearance, $fn = 50);
-                translate([0,0,5])
-                    cylinder(d = M4_nut_diameter, h = 50 * M4_nut_height, $fn = 6);
-            }
-
 
         translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle,0])
@@ -128,33 +113,57 @@ module 888_1026(draft)
 
 
     	//tube
-    	translate([0,0,- global_clearance/2])
-    	   cylinder(h = height*100, r = main_tube_outer_diameter/2, $fn = draft ? 100 : 200);
+    	//for (i=[-1,1])
+        //    translate([0, i*beam_main_pipe_distance/2,- global_clearance/2])
+    	//       cylinder(h = height*100, d = beam_main_pipe_thickness, $fn = draft ? 100 : 200);
+
+        translate([0, 0, engine_holder_beam_depth])
+            rotate([0, 90, 0])
+                beam_plug(60);
 
     	//screw
-    	translate([0,depth/2 + global_clearance/2,7.5])
+
+
+        for(i = [-1, 1]){
+            translate([0, i*(beam_main_pipe_distance/2-beam_main_pipe_thickness-3), 0]){
+                translate([0, 0, engine_holder_beam_depth - beam_patern/2])
+                    rotate([0, 90, 0])
+                        cylinder(d = M4_screw_diameter, h = 100, center = true, $fn = 20);
+                translate([beam_thickness/2 + 5, 0, engine_holder_beam_depth - beam_patern/2])
+                    rotate([0, 90, 0])
+                        cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
+            }
+
+            translate([15, i*10, 0]){
+                cylinder(d = M4_screw_diameter, h = 100, $fn = 20);
+                translate([0, 0, 10+engine_holder_beam_depth])
+                    cylinder(d = M4_nut_diameter, h = 100, $fn = 30);
+            }
+        }
+
+        /* translate([0,depth/2 + global_clearance/2,7.5])
     	   rotate([90,0,0])
-    	       cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
+    	       cylinder(h = depth + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         translate([0,-20,7.5])
            rotate([90,0,0])
-               cylinder(h = depth + global_clearance, d = M4_nut_diameter, $fn = 6);
+               cylinder(h = depth + global_clearance, d = M3_nut_diameter, $fn = 6);
 
         translate([0,20,7.5])
            rotate([-90,0,0])
-               cylinder(h = depth + global_clearance, d = M4_nut_diameter, $fn = 6);
+               cylinder(h = depth + global_clearance, d = M3_nut_diameter, $fn = 6);
 
     	translate([0,depth/2 + global_clearance/2,42.5])
     	   rotate([90,0,0])
-    	       cylinder(h = depth + global_clearance, r = M4_screw_diameter/2, $fn = draft ? 10 : 20);
+    	       cylinder(h = depth + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
 
         translate([0,-20,42.5])
            rotate([90,0,0])
-               cylinder(h = depth, d = M4_nut_diameter, $fn = 6);
+               cylinder(h = depth, d = M3_nut_diameter, $fn = 6);
 
         translate([0,20,42.5])
            rotate([-90,0,0])
-               cylinder(h = depth, d = M4_nut_diameter, $fn = 6);
+               cylinder(h = depth, d = M3_nut_diameter, $fn = 6); */
 
 
         //vypouštěcí zařízneí

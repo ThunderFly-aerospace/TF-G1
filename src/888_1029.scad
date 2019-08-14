@@ -1,6 +1,6 @@
 include <../parameters.scad>
 
-
+draft = true;
 
 module pipes(diameter = pilon_pipe_diameter, length = 100, draft = false){
     length_front = mod([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube+pilon_pipe_base_front_z]) + 5;
@@ -121,7 +121,7 @@ module 888_1029() {
                 // zadni tyc
                     translate([-pilon_pipe_head_rear_x, 0, 0])
                         orientate([-pilon_pipe_base_rear_x+pilon_pipe_head_rear_x, 0, -height_of_vertical_tube],vref=[0,0,1], roll=0)
-                            translate([0, 0, -5]) cylinder(d = diameter, h = length + 5, $fn = draft? 20 : 50);
+                            translate([0, 0, -5]) cylinder(d = pilon_pipe_diameter, h = 100 + 5, $fn = draft? 20 : 50);
 
 
                 %translate([0, 0, -height_of_vertical_tube])
