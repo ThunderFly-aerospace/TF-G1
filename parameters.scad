@@ -20,6 +20,23 @@ pilon_pipe_diameter = carbon_pipe_10_outer_diameter;
 pilon_pipe_diameter_inner = carbon_pipe_10_inner_diameter;
 
 
+// Parametry hlavniho nosniku
+
+beam_vertical_space_between_pipes = 1;
+//beam_thickness = 3*carbon_pipe_10_outer_diameter + 2*beam_vertical_space_between_pipes + 2*5;
+beam_thickness = 45;
+beam_width = 80;
+beam_length = 490;
+beam_edge_angle = 60/2;
+beam_division = [120, 240, 360];
+
+beam_main_pipe_distance = 45;
+beam_main_pipe_thickness = carbon_pipe_10_outer_diameter;
+
+beam_patern = 40;
+beam_side_pipe_distance = 200;
+beam_side_edge_width = 175;
+
 
 // Nastavení parametrů rotoru
 
@@ -52,7 +69,8 @@ rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loz
 
 engine_angle = 0;
 engine_diameter = 55;
-engine_offset = 66;
+engine_offset = 75;
+engine_holder_beam_depth = 55; // jak moc je nosnik zapusten v dilu
 
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
@@ -80,7 +98,6 @@ wheel_disc_upper_difference = 7;
 
 // screw length step - minimum difference in length between two types of screws
 basic_screw_length = 5;
-
 
 //Square nut for M6 [mm]
 M6_square_nut_length = 10;
@@ -159,10 +176,10 @@ Help_tube_for_undercarriage_inner = 5;
 
 //main hull parameters
 
-hull_drop_length = 650;  // zajím sjednoceno s hull_x_size, ale v budoucnu by tento parametr chtělo zrušit
+hull_drop_length = 720;  // zajím sjednoceno s hull_x_size, ale v budoucnu by tento parametr chtělo zrušit
 hull_wall_thickness = 0.8;
 hull_y_size = 150;
-hull_z_size = 200;
+hull_z_size = 230;
 hull_x_size = hull_drop_length;
 hull_corner_radius = 4;
 hull_airfoil_thickness= 35;  // thickness of drop generating airfoil in percent of length.
@@ -172,17 +189,22 @@ hull_scale_z = 1.5;
 
 hull_strenghtening_pipe_distance = 45;
 
-main_pilon_position = 170+68+30;       // pozice rotorového pilonu měřená od přední části krytu
-//pilon_pipe_base_distance_x = 160;      // souradnice dopredu dozadu
-// pilon_pipe_base_distance_y = 180;
-// pilon_pipe_head_distance_x = 40;
-// pilon_pipe_head_distance_y = 40;
+
+
+
+// Parametry pylonu k rotorove hlave
+
+main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od přední části krytu
 
 // vzdalenosti jsou pocitany od stredu rotoru
 // vzdalenosti jednotlivych tyci u podlozky
 pilon_pipe_base_front_x = 30;
+pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*6;
 pilon_pipe_base_front_y = 50;
-pilon_pipe_base_rear_x = 80;
+pilon_pipe_base_front_z = 0;
+
+pilon_pipe_base_rear_x = -engine_holder_beam_depth + beam_patern*9 - main_pilon_position;
+pilon_pipe_base_rear_z = beam_thickness/2;
 
 // vzhalenosti jednotlivych tyci u rotorove hlavy
 pilon_pipe_head_front_x = 20;
@@ -191,6 +213,8 @@ pilon_pipe_head_rear_x = 20;
 
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky.
+
+
 
 //délka hlavní dlouhé trubky
 length_of_main_tube = 820;
@@ -211,11 +235,8 @@ bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
 
-
-
 rotor_height = height_of_vertical_tube + main_tube_outer_diameter/2 + 2*global_clearance + thickness_between_tubes + 30; // změřená výška rotoru je 367mm
 center_of_gravity_position = [main_pilon_position - tan(gliding_aggle)*rotor_height, 0, 0];
-
 
 
 //Cover pilon division - na výšku (v ose Z)
