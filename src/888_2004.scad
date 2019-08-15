@@ -105,7 +105,7 @@ module 888_2004_drillhelper(height = 45, height_of_mini_cylinder = 2)
 rotate([0,0,90])
     888_2004();
 
-translate([2*main_tube_outer_diameter,0,0])
+translate([1.5*main_tube_outer_diameter,0,0])
     888_2004_drillhelper();
 
 
