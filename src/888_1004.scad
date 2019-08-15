@@ -19,6 +19,7 @@ module beam_profile(l = 100){
                                 cube([l+global_clearance, 80, 50]);
                     }
 
+        // podelne diry na tyce
         translate([-global_clearance/2, -beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
                 cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = 50);
@@ -26,6 +27,29 @@ module beam_profile(l = 100){
         translate([-global_clearance/2, beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
                 cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = 50);
+
+
+        // drazky na matice
+        translate([-global_clearance/2 + l/2, 12.5, beam_thickness/2 - 1 - 2]){
+            cube([l+global_clearance*2, 6, 2], center = true);
+            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
+        }
+
+        translate([-global_clearance/2 + l/2, -12.5, beam_thickness/2 - 1 - 2]){
+            cube([l+global_clearance*2, 6, 2], center = true);
+            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
+        }
+
+        translate([-global_clearance/2 + l/2, 12.5, -beam_thickness/2 + 1 + 2]){
+            cube([l+global_clearance*2, 6, 2], center = true);
+            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
+        }
+
+        translate([-global_clearance/2 + l/2, -12.5, -beam_thickness/2 + 1 + 2]){
+            cube([l+global_clearance*2, 6, 2], center = true);
+            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
+        }
+
     }
 }
 
@@ -86,7 +110,7 @@ module beam_holes_patern(n = 1){
             }
 
             for (k=[1,-1])
-                for (j=[1, -1]) translate([5*k, j*(beam_main_pipe_distance/2-beam_main_pipe_thickness/2-2), 0]){
+                for (j=[0]) translate([5*k, j*(beam_main_pipe_distance/2-beam_main_pipe_thickness/2-2), 0]){
                     cylinder(d = M3_screw_diameter, h = beam_thickness, center = true, $fn = 50);
                     translate([0, 0, k*(beam_main_pipe_thickness+beam_vertical_space_between_pipes) + screw_length/2]) cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
                     translate([0, 0, k*(beam_main_pipe_thickness+beam_vertical_space_between_pipes) - screw_length/2 - beam_thickness]) cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
