@@ -2,6 +2,8 @@ include <../parameters.scad>
 
 
 module beam_profile(l = 100){
+    rail_length = 40;
+
     difference(){
         translate([l/2, 0, 0])
             cube([l, beam_width, beam_thickness], center = true);
@@ -30,26 +32,42 @@ module beam_profile(l = 100){
 
 
         // drazky na matice
-        translate([-global_clearance/2 + l/2, 12.5, beam_thickness/2 - 1 - 2]){
-            cube([l+global_clearance*2, 6, 2], center = true);
-            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
-        }
+        translate([30, 0, 0]){
+            for (m = [[0, 0, 0], [0, 1, 0]]) mirror(m)
+                for (i=[0:15]){
+                    translate([-global_clearance/2 + rail_length*i, 15, beam_thickness/2]){
+                        // drazka pro matku
+                        translate([0, -3, -2-M3_nut_height])
+                            cube([rail_length, 6, M3_nut_height]);
+                        // otvor pro vlozeni matky
+                        translate([layer, -3, -2-M3_nut_height])
+                            cube([6, 6, 2+5]);
+                        // drazka pro sroub
+                        translate([0, -M3_screw_diameter/2, -8])
+                            cube([rail_length+global_clearance*2 , M3_screw_diameter, 8-2]);
+                        translate([6-layer, -M3_screw_diameter/2, -7])
+                            cube([rail_length-6 , M3_screw_diameter, 8]);
+                    }
 
-        translate([-global_clearance/2 + l/2, -12.5, beam_thickness/2 - 1 - 2]){
-            cube([l+global_clearance*2, 6, 2], center = true);
-            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
-        }
 
-        translate([-global_clearance/2 + l/2, 12.5, -beam_thickness/2 + 1 + 2]){
-            cube([l+global_clearance*2, 6, 2], center = true);
-            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
-        }
+                    translate([-global_clearance/2 + rail_length*i, 15, -beam_thickness/2]){
+                        // drazka pro matku
+                        translate([0, -3, 2])
+                            cube([rail_length, 6, M3_nut_height]);
+                        // otvor pro vlozeni matky
+                        translate([layer, -3, -3])
+                            cube([6, 6, 2+5]);
+                        // drazka pro sroub
+                        translate([-global_clearance, -M3_screw_diameter/2, 2])
+                            cube([rail_length+global_clearance*2 , M3_screw_diameter, 8-2]);
+                        translate([6-layer, -M3_screw_diameter/2, -1])
+                            cube([rail_length-6 , M3_screw_diameter, 8-2]);
+                    }
 
-        translate([-global_clearance/2 + l/2, -12.5, -beam_thickness/2 + 1 + 2]){
-            cube([l+global_clearance*2, 6, 2], center = true);
-            cube([l+global_clearance*2, M3_screw_diameter, 12], center = true);
-        }
 
+
+                }
+        }
     }
 }
 
