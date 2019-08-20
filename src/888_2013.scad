@@ -32,13 +32,13 @@ module 888_2013(front = true, left = 1, rotate = false){
         translate([0, 0, 0])
             rotate([90, 0, 0])
                 cylinder(d = 25, h = kstm_ball_thickness, center = true, $fn = 80);
-        //translate([0, 0, 0])
+
         difference(){
             cube([30, kstm_ball_thickness, 23], center = true);
 
-            translate([25, 0, 0])
-                rotate([90, 0, 0])
-                    cylinder(d = 25, h = kstm_ball_thickness, center = true, $fn = 80);
+        translate([25, 0, 0])
+            rotate([90, 0, 0])
+                cylinder(d = 25, h = kstm_ball_thickness, center = true, $fn = 80);
 
         }
 
@@ -62,13 +62,13 @@ module 888_2013(front = true, left = 1, rotate = false){
                 translate([i, 0, 0]) {
                     translate([0, 0, 0])
                         rotate([90, 0, 0])
-                            cylinder(d = M4_screw_diameter, h = 50, center = true, $fn = 40);
+                            cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 40);
                     translate([0, pipe_screw_length/2+20, 0])
                         rotate([90, 0, 0])
-                            cylinder(d = M4_nut_pocket, h = 20, $fn = 6);
+                            cylinder(d = M3_nut_pocket, h = 20, $fn = 6);
                     translate([0, -pipe_screw_length/2, 0])
                         rotate([90, 0, 0])
-                            cylinder(d = M4_nut_pocket, h = 20, $fn = 6);
+                            cylinder(d = M3_nut_pocket, h = 20, $fn = 6);
                 }
 
     }

@@ -39,26 +39,8 @@ module 888_2017(right = 0){
                         orientate(vec_f)
                             cylinder(d = tube_for_undercarriage_outer_diameter + suspension_wall_thickness*2, h = 40 + 10, $fn = 80);
 
-                    /* %translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
-                        orientate(vec_r)
-                            cylinder(d = tube_for_undercarriage_outer_diameter, h = mod(vec_r), $fn = 80);
-
-                    %translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
-                        orientate(vec_f)
-                            cylinder(d = tube_for_undercarriage_outer_diameter, h = mod(vec_f), $fn = 80); */
                 }
-
-                // vyrez pro kulovy cep na pistnici
-                //translate(suspension_mount_offset)
-                //    rotate([90, 0, 0])
-                //        cube([24, 20, 12.3+0.2], center = true);
             }
-
-
-
-            //translate([-50, -30/2, 0])
-            //    cube([50, 30, 8]);
-
         }
 
         // diry na licovany sroub skrz kulove lozisko
@@ -103,7 +85,21 @@ module 888_2017(right = 0){
             // sroub skrze trubku
             translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
                 orientate(vec_r)
-                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 18])
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 15])
+                        rotate([90, 0, 0]){
+                            cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
+                            translate([0,0, suspension_pipe_screw_length/2])
+                                    cylinder(d = M3_nut_diameter, h = 40, $fn = 60);
+                            translate([0,0, -suspension_pipe_screw_length/2 - M3_nut_height/2])
+                                rotate([0, 0, 30])
+                                    cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+                            translate([-100 , -M3_nut_diameter/2, -suspension_pipe_screw_length/2 - M3_nut_height/2])
+                                cube([100, M3_nut_diameter, M3_nut_height]);
+                        }
+
+            translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
+                orientate(vec_r)
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 35])
                         rotate([90, 0, 0]){
                             cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
                             translate([0,0, suspension_pipe_screw_length/2])
@@ -116,6 +112,7 @@ module 888_2017(right = 0){
                         }
 
 
+            // Dira pro tyc k podvozku
             translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
                 orientate(vec_f)
                     translate([0, 0, suspension_mount_pipe_end])
@@ -123,9 +120,8 @@ module 888_2017(right = 0){
 
             translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
                 orientate(vec_f)
-                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 18])
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 10+5])
                         rotate([90, 0, 0]){
-
                             cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
                             translate([0, 0, -suspension_pipe_screw_length/2 -20])
                                 cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
@@ -136,27 +132,49 @@ module 888_2017(right = 0){
                                 cube([100, M3_nut_diameter, M3_nut_height]);
                     }
 
-            // Diry na srouby pro sesroubovani do vidlice
-            translate([suspension_mount_offset[0]+10 - 25, 0, 0])
-                cylinder(h = 50, d = M3_screw_diameter, $fn = 60);
-            translate([suspension_mount_offset[0]+10 - 25, 0, 4])
-                cylinder(h = 50, d = M3_nut_diameter, $fn = 60);
+            translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+                orientate(vec_f)
+                    translate([0, 0, global_clearance+suspension_mount_pipe_end + 10+25])
+                        rotate([90, 0, 0]){
+                            cylinder(d = M3_screw_diameter, h = 30, center=true, $fn = 60);
+                            translate([0, 0, -suspension_pipe_screw_length/2 -20])
+                                cylinder(d = M3_nut_diameter, h = 20, $fn = 60);
+                            translate([0,0, suspension_pipe_screw_length/2 - M3_nut_height/2])
+                                rotate([0, 0, 30])
+                                    cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+                            translate([-100 , -M3_nut_diameter/2, suspension_pipe_screw_length/2 - M3_nut_height/2])
+                                cube([100, M3_nut_diameter, M3_nut_height]);
+                    }
 
-            translate([suspension_mount_offset[0]-10 - 25, 0, 0])
-                cylinder(h = 50, d = M3_screw_diameter, $fn = 60);
-            translate([suspension_mount_offset[0]-10 - 25, 0, 4])
-                cylinder(h = 50, d = M3_nut_diameter, $fn = 60);
+            rotate([0, chassis_camber, 0]){
+                // Diry na srouby pro sesroubovani do vidlice
+                translate([suspension_mount_offset[0]+10 - 25, 0, 5+layer])
+                    cylinder(h = 50, d = M4_screw_diameter, $fn = 60);
+                translate([suspension_mount_offset[0]+10 - 25, 0, 8])
+                    cylinder(h = 50, d = M4_nut_diameter, $fn = 60);
 
-            translate([0, 0, -0.1])
+                translate([suspension_mount_offset[0]-10 - 25, 0, 5+layer])
+                    cylinder(h = 50, d = M4_screw_diameter, $fn = 60);
+                translate([suspension_mount_offset[0]-10 - 25, 0, 8])
+                    cylinder(h = 50, d = M4_nut_diameter, $fn = 60);
+            }
+
+            /* translate([0, 0, -0.1])
                 linear_extrude(0.9)
                     translate([-20, -5, 0]) rotate([180, 0, 0]) text("888_2017", size = 5, halign = "center");
 
             translate([0, 0, -0.1])
                 linear_extrude(0.9)
-                    translate([-20, 8, 0]) rotate([180, 0, 0]) text(right? "Right": "Left", size = 5, halign = "center");
+                    translate([-20, 8, 0]) rotate([180, 0, 0]) text(right? "Right": "Left", size = 5, halign = "center"); */
 
-            translate([-250, -250, -500])
-                cube(500);
+
+            //rotate([0, chassis_camber, 0])
+                translate([-250, -250, -500])
+                    cube(500);
+
+            rotate([0, chassis_camber, 0])
+                translate([-250, -21/2, -500+5])
+                    cube([500, 21, 500]);
         }
     }
 }

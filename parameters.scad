@@ -627,7 +627,7 @@ DS313MG_X = 4;
     2013_pipe_offset = [0, 0, 25];
 
 // Dily spojujici podvozkova ramena
-    2017_bearing_mount_offset = [0, 18, 0];        // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
+    2017_bearing_mount_offset = [0, 22, 0];        // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
     2017_pipe_mount_offset = [6, 0, -37];          // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
     2017_pipe_bottom = 8;                          // Jak daleko nad zemi konci tyc
 
