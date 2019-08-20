@@ -31,8 +31,16 @@ module 888_2013(front = true, left = 1, rotate = false){
 
         translate([0, 0, 0])
             rotate([90, 0, 0])
-                cylinder(d = 25, h = kstm_ball_thickness, center = true);
+                cylinder(d = 25, h = kstm_ball_thickness, center = true, $fn = 80);
+        //translate([0, 0, 0])
+        difference(){
+            cube([30, kstm_ball_thickness, 23], center = true);
 
+            translate([25, 0, 0])
+                rotate([90, 0, 0])
+                    cylinder(d = 25, h = kstm_ball_thickness, center = true, $fn = 80);
+
+        }
 
     // Otvory sroubu pro pridelani KSTM
         translate([0, 0, 0])
