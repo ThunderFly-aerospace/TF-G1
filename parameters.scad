@@ -4,7 +4,7 @@ global_clearance = 0.5;
 layer = 0.2;
 
 // obecne rozmery trubek
-carbon_pipe_10_outer_diameter = 10.6;
+carbon_pipe_10_outer_diameter = 10.4;
 carbon_pipe_10_inner_diameter = 6;
 
 //Main tube diameter - hole [mm]
@@ -638,7 +638,7 @@ chassis_wheelbase = 650;        // rozvor kolecek
 chassis_height = 200;           // vyska podvozku
 chassis_baselength_r = 100;       // podelna roztec podvozku dozade
 chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
-chassis_bearing_distance = 48;   // vzdalenost kulovych lozisek na podlozek
+chassis_bearing_distance = 50;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 300;//vzdalenost prichyceni tlumicu na pricne tyci
 chassis_camber = -3;    //Odklon kola
 
@@ -681,7 +681,7 @@ chassis_top_bearing_position_f = [chassis_pipe_baselength_r/2, chassis_bearing_d
 chassis_top_bearing_position_r = [chassis_pipe_baselength_f/2, chassis_bearing_distance/2, 0];
 //chassis_top_bearing_position_x = chassis_top_bearing_position[0];
 chassis_top_bearing_position_y = chassis_bearing_distance/2;
-chassis_top_bearing_position_z = chassis_bearing_distance/2;
+chassis_top_bearing_position_z = 20;
 chassis_top_bearing_rotation_f = [chassis_pipe_angle_x, 0, chassis_pipe_angle_f_z];
 chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_z];
 

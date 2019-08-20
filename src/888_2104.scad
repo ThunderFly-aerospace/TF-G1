@@ -56,13 +56,13 @@ rotate([-15, 0, 0])
 translate([0, -chassis_top_bearing_position_y+5, -kstm_ball_height(8)-9])
 {
 
-translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
+/* translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
     rotate([0, 0, 180]) 888_2013(front = 1, left = 0);
 translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
     rotate([0, 0, 180]) 888_2013(front = 0, left = 0);
 translate([0, -chassis_wheelbase/2, -chassis_height])
     rotate([-90, -90, 0])
-        888_2017(right = 0);
+        888_2017(right = 0); */
 
 /* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
     rotate([-28, 0, 0])
@@ -74,24 +74,43 @@ translate([0, -chassis_wheelbase/2, -chassis_height])
 
 
 
-translate([chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    888_2013(front = 1, left = 1);
-translate([-chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    888_2013(front = 0, left = 1);
-translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    rotate([0, 0, 180]) 888_2013(front = 1, left = 0);
-translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    rotate([0, 0, 180]) 888_2013(front = 0, left = 0);
+translate([chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+        rotate([0, 90, 90])
+            888_2013(front = 1, left = 1);
+
+translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
+        rotate([0, 90, 90])
+            888_2013(front = 0, left = 1);
+
+translate([-chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([-chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+        rotate([0, 90, 90])
+            888_2013(front = 1, left = 0);
+
+translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([-chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
+        rotate([0, 90, 90])
+            888_2013(front = 0, left = 0);
 
 
-translate([chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    rotate([180, 0, 90]) kstm_08();
-translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    rotate([180, 0, 90]) kstm_08();
-translate([-chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    rotate([180, 0, 90]) kstm_08();
-translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
-    rotate([180, 0, 90]) kstm_08();
+// KSTM kulova loziska pod nosnikem virniku
+color("navy"){
+    translate([chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+            rotate([180, 0, 90]) kstm_08();
+    translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
+            rotate([180, 0, 90]) kstm_08();
+    translate([-chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([-chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+            rotate([180, 0, 90]) kstm_08();
+    translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([-chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
+            rotate([180, 0, 90]) kstm_08();
+}
+
 
 
 translate([0, chassis_wheelbase/2, -chassis_height])
@@ -109,14 +128,6 @@ translate([-chassis_top_bearing_position_r, chassis_top_bearing_position_y, 0])
     sphere(d = 10);
 translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
     sphere(d = 10);
-
-
-/* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
-    rotate([-22, 0, 0])
-        piston(); */
-
-
-
 
 
 //
