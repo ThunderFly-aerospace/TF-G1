@@ -22,7 +22,7 @@ pipe_holder2_pos = pipe_holder1_pos + pipe_holder_distance;
 pipe_holder_space =3;
 
 
-module 888_1027() {
+module 888_2021() {
 
 rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
     difference() {
@@ -195,7 +195,7 @@ module motor_holder(){
 }
 }
 
-module 888_1027_drill(){
+module 888_2021_drill(){
     difference(){
         cube([25, 25, pipe_holder_distance+pipe_holder_length], center = true);
 
@@ -211,11 +211,11 @@ module 888_1027_drill(){
     }
 }
 
-888_1027();
+888_2021();
 
 rotate([90, 0, 0]) cylinder(d = 110, h = 30, center = true);
 //translate([49, 0, 50]) rotate([90, 0, 0]) cylinder(d = 30, h = 36, center = true);
 
-//888_1027_drill();
+//888_2021_drill();
 
 translate([0, -20, 70]) rotate([-90, 22, 0]) motor_holder();
