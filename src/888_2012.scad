@@ -2,10 +2,10 @@
 
 include <../parameters.scad>
 
-cylinder_1_thickness = 2;
+cylinder_1_thickness = 1.2;
 cylinder_1_diameter = 608_bearing_outer_diameter+2;
-cylinder_2_thickness = 3;
-cylinder_2_diameter = 608_bearing_inner_diameter+5;
+cylinder_2_thickness = cylinder_1_thickness+0.7;
+cylinder_2_diameter = 608_bearing_inner_diameter+4;
 
 module 888_2012 () {
     difference() {
