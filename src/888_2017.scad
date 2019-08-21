@@ -10,7 +10,7 @@ module 888_2017(right = 0){
     suspension_mount_offset = [2017_bearing_mount_offset[2], 2017_bearing_mount_offset[0], 2017_bearing_mount_offset[1]];                                       // Umisteni osy kuloveho loziska v souradnicovem syst. dilu
     pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];                                        // Umisteni tyce podvozku loziska v souradnicovem syst. dilu
     suspension_mount_pipe_end = 2017_pipe_bottom;                                              // Jak daleko nad zemi konci tyc
-
+    fork_cutout_width = 20+1;
 
     vec_r = [chassis_height, -chassis_pipe_baselength_r, chassis_pipe_wheelbase];
     vec_f = [chassis_height, chassis_pipe_baselength_f, chassis_pipe_wheelbase];
@@ -173,8 +173,8 @@ module 888_2017(right = 0){
                     cube(500);
 
             rotate([0, chassis_camber, 0])
-                translate([-250, -21/2, -500+5])
-                    cube([500, 21, 500]);
+                translate([-250, -fork_cutout_width/2, -500+5])
+                    cube([500, fork_cutout_width, 500]);
         }
     }
 }
