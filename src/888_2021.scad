@@ -94,16 +94,16 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
       }
       rotate ([90,0,0,]) {
           translate([pipe_holder2_pos+pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
-            cylinder (h=fork_wheel_width, d=M3_screw_diameter, $fn=50);
+            cylinder (h=fork_wheel_width, d=M4_screw_diameter, $fn=50);
 
           translate([pipe_holder2_pos+pipe_holder_length/2, fork_thickness/2, -(0.5*fork_wheel_width+M3_nut_height*2)])
-            cylinder (h=fork_width, d=M3_nut_diameter, $fn=6);
+            cylinder (h=fork_width, d=M4_nut_diameter, $fn=6);
 
           translate([pipe_holder1_pos+pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
-            cylinder (h=fork_wheel_width, d=M3_screw_diameter, $fn=50);
+            cylinder (h=fork_wheel_width, d=M4_screw_diameter, $fn=50);
 
           translate([pipe_holder1_pos+pipe_holder_length/2, fork_thickness/2, -(0.5*fork_wheel_width+M3_nut_height*2)])
-            cylinder (h=fork_width, d=M3_nut_diameter, $fn=6);
+            cylinder (h=fork_width, d=M4_nut_diameter, $fn=6);
       }
     }
 }
@@ -213,7 +213,7 @@ module 888_2021_drill(){
 
 888_2021();
 
-rotate([90, 0, 0]) cylinder(d = 110, h = 30, center = true);
+//rotate([90, 0, 0]) cylinder(d = 110, h = 30, center = true);
 //translate([49, 0, 50]) rotate([90, 0, 0]) cylinder(d = 30, h = 36, center = true);
 
 //888_2021_drill();
