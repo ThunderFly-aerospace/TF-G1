@@ -87,6 +87,10 @@ thickness_between_tubes_undercarriage = tube_for_undercarriage_outer_diameter/10
 608_bearing_inner_diameter = 8-0.3+0.4;
 608_bearing_thickness = 7.1;
 
+696_bearing_outer_diameter = 15.3;
+696_bearing_inner_diameter = 6-0.3+0.4;
+696_bearing_thickness = 5.1;
+
 //parametry mechoveho kola
 wheel_inner_diameter = 36;
 wheel_inner_thickness = 28;
@@ -624,6 +628,7 @@ DS313MG_X = 4;
 
 
 /// Parametry podvozku
+fork_wheel_width = wheel_inner_thickness + 2*1.5 + 2* wheel_disc_upper_thickness + 0.5;
     2013_pipe_offset = [0, 0, 25];
 
 // Dily spojujici podvozkova ramena
@@ -689,3 +694,17 @@ chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_
 //chassis_arm_mount_plate = [40, 25];
 
 888_2013_width = 70;
+
+
+// PREDNI PODVOZEK 888_2016
+888_2016_wheel_width = fork_wheel_width;
+888_2016_wheel_diameter = 110+15;
+888_2016_wheel_screw_diameter = M6_screw_diameter;
+888_2016_wheel_nut_diameter = M6_nut_diameter;
+888_2016_wheel_nut_height = M6_nut_height;
+888_2016_wheel_screw_head_height = M6_head_height;
+888_2016_wheel_screw_head_diameter = M6_head_diameter;
+888_2016_height = 696_bearing_outer_diameter+7;
+888_2016_holder_thickness = 10;
+888_2016_connector_width = 15;
+screw_spring_distance = 15;
