@@ -28,3 +28,5 @@ translate([0, -wheel_inner_thickness/2-6.8, 0]) rotate([-90, 0, 0]) 888_2012();
 //vidlice
 translate ([0, 0, 0])
     888_2021() ;
+
+translate([0, 38, 70]) rotate([90, 22, 0]) motor_holder();

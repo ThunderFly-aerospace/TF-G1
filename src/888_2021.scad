@@ -11,13 +11,14 @@ fork_thickness = 20;
 fork_width = 10 ;
 fork_hole_diameter = 10 ;
 fork_lenght = 95;
+fork_length_overlap = 10;       // prodlouzeni smerem dolu
 
 pipe_diameter = tube_for_undercarriage_outer_diameter;
 pipe_holder_length = 20;
 pipe_holder_thickness = pipe_diameter/2+3;
 
 pipe_holder_distance = 20;
-pipe_holder1_pos = -5+40;
+pipe_holder1_pos = 68;
 pipe_holder2_pos = pipe_holder1_pos + pipe_holder_distance;
 pipe_holder_space =3;
 
@@ -29,17 +30,17 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
       union () {
         difference() {
             union () {
-                cylinder ( h=fork_thickness, d=2*fork_width+fork_wheel_width, $fn=100);
+                cylinder(h=fork_thickness, d=2*fork_width+fork_wheel_width, $fn=100);
 
-                translate ([0,fork_wheel_width/2,0])
-                    cube ([fork_lenght, fork_width, fork_thickness]);
+                translate([0,fork_wheel_width/2,0])
+                    cube([fork_lenght+fork_length_overlap, fork_width, fork_thickness]);
 
                 translate ([0,-(fork_wheel_width/2+fork_width),0])
-                    cube ([fork_lenght, fork_width, fork_thickness]);
+                    cube([fork_lenght+fork_length_overlap, fork_width, fork_thickness]);
             }
 
             translate([0, 0, -10])
-                cylinder ( h=fork_thickness+20, d=fork_wheel_width, $fn=50);
+                cylinder( h=fork_thickness+20, d=fork_wheel_width, $fn=50);
 
             translate([0,-(fork_wheel_width/2),-10])
                 cube ([2*fork_width+fork_wheel_width+20,fork_wheel_width,fork_thickness+20 ]);
@@ -109,13 +110,19 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
 }
 
 module motor_holder(){
-    motor_distance = 50;
+    motor_distance = 35;
+    motor_offset = 12;
     tail_distance = 50;
-    thickness = 4;
+    thickness = 4+3;
 
     shaft_width = 13;
     screw_radius = 25/2;
-    encoder_radius = 19/2;
+    encoder_radius = 19.05/2;
+
+    encoder_width = 30;
+    encoder_length = 36;
+    encoder_round = 17;
+    encoder_wall = 3;
 
     difference(){
         union(){
@@ -127,6 +134,19 @@ module motor_holder(){
                 translate([motor_distance, 0, 0])
                     cylinder(d = 35, h = thickness);
             }
+
+            translate([motor_distance, 0, 0])
+                hull(){
+                    intersection(){
+                        translate([0, 0, 0])
+                            cylinder(r = encoder_round+encoder_wall, h = thickness + motor_offset, $fn = 60);
+                        translate([-25, -encoder_width/2-encoder_wall, 0])
+                            cube([50, encoder_width+encoder_wall*2, motor_offset+thickness]);
+                    }
+                    translate([23+encoder_wall, -encoder_width/2-encoder_wall, 0])
+                        cube([1, encoder_width+encoder_wall*2, thickness+motor_offset]);
+                }
+
             cylinder( d = 10, h = 10);
 
             translate([-tail_distance, 0, 0])
@@ -142,7 +162,9 @@ module motor_holder(){
     translate([motor_distance, 0, 0]){
 
 
-    	cylinder(thickness + 2, d = shaft_width);
+    	cylinder(thickness + 10, d = shaft_width);
+
+        %translate([0, 0, thickness + motor_offset + global_clearance]) cylinder(h = 36, d = 30);
 
         for(i = [0:3]) {
     		rotate([0, 0, i * 90 + 45])
@@ -156,17 +178,8 @@ module motor_holder(){
 
     	//nut holes
     	translate([encoder_radius, 0, 0])
-    	union() {
-    		cylinder(thickness + 2, d = M3_screw_diameter, $fn = 30);
-    		rotate([0, 0, 90])
-    		translate([0, 0, 4-M3_nut_height]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-    	}
-    	translate([- encoder_radius, 0, 0])
-    	union() {
-    		cylinder(thickness + 2, d = M3_screw_diameter, $fn = 30);
-    		rotate([0, 0, 90])
-    		translate([0, 0, 4-M3_nut_height]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-    	}
+
+
     	translate([encoder_radius, 0, 0])
     	union() {
     		cylinder(thickness + 2, d = M3_screw_diameter, $fn = 30);
@@ -191,6 +204,17 @@ module motor_holder(){
     		rotate([0, 0, 0])
     		translate([0, 0, 4-M3_nut_height]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
     	}
+        translate([0, 0, -0.1])
+        hull(){
+            intersection(){
+                translate([0, 0, 0])
+                    cylinder(r = encoder_round, h = motor_offset + thickness, $fn = 60);
+                translate([-25, -encoder_width/2, 0])
+                    cube([50, encoder_width, motor_offset+thickness]);
+            }
+            translate([23, -encoder_width/2, 0])
+                cube([1, encoder_width, motor_offset+thickness]);
+        }
     }
 }
 }
@@ -218,4 +242,4 @@ module 888_2021_drill(){
 
 //888_2021_drill();
 
-translate([0, -20, 70]) rotate([-90, 22, 0]) motor_holder();
+translate([0, 38, 70]) rotate([90, 22, 0]) motor_holder();
