@@ -20,6 +20,9 @@ Rudder_angle = 90;
 //výstuhy tloušťka stěny
 infill_wall_thickness = 1;
 
+//pusun serva
+servo_offset = 50;
+
 draft = true;
 
 module 666_1028(draft){
@@ -47,14 +50,14 @@ module 666_1028(draft){
                         airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 160, open = false);
                         union(){
                                     //žebrování
-                                    translate([55,-15,-80])
+                                    translate([60,-15,-40])
                                         rotate([45,0,90])
                                             for (i = [0:8]) { // opakovani cyklu
                                                 translate([0, i * 25,-15])  //sude prorezy
                                                     cube([30, wall_thickness, 220]);
                                             }
     
-                                    translate([-55,-15,80])
+                                    translate([-60,-15,60])
                                         rotate([135,0,90])
                                             for (i = [0:8]) { // opakovani cyklu
                                                 translate([0, i * 25,-15])  //sude prorezy
@@ -95,7 +98,7 @@ module 666_1028(draft){
                                         cube([Rudder_height + 8, Rudder_depth + gap_width, Rudder_length + infill_wall_thickness * 2], center = true);
                                             
                                     //vyztužení pro upevnění serva
-                                    translate([30, 0, 75 - 35])
+                                    translate([servo_offset, 0, 75 - 35])
                                         cube([35 + infill_wall_thickness * 2, 20, 28 + infill_wall_thickness * 2], center = true);
                         }
                     }
@@ -152,25 +155,26 @@ module 666_1028(draft){
                     
                  
                 //otvor pro servo
-                translate([30, 0, 75 - 35])
+                translate([servo_offset, 0, 75 - 35])
                     cube([24, 20, 28], center = true);
                          
-                translate([30 - 27 / 2, 0, 75 - 35])
+                translate([servo_offset - 27 / 2, 0, 75 - 35])
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth + 2, d = M2_screw_diameter, $fn = 100, center = true);
                         
-                translate([30 + 27 / 2, 0, 75 - 35])
+                translate([servo_offset + 27 / 2, 0, 75 - 35])
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth + 2, d = M2_screw_diameter, $fn = 100, center = true);
                            
-                translate([30, 11, 75 - 35])
+                translate([servo_offset, 11, 75 - 35])
                     cube([35, 20, 28], center = true);   
                     
-                translate([30, - 11, 75 - 35])
+                translate([servo_offset, - 11, 75 - 35])
                     cube([35, 20, 28], center = true);
-
-                translate([30 + 14.5, 0, 75 - 20])
-                    cube([5.1, 8, 10], center = true);
+                
+                //otvor pro dráty
+                translate([servo_offset + 13.5, 0, 75 - 12.5])
+                    cube([8, 8, 25], center = true);
                         
                     }
             }
