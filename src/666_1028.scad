@@ -17,8 +17,7 @@ side_choose = - 1;
 //tvar A vzájemný náklon
 rudder_angle = 90;
 
-draft = true;        
-                                        
+draft = true;
 
 module 666_1028(draft){
 
@@ -39,34 +38,11 @@ module 666_1028(draft){
             union(){
                 difference(){
                     union(){
-                        rotate([0, 0, 90 + 90 * side_choose])
-						hull() {
-							rotate([0,-90,0])
-								translate([screw_for_pipe_pos, 0, -8])
-									cylinder (h=M3_ISO7380_head_height, d=M3_ISO7380_nut_diameter+1, $fn=50);
-
-							translate ([0, 75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
-			                    rotate([90,-90,0])
-									translate([0, 0, 75])
-										rotate([0, 90, 0])
-											cylinder(h=62, d=tube_for_undercarriage_outer_diameter+2, $fn=50);
-
-							rotate([0,-90,0])
-								translate([screw_for_pipe_pos, 0, 12])
-									cylinder (h=M3_ISO7380_head_height, d=M3_ISO7380_nut_diameter+1, $fn=6);
-											}
-
-                            translate ([0, 75,-0.1]) // elementar Z shift to improve adhesion on the printig surface
-                                rotate([90,-90,0])  {
-                                        hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 160, open = false); //dutý profil
-
-										//vyztuha pro tyc d=10,6 mm
-										translate([0, 0, 75])
-											rotate([0, 90, 0])
-												difference() {
-													cylinder(h=62, d=tube_for_undercarriage_outer_diameter+2, $fn=50);
-														cylinder(h=60, d=tube_for_undercarriage_outer_diameter, $fn=50);
-								}
+                        translate([0, - tail_pipe_distance, 0])
+                            cylinder(h=62, d=tube_for_undercarriage_outer_diameter+2, $fn=50);
+                        translate ([0, 0,-0.1]) // elementar Z shift to improve adhesion on the printig surface
+                            rotate([90,-90,0])  {
+                                hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 160, open = false); //dutý profil
 
                             //výztuhy
                             intersection(){
@@ -109,77 +85,48 @@ module 666_1028(draft){
         				                        }
                                                 
                                         // vyztužení pro upevnění do tvaru A
-                                        translate([0, 0, 155])
-        				                    cube([300, 20, 20], center = true);
+                                        translate([80, 0, 155])
+        				                    cube([200, 20, 20], center = true);
                                                 
-                                       //work in progress   
-                                          //
-                                          //      
-                            rotate([0, 0, 90])            
-                                                translate([17 , -(22.8 - 19.3) - 1.25, -4.95 - 1 - 0.25])
-
-                                difference() {
-                                    cube([13.5,22.8 + 4.5, 32.5 + 2 + 0.5]);
-                                    translate([- 1, 1, 1])
-                                    cube([13.5 + 2,22.8 + 4.5 - 2, 32.5 + 2 + 0.5 - 2]);
-                            }
-                            //
-                            //
-                            //
+                                        //vyztužení pro upevnění serva     
+                                        rotate([90, 0, 90 + side_choose * 3])            
+                                            translate([ - 7 - side_choose * 6, 27, 23.5])
+                                                difference() {
+                                                    cube([15, 29, 36]);
+                                                    translate([- 1, 1, 1])
+                                                        cube([15 + 2, 29 - 2, 36 - 2]);
+                                                }
                                     }
             	            }
                         }
 
                     }
 
-										//otvor pro tyc d=10,6mm
-												translate ([0,75,-1])
-												rotate([90,-90,0])
-												translate([0, 0, 75])
-												rotate([0, 90, 0])
-														cylinder(h=60, d=tube_for_undercarriage_outer_diameter, $fn=50);
+					//otvor pro srouby M3 na spojeni smerovek do tvaru A
+					translate([130, 46, 30])
+					    rotate ([0, 100, 45])
+						    cylinder (h=30, d=M3_screw_diameter, $fn=100);
 
-										//dira na sroub M3 ISO7380 pro tyc
-										rotate([0,-90,0])
-										translate([screw_for_pipe_pos, 0, -30])
-												cylinder (h=60, d=M3_screw_diameter, $fn=50);
-
-										//dira na hlavu sroubu M3
-										rotate([0,-90, 90 + 90 * side_choose])
-										translate([screw_for_pipe_pos, 0, -9])
-												cylinder (h=M3_ISO7380_head_height+1, d=M3_ISO7380_nut_diameter, $fn=50);
-
-										//dira na matku sroubu M3
-										rotate([0,-90, 90 + 90 * side_choose])
-										translate([screw_for_pipe_pos, 0, 12])
-												cylinder (h=M3_ISO7380_head_height+1, d=M3_ISO7380_nut_diameter, $fn=6);
-
-										//otvor pro srouby M3 na spojeni smerovek do tvaru A
-
-										translate([130, 46, 30])
-												rotate ([0, 100, 45])
-														cylinder (h=30, d=M3_screw_diameter, $fn=100);
-
-										translate([130, 46, 30])
-												rotate ([0, 100, 45])
-														cylinder (h=30, d=M3_screw_diameter, $fn=100);
+					translate([130, 46, 30])
+					    rotate ([0, 100, 45])
+						    cylinder (h=30, d=M3_screw_diameter, $fn=100);
 
                     //vyříznutí otvoru pro směrovku
-                    translate([- Rudder_depth/2,- Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
+                    translate([- Rudder_depth/2, - 75 - Rudder_length/2, 150 - Rudder_height - gap_width - 4.85*0.75])
                         cube([Rudder_depth, Rudder_length, Rudder_height + global_clearance + gap_width + 4.85*0.75 ]);
 
-                    translate([0, 75, 150 - Rudder_height + gap_width/2])
+                    translate([0, - 75, 150 - Rudder_height + gap_width/2])
                         rotate([90,0,0])
                            translate([0,0,-3])
-                           		cylinder(h = 150 + 6, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
+                           		cylinder(h = 160 + 6, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
                                 
                     //vyříznutí boku do tvaru A
-                    translate([side_choose * 6, -85, 150])
+                    translate([side_choose * 6, -160, 80])
                         rotate([0, 0, side_choose * rudder_angle / 2])
-        				    cube([20, 20, 300], center = true);
+        				    cube([40, 20, 220], center = true);
                             
                     //vyříynutí děr pro upevnění do tvaru A
-                    translate([0, -80, 30])
+                    translate([0, -155, 30])
 						rotate ([0, 90, - side_choose * rudder_angle / 2])
                             union() {
 							    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -191,7 +138,7 @@ module 666_1028(draft){
                                     }
                             }
                             
-                    translate([0, -80, 80])
+                    translate([0, -155, 80])
 						rotate ([0, 90, - side_choose * rudder_angle / 2])
                             union() {
 							    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -205,22 +152,22 @@ module 666_1028(draft){
                     
                     // otvor pro servo
                     rotate([0, - 90 + 90 * side_choose, 0])
-                        translate([3,19.8,- 11.5 + side_choose * 41.5])
+                        translate([3, - 50,- 11.5 + side_choose * 41.5])
                             rotate([0, - side_choose * 3, 0])
                                 union(){
-                                    translate([-6 , -(22.8 - 19.3) - 1.25, -4.95 - 1 - 0.25])
-                                        cube([13.5,22.8 + 4.5, 32.5 + 2 + 0.5]);
+                                    translate([-6, - 4.8, - 5.65])
+                                        cube([15 + 2, 29 - 2, 36 - 1.9]);
 
-                                    translate([-20, -5, 0])
+                                    translate([- 20, - 4.8, - 4])
                                        cube([20,8,30]);
                            	}
                 }
                 // TODO - potřebuje zkontrolovat
                 //servo uchytovy ramecek
                 rotate([0, - 90 + 90 * side_choose, 0])
-                    translate([3,19.8,- 11.5 + side_choose * 41.5])
+                    translate([3, - 50,- 11.5 + side_choose * 41.5])
                         rotate([0, - side_choose * 3, 0])
-                        888_1012_C();
+                            888_1012_C();
 
             }
     }
@@ -463,10 +410,8 @@ module 666_1028_rudder_flightgear(draft){
         666_1028_rudder(draft);
 */
 
-
-translate([ 0, Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
-    rotate([90,-90 ,0])
-        666_1028_rudder_flightgear(draft);
+rotate([90,-90 ,0])
+    666_1028_rudder_flightgear(draft);
 
 
 //666_1028_flightgear();
