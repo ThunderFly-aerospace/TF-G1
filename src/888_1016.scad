@@ -4,8 +4,8 @@ module 888_3016(draft = true){
 
     inner_diameter = 8.1;
     outer_diameter = bearing_efsm_12_d + 3;
-    rim_height = 1;
-    bearng_ball_height = 10.1/2;
+    rim_height = 1.5;
+    bearng_ball_height = 10.1-3;
     difference(){
         union(){
             cylinder(h = rim_height, d = outer_diameter, $fn = 50);
