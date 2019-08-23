@@ -147,7 +147,8 @@ module 666_1028(draft){
                 //otvor pro upevnění na trubku
                 translate([20, 0, tail_pipe_z_position])
                     union() {
-                        cube([40 + infill_wall_thickness * 2, Rudder_depth + 2, 30], center = true);
+                        cube([40 + infill_wall_thickness * 2, Rudder_depth + 2, 14], center = true);
+                        cube([40 + infill_wall_thickness * 2, 5, 30], center = true);
                         translate([20, 0, 0])
                             rotate([0, 90, 0])
                                 cylinder(h = 10, d = 8, center = true);
@@ -400,12 +401,52 @@ module 666_1028_rudder_flightgear(draft){
 }
 
 
+//díl pro připevnění na trubku
+module 666_1028_mount(draft){
+    difference() {//diff
+        union() {
+            //tělo dílu:
+            intersection(){
+                airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 160, open = false);
+                translate([20, 0, tail_pipe_z_position])
+                    union() {                    
+                        cube([40, Rudder_depth + 2, 14 - global_clearance * 2], center = true);
+                        cube([40, 5 - global_clearance * 2, 30 - global_clearance * 2], center = true);
+                    }
+                }
+            translate([20, 0, tail_pipe_z_position])
+                rotate([0, 90, 0])
+                    cylinder(h = 40, d = tube_for_undercarriage_outer_diameter + global_clearance + 2, center = true, $fn = 100);
+            }
+        
+        //otvor pro trubku
+        translate([20, 0, tail_pipe_z_position])
+            rotate([0, 90, 0])
+                cylinder(h = 40 + 2, d = tube_for_undercarriage_outer_diameter + global_clearance, center = true, $fn = 100);
+        //otvory pro šrouby    
+        translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 10])
+            rotate([side_choose * 90, 0, 0])
+                cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
+        translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 10])
+            rotate([side_choose * 90, 0, 0])
+                cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
+        translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 10])
+            rotate([side_choose * 90, 0, 0])
+                cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
+        translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 10])
+            rotate([side_choose * 90, 0, 0])
+                cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
+    }
+}
 
 
 /*translate([150 - Rudder_depth + gap_width*1.5 + 0.14,Rudder_length - gap_width - (150 - Rudder_length)/2 - gap_width/2,-gap_width*0.3])
     rotate([90,-90 ,0])
         666_1028_rudder(draft);
 */
+
+rotate([0,0 ,90])
+    666_1028_mount(draft);
 
 rotate([0,0 ,90])
     666_1028_rudder_flightgear(draft);
