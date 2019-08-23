@@ -628,7 +628,7 @@ DS313MG_X = 4;
 
 
 /// Parametry podvozku
-fork_wheel_width = wheel_inner_thickness + 2*1.5 + 2* wheel_disc_upper_thickness + 0.5;
+    fork_wheel_width = wheel_inner_thickness + 2*1.5 + 2* wheel_disc_upper_thickness + 0.5;
     2013_pipe_offset = [0, 0, 25];
 
 // Dily spojujici podvozkova ramena
