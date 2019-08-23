@@ -161,6 +161,12 @@ M2_5_nut_height = 2.3;
 M2_5_nut_diameter = 6;
 M2_5_nut_pocket = 5.1;
 
+//Screw diameter and nut for M2 [mm]
+M2_screw_diameter = 2.1;
+M2_nut_height = 2;
+M2_nut_diameter = 4.5;
+M2_nut_pocket = 3.95;
+
 //M3 ISO7380
 M3_ISO7380_head_height = 1.5;
 M3_ISO7380_nut_height = 3;
