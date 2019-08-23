@@ -3,6 +3,8 @@
 include <../parameters.scad>
 
 module 888_2016() {
+    translate([-(696_bearing_outer_diameter/2+888_2016_connector_width+7), 0, 0])
+    rotate([0, 0, -90])
     difference() {
         translate([-888_2016_holder_thickness-888_2016_wheel_width/2, -888_2016_wheel_diameter/2-10, -888_2016_height/2])
             cube([888_2016_holder_thickness*2+888_2016_wheel_width, 888_2016_wheel_diameter/2+50, 888_2016_height]);
@@ -43,7 +45,7 @@ module 888_2016() {
         translate([0, -888_2016_wheel_diameter/2+screw_spring_distance, 0])
             rotate([0, 90, 0])
                 cylinder(d=M3_nut_diameter, h=M3_nut_height*2+888_2016_wheel_width, center=true, $fn=6);
-                
+
         //otvor pro šroub uchycení
         translate([0, 696_bearing_outer_diameter/2+888_2016_connector_width+7,  0])
             rotate([0, 90, 0])
