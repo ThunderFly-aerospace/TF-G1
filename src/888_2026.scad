@@ -4,7 +4,7 @@ include <../parameters.scad>
 
 joint_diameter = 40;
 screw_length = 10.8;
-height = 50;
+height = 25;
 washer_diameter = 20;
 screw_distance = 42.5;
 stops_overhang = 3;
@@ -13,7 +13,8 @@ layer_height = 0.2;
 module 888_2026() {
     difference() {
         union() {
-            cylinder(d=joint_diameter, h=height, $fn=100);
+            translate([0, 0, -5])
+            cylinder(d=joint_diameter, h=height+5, $fn=100);
 
             hull() {
                 translate([0, 0, height/2])
@@ -48,27 +49,30 @@ module 888_2026() {
                             cube([8, stop_size, 10]);
             }
         }
-        translate([0, 0, -6])
-            cylinder(d=joint_diameter+1, h=6, $fn=50);
+        rotate([5, 0, 0])
+        translate([0, 0, -10])
+            cylinder(d=joint_diameter+1, h=10, $fn=50);
 
         //šroub uchycení podvozku
-        translate([0, 0, -0.1])
-            cylinder(d=M8_screw_diameter, h=screw_length-layer_height, $fn=20);
-        translate([0, 0, screw_length])
-            cylinder(d=washer_diameter, h=100, $fn=40);
+        rotate([5, 0, 0]) {
+            translate([0, 0, -0.1])
+                cylinder(d=M8_screw_diameter, h=screw_length-layer_height, $fn=20);
+            translate([0, 0, screw_length])
+                cylinder(d=washer_diameter, h=100, $fn=40);
+        }
 
         //šrouby pro připevnění k motorovému dílu
-        translate([screw_distance/2, 0, 5])
+        translate([screw_distance/2, 0, 0])
             cylinder(d=M4_screw_diameter, h=100, $fn=20);
 
-        translate([screw_distance/-2, 0, 5])
+        translate([screw_distance/-2, 0, 0])
             cylinder(d=M4_screw_diameter, h=100, $fn=20);
 
-        translate([screw_distance/2, 0, 5])
-            cylinder(d=M4_screw_diameter+5, h=height-10, $fn=20);
+        translate([screw_distance/2, 0, -10])
+            cylinder(d=M4_screw_diameter+5, h=height+5, $fn=20);
 
-        translate([screw_distance/-2, 0, 5])
-            cylinder(d=M4_screw_diameter+5, h=height-10, $fn=20);
+        translate([screw_distance/-2, 0, -10])
+            cylinder(d=M4_screw_diameter+5, h=height+5, $fn=20);
     }
 }
 
