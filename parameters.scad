@@ -329,7 +329,7 @@ Rudder_length = 4*main_tube_outer_diameter;
 Rudder_height = 2*main_tube_outer_diameter;
 Rudder_depth = main_tube_outer_diameter/2;
 gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
-ruder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
+Rudder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 tail_airfoils_angle = 90;
 tail_height = 140;                    // vyska smerovky (ne delka plochy kridla)
