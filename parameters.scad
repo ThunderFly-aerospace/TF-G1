@@ -696,15 +696,22 @@ chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_
 888_2013_width = 70;
 
 
-// PREDNI PODVOZEK 888_2016
-888_2016_wheel_width = fork_wheel_width;
-888_2016_wheel_diameter = 110+15;
-888_2016_wheel_screw_diameter = M6_screw_diameter;
-888_2016_wheel_nut_diameter = M6_nut_diameter;
-888_2016_wheel_nut_height = M6_nut_height;
-888_2016_wheel_screw_head_height = M6_head_height;
-888_2016_wheel_screw_head_diameter = M6_head_diameter;
-888_2016_height = 696_bearing_outer_diameter+7;
-888_2016_holder_thickness = 10;
-888_2016_connector_width = 15;
+// PREDNI PODVOZEK
+wheel_diameter = 110;
 screw_spring_distance = 15;
+material_around_bearing = 3;
+chasis_fork_thickness = 10;
+stop_size = 5;
+stop_width = 5;
+
+
+//RT/57208/M/25 - https://www.tme.eu/cz/details/rt_57208_m_25/pracovni-valce/norgren-herion/
+//https://www.tme.eu/Document/ff73b4843b8c955086fd9fea378c9c65/RT57200.PDF
+//https://www.tme.eu/html/gfx/image_9212.gif
+RT57208M25_BE = M10_screw_diameter;
+RT57208M25_EW = 6;
+RT57208M25_CD = 3;
+RT57208M25_D  = 12;
+RT57208M25_MR = 3;
+RT57208M25_LB = 4.5;
+RT57208M25_XC = 48;
