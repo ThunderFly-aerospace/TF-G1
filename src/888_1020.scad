@@ -46,6 +46,7 @@ module 888_1020(draft = true){
 
     brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
     
+    
     rotor_ax_neck_diameter=rotor_head_bearing_d+2;
     rotor_ax_neck_height=brit_height-(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
     rotor_ax_bearing_ring_h=3;
