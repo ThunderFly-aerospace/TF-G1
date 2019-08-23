@@ -5,7 +5,7 @@ use <./888_1020.scad>
 include <../parameters.scad>
 
 roll=-10;
-pitch=-15;
+pitch=15;
 
 
 //difference()

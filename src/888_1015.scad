@@ -146,7 +146,7 @@ module 888_1015(draft){
                 translate([0, 0, 15-rotor_head_bearing_a_center_of_rotation])
                     cube([rotor_head_bearing_width+global_clearance, rotor_head_bearing_width+global_clearance, 30], center=true);
 
-                translate([0, 0, -30])
+                translate([0, 0, -18+0.3])
                     cylinder(h=30, d=rotor_head_bearing_db);
 
                 for (i=[[rotor_head_bearing_m/2, rotor_head_bearing_m/2, -25, 0],
@@ -154,12 +154,21 @@ module 888_1015(draft){
                     [-rotor_head_bearing_m/2, -rotor_head_bearing_m/2, -25, 1],
                     [rotor_head_bearing_m/2, -rotor_head_bearing_m/2, -25, 1]]) {
                     translate(i+[0,0,10]){
-                        translate([0,0,-15])
+                        //bridged screw hole
+                        translate([0,0,M5_nut_height+0.3])
                             cylinder(h = 30, d = M5_screw_diameter, $fn = draft ? 50 : 100);
                         cylinder(h = M5_nut_height, d = M5_nut_diameter, $fn = 6);
                         rotate([0, 0, i[3]*180])
                             translate([-M5_nut_diameter/2, 0, 0])
                                 cube([M5_nut_diameter, 20, M5_nut_height]);
+              
+                       //bridged screw hole
+                       translate([0, 0, -3+0.3])
+                            cylinder(h = 4, d = M5_screw_diameter, $fn = draft ? 20 : 100);
+
+                        //bridged screw hole
+                        translate([0, 0, -7-3])
+                            cylinder(h = 7, d = M5_screw_diameter, $fn = draft ? 20 : 100);
 
                     }
                 //brity
@@ -195,7 +204,7 @@ module 888_1015(draft){
                 }
 
                 // montazni otvor
-                translate([-30/2-50, -30/2, -rotor_head_bearing_a1-20-4])
+                translate([-30/2-50-2, -30/2, -rotor_head_bearing_a1-20-4])
                     cube([30+50, 30, 13]);
 
             }
