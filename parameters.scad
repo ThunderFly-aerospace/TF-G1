@@ -707,6 +707,7 @@ wheel_diameter = 110;
 screw_spring_distance = 15;
 material_around_bearing = 3;
 chasis_fork_thickness = 10;
+888_2025_distance_space = 0.5;
 stop_size = 5;
 stop_width = 5;
 
@@ -721,3 +722,8 @@ RT57208M25_D  = 12;
 RT57208M25_MR = 3;
 RT57208M25_LB = 4.5;
 RT57208M25_XC = 48;
+
+//KBRM-03
+//https://www.igus.cz/product/160
+//https://www.igus.cz/contentData/Products/ProductPictures/p160z22479_1050x700.jpg
+KBRM03_B = 6;
