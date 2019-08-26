@@ -30,7 +30,7 @@ module beam_side_holder(l = 20){
 }
 
 module 888_1006(){
-    beam_side_holder():
+    beam_side_holder();
 }
 
 888_1006();
