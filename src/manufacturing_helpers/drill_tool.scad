@@ -25,16 +25,16 @@ module drill_tool() {
                 cylinder (d= diameter, h= drill_tool_lenght+2, $fn= 50);
 
         // prostredni dira na vrtani
-        translate ([drill_tool_lenght/2, drill_tool_thickness+1, drill_tool_thickness/2])
+        translate ([drill_tool_lenght/2 + screw, drill_tool_thickness+1, drill_tool_thickness/2])
             rotate ([90, 0, 0])
                 cylinder (d= screw, h= drill_tool_thickness+2, $fn= 50);
 
-        //krajni diry na provrtani
-        translate ([drill_tool_lenght/2, drill_tool_thickness+1, drill_tool_thickness/2 + diameter/2 - screw/2])
+        //krajni diry na vrtani
+        translate ([drill_tool_lenght/2 - screw, drill_tool_thickness+1, drill_tool_thickness/2 + diameter/2 - screw/2])
             rotate ([90, 0, 0])
                 cylinder (d= screw, h= drill_tool_thickness+2, $fn= 50);
 
-        translate ([drill_tool_lenght/2, drill_tool_thickness+1, drill_tool_thickness/2 - diameter/2 + screw/2])
+        translate ([drill_tool_lenght/2 - screw, drill_tool_thickness+1, drill_tool_thickness/2 - diameter/2 + screw/2])
             rotate ([90, 0, 0])
                 cylinder (d= screw, h= drill_tool_thickness+2, $fn= 50);
 
