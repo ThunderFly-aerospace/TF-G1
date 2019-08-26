@@ -1,3 +1,4 @@
+// hlavni nosnik virniku
 include <../parameters.scad>
 
 
@@ -5,7 +6,7 @@ module beam_profile(l = 100){
     rail_length = 40;
 
     difference(){
-        translate([l/2, 0, 0])
+        translate([l/2, 0, -beam_thickness/2 + 5 + beam_min_wall])
             cube([l, beam_width, beam_thickness], center = true);
 
         for (i=[0,2])
@@ -35,7 +36,7 @@ module beam_profile(l = 100){
         translate([30, 0, 0]){
             for (m = [[0, 0, 0], [0, 1, 0]]) mirror(m)
                 for (i=[0:15]){
-                    translate([-global_clearance/2 + rail_length*i, 15, beam_thickness/2]){
+                    translate([-global_clearance/2 + rail_length*i, 12.5, 10/2 + beam_min_wall]){
                         // drazka pro matku
                         translate([0, -3, -2-M3_nut_height])
                             cube([rail_length, 6, M3_nut_height]);
@@ -50,7 +51,7 @@ module beam_profile(l = 100){
                     }
 
 
-                    translate([-global_clearance/2 + rail_length*i, 15, -beam_thickness/2]){
+                    translate([-global_clearance/2 + rail_length*i, 12.5, -10-10/2-beam_min_wall-beam_vertical_space_between_pipes]){
                         // drazka pro matku
                         translate([0, -3, 2])
                             cube([rail_length, 6, M3_nut_height]);
@@ -123,16 +124,28 @@ module beam_holes_patern(n = 1){
 
 
             // diry pro pricne tyce
-            for (j=[1, -1]) translate([5*j, 0, j*(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
-                rotate([90, 0, 0]) cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = 50);
+            for (j=[-1]) translate([10, 0, j*(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
+                rotate([90, 0, 0])
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = 50);
             }
 
-            for (k=[1,-1])
+            /* #for (k=[-1])
                 for (j=[0]) translate([5*k, j*(beam_main_pipe_distance/2-beam_main_pipe_thickness/2-2), 0]){
                     cylinder(d = M3_screw_diameter, h = beam_thickness, center = true, $fn = 50);
-                    translate([0, 0, k*(beam_main_pipe_thickness+beam_vertical_space_between_pipes) + screw_length/2]) cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
-                    translate([0, 0, k*(beam_main_pipe_thickness+beam_vertical_space_between_pipes) - screw_length/2 - beam_thickness]) cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
-                }
+                    translate([0, 0, k*(beam_main_pipe_thickness+beam_vertical_space_between_pipes) + screw_length/2])
+                        cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
+                    translate([0, 0, k*(beam_main_pipe_thickness+beam_vertical_space_between_pipes) - screw_length/2 - beam_thickness])
+                        cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
+                } */
+
+            // stredove montazni diry
+            for (j=[0]) translate([0, j*(beam_main_pipe_distance/2-beam_main_pipe_thickness/2-2), 0]){
+                cylinder(d = M3_screw_diameter, h = beam_thickness*2, center = true, $fn = 50);
+                translate([0, 0, 5 + beam_min_wall - 10])
+                    cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
+                translate([0, 0, -5 - beam_vertical_space_between_pipes - 10 - beam_min_wall - beam_thickness + 10])
+                    cylinder(d = M3_nut_diameter, h = beam_thickness, $fn = 6);
+            }
 
 
             // diry skrz podelnou trubku
@@ -143,7 +156,7 @@ module beam_holes_patern(n = 1){
             }
 
             // diry pro bocni pripevneni
-            for (j=[0, 1]) mirror([0, j, 0]) translate([patern/2, 0, 0]){
+            for (j=[0, 1]) mirror([0, j, 0]) translate([0, 0, 0]){
                 translate([0, beam_width/2, 0])
                     rotate([90, 0, 0])
                         cylinder(d = M4_screw_diameter, h = beam_width - beam_main_pipe_distance-12, center = true, $fn = 50);
@@ -156,11 +169,13 @@ module beam_holes_patern(n = 1){
                     cube([M3_nut_diameter, M3_nut_height, 50]);
             }
 
-            // stredove M4 diry
-            translate([patern/2, 0, 0]){
+            // M4 diry skrze pricne tyce
+            translate([patern/2-10, 0, -5-beam_vertical_space_between_pipes-5]){
                 cylinder(d = M4_screw_diameter, h = beam_thickness, center = true, $fn = 50);
-                translate([0, 0, screw_length/2]) cylinder(d = M4_nut_diameter, h = beam_thickness, $fn = 6);
-                translate([0, 0, -screw_length/2-beam_thickness]) cylinder(d = M4_nut_diameter, h = beam_thickness, $fn = 6);
+                translate([0, 0,screw_length/2])
+                    cylinder(d = M4_nut_diameter, h = beam_thickness, $fn = 6);
+                translate([0, 0, -screw_length/2-beam_thickness])
+                    cylinder(d = M4_nut_diameter, h = beam_thickness, $fn = 6);
             }
         }
 
