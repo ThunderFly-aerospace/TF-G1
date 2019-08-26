@@ -43,8 +43,8 @@ module 888_1026(draft)
     difference (){
         union(){
             hull(){
-                translate([0,-(depth/2),0])
-                    cube ([width/2,depth,height]);
+                translate([-10 -beam_vertical_space_between_pipes -beam_min_wall + 0.6,-(depth/2),0])
+                    cube ([beam_thickness,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])
                     rotate([0, engine_angle,0])
