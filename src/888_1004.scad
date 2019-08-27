@@ -158,15 +158,15 @@ module beam_holes_patern(n = 1){
 
             // diry pro bocni pripevneni
             for (j=[0, 1]) mirror([0, j, 0]) translate([0, 0, 0]){
-                translate([0, beam_width/2, 0])
+                translate([0, beam_width/2-0.5, 0])
                     rotate([90, 0, 0])
                         cylinder(d = M4_screw_diameter, h = beam_width - beam_main_pipe_distance-12, center = true, $fn = draft ?15:50);
 
-                translate([0, beam_width/2 - 8, 0])
+                translate([0, beam_width/2 - 5, 0])
                     rotate([90, 0, 0])
                         cylinder(d = M4_nut_diameter, h = M3_nut_height, $fn = 6);
 
-                translate([-M3_nut_diameter/2, beam_width/2 - 8 - M3_nut_height, 0])
+                translate([-M3_nut_diameter/2, beam_width/2 - 5 - M3_nut_height, 0])
                     cube([M3_nut_diameter, M3_nut_height, 50]);
             }
 
@@ -202,11 +202,9 @@ module beam_holes_patern(n = 1){
 }
 
 module 888_1004(){
-
     difference(){
         beam_profile(beam_length + engine_holder_beam_depth);
         beam_holes_patern((beam_length+engine_holder_beam_depth)/30);
-
     }
 }
 
