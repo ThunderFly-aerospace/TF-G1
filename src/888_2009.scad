@@ -3,9 +3,9 @@
 include <../parameters.scad>
 use <888_1004.scad>
 
-column_upper_diameter = 60;
-column_lower_diameter = 608_bearing_outer_diameter*2;
-column_height = 80;
+column_upper_diameter = 40;
+column_lower_diameter = 40;
+column_height = 40;
 
 joint_diameter = 40;
 screw_length = 10.8;
@@ -24,8 +24,13 @@ module 888_2009(){
             translate([-engine_holder_beam_depth-10, -(beam_width+10)/2, -0.1])
                 cube([engine_holder_beam_depth+10, beam_width+10, 0.1]);
 
-            translate([0, 0, -column_height]) cylinder (h=column_height, d=column_lower_diameter, $fn=50);
+            translate([0, 0, -column_height-5])
+                cylinder (h=column_height+5, d=column_lower_diameter, $fn=60);
         }
+
+        rotate([0, 5, 0])
+            translate([0, 0, -column_lower_diameter-50])
+                cylinder(d=column_lower_diameter+30, h=50, $fn=30);
 
 
         translate([-engine_holder_beam_depth + beam_patern/2, (beam_main_pipe_distance/2-beam_main_pipe_thickness-3), -beam_thickness/2]){
@@ -44,13 +49,13 @@ module 888_2009(){
         }
 
         translate([-engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/2]){
-            translate([0, 0, -30])
-                cylinder(d = M4_screw_diameter, h = 20, $fn = 20);
-            translate([0, 0, -10])
+            translate([0, 0, -20])
+                cylinder(d = M4_screw_diameter, h = 50, $fn = 20);
+            translate([0, 0, 0])
                 rotate(30)
                     cylinder(d = M4_nut_diameter, h = M4_nut_height, $fn = 6);
             rotate(-90)
-                translate([-M4_nut_diameter/2, 0, -10])
+                translate([-M4_nut_diameter/2, 0, 0])
                     cube([M4_nut_diameter, 50, M4_nut_height]);
         }
 
@@ -67,7 +72,7 @@ module 888_2009(){
                     cube ([column_upper_diameter/2, M5_nut_pocket, M5_nut_height ]);
                 }
 
-                    /* difference() {
+                    #translate([0, 0, -80]) difference() {
                         union() {
                             translate([0, 0, -5])
                             cylinder(d=joint_diameter, h=height+5, $fn=100);
@@ -129,7 +134,7 @@ module 888_2009(){
 
                         translate([screw_distance/-2, 0, -10])
                             cylinder(d=M4_screw_diameter+5, h=height+5, $fn=20);
-                    } */
+                    }
 
     }
 }
