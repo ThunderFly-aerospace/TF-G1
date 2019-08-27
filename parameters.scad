@@ -24,7 +24,11 @@ pilon_pipe_diameter_inner = carbon_pipe_10_inner_diameter;
 
 beam_vertical_space_between_pipes = 1;
 beam_min_wall = 3;
+
+// tloustka podlozky, a tloustka podlozky od stredu smerem nahoru/dolu
 beam_thickness = 2*10 + beam_vertical_space_between_pipes + 2*beam_min_wall;
+beam_thickness_above = 5 + beam_min_wall;
+beam_thickness_below = 5+ beam_vertical_space_between_pipes + 10 + beam_min_wall;
 //beam_thickness = 30;
 beam_width = 80;
 beam_length = 490;
