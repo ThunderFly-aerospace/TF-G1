@@ -113,7 +113,7 @@ module 666_1028(draft){
                                             }
                                             
                                     //vystužení pro směrovku
-                                    translate([150 - Rudder_height/ 2, 0, 75])
+                                    translate([150 - Rudder_height/ 2, 0, rudder_full_height / 2])
                                         cube([Rudder_height + 8, Rudder_depth + gap_width, Rudder_length + infill_wall_thickness * 2], center = true);
                                             
                                     //vyztužení pro upevnění serva
@@ -223,15 +223,15 @@ module 666_1028(draft){
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth + 2, d = M2_screw_diameter, $fn = 100, center = true);
                              
-                translate([servo_x_offset, (Rudder_depth + servo_mount_wall_thickness / 2), tail_pipe_z_position - servo_height / 2 - mount_height / 2 - infill_wall_thickness])
+                translate([servo_x_offset, side_choose * Rudder_depth, tail_pipe_z_position - servo_height / 2 - mount_height / 2 - infill_wall_thickness])
                     cube([servo_length, Rudder_depth * 2, servo_height], center = true);   
                     
-                translate([servo_x_offset, - (Rudder_depth + servo_mount_wall_thickness / 2), tail_pipe_z_position - servo_height / 2 - mount_height / 2 - infill_wall_thickness])
+                translate([servo_x_offset, - side_choose * (Rudder_depth + servo_mount_wall_thickness), tail_pipe_z_position - servo_height / 2 - mount_height / 2 - infill_wall_thickness])
                     cube([servo_length, Rudder_depth * 2, servo_height], center = true);   
                     
                 //otvor pro dráty
-                translate([servo_x_offset + 13.5, 0, tail_pipe_z_position - 7.5])
-                    cube([8, 8, 25], center = true);
+                translate([servo_x_offset + 13.5, 0, tail_pipe_z_position - 10])
+                    cube([5, 8, 20], center = true);
         }
     }
 }
