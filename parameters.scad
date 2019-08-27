@@ -29,7 +29,7 @@ beam_thickness = 2*10 + beam_vertical_space_between_pipes + 2*beam_min_wall;
 beam_width = 80;
 beam_length = 490;
 beam_edge_angle = 60/2;
-beam_division = [120, 240, 360];
+beam_division = [0, 145, 275, 417, 1000];
 
 beam_main_pipe_distance = 45;
 beam_main_pipe_thickness = carbon_pipe_10_outer_diameter;
