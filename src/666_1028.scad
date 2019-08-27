@@ -32,8 +32,12 @@ servo_screws_height = 15;
 servo_mount_wall_thickness = 2;
 
 //upevnovaci trubka
-mount_height = 30;
+mount_height = 32;
 mount_length = 40;
+mount_wing_thickness = 5;
+
+//vyska vyztuhy do tvaru A
+shape_A_mount_thickness = 30;
 
 draft = true;
 
@@ -78,11 +82,11 @@ module 666_1028(draft){
                                             
                                     //vyztužení pro upevnění do tvaru A
                                     translate([80, 0, 155])
-                                        cube([200, 20, 20], center = true);
+                                        cube([200, 20, shape_A_mount_thickness], center = true);
                                             
                                     //vyztužní pro upevnění na trubku
                                     translate([20 + infill_wall_thickness, 0, tail_pipe_z_position])
-                                            cube([40 + infill_wall_thickness * 2, Rudder_depth + 2, 30 + infill_wall_thickness * 2], center = true); 
+                                            cube([mount_length + infill_wall_thickness * 2, Rudder_depth + 2, mount_height + infill_wall_thickness * 2], center = true); 
                                     
                                             
                                     // vyztužení pro čepy
@@ -119,7 +123,7 @@ module 666_1028(draft){
                     //otvory pod airfoil:
                         
                 //otvory pro šrouby pro upevnění trubky
-                translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 10])
+                translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 12])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
@@ -127,7 +131,7 @@ module 666_1028(draft){
                                 cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 100);
                             cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
                         }
-                translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 10])
+                translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 12])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
@@ -135,7 +139,7 @@ module 666_1028(draft){
                                 cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 100);
                             cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
                         }
-                translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 10])
+                translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 12])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
@@ -143,7 +147,7 @@ module 666_1028(draft){
                                 cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 100);
                             cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
                         }
-                translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 10])
+                translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 12])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
@@ -159,8 +163,8 @@ module 666_1028(draft){
                 //otvor pro upevnění na trubku
                 translate([20, 0, tail_pipe_z_position])
                     union() {
-                        cube([40 + infill_wall_thickness * 2, Rudder_depth + 2, 14], center = true);
-                        cube([40 + infill_wall_thickness * 2, 5, 30], center = true);
+                        cube([mount_length + infill_wall_thickness * 2, Rudder_depth * 2, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 4], center = true);
+                        cube([mount_length + infill_wall_thickness * 2, mount_wing_thickness, mount_height], center = true);
                         translate([20, 0, 0])
                             rotate([0, 90, 0])
                                 cylinder(h = 10, d = 8, center = true);
@@ -204,7 +208,7 @@ module 666_1028(draft){
         		    cube([40, 20, 150 + 10], center = true);
                             
             //vyříznutí děr pro upevnění do tvaru A
-            translate([30, 0, 155])
+            translate([30, 0, 150])
                 rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                     union() {
 					    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -215,7 +219,7 @@ module 666_1028(draft){
                                 cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
                             }
                     }
-            translate([80, 0, 155])
+            translate([80, 0, 150])
                 rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                     union() {
 					    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -420,32 +424,32 @@ module 666_1028_mount(draft){
             //tělo dílu:
             intersection(){
                 airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 160, open = false);
-                translate([20, 0, tail_pipe_z_position])
+                translate([mount_length / 2, 0, tail_pipe_z_position])
                     union() {                    
-                        cube([40, Rudder_depth + 2, 14 - global_clearance * 2], center = true);
-                        cube([40, 5 - global_clearance * 2, 30 - global_clearance * 2], center = true);
+                        cube([mount_length, Rudder_depth + 2, tube_for_undercarriage_outer_diameter + 4], center = true);
+                        cube([mount_length, mount_wing_thickness - global_clearance * 2, mount_height - global_clearance * 2], center = true);
                     }
                 }
-            translate([20, 0, tail_pipe_z_position])
+            translate([mount_length / 2, 0, tail_pipe_z_position])
                 rotate([0, 90, 0])
-                    cylinder(h = 40, d = tube_for_undercarriage_outer_diameter + global_clearance + 2, center = true, $fn = 100);
+                    cylinder(h = mount_length, d = tube_for_undercarriage_outer_diameter + global_clearance + 2, center = true, $fn = 100);
             }
         
         //otvor pro trubku
-        translate([20, 0, tail_pipe_z_position])
+        translate([mount_length / 2, 0, tail_pipe_z_position])
             rotate([0, 90, 0])
-                cylinder(h = 40 + 2, d = tube_for_undercarriage_outer_diameter + global_clearance, center = true, $fn = 100);
+                cylinder(h = mount_length + 2, d = tube_for_undercarriage_outer_diameter + global_clearance, center = true, $fn = 100);
         //otvory pro šrouby    
-        translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 10])
+        translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 12])
             rotate([side_choose * 90, 0, 0])
                 cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
-        translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 10])
+        translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 12])
             rotate([side_choose * 90, 0, 0])
                 cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
-        translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 10])
+        translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 12])
             rotate([side_choose * 90, 0, 0])
                 cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
-        translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 10])
+        translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 12])
             rotate([side_choose * 90, 0, 0])
                 cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
     }
