@@ -141,6 +141,25 @@ module 888_1026(draft)
             }
         }
 
+        // Otvor pro pripeveni kolecka
+        translate([0, 0, 0]){
+            translate([0, 0, engine_holder_beam_depth - beam_patern*1.25])
+                rotate([0, 90, 0])
+                    cylinder(d = M4_screw_diameter, h = 100, center = true, $fn = 20);
+            translate([beam_thickness_above + 5, 0, engine_holder_beam_depth - beam_patern*1.25])
+                rotate([0, 90, 0])
+                    cylinder(d = M4_nut_diameter, h = 100, $fn = 50);
+        }
+        /*
+        #translate([engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/2]){
+            rotate([0, 90, 0])
+                cylinder(d = M4_screw_diameter, h = 130, $fn = 20);
+            translate([0, 0, 10+engine_holder_beam_depth])
+                rotate([0, 90, 0])
+                    cylinder(d = M4_nut_diameter, h = 100, $fn = 30);
+            }
+ */
+
         /* translate([0,depth/2 + global_clearance/2,7.5])
     	   rotate([90,0,0])
     	       cylinder(h = depth + global_clearance, r = M3_screw_diameter/2, $fn = draft ? 10 : 20);
