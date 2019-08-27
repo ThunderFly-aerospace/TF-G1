@@ -11,23 +11,27 @@ use <888_1031.scad>
 
 difference(){
     union(){
-translate([-engine_holder_beam_depth, 0, 0])
-    888_1004();
-888_1005();
 
+#translate([-engine_holder_beam_depth, 0, 0])
+    888_1004();
+
+#888_1005();
+
+// rotorova hlava
 translate([main_pilon_position, 0, height_of_vertical_tube])
 rotate(180)
     888_1029();
 
-translate([-engine_holder_beam_depth+beam_patern*9.5, 0, beam_thickness/2])
-rotate(180)
-    888_1030();
+// stredni patka pro pripevneni pylonu
+translate([-engine_holder_beam_depth+beam_patern*9.25, 0, beam_thickness/2])
+    rotate(180)
+        888_1030();
 
-translate([-engine_holder_beam_depth+beam_patern*6, 0, 0])
+// bocni patky pro pripevneni pylonu
+translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
     rotate(180)
         888_1031();
-
-translate([-engine_holder_beam_depth+beam_patern*6, 0, 0])
+translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
     mirror([0, 1, 0])
     rotate(180)
         888_1031();
