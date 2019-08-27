@@ -35,7 +35,7 @@ translate([-engine_holder_beam_depth+beam_patern*6, 0, 0])
 // motor
 //color([0.8, 0.8, 0.8, 0.2])
 translate([-global_clearance, 0, 0]) rotate([0,-90,0]) 888_1026();
-translate([-global_clearance, 0, 0]) rotate([0, 0,0]) 888_2009();
+//translate([-global_clearance, 0, 0]) rotate([0, 0,0]) 888_2009();
 
 
 %translate([main_pilon_position, 0, 0])

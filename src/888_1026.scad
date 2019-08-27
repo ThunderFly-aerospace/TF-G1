@@ -19,7 +19,7 @@ module 888_1026(draft)
 
     width = beam_thickness+2*2;
     depth = beam_width+10;   // šířka plechu držáku motoru
-    height = engine_holder_beam_depth+3;
+    height = engine_holder_beam_depth+10;
     engine_displacement = maximum_printable_size -  1.2 * height;
     //engine_displacement = 60;
     magnet_displacement = 50;
@@ -43,7 +43,7 @@ module 888_1026(draft)
     difference (){
         union(){
             hull(){
-                translate([-10 -beam_vertical_space_between_pipes -beam_min_wall + 0.6,-(depth/2),0])
+                translate([-5 -10 -beam_vertical_space_between_pipes -beam_min_wall +0.01,-(depth/2),0])
                     cube ([beam_thickness,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])
@@ -123,7 +123,7 @@ module 888_1026(draft)
 
     	//screw
 
-
+        // diry pro pripevneni drzaku motoru k nosniku
         for(i = [-1, 1]){
             translate([0, i*(beam_main_pipe_distance/2-beam_main_pipe_thickness-3), 0]){
                 translate([0, 0, engine_holder_beam_depth - beam_patern/2])
@@ -134,7 +134,7 @@ module 888_1026(draft)
                         cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
             }
 
-            translate([15, i*10, 0]){
+            translate([-10, i*beam_main_pipe_distance/2, -5]){
                 cylinder(d = M4_screw_diameter, h = 100, $fn = 20);
                 translate([0, 0, 10+engine_holder_beam_depth])
                     cylinder(d = M4_nut_diameter, h = 100, $fn = 30);
