@@ -18,7 +18,7 @@ module 888_1026(draft)
 {
 
     width = beam_thickness+2*2;
-    depth = beam_width+10;   // šířka plechu držáku motoru
+    depth = beam_width;   // šířka plechu držáku motoru
     height = engine_holder_beam_depth+10;
     engine_displacement = maximum_printable_size -  1.2 * height;
     //engine_displacement = 60;
@@ -120,6 +120,9 @@ module 888_1026(draft)
         translate([0, 0, engine_holder_beam_depth])
             rotate([0, 90, 0])
                 beam_plug(60);
+
+        translate([-50, -beam_width/2-1, engine_holder_beam_depth-100+global_clearance])
+            cube([50, beam_width+2, 100]);
 
     	//screw
 

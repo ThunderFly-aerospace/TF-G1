@@ -3,7 +3,7 @@
 include <../parameters.scad>
 use <888_1004.scad>
 
-column_upper_diameter = 40;
+column_upper_diameter = 20;
 column_lower_diameter = 40;
 column_height = 40;
 
@@ -12,25 +12,59 @@ screw_length = 10.8;
 height = 25;
 washer_diameter = 20;
 screw_distance = 42.5;
-stops_overhang = 3;
+stops_overhang = 5;
 layer_height = 0.2;
 
+shoulder_screw_length = 10; // jak hluboko je licovani v tomto dile
 module 888_2009(){
     difference(){
 
         //sloupek
-        hull(){
+        union(){
+            hull(){
+                translate([-engine_holder_beam_depth-10, -(beam_width-22)/2, -0.1])
+                    cube([engine_holder_beam_depth-10, beam_width-22, 0.1]);
+                translate([0, 0, -5])
+                    //rotate([0, 5, 0])
+                        cylinder (h=5, d=column_upper_diameter, $fn=60);
+                #translate([0, 0, -column_height])
+                        rotate([0, 5, 0])
+                            cylinder (h=1, d=column_lower_diameter, $fn=60);
+            }
+            rotate([0, 5, 0])
+                rotate([0, 0, -max_angle_of_ratation/2])
+                    translate([-column_lower_diameter/2-5, 0 + stop_width/2, -column_height-stops_overhang])
+                        cube([10, 5, 30]);
+            rotate([0, 5, 0])
+                rotate([0, 0, max_angle_of_ratation/2])
+                    translate([-column_lower_diameter/2-5, -5 - stop_width/2, -column_height-stops_overhang])
+                        cube([10, 5, 30]);
 
-            translate([-engine_holder_beam_depth-10, -(beam_width+10)/2, -0.1])
-                cube([engine_holder_beam_depth+10, beam_width+10, 0.1]);
-
-            translate([0, 0, -column_height-5])
-                cylinder (h=column_height+5, d=column_lower_diameter, $fn=60);
         }
 
-        rotate([0, 5, 0])
-            translate([0, 0, -column_lower_diameter-50])
-                cylinder(d=column_lower_diameter+30, h=50, $fn=30);
+        // odcteni sikme plochy
+        translate([0, 0, -column_height])
+            rotate([0, 5, 0]){
+            //translate([0, 0, -column_lower_diameter]){
+
+                translate([0, 0, -50])
+                    cylinder(d=column_lower_diameter+global_clearance, h=50, $fn=50);
+
+                // Otvory pro licovany sroub
+                translate([0, 0, -1])
+                    cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
+
+                translate([0, 0, shoulder_screw_length + layer])
+                rotate([0, 0, 30])
+                    cylinder(d = M6_nut_diameter, h = M6_nut_height, $fn = 6);
+
+                translate([0, 0, shoulder_screw_length + layer])
+                    cylinder(d = M6_screw_diameter, h = 15, $fn = 50);
+
+                translate([0, -M6_nut_diameter/2, shoulder_screw_length + layer])
+                    cube([50, M6_nut_diameter, M6_nut_height]);
+            }
+
 
 
         translate([-engine_holder_beam_depth + beam_patern/2, (beam_main_pipe_distance/2-beam_main_pipe_thickness-3), -beam_thickness/2]){
@@ -48,8 +82,8 @@ module 888_2009(){
                 cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
         }
 
-        translate([-engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/2]){
-            translate([0, 0, -20])
+        translate([-engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/3]){
+            translate([0, 0, -10])
                 cylinder(d = M4_screw_diameter, h = 50, $fn = 20);
             translate([0, 0, 0])
                 rotate(30)
@@ -59,82 +93,6 @@ module 888_2009(){
                     cube([M4_nut_diameter, 50, M4_nut_height]);
         }
 
-
-        //dira pro hlavni M5 osou
-        translate([0, 0, -1-column_height])
-            cylinder(h=column_height-80, d=M5_screw_diameter, $fn=50);
-
-        //kapsa pro M5 matici
-        rotate([0, 0, 90])
-            translate([0, -M5_nut_pocket/2, column_height*1.5])
-                hull() {
-                    translate([0,M5_nut_pocket/2,0]) cylinder(h=M5_nut_height, d=M5_nut_diameter, $fn=6);
-                    cube ([column_upper_diameter/2, M5_nut_pocket, M5_nut_height ]);
-                }
-
-                    #translate([0, 0, -80]) difference() {
-                        union() {
-                            translate([0, 0, -5])
-                            cylinder(d=joint_diameter, h=height+5, $fn=100);
-
-                            hull() {
-                                translate([0, 0, height/2])
-                                    cylinder(d=joint_diameter, h=height/2, $fn=100);
-
-                                translate([0, 0, height-5])
-                                    cylinder(d=screw_distance+10, h=5, $fn=100);
-                            }
-
-                            //zarážka
-                            hull() {
-                                translate([stop_width/2, 0, -stops_overhang])
-                                    rotate([0, 0, max_angle_of_ratation/-2])
-                                        translate([0, joint_diameter/2-10, 0])
-                                            cube([8, stop_size+10, 10]);
-
-                                translate([stop_width/2, 0, -stops_overhang+10])
-                                    rotate([0, 0, max_angle_of_ratation/-2])
-                                        translate([0, joint_diameter/2-10, 0])
-                                            cube([8, stop_size, 10]);
-                            }
-                            //zarážka
-                            hull() {
-                                translate([stop_width/-2, 0, -stops_overhang])
-                                    rotate([0, 0, max_angle_of_ratation/2])
-                                        translate([-8, joint_diameter/2-10, 0])
-                                            cube([8, stop_size+10, 10]);
-
-                                translate([stop_width/-2, 0, -stops_overhang+10])
-                                    rotate([0, 0, max_angle_of_ratation/2])
-                                        translate([-8, joint_diameter/2-10, 0])
-                                            cube([8, stop_size, 10]);
-                            }
-                        }
-                        rotate([5, 0, 0])
-                        translate([0, 0, -10])
-                            cylinder(d=joint_diameter+1, h=10, $fn=50);
-
-                        //šroub uchycení podvozku
-                        rotate([5, 0, 0]) {
-                            translate([0, 0, -0.1])
-                                cylinder(d=M8_screw_diameter, h=screw_length-layer_height, $fn=20);
-                            translate([0, 0, screw_length])
-                                cylinder(d=washer_diameter, h=100, $fn=40);
-                        }
-
-                        //šrouby pro připevnění k motorovému dílu
-                        translate([screw_distance/2, 0, 0])
-                            cylinder(d=M4_screw_diameter, h=100, $fn=20);
-
-                        translate([screw_distance/-2, 0, 0])
-                            cylinder(d=M4_screw_diameter, h=100, $fn=20);
-
-                        translate([screw_distance/2, 0, -10])
-                            cylinder(d=M4_screw_diameter+5, h=height+5, $fn=20);
-
-                        translate([screw_distance/-2, 0, -10])
-                            cylinder(d=M4_screw_diameter+5, h=height+5, $fn=20);
-                    }
 
     }
 }
