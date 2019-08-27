@@ -1,16 +1,44 @@
 include <../parameters.scad>
 
-module kardan_brit_top_oposite_model(lenght)
+module kardan_center_part_model()
 {
-    difference(){
-        translate([0,0,lenght/2-rotor_head_wall_height/2-rotor_head_plate_thickness])
-            cube([lenght,rotor_head_brit_width+rotor_head_cardan_clearance,lenght], center=true);
-        translate([0,0,-(rotor_head_wall_height+rotor_head_plate_thickness)*sqrt(2)])
-            rotate([0,45,0])
-                cube(2*(rotor_head_wall_height+rotor_head_plate_thickness), center=true);
-            
-        } 
+    
+    b=2*rotor_head_wall_height;
+
+    inner_x=rotor_head_kardan_inner_x;
+    inner_y=rotor_head_kardan_inner_y;
+    plate_thickness=rotor_head_plate_thickness;
+    brit_width=rotor_head_brit_width;
+    wall_height=rotor_head_wall_height;
+    kardan_clearance=rotor_head_cardan_clearance;
+    
+    outer_x = inner_x + 2*brit_width;
+    outer_y = inner_y + 2*brit_width+2*kardan_clearance;
+    outer_height = wall_height + plate_thickness ;
+    
+    translate([0,0,-plate_thickness-wall_height/2])
+        difference(){     
+            translate ([0,0,outer_height/2]) {
+                cube([outer_x,outer_y,outer_height],center = true);
+                }
+            /*translate([0,0,wall_height + plate_thickness]){
+                cube([inner_x,inner_y,wall_height*2],center = true);
+                } */      
+
+            translate([0,-b/2-inner_y/2+0.01,-(b * sqrt(2) / 2) + plate_thickness+wall_height/2]){
+                rotate ([0,45,0]){
+                    cube(b,center=true);
+                    }
+                }
+            translate([0,b/2+inner_y/2-0.01,-(b * sqrt(2) / 2) + plate_thickness+wall_height/2]){
+                rotate ([0,45,0]){
+                    cube(b,center=true);
+                    }
+                }           
+            }
 }
+
+
 module 888_1020(draft = true){
 
 
@@ -172,52 +200,37 @@ module 888_1020(draft = true){
 
 
             //otvor por kardan
-            translate([back_part_crop/2-wall_thickness,0,plate_size_z+25])
+           /* translate([back_part_crop/2-wall_thickness,0,plate_size_z+25])
                 cube([plate_size_x - motor_diameter - back_part_crop,
                       rotor_head_kardan_inner_y,
-                      50], center=true);
-                      
+                      50], center=true);*/
+           
             //brity
+   
+           translate([0,0,plate_size_z+brit_height])
+                rotate([0,rotor_head_pitch_stop,0])
+                    kardan_center_part_model();
+                      
+           translate([0,0,plate_size_z+brit_height])
+                rotate([0,-rotor_head_pitch_stop,0])
+                    kardan_center_part_model();
+           
             xdst=(rotor_head_kardan_inner_x/2+rotor_head_brit_width-(rotor_head_wall_height/2+rotor_head_plate_thickness)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
             xsize=(plate_size_x - motor_diameter)/2-(rotor_head_kardan_inner_x/2+rotor_head_brit_width)-global_clearance;
-            
-            translate([0,(rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,brit_height+plate_size_z])
-                rotate([0,rotor_head_pitch_stop,0])
-                    kardan_brit_top_oposite_model(rotor_head_kardan_inner_x+2*rotor_head_brit_width);
-                    
-            translate([0,(rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,brit_height+plate_size_z])
-                rotate([0,-rotor_head_pitch_stop,0])
-                    kardan_brit_top_oposite_model(rotor_head_kardan_inner_x+2*rotor_head_brit_width);
-                    
+                                
             translate([-xdst-15,
-                        (rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,
+                        0,
                         15+plate_size_z])
-                    cube([30,rotor_head_brit_width+rotor_head_cardan_clearance,30], center=true);
+                    cube([30,
+                    rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
+                    30], center=true);
             
             translate([xdst+xsize/2,
-                        (rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,
+                        0,
                         15+plate_size_z])
-                    cube([xsize,rotor_head_brit_width+rotor_head_cardan_clearance,30], center=true);
-        
-        
-            translate([0,-(rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,brit_height+plate_size_z])
-                rotate([0,rotor_head_pitch_stop,0])
-                    kardan_brit_top_oposite_model(rotor_head_kardan_inner_x+2*rotor_head_brit_width);
-                    
-            translate([0,-(rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,brit_height+plate_size_z])
-                rotate([0,-rotor_head_pitch_stop,0])
-                    kardan_brit_top_oposite_model(rotor_head_kardan_inner_x+2*rotor_head_brit_width);
-                    
-            translate([-xdst-15,
-                        -(rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,
-                        15+plate_size_z])
-                    cube([30,rotor_head_brit_width+rotor_head_cardan_clearance,30], center=true);
-            
-            translate([xdst+xsize/2,
-                        -(rotor_head_kardan_inner_y+rotor_head_brit_width+rotor_head_cardan_clearance-0.01)/2,
-                        15+plate_size_z])
-                    cube([xsize,rotor_head_brit_width+rotor_head_cardan_clearance,30], center=true);
-                    
+                    cube([xsize,
+                        rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
+                        30], center=true);                     
                     
             translate([(plate_size_x - motor_diameter - back_part_crop)/2+5,0,brit_height+plate_size_z])
                 rotate([0,40,0])
@@ -245,4 +258,5 @@ module 888_1020(draft = true){
 }
 
 888_1020(false);
-//kardan_brit_top_oposite_model(50);
+//translate([0,0,40])
+   // kardan_center_part_model();
