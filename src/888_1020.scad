@@ -74,6 +74,7 @@ module 888_1020(draft = true){
 
     brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
     
+    
     rotor_ax_neck_diameter=rotor_head_bearing_d+2;
     rotor_ax_neck_height=brit_height-(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
     rotor_ax_bearing_ring_h=3;
@@ -152,6 +153,9 @@ module 888_1020(draft = true){
             translate([motor_distance, 0, -global_clearance/2-10])
                 cylinder(d = motor_puller_diameter, h = 50, $fn = draft ? 10 : 100);
 
+            //misto pro motor
+            translate([motor_distance,0,plate_size_z+motor_sink])
+                cylinder(d=motor_diameter, h=20,$fn = draft ? 10 : 100);
 
             // Otvory pro pridelani motoru
             translate([motor_distance, 0, -global_clearance/2 ])
@@ -192,11 +196,15 @@ module 888_1020(draft = true){
             translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, -global_clearance/2])
                 cube([hall_length, hall_width, hall_thickness+global_clearance]);
 
-
-            translate([hall_distance+hall_length_offset+hall_length/2, 0, hall_thickness])
+            difference(){
+                translate([hall_distance+hall_length_offset+hall_length/2, 0, hall_thickness])
                     rotate([0,40,0])
                         translate([-1.5,0,0])
                             cube([3, 6, 50], center=true);
+                
+                 translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, 0])
+                cube([hall_length, hall_width, hall_thickness+global_clearance]);
+            }
 
 
             //otvor por kardan
