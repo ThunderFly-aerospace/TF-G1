@@ -178,7 +178,7 @@ module 888_1020(draft = true){
                     cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
 
 
-            translate([servo_join_x, -servo_join_y/2 + 5,  M3_nut_pocket/2 + servo_joint_z])
+            translate([servo_join_x, -servo_join_y/2 + 5,  -M3_nut_pocket/2 + servo_joint_z])
                 cube([plate_size_z*5, M3_nut_height, M3_nut_pocket]);
 
             translate([servo_join_x, servo_join_y/2 - 20, servo_joint_z])
@@ -189,7 +189,7 @@ module 888_1020(draft = true){
                 rotate([-90, 0, 0])
                     cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
 
-            translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, M3_nut_pocket/2 + servo_joint_z])
+            translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, -M3_nut_pocket/2 + servo_joint_z])
                 cube([plate_size_z*5, M3_nut_height, M3_nut_pocket]);
 
             //Otvor na hallovu sondu
