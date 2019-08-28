@@ -16,8 +16,8 @@ module kardan_brit_oposite_model(lenght)
         translate([0,0,-rotor_head_wall_height*sqrt(2)])
             rotate([45,0,0])
                 cube(2*rotor_head_wall_height, center=true);
-            
-        } 
+
+        }
 }
 
 
@@ -155,20 +155,25 @@ module 888_1015(draft){
                     [rotor_head_bearing_m/2, -rotor_head_bearing_m/2, -25, 1]]) {
                     translate(i+[0,0,10]){
                         //bridged screw hole
-                        translate([0,0,M5_nut_height+0.3])
+                        translate([0,0,-M5_nut_height/2 + layer_thickness])
                             cylinder(h = 30, d = M5_screw_diameter, $fn = draft ? 50 : 100);
-                        cylinder(h = M5_nut_height, d = M5_nut_diameter, $fn = 6);
-                        rotate([0, 0, i[3]*180])
-                            translate([-M5_nut_diameter/2, 0, 0])
-                                cube([M5_nut_diameter, 20, M5_nut_height]);
-              
-                       //bridged screw hole
-                       translate([0, 0, -3+0.3])
-                            cylinder(h = 4, d = M5_screw_diameter, $fn = draft ? 20 : 100);
 
-                        //bridged screw hole
-                        translate([0, 0, -7-3])
-                            cylinder(h = 7, d = M5_screw_diameter, $fn = draft ? 20 : 100);
+                        translate([0,0,-1.5*M5_nut_height])
+                        {
+                            rotate([0,0,30])
+                                cylinder(h = M5_nut_height, d = M5_nut_diameter, $fn = 6);
+                            rotate([0, 0, i[3]*180])
+                                translate([-M5_nut_pocket/2, 0, 0])
+                                    cube([M5_nut_pocket, 20, M5_nut_height]);
+
+                            //bridged screw hole
+                            translate([0, 0, -M5_nut_pocket/2])
+                                cylinder(h = M5_nut_pocket, d = M5_screw_diameter, $fn = draft ? 20 : 100);
+
+                            /*//bridged screw hole
+                            translate([0, 0, -7-3])
+                                cylinder(h = 7, d = M5_screw_diameter, $fn = draft ? 20 : 100);*/
+                        }
 
                     }
                 //brity
@@ -190,7 +195,7 @@ module 888_1015(draft){
                    cube([100,70,30], center=true);
                 translate([0,-rotor_head_bearing_width/2-35,0])
                    cube([100,70,30], center=true);
-                    
+
                 //elegance
                 translate([(rotor_head_bearing_width+global_clearance)/2+1.5*rotor_head_cardan_clearance+rotor_head_brit_width,0,0])
                 translate([35*sqrt(2)+1,0,0])
@@ -217,4 +222,3 @@ module 888_1015(draft){
 888_1015(draft);
 
 //kardan_brit_oposite_model(50);
-
