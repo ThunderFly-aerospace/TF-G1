@@ -230,8 +230,12 @@ module 666_1028(draft){
                     cube([servo_length, Rudder_depth * 2, servo_height], center = true);   
                     
                 //otvor pro dráty
-                translate([servo_x_offset + 13.5, 0, tail_pipe_z_position - 10])
-                    cube([5, 8, 20], center = true);
+                translate([servo_x_offset + 13.5, 0, tail_pipe_z_position - 15])
+                    cube([8, 8, 15], center = true);
+                    
+                translate([servo_x_offset + 7, 0, tail_pipe_z_position - 5])
+                    rotate([90, 0, 0])
+                        cube([8, 8, 8], center = true);
         }
     }
 }
