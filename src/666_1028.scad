@@ -51,6 +51,7 @@ module 666_1028(side_choose = -1, draft){
     wall_thickness = 0.65;
 
     rotate([0,0,90])  {
+        
         union() {
             difference(){//diff
                 union(){
@@ -236,6 +237,10 @@ module 666_1028(side_choose = -1, draft){
                     translate([servo_x_offset + 7, 0, tail_pipe_z_position - 5])
                         rotate([90, 0, 0])
                             cube([8, 8, 8], center = true);
+    
+                    //otvor pro vykousnuti směrovky
+                    translate([150 - Rudder_height - 2.5, 0, 75])
+                        cube([1, Rudder_depth + gap_width, Rudder_length], center = true); 
             }
         }
         
