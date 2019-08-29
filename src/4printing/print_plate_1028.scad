@@ -3,7 +3,10 @@ use <../666_1028.scad>
 
 draft = false;
 
-666_1028(draft);
+666_1028(side_choose = 1, draft = draft);
+
+translate([40,0,0])
+    666_1028(side_choose = -1, draft = draft);
 
 
 // plochy pro zlepšení adheze k podložce při tisku
@@ -12,8 +15,3 @@ draft = false;
 
 //translate ([0,-35,0])
 //	cube ([30,70,0.3]);
-
-
-
-
-
