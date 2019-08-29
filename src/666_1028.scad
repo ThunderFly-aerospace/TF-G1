@@ -127,6 +127,16 @@ module 666_1028(side_choose = -1, draft){
                 //otvor pro směrovku
                 translate([150 - Rudder_height/ 2, 0, 75])
                     cube([Rudder_height + 6, Rudder_depth + gap_width, Rudder_length], center = true);
+
+                //otvor pro upevnění na trubku
+                translate([20, 0, tail_pipe_z_position])
+                    union() {
+                        cube([mount_length + infill_wall_thickness * 2, Rudder_depth * 2, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 4], center = true);
+                        cube([mount_length + infill_wall_thickness * 2, mount_wing_thickness, mount_height], center = true);
+                        translate([20, 0, 0])
+                            rotate([0, 90, 0])
+                                cylinder(h = 10, d = 8, center = true);
+                    }
                 }
             }
 
@@ -197,16 +207,6 @@ module 666_1028(side_choose = -1, draft){
                         translate([0, 0, Rudder_depth + 2 - M3_nut_height])
                             cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 100);
                         cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
-                    }
-
-                //otvor pro upevnění na trubku
-                translate([20, 0, tail_pipe_z_position])
-                    union() {
-                        cube([mount_length + infill_wall_thickness * 2, Rudder_depth * 2, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 4], center = true);
-                        cube([mount_length + infill_wall_thickness * 2, mount_wing_thickness, mount_height], center = true);
-                        translate([20, 0, 0])
-                            rotate([0, 90, 0])
-                                cylinder(h = 10, d = 8, center = true);
                     }
 
 
@@ -466,8 +466,8 @@ module 666_1028_mount(draft){
         666_1028_rudder(draft);
 */
 
-rotate([0,0 ,90])
-    666_1028_mount(draft);
+//rotate([0,0 ,90])
+    //666_1028_mount(draft);
 
 rotate([0,0 ,90])
     666_1028_rudder_flightgear(draft);
