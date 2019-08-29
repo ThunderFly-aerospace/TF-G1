@@ -654,7 +654,7 @@ chassis_wheelbase = 650;        // rozvor kolecek
 chassis_height = 200;           // vyska podvozku
 chassis_baselength_r = 100;       // podelna roztec podvozku dozade
 chassis_baselength_f = 100;       // podelna roztec podvozku dopredu
-chassis_bearing_distance = 50;   // vzdalenost kulovych lozisek na podlozek
+chassis_bearing_distance = 60;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 300;//vzdalenost prichyceni tlumicu na pricne tyci
 chassis_camber = -3;    //Odklon kola
 

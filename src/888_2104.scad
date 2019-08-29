@@ -3,12 +3,17 @@ use <888_2013.scad>
 use <888_2016.scad>
 use <888_2017.scad>
 use <888_2018.scad>
+use <888_2027.scad>
 use <lib/igus.scad>
 use <lib/vector.scad>
 use <lib/piston.scad>
 use <666_1027.scad>
+use <888_1004.scad>
 
 //color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_outer_diameter/2+2]) rotate([90,0,0]) 666_1027();
+
+translate([-engine_holder_beam_depth , 0, beam_thickness_below])
+    888_1004();
 
 washer_thickness = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
 
@@ -111,6 +116,12 @@ color("navy"){
             rotate([180, 0, 90]) kstm_08();
 }
 
+
+color("blue"){
+
+    translate([chassis_baselength_f, 0, 0])
+        888_2027();
+}
 
 
 translate([0, chassis_wheelbase/2, -chassis_height])
