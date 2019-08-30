@@ -1,3 +1,6 @@
+include <../parameters.scad>
+draft = true;
+
 // Parametric Pulley with multiple belt profiles
 // by droftarts January 2012
 
@@ -31,8 +34,8 @@ m3_nut_depth = 2.7;	// normal M3 hex nut exact depth = 2.4, nyloc = 4
 
 retainer = 0;		// Belt retainer above teeth, 0 = No, 1 = Yes
 retainer_ht = 0;	// height of retainer flange over pulley, standard = 1.5
-idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
-idler_ht = 0;		// height of idler flange over pulley, standard = 1.5
+idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
+idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
 pulley_t_ht = 10.5;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 1;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
@@ -77,20 +80,31 @@ GT2_5mm_pulley_dia = tooth_spacing (5,0.5715);
 
 // The following calls the pulley creation part, and passes the pulley diameter and tooth width to that module
 
-if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
-if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
-if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
-if ( profile == 4 ) { pulley ( "H" , H_pulley_dia ,1.905 , 5.359 ); }
-if ( profile == 5 ) { pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678 ); }
-if ( profile == 6 ) { pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264 ); }
-if ( profile == 7 ) { pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13 ); }
-if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
-if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
-if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
-if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
-if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
-if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
-if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
+module motor_pulley(draft)
+{
+    difference(){
+        if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
+        if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
+        if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
+        if ( profile == 4 ) { pulley ( "H" , H_pulley_dia ,1.905 , 5.359 ); }
+        if ( profile == 5 ) { pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678 ); }
+        if ( profile == 6 ) { pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264 ); }
+        if ( profile == 7 ) { pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13 ); }
+        if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
+        if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
+        if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
+        if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
+        if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
+        if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
+        if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
+
+        // osazení pro kroužek
+        cylinder(h = M8_nut_height, d=M8_nut_diameter,  $fn = 6);
+    }
+	translate([0,0,M8_nut_height])
+		cylinder(h = layer_thickness, d=M8_nut_diameter,  $fn = 50);
+
+}
 
 // Functions
 
@@ -117,11 +131,11 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 //	translate ([0,0, pulley_b_ht + pulley_t_ht + retainer_ht ]) rotate ([0,180,0])
 
 	difference()
-	 {	 
+	 {
 		union()
 		{
 			//base
-	
+
 			if ( pulley_b_ht < 2 ) { echo ("CAN'T DRAW PULLEY BASE, HEIGHT LESS THAN 2!!!"); } else {
 				rotate_extrude($fn=pulley_b_dia*2)
 				{
@@ -130,21 +144,21 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 						translate([pulley_b_dia/2-1,pulley_b_ht-1]) circle(1);
 				}
 			}
-	
+
 		difference()
 			{
 			//shaft - diameter is outside diameter of pulley
-			
-			translate([0,0,pulley_b_ht]) 
-			rotate ([0,0,360/(teeth*4)]) 
+
+			translate([0,0,pulley_b_ht])
+			rotate ([0,0,360/(teeth*4)])
 			cylinder(r=pulley_OD/2,h=pulley_t_ht, $fn=teeth*4);
-	
+
 			//teeth - cut out of shaft
-		
-			for(i=[1:teeth]) 
+
+			for(i=[1:teeth])
 			rotate([0,0,i*(360/teeth)])
-			translate([0,-tooth_distance_from_centre,pulley_b_ht -1]) 
-			scale ([ tooth_width_scale , tooth_depth_scale , 1 ]) 
+			translate([0,-tooth_distance_from_centre,pulley_b_ht -1])
+			scale ([ tooth_width_scale , tooth_depth_scale , 1 ])
 			{
 			if ( profile == 1 ) { MXL();}
 			if ( profile == 2 ) { 40DP();}
@@ -163,34 +177,34 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 			}
 
 			}
-			
+
 		//belt retainer / idler
-		if ( retainer > 0 ) {translate ([0,0, pulley_b_ht + pulley_t_ht ]) 
-		rotate_extrude($fn=teeth*4)  
+		if ( retainer > 0 ) {translate ([0,0, pulley_b_ht + pulley_t_ht ])
+		rotate_extrude($fn=teeth*4)
 		polygon([[0,0],[pulley_OD/2,0],[pulley_OD/2 + retainer_ht , retainer_ht],[0 , retainer_ht],[0,0]]);}
-		
-		if ( idler > 0 ) {translate ([0,0, pulley_b_ht - idler_ht ]) 
-		rotate_extrude($fn=teeth*4)  
+
+		if ( idler > 0 ) {translate ([0,0, pulley_b_ht - idler_ht ])
+		rotate_extrude($fn=teeth*4)
 		polygon([[0,0],[pulley_OD/2 + idler_ht,0],[pulley_OD/2 , idler_ht],[0 , idler_ht],[0,0]]);}
-	
+
 		}
-	   
+
 		//hole for motor shaft
 		translate([0,0,-1])cylinder(r=motor_shaft/2,h=pulley_b_ht + pulley_t_ht + retainer_ht + 2,$fn=motor_shaft*4);
-				
+
 		//captive nut and grub screw holes
-	
+
 		if ( pulley_b_ht < m3_nut_flats ) { echo ("CAN'T DRAW CAPTIVE NUTS, HEIGHT LESS THAN NUT DIAMETER!!!"); } else {
 		if ( (pulley_b_dia - motor_shaft)/2 < m3_nut_depth + 3 ) { echo ("CAN'T DRAW CAPTIVE NUTS, DIAMETER TOO SMALL FOR NUT DEPTH!!!"); } else {
-	
+
 			for(j=[1:no_of_nuts]) rotate([0,0,j*nut_angle])
 			translate([0,0,nut_elevation])rotate([90,0,0])
-	
+
 			union()
 			{
 				//entrance
 				translate([0,-pulley_b_ht/4-0.5,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) cube([m3_nut_flats,pulley_b_ht/2+1,m3_nut_depth],center=true);
-	
+
 				//nut
 				if ( m3_nut_hex > 0 )
 					{
@@ -200,13 +214,13 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 						// square nut
 						translate([0,0.25,motor_shaft/2+m3_nut_depth/2+nut_shaft_distance]) cube([m3_nut_flats,m3_nut_flats,m3_nut_depth],center=true);
 					}
-	
+
 				//grub screw hole
 				rotate([0,0,22.5])cylinder(r=m3_dia/2,h=pulley_b_dia/2+1,$fn=8);
 			}
 		}}
 	 }
-	   
+
 	}
 
 
@@ -281,3 +295,5 @@ module GT2_5mm()
 	{
 	linear_extrude(height=pulley_t_ht+2) polygon([[-1.975908,-0.75],[-1.975908,0],[-1.797959,0.03212],[-1.646634,0.121224],[-1.534534,0.256431],[-1.474258,0.426861],[-1.446911,0.570808],[-1.411774,0.712722],[-1.368964,0.852287],[-1.318597,0.989189],[-1.260788,1.123115],[-1.195654,1.25375],[-1.12331,1.380781],[-1.043869,1.503892],[-0.935264,1.612278],[-0.817959,1.706414],[-0.693181,1.786237],[-0.562151,1.851687],[-0.426095,1.9027],[-0.286235,1.939214],[-0.143795,1.961168],[0,1.9685],[0.143796,1.961168],[0.286235,1.939214],[0.426095,1.9027],[0.562151,1.851687],[0.693181,1.786237],[0.817959,1.706414],[0.935263,1.612278],[1.043869,1.503892],[1.123207,1.380781],[1.195509,1.25375],[1.26065,1.123115],[1.318507,0.989189],[1.368956,0.852287],[1.411872,0.712722],[1.447132,0.570808],[1.474611,0.426861],[1.534583,0.256431],[1.646678,0.121223],[1.798064,0.03212],[1.975908,0],[1.975908,-0.75]]);
 	}
+
+motor_pulley(draft);
