@@ -147,16 +147,24 @@ module rotor_pulley(draft)
         translate([-35, 0, 0])
             cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
 
-
-        #difference(){
+        difference(){
+            translate([0, 0, -0.1]) difference(){
+                translate([0, 0, -0.1]) cylinder(d = 110, h = overal_ht+0.2);
+                translate([0, 0, -0.2])cylinder(d = 50, h = overal_ht+0.4);
+            }
             translate([0, 0, 0]){
                 for (i=[0:16])
                     rotate(i*360/16){
-                        translate([25, -0.5/2, 2.5])
-                            cube([30, 0.5, overal_ht-4]);
+                        hull(){
+                            translate([0, 0, -1])
+                                rotate([45, 0, 0])
+                                    cube([100, 5, 5]);
+                            translate([0, 0, overal_ht-6])
+                                rotate([45, 0, 0])
+                                    cube([100, 5, 5]);
+                        }
                     }
             }
-
             rotate([0,0,20])
             {
                 translate([position_of_rubber - 2,- hole_for_rubber_Y/2 - 2, pulley_t_ht - 6 - 1])
@@ -164,8 +172,6 @@ module rotor_pulley(draft)
                 translate([- position_of_rubber - hole_for_rubber_X - 2, - hole_for_rubber_Y/2 - 2,  pulley_t_ht - 6 - 1])
                     cube([hole_for_rubber_X + 4,hole_for_rubber_Y + 4,hole_for_rubber_Z]);
             }
-
-
         }
 
 
