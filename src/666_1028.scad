@@ -43,7 +43,7 @@ rudder_full_height = 150;
 
 draft = true;
 
-module 666_1028(side_choose = -1, draft){
+module 666_1028(side_choose = 1, draft){
 
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
