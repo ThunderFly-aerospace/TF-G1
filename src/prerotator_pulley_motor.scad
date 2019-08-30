@@ -99,9 +99,9 @@ module motor_pulley(draft)
         if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
         // osazení pro kroužek
-        cylinder(h = M8_nut_height, d=M8_nut_diameter,  $fn = 6);
+        cylinder(h = 3, d=M8_nut_diameter,  $fn = 6);
     }
-	translate([0,0,M8_nut_height])
+	translate([0,0,3])
 		cylinder(h = layer_thickness, d=M8_nut_diameter,  $fn = 50);
 
 }
