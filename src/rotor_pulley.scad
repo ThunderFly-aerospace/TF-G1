@@ -152,16 +152,16 @@ module rotor_pulley(draft)
             translate([0, 0, 0]){
                 for (i=[0:16])
                     rotate(i*360/16){
-                        translate([25, -0.5, 2])
-                            cube([30, 1, overal_ht-4]);
+                        translate([25, -0.5/2, 2.5])
+                            cube([30, 0.5, overal_ht-4]);
                     }
             }
 
             rotate([0,0,20])
             {
-                translate([position_of_rubber - 2,- hole_for_rubber_Y/2 - 2, pulley_t_ht - 6])
+                translate([position_of_rubber - 2,- hole_for_rubber_Y/2 - 2, pulley_t_ht - 6 - 1])
                     cube([hole_for_rubber_X + 4, hole_for_rubber_Y + 4, hole_for_rubber_Z]);
-                translate([- position_of_rubber - hole_for_rubber_X - 2, - hole_for_rubber_Y/2 - 2,  pulley_t_ht - 6])
+                translate([- position_of_rubber - hole_for_rubber_X - 2, - hole_for_rubber_Y/2 - 2,  pulley_t_ht - 6 - 1])
                     cube([hole_for_rubber_X + 4,hole_for_rubber_Y + 4,hole_for_rubber_Z]);
             }
 
