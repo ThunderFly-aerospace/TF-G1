@@ -34,7 +34,9 @@ retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 20;	// length of toothed part of pulley, standard = 12
+overal_ht = 20;     // overal height of pulley
+overal_d = 122;     // top cylinder diameter
+pulley_t_ht = 10;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 0;	// pulley base diameter, standard = 20
 no_of_nuts = 0;		// number of captive nuts required, standard = 1
@@ -86,6 +88,7 @@ GT2_5mm_pulley_dia = tooth_spacing (5,0.5715);
 module rotor_pulley(draft)
 {
     difference(){
+        union(){
         if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
         if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
         if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
@@ -101,16 +104,21 @@ module rotor_pulley(draft)
         if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
         if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
+        translate([0, 0, pulley_t_ht])
+            cylinder(d = overal_d, h = overal_ht - pulley_t_ht, $fn = draft ? 50 : 200);
+        }
+
         // osazení pro kroužek
-        cylinder(h = 4, d=42.5,  $fn = draft ? 50 : 200);
+        translate([0, 0, -0.1])
+            cylinder(h = 4+0.1, d=42.5,  $fn = draft ? 50 : 200);
 
         // osazení pro domek
-        translate([0, 0, pulley_t_ht - 5])
-            cylinder(h = 5, d=42.5,  $fn = draft ? 50 : 200);
+        translate([0, 0, overal_ht - 5])
+            cylinder(h = 5+0.1, d=42.5,  $fn = draft ? 50 : 200);
 
         // osazení pro  šikmou část domku
-        translate([0, 0, pulley_t_ht - 5 - 8])
-            cylinder(h = 8, d2=42.5, d1=26.5,  $fn = draft ? 50 : 200);
+        translate([0, 0, overal_ht - 5 - 8])
+            cylinder(h = 8+0.1, d2=42.5, d1=26.5,  $fn = draft ? 50 : 200);
 
 
         //šrouby
@@ -138,6 +146,27 @@ module rotor_pulley(draft)
 
         translate([-35, 0, 0])
             cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
+
+
+        #difference(){
+            translate([0, 0, 0]){
+                for (i=[0:16])
+                    rotate(i*360/16){
+                        translate([25, -0.5, 2])
+                            cube([30, 1, overal_ht-4]);
+                    }
+            }
+
+            rotate([0,0,20])
+            {
+                translate([position_of_rubber - 2,- hole_for_rubber_Y/2 - 2, pulley_t_ht - 6])
+                    cube([hole_for_rubber_X + 4, hole_for_rubber_Y + 4, hole_for_rubber_Z]);
+                translate([- position_of_rubber - hole_for_rubber_X - 2, - hole_for_rubber_Y/2 - 2,  pulley_t_ht - 6])
+                    cube([hole_for_rubber_X + 4,hole_for_rubber_Y + 4,hole_for_rubber_Z]);
+            }
+
+
+        }
 
 
         rotate([0,0,20])
