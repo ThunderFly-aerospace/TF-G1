@@ -2,7 +2,7 @@
 
 include <../parameters.scad>
 
-holder_length = 70;
+holder_length = 90;
 holder_angle = 55;
 joint_diameter = 40;
 joint_height = 5;
