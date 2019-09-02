@@ -5,7 +5,7 @@ use <888_1004.scad>
 
 column_upper_diameter = 20;
 column_lower_diameter = 40;
-column_height = 60;
+column_height = 50;
 column_offset = 40;
 
 joint_diameter = 40;
@@ -27,7 +27,7 @@ module 888_2009(){
                     cube([engine_holder_beam_depth-10, beam_width-22, 0.1]);
                 translate([0, 0, -5])
                     //rotate([0, 5, 0])
-                        cylinder (h=5, d=column_upper_diameter, $fn=60);
+                        cylinder (h=5, d=10, $fn=60);
                 translate([-column_offset, 0, -column_height])
                         rotate([0, slope, 0])
                             cylinder (h=1, d=column_lower_diameter, $fn=60);
@@ -51,7 +51,7 @@ module 888_2009(){
             //translate([0, 0, -column_lower_diameter]){
 
                 translate([0, 0, -50])
-                    cylinder(d=column_lower_diameter+global_clearance, h=50, $fn=50);
+                    cylinder(d=column_lower_diameter+global_clearance+1, h=50, $fn=50);
 
                 // Otvory pro licovany sroub
                 translate([0, 0, -1])
