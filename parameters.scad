@@ -147,8 +147,8 @@ M5_nut_diameter = 9.4;
 M5_nut_pocket = 8.4;
 
 //Screw diameter and nut for M4 [mm]
-M4_screw_diameter=4.5;
-M4_screw_head_height = 4;
+M4_screw_diameter=4.3;
+M4_screw_head_height = 4.5;
 M4_nut_height = 3.2;
 M4_nut_diameter = 8.4;
 M4_nut_pocket = 7.5;
