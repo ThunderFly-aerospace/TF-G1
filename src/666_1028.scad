@@ -11,8 +11,6 @@ DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 //poloha sroubu, drzici tyc, od nabezne hrany
 screw_for_pipe_pos = 50;
 
-// side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
-
 //tvar A vzájemný náklon
 Rudder_angle = 90;
 
@@ -29,8 +27,9 @@ servo_rudder_inside_length = 23.2;
 servo_rudder_screws_gap = 27;
 servo_rudder_screws_height = 15;
 servo_rudder_mount_wall_thickness = 2;
+servo_rudder_mount_wall_offset = 3;
 servo_rudder_wire_hole_height = 5;
-servo_rudder_wire_hole_width = 8;
+servo_rudder_wire_hole_width = 9;
 
 //upevnovaci trubka
 mount_rudder_height = 32;
@@ -45,6 +44,7 @@ rudder_full_height = 150;
 
 draft = true;
 
+// side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
 module 666_1028(side_choose = 1, draft){
 
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
@@ -120,13 +120,13 @@ module 666_1028(side_choose = 1, draft){
                                             cube([Rudder_height + 8, Rudder_depth + gap_width, Rudder_length + infill_wall_thickness * 2], center = true);
     
                                         //vyztužení pro upevnění serva
-                                        translate([servo_rudder_x_offset + servo_rudder_wire_hole_height / 2, 0, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
-                                            cube([servo_rudder_length + infill_wall_thickness * 2 + servo_rudder_wire_hole_height, Rudder_depth * 2, servo_rudder_height + infill_wall_thickness * 2], center = true);
+                                        translate([servo_rudder_x_offset + servo_rudder_wire_hole_height / 2 + infill_wall_thickness / 2, 0, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
+                                            cube([servo_rudder_length + infill_wall_thickness * 3 + servo_rudder_wire_hole_height, Rudder_depth * 2, servo_rudder_height + infill_wall_thickness * 2], center = true);
                                                 
                                         //servo wire guide
-                                        translate([servo_rudder_x_offset + 16.6, 0, tail_pipe_z_position - 9])
+                                        translate([servo_rudder_x_offset + 17.5, 0, tail_pipe_z_position - 8.5])
                                             rotate([0, - 35, 0])
-                                                cube([0.6, Rudder_depth + 2, 18], center = true);
+                                                cube([0.6, Rudder_depth + 2, 18.5], center = true);
                             }
                         }
     
@@ -231,18 +231,18 @@ module 666_1028(side_choose = 1, draft){
                         rotate([90, 0, 0])
                             cylinder(h = Rudder_depth + 2, d = M2_screw_diameter, $fn = 100, center = true);
     
-                    translate([servo_rudder_x_offset, side_choose * Rudder_depth, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
+                    translate([servo_rudder_x_offset, - side_choose * (Rudder_depth + servo_rudder_mount_wall_thickness / 2 - servo_rudder_mount_wall_offset), tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
                         cube([servo_rudder_length, Rudder_depth * 2, servo_rudder_height], center = true);
     
-                    translate([servo_rudder_x_offset, - side_choose * (Rudder_depth + servo_rudder_mount_wall_thickness), tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
+                    translate([servo_rudder_x_offset, side_choose * (Rudder_depth + servo_rudder_mount_wall_thickness / 2 + servo_rudder_mount_wall_offset), tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
                         cube([servo_rudder_length, Rudder_depth * 2, servo_rudder_height], center = true);
     
                     //otvor pro dráty
-                    translate([servo_rudder_x_offset + servo_rudder_wire_hole_height / 2 + servo_rudder_length / 2, 0, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
+                    translate([servo_rudder_x_offset + servo_rudder_wire_hole_height / 2 + servo_rudder_length / 2 + infill_wall_thickness, 0, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
                         cube([servo_rudder_wire_hole_height, servo_rudder_wire_hole_width, servo_rudder_height + infill_wall_thickness + 2], center = true);
                     
                     translate([servo_rudder_x_offset + 13.5, 0, tail_pipe_z_position - 20 - servo_rudder_height])
-                        cube([8, 8, 15], center = true);
+                        cube([8, servo_rudder_wire_hole_width, 15], center = true);
     
                     translate([servo_rudder_x_offset + 7, 0, tail_pipe_z_position - 5])
                         rotate([90, 0, 0])
