@@ -63,7 +63,7 @@ module 666_1028(side_choose = 1, draft){
                     //
                     //
                     //dutý profil
-                    hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = rudder_full_height, open = false);
+                    hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = rudder_full_height, open = false, wall_thickness = 0.5);
     
                     difference() {//diff
     
