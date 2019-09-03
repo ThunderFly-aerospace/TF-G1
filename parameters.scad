@@ -242,7 +242,7 @@ ribbon_width = 5; // šířka vyztužovacích lemů.
 width_of_engine_holder = 83;
 
 //Top Cover Division - dělení horního krytu pro tisk
-top_cover_division = [0, 50, 150, 280, 410, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
+top_cover_division = [0, 50, 150, 280, 410, 550, hull_x_size-15]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
 
 //Bottom Cover Division - dělení dolního krytu pro tisk
 bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
@@ -716,6 +716,7 @@ chasis_fork_thickness = 10;
 stop_size = 5;
 stop_width = 5;
 max_angle_of_ratation = 75; //úhel mezi maximálními výchilkami podvozku při zatáčení
+joint_width = 25;
 
 
 //RT/57208/M/25 - https://www.tme.eu/cz/details/rt_57208_m_25/pracovni-valce/norgren-herion/

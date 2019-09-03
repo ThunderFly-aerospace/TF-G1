@@ -72,6 +72,13 @@ module 888_1005(draft){
             translate([0, beam_side_pipe_distance/2, 0])
                 rotate([0, 90, 0])
                     cylinder(d = beam_main_pipe_thickness, h = 1000);
+
+            rotate([90, 0, 0]) for (position_number = [1:5])
+            {
+                screw_top(position_number, draft);
+                mirror([0,0,1])
+                    screw_top(position_number, draft);
+            }
         }
     }
 }
@@ -124,8 +131,10 @@ module 888_1005_cut(){
                 888_1005(); */
 }
 
-888_1005_cut();
+888_1005();
+//888_1005_cut();
 
 use <./lib/naca4.scad>
+use <666_1025.scad>
 include <../parameters.scad>
 use <888_1000.scad>

@@ -13,16 +13,16 @@ module 888_2024() {
     difference() {
         union() {
             hull() {
-                translate([fork_wheel_width/-2, 0, 0])
-                    cube([fork_wheel_width, holder_length+bearing_extension, 696_bearing_outer_diameter+material_around_bearing*2]);
+                translate([joint_width/-2, 0, 0])
+                    cube([joint_width, holder_length+bearing_extension, 696_bearing_outer_diameter+material_around_bearing*2]);
 
                 translate([0, 0, 696_bearing_outer_diameter/2+material_around_bearing])
                     rotate([0, 90, 0])
-                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=fork_wheel_width, $fn=100, center=true);
+                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=joint_width, $fn=100, center=true);
 
                 translate([0, holder_length, 0])
                     rotate([0, 90, 0])
-                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=fork_wheel_width, $fn=50, center=true);
+                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=joint_width, $fn=50, center=true);
             }
 
             translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
@@ -30,8 +30,8 @@ module 888_2024() {
                     cylinder(d=joint_diameter, h=joint_height, $fn=100);
             
             hull() {
-                translate([-fork_wheel_width/2, holder_length-joint_diameter*3/4, 0])
-                    cube([fork_wheel_width, joint_diameter*3/4, 696_bearing_outer_diameter+material_around_bearing*2]);
+                translate([-joint_width/2, holder_length-joint_diameter*3/4, 0])
+                    cube([joint_width, joint_diameter*3/4, 696_bearing_outer_diameter+material_around_bearing*2]);
 
                 translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
                     rotate([-holder_angle, 0, 0])

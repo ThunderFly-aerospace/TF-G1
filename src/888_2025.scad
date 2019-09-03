@@ -3,7 +3,7 @@
 include <../parameters.scad>
 
 wall_thickness = 2;
-height = 5;
+height = 10;
 
 module 888_2025(piston=false) {
     if(piston) {

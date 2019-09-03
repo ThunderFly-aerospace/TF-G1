@@ -13,7 +13,7 @@ wheel_tolerance = 15;
 888_2022_wheel_diameter = wheel_diameter+wheel_tolerance;
 lifting_size = 10;
 
-height = 23;
+height = 20;
 connector_width = 10;
 wheel_screw_overhang = 8;
 
@@ -40,12 +40,12 @@ module 888_2022(wheel=false) {
                 cube([chasis_fork_thickness*2+fork_wheel_width, 888_2022_wheel_diameter/2+wheel_screw_overhang+connector_width, height]);
 
             hull() {
-                translate([-chasis_fork_thickness-fork_wheel_width/2, connector_width, -height/2])
-                    cube([chasis_fork_thickness*2+fork_wheel_width, 20, height]);
+                translate([-chasis_fork_thickness-joint_width/2, connector_width, -height/2])
+                    cube([chasis_fork_thickness*2+joint_width, 20, height]);
 
                 translate([0, connector_width+material_around_bearing*2+696_bearing_outer_diameter, height/2+696_bearing_outer_diameter/2+material_around_bearing+lifting_size])
                     rotate([0, 90, 0])
-                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=chasis_fork_thickness*2+fork_wheel_width, $fn=100, center=true);
+                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=chasis_fork_thickness*2+joint_width, $fn=100, center=true);
             }
 
             hull() {
@@ -67,8 +67,8 @@ module 888_2022(wheel=false) {
             cylinder(d=fork_wheel_width, h=height*2, $fn=50, center=true);
 
         //uchycení
-        translate([-fork_wheel_width/2-0.2, connector_width, -height*5])
-            cube([fork_wheel_width+0.4, 300, height*10]);
+        translate([-joint_width/2-0.2, connector_width, -height*5])
+            cube([joint_width+0.4, 300, height*10]);
 
         //šroub u kola
         translate([0, -888_2022_wheel_diameter/2, 0])

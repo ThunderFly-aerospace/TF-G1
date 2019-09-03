@@ -35,7 +35,7 @@ module screw_top (position_number, draft){
                 distance_top = - (hull_z_size - 2*hull_corner_radius)/2;
 
                 translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                    #cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
             //final if
             }
@@ -45,7 +45,7 @@ module screw_top (position_number, draft){
                 distance_top = distance_top;
 
                 translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                    cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
             //final if
             }
 
@@ -109,7 +109,7 @@ union(){
                         rotate ([-90,0,0])
                             translate ([hull_wall_thickness,0,0])
                                 resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                                    airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = draft ? 50 : 100, open = false);
+                                    airfoil(naca = 0030, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
 
                     translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
                             cube ([hull_x_size, hull_y_size,hull_z_size]);
@@ -149,7 +149,7 @@ union(){
             translate ([cover_pilon_position+2*hull_wall_thickness,-10,0])
                 rotate ([-90,0,0])
                     resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                        airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+                        airfoil(naca = 0030, L = 170, N = draft ? 30 : 100, h = 200, open = false);
 
             //šrouby
 
@@ -215,17 +215,17 @@ strana_a = (uhlopricka*(cos(45)))/2;
         union(){
                 rotate([-90 - pozadovany_uhel,0,-pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-            translate([strana_a,0,0])    
+            translate([strana_a,0,0])
                 rotate([-90 - pozadovany_uhel,0,pozadovany_uhel])
                    cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-            
-            translate([strana_a,0,-strana_a])    
+
+            translate([strana_a,0,-strana_a])
                 rotate([-90 + pozadovany_uhel,0,pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
             translate([0,0,- strana_a])
                 rotate([-90 + pozadovany_uhel,0,-pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-        }    
+        }
 
     //final difference
     }
