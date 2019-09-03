@@ -48,10 +48,10 @@ module 888_2013(front = true, left = 1, rotate = false){
                 cylinder(d = M4_screw_diameter, h = 50, center = true, $fn = 40);
         translate([0, kstm_screw_length/2+20, 0])
             rotate([90, 0, 0])
-                cylinder(d = M4_nut_pocket, h = 20, $fn = 6);
+                cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
         translate([0, -kstm_screw_length/2, 0])
             rotate([90, 0, 0])
-                cylinder(d = M4_nut_pocket, h = 20, $fn = 6);
+                cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
 
 
         translate([15-0.5, 0, 0])
@@ -65,10 +65,10 @@ module 888_2013(front = true, left = 1, rotate = false){
                             cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 40);
                     translate([0, pipe_screw_length/2+20, 0])
                         rotate([90, 0, 0])
-                            cylinder(d = M3_nut_pocket, h = 20, $fn = 6);
+                            cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
                     translate([0, -pipe_screw_length/2, 0])
                         rotate([90, 0, 0])
-                            cylinder(d = M3_nut_pocket, h = 20, $fn = 6);
+                            cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
                 }
 
     }

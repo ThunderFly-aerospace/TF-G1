@@ -12,7 +12,7 @@ use <888_1004.scad>
 
 //color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_outer_diameter/2+2]) rotate([90,0,0]) 666_1027();
 
-translate([-engine_holder_beam_depth , 0, beam_thickness_below])
+translate([-beam_patern*11.5, 0, beam_thickness_below])
     888_1004();
 
 washer_thickness = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
@@ -164,6 +164,10 @@ translate([0, 0, -main_tube_outer_diameter/2 - 2018_thickness_above_pipe]){
 
         translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
             rotate([0, 180+12, 90])
+                chassis_piston_assembly();
+
+        translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
+            rotate([0, 180+42, 90])
                 chassis_piston_assembly();
     }
 
