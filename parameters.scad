@@ -716,6 +716,7 @@ chasis_fork_thickness = 10;
 stop_size = 5;
 stop_width = 5;
 max_angle_of_ratation = 75; //úhel mezi maximálními výchilkami podvozku při zatáčení
+joint_width = 25;
 
 
 //RT/57208/M/25 - https://www.tme.eu/cz/details/rt_57208_m_25/pracovni-valce/norgren-herion/
