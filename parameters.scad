@@ -242,7 +242,7 @@ ribbon_width = 5; // šířka vyztužovacích lemů.
 width_of_engine_holder = 83;
 
 //Top Cover Division - dělení horního krytu pro tisk
-top_cover_division = [0, 50, 150, 280, 410, hull_x_size]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
+top_cover_division = [0, 50, 150, 280, 410, 550, hull_x_size-15]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
 
 //Bottom Cover Division - dělení dolního krytu pro tisk
 bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
