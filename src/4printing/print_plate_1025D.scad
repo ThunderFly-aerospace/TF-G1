@@ -5,10 +5,4 @@ draft = false;
 
 translate([0,30,-340])
     rotate([90,-90,90])
-        666_1025_part(4, draft);
-
-
-
-
-
-
+        666_1025_part_B(4, draft);
