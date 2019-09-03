@@ -25,10 +25,10 @@ module 888_1005(draft){
                     translate([main_tube_outer_diameter, - (hull_z_size - 2*hull_wall_thickness - 2*global_clearance)/2, -beam_thickness_below]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
                         cube([hull_drop_length - main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*global_clearance, beam_thickness]);
 
-                    #translate([0, beam_side_edge_width/2, 0])
+                    translate([0, beam_side_edge_width/2, 0])
                         rotate([beam_edge_angle, 0, 0])
-                            translate([0, 0, -50])
-                                cube([800, 50, 100]);
+                            translate([ - engine_holder_beam_depth + beam_patern*(0.25+3), 0, -50])
+                                cube([beam_patern*8, 50, 100]);
 
                     translate([0, beam_side_edge_width/2, 0])
                         rotate([-beam_edge_angle, 0, 0])
@@ -36,10 +36,21 @@ module 888_1005(draft){
                                 cube([800, 50, 100]);
                 }
             }
-                for (i=[0:10]) {
-                    translate([beam_patern*i + -5, 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)])
+                for (i=[3:8]) {
+                    translate([beam_patern*(i+0.25), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
                         rotate([-90, 0, 0])
                             cylinder(d = beam_main_pipe_thickness, h = hull_x_size);
+
+                        translate([0, 108, 0])
+                            cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+
+                        translate([0, 108, -8-50])
+                            cylinder(d = M3_nut_diameter, h = 50, $fn = 6);
+
+                        translate([0, 108, 8])
+                            cylinder(d = M3_nut_diameter, h = 50, $fn = 6);
+
+                    }
                 }
 
 
@@ -65,7 +76,55 @@ module 888_1005(draft){
     }
 }
 
-888_1005();
+
+module 888_1005_cut(){
+    translate([35, 0, 0])
+    intersection(){
+        translate([0, -100, beam_patern*(4)])
+            rotate([0, 90, 0])
+                translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                    888_1005();
+
+        translate([-20, -20, 0])
+            cube([40, 40, beam_patern*3.5]);
+    }
+    translate([0, 0, 0])
+    intersection(){
+        translate([0, -100, beam_patern*(4+1)])
+            rotate([0, 90, 0])
+                translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                    888_1005();
+
+        translate([-20, -20, 0])
+            cube([40, 40, beam_patern*1]);
+    }
+    translate([-35, 0, beam_patern*(3.5)]) rotate([180, 0, 0])
+        intersection(){
+            translate([0, -100, beam_patern*(4+1+3.5)])
+                rotate([0, 90, 0])
+                    translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                        888_1005();
+
+            translate([-20, -20, 0])
+                cube([40, 40, beam_patern*3.5]);
+        }
+
+/*
+
+    translate([-40, 20, beam_patern*(3+0.5)])
+        rotate([0, 90, 0])
+            translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                888_1005();
+
+
+
+    translate([40, 0, beam_patern*3+beam_patern*5])
+        rotate([0, 90, 0])
+            translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                888_1005(); */
+}
+
+888_1005_cut();
 
 use <./lib/naca4.scad>
 include <../parameters.scad>
