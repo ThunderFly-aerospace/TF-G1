@@ -35,7 +35,11 @@ module screw_top (position_number, draft){
                 distance_top = - (hull_z_size - 2*hull_corner_radius)/2;
 
                 translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
+<<<<<<< HEAD
                     cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+=======
+                    #cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+>>>>>>> 1c6815f... drobne upravy, render
 
             //final if
             }
@@ -226,6 +230,7 @@ strana_a = (uhlopricka*(cos(45)))/2;
                 rotate([-90 + pozadovany_uhel,0,-pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
         }
+<<<<<<< HEAD
 translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
 
    rotate([180,0,0])
@@ -236,6 +241,8 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
                     translate([0, 0, -20])
                        % cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 60);
    }
+=======
+>>>>>>> 1c6815f... drobne upravy, render
 
     //final difference
     }
