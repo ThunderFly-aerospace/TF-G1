@@ -1,20 +1,21 @@
+draft = true;
 include <../parameters.scad>
 use <888_2013.scad>
 use <888_2016.scad>
 use <888_2017.scad>
-use <888_2018.scad>
 use <888_2027.scad>
 use <lib/igus.scad>
 use <lib/vector.scad>
 use <lib/piston.scad>
 use <666_1027.scad>
 use <888_1004.scad>
-
+use <888_1005.scad>
 //color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_outer_diameter/2+2]) rotate([90,0,0]) 666_1027();
 
-translate([-beam_patern*11.5, 0, beam_thickness_below])
-    888_1004();
-
+translate([-beam_patern*12 + engine_holder_beam_depth - beam_main_pipe_thickness/2, 0, beam_thickness_below]){
+    888_1004(draft = true);
+    //888_1005();
+}
 washer_thickness = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
 
 
@@ -147,42 +148,49 @@ translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_heig
 //
 //
 
-translate([0, 0, -main_tube_outer_diameter/2 - 2018_thickness_above_pipe]){
+translate([0, 0, 0]){
     color("green"){
-        // dil na pridelani pricne tyce k podlozce
-        translate([0,0, main_tube_outer_diameter/2 + 2018_thickness_above_pipe])
-            rotate([180, 0, 0])
-            888_2018();
 
         // trmeny k pricne trubce
-        translate([0, chassis_suspension_basewidth/2, 0])
-            rotate([0, -90, 90])
+        translate([0, chassis_suspension_basewidth/2, beam_main_pipe_thickness/2 + beam_min_wall])
+            rotate([-90, 180, 0])
                 888_2016();
-        translate([0, -chassis_suspension_basewidth/2, 0])
-            rotate([0, 90, 90])
+        translate([0, -chassis_suspension_basewidth/2, beam_main_pipe_thickness/2 + beam_min_wall])
+            rotate([90, 0, 0])
                 888_2016();
 
-        translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
-            rotate([0, 180+12, 90])
-                chassis_piston_assembly();
+        translate([0, -chassis_suspension_basewidth/2 - 5, beam_min_wall + beam_main_pipe_thickness/2 + 9])
+            rotate([20, 0, 0])
+                translate([0,  -kstm_ball_height(8), 0])
+                    rotate([0, 180+45, 90])
+                    chassis_piston_assembly();
 
-        translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
+        /* translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
             rotate([0, 180+42, 90])
-                chassis_piston_assembly();
+                chassis_piston_assembly(); */
     }
 
     color("Teal"){
-        translate([0,0,0])
+        translate([beam_patern/2,0, beam_main_pipe_thickness/2 + beam_min_wall])
             rotate([90, 0, 0])
-                cylinder(d = main_tube_outer_diameter, h = chassis_suspension_basewidth, center = true);
+                cylinder(d = tube_for_undercarriage_outer_diameter, h = chassis_suspension_basewidth, center = true);
+
+        translate([-beam_patern/2,0, beam_main_pipe_thickness/2 + beam_min_wall])
+            rotate([90, 0, 0])
+                cylinder(d = tube_for_undercarriage_outer_diameter, h = chassis_suspension_basewidth, center = true);
 
 
-        translate([0, -chassis_suspension_basewidth/2 - kstm_ball_height(8), 0])
-            rotate([0, -90, 90])
-                kstm_08();
-        translate([0, chassis_suspension_basewidth/2 + kstm_ball_height(8), 0])
-            rotate([0, 90, 90])
-                kstm_08();
+        translate([0, -chassis_suspension_basewidth/2 - 5, beam_main_pipe_thickness/2 + beam_min_wall+2])
+            rotate([-20, 0, 0])
+                translate([0,  -kstm_ball_height(8), 0])
+                    rotate([0, -90, 90])
+                        kstm_08();
+
+        translate([0, chassis_suspension_basewidth/2 + 5, beam_main_pipe_thickness/2 + beam_min_wall+2])
+            rotate([20, 0, 0])
+                translate([0,  kstm_ball_height(8), 0])
+                rotate([0, 90, 90])
+                    kstm_08();
 
     }
 }

@@ -29,15 +29,15 @@ module 888_2016(){
 
             // cast pro prirubove lozisko
             hull(){
-                translate([-beam_patern/8, 0, -pipe_recessed/2 + 2])
+                translate([-beam_patern/8, 0, -pipe_recessed])
                     cylinder(d =  tube_for_undercarriage_outer_diameter + 4, h = pipe_recessed/2);
-                translate([beam_patern/8, 0, -pipe_recessed/2 + 2])
+                translate([beam_patern/8, 0, -pipe_recessed])
                     cylinder(d =  tube_for_undercarriage_outer_diameter + 4, h = pipe_recessed/2);
 
-                rotate([0, 0, 0]){
-                    translate([0, 38/2, -kstm_offset + 2])
+                rotate([-20, 0, 0]){
+                    translate([0, 38/2, -kstm_offset + 5])
                         cylinder(d = 10, h = kstm_offset);
-                    translate([0, -38/2, -kstm_offset + 2])
+                    translate([0, -38/2, -kstm_offset + 5])
                         cylinder(d = 10, h = kstm_offset);
                 }
             }
@@ -50,16 +50,18 @@ module 888_2016(){
             cylinder(d =  tube_for_undercarriage_outer_diameter, h = pipe_recessed+0.2);
 
         // Otvory pro srouby do loziska
-        translate([0, 0, 2]){
-            translate([0, 33/2, -9])
+
+        rotate([-20, 0, 0])
+        translate([0, 0, 5]){
+            translate([0, 33/2, -3.5])
                 cylinder(d = M4_screw_diameter, h = 10);
-            translate([0, -33/2, -9])
+            translate([0, -33/2, -3.5])
                 cylinder(d = M4_screw_diameter, h = 10);
 
-            translate([0, 33/2, -9])
-                cylinder(d = M4_nut_diameter, h = 5, $fn = 6);
-            translate([0, -33/2, -9])
-                cylinder(d = M4_nut_diameter, h = 5, $fn = 6);
+            translate([0, 33/2, -9-15])
+                cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
+            translate([0, -33/2, -9-15])
+                cylinder(d = M4_nut_diameter, h = 20, $fn = 6);
         }
 
         // diry pro sroub skrz tyce
