@@ -62,7 +62,7 @@ module screw_top (position_number, draft){
 	distance_top = - hull_drop_length * surface_distance(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
 	//echo (distance_top);
 
-	if (position_number > 1 && position_number < 5) //tato podmínka znamená, že v pozici 2,3 a 4 se šroub neotáčí podle surface_angle a ani neposouvá podle surface_distance, protože je na podložce rovná hrana. Je tam tedy dané pevné posunugí -hull_z_size/2
+	if (position_number > 2 && position_number < 5) //tato podmínka znamená, že v pozici 2,3 a 4 se šroub neotáčí podle surface_angle a ani neposouvá podle surface_distance, protože je na podložce rovná hrana. Je tam tedy dané pevné posunugí -hull_z_size/2
 	{
 
 
@@ -525,7 +525,7 @@ echo(floor (C));
 
     	//šrouby a matky SPODNÍ kryt - vždy spojení šroubu a matky dohromady
 
-        for (position_number = [1:4])
+        %for (position_number = [1:4])
         {
         		screw_bottom(position_number, draft);
         	mirror([0,0,1])
