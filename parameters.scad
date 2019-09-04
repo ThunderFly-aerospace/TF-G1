@@ -652,8 +652,8 @@ DS313MG_X = 4;
 
 chassis_wheelbase = 600;        // rozvor kolecek
 chassis_height = 200;           // vyska podvozku
-chassis_baselength_r = beam_patern*2;       // podelna roztec podvozku dozade
-chassis_baselength_f = beam_patern*2;       // podelna roztec podvozku dopredu
+chassis_baselength_r = beam_patern*2.25;       // podelna roztec podvozku dozade
+chassis_baselength_f = beam_patern*2.75;       // podelna roztec podvozku dopredu
 chassis_bearing_distance = 60;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 250;//vzdalenost prichyceni tlumicu na pricne tyci
 chassis_camber = -3;    //Odklon kola

@@ -43,12 +43,12 @@ module holes(){
 //    orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
 
 
-module 888_2027() {
+module 888_2027(baselength) {
     difference() {
         hull(){
 
             translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-                orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+                orientate([baselength, -chassis_pipe_wheelbase, chassis_height])
                     translate([0, 0, kstm_center_height])
                         hull(){
                             translate([0, (kstm_length-kstm_width)/2, 0])
@@ -57,7 +57,7 @@ module 888_2027() {
                                 cylinder(d = kstm_width, h = 1);
                         }
             translate([0, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-                orientate([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
+                orientate([baselength, chassis_pipe_wheelbase, chassis_height])
                     translate([0, 0, kstm_center_height])
                         hull(){
                             translate([0, (kstm_length-kstm_width)/2, 0])
@@ -69,25 +69,31 @@ module 888_2027() {
                 cube([30, 60, 1]);
         }
 
+        // diry pro prisroubovani KSTM lozisek
         translate([0, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-            orientate([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
+            orientate([baselength, chassis_pipe_wheelbase, chassis_height])
                 translate([0, 0, kstm_center_height])
                     holes();
-
         translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-            orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+            orientate([baselength, -chassis_pipe_wheelbase, chassis_height])
                 translate([0, 0, kstm_center_height])
                     holes();
 
-        for (i=[-5:5]) {
-            translate([beam_patern*i - chassis_suspension_basewidth/2, 0, -100]) {
+        translate([0, 0, -100])
+            cylinder(d = M4_screw_diameter, h = 100);
+        translate([0, 0, -110])
+            cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
+        
+
+        /* for (i=[-5:5]) {
+            #translate([beam_patern*i - chassis_suspension_basewidth/2, 0, -100]) {
                 cylinder(d = M4_screw_diameter, h = 100);
 
                 translate([0, 0, -10]) {
                     cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
                 }
             }
-        }
+        } */
 
     }
 
