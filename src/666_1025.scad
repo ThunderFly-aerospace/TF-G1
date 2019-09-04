@@ -226,6 +226,16 @@ strana_a = (uhlopricka*(cos(45)))/2;
                 rotate([-90 + pozadovany_uhel,0,-pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
         }
+translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
+
+   rotate([180,0,0])
+   union(){
+        translate([0, pilon_pipe_base_front_y, pilon_pipe_base_front_z])
+            orientate([-pilon_pipe_base_front_x + pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), height_of_vertical_tube-pilon_pipe_base_front_z],vref=[0,0,1], roll=0)
+                rotate([90,0,0])    
+                    translate([0, 0, -20])
+                       % cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 60);
+   }
 
     //final difference
     }
