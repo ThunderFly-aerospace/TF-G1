@@ -97,6 +97,11 @@ module 888_1020(draft = true){
     cone_h1=(rotor_head_wall_height/2+rotor_head_plate_thickness)-(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
     cone_d=2/3*rotor_ax_neck_diameter+((rotor_head_bearing_db-rotor_ax_neck_diameter)/cone_h1*rotor_ax_neck_height)-rotor_head_cardan_clearance;
     back_part_crop = 20;
+    
+    zebra_inplate=3;
+    zebra_x=(rotor_head_kardan_inner_x )/2;
+    zebra_y=rotor_head_kardan_inner_y/2;
+    zebra_th=2;
 
     difference(){
             union(){
@@ -119,15 +124,15 @@ module 888_1020(draft = true){
                         hull(){
                                 translate([servo_join_x-servo_join_size/2, -servo_join_y/2, 0])
                                     cube([servo_join_size, servo_join_y/4 ,servo_joint_z + 10]);
-                                translate([servo_join_x-servo_join_size, -plate_size_y/2, 0])
-                                    cube([servo_join_size*2, plate_size_y ,plate_size_z*2-2]);
+                                translate([0, -plate_size_y/2, 0])
+                                    cube([plate_size_x - motor_diameter - 1.5*back_part_crop, plate_size_y ,plate_size_z]);
                             }
                         // rameno, na kterem jsou kloubky pro servo
                         hull(){
                             translate([servo_join_x-servo_join_size/2, servo_join_y/2 - servo_join_y/5, 0])
                                 cube([servo_join_size, servo_join_y/5 ,servo_joint_z + 10]);
-                            translate([servo_join_x-servo_join_size, -plate_size_y/2, 0])
-                                cube([servo_join_size*2, plate_size_y ,plate_size_z*2-2]);
+                            translate([0, -plate_size_y/2, 0])
+                                cube([plate_size_x - motor_diameter - 1.5*back_part_crop, plate_size_y ,plate_size_z]);
                         }
 
 
@@ -174,7 +179,8 @@ module 888_1020(draft = true){
                         rotate([0,0,45]){
                             for (i=[[0,1],[0,-1],[1,0], [-1,0]]) {
                                 translate([i[0]*motor_mounting_diameter/2, i[1]*motor_mounting_diameter/2, 0]){
-                                    cylinder(d = motor_screw_diameter, h = 50, , $fn = draft ? 10 : 50);
+                                    translate([0,0,M3_screw_head_height+global_clearance+0.03])
+                                        cylinder(d = motor_screw_diameter, h = 50, , $fn = draft ? 10 : 50);
                                     cylinder(d = M3_nut_diameter, h = M3_screw_head_height+ global_clearance, $fn = draft ? 10 : 50);
                                 }
                             }
@@ -240,18 +246,20 @@ module 888_1020(draft = true){
                             rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
                             30], center=true);
                     
-                    translate([xdst+xsize/2,
+                    translate([xdst+(zebra_x+rotor_ax_neck_diameter/2-xdst)/2,
                                 0,
                                 15+plate_size_z])
-                            cube([xsize,
+                            cube([(zebra_x+rotor_ax_neck_diameter/2-xdst),
                                 rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
-                                30], center=true);                     
-                            
-                    translate([(plate_size_x - motor_diameter - back_part_crop)/2+5,0,brit_height+plate_size_z])
-                        rotate([0,40,0])
-                            cube([rotor_head_wall_height,
+                                30], center=true);                   
+                                
+                                
+                                //zkoseni zadní časti       
+                    translate([zebra_x+rotor_ax_neck_diameter/2,0,sqrt(2)*rotor_head_wall_height+plate_size_z])
+                        rotate([0,45,0])
+                            cube([2*rotor_head_wall_height,
                             rotor_head_kardan_inner_y+2*(rotor_head_brit_width+rotor_head_cardan_clearance),
-                            rotor_head_wall_height],center=true);
+                            2*rotor_head_wall_height],center=true);
                 }
                 
                 
@@ -273,23 +281,29 @@ module 888_1020(draft = true){
                 }
             }
             
-         //žebra
-         zebra_x=(rotor_head_kardan_inner_x )/2;
-         zebra_y=rotor_head_kardan_inner_y/2;
-         zebra_th=2;
-        
-         for(i=[0,45,135,180,225,315]){
-            translate([0,0,plate_size_z])
-                rotate([0,0,i])
-                    translate([rotor_ax_neck_diameter/2,-zebra_th/2,0])
-                        cube([1.5*zebra_x,zebra_th,brit_height]);
+         //žebra        
+         for(i=[45,135,225,315]){
+            translate([0,0,plate_size_z-zebra_inplate])
+                rotate([0,0,i])                    
+                        difference(){                            
+                            translate([rotor_ax_neck_diameter/2,-zebra_th/2,0])
+                                cube([1.54*(zebra_x),zebra_th,brit_height]);
+                            for(j=[0:1:10])
+                                translate([rotor_ax_neck_diameter/2+j*3*zebra_th,0,brit_height])
+                                    cube([zebra_th,2*zebra_th,2*brit_height],center=true);
+                        }
          }
          
-         for(i=[90,270]){
-            translate([0,0,plate_size_z])
+         for(i=[0,90,180,270]){
+            translate([0,0,plate_size_z-zebra_inplate])
                 rotate([0,0,i])
-                    translate([rotor_ax_neck_diameter/2,-zebra_th/2,0])
-                        cube([zebra_x-rotor_head_brit_width-0.5*rotor_head_cardan_clearance,zebra_th,brit_height]);
+                    difference(){
+                        translate([rotor_ax_neck_diameter/2,-zebra_th/2,0])
+                            cube([zebra_x-rotor_head_brit_width-0.5*rotor_head_cardan_clearance,zebra_th,brit_height]);
+                            for(j=[0:1:10])
+                                translate([rotor_ax_neck_diameter/2+j*3*zebra_th,0,brit_height])
+                                    cube([zebra_th,2*zebra_th,2*brit_height],center=true);
+                        }
          }
          
          
