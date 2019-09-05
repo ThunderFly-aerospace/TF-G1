@@ -38,20 +38,20 @@ module piston(shift = 32){
 ch = chassis_height;
 color("red")
     translate([2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
-        cube([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height]);
+        cube([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height]);
 
 color("green")
-    translate([-chassis_pipe_baselength_r - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
-        cube([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height]);
+    translate([-chassis_pipe_baselength_f - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1], -ch + 2017_pipe_mount_offset[2]])
+        cube([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height]);
 
 echo(str("Delka predniho ramene je ", mod([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
 echo(str("Delka  zadniho ramene je ", mod([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
 //
-//color("blue")
-//    translate([ - 2017_pipe_mount_offset[0], 2017_bearing_mount_offset[1] + chassis_pipe_wheelbase, -ch + 2017_pipe_mount_offset[2]])
-//        rotate([0, 0, 180])
-//        orientate(chassis_arm_f, [0, 0, 1])
-//            cylinder(d = 10, h = 500);
+color("blue")
+    translate([ -2017_pipe_mount_offset[0], -2017_bearing_mount_offset[1] - chassis_pipe_wheelbase, -ch + 2017_pipe_mount_offset[2]])
+        rotate([0, 0, 0])
+        orientate([-chassis_pipe_baselength_f, chassis_wheelbase, chassis_height], [0, 0, 1])
+            cylinder(d = 10, h = 500);
 
 
 
@@ -80,48 +80,51 @@ translate([0, -chassis_wheelbase/2, -chassis_height])
 
 
 
-translate([chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-    orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+translate([-chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([-chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
         rotate([0, 90, 90])
             888_2013(front = 1, left = 1);
 
-translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-    orientate([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
+translate([-chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([-chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
         rotate([0, 90, 90])
             888_2013(front = 0, left = 1);
 
-translate([-chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-    orientate([-chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+translate([chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
         rotate([0, 90, 90])
             888_2013(front = 1, left = 0);
 
-translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-    orientate([-chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
+translate([chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    orientate([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
         rotate([0, 90, 90])
             888_2013(front = 0, left = 0);
 
 
 // KSTM kulova loziska pod nosnikem virniku
 color("navy"){
-    translate([chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+    translate([chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
         orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
             rotate([180, 0, 90]) kstm_08();
-    translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-        orientate([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
+    translate([chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
             rotate([180, 0, 90]) kstm_08();
-    translate([-chassis_baselength_r, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-        orientate([-chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
+    translate([-chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([-chassis_pipe_baselength_f, -chassis_pipe_wheelbase, chassis_height])
             rotate([180, 0, 90]) kstm_08();
-    translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
-        orientate([-chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
+    translate([-chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
+        orientate([-chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
             rotate([180, 0, 90]) kstm_08();
 }
 
 
-color("blue"){
+color([0.2, 0.2, 0.6, 0.7]){
+    translate([-chassis_baselength_f, 0, 0])
+        rotate([0, 0, 180])
+            888_2027(chassis_baselength_f);
 
-    translate([chassis_baselength_f, 0, 0])
-        888_2027();
+    translate([chassis_baselength_r, 0, 0])
+        888_2027(chassis_baselength_r);
 }
 
 
