@@ -1,3 +1,8 @@
+include <../parameters.scad>
+use <./lib/naca4.scad>
+use <666_1025.scad>
+use <888_1000.scad>
+
 /*
 // Nastavení zobrazení
 $vpr = [338, 0, 357];
@@ -24,7 +29,7 @@ module screw_top (position_number, draft){
                     union(){
                         cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
                         translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
-                            cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                            cube([M3_nut_diameter, M3_nut_diameter+20, M3_nut_height]);
                         translate([0,0, M3_nut_height + 2*hull_wall_thickness])
                             cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
                     }
@@ -226,11 +231,6 @@ module 888_1005_cut(){
 
 //translate([55,0,0])
 888_1005();
-//888_1005_cut();
+//88_1005_cut();
 //rotate([90,0,0])
 //666_1025(draft);
-
-use <./lib/naca4.scad>
-use <666_1025.scad>
-include <../parameters.scad>
-use <888_1000.scad>
