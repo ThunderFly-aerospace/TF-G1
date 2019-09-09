@@ -7,7 +7,7 @@ $fn=100;
 
 CP=2415; //číslo profilu NACA - první pouzite je 12
 HP=50; //hloubka profilu tj, v ose x
-DF=70; //délka formy tj, v ose z
+DF=100; //délka formy tj, v ose z
 VF=25; //výška formy tj, v ose y
 SF=HP+40; //šířka formy tj, v ose x
 //poloměr vodící trubky
@@ -25,7 +25,7 @@ LDOK=10; // vzdálenost díry pro spojení polovin forem k sobě od kraje formy
 // rozměry příruby
 SPri=SF+0; // v ose x
 DPri=VF+40;// v ose y
-VPri=10;
+VPri=6;
 //posuny příruby
 dXPri=(SPri-SF)/2;
 dYPri=(DPri-VF)/2;
@@ -56,20 +56,31 @@ difference ()
           translate ([SF-LDOK,50,DF/2]) rotate ([90,0,0])   cylinder (h=100,d=M4_screw_diameter);
           translate ([SF-LDOK,50,VPri+10]) rotate ([90,0,0])   cylinder (h=100,d=M4_screw_diameter);
           translate ([SF-LDOK,50,DF-(VPri+10)]) rotate ([90,0,0])   cylinder (h=100,d=M4_screw_diameter);
-// díry v přírubách
-for (i=[x1,x2])
-for (j=[y1,y2])
-for (k=[z1,z2])  {translate ([i,j,k])  cylinder (h=30,d=M4_screw_diameter);};
+
+    // díry v přírubách
+    for (i=[x1,x2])
+        for (j=[y1,y2])
+            for (k=[z1,z2])
+                translate ([i,j,k])
+                    cylinder (h=30,d=M4_screw_diameter);
+    for (i=[x1,x2])
+        for (j=[y1,y2])
+            for (k=[3])
+                translate ([i,j,k])
+                    cylinder (h=30,d=M4_nut_diameter, $fn = 6);
+
 
      }
 // žebra
 
- TlZ=2;
+ TlZ=1.6;
  HlZ=(DPri-VF)/2;
  VyZ=DF;
 
- for (j=[-20,25])
- for (i=[0:4]) translate ([i*(SF-TlZ)/4,j,0]) cube ([TlZ,HlZ,VyZ]);
+    for (j=[-20,25])
+        for (i=[0:3])
+            translate ([i*(SF-TlZ)/3,j,0])
+                cube ([TlZ,HlZ,VyZ]);
 
 }
 //translate ([0,dY,0]) cube ([SPri,DPri,DF]);};// rozdílová kostka
