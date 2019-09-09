@@ -6,8 +6,8 @@ use  <../lib/naca4.scad>
 $fn=100;
 
 CP=2415; //číslo profilu NACA - první pouzite je 12
-HP=70; //hloubka profilu tj, v ose x
-DF=100; //délka formy tj, v ose z
+HP=50; //hloubka profilu tj, v ose x
+DF=70; //délka formy tj, v ose z
 VF=25; //výška formy tj, v ose y
 SF=HP+40; //šířka formy tj, v ose x
 //poloměr vodící trubky
