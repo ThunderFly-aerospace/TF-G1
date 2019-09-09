@@ -50,8 +50,8 @@ module 888_1015(draft){
                     hull() {
                         translate([0,-depth/2,0])
                             cube ([width/2, depth, 0.1]);
-                        translate([-width/2, -depth_pipe/2,0])
-                            cube ([width, depth_pipe, 0.1]);
+                        #translate([-width/3, -depth_pipe/2,0])
+                            cube ([width/3, depth_pipe, 0.1]);
 
                     }
                     //translate([-width/2,-depth/2,0])
@@ -68,7 +68,7 @@ module 888_1015(draft){
 
 
 		//otvory z dílu 666_1026
-		translate([17.5 - width/2,0,0])
+		translate([27 - width/2,0,0])
 			union(){
 			//vertikální trubka
 				translate([0,0,-global_clearance])
