@@ -47,6 +47,8 @@ rudder_servo_holes_z_offset = 26;
 
 draft = true;
 
+//test neceho
+
 // side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
 module 666_1028(side_choose = 1, draft){
 
