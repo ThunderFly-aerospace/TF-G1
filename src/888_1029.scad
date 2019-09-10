@@ -1,6 +1,10 @@
 include <../parameters.scad>
+use <lib/servo.scad>
 
 draft = true;
+if (draft) {
+    $fn = 10;
+}
 
 module pipes(diameter = pilon_pipe_diameter, length = 100, draft = false){
     length_front = mod([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube+pilon_pipe_base_front_z]) + 5;
@@ -13,7 +17,6 @@ module pipes(diameter = pilon_pipe_diameter, length = 100, draft = false){
                 translate([0, 0, -5]) cylinder(d = diameter, h = length_front, $fn = draft? 20 : 50);
 
 // zadni tyc
-
     length_rear = mod([-pilon_pipe_base_rear_x+pilon_pipe_head_rear_x, 0, -height_of_vertical_tube+pilon_pipe_base_rear_z]);
 
     translate([-pilon_pipe_head_rear_x, 0, 0])
@@ -89,58 +92,153 @@ module pipes_top_screw(position = 100, draft = false){
             }
 }
 
+
 module 888_1029() {
     pilon_info();
-    %pipes(pilon_pipe_diameter, 500);
+    //%pipes(pilon_pipe_diameter, 500);
     difference(){
-                union(){
-
-                    //#translate([0, 0, 5])
-                    //    cube([pilon_pipe_head_distance_x, pilon_pipe_head_distance_y, 10], center = true);
-
+        union(){
+            intersection(){
+                hull(){
                     intersection(){
-                        hull()
-                            pipes(14, 200);
-                        cube([100, 100, 30], center = true);
+                        pipes(16, 200);
+                        translate([-50, -50, -40])
+                            cube([100, 100, 85]);
+
                     }
+                    translate([0, 0, rotor_head_height-2])
+                        rotate([0, -rotor_head_rank_angle, 0])
+                            cube([70, rotor_head_width, 10], center = true);
+                    //translate([-5, 50, 0]) rotate([0, 180, 180]) LW_20MG_base_cube(5);
+                    //translate([-5, -50, 0]) rotate([0, 180, 0]) LW_20MG_base_cube(5);
                 }
+                translate([-50, -50, -40])
+                    cube([100, 100, 85]);
+            }
 
+        }
 
-            // kostky k odecneti od rohu dilu
-                // predni tyce
-                    translate([pilon_pipe_head_front_x, pilon_pipe_head_front_y, 0])
-                            orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=0)
-                                translate([-25, -20, -50])
-                                    cube([50, 20, 100]);
-
-                    translate([pilon_pipe_head_front_x, -pilon_pipe_head_front_y, 0])
-                            orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=0)
-                                #translate([-25, 0, -50])
-                                    cube([50, 20, 100]);
+        //translate([0, 0, 0]) cardan(draft);
 
                 // zadni tyc
-                    translate([-pilon_pipe_head_rear_x, 0, 0])
-                        orientate([-pilon_pipe_base_rear_x+pilon_pipe_head_rear_x, 0, -height_of_vertical_tube],vref=[0,0,1], roll=0)
-                            translate([0, 0, -5]) cylinder(d = pilon_pipe_diameter, h = 100 + 5, $fn = draft? 20 : 50);
+        translate([-pilon_pipe_head_rear_x, 0, 0])
+            orientate([-pilon_pipe_base_rear_x+pilon_pipe_head_rear_x, 0, -height_of_vertical_tube],vref=[0,0,1], roll=0)
+                translate([0, 0, -5])
+                    cylinder(d = pilon_pipe_diameter, h = 100 + 5, $fn = draft? 20 : 50);
 
 
-                %translate([0, 0, -height_of_vertical_tube])
-                    cylinder(h = height_of_vertical_tube, d = 20);
-                pipes(pilon_pipe_diameter, 500);
-                pipes_top_screw();
+        pipes(pilon_pipe_diameter, 50);
+
+
+
+        //#translate([-5, 50, -40]) rotate([0, 180, 180]) LW_20MG(circle = 0);
+        //#translate([-5, -50, -40]) rotate([0, 180, 0]) LW_20MG(circle = 0);
+
 
     }
 }
 
 
-module 888_1029_clamp(){
+module kardan_brit_oposite_model(lenght)
+{
+    difference(){
+        translate([0,0,lenght/2-rotor_head_wall_height/2])
+            cube([rotor_head_brit_width+1.5*rotor_head_cardan_clearance+0.01,lenght,lenght], center=true);
+        translate([0,0,-rotor_head_wall_height*sqrt(2)])
+            rotate([45,0,0])
+                cube(2*rotor_head_wall_height, center=true);
+
+        }
+}
+
+module cardan(draft = false){
+
+    //priruba pro lozisko
+    translate([-rotor_head_bearing_x_shift,0, rotor_head_height])
+        rotate([0, -rotor_head_rank_angle, 0]){
+
+            // základní tvar pro prirubu
+            translate([0, 0, 15-rotor_head_bearing_a_center_of_rotation])
+                cube([rotor_head_bearing_width+global_clearance, rotor_head_bearing_width+global_clearance, 30], center=true);
+
+            translate([0, 0, -18-60+0.3])
+                cylinder(h=90, d=rotor_head_bearing_db);
+
+            for (i=[[rotor_head_bearing_m/2, rotor_head_bearing_m/2, -25, 0],
+                [-rotor_head_bearing_m/2, rotor_head_bearing_m/2, -25, 0],
+                [-rotor_head_bearing_m/2, -rotor_head_bearing_m/2, -25, 1],
+                [rotor_head_bearing_m/2, -rotor_head_bearing_m/2, -25, 1]]) {
+                translate(i+[0,0,10]){
+                    //bridged screw hole
+                    translate([0,0,-M5_nut_height/2 + layer])
+                        cylinder(h = 30, d = M5_screw_diameter, $fn = draft ? 10 : 60);
+
+                    translate([0,0,-1.5*M5_nut_height])
+                    {
+                        rotate([0,0,30])
+                            cylinder(h = M5_nut_height, d = M5_nut_diameter, $fn = 6);
+                        rotate([0, 0, i[3]*180])
+                            translate([-M5_nut_pocket/2, 0, 0])
+                                cube([M5_nut_pocket, 20, M5_nut_height]);
+
+                        //bridged screw hole
+                        translate([0, 0, -M5_nut_pocket/2])
+                            cylinder(h = M5_nut_pocket, d = M5_screw_diameter, $fn = draft ? 10 : 60);
+
+                        /*//bridged screw hole
+                        translate([0, 0, -7-3])
+                            cylinder(h = 7, d = M5_screw_diameter, $fn = draft ? 20 : 100);*/
+                    }
+
+                }
+            //brity
+            xdst=(rotor_head_bearing_width+global_clearance+1.5*rotor_head_cardan_clearance+rotor_head_brit_width)/2;
+            translate([xdst,0,0])
+                rotate([rotor_head_roll_stop,0,0])
+                         kardan_brit_oposite_model(70);
+            translate([-xdst,0,0])
+                rotate([rotor_head_roll_stop ,0,0])
+                        kardan_brit_oposite_model(70);
+            translate([xdst,0,0])
+                rotate([-rotor_head_roll_stop,0,0])
+                        kardan_brit_oposite_model(70) ;
+            translate([-xdst,0,0])
+                rotate([-rotor_head_roll_stop,0,0])
+                        kardan_brit_oposite_model(70);
+            //zuzeni
+            translate([0,rotor_head_bearing_width/2+35,0])
+               cube([100,70,30], center=true);
+            translate([0,-rotor_head_bearing_width/2-35,0])
+               cube([100,70,30], center=true);
+
+            //elegance
+            translate([(rotor_head_bearing_width+global_clearance)/2+1.5*rotor_head_cardan_clearance+rotor_head_brit_width,0,0])
+            translate([35*sqrt(2)+1,0,0])
+                rotate([0,45,0])
+                    translate([-20, 0, 0])
+                        cube([70,70,70],center=true);
+           translate([-((rotor_head_bearing_width+global_clearance)/2+1.5*rotor_head_cardan_clearance+rotor_head_brit_width),0,0])
+            translate([-(35*sqrt(2)+1),0,0])
+                rotate([0,45,0])
+                    translate([0, 0, 20])
+                        cube([70,70,70],center=true);
+
+            }
+
+            // montazni otvor
+            //translate([-30/2-50-2, -30/2, -rotor_head_bearing_a1-20-4])
+            //    cube([30+50, 30, 13]);
+
+        }
 
 
 
 
 }
 
-888_1029();
+/* difference(){
+    cube(80, center = true);
+cardan();
+} */
 
-translate([50, 50, 0])
-    888_1029_clamp();
+888_1029();

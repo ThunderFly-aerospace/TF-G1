@@ -279,7 +279,7 @@ translate([40, 0, 0]) SB_2282();
 
 
 
-module LW_20MG()
+module LW_20MG(circle = 0)
 {
   //Model for the POWER HD
 
@@ -292,7 +292,7 @@ module LW_20MG()
   holes_distance = 10;
   holes_ears_distance = 49.0;
 
-  translate([-9.75,8.5,-30]) //align the shaft to 0-0
+  translate([-body_thickness/2,8.5,-30]) //align the shaft to 0-0
   union()
   {
     color("Gray")
@@ -334,14 +334,38 @@ module LW_20MG()
     union()
     {
       //shaft
-      translate([9.75,0,30])
-      rotate([90,0,0])
-      cylinder(r=2.5, h=4, $fn=100);
+        translate([body_thickness/2,0,30])
+            rotate([90,0,0])
+                cylinder(r=2.5, h=4, $fn=100);
+
+        translate([body_thickness/2,0,30])
+            rotate([90,0,0])
+                translate([-15, 0, 0])
+                    cylinder(r = circle, h=1, $fn=100);
 
     }
 
   }
 }
+
+// base_cube - zakladni dil pro odecteni dalsich casti..
+module LW_20MG_base_cube(border = 5)
+{
+  //Model for the POWER HD
+
+  body_height = 39.5;
+  body_thickness = 20.5;
+  body_length = 40.7;
+
+  ears_length = 54.5;
+  ear_length = (ears_length - body_length)/2;
+  holes_distance = 10;
+  holes_ears_distance = 49.0;
+
+  translate([-body_thickness/2 - border, 8.5*2, -30 - border]) //align the shaft to 0-0
+        cube([body_thickness + border*2, body_height+border ,body_length+border*3]);
+
+ }
 
 
 

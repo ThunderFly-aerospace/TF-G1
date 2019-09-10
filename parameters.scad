@@ -54,7 +54,7 @@ rotor_flap0 = 2;
 rotor_delta = 20;
 
 
-// parametry rotorove hlavy
+/* // parametry rotorove hlavy
 
 rotor_head_pitch = 0;
 rotor_head_roll = 0;
@@ -68,7 +68,7 @@ rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
 
 rotor_head_plate_bearing_center_distance = 14;     // vzdalenost horni spodni steny placky od stredu loziska
 rotor_head_limiter_above = 12; // jak moc vysoko ma byt divnotvar nad stredem loziska
-rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loziska
+rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loziska */
 
 // nastavení parametrů motoru
 
@@ -224,7 +224,7 @@ pilon_pipe_base_rear_z = beam_thickness/2;
 // vzhalenosti jednotlivych tyci u rotorove hlavy
 pilon_pipe_head_front_x = 20;
 pilon_pipe_head_front_y = 20;
-pilon_pipe_head_rear_x = 20;
+pilon_pipe_head_rear_x = 30;
 
 cover_pilon_position = 180;
 height_of_vertical_tube = 275; //278mm je změřená délka trubky.
@@ -531,6 +531,43 @@ servo_20kg_below = 25.8; // jak hluboko je páka serva pod drzaky na srouby
 
 servo_20kg_bolt_d = 2.5+0.3;
 servo_20kg_nut_d = 5+0.3;
+
+
+
+// parametry rotorove hlavy
+
+rotor_head_pitch = 0;
+rotor_head_roll = 0;
+
+rotor_head_height = 20; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
+rotor_head_width = 30; // je to "sirka" v ose X
+rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
+rotor_head_bearing_x_shift = 5; // posun kuloveho loziska dopredu dozadu.
+
+rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
+
+rotor_head_roll_stop=10;//max roll angle
+rotor_head_pitch_stop=15;//max pitch angle
+
+rotor_head_brit_width=5;
+rotor_head_plate_thickness=3;
+
+rotor_head_cardan_clearance=1;
+
+rotor_head_bearing_width=bearing_efsm_12_width;//širka podstavy x
+rotor_head_bearing_h=bearing_efsm_12_h;//delka podstavy y
+rotor_head_bearing_db=bearing_efsm_12_db;//sirka vnitrniho vyviseni
+rotor_head_bearing_m=bearing_efsm_12_m;//vzdalenost stredu sroubku
+rotor_head_bearing_d=bearing_efsm_12_d;//tloušťka osičky
+rotor_head_bearing_a1=bearing_efsm_12_a1;//vyška priruby pro sroubky
+rotor_head_bearing_ag=bearing_efsm_12_ag;
+rotor_head_bearing_a_center_of_rotation=8; //vyska stredu otaceni
+rotor_head_bearing_screw_head_height=3.5;
+
+//rotor_head computed parameters
+rotor_head_wall_height=2*((rotor_head_bearing_a1+rotor_head_bearing_screw_head_height-rotor_head_bearing_a_center_of_rotation+rotor_head_bearing_width/2*tan(rotor_head_roll_stop))*cos(rotor_head_roll_stop));//height of side wall of center part
+rotor_head_kardan_inner_x=rotor_head_bearing_width+2*rotor_head_cardan_clearance;
+rotor_head_kardan_inner_y=2*(rotor_head_bearing_h/2*1/cos(rotor_head_pitch_stop)+rotor_head_wall_height/2*tan(rotor_head_pitch_stop)); //center part
 
 
 
