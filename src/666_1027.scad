@@ -5,6 +5,20 @@ $vpt = [180, 25, -18];
 $vpd = 1280;
 */
 
+use <./lib/naca4.scad>
+use <./lib/igus.scad>
+use <./lib/vector.scad>
+include <../parameters.scad>
+use <666_1032.scad>
+use <666_1004.scad>
+//use <666_1026.scad>
+use <888_1001.scad>
+use <666_1025.scad>
+use <666_1029.scad>
+use <888_1000.scad>
+use <888_1001.scad>
+use <888_1003.scad>
+
 draft = true;
 
 
@@ -452,28 +466,28 @@ echo(floor (C));
 
         // Pripevneni rotorove hlavy
         translate([main_pilon_position, 0, 0]){
-            translate([pilon_pipe_base_distance_x/2, 0, pilon_pipe_base_distance_y/2]) cylinder(d = pilon_pipe_diameter, h = 1000, center=true);
-            translate([pilon_pipe_base_distance_x/2, 0, pilon_pipe_base_distance_y/2])
+            translate([pilon_pipe_base_front_x/2, 0, pilon_pipe_base_front_y/2]) cylinder(d = pilon_pipe_diameter, h = 1000, center=true);
+            translate([pilon_pipe_base_front_x/2, 0, pilon_pipe_base_front_y/2])
                 cylinder(d = pilon_pipe_diameter, h = 100);
-            //translate([pilon_pipe_base_distance_x/2, 0, pilon_pipe_base_distance_y/2])
+            //translate([pilon_pipe_base_front_x/2, 0, pilon_pipe_base_front_y/2])
 
             %rotate([-90, 0, 0])
                 cylinder(h = height_of_vertical_tube, d = 20);
 
-            translate([-(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2 - pilon_pipe_head_distance_x/2, 0, (pilon_pipe_base_distance_y)/2])
-                orientate([(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, -(pilon_pipe_base_distance_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
+            translate([-(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2 - pilon_pipe_head_distance_x/2, 0, (pilon_pipe_base_front_y)/2])
+                orientate([(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, -(pilon_pipe_base_front_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
                     translate([0, 0, -30]) cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 50);
 
-            translate([-(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2 - pilon_pipe_head_distance_x/2, 0, -(pilon_pipe_base_distance_y)/2])
-                orientate([(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, (pilon_pipe_base_distance_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
+            translate([-(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2 - pilon_pipe_head_distance_x/2, 0, -(pilon_pipe_base_front_y)/2])
+                orientate([(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, (pilon_pipe_base_front_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
                     translate([0, 0, -30]) cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 50);
 
-            translate([(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2 + pilon_pipe_head_distance_x/2, 0, (pilon_pipe_base_distance_y)/2])
-                orientate([-(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, -(pilon_pipe_base_distance_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
+            translate([(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2 + pilon_pipe_head_distance_x/2, 0, (pilon_pipe_base_front_y)/2])
+                orientate([-(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, -(pilon_pipe_base_front_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
                     translate([0, 0, -30]) cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 50);
 
-            translate([(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2 + pilon_pipe_head_distance_x/2, 0, -(pilon_pipe_base_distance_y)/2])
-                orientate([-(pilon_pipe_base_distance_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, (pilon_pipe_base_distance_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
+            translate([(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2 + pilon_pipe_head_distance_x/2, 0, -(pilon_pipe_base_front_y)/2])
+                orientate([-(pilon_pipe_base_front_x-pilon_pipe_head_distance_x)/2, height_of_vertical_tube, (pilon_pipe_base_front_y-pilon_pipe_head_distance_y)/2],vref=[0,0,1], roll=0)
                     translate([0, 0, -30]) cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 50);
 
         }
@@ -813,16 +827,3 @@ translate([move_of_accumulator ,main_tube_outer_diameter/2 + coupling_wall_thick
     rotate([-90,0,0])
         888_1001();
 */
-use <./lib/naca4.scad>
-use <./lib/igus.scad>
-use <./lib/vector.scad>
-include <../parameters.scad>
-use <666_1032.scad>
-use <666_1004.scad>
-//use <666_1026.scad>
-use <888_1001.scad>
-use <666_1025.scad>
-use <666_1029.scad>
-use <888_1000.scad>
-use <888_1001.scad>
-use <888_1003.scad>

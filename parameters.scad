@@ -63,12 +63,11 @@ rotor_head_height = 78; // vzdalenost spodni zakladny rotorove hlavy od stredu k
 rotor_head_width = 70; // je to "sirka" v ose X
 rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
 rotor_head_bearing_x_shift = -0; // posun kuloveho loziska dopredu dozadu.
-
-rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
+*/
 
 rotor_head_plate_bearing_center_distance = 14;     // vzdalenost horni spodni steny placky od stredu loziska
 rotor_head_limiter_above = 12; // jak moc vysoko ma byt divnotvar nad stredem loziska
-rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loziska */
+rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loziska
 
 // nastavení parametrů motoru
 
@@ -213,7 +212,7 @@ main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od p�
 
 // vzdalenosti jsou pocitany od stredu rotoru
 // vzdalenosti jednotlivych tyci u podlozky
-pilon_pipe_base_front_x = 30;
+//pilon_pipe_base_front_x = 30;
 pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*5.5;
 pilon_pipe_base_front_y = 55;
 pilon_pipe_base_front_z = 0;
@@ -539,10 +538,10 @@ servo_20kg_nut_d = 5+0.3;
 rotor_head_pitch = 0;
 rotor_head_roll = 0;
 
-rotor_head_height = 20; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
+rotor_head_height = 25; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
 rotor_head_width = 30; // je to "sirka" v ose X
 rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
-rotor_head_bearing_x_shift = 5; // posun kuloveho loziska dopredu dozadu.
+rotor_head_bearing_x_shift = 10; // posun kuloveho loziska dopredu dozadu.
 
 rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
 

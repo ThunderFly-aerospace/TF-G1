@@ -13,7 +13,7 @@ IMAGES=$(patsubst $(SRC_DIR)/%.scad, $(IMG_DIR)/%.png, $(SOURCES))
 all: default images
 
 calibration:
-	openscad -m make -o calibration.stl calibration.scad
+	$(OPENSCAD_APP) -m make -o calibration.stl calibration.scad
 
 default: $(TARGETS)
 

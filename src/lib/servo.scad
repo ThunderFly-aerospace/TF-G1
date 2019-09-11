@@ -1,6 +1,6 @@
 //parametry pro serva
 //značení parametrů: https://www.servocity.com/media/wysiwyg/products/servos/hitec-servos/standard_servos/31422S/Standard_Servo_Schematic_2_1_.jpg
-
+include <../../parameters.scad>
 
 module MG995()
 {
@@ -279,7 +279,7 @@ translate([40, 0, 0]) SB_2282();
 
 
 
-module LW_20MG(circle = 0)
+module LW_20MG(circle = 0, circle_pos = 0)
 {
   //Model for the POWER HD
 
@@ -339,30 +339,76 @@ module LW_20MG(circle = 0)
                 cylinder(r=2.5, h=4, $fn=100);
 
         translate([body_thickness/2,0,30])
-            rotate([90,0,0])
-                translate([-15, 0, 0])
-                    cylinder(r = circle, h=1, $fn=100);
+            rotate([90,circle_pos,0])
+                translate([-15, 0, 0]){
+                    cylinder(r = circle, h=1, $fn=30);
+                    cylinder(r = 1, h=5, $fn=30);
+                }
 
     }
 
   }
 }
 
+module LW_20MG_screw(depth = 15){
+
+    body_height = 39.5;
+    body_thickness = 20.5;
+    body_length = 40.7;
+
+    ears_length = 54.5;
+    ear_length = (ears_length - body_length)/2;
+    holes_distance = 10;
+    holes_ears_distance = 49.0;
+
+    translate([-body_thickness/2,8.5,-30]){
+
+        translate([ body_thickness/2 + holes_distance/2,9 + depth, -(holes_ears_distance - body_length)/2])
+            rotate([90,0,0]){
+                cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
+                translate([0, 0, 5]) cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
+                translate([-M3_nut_diameter/2, -30, 5]) cube([M3_nut_diameter, 30, M3_nut_height]);
+        }
+
+        translate([ body_thickness/2 - holes_distance/2,9 + depth,-(holes_ears_distance - body_length)/2])
+            rotate([90,0,0]){
+                cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
+                translate([0, 0, 5]) cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
+                translate([-M3_nut_diameter/2, -30, 5]) cube([M3_nut_diameter, 30, M3_nut_height]);
+        }
+
+        translate([ body_thickness/2 + holes_distance/2,9 + depth, body_length+(holes_ears_distance - body_length)/2])
+            rotate([90,0,0]){
+                cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
+                translate([0, 0, 5]) cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
+                translate([-M3_nut_diameter/2, -20, 5]) cube([M3_nut_diameter, 20, M3_nut_height]);
+        }
+
+        translate([ body_thickness/2 - holes_distance/2,9 + depth, body_length+(holes_ears_distance - body_length)/2])
+            rotate([90,0,0]){
+                cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
+                translate([0, 0, 5]) cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
+                translate([-M3_nut_diameter/2, -20, 5]) cube([M3_nut_diameter, 20, M3_nut_height]);
+        }
+    }
+
+}
+
 // base_cube - zakladni dil pro odecteni dalsich casti..
 module LW_20MG_base_cube(border = 5)
 {
-  //Model for the POWER HD
+    //Model for the POWER HD
 
-  body_height = 39.5;
-  body_thickness = 20.5;
-  body_length = 40.7;
+    body_height = 39.5;
+    body_thickness = 20.5;
+    body_length = 40.7;
 
-  ears_length = 54.5;
-  ear_length = (ears_length - body_length)/2;
-  holes_distance = 10;
-  holes_ears_distance = 49.0;
+    ears_length = 54.5;
+    ear_length = (ears_length - body_length)/2;
+    holes_distance = 10;
+    holes_ears_distance = 49.0;
 
-  translate([-body_thickness/2 - border, 8.5*2, -30 - border]) //align the shaft to 0-0
+    translate([-body_thickness/2 - border, 8.5*2, -30 - border*1.5]) //align the shaft to 0-0
         cube([body_thickness + border*2, body_height+border ,body_length+border*3]);
 
  }
