@@ -1,5 +1,5 @@
 include <../parameters.scad>
-use <lib/servo.scad>
+include <lib/servo.scad>
 use <lib/igus.scad>
 
 draft = $preview;
@@ -36,65 +36,43 @@ module pipes_top_screw(position = 100, draft = false){
 // predni tyce
     translate([pilon_pipe_head_front_x, pilon_pipe_head_front_y, 0])
         orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=0)
-            union(){
-                translate([0, 10, 0])
+            union() for(h = [0, 10, 60]){
+                translate([0, 10, h])
                     rotate([90, 180, 0]){
                         translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
                         translate([0, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
                     }
-                translate([0, 10, 10])
-                    rotate([90, 0, 0]){
-                        translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
-                    }
             }
 
 
     translate([pilon_pipe_head_front_x, -pilon_pipe_head_front_y, 0])
         orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=0)
-            union(){
-                translate([0, -10, 0])
+            union() for(h = [0, 10, 60]){
+                translate([0, -10, h])
                     rotate([-90, 180, 0]){
                         translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
                         translate([0, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
                     }
-                translate([0, -10, 10])
-                    rotate([-90, 0, 0]){
-                        translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
-                    }
             }
 
     // zadni tyc
     translate([-pilon_pipe_head_rear_x, 0, 0])
         orientate([-pilon_pipe_base_rear_x+pilon_pipe_head_rear_x, 0, -height_of_vertical_tube],vref=[0,0,1], roll=0)
-            union(){
-                translate([-10, 0, 0])
+            union() for(h = [0, 10, 60]){
+                translate([-10, 0, h])
                     rotate([-90, 0, -90]){
                         translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         rotate(30) translate([0, 0, -20]) cylinder(d = M3_nut_diameter, h = M3_nut_height+20, $fn = 6);
                         translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         //translate([0, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
                     }
-                translate([-10, 0, 10])
-                    rotate([90, 0, 90]){
-                        translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        rotate(30) translate([0, 0, -20]) cylinder(d = M3_nut_diameter, h = M3_nut_height+20, $fn = 6);
-                        translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        //translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
-                    }
             }
 }
 
-servo_shift = [-6, -49, -30];
 
 module 888_1029() {
     pilon_info();
@@ -106,29 +84,29 @@ module 888_1029() {
                     hull(){
                         intersection(){
                             pipes(16, 200);
-                            translate([-50, -50, -30])
+                            translate([-50, -50, -15])
                                 cube([100, 100, 85]);
 
                         }
                         translate([0, 0, rotor_head_height-2])
                             rotate([0, -rotor_head_rank_angle, 0])
                                 translate([-rotor_head_bearing_x_shift, 0, 0])
-                                    cube([70, rotor_head_width, 10], center = true);
+                                    cube([60, rotor_head_width, 10], center = true);
                         //translate([-5, 50, 0]) rotate([0, 180, 180]) LW_20MG_base_cube(5);
                         //translate([-5, -50, 0]) rotate([0, 180, 0]) LW_20MG_base_cube(5);
 
 
-                    translate(servo_shift)
+                    translate(rotor_head_servo_shift)
                         rotate([0, 180, 0])
                             LW_20MG_base_cube(5);
                     mirror([0, 1, 0])
-                    translate(servo_shift)
+                    translate(rotor_head_servo_shift)
                         rotate([0, 180, 0])
                             LW_20MG_base_cube(5);
                     }
                 }
 
-                translate([-50, -50, -30])
+                translate([-50, -50, -15])
                     cube([100, 100, 85]);
             }
 
@@ -144,26 +122,85 @@ module 888_1029() {
                     cylinder(d = pilon_pipe_diameter, h = 100 + 5, $fn = draft? 20 : 50);
 
 
-        //#translate(servo_shift)
-        //    cube([servo_20kg_body_y, servo_20kg_body_z, servo_20kg_body_x]);
-        translate(servo_shift)
+        translate(rotor_head_servo_shift)
             rotate([0, 180, 0]){
-                #LW_20MG(circle = 75, circle_pos = 150);
+                LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10);
                 LW_20MG_screw();
             }
         mirror([0, 1, 0])
-        translate(servo_shift)
+        translate(rotor_head_servo_shift)
             rotate([0, 180, 0]){
-                LW_20MG(circle = 75, circle_pos = 150);
+                LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10);
                 LW_20MG_screw();
             }
 
         pipes(pilon_pipe_diameter, 50);
         pipes_top_screw();
 
+        pos = [[-LW_20MG_thickness - rotor_head_servo_shift[0], 20, 0],
+               [LW_20MG_thickness - rotor_head_servo_shift[0], 20, 0],
+               [LW_20MG_thickness - rotor_head_servo_shift[0], -20, 180],
+               [-LW_20MG_thickness - rotor_head_servo_shift[0], -20, 180]];
+
+        for (i=pos) {
+            translate([i[0], i[1], -30+5])
+            rotate([0, 0, i[2]]){
+                //rotate([0, 0, 0])
+                    cylinder(d=M3_nut_diameter, h= M3_nut_height, $fn = 6);
+                translate([0, 0, -20])
+                    cylinder(h = 20, d= M3_screw_diameter, $fn = draft? 8:20);
+                translate([0, 0, M3_nut_height + layer])
+                    cylinder(h = 5, d= M3_screw_diameter, $fn = draft? 8:20);
+                translate([-M3_nut_diameter/2, 0, 0]) cube([M3_nut_diameter, 20, M3_nut_height]);
+            }
+        }
+
     }
+
+    translate([0, 0, rotor_head_servo_shift[2] + LM_20MG_axis_offset])
+    cylinder(d = 40, h = layer);
 }
 
+
+module 888_1029_servoholder(draft){
+
+    thickness = 15;
+    zpos = rotor_head_servo_shift[2] - thickness - (LM_20MG_length - LM_20MG_axis_offset);
+
+        difference(){
+            hull(){
+                translate([rotor_head_servo_shift[0]-15, -LM_20MG_length +9, zpos])
+                    cube([30,  LM_20MG_length + 23, thickness]);
+                intersection(){
+                    pipes(16, 200);
+                    translate([-50, -90/2, zpos])
+                        cube([100, 90, thickness]);
+                }
+            }
+
+            translate(rotor_head_servo_shift)
+                rotate([0, 180, 0]){
+                    LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10, screw_diameter = 0);
+                    LW_20MG_screw();
+                }
+            mirror([0, 1, 0])
+            translate(rotor_head_servo_shift + [0, 0, 0])
+                rotate([0, 180, 0]){
+                    LW_20MG(circle = 75, circle_pos = 165, depth_offset = 10, screw_diameter = 0);
+                    LW_20MG_screw();
+                }
+
+
+            pipes(pilon_pipe_diameter, 200);
+            pipes_top_screw();
+
+            translate([rotor_head_servo_shift[0]-15, -20, zpos-0.5])
+                cube([40, 40, thickness+1]);
+
+
+    }
+
+}
 
 module kardan_brit_oposite_model(lenght)
 {
@@ -267,13 +304,14 @@ kardan();
 } */
 
 888_1029();
+888_1029_servoholder();
 
 //pipes_top_screw();
 //pipes();
 if(draft)
 translate([0, 0, rotor_head_height])
 rotate([0, rotor_head_rank_angle, 180])
-translate([rotor_head_bearing_x_shift, 0, 10])
+translate([rotor_head_bearing_x_shift, 0, 16-4])
 import("../STL/333_1001.stl", convexity=3);
 
 if(draft)

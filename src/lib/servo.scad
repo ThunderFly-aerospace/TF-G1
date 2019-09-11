@@ -212,7 +212,7 @@ module MG995WithDoubleHorn(horn_angle=0)
   MG995DoubleHorn();
 }
 
-MG995WithSingleHorn(45);
+//MG995WithSingleHorn(45);
 
 
 
@@ -272,20 +272,23 @@ module SB_2282()
   }
 }
 
-
-translate([40, 0, 0]) SB_2282();
-
+//translate([40, 0, 0]) SB_2282();
 
 
+LW_20MG_height = 39.5;
+LW_20MG_thickness = 20.5;
+LM_20MG_length = 40.7;
+LM_20MG_ears_length = 54.5;
+LM_20MG_axis_offset = 30;
 
 
-module LW_20MG(circle = 0, circle_pos = 0)
+module LW_20MG(circle = 0, circle_pos = 0, depth_offset = 0, screw_diameter = 3.5)
 {
   //Model for the POWER HD
 
-  body_height = 39.5;
-  body_thickness = 20.5;
-  body_length = 40.7;
+  body_height = LW_20MG_height;
+  body_thickness = LW_20MG_thickness;
+  body_length = LM_20MG_length;
 
   ears_length = 54.5;
   ear_length = (ears_length - body_length)/2;
@@ -300,7 +303,7 @@ module LW_20MG(circle = 0, circle_pos = 0)
       union()
       {
         //main box
-        cube([body_thickness, body_height ,body_length]);
+        cube([body_thickness, body_height+depth_offset ,body_length]);
 
         //ears
         difference()
@@ -312,19 +315,19 @@ module LW_20MG(circle = 0, circle_pos = 0)
             //hole in ears
             translate([ body_thickness/2 + holes_distance/2,9, -(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
-            cylinder(d=4, h=4, $fn=100);
+            cylinder(d=screw_diameter, h=4, $fn=100);
 
             translate([ body_thickness/2 - holes_distance/2,9,-(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
-            cylinder(d=4, h=4, $fn=100);
+            cylinder(d=screw_diameter, h=4, $fn=100);
 
             translate([ body_thickness/2 + holes_distance/2,9, body_length+(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
-            cylinder(d=4, h=4, $fn=100);
+            cylinder(d=screw_diameter, h=4, $fn=100);
 
             translate([ body_thickness/2 - holes_distance/2,9, body_length+(holes_ears_distance - body_length)/2])
             rotate([90,0,0])
-            cylinder(d=4, h=4, $fn=100);
+            cylinder(d=screw_diameter, h=4, $fn=100);
         }
 
 
@@ -334,11 +337,11 @@ module LW_20MG(circle = 0, circle_pos = 0)
     union()
     {
       //shaft
-        translate([body_thickness/2,0,30])
+        translate([body_thickness/2,0,LM_20MG_axis_offset])
             rotate([90,0,0])
                 cylinder(r=2.5, h=4, $fn=100);
 
-        translate([body_thickness/2,0,30])
+        translate([body_thickness/2,0,LM_20MG_axis_offset])
             rotate([90,circle_pos,0])
                 translate([-15, 0, 0]){
                     cylinder(r = circle, h=1, $fn=30);
@@ -367,14 +370,14 @@ module LW_20MG_screw(depth = 15){
             rotate([90,0,0]){
                 cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
                 translate([0, 0, 5]) cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
-                translate([-M3_nut_diameter/2, -30, 5]) cube([M3_nut_diameter, 30, M3_nut_height]);
+                translate([-M3_nut_diameter/2, 0, 5]) cube([M3_nut_diameter, 30, M3_nut_height]);
         }
 
         translate([ body_thickness/2 - holes_distance/2,9 + depth,-(holes_ears_distance - body_length)/2])
             rotate([90,0,0]){
                 cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
                 translate([0, 0, 5]) cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
-                translate([-M3_nut_diameter/2, -30, 5]) cube([M3_nut_diameter, 30, M3_nut_height]);
+                translate([-M3_nut_diameter/2, 0, 5]) cube([M3_nut_diameter, 30, M3_nut_height]);
         }
 
         translate([ body_thickness/2 + holes_distance/2,9 + depth, body_length+(holes_ears_distance - body_length)/2])
@@ -414,5 +417,4 @@ module LW_20MG_base_cube(border = 5)
  }
 
 
-
-translate([80, 0, 0]) LW_20MG();
+//translate([80, 0, 0]) LW_20MG();
