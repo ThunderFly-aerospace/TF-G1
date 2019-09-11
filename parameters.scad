@@ -226,7 +226,7 @@ pilon_pipe_head_front_y = 20;
 pilon_pipe_head_rear_x = 30;
 
 cover_pilon_position = 180;
-height_of_vertical_tube = 275; //278mm je změřená délka trubky.
+height_of_vertical_tube = 350; //278mm je změřená délka trubky.
 
 
 

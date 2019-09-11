@@ -73,6 +73,12 @@ module pipes_top_screw(position = 100, draft = false){
             }
 }
 
+module pipe_drill(draft){
+    translate([-10, -10, -5])
+        cube([20, 20, 60]);
+
+}
+
 
 module 888_1029() {
     pilon_info();
