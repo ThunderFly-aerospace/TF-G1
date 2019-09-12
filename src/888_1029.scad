@@ -74,8 +74,29 @@ module pipes_top_screw(position = 100, draft = false){
 }
 
 module pipe_drill(draft){
-    translate([-10, -10, -5])
-        cube([20, 20, 60]);
+
+    difference(){
+        translate([-15, -15, -7])
+            cube([30, 30, 100]);
+        translate([0, 0, -5+global_clearance])
+            cylinder(d = pilon_pipe_diameter, h  = 150, $fn = 25);
+
+        translate([-0.5, -20, 67])
+            cube([1, 40, 50]);
+
+        rotate([0, -90, 0]){
+            translate([ 0, 0, 0])  cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+            translate([10, 0, 0])  cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+            translate([60, 0, 0])  cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+
+            translate([85, 8, 0])  cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+            translate([85, -8, 0])  cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+            translate([85, 8, 7])  cylinder(d = M3_nut_diameter, h = 50, $fn = 6);
+            translate([85, -8, 7])  cylinder(d = M3_nut_diameter, h = 50, $fn = 6);
+            translate([85, 8, -50-7])  cylinder(d = M3_nut_diameter, h = 50, $fn = 20);
+            translate([85, -8, -50-7])  cylinder(d = M3_nut_diameter, h = 50, $fn = 20);
+        }
+    }
 
 }
 
@@ -308,6 +329,8 @@ module kardan(draft = false){
     cube(80, center = true);
 kardan();
 } */
+
+translate([0, 80, 0]) pipe_drill();
 
 888_1029();
 888_1029_servoholder();
