@@ -100,7 +100,7 @@ module 888_1020(draft = true){
     hole_r=(rotor_head_bearing_db/2*1/cos(rotor_head_roll_stop))-rotor_head_cardan_clearance;
     cone_h1=(rotor_head_wall_height/2+rotor_head_plate_thickness)-(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
     cone_d=2/3*rotor_ax_neck_diameter+((rotor_head_bearing_db-rotor_ax_neck_diameter)/cone_h1*rotor_ax_neck_height)-rotor_head_cardan_clearance;
-    back_part_crop = 20;
+    back_part_crop = 30;
 
     zebra_inplate=plate_size_z-3*layer;
     zebra_x=(rotor_head_kardan_inner_x )/2;
@@ -277,6 +277,9 @@ module 888_1020(draft = true){
                              cylinder(d = rotor_head_bearing_d , h = rotor_ax_neck_height+rotor_ax_bearing_ring_h + plate_size_z);
 
                     }
+
+                    #translate([ -(back_part_crop/2)-25, 0, plate_size_z/2])
+                        cube([50, plate_size_y, plate_size_z],center=true);
 
                     //otvor pro sroub rotoru
                     translate([0, 0, -(rotor_ax_neck_height+rotor_ax_bearing_ring_h)/2])
