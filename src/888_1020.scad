@@ -76,13 +76,13 @@ module 888_1020(draft = true){
 
     servo_join_y = 78; // vzdalenost kloubu pro servo
     servo_join_x = 45; // vzdalenost kloubku od osy rotoru
-    servo_join_size = 12;
+    servo_join_size = 10;
     servo_joint_z = 5; // jak moc nizko bude kloubek
 
     wall_thickness=4;
 
     //brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
-    brit_height = 12;
+    brit_height = rotor_head_wall_height;
 
 
     rotor_ax_neck_diameter=rotor_head_bearing_d+1;
@@ -92,9 +92,10 @@ module 888_1020(draft = true){
 
     plate_size_y = rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*wall_thickness;
     plate_size_x = plate_overlap + motor_distance + motor_diameter/2;
-    plate_size_z = 2;
+    plate_size_z = 5;
     echo("Sirka dilu je:", plate_size_y);
     echo("Delka dilu je:", plate_size_x);
+    echo("Delka krcku je:", rotor_ax_neck_height);
 
     hole_r=(rotor_head_bearing_db/2*1/cos(rotor_head_roll_stop))-rotor_head_cardan_clearance;
     cone_h1=(rotor_head_wall_height/2+rotor_head_plate_thickness)-(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
@@ -110,7 +111,7 @@ module 888_1020(draft = true){
             union(){
                 difference(){
                     union(){
-                        hull(){
+                        hull()union(){
                             translate([ ( back_part_crop)/2,0, plate_size_z/2])
                                 cube([plate_size_x - motor_diameter - back_part_crop, plate_size_y, plate_size_z],center=true);
                             // cast nad motorem
@@ -124,16 +125,16 @@ module 888_1020(draft = true){
                         }
 
                         // rameno, na kterem jsou kloubky pro servo
-                        hull(){
+                        hull()union(){
                                 translate([servo_join_x-servo_join_size/2, -servo_join_y/2, 0])
-                                    cube([servo_join_size, servo_join_y/4 ,servo_joint_z + 10]);
+                                    cube([servo_join_size, servo_join_y/4 ,servo_joint_z + 5]);
                                 translate([0, -plate_size_y/2, 0])
                                     cube([plate_size_x - motor_diameter - 1.5*back_part_crop, plate_size_y ,plate_size_z]);
                             }
                         // rameno, na kterem jsou kloubky pro servo
-                        hull(){
+                        hull()union(){
                             translate([servo_join_x-servo_join_size/2, servo_join_y/2 - servo_join_y/5, 0])
-                                cube([servo_join_size, servo_join_y/5 ,servo_joint_z + 10]);
+                                cube([servo_join_size, servo_join_y/5 ,servo_joint_z + 5]);
                             translate([0, -plate_size_y/2, 0])
                                 cube([plate_size_x - motor_diameter - 1.5*back_part_crop, plate_size_y ,plate_size_z]);
                         }
@@ -231,7 +232,7 @@ module 888_1020(draft = true){
                     //otvor por kardan
                     //brity
 
-                   /* translate([0,0,plate_size_z+brit_height])
+                    translate([0,0,plate_size_z+brit_height])
                         rotate([0,rotor_head_pitch_stop,0])
                             kardan_center_part_model();
 
@@ -262,7 +263,7 @@ module 888_1020(draft = true){
                         rotate([0,45,0])
                             cube([2*rotor_head_wall_height,
                             rotor_head_kardan_inner_y+2*(rotor_head_brit_width+rotor_head_cardan_clearance),
-                            2*rotor_head_wall_height],center=true); */
+                            2*rotor_head_wall_height],center=true);
                 }
 
 
