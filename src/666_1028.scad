@@ -15,7 +15,7 @@ screw_for_pipe_pos = 50;
 Rudder_angle = 90;
 
 //výstuhy tloušťka stěny
-infill_wall_thickness = 1;
+infill_wall_thickness = 2;
 
 //pusun serva
 servo_rudder_x_offset = 50;
@@ -25,7 +25,7 @@ servo_rudder_height = 30;
 servo_rudder_length = 32;
 servo_rudder_inside_length = 23.2;
 servo_rudder_screws_gap = 27;
-servo_rudder_screws_height = 15;
+servo_rudder_screws_height = 17;
 servo_rudder_mount_wall_thickness = 2;
 servo_rudder_mount_wall_offset = 3;
 servo_rudder_wire_hole_height = 5;
@@ -68,7 +68,7 @@ module 666_1028(side_choose = 1, draft){
                     //
                     //
                     //dutý profil
-                    hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = rudder_full_height, open = false, wall_thickness = 0.5);
+                    hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = rudder_full_height, open = false, wall_thickness = 1);
     
                     difference() {//diff
     
@@ -92,8 +92,8 @@ module 666_1028(side_choose = 1, draft){
                                                 }
     
                                         //vyztužení pro upevnění do tvaru A
-                                        translate([80, 0, 145])
-                                            cube([200, 20, shape_A_mount_thickness], center = true);
+                                        translate([80, 0, 140])
+                                            cube([200, 25, shape_A_mount_thickness], center = true);
     
                                         //vyztužní pro upevnění na trubku
                                         translate([20 + infill_wall_thickness, 0, tail_pipe_z_position])
@@ -129,9 +129,9 @@ module 666_1028(side_choose = 1, draft){
                                             cube([servo_rudder_length + infill_wall_thickness * 3 + servo_rudder_wire_hole_height, Rudder_depth * 2, servo_rudder_height + infill_wall_thickness * 2], center = true);
                                                 
                                         //servo wire guide
-                                        translate([servo_rudder_x_offset + 17.5, 0, tail_pipe_z_position - 8.5])
+                                        translate([servo_rudder_x_offset + 18.5, 0, tail_pipe_z_position - 8.5])
                                             rotate([0, - 35, 0])
-                                                cube([0.6, Rudder_depth + 2, 18.5], center = true);
+                                                cube([0.6, Rudder_depth + 2, 19], center = true);
                             }
                         }
     
@@ -146,9 +146,9 @@ module 666_1028(side_choose = 1, draft){
     
                     //otvory skrze celí model:
     
-                //díra pro uchycení směrovky
-                translate([rudder_full_height - Rudder_height + gap_width / 2, 0, - 3])
-                    cylinder(h = 160 + 6, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
+                //díra pro uchycení čepu směrovky
+                translate([rudder_full_height - Rudder_height + gap_width / 2, 0, 2])
+                    cylinder(h = 160, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
     
                 //vyříznutí boku do tvaru A
                 translate([75, - side_choose * 6, rudder_full_height])
@@ -244,14 +244,14 @@ module 666_1028(side_choose = 1, draft){
     
                     //otvor pro dráty
                     translate([servo_rudder_x_offset + servo_rudder_wire_hole_height / 2 + servo_rudder_length / 2 + infill_wall_thickness, 0, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness])
-                        cube([servo_rudder_wire_hole_height, servo_rudder_wire_hole_width, servo_rudder_height + infill_wall_thickness + 2], center = true);
+                        cube([servo_rudder_wire_hole_height, servo_rudder_wire_hole_width, servo_rudder_height + infill_wall_thickness * 2 + 1], center = true);
                     
-                    translate([servo_rudder_x_offset + 13.5, 0, tail_pipe_z_position - 20 - servo_rudder_height])
-                        cube([8, servo_rudder_wire_hole_width, 15], center = true);
+                    translate([servo_rudder_x_offset + 13.5, 0, tail_pipe_z_position - 14 - servo_rudder_height])
+                        cube([10, servo_rudder_wire_hole_width, 20], center = true);
     
                     translate([servo_rudder_x_offset + 7, 0, tail_pipe_z_position - 5])
                         rotate([90, 0, 0])
-                            cube([8, 8, 8], center = true);
+                            cube([10, 8, 8], center = true);
     
                     //otvor pro vykousnuti směrovky
                     translate([150 - Rudder_height - 2.5, 0, 75])
@@ -259,12 +259,16 @@ module 666_1028(side_choose = 1, draft){
             }
         }
         
-        //podpora tisku
+        //podpora tisku v miste upevneni trubky
         translate([24, 0, tail_pipe_z_position])
             difference() {
                 cube([mount_rudder_length + infill_wall_thickness * 2 - 9, Rudder_depth - 5, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 4], center = true);
                 cube([mount_rudder_length + infill_wall_thickness * 2 - 7, Rudder_depth - 6, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 6], center = true);
             }
+        
+        //podpora tisku u serva
+        translate([servo_rudder_x_offset + 13.5, 0, tail_pipe_z_position - 11 - servo_rudder_height])
+            cube([1, Rudder_depth, 14], center = true);
     }
 }
 
