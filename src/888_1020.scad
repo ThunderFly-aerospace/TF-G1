@@ -3,18 +3,18 @@ include <../parameters.scad>
 module kardan_center_part_model()
 {
 
-    b=2*rotor_head_wall_height;
+    b=3*rotor_head_wall_height;
 
     inner_x=rotor_head_kardan_inner_x;
     inner_y=rotor_head_kardan_inner_y;
     plate_thickness=rotor_head_plate_thickness;
     brit_width=rotor_head_brit_width;
-    wall_height=6;
+    wall_height=5;
     kardan_clearance=rotor_head_cardan_clearance;
 
     outer_x = inner_x + 2*brit_width;
     outer_y = inner_y + 2*brit_width+2*kardan_clearance;
-    outer_height = wall_height + plate_thickness ;
+    outer_height = wall_height + plate_thickness +10;
 
         hole_r=(rotor_head_bearing_db/2*1/cos(rotor_head_roll_stop));
 
@@ -102,7 +102,7 @@ module 888_1020(draft = true){
     cone_d=2/3*rotor_ax_neck_diameter+((rotor_head_bearing_db-rotor_ax_neck_diameter)/cone_h1*rotor_ax_neck_height)-rotor_head_cardan_clearance;
     back_part_crop = 20;
 
-    zebra_inplate=0;
+    zebra_inplate=plate_size_z-3*layer;
     zebra_x=(rotor_head_kardan_inner_x )/2;
     zebra_y=rotor_head_kardan_inner_y/2;
     zebra_th=2;
@@ -243,11 +243,8 @@ module 888_1020(draft = true){
                     xdst=(rotor_head_kardan_inner_x/2+rotor_head_brit_width-(rotor_head_wall_height/2+rotor_head_plate_thickness)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
                     xsize=(plate_size_x - motor_diameter)/2-(rotor_head_kardan_inner_x/2+rotor_head_brit_width)-global_clearance;
 
-                    translate([-xdst-15,
-                                0,
-                                15+plate_size_z])
-                            cube([30,
-                            rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
+                    translate([-xdst-15, 0, 15+plate_size_z])
+                            cube([30, rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
                             30], center=true);
 
                     translate([xdst+(zebra_x+rotor_ax_neck_diameter/2-xdst)/2,
@@ -271,17 +268,19 @@ module 888_1020(draft = true){
                     union(){
                         //ax_neck
 
-                        translate([0, 0,plate_size_z ])
-                             cylinder(d2 = rotor_ax_neck_diameter, d1=cone_d , h = rotor_ax_neck_height);
+                        translate([0, 0,0])
+                             cylinder(d2 = rotor_ax_neck_diameter, d1=cone_d , h = rotor_ax_neck_height + plate_size_z);
+                        translate([0, 0,plate_size_z/2])
+                             cylinder(d2 = rotor_ax_neck_diameter, d1=cone_d , h = rotor_ax_neck_height + plate_size_z/2);
                         //bearing ring
-                        translate([0, 0,plate_size_z ])
-                             cylinder(d = rotor_head_bearing_d , h = rotor_ax_neck_height+rotor_ax_bearing_ring_h);
+                        translate([0, 0, 0])
+                             cylinder(d = rotor_head_bearing_d , h = rotor_ax_neck_height+rotor_ax_bearing_ring_h + plate_size_z);
 
                     }
 
                     //otvor pro sroub rotoru
                     translate([0, 0, -(rotor_ax_neck_height+rotor_ax_bearing_ring_h)/2])
-                        cylinder(d = rotor_axis_diameter, h = 2*(rotor_ax_neck_height+rotor_ax_bearing_ring_h), $fn = draft ? 20 : 80);
+                        cylinder(d = rotor_axis_diameter, h = 3*(rotor_ax_neck_height+rotor_ax_bearing_ring_h), $fn = draft ? 20 : 80);
                 }
             }
 

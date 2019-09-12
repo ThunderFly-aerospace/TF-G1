@@ -11,7 +11,8 @@ rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5
 
 rotx = -0;
-roty = 0;
+roty = -10.5;
+//roty = 0;
 
 use <888_1015.scad>
 use <888_1020.scad>
@@ -32,11 +33,11 @@ module 888_1101(){
     difference(){union(){
         translate([0, 0, rotor_head_height])
             rotate([rotx, rotor_head_rank_angle, 180])
-                translate([rotor_head_bearing_x_shift, 0, 5.5])
+                translate([rotor_head_bearing_x_shift, 0, 6])
                     rotate([180, 0, 0])
                         888_1022();
 
-        import("../STL/888_1029.stl", convexity=3);
+        import("../STL/888_1029.stl", convexity=4);
 
         //pipes_top_screw();
         //pipes();
@@ -48,18 +49,19 @@ module 888_1101(){
         translate([-rotor_head_bearing_x_shift, 0, 0])
         rotate([-rotx, -roty-rotor_head_rank_angle, 0]){
             //sphere(r=5);
-            translate([0, 0, 11.5]) rotate([180, 0, 180]) import("../STL/888_1020.stl", convexity=3);
+            translate([0, 0, 15]) rotate([180, 0, 180]) import("../STL/888_1020.stl", convexity=7);
         }
         //888_1020();
 
         if(draft)
-        translate([0, 0, rotor_head_height])
-            rotate([0, rotor_head_rank_angle, 180])
-                translate([rotor_head_bearing_x_shift, 0, -7])
-                    efsm_12();
+        color("blue")
+            translate([0, 0, rotor_head_height])
+                rotate([0, rotor_head_rank_angle, 180])
+                    translate([rotor_head_bearing_x_shift, 0, -6])
+                        efsm_12();
     }
 
-    cube(500);
+    translate([-200, 0, 0]) cube(500);
     }
 }
 

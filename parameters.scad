@@ -547,7 +547,7 @@ rotor_head_bearing_x_shift = 12; // posun kuloveho loziska dopredu dozadu.
 rotor_head_prerotator_distance = 79.03; // vzdalenost osy motoru od osy rotoru
 
 rotor_head_roll_stop=10;//max roll angle
-rotor_head_pitch_stop=15;//max pitch angle
+rotor_head_pitch_stop=21/2;//max pitch angle
 
 rotor_head_brit_width=5;
 rotor_head_plate_thickness=2;
