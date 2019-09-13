@@ -102,7 +102,7 @@ module 888_1005(draft){
                     rotate([90, 0, 0])
                         hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
                     translate([main_tube_outer_diameter, - (hull_z_size - 2*hull_wall_thickness - 2*global_clearance)/2, -beam_thickness_below]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
-                        cube([hull_drop_length - main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*global_clearance, beam_thickness]);
+                        cube([hull_drop_length - main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*global_clearance, ring_thickness]);
 
                     translate([0, beam_side_edge_width/2, 0])
                         rotate([beam_edge_angle, 0, 0])
