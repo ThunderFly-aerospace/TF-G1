@@ -29,14 +29,14 @@ m3_nut_hex = 1;		// 1 for hex, 0 for square nut
 m3_nut_flats = 5.7;	// normal M3 hex nut exact width = 5.5
 m3_nut_depth = 2.7;	// normal M3 hex nut exact depth = 2.4, nyloc = 4
 
-retainer = 0;		// Belt retainer above teeth, 0 = No, 1 = Yes
-retainer_ht = 1;	// height of retainer flange over pulley, standard = 1.5
+retainer = 1;		// Belt retainer above teeth, 0 = No, 1 = Yes
+retainer_ht = 1.5;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
 overal_ht = 20;     // overal height of pulley
 overal_d = 122;     // top cylinder diameter
-pulley_t_ht = 10;	// length of toothed part of pulley, standard = 12
+pulley_t_ht = 12;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 0;	// pulley base diameter, standard = 20
 no_of_nuts = 0;		// number of captive nuts required, standard = 1
@@ -46,7 +46,7 @@ nut_shaft_distance = 0;	// distance between inner face of nut and shaft, can be 
 hole_for_rubber_X = 11;
 hole_for_rubber_Y =31;
 hole_for_rubber_Z = 49;
-thickness = 10;
+thickness = 12;
 position_of_rubber = 43;
 
 
@@ -147,21 +147,26 @@ module rotor_pulley(draft)
         translate([-35, 0, 0])
             cylinder(h = 2.7, d = 10.2, $fn = draft ? 10 : 50);
 
+        //translate([0, 0, 40])
         difference(){
             translate([0, 0, -0.1]) difference(){
-                translate([0, 0, -0.1]) cylinder(d = 110, h = overal_ht+0.2);
+                translate([0, 0, -0.1])cylinder(d = 110, h = overal_ht+0.25);
                 translate([0, 0, -0.2])cylinder(d = 50, h = overal_ht+0.4);
             }
             translate([0, 0, 0]){
                 for (i=[0:16])
                     rotate(i*360/16){
-                        hull(){
-                            translate([0, 0, -1])
-                                rotate([45, 0, 0])
-                                    cube([100, 5, 5]);
-                            translate([0, 0, overal_ht-6])
-                                rotate([45, 0, 0])
-                                    cube([100, 5, 5]);
+                        difference(){
+                            hull(){
+                                translate([0, 0, -1])
+                                    rotate([45, 0, 0])
+                                        cube([100, 5, 5]);
+                                translate([0, 0, overal_ht-6])
+                                    rotate([45, 0, 0])
+                                        cube([100, 5, 5]);
+                            }
+                            translate([0, -1, 2])
+                                cube([100, 2, overal_ht-4]);
                         }
                     }
             }
@@ -260,7 +265,7 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 		//belt retainer / idler
 		if ( retainer > 0 ) {translate ([0,0, pulley_b_ht + pulley_t_ht ])
 		rotate_extrude($fn=teeth*4)
-		polygon([[0,0],[pulley_OD/2,0],[pulley_OD/2 + retainer_ht , retainer_ht],[0 , retainer_ht],[0,0]]);}
+		polygon([[0,0],[pulley_OD/2,0],[pulley_OD/2 + retainer_ht , retainer_ht],[pulley_OD/2 , retainer_ht*2],[0,0]]);}
 
 		if ( idler > 0 ) {translate ([0,0, pulley_b_ht - idler_ht ])
 		rotate_extrude($fn=teeth*4)
