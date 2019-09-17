@@ -9,6 +9,7 @@ if (draft) {
 
 module pipes(diameter = pilon_pipe_diameter, length = 100, draft = false){
     length_front = mod([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube+pilon_pipe_base_front_z]) + 5;
+    echo("Delka predni tyce", length_front);
 // predni tyce
     translate([pilon_pipe_head_front_x, pilon_pipe_head_front_y, 0])
             orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube+pilon_pipe_base_front_z],vref=[0,0,1], roll=0)
@@ -161,7 +162,7 @@ module 888_1029() {
                 LW_20MG_screw();
             }
 
-        pipes(pilon_pipe_diameter, 50);
+        #pipes(pilon_pipe_diameter, 100);
         pipes_top_screw();
 
         pos = [[-LW_20MG_thickness - rotor_head_servo_shift[0], 20, 0],

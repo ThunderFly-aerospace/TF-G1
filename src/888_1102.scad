@@ -18,9 +18,9 @@ translate([-engine_holder_beam_depth, 0, 0])
 888_1005();
 
 // rotorova hlava
-/* translate([main_pilon_position, 0, height_of_vertical_tube])
+ translate([main_pilon_position, 0, height_of_vertical_tube])
 rotate(180)
-    888_1029(); */
+    888_1029(); 
 
 
 /*

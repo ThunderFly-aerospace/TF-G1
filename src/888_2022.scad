@@ -14,13 +14,13 @@ wheel_tolerance = 15;
 lifting_size = 10;
 
 height = 20;
-connector_width = 10;
+connector_width = 25;
 wheel_screw_overhang = 8;
 
 module 888_2022(wheel=false) {
     translate([0, -(connector_width+material_around_bearing*2+696_bearing_outer_diameter), height/-2-material_around_bearing-696_bearing_outer_diameter/2-lifting_size]) {
     if(wheel) {
-        #union() {
+        union() {
             translate([-fork_wheel_width*1/3/2, -888_2022_wheel_diameter/2, 0])
                 rotate([0, -90, 0])
                     cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=20);
@@ -37,7 +37,12 @@ module 888_2022(wheel=false) {
     difference() {
         union() {
             translate([-chasis_fork_thickness-fork_wheel_width/2, -888_2022_wheel_diameter/2-wheel_screw_overhang, -height/2])
-                cube([chasis_fork_thickness*2+fork_wheel_width, 888_2022_wheel_diameter/2+wheel_screw_overhang+connector_width, height]);
+                hull(){
+                    cube([chasis_fork_thickness*2+fork_wheel_width, 888_2022_wheel_diameter/2+wheel_screw_overhang, height]);
+                   
+                    translate([-chasis_fork_thickness + fork_wheel_width/2 , 0, 0])
+                        cube([chasis_fork_thickness*4, 888_2022_wheel_diameter/2+wheel_screw_overhang+connector_width+20, height]);
+                }
 
             hull() {
                 translate([-chasis_fork_thickness-joint_width/2, connector_width, -height/2])
