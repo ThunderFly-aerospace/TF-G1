@@ -1,8 +1,5 @@
-    include <../parameters.scad>
+include <../parameters.scad>
 use <lib/igus.scad>
-
-$fn = 80;
-
 
 wall = 6;
 length = 47;
@@ -122,7 +119,7 @@ module 888_2016_drill_center(){
         translate([beam_patern, 0, -global_clearance])
             cylinder(d = tube_for_undercarriage_outer_diameter, h = 100);
 
-        translate([0, 0, 2+global_clearance])
+        translate([0, 0, -global_clearance])
             cylinder(d = tube_for_undercarriage_outer_diameter, h = 100);
 
         translate([0, 0, 25/2]) rotate([90, 0, 0]){
@@ -139,8 +136,8 @@ module 888_2016_drill_center(){
 }
 
 
+//translate([0, 0, pipe_recessed])
 888_2016();
-//translate([0, 0, 2])
-//rotate([180, 0, 90])
-//888_2016_drill();
-//888_2016_drill_center();
+
+//translate([0, 50, 0])    888_2016_drill();
+//translate([0, -50, 0]) 888_2016_drill_center();
