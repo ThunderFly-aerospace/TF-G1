@@ -216,7 +216,7 @@ main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od p�
 // vzdalenosti jsou pocitany od stredu rotoru
 // vzdalenosti jednotlivych tyci u podlozky
 //pilon_pipe_base_front_x = 30;
-pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*5.5;
+pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*5.75;
 pilon_pipe_base_front_y = 55;
 pilon_pipe_base_front_z = 0;
 
