@@ -117,11 +117,12 @@ module 888_1005(draft){
             }
                 for (i=[3:8]) {
                     translate([beam_patern*(i+0.25), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
+                        // nosna tyc
                         rotate([-90, 0, 0])
-                            cylinder(d = beam_main_pipe_thickness, h = hull_x_size);
+                            cylinder(d = beam_main_pipe_thickness, h = hull_x_size, $fn = draft? 10 : 50);
 
                         translate([0, 108, 0])
-                            cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = 20);
+                            cylinder(d = M3_screw_diameter, h = 50, center = true, $fn = draft? 8 : 20);
 
                         translate([0, 108, -8-50])
                             cylinder(d = M3_nut_diameter, h = 50, $fn = 6);
@@ -134,28 +135,17 @@ module 888_1005(draft){
 
   //šrouby a matky HORNÍ kryt - vždy spojení šroubu a matky dohromady
 
-rotate([90,0,0])
-        %for (position_number = [2:4])
+    rotate([90,0,0])
+        for (position_number = [2:4])
         {
                 screw_top(position_number, draft);
-            //mirror([0,0,1])
-               // screw_top(position_number, draft);
-        }
-/*
-        //šrouby a matky SPODNÍ kryt - vždy spojení šroubu a matky dohromady
-
-        %for (position_number = [1:4])
-        {
-                screw_bottom(position_number, draft);
-            mirror([0,0,1])
-                screw_bottom(position_number, draft);
         }
 
-*/
+            // drazka podel pro zastrceni krytu
             intersection(){
                 difference(){
                     translate([0,-hull_z_size/2, 0])
-                        cube([hull_x_size, hull_z_size, hull_wall_thickness]); // spodní lem
+                        cube([hull_x_size, hull_z_size, hull_wall_thickness*2]); // spodní lem
 
                     //odebrání dna
                     translate([ribbon_width/2,0,0])
@@ -169,7 +159,7 @@ rotate([90,0,0])
 
             translate([0, beam_side_pipe_distance/2, 0])
                 rotate([0, 90, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = 1000);
+                    cylinder(d = beam_main_pipe_thickness, h = 1000, $fn = draft? 8 : 50);
 
             rotate([90, 0, 0]) for (position_number = [1:5])
             {
@@ -184,34 +174,43 @@ rotate([90,0,0])
 
 module 888_1005_cut(){
     translate([35, 0, 0])
-    intersection(){
-        translate([0, -100, beam_patern*(4)])
-            rotate([0, 90, 0])
-                translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                    888_1005();
+        difference(){
+            intersection(){
+                translate([0, -100, beam_patern*(4)])
+                    rotate([0, 90, 0])
+                        translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                            888_1005($preview);
 
-        translate([-20, -20, 0])
-            cube([40, 40, beam_patern*3.5]);
-    }
+                translate([-20, -20, 0])
+                    cube([40, 40, beam_patern*3.5]);
+            }
+            translate([-17, 0, 0]) linear_extrude(0.2) text("A", valgin = "center", halgin = "center");
+        }
     translate([0, 0, 0])
-    intersection(){
-        translate([0, -100, beam_patern*(4+1)])
-            rotate([0, 90, 0])
-                translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                    888_1005();
+        difference(){
+            intersection(){
+                translate([0, -100, beam_patern*(4+1)])
+                    rotate([0, 90, 0])
+                        translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                            888_1005($preview);
 
-        translate([-20, -20, 0])
-            cube([40, 40, beam_patern*1]);
-    }
+                translate([-20, -20, 0])
+                    cube([40, 40, beam_patern*1]);
+            }
+            translate([-17, 0, 0]) linear_extrude(0.2) text("B", valgin = "center", halgin = "center");
+        }
     translate([-35, 0, beam_patern*(3.5)]) rotate([180, 0, 0])
-        intersection(){
-            translate([0, -100, beam_patern*(4+1+3.5)])
-                rotate([0, 90, 0])
-                    translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                        888_1005();
+        difference(){
+            intersection(){
+                translate([0, -100, beam_patern*(4+1+3.5)])
+                    rotate([0, 90, 0])
+                        translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                            888_1005($preview);
 
-            translate([-20, -20, 0])
-                cube([40, 40, beam_patern*3.5]);
+                translate([-20, -20, 0])
+                    cube([40, 40, beam_patern*3.5]);
+            }
+            translate([-17, 0, beam_patern*(3.5)]) linear_extrude(0.2) text("C", valgin = "center", halgin = "center");
         }
 
 /*
