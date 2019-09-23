@@ -73,12 +73,27 @@ module 888_1031(draft){
 }
 
 module 888_1031_pipe(draft){
-    difference(){
-        rotate([0, 90, 0])
-            cylinder(d = beam_main_pipe_thickness, h = beam_width + 2*(5+15), center = true);
-        rotate([0, 90, 0])
-            cylinder(d = beam_main_pipe_thickness-2, h = beam_width + 2*(5+15)+1, center = true);
-    }
+    translate([0, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes])
+        rotate([0, 0, 90])
+            difference(){
+                rotate([0, 90, 0])
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width + 2*(5+15), center = true, $fn =  draft? 10 : 60);
+                rotate([0, 90, 0])
+                    cylinder(d = beam_main_pipe_thickness-2, h = beam_width + 2*(5+15)+1, center = true, $fn =  draft? 10 : 60);
+
+                rotate([0, 0, 90])
+                    cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+
+                translate([beam_width/2 + 5, 0, 0])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+
+                translate([-beam_width/2 - 5, 0, 0])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+
+
+            }
 }
 
 module 888_1031_drill_a(draft){
@@ -138,5 +153,6 @@ module 888_1031_info(){
 
 888_1031_info();
 888_1031();
+//888_1031_pipe();
 
 //translate([20, 0, 0]) 888_1031_drill_a($preview);

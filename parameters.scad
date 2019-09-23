@@ -221,7 +221,7 @@ pilon_pipe_base_front_y = 55;
 pilon_pipe_base_front_z = 0;
 
 pilon_pipe_base_rear_x = -engine_holder_beam_depth + beam_patern*8.75 - main_pilon_position;
-pilon_pipe_base_rear_z = beam_thickness/2;
+pilon_pipe_base_rear_z = beam_thickness_above;
 
 // vzhalenosti jednotlivych tyci u rotorove hlavy
 pilon_pipe_head_front_x = 20;
