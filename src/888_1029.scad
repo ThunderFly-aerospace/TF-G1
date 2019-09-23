@@ -36,27 +36,27 @@ module pilon_info(){
 module pipes_top_screw(position = 100, draft = false){
 // predni tyce
     translate([pilon_pipe_head_front_x, pilon_pipe_head_front_y, 0])
-        orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=0)
+        orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=-101)
             union() for(h = [0, 10, 60]){
                 translate([0, 10, h])
                     rotate([90, 180, 0]){
                         translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        translate([0, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
+                        translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
                     }
             }
 
 
     translate([pilon_pipe_head_front_x, -pilon_pipe_head_front_y, 0])
-        orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=0)
+        orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube],vref=[0,0,1], roll=-79)
             union() for(h = [0, 10, 60]){
-                translate([0, -10, h])
-                    rotate([-90, 180, 0]){
+                translate([0, 10, h])
+                    rotate([90, 0, 0]){
                         translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
                         rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        translate([0, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
+                        translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
                     }
             }
 
@@ -152,13 +152,13 @@ module 888_1029() {
 
         translate(rotor_head_servo_shift)
             rotate([0, 180, 0]){
-                LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10);
+                LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10, clearance = global_clearance);
                 LW_20MG_screw();
             }
         mirror([0, 1, 0])
         translate(rotor_head_servo_shift)
             rotate([0, 180, 0]){
-                LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10);
+                LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10, clearance = global_clearance);
                 LW_20MG_screw();
             }
 
@@ -208,13 +208,13 @@ module 888_1029_servoholder(draft){
 
             translate(rotor_head_servo_shift)
                 rotate([0, 180, 0]){
-                    LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10, screw_diameter = 0);
+                    LW_20MG(circle = 75, circle_pos = 150, depth_offset = 10, screw_diameter = 0, clearance = global_clearance);
                     LW_20MG_screw();
                 }
             mirror([0, 1, 0])
             translate(rotor_head_servo_shift + [0, 0, 0])
                 rotate([0, 180, 0]){
-                    LW_20MG(circle = 75, circle_pos = 165, depth_offset = 10, screw_diameter = 0);
+                    LW_20MG(circle = 75, circle_pos = 165, depth_offset = 10, screw_diameter = 0, clearance = global_clearance);
                     LW_20MG_screw();
                 }
 
