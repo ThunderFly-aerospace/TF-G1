@@ -23,6 +23,11 @@ module beam_profile(l = 100, draft = true){
                                 cube([l+global_clearance, 80, 50]);
                     }
 
+        translate([0, beam_width/2-1, -beam_thickness/2])
+            cube([l, 10, beam_thickness]);
+        translate([0, -beam_width/2+1-10, -beam_thickness/2])
+            cube([l, 10, beam_thickness]);
+
         // podelne diry na tyce
         translate([-global_clearance/2, -beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
