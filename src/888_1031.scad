@@ -3,7 +3,7 @@ include <../parameters.scad>
 use <888_1004.scad>
 //use <lib/drill.scad>
 
-draft = true;
+draft = $preview;
 
 module 888_1031(draft){
     difference(){
@@ -45,8 +45,8 @@ module 888_1031(draft){
                 rotate([0, 90, 0])
                     translate([0, beam_width/2+5, 0])
                         rotate([i[1], 0, 0]){
-                            cylinder(d = M3_screw_diameter, h = 20, center = true);
-                            translate([0, 0, -10 - beam_main_pipe_thickness/2 -1]) cylinder(d = M3_nut_diameter, h = 10);
+                            cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = draft? 10:60);
+                            translate([0, 0, -10 - beam_main_pipe_thickness/2 -1]) cylinder(d = M3_nut_diameter, h = 10, $fn = draft? 10:60);
                             hull(){
                                 translate([0, 0, beam_main_pipe_thickness/2 +1]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
                                 translate([20, 0, beam_main_pipe_thickness/2 +1]) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
@@ -152,7 +152,7 @@ module 888_1031_info(){
 
 
 888_1031_info();
-888_1031();
+888_1031(draft);
 //888_1031_pipe();
 
 //translate([20, 0, 0]) 888_1031_drill_a($preview);
