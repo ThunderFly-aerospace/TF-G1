@@ -203,7 +203,7 @@ module beam_holes_patern(n = 1){
 
 }
 
-module 888_1004(){
+module 888_1004(draft = false){
     difference(){
         beam_profile(beam_length + engine_holder_beam_depth);
         beam_holes_patern((beam_length+engine_holder_beam_depth)/30);

@@ -282,13 +282,13 @@ LM_20MG_ears_length = 54.5;
 LM_20MG_axis_offset = 30;
 
 
-module LW_20MG(circle = 0, circle_pos = 0, depth_offset = 0, screw_diameter = 3.5)
+module LW_20MG(circle = 0, circle_pos = 0, depth_offset = 0, screw_diameter = 3.5, clearance = 0)
 {
   //Model for the POWER HD
 
-  body_height = LW_20MG_height;
-  body_thickness = LW_20MG_thickness;
-  body_length = LM_20MG_length;
+  body_height = LW_20MG_height + clearance*2;
+  body_thickness = LW_20MG_thickness + clearance*2;
+  body_length = LM_20MG_length + clearance*2;
 
   ears_length = 54.5;
   ear_length = (ears_length - body_length)/2;
