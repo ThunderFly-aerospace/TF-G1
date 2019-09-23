@@ -142,6 +142,77 @@ module 888_1031_drill_a(draft){
     }
 }
 
+module 888_1031_pipe(draft){
+    translate([0, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes])
+        rotate([0, 0, 90])
+            difference(){
+                rotate([0, 90, 0])
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width + 2*(5+15), center = true, $fn =  draft? 10 : 60);
+                rotate([0, 90, 0])
+                    cylinder(d = beam_main_pipe_thickness-2, h = beam_width + 2*(5+15)+1, center = true, $fn =  draft? 10 : 60);
+
+                rotate([0, 0, 90])
+                    cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+
+                translate([beam_width/2 + 5, 0, 0])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+
+                translate([-beam_width/2 - 5, 0, 0])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+
+
+            }
+}
+
+module 888_1031_drill_b(draft){
+
+    cube_side = 25;
+    height = 40;
+    clamp_length = 15;
+    clamp_thickness = 1;
+    pipe_diameter = beam_main_pipe_thickness;
+    drill_diameter = M3_screw_diameter;
+    holes = [5, 15];
+    end = true;
+    text_a = "drill-B 888_1031   ";
+    text_b = "pylon svis trub   ";
+
+
+    difference(){
+        translate([-cube_side/2, -cube_side/2, end? -5: 0]) cube([cube_side, cube_side, height + (end?5:0)]);
+        cylinder(d = pipe_diameter, h=height+1, $fn = draft? 10 : 60);
+
+        for(i = holes){
+            translate([0, 0, i])
+                rotate([0, 90, 0])
+                    cylinder(d = drill_diameter, h = cube_side+2, center = true, $fn = draft? 10 : 60);
+        }
+
+        translate([-clamp_thickness/2, -cube_side/2, height - clamp_length])
+            cube([clamp_thickness, cube_side, clamp_length]);
+
+        for(i = [1, -1]){
+            translate([-cube_side/2, i*(pipe_diameter/2+2), height - clamp_length/2])
+                rotate([0, 90, 0])
+                    cylinder(d = M3_screw_diameter, h = cube_side, $fn = draft? 10 : 60);
+
+            translate([-cube_side/2, i*(pipe_diameter/2+2), height - clamp_length/2])
+                rotate([0, 90, 0])
+                    cylinder(d = M3_nut_diameter, h = cube_side/2 - pipe_diameter/3, $fn = 6);
+
+            translate([pipe_diameter/3, i*(pipe_diameter/2+2), height - clamp_length/2])
+                rotate([0, 90, 0])
+                    cylinder(d = M3_nut_diameter, h = cube_side/2 - pipe_diameter/3, $fn = 6);
+        }
+
+        translate([-cube_side/4, -cube_side/2, height/2]) rotate([90, -90, 0]) linear_extrude(0.3, center = true) text(text_a, valign = "center", halign = "center", size = 4);
+        translate([cube_side/4, -cube_side/2, height/2]) rotate([90, -90, 0]) linear_extrude(0.3, center = true) text(text_b, valign = "center", halign = "center", size = 4);
+    }
+}
+
+
 module 888_1031_info(){
     echo("==========INFO 888_1031 ==========");
     echo("Dil pro pripevneni prednich tyci pylonu");
@@ -156,3 +227,4 @@ module 888_1031_info(){
 //888_1031_pipe();
 
 //translate([20, 0, 0]) 888_1031_drill_a($preview);
+//translate([20, 0, 0]) 888_1031_drill_b($preview);
