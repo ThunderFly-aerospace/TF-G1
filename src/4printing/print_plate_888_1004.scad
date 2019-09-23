@@ -2,7 +2,7 @@ include <../../parameters.scad>
 
 use <../888_1004.scad>
 
-draft = false;
+draft = $preview;
 
 for (i=[1:len(beam_division)-1]) {
 
