@@ -17,9 +17,9 @@ $fa = 10;
 module 888_1026(draft)
 {
 
-    width = beam_thickness+2*2;
-    depth = beam_width;   // šířka plechu držáku motoru
-    height = engine_holder_beam_depth+10;
+    width = beam_thickness;
+    depth = beam_width-22;   // šířka plechu držáku motoru
+    height = engine_holder_beam_depth+5;
     engine_displacement = maximum_printable_size -  1.2 * height;
     //engine_displacement = 60;
     magnet_displacement = 50;
@@ -33,18 +33,19 @@ module 888_1026(draft)
     vlecne_zarizeni = true;
     servo = false;
     prumer = 2;
-    vyska = 5;
+    vyska = 6;
     fix_screw_distance = 3; //vzdálenost kotvícího šroubku od serva
-    servo_overhang = 10;
-    servo_lever = 15; //délka páky serva od středu otáčení ke konci
+    servo_overhang = 5;
+    release_wire_height = beam_thickness_above + 13;
+    servo_lever = 5; //délka páky serva od středu otáčení ke konci
     distance_shift = (maximum_printable_size-1.2*height+height)-(magnet_displacement+magnet_diameter/2);
     distance_height = (engine_offset-wall_thickness-engine_diameter/2)-magnet_vertical_position;
-    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter-magnet_vertical_position)/distance_height-13;
+    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter-magnet_vertical_position)/distance_height-20;
 
     difference (){
         union(){
             hull(){
-                translate([-5 -10 -beam_vertical_space_between_pipes -beam_min_wall +0.01,-(depth/2),0])
+                translate([global_clearance -5 -10 -beam_vertical_space_between_pipes -beam_min_wall +0.01,-(depth/2),0])
                     cube ([beam_thickness,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])
@@ -191,7 +192,7 @@ module 888_1026(draft)
 
         //vypouštěcí zařízneí
         if(vlecne_zarizeni) {
-            translate([main_tube_outer_diameter, 0, 0])
+            translate([release_wire_height, 0, 0])
                 hull() {
                     translate([vyska/2-prumer/2, 0, 5+DS313MG_A])
                         cylinder(d=prumer, h=1000, $fn=15, center = true);
@@ -199,7 +200,7 @@ module 888_1026(draft)
                         cylinder(d=prumer, h=1000, $fn=15, center = true);
                 }
 
-            translate([main_tube_outer_diameter, 0, 0])
+            translate([release_wire_height, 0, 0])
                 hull() {
                     translate([vyska/2-prumer/2, 0, 5+DS313MG_A+50])
                         cylinder(d=prumer, h=1000, $fn=55);
@@ -209,15 +210,15 @@ module 888_1026(draft)
 
 
 
-            translate([main_tube_outer_diameter, 0, hole_distance])
+            translate([release_wire_height, 0, hole_distance])
                 rotate([90, 0, 0])
                     cylinder(d=M3_screw_diameter, h=100, $fn=20, center=true);
 
-            translate([main_tube_outer_diameter, -15, hole_distance])
+            translate([release_wire_height, -15, hole_distance])
                 rotate([90, 0, 0])
                     cylinder(d=M3_nut_diameter, h=20, $fn=6);
 
-            translate([main_tube_outer_diameter, 15, hole_distance])
+            translate([release_wire_height, 15, hole_distance])
                 rotate([-90, 0, 0])
                     cylinder(d=M3_nut_diameter, h=20, $fn=20);
 

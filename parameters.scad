@@ -74,7 +74,7 @@ rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loz
 
 // nastavení parametrů motoru
 
-engine_angle = 0;
+engine_angle = -10;
 engine_diameter = 55;
 engine_offset = 75;
 engine_holder_beam_depth = 55; // jak moc je nosnik zapusten v dilu
