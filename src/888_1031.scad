@@ -1,8 +1,8 @@
 // patka pro pridelani predni tyce pylonu k nosniku
+
 include <../parameters.scad>
 use <888_1004.scad>
 //use <lib/drill.scad>
-
 draft = $preview;
 
 module 888_1031(draft){

@@ -45,7 +45,7 @@ module 888_1026(draft)
     difference (){
         union(){
             hull(){
-                translate([global_clearance -5 -10 -beam_vertical_space_between_pipes -beam_min_wall +0.01,-(depth/2),0])
+                translate([global_clearance -2 -10 -beam_vertical_space_between_pipes -beam_min_wall +0.01,-(depth/2),0])
                     cube ([beam_thickness,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])

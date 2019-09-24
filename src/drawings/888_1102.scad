@@ -2,7 +2,7 @@
 draft = true;
 stl = true;
 
-limec = true;
+limec = false;
 pilon_mount = true;
 motor = true;
 
@@ -62,6 +62,16 @@ difference(){
                 mirror([0, 1, 0])
                     rotate(180)
                         888_1031();
+
+        if(pilon_mount)
+        translate([-engine_holder_beam_depth+beam_patern*7.325, 0, height_of_vertical_tube])
+            rotate(180)
+                pipe_front(10);
+
+        if(pilon_mount)
+        translate([-engine_holder_beam_depth+beam_patern*7.325, 0, height_of_vertical_tube])
+            rotate(180)
+                pipe_rear(10);
 
 // motor
     if(motor)
