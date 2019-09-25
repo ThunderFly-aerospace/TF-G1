@@ -28,7 +28,7 @@ module 888_2024() {
             translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
                 rotate([-holder_angle, 0, 0])
                     cylinder(d=joint_diameter, h=joint_height, $fn=100);
-            
+
             hull() {
                 translate([-joint_width/2, holder_length-joint_diameter*3/4, 0])
                     cube([joint_width, joint_diameter*3/4, 696_bearing_outer_diameter+material_around_bearing*2]);
@@ -36,6 +36,12 @@ module 888_2024() {
                 translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
                     rotate([-holder_angle, 0, 0])
                         cylinder(d=joint_diameter, h=joint_height/3, $fn=100);
+
+                // kostka pro tahlo serva
+                translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
+                    rotate([-holder_angle, 0, 0])
+                        translate([5, -10, -10])
+                            cube([joint_diameter/2, 20, 10]);
 
                 translate([0, holder_length, 0])
                     rotate([0, 90, 0])
@@ -57,10 +63,10 @@ module 888_2024() {
                 cylinder(d=M6_screw_diameter+2, h=fork_wheel_width+10, $fn=20, center=true);
 
         //ložiska
-        translate([-fork_wheel_width/2-0.1, 0, 696_bearing_outer_diameter/2+material_around_bearing])
+        translate([-joint_width/2-0.1, 0, 696_bearing_outer_diameter/2+material_around_bearing])
             rotate([0, 90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=60);
-        translate([fork_wheel_width/2+0.1, 0, 696_bearing_outer_diameter/2+material_around_bearing])
+        translate([joint_width/2+0.1, 0, 696_bearing_outer_diameter/2+material_around_bearing])
             rotate([0, -90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=60);
 
@@ -88,9 +94,24 @@ module 888_2024() {
         translate([-fork_wheel_width/2-0.1, holder_length, 0])
             rotate([0, 90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=50);
-        translate([fork_wheel_width/2+0.1, holder_length, 0])
+        translate([fork_wheel_width/2+0.1+10, holder_length, 0])
             rotate([0, -90, 0])
-                cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=50);
+                cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+10, $fn=50);
+
+        // Otvory pro zataceci tahlo
+        translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
+            rotate([-holder_angle, 0, 0])
+                translate([joint_diameter/2, -0, -5])
+                    rotate([0, 90, 0])
+                        for(i = [-5, 5]) translate([0, i, 0]){
+                            translate([0, 0, -8])
+                                cylinder(d = M3_screw_diameter, h = 15, $fn = 20);
+                            translate([0, 0, 0])
+                                rotate(30)
+                                    cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+                            translate([-20, -M3_nut_diameter/2, 0])
+                                cube([20, M3_nut_diameter, M3_nut_height]);
+                }
     }
 }
 
