@@ -31,6 +31,10 @@ module 888_2009(){
                 translate([-column_offset, 0, -column_height])
                         rotate([0, slope, 0])
                             cylinder (h=10, d=column_lower_diameter, $fn=60);
+                translate([-column_offset, 0, -column_height])
+                    rotate([0, slope, 0])
+                        translate([-25/2, -column_lower_diameter/2 - 10, 10])
+                            cube([10, column_lower_diameter/2+5, 25]);
             }
 
 
@@ -72,6 +76,12 @@ module 888_2009(){
                 translate([0, -M6_nut_diameter/2, shoulder_screw_length + layer])
                     cube([50, M6_nut_diameter, M6_nut_height]);
             }
+
+
+translate([-column_offset, 0, -column_height])
+    rotate([0, slope, 0])
+        translate([-25/2, -column_lower_diameter/2 - 10, 10])
+            #cube([10, column_lower_diameter/2+5, 25]);
 
 
 
