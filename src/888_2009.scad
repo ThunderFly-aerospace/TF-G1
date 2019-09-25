@@ -5,7 +5,7 @@ use <888_1004.scad>
 
 column_upper_diameter = 20;
 column_lower_diameter = 40;
-column_height = 80;
+column_height = 70;
 column_offset = 50;
 
 joint_diameter = 40;
@@ -30,20 +30,24 @@ module 888_2009(){
                         cylinder (h=5, d=10, $fn=60);
                 translate([-column_offset, 0, -column_height])
                         rotate([0, slope, 0])
-                            cylinder (h=1, d=column_lower_diameter, $fn=60);
+                            cylinder (h=10, d=column_lower_diameter, $fn=60);
             }
 
 
-            translate([-column_offset, 0, 0]){
-                rotate([0, slope, 0])
-                    rotate([0, 0, -max_angle_of_ratation/2])
-                        translate([-column_lower_diameter/2 + 20, 15 + stop_width/2, -column_height-stops_overhang])
-                            cube([10, 5, 30]);
+            translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
                     rotate([0, 0, max_angle_of_ratation/2])
-                        translate([-column_lower_diameter/2 + 20, -20 - stop_width/2, -column_height-stops_overhang])
-                            cube([10, 5, 30]);
-            }
+                        translate([column_lower_diameter/2-5, 5, -10])
+                            rotate([0, -15, 0])
+                                cube([13, 5, 50]);
+
+            translate([-column_offset, 0, -column_height])
+                rotate([0, slope, 0])
+                    rotate([0, 0, -max_angle_of_ratation/2])
+                        translate([column_lower_diameter/2-5, -5, -10])
+                            rotate([0, -15, 0])
+                                cube([13, 5, 50]);
+
         }
 
         // odcteni sikme plochy
