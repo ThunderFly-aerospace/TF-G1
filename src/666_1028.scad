@@ -308,8 +308,14 @@ module 666_1028_body_bottom(draft) {
                                 }
                                 
                         translate([rudder_full_length - Rudder_height + gap_width/2, 0, rudder_bottom_height / 2])
-                            cube([20, 40, rudder_bottom_height], center = true);
-                        
+                            cube([20, 40, rudder_bottom_height], center = true);   
+                          
+                            //vystuzeni pro karbonove vyztuhove tyce
+                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
+                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                   
+                                
+                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, Rudder_length / 2])
+                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                 
                     }
                 }
             }
@@ -319,7 +325,14 @@ module 666_1028_body_bottom(draft) {
     
         //díra pro uchycení čepu směrovky
         translate([rudder_full_length - Rudder_height + gap_width / 2, 0, 2])
-            cylinder(h = 160, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
+            cylinder(h = rudder_full_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
+        
+        //díra pro karbonove vyztuhove tyce
+        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, 2])
+            cylinder(h = rudder_full_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+        
+        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, 2])
+            cylinder(h = rudder_full_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
     }
 }
 
@@ -363,7 +376,7 @@ module 666_1028_body_middle(draft) {
     
                             //vyztužní pro upevnění na trubku
                             translate([20 + infill_wall_thickness, 0, tail_pipe_z_position - rudder_bottom_height])
-                                    cube([mount_rudder_length + infill_wall_thickness * 2, Rudder_depth + 2, mount_rudder_height + infill_wall_thickness * 2], center = true);
+                                    cube([mount_rudder_length + infill_wall_thickness * 2, Rudder_depth * 2, mount_rudder_height + infill_wall_thickness * 2], center = true);
     
                             //vyztužení pro upevnění serva
                             translate([servo_rudder_x_offset + servo_rudder_wire_hole_height / 2 + infill_wall_thickness / 2, 0, tail_pipe_z_position - servo_rudder_height / 2 - mount_rudder_height / 2 - infill_wall_thickness - rudder_bottom_height])
@@ -372,7 +385,14 @@ module 666_1028_body_middle(draft) {
                             //servo wire guide
                             translate([servo_rudder_x_offset + 18.5, 0, tail_pipe_z_position - 8.5 - rudder_bottom_height])
                                 rotate([0, - 35, 0])
-                                    cube([0.6, Rudder_depth + 2, 19], center = true);                    
+                                    cube([0.6, Rudder_depth + 2, 19], center = true);   
+                          
+                            //vystuzeni pro karbonove vyztuhove tyce
+                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
+                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                   
+                                
+                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, Rudder_length / 2])
+                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                 
                         }
                     }
                 }
@@ -396,10 +416,11 @@ module 666_1028_body_middle(draft) {
             translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position - 12 - rudder_bottom_height])
                 rotate([side_choose * 90, 0, 0])
                     union() {
-                        cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
-                        translate([0, 0, Rudder_depth + 2 - M3_nut_height])
+                        cylinder(h = Rudder_depth + 4, d = M3_screw_diameter, $fn = 100);
+                        translate([0, 0, Rudder_depth + 4 - M3_nut_height])
                             cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 100);
-                        cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
+                        translate([0, 0, - 2])
+                            cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
                     }
             translate([10, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 12 - rudder_bottom_height])
                 rotate([side_choose * 90, 0, 0])
@@ -412,10 +433,11 @@ module 666_1028_body_middle(draft) {
             translate([30, side_choose * (Rudder_depth / 2 + 1), tail_pipe_z_position + 12 - rudder_bottom_height])
                 rotate([side_choose * 90, 0, 0])
                     union() {
-                        cylinder(h = Rudder_depth + 2, d = M3_screw_diameter, $fn = 100);
-                        translate([0, 0, Rudder_depth + 2 - M3_nut_height])
+                        cylinder(h = Rudder_depth + 4, d = M3_screw_diameter, $fn = 100);
+                        translate([0, 0, Rudder_depth + 4 - M3_nut_height])
                             cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 100);
-                        cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
+                        translate([0, 0, - 2])
+                            cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
                     }
                     
             //otvor pro servo
@@ -456,6 +478,13 @@ module 666_1028_body_middle(draft) {
                         rotate([0, 90, 0])
                             cylinder(h = 10, d = 8, center = true);
                     }
+        
+            //díra pro karbonove vyztuhove tyce
+            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, 2])
+                cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+            
+            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, 2])
+                cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
         }
         
         //podpora tisku v miste upevneni trubky
@@ -490,10 +519,10 @@ module 666_1028_body_top(draft) {
         //vyříznutí boku do tvaru A
         translate([rudder_full_length / 2, - side_choose * 6, rudder_full_height - Rudder_length - rudder_bottom_height])
             rotate([90, - side_choose * Rudder_angle / 2, 90])
-                cube([40, 20, rudder_full_length + 10], center = true);
+                cube([80, 22, rudder_full_length + 10], center = true);
 
         //vyříznutí děr pro upevnění do tvaru A
-        translate([30, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+        translate([40, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
             rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                 union() {
                     cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -504,7 +533,8 @@ module 666_1028_body_top(draft) {
                             cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
                         }
                 }
-        translate([80, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+                
+        translate([65, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
             rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                 union() {
                     cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -515,6 +545,37 @@ module 666_1028_body_top(draft) {
                             cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
                         }
                 }
+                
+        translate([100, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+            rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
+                union() {
+                    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
+                    translate([0, 0, - side_choose * 10])
+                        if(side_choose == - 1) {
+                            cylinder (h=10, d=M3_nut_diameter, $fn=100, center = true);
+                        } else {
+                            cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
+                        }
+                }
+                
+        translate([130, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+            rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
+                union() {
+                    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
+                    translate([0, 0, - side_choose * 10])
+                        if(side_choose == - 1) {
+                            cylinder (h=10, d=M3_nut_diameter, $fn=100, center = true);
+                        } else {
+                            cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
+                        }
+                }
+        
+        //díra pro karbonove vyztuhove tyce
+        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, 2])
+            cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+        
+        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, 2])
+            cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
     }
 }
 
