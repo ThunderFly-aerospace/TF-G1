@@ -14,7 +14,7 @@ wheel_tolerance = 15;
 lifting_size = 10;
 
 height = 20;
-connector_width = 30;
+connector_width = 25;
 wheel_screw_overhang = 8;
 
 module 888_2022(wheel=false) {
