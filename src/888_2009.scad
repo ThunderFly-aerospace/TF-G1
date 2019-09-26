@@ -78,12 +78,43 @@ module 888_2009(){
             }
 
 
-translate([-column_offset, 0, -column_height])
-    rotate([0, slope, 0])
-        translate([-25/2, -column_lower_diameter/2 - 10, 10])
-            #cube([10, column_lower_diameter/2+5, 25]);
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
 
 
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5 + 10])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5+10])
+                    rotate([90, 30, 0])
+                        cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5])
+                    rotate([90, 30, 0])
+                        cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5+10 - M3_nut_diameter/2])
+                    cube([20, M3_nut_height, M3_nut_diameter]);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5 - M3_nut_diameter/2])
+                    cube([20, M3_nut_height, M3_nut_diameter]);
 
         translate([-engine_holder_beam_depth + beam_patern/2, (beam_main_pipe_distance/2-beam_main_pipe_thickness-3), -beam_thickness/2]){
             translate([0, 0, -30])
