@@ -5,7 +5,7 @@ use <888_1004.scad>
 
 column_upper_diameter = 20;
 column_lower_diameter = 40;
-column_height = 80;
+column_height = 70;
 column_offset = 50;
 
 joint_diameter = 40;
@@ -14,7 +14,7 @@ washer_diameter = 20;
 screw_distance = 42.5;
 stops_overhang = 5;
 layer_height = 0.2;
-slope = 25;
+slope = 10;
 
 shoulder_screw_length = 20; // jak hluboko je licovani v tomto dile
 module 888_2009(){
@@ -30,20 +30,28 @@ module 888_2009(){
                         cylinder (h=5, d=10, $fn=60);
                 translate([-column_offset, 0, -column_height])
                         rotate([0, slope, 0])
-                            cylinder (h=1, d=column_lower_diameter, $fn=60);
+                            cylinder (h=10, d=column_lower_diameter, $fn=60);
+                translate([-column_offset, 0, -column_height])
+                    rotate([0, slope, 0])
+                        translate([-25/2, -column_lower_diameter/2 - 10, 10])
+                            cube([10, column_lower_diameter/2+5, 25]);
             }
 
 
-            translate([-column_offset, 0, 0]){
-                rotate([0, slope, 0])
-                    rotate([0, 0, -max_angle_of_ratation/2])
-                        translate([-column_lower_diameter/2 + 20, 15 + stop_width/2, -column_height-stops_overhang])
-                            cube([10, 5, 30]);
+            translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
                     rotate([0, 0, max_angle_of_ratation/2])
-                        translate([-column_lower_diameter/2 + 20, -20 - stop_width/2, -column_height-stops_overhang])
-                            cube([10, 5, 30]);
-            }
+                        translate([column_lower_diameter/2-5, 5, -10])
+                            rotate([0, -15, 0])
+                                cube([13, 5, 50]);
+
+            translate([-column_offset, 0, -column_height])
+                rotate([0, slope, 0])
+                    rotate([0, 0, -max_angle_of_ratation/2])
+                        translate([column_lower_diameter/2-5, -5, -10])
+                            rotate([0, -15, 0])
+                                cube([13, 5, 50]);
+
         }
 
         // odcteni sikme plochy
@@ -70,6 +78,43 @@ module 888_2009(){
             }
 
 
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5 + 10])
+                    rotate([90, 0, 0])
+                        cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5+10])
+                    rotate([90, 30, 0])
+                        cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5])
+                    rotate([90, 30, 0])
+                        cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5+10 - M3_nut_diameter/2])
+                    cube([20, M3_nut_height, M3_nut_diameter]);
+
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5 - M3_nut_diameter/2])
+                    cube([20, M3_nut_height, M3_nut_diameter]);
 
         translate([-engine_holder_beam_depth + beam_patern/2, (beam_main_pipe_distance/2-beam_main_pipe_thickness-3), -beam_thickness/2]){
             translate([0, 0, -30])
