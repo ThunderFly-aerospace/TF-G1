@@ -14,7 +14,7 @@ washer_diameter = 20;
 screw_distance = 42.5;
 stops_overhang = 5;
 layer_height = 0.2;
-slope = 25;
+slope = 10;
 
 shoulder_screw_length = 20; // jak hluboko je licovani v tomto dile
 module 888_2009(){
