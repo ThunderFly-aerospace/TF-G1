@@ -65,7 +65,7 @@ module 888_1020(draft = true){
     servo_join_y = 78; // vzdalenost kloubu pro servo
     servo_join_x = 45; // vzdalenost kloubku od osy rotoru
     servo_join_size = 10;
-    servo_joint_z = 15; // jak moc nizko bude kloubek
+    servo_joint_z = 10; // jak moc nizko bude kloubek
 
     wall_thickness=4;
 

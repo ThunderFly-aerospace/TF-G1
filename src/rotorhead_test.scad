@@ -1,6 +1,7 @@
 use <./888_1029.scad>
 use <./888_1022_without_desk.scad>
 use <./888_1020.scad>
+use <lib/igus.scad>
 
 include <../parameters.scad>
 
@@ -34,17 +35,30 @@ module neck_model(){
 }
 
 roll=10;
-pitch=15;
+pitch=15
+;
 
 
-//difference()
+difference()
 {
     union()
     {
         draft=true;
-        translate([-12,0,0])
-            rotate([0,0,180])
-                888_1029();
+        union(){
+            translate([-rotor_head_bearing_x_shift,0,0])
+                rotate([0,0,180])
+                    888_1029();
+            translate([-1,0,rotor_head_height-rotor_head_bearing_a_center_of_rotation])
+                rotate([0,rotor_head_rank_angle,0])
+                union(){
+                    efsm_12();
+                    for (i=[-1,1])
+                        for(j=[-1,1])
+                            translate([i*14,j*14,rotor_head_bearing_a1+1.5])            
+                                cylinder(d=9,h=3,center=true);
+                }
+    }
+
 
     translate([0,0,rotor_head_height])
     rotate([0,rotor_head_rank_angle,0])
@@ -52,12 +66,12 @@ pitch=15;
             translate([0,0,4])
                 rotate([180,0,0])
                     888_1022();
-    
+    //}
     translate([0,0,rotor_head_height])
     rotate([0,rotor_head_rank_angle,0])    
         rotate([roll,0,0])
             rotate([0,pitch,0])
-                translate([0,0,12])
+                translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
                     union()
                     {
                         rotate([180,0,0])
@@ -65,7 +79,10 @@ pitch=15;
                         translate([0,0,-(neck_height+desk_thickness)])
                         neck_model();
                     }
-    }
+      }
+    
+    translate([-40,0,0])
+        cube([100,100,100],center=true);
 }
 
 
