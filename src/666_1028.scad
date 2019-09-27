@@ -52,9 +52,8 @@ draft = true;
 //test neceho
 
 // side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
-side_choose = 1;
 
-module 666_1028(draft){
+module 666_1028(side_choose = 1, draft){
 
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -274,7 +273,7 @@ module 666_1028(draft){
     }
 }
 
-module 666_1028_body_bottom(draft) {
+module 666_1028_body_bottom(side_choose = 1, draft) {
     difference(){//diff
         union(){
             //
@@ -336,7 +335,7 @@ module 666_1028_body_bottom(draft) {
     }
 }
 
-module 666_1028_body_middle(draft) {
+module 666_1028_body_middle(side_choose = 1, draft) {
     union(){
         difference(){//diff
             union(){
@@ -502,7 +501,7 @@ module 666_1028_body_middle(draft) {
     }
 }
 
-module 666_1028_body_top(draft) {
+module 666_1028_body_top(side_choose = 1, draft) {
     difference(){//diff
         intersection(){
             airfoil(naca = 0009, L = rudder_full_length, N = draft ? 50 : 100, h = rudder_full_height - Rudder_length - rudder_bottom_height, open = false);
