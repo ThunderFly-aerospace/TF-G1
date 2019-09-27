@@ -293,14 +293,14 @@ module 666_1028_body_bottom(draft) {
                     
                     union(){
                         //žebrování
-                        translate([80,-15,-80])
+                        translate([60,-15,-120])
                             rotate([45,0,90])
                                 for (i = [0:12]) { // opakovani cyklu
                                     translate([0, i * 25,-15])  //sude prorezy
                                         cube([30, wall_thickness, rudder_full_length * 4]);
                                 }
 
-                        translate([-80,-15,80])
+                        translate([-60,-15,40])
                             rotate([135,0,90])
                                 for (i = [0:12]) { // opakovani cyklu
                                     translate([0, i * 25,-15])  //sude prorezy
