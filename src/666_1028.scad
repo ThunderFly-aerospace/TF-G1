@@ -40,8 +40,8 @@ mount_rudder_wing_thickness = 5;
 shape_A_mount_thickness = 30;
 
 //celkove rozmery
-rudder_full_height = 150;
-rudder_bottom_height = tail_pipe_z_position - mount_rudder_height / 2 - infill_wall_thickness * 2 - servo_rudder_height;
+rudder_full_height = tail_height;
+rudder_bottom_height = 20;
 rudder_full_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2));
 
 //upevneni paky pro smerovku
@@ -81,14 +81,14 @@ module 666_1028(draft){
                                         //žebrování
                                         translate([60,-15,-40])
                                             rotate([45,0,90])
-                                                for (i = [0:8]) { // opakovani cyklu
+                                                for (i = [0:12]) { // opakovani cyklu
                                                     translate([0, i * 25,-15])  //sude prorezy
                                                         cube([30, wall_thickness, rudder_full_length * 2]);
                                                 }
     
                                         translate([-60,-15,60])
                                             rotate([135,0,90])
-                                                for (i = [0:8]) { // opakovani cyklu
+                                                for (i = [0:12]) { // opakovani cyklu
                                                     translate([0, i * 25,-15])  //sude prorezy
                                                         cube([30, wall_thickness, rudder_full_length * 2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                                                 }
@@ -293,18 +293,18 @@ module 666_1028_body_bottom(draft) {
                     
                     union(){
                         //žebrování
-                        translate([60,-15,-40])
+                        translate([80,-15,-80])
                             rotate([45,0,90])
-                                for (i = [0:8]) { // opakovani cyklu
+                                for (i = [0:12]) { // opakovani cyklu
                                     translate([0, i * 25,-15])  //sude prorezy
-                                        cube([30, wall_thickness, rudder_full_length * 2]);
+                                        cube([30, wall_thickness, rudder_full_length * 4]);
                                 }
 
-                        translate([-60,-15,60])
+                        translate([-80,-15,80])
                             rotate([135,0,90])
-                                for (i = [0:8]) { // opakovani cyklu
+                                for (i = [0:12]) { // opakovani cyklu
                                     translate([0, i * 25,-15])  //sude prorezy
-                                        cube([30, wall_thickness, rudder_full_length * 2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                                        cube([30, wall_thickness, rudder_full_length * 4]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                                 }
                                 
                         translate([rudder_full_length - Rudder_height + gap_width/2, 0, rudder_bottom_height / 2])
@@ -799,8 +799,8 @@ module 666_1028_mount(draft){
 //rotate([0,0 ,90])
     //666_1028_mount(draft);
 
-rotate([0,0 ,90])
-    666_1028_rudder_flightgear(draft);
+//rotate([0,0 ,90])
+    //666_1028_rudder_flightgear(draft);
 
 
 //666_1028_flightgear();
@@ -836,13 +836,16 @@ translate([150, 0, 0])
 
 translate([100, 0, 0])
     rotate([0, 0, 90])
-        666_1028_body_middle();
+        union() {
+            666_1028_body_middle();
+            //666_1028_rudder();
+        }
 
 translate([50, 0, 0])
     rotate([0, 0, 90])
         666_1028_body_bottom();
 
-666_1028();
+//666_1028();
 
 
 use <888_1012.scad>
