@@ -372,7 +372,7 @@ module 666_1028_body_middle(draft) {
                                     
                             //vyztužní v zadni casti        
                             translate([rudder_full_length - Rudder_height - infill_wall_thickness * 2 + 0.1, 0, Rudder_length / 2])
-                                cube([infill_wall_thickness, Rudder_depth, Rudder_length + 2], center = true);
+                                cube([infill_wall_thickness, Rudder_depth * 2, Rudder_length + 2], center = true);
     
                             //vyztužní pro upevnění na trubku
                             translate([20 + infill_wall_thickness, 0, tail_pipe_z_position - rudder_bottom_height])
@@ -682,20 +682,20 @@ module 666_1028_rudder(draft){
     difference(){
         union(){
             intersection(){
-               	hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
-                translate([150 - Rudder_height + gap_width/2,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
+               	hollow_airfoil(naca = 0009, L = rudder_full_length, N = draft ? 50 : 100, h = rudder_full_height, open = false); //dutý profil
+                translate([rudder_full_length - Rudder_height + gap_width*3,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
                     rotate([90,0,90])
                           cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
             }
-            translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
-                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
+            translate([rudder_full_length - Rudder_height + gap_width*3,0, gap_width/2 + (150 - Rudder_length)/2])
+                cylinder(h = Rudder_length - gap_width, r = rudder_full_length*surface_distance(x = (rudder_full_length - Rudder_height + gap_width*1.5 - 1)/rudder_full_length, naca=0009, open = false), $fn = draft ? 10:50);
 
-		    translate([112,0, 30 + rudder_servo_holes_z_offset - height/2])
+		    translate([rudder_full_length - 48,0, 30 + rudder_servo_holes_z_offset - height/2])
 		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
 
 
         }
-        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
+        translate([rudder_full_length - Rudder_height + gap_width*3,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
             cylinder(h = Rudder_length + gap_width, d = Rudder_shaft_diameter, $fn = 10);
 
 	    //páka pro táhlo
@@ -715,7 +715,7 @@ module 666_1028_rudder(draft){
 	    screw_xposition = (lenght/diagonal)*(screws_distance/2);
 	    screw_yposition = (height/diagonal)*(screws_distance/2);
 
-		translate([112,0,30 + rudder_servo_holes_z_offset - height/2]){
+		translate([rudder_full_length - 48,0,30 + rudder_servo_holes_z_offset - height/2]){
 
 		    translate([screw_xposition, 0, screw_yposition])
 		        rotate([90,0,0])
@@ -838,7 +838,7 @@ translate([100, 0, 0])
     rotate([0, 0, 90])
         union() {
             666_1028_body_middle();
-            //666_1028_rudder();
+            666_1028_rudder();
         }
 
 translate([50, 0, 0])
