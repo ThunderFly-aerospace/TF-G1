@@ -41,14 +41,14 @@ module 888_2009(){
             translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
                     rotate([0, 0, max_angle_of_ratation/2])
-                        translate([column_lower_diameter/2-5, 5, -10])
+                        translate([column_lower_diameter/2-3, stop_width/2, -10])
                             rotate([0, -15, 0])
                                 cube([13, 5, 50]);
 
             translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
                     rotate([0, 0, -max_angle_of_ratation/2])
-                        translate([column_lower_diameter/2-5, -5, -10])
+                        translate([column_lower_diameter/2-3, -5-stop_width/2, -10])
                             rotate([0, -15, 0])
                                 cube([13, 5, 50]);
 
