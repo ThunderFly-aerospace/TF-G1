@@ -385,7 +385,7 @@ module 666_1028_body_middle(draft) {
                             //servo wire guide
                             translate([servo_rudder_x_offset + 18.5, 0, tail_pipe_z_position - 8.5 - rudder_bottom_height])
                                 rotate([0, - 35, 0])
-                                    cube([0.6, Rudder_depth + 2, 19], center = true);   
+                                    cube([0.6, Rudder_depth + 2, 28], center = true);   
                           
                             //vystuzeni pro karbonove vyztuhove tyce
                             translate([Rudder_shaft_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
