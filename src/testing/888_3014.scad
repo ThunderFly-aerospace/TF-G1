@@ -11,7 +11,7 @@ module 888_3014(){
     difference(){
         union(){
             cylinder(d = 15.4, h = height);
-            cylinder(d = 11.9, h = height+neck);
+            cylinder(d = 11.9-0.2, h = height+neck);
         }
 
         cylinder(d = M8_screw_diameter, h = 50);
