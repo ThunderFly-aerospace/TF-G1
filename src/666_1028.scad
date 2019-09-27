@@ -548,19 +548,7 @@ module 666_1028_body_top(draft) {
                         }
                 }
                 
-        translate([100, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
-            rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
-                union() {
-                    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
-                    translate([0, 0, - side_choose * 10])
-                        if(side_choose == - 1) {
-                            cylinder (h=10, d=M3_nut_diameter, $fn=100, center = true);
-                        } else {
-                            cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
-                        }
-                }
-                
-        translate([130, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+        translate([110, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
             rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                 union() {
                     cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
