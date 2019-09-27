@@ -474,9 +474,11 @@ module 666_1028_body_middle(draft) {
                 union() {
                     cube([mount_rudder_length + infill_wall_thickness * 2, Rudder_depth * 2, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 4], center = true);
                     cube([mount_rudder_length + infill_wall_thickness * 2, mount_rudder_wing_thickness, mount_rudder_height], center = true);
+                    
+                    //otvor pro draty u upeveni trubky
                     translate([20, 0, 0])
                         rotate([0, 90, 0])
-                            cylinder(h = 10, d = 8, center = true);
+                            cube(13, center = true);
                     }
         
             //díra pro karbonove vyztuhove tyce
