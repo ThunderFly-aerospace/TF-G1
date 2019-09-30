@@ -338,14 +338,14 @@ Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samo
 
 
 ////směrové kormidlo
-Rudder_length = 4*main_tube_outer_diameter;
-Rudder_height = 2*main_tube_outer_diameter;
+Rudder_length = 150;
+Rudder_height = 3*main_tube_outer_diameter;
 Rudder_depth = main_tube_outer_diameter/2;
 gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
 Rudder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
 
 tail_airfoils_angle = 90;
-tail_height = 140;                    // vyska smerovky (ne delka plochy kridla)
+tail_height = 200;                    // vyska smerovky (ne delka plochy kridla)
 tail_pipe_z_position = tail_height/2; // od spodniho okraje smerovky
 tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
 tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2;

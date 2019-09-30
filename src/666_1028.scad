@@ -40,8 +40,8 @@ mount_rudder_wing_thickness = 5;
 shape_A_mount_thickness = 30;
 
 //celkove rozmery
-rudder_full_height = 150;
-rudder_bottom_height = tail_pipe_z_position - mount_rudder_height / 2 - infill_wall_thickness * 2 - servo_rudder_height;
+rudder_full_height = tail_height;
+rudder_bottom_height = 20;
 rudder_full_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2));
 
 //upevneni paky pro smerovku
@@ -52,9 +52,8 @@ draft = true;
 //test neceho
 
 // side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
-side_choose = 1;
 
-module 666_1028(draft){
+module 666_1028(side_choose = 1, draft){
 
 	beta = 90 - trailing_edge_angle(naca = 0005); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -81,14 +80,14 @@ module 666_1028(draft){
                                         //žebrování
                                         translate([60,-15,-40])
                                             rotate([45,0,90])
-                                                for (i = [0:8]) { // opakovani cyklu
+                                                for (i = [0:12]) { // opakovani cyklu
                                                     translate([0, i * 25,-15])  //sude prorezy
                                                         cube([30, wall_thickness, rudder_full_length * 2]);
                                                 }
     
                                         translate([-60,-15,60])
                                             rotate([135,0,90])
-                                                for (i = [0:8]) { // opakovani cyklu
+                                                for (i = [0:12]) { // opakovani cyklu
                                                     translate([0, i * 25,-15])  //sude prorezy
                                                         cube([30, wall_thickness, rudder_full_length * 2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                                                 }
@@ -274,7 +273,7 @@ module 666_1028(draft){
     }
 }
 
-module 666_1028_body_bottom(draft) {
+module 666_1028_body_bottom(side_choose = 1, draft) {
     difference(){//diff
         union(){
             //
@@ -293,29 +292,29 @@ module 666_1028_body_bottom(draft) {
                     
                     union(){
                         //žebrování
-                        translate([60,-15,-40])
+                        translate([60,-15,-120])
                             rotate([45,0,90])
-                                for (i = [0:8]) { // opakovani cyklu
+                                for (i = [0:12]) { // opakovani cyklu
                                     translate([0, i * 25,-15])  //sude prorezy
-                                        cube([30, wall_thickness, rudder_full_length * 2]);
+                                        cube([30, wall_thickness, rudder_full_length * 4]);
                                 }
 
-                        translate([-60,-15,60])
+                        translate([-60,-15,40])
                             rotate([135,0,90])
-                                for (i = [0:8]) { // opakovani cyklu
+                                for (i = [0:12]) { // opakovani cyklu
                                     translate([0, i * 25,-15])  //sude prorezy
-                                        cube([30, wall_thickness, rudder_full_length * 2]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
+                                        cube([30, wall_thickness, rudder_full_length * 4]); // the fenestrations have to start a bit lower and be a bit taller, so that we don't get 0 sized objects
                                 }
                                 
                         translate([rudder_full_length - Rudder_height + gap_width/2, 0, rudder_bottom_height / 2])
                             cube([20, 40, rudder_bottom_height], center = true);   
                           
                             //vystuzeni pro karbonove vyztuhove tyce
-                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
-                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                   
+                            translate([Rudder_shaft_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
+                                cube([Rudder_shaft_diameter + 6, 40, Rudder_length], center = true);                   
                                 
-                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, Rudder_length / 2])
-                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                 
+                            translate([Rudder_shaft_diameter / 2 + 3 + 75, 0, Rudder_length / 2])
+                                cube([Rudder_shaft_diameter + 6, 40, Rudder_length], center = true);                 
                     }
                 }
             }
@@ -328,15 +327,15 @@ module 666_1028_body_bottom(draft) {
             cylinder(h = rudder_full_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
         
         //díra pro karbonove vyztuhove tyce
-        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, 2])
-            cylinder(h = rudder_full_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+        translate([Rudder_shaft_diameter / 2 + 3 + 15, 0, 2])
+            cylinder(h = rudder_full_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
         
-        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, 2])
-            cylinder(h = rudder_full_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+        translate([Rudder_shaft_diameter / 2 + 3 + 75, 0, 2])
+            cylinder(h = rudder_full_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
     }
 }
 
-module 666_1028_body_middle(draft) {
+module 666_1028_body_middle(side_choose = 1, draft) {
     union(){
         difference(){//diff
             union(){
@@ -372,7 +371,7 @@ module 666_1028_body_middle(draft) {
                                     
                             //vyztužní v zadni casti        
                             translate([rudder_full_length - Rudder_height - infill_wall_thickness * 2 + 0.1, 0, Rudder_length / 2])
-                                cube([infill_wall_thickness, Rudder_depth, Rudder_length + 2], center = true);
+                                cube([infill_wall_thickness, Rudder_depth * 2, Rudder_length + 2], center = true);
     
                             //vyztužní pro upevnění na trubku
                             translate([20 + infill_wall_thickness, 0, tail_pipe_z_position - rudder_bottom_height])
@@ -385,14 +384,14 @@ module 666_1028_body_middle(draft) {
                             //servo wire guide
                             translate([servo_rudder_x_offset + 18.5, 0, tail_pipe_z_position - 8.5 - rudder_bottom_height])
                                 rotate([0, - 35, 0])
-                                    cube([0.6, Rudder_depth + 2, 19], center = true);   
+                                    cube([0.6, Rudder_depth + 2, 28], center = true);   
                           
                             //vystuzeni pro karbonove vyztuhove tyce
-                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
-                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                   
+                            translate([Rudder_shaft_diameter / 2 + 3 + 15, 0, Rudder_length / 2])
+                                cube([Rudder_shaft_diameter + 6, 40, Rudder_length], center = true);                   
                                 
-                            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, Rudder_length / 2])
-                                cube([tube_for_undercarriage_outer_diameter + 6, 40, Rudder_length], center = true);                 
+                            translate([Rudder_shaft_diameter / 2 + 3 + 75, 0, Rudder_length / 2])
+                                cube([Rudder_shaft_diameter + 6, 40, Rudder_length], center = true);                 
                         }
                     }
                 }
@@ -474,17 +473,19 @@ module 666_1028_body_middle(draft) {
                 union() {
                     cube([mount_rudder_length + infill_wall_thickness * 2, Rudder_depth * 2, tube_for_undercarriage_outer_diameter + global_clearance * 2 + 4], center = true);
                     cube([mount_rudder_length + infill_wall_thickness * 2, mount_rudder_wing_thickness, mount_rudder_height], center = true);
+                    
+                    //otvor pro draty u upeveni trubky
                     translate([20, 0, 0])
                         rotate([0, 90, 0])
-                            cylinder(h = 10, d = 8, center = true);
+                            cube(13, center = true);
                     }
         
             //díra pro karbonove vyztuhove tyce
-            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, 2])
-                cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+            translate([Rudder_shaft_diameter / 2 + 3 + 15, 0, 2])
+                cylinder(h = rudder_full_height - rudder_bottom_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
             
-            translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, 2])
-                cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+            translate([Rudder_shaft_diameter / 2 + 3 + 75, 0, 2])
+                cylinder(h = rudder_full_height - rudder_bottom_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
         }
         
         //podpora tisku v miste upevneni trubky
@@ -500,7 +501,7 @@ module 666_1028_body_middle(draft) {
     }
 }
 
-module 666_1028_body_top(draft) {
+module 666_1028_body_top(side_choose = 1, draft) {
     difference(){//diff
         intersection(){
             airfoil(naca = 0009, L = rudder_full_length, N = draft ? 50 : 100, h = rudder_full_height - Rudder_length - rudder_bottom_height, open = false);
@@ -522,7 +523,7 @@ module 666_1028_body_top(draft) {
                 cube([80, 22, rudder_full_length + 10], center = true);
 
         //vyříznutí děr pro upevnění do tvaru A
-        translate([40, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+        translate([35, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
             rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                 union() {
                     cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -546,19 +547,7 @@ module 666_1028_body_top(draft) {
                         }
                 }
                 
-        translate([100, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
-            rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
-                union() {
-                    cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
-                    translate([0, 0, - side_choose * 10])
-                        if(side_choose == - 1) {
-                            cylinder (h=10, d=M3_nut_diameter, $fn=100, center = true);
-                        } else {
-                            cylinder (h=10, d=M3_nut_diameter, $fn=6, center = true);
-                        }
-                }
-                
-        translate([130, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
+        translate([110, 0, rudder_full_height - 10 - Rudder_length - rudder_bottom_height])
             rotate([90 - side_choose * Rudder_angle / 2, 0, 0])
                 union() {
                     cylinder (h=30, d=M3_screw_diameter, $fn=100, center = true);
@@ -571,11 +560,11 @@ module 666_1028_body_top(draft) {
                 }
         
         //díra pro karbonove vyztuhove tyce
-        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 15, 0, 2])
-            cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+        translate([Rudder_shaft_diameter / 2 + 3 + 15, 0, 2])
+            cylinder(h = rudder_full_height - rudder_bottom_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
         
-        translate([tube_for_undercarriage_outer_diameter / 2 + 3 + 75, 0, 2])
-            cylinder(h = rudder_full_height - rudder_bottom_height, d = tube_for_undercarriage_outer_diameter, $fn = draft ? 10 : 50);
+        translate([Rudder_shaft_diameter / 2 + 3 + 75, 0, 2])
+            cylinder(h = rudder_full_height - rudder_bottom_height, d = Rudder_shaft_diameter, $fn = draft ? 10 : 50);
     }
 }
 
@@ -692,20 +681,20 @@ module 666_1028_rudder(draft){
     difference(){
         union(){
             intersection(){
-               	hollow_airfoil(naca = 0009, L = 150, N = draft ? 50 : 100, h = 150, open = false); //dutý profil
-                translate([150 - Rudder_height + gap_width/2,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
+               	hollow_airfoil(naca = 0009, L = rudder_full_length, N = draft ? 50 : 100, h = rudder_full_height, open = false); //dutý profil
+                translate([rudder_full_length - Rudder_height + gap_width*3,- Rudder_depth/2, + gap_width/2 + (150 - Rudder_length)/2])
                     rotate([90,0,90])
                           cube([Rudder_depth + gap_width, Rudder_length - gap_width,Rudder_height + global_clearance]);
             }
-            translate([150 - Rudder_height + gap_width*1.5 - 1,0, gap_width/2 + (150 - Rudder_length)/2])
-                cylinder(h = Rudder_length - gap_width, r = 150*surface_distance(x = (150 - Rudder_height + gap_width*1.5 - 1)/150, naca=0009, open = false), $fn = draft ? 10:50);
+            translate([rudder_full_length - Rudder_height + gap_width*3,0, gap_width/2 + (150 - Rudder_length)/2])
+                cylinder(h = Rudder_length - gap_width, r = rudder_full_length*surface_distance(x = (rudder_full_length - Rudder_height + gap_width*1.5 - 1)/rudder_full_length, naca=0009, open = false), $fn = draft ? 10:50);
 
-		    translate([112,0, 30 + rudder_servo_holes_z_offset - height/2])
+		    translate([rudder_full_length - 48,0, 30 + rudder_servo_holes_z_offset - height/2])
 		        cube([11,2*150*surface_distance(x = 107/150, naca=0009, open = false),10], center = true);
 
 
         }
-        translate([150 - Rudder_height + gap_width*1.5 - 1,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
+        translate([rudder_full_length - Rudder_height + gap_width*3,0, + gap_width/2 + (150 - Rudder_length)/2 - gap_width])
             cylinder(h = Rudder_length + gap_width, d = Rudder_shaft_diameter, $fn = 10);
 
 	    //páka pro táhlo
@@ -725,7 +714,7 @@ module 666_1028_rudder(draft){
 	    screw_xposition = (lenght/diagonal)*(screws_distance/2);
 	    screw_yposition = (height/diagonal)*(screws_distance/2);
 
-		translate([112,0,30 + rudder_servo_holes_z_offset - height/2]){
+		translate([rudder_full_length - 48,0,30 + rudder_servo_holes_z_offset - height/2]){
 
 		    translate([screw_xposition, 0, screw_yposition])
 		        rotate([90,0,0])
@@ -809,8 +798,8 @@ module 666_1028_mount(draft){
 //rotate([0,0 ,90])
     //666_1028_mount(draft);
 
-rotate([0,0 ,90])
-    666_1028_rudder_flightgear(draft);
+//rotate([0,0 ,90])
+    //666_1028_rudder_flightgear(draft);
 
 
 //666_1028_flightgear();
@@ -846,13 +835,16 @@ translate([150, 0, 0])
 
 translate([100, 0, 0])
     rotate([0, 0, 90])
-        666_1028_body_middle();
+        union() {
+            666_1028_body_middle();
+            666_1028_rudder();
+        }
 
 translate([50, 0, 0])
     rotate([0, 0, 90])
         666_1028_body_bottom();
 
-666_1028();
+//666_1028();
 
 
 use <888_1012.scad>
