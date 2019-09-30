@@ -34,10 +34,10 @@ m3_nut_depth = 2.7;	// normal M3 hex nut exact depth = 2.4, nyloc = 4
 
 retainer = 0;		// Belt retainer above teeth, 0 = No, 1 = Yes
 retainer_ht = 0;	// height of retainer flange over pulley, standard = 1.5
-idler = 1;			// Belt retainer below teeth, 0 = No, 1 = Yes
+idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-pulley_t_ht = 10.5;	// length of toothed part of pulley, standard = 12
+pulley_t_ht = 12;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 1;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 20;	// pulley base diameter, standard = 20
 no_of_nuts = 1;		// number of captive nuts required, standard = 1
@@ -99,10 +99,10 @@ module motor_pulley(draft)
         if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
         // osazení pro kroužek
-        cylinder(h = 3, d=M8_nut_diameter,  $fn = 6);
+        cylinder(h = 3+1.5, d=M8_nut_diameter,  $fn = 6);
     }
-	translate([0,0,3])
-		cylinder(h = layer_thickness, d=M8_nut_diameter,  $fn = 50);
+	//translate([0,0,3])
+	//	cylinder(h = layer_thickness, d=M8_nut_diameter,  $fn = 50);
 
 }
 
@@ -296,4 +296,5 @@ module GT2_5mm()
 	linear_extrude(height=pulley_t_ht+2) polygon([[-1.975908,-0.75],[-1.975908,0],[-1.797959,0.03212],[-1.646634,0.121224],[-1.534534,0.256431],[-1.474258,0.426861],[-1.446911,0.570808],[-1.411774,0.712722],[-1.368964,0.852287],[-1.318597,0.989189],[-1.260788,1.123115],[-1.195654,1.25375],[-1.12331,1.380781],[-1.043869,1.503892],[-0.935264,1.612278],[-0.817959,1.706414],[-0.693181,1.786237],[-0.562151,1.851687],[-0.426095,1.9027],[-0.286235,1.939214],[-0.143795,1.961168],[0,1.9685],[0.143796,1.961168],[0.286235,1.939214],[0.426095,1.9027],[0.562151,1.851687],[0.693181,1.786237],[0.817959,1.706414],[0.935263,1.612278],[1.043869,1.503892],[1.123207,1.380781],[1.195509,1.25375],[1.26065,1.123115],[1.318507,0.989189],[1.368956,0.852287],[1.411872,0.712722],[1.447132,0.570808],[1.474611,0.426861],[1.534583,0.256431],[1.646678,0.121223],[1.798064,0.03212],[1.975908,0],[1.975908,-0.75]]);
 	}
 
+rotate([180, 0, 0])
 motor_pulley(draft);
