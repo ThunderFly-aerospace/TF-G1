@@ -130,7 +130,7 @@ module beam_holes_patern(n = 1){
 
 
             // diry pro pricne tyce
-             for (j=[-1]) translate([10, 0, j*(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
+            for (j=[-1]) translate([10, 0, j*(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
                 rotate([90, 0, 0])
                     cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = draft ?15:50);
             }
@@ -179,8 +179,8 @@ module beam_holes_patern(n = 1){
                     rotate([90, 0, 0])
                         cylinder(d = M4_nut_diameter, h = M4_nut_height, $fn = 6);
 
-                translate([-M4_nut_diameter/2, beam_width/2 - 5 - M4_nut_height, 0])
-                    cube([M4_nut_diameter, M3_nut_height, 50]);
+                translate([-M4_nut_diameter/2, beam_width/2 - 5 - M4_nut_height*1.5, 0])
+                    cube([M4_nut_diameter, M4_nut_height, 50]);
             }
 
             // M4 diry skrze pricne tyce
