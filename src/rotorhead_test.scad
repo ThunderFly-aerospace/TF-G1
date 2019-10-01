@@ -5,6 +5,7 @@ use <lib/igus.scad>
 
 include <../parameters.scad>
 
+stl = true;
 
 desk_thickness=4;
 plate_thickness=2;
@@ -22,22 +23,23 @@ module neck_model(){
     {
         union()
         {
-            
+
             cylinder(h=desk_thickness+neck_height,d=neck_diameter);
             translate([0,0,(neck_height-bearing_neck_length)/2])
                 cylinder(h=bearing_neck_length+neck_height,d=bearing_diameter,center=true);
             translate([0,0,neck_height-plate_thickness])
                 cylinder(h=plate_thickness,d=plate_diameter);
-            
+
         }
         cylinder(h=4*(desk_thickness+neck_height),d=ax_diameter,center=true);
     }
 }
 
 roll=rotor_head_roll_stop;
-pitch=rotor_head_pitch_stop
-;
+pitch=rotor_head_pitch_stop;
 
+//roll=0;
+//pitch=0;
 
 difference()
 {
@@ -54,39 +56,50 @@ difference()
                     efsm_12();
                     for (i=[-1,1])
                         for(j=[-1,1])
-                            translate([i*14,j*14,rotor_head_bearing_a1+1.5])            
+                            translate([i*14,j*14,rotor_head_bearing_a1+1.5])
                                 cylinder(d=9,h=3,center=true);
                 }
-    }
+    //}
 
 
     translate([0,0,rotor_head_height])
     rotate([0,rotor_head_rank_angle,0])
-        rotate([roll,0,0])        
+        rotate([roll,0,0])
             translate([0,0,4])
                 rotate([180,0,0])
                     888_1022();
     }
     translate([0,0,rotor_head_height])
-    rotate([0,rotor_head_rank_angle,0])    
+    rotate([0,rotor_head_rank_angle,0])
         rotate([roll,0,0])
             rotate([0,pitch,0])
                 translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
-                    union()
-                    {
-                        rotate([180,0,0])
-                            888_1020();
-                        translate([0,0,-(neck_height+desk_thickness)])
-                        neck_model();
+                    color([0.8, 0.8, 0.8, 0.5])
+                    if(stl){
+                        //rotate([180,0,0])
+                        //    import("../STL/888_1020.stl", convexity=3);
+                        translate([0, 0, -desk_thickness])
+                            cylinder(d = 100, h = 4);
+                        translate([0,0,-(desk_thickness)])
+                            import("../STL/666_1265.stl", convexity=3);
+                        translate([0,0,0])
+                            import("../STL/666_1264.stl", convexity=3);
                     }
-      //}
-    
+                    else{
+                        {
+                            %rotate([180,0,0])
+                                888_1020();
+                            #translate([0,0,-(neck_height+desk_thickness)])
+                                #neck_model();
+                        }
+                    }
+      }
+
     //translate([-40,0,0])
-      //  cube([100,100,100],center=true);
+    //    cube([100,100,100],center=true);
 }
 
 
 
 
 //neck_model();
- 
