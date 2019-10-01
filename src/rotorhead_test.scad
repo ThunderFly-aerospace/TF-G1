@@ -8,7 +8,7 @@ include <../parameters.scad>
 
 desk_thickness=4;
 plate_thickness=2;
-plate_diameter=40;
+plate_diameter=38;
 neck_height=rotorhead_neck_height;
 bearing_neck_length=10;
 neck_diameter=14;
@@ -34,8 +34,8 @@ module neck_model(){
     }
 }
 
-roll=10;
-pitch=15
+roll=rotor_head_roll_stop;
+pitch=rotor_head_pitch_stop
 ;
 
 
@@ -66,7 +66,7 @@ difference()
             translate([0,0,4])
                 rotate([180,0,0])
                     888_1022();
-    //}
+    }
     translate([0,0,rotor_head_height])
     rotate([0,rotor_head_rank_angle,0])    
         rotate([roll,0,0])
@@ -79,10 +79,10 @@ difference()
                         translate([0,0,-(neck_height+desk_thickness)])
                         neck_model();
                     }
-      }
+      //}
     
-    translate([-40,0,0])
-        cube([100,100,100],center=true);
+    //translate([-40,0,0])
+      //  cube([100,100,100],center=true);
 }
 
 
