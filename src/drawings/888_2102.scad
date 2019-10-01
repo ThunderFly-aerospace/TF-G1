@@ -1,19 +1,19 @@
 draft = true;
 
-use <./lib/naca4.scad>
-include <../parameters.scad>
+use <../lib/stdlib/naca4.scad>
+include <../../parameters.scad>
 
 
-use <666_1027.scad>
-use <888_1018.scad>
-use <888_1019.scad>
+use <../666_1027.scad>
+use <../888_1018.scad>
+use <../888_1019.scad>
 
-use <888_2002.scad>
-use <888_2003.scad>
-use <888_2004.scad>
-use <888_2005.scad>
-use <888_2006.scad>
-use <888_2007.scad>
+use <../888_2002.scad>
+use <../888_2003.scad>
+use <../888_2004.scad>
+use <../888_2005.scad>
+use <../888_2006.scad>
+use <../888_2007.scad>
 
 
 difference(){

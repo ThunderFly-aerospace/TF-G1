@@ -2,7 +2,7 @@
 draft = true;
 stl = true;
 
-limec = false;
+limec = true;
 pilon_mount = true;
 motor = true;
 
