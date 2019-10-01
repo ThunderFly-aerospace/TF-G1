@@ -571,6 +571,9 @@ rotor_head_bearing_screw_head_height=3.5;
 //rotor_head_wall_height=2*((rotor_head_bearing_a1+rotor_head_bearing_screw_head_height-rotor_head_bearing_a_center_of_rotation+rotor_head_bearing_width/2*tan(rotor_head_roll_stop))*cos(rotor_head_roll_stop));//height of side wall of center part
 rotor_head_wall_height = 8;
 rotorhead_neck_height=6;
+rotorhead_neck_plate_diameter = 38;
+rotorhead_neck_plate_thickness = 2;
+rotorhead_desk_thickness = 4;
 rotor_head_kardan_inner_x=rotor_head_bearing_width+2*rotor_head_cardan_clearance;
 rotor_head_kardan_inner_y=2*(rotor_head_bearing_h/2*1/cos(rotor_head_pitch_stop)+rotor_head_wall_height/2*tan(rotor_head_pitch_stop)); //center part
 

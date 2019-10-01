@@ -7,9 +7,9 @@ include <../parameters.scad>
 
 stl = true;
 
-desk_thickness=4;
-plate_thickness=2;
-plate_diameter=38;
+desk_thickness=rotorhead_desk_thickness;
+plate_thickness=rotorhead_neck_plate_thickness;
+plate_diameter=rotorhead_neck_plate_diameter;
 neck_height=rotorhead_neck_height;
 bearing_neck_length=10;
 neck_diameter=14;
@@ -76,10 +76,10 @@ difference()
                 translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
                     color([0.8, 0.8, 0.8, 0.5])
                     if(stl){
-                        //rotate([180,0,0])
-                        //    import("../STL/888_1020.stl", convexity=3);
-                        translate([0, 0, -desk_thickness])
-                            cylinder(d = 100, h = 4);
+                        rotate([180,0,0])
+                            import("../STL/888_1020.stl", convexity=3);
+                        //translate([0, 0, -desk_thickness])
+                        //    cylinder(d = 100, h = 4);
                         translate([0,0,-(desk_thickness)])
                             import("../STL/666_1265.stl", convexity=3);
                         translate([0,0,0])

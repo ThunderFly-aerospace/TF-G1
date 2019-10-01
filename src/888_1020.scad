@@ -71,7 +71,7 @@ module 888_1020(draft = true){
 
     //brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
     brit_height=rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
-   
+
     plate_size_y = rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*wall_thickness;
     plate_size_x = plate_overlap + motor_distance + motor_diameter/2;
     plate_size_z = 4;
@@ -98,6 +98,8 @@ module 888_1020(draft = true){
                 //ramecek pro kardan
                 translate([ ( back_part_crop)/2+5,0, brit_height+plate_size_z/2])
                     cube([plate_size_x - motor_diameter - back_part_crop+5, plate_size_y, plate_size_z],center=true);
+
+                    cylinder(d = rotorhead_neck_plate_diameter, h = rotorhead_desk_thickness);
 
             }
 
@@ -197,8 +199,8 @@ module 888_1020(draft = true){
                     translate([-1.5,0,0])
                         cube([3, 6, 50], center=true);
 
-             translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, 0])
-            cube([hall_length, hall_width, hall_thickness+global_clearance]);
+            translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, 0])
+                cube([hall_length, hall_width, hall_thickness+global_clearance]);
         }
 
        //otvor por kardan
@@ -206,7 +208,7 @@ module 888_1020(draft = true){
             cube([rotor_head_kardan_inner_x+2*rotor_head_brit_width,
                   rotor_head_kardan_inner_y,
                   2*brit_height],center=true);
-        
+
         //brity
         translate([0,0,plate_size_z+brit_height])
             rotate([0,rotor_head_pitch_stop,0])
@@ -220,7 +222,7 @@ module 888_1020(draft = true){
 
         xdst=(rotor_head_kardan_inner_x/2+rotor_head_brit_width-(rotor_head_wall_height/2+rotor_head_plate_thickness)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
         xsize=(plate_size_x - motor_diameter)/2-(rotor_head_kardan_inner_x/2+rotor_head_brit_width)-global_clearance;
-        
+
         translate([xdst+(zebra_x+rotor_ax_neck_diameter/2-xdst)/2,
                     0,
                     15+plate_size_z])
@@ -235,12 +237,12 @@ module 888_1020(draft = true){
                 cube([4*brit_height,
                 rotor_head_kardan_inner_y+2*(rotor_head_brit_width+rotor_head_cardan_clearance),
                 4*brit_height],center=true);
-                
-        
+
+
         //otvor pro soustružený krček
         translate([0, 0, -brit_height])
             cylinder(d = rotor_ax_neck_diameter, h = 2*brit_height, $fn = draft ? 20 : 80);
-            
+
          //žebra
          for(i=[45,135,225,315]){
             translate([0,0,plate_size_z-zebra_inplate])
@@ -264,8 +266,8 @@ module 888_1020(draft = true){
                                 translate([rotor_ax_neck_diameter/2+zebra_th/2+j*3*zebra_th,0,brit_height])
                                     cube([zebra_th,2*zebra_th,2*brit_height],center=true);
                         }
-         }    
-                                   
+         }
+
 
 
      }
