@@ -4,26 +4,32 @@ include <../parameters.scad>
 module 888_2028() {
 
 screw_distance = 10;
+hole_distance = 30;
+hole_offset = 7;
 
 
 difference(){
     union(){
         hull(){
-            cube([10, 20, 2]);
-            cube([3, 20, 10]);
+            cube([11, 20, 2]);
+            cube([3, 20, 5]);
         }
         hull(){
-            cube([3, 20, 10]);
-            translate([0, 10, 20])
+            cube([7, 20, 15]);
+            translate([0, 10+hole_offset, hole_distance])
                 rotate([0, 90, 0])
-                    cylinder(d = 10, h = 3);
+                    cylinder(d = 10, h = 6, $fn = 60);
 
         }
     }
 
-    translate([0, 10, 20])
+    #translate([0, 10+hole_offset, hole_distance])
         rotate([0, 90, 0])
-            cylinder(d = M3_screw_diameter, h = 3.5, $fn = 30);
+            cylinder(d = M2_screw_diameter, h = 20, $fn = 30);
+
+    translate([6, 10+hole_offset, hole_distance])
+        rotate([0, 90, 0])
+            cylinder(d = M3_nut_diameter, h = 20, $fn = 30);
 
     translate([7, 10-5, -0.1])
         cylinder(d = M3_screw_diameter, h = 10, $fn = 30);
