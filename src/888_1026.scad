@@ -102,7 +102,7 @@ module 888_1026(draft)
                         }
 
 
-        //octvor pro vývody motoru
+        //otvor pro vývody motoru
         translate([engine_offset,0,engine_displacement])
             rotate([0, engine_angle, 0])
                 translate([0, 0, height - 8])
