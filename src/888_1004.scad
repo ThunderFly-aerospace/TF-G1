@@ -42,7 +42,7 @@ module beam_profile(l = 100, draft = true){
         translate([30, 0, 0]){
             for (m = [[0, 0, 0], [0, 1, 0]]) mirror(m)
                 for (i=[0:15]){
-                    translate([-global_clearance/2 + rail_length*i, 12.5, 10/2 + beam_min_wall]){
+                    translate([-global_clearance/2 + rail_length*i, beam_socket_width/2, 10/2 + beam_min_wall]){
                         // drazka pro matku
                         translate([0, -3, -2-M3_nut_height])
                             cube([rail_length, 6, M3_nut_height]);
@@ -57,7 +57,7 @@ module beam_profile(l = 100, draft = true){
                     }
 
 
-                    translate([-global_clearance/2 + rail_length*i, 12.5, -10-10/2-beam_min_wall-beam_vertical_space_between_pipes]){
+                    translate([-global_clearance/2 + rail_length*i, beam_socket_width/2, -10-10/2-beam_min_wall-beam_vertical_space_between_pipes]){
                         // drazka pro matku
                         translate([0, -3, 2])
                             cube([rail_length, 6, M3_nut_height]);

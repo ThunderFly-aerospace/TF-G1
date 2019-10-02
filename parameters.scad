@@ -24,6 +24,7 @@ pilon_pipe_diameter_inner = carbon_pipe_10_inner_diameter;
 
 beam_vertical_space_between_pipes = 1;
 beam_min_wall = 3;
+beam_socket_width = 25;
 
 // tloustka limce
 ring_thickness = 2*10 + beam_vertical_space_between_pipes + 3*beam_min_wall;
