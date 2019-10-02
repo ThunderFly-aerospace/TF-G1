@@ -42,7 +42,7 @@ shape_A_mount_thickness = 30;
 //celkove rozmery
 rudder_full_height = tail_height;
 rudder_bottom_height = 20;
-rudder_full_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2));
+rudder_full_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2)) - 7;
 
 //upevneni paky pro smerovku
 rudder_servo_holes_z_offset = 26;
