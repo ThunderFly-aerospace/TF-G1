@@ -71,8 +71,8 @@ module 888_1020(draft = true){
     servo_joint_z = 10; // jak moc nizko bude kloubek
 
     wall_thickness=4;
-    
-    
+
+
 
     //brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
     brit_height=rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
@@ -275,13 +275,13 @@ union(){
                         }
          }
      }
-     
+
      //krček
         translate([0, 0, 0])
               cylinder(d = rotor_ax_neck_diameter, h = plate_size_z+rotorhead_neck_height, $fn = draft ? 20 : 80);
         translate([0, 0, 0])
               cylinder(d = rotor_as_neck_ball_d, h = plate_size_z+rotorhead_neck_height+rotor_ax_neck_inball, $fn = draft ? 20 : 80);
-     
+
 
 }
 
@@ -334,6 +334,12 @@ union(){
                                 }
                             }
              }
+
+             for (i=[-1,1])
+                 for(j=[-1,1])
+                     translate([i*14,j*14,plate_size_z+brit_height/2.25])
+                        rotate([-j*10, i*10, 0])
+                            #cylinder(d1=8, d2=12, h=5, center=true);
 
 
 }
