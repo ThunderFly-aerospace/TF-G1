@@ -18,7 +18,7 @@ module pilon_info(){
     echo(str("Delka zadni tyce je ", rotor_head_rear_pipe_length(), "mm"));
 }
 
-module pipes(diameter = pilon_pipe_diameter, draft = false){
+module pipes(diameter = pilon_pipe_diameter, draft = $preview){
     length_front = rotor_head_front_pipe_length();
 // predni tyce
     translate([pilon_pipe_head_front_x, pilon_pipe_head_front_y, 0])
@@ -26,13 +26,13 @@ module pipes(diameter = pilon_pipe_diameter, draft = false){
                 translate([0, 0, -5]) cylinder(d = diameter, h = length_front, $fn = draft? 9 : 50);
     translate([pilon_pipe_head_front_x, -pilon_pipe_head_front_y, 0])
             orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube+pilon_pipe_base_front_z],vref=[0,0,1], roll=0)
-                translate([0, 0, -5]) cylinder(d = diameter, h = length_front, $fn = draft? 9 : 50);
+                translate([0, 0, -5]) cylinder(d = diameter, h = length_front, $fn = draft? 8 : 50);
 
 // zadni tyc
     length_rear = rotor_head_rear_pipe_length();
     translate([-pilon_pipe_head_rear_x, 0, 0])
         orientate([-pilon_pipe_base_rear_x+pilon_pipe_head_rear_x, 0, -height_of_vertical_tube+pilon_pipe_base_rear_z],vref=[0,0,1], roll=0)
-            translate([0, 0, -5]) cylinder(d = diameter, h = length_rear, $fn = draft? 9 : 50);
+            translate([0, 0, -5]) cylinder(d = diameter, h = length_rear, $fn = draft? 8 : 50);
 }
 
 
@@ -40,7 +40,7 @@ module pipe_front(diameter = pilon_pipe_diameter, draft = false)
     difference(){
         translate([pilon_pipe_head_front_x, pilon_pipe_head_front_y, 0])
             orientate([pilon_pipe_base_front_x - pilon_pipe_head_front_x, (pilon_pipe_base_front_y-pilon_pipe_head_front_y), -height_of_vertical_tube+pilon_pipe_base_front_z],vref=[0,0,1], roll=0)
-                translate([0, 0, -5]) cylinder(d = diameter, h = rotor_head_front_pipe_length(), $fn = draft? 9 : 50);
+                translate([0, 0, -5]) cylinder(d = diameter, h = rotor_head_front_pipe_length(), $fn = draft? 8 : 50);
 
         pipes_top_screw();
     }
@@ -151,7 +151,7 @@ module 888_1029() {
                 union(){
                     hull(){
                         intersection(){
-                            pipes(16, 200);
+                            pipes(16, draft);
                             translate([-50, -50, -15])
                                 cube([100, 100, 85]);
 
@@ -241,7 +241,7 @@ module 888_1029_servoholder(draft){
                 translate([rotor_head_servo_shift[0]-15, -LM_20MG_length +9, zpos])
                     cube([30,  LM_20MG_length + 23, thickness]);
                 intersection(){
-                    pipes(16, 200);
+                    pipes(16, $preview);
                     translate([-50, -90/2, zpos])
                         cube([100, 90, thickness]);
                 }
@@ -260,7 +260,7 @@ module 888_1029_servoholder(draft){
                 }
 
 
-            pipes(pilon_pipe_diameter, 200);
+            pipes(pilon_pipe_diameter, $preview);
             pipes_top_screw();
 
             translate([rotor_head_servo_shift[0]-15, -20, zpos-0.5])
