@@ -6,6 +6,7 @@ use <lib/igus.scad>
 include <../parameters.scad>
 
 stl = true;
+plastick = true;
 
 desk_thickness=rotorhead_desk_thickness;
 plate_thickness=rotorhead_neck_plate_thickness;
@@ -56,7 +57,7 @@ difference()
                     efsm_12();
                     for (i=[-1,1])
                         for(j=[-1,1])
-                            translate([i*14,j*14,rotor_head_bearing_a1+1.5])
+                            translate([i*14,j*14,rotor_head_bearing_a1+3/2])
                                 cylinder(d=9,h=3,center=true);
                 }
     //}
@@ -76,14 +77,21 @@ difference()
                 translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
                     color([0.8, 0.8, 0.8, 0.5])
                     if(stl){
-                        rotate([180,0,0])
-                            import("../STL/888_1020.stl", convexity=3);
-                        //translate([0, 0, -desk_thickness])
-                        //    cylinder(d = 100, h = 4);
-                        translate([0,0,-(desk_thickness)])
-                            import("../STL/666_1265.stl", convexity=3);
-                        translate([0,0,0])
-                            import("../STL/666_1264.stl", convexity=3);
+                        if(plastick){
+                            rotate([180,0,0])
+                                import("../STL/888_1020_plastick_neck.stl", convexity=3);
+                                translate([0,0,0])
+                                    import("../STL/666_1264.stl", convexity=3);
+                        }else{
+                            rotate([180,0,0])
+                                import("../STL/888_1020.stl", convexity=3);
+
+                            translate([0,0,-(desk_thickness)])
+                                import("../STL/666_1265.stl", convexity=3);
+                            translate([0,0,0])
+                                import("../STL/666_1264.stl", convexity=3);
+                        }
+
                     }
                     else{
                         {
