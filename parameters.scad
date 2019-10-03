@@ -541,8 +541,8 @@ servo_20kg_nut_d = 5+0.3;
 
 rotor_head_pitch = 0;
 rotor_head_roll = 0;
-
-rotor_head_servo_shift = [-6, -49, -40];
+rotor_head_screw_distances = [0, 10, 64];
+rotor_head_servo_shift = [-7, -49, -45];
 rotor_head_height = 17; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
 rotor_head_width = 30; // je to "sirka" v ose X
 rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
