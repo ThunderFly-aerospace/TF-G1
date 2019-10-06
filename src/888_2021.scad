@@ -7,13 +7,13 @@ cylinder_2_thickness = 1.5;
 
 screw_length = 55;
 fork_thickness = 20;
-fork_width = 10 ;
-fork_hole_diameter = 10 ;
-fork_lenght = 65;
-fork_length_overlap = 10;       // prodlouzeni smerem dolu
+fork_width = 10;
+fork_hole_diameter = 10;
+fork_lenght = 105/2;
+fork_length_overlap = 13;       // prodlouzeni smerem dolu
 
 pipe_diameter = tube_for_undercarriage_outer_diameter;
-pipe_holder_length = 20;
+pipe_holder_length = 0;
 pipe_holder_thickness = pipe_diameter/2+3;
 
 pipe_holder_distance = 20;
@@ -22,14 +22,14 @@ pipe_holder2_pos = pipe_holder1_pos + pipe_holder_distance;
 pipe_holder_space =3;
 
 
-module 888_2021(){
+module 888_2021(draft = true){
 
 rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
     difference() {
       union () {
         difference() {
             union () {
-                cylinder(h=fork_thickness, d=2*fork_width+fork_wheel_width, $fn=100);
+                cylinder(h=fork_thickness, d=2*fork_width+fork_wheel_width, $fn=draft? 10 : 120);
 
                 translate([0,fork_wheel_width/2,0])
                     cube([fork_lenght+fork_length_overlap, fork_width, fork_thickness]);
@@ -37,48 +37,50 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
                 translate ([0,-(fork_wheel_width/2+fork_width),0])
                     cube([fork_lenght+fork_length_overlap, fork_width, fork_thickness]);
 
-                translate([fork_lenght - 75 - 5, -fork_wheel_width/2 - fork_thickness/2, 0])
-                    cube([10, fork_wheel_width+fork_thickness, fork_thickness]);
+                // kostka pro diry pro drzak motoru
+                //translate([fork_lenght - 75 - 5, -fork_wheel_width/2 - fork_thickness/2, 0])
+                //    cube([10, fork_wheel_width+fork_thickness, fork_thickness]);
             }
 
             translate([0, 0, -10])
-                cylinder( h=fork_thickness+20, d=fork_wheel_width, $fn=50);
+                cylinder( h=fork_thickness+20, d=fork_wheel_width, $fn=draft? 10 : 100);
 
             translate([0,-(fork_wheel_width/2),-10])
                 cube ([2*fork_width+fork_wheel_width+20,fork_wheel_width,fork_thickness+20 ]);
 
             // dira pro pripevneni paky pro motor
-            translate([fork_lenght - 75, -fork_wheel_width/3, fork_thickness/2])
-                rotate([90, 0, 0])
-                    cylinder(d = M3_screw_diameter, h = 30, $fn = 60);
+            //translate([fork_lenght - 75, -fork_wheel_width/3, fork_thickness/2])
+            //    rotate([90, 0, 0])
+            //        cylinder(d = M3_screw_diameter, h = 30, $fn = 60);
 
-            translate([fork_lenght - 75, fork_wheel_width/3+30, fork_thickness/2])
-                rotate([90, 0, 0])
-                    cylinder(d = M3_screw_diameter, h = 30, $fn = 60);
+            //translate([fork_lenght - 75, fork_wheel_width/3+30, fork_thickness/2])
+            //    rotate([90, 0, 0])
+            //        cylinder(d = M3_screw_diameter, h = 30, $fn = 60);
 
-            translate([fork_lenght - 75, 0, fork_thickness/2])
-                rotate([90, 0, 0])
-                    cylinder(d = M3_nut_diameter, h = fork_wheel_width, $fn = 60, center = true);
+            //translate([fork_lenght - 75, 0, fork_thickness/2])
+            //    rotate([90, 0, 0])
+            //        cylinder(d = M3_nut_diameter, h = fork_wheel_width, $fn = 60, center = true);
 
 
-            translate([-20, 0, fork_thickness/2])
-                rotate([0, -90, 0])
-                    cylinder(d = M3_screw_diameter, h = 30, $fn = 60);
+            // Diry pro sroub smerem nahoru pro namotani gumicek
+            //translate([-20, 0, fork_thickness/2])
+            //    rotate([0, -90, 0])
+            //        cylinder(d = M3_screw_diameter, h = 30, $fn = 60);
 
-            translate([-28, 0, fork_thickness/2])
-                rotate([0, -90, 0])
-                    cylinder(d = M3_nut_diameter, h = 30, $fn = 6);
+            //translate([-28, 0, fork_thickness/2])
+            //    rotate([0, -90, 0])
+            //        cylinder(d = M3_nut_diameter, h = 30, $fn = 6);
 
-            translate([-28+35, 0, fork_thickness/2])
-                rotate([0, -90, 0])
-                    cylinder(d = M3_nut_diameter, h = 30, $fn = 60);
+            //translate([-28+35, 0, fork_thickness/2])
+            //    rotate([0, -90, 0])
+            //        cylinder(d = M3_nut_diameter, h = 30, $fn = 60);
 
             //osa M4
             rotate ([90,0,0,]) {
                 translate([fork_lenght-6, fork_thickness/2, 0])
                   cylinder (h=2*fork_width+fork_wheel_width+20, d=M4_screw_diameter, center=true, $fn=50);
 
-                translate([fork_lenght-6,fork_thickness/2, -30 - (screw_length-5)/2])
+                translate([fork_lenght-6, fork_thickness/2, -30 - (screw_length-5)/2])
                   cylinder (h=30, d=M4_nut_diameter, $fn=6);
 
                 translate([fork_lenght-6, fork_thickness/2,  (screw_length-5)/2])
@@ -103,7 +105,7 @@ rotate([0, 90, 0]) translate([-fork_lenght+6, 0, -fork_thickness/2])
                 cylinder(h=fork_lenght*2, d=pipe_diameter, $fn=50, center = true);
         } */
       }
-      rotate ([90,0,0,]) {
+       rotate ([90,0,0,]) {
           translate([pipe_holder2_pos+pipe_holder_length/2, fork_thickness/2, -fork_wheel_width])
             cylinder (h=fork_wheel_width, d=M4_screw_diameter, $fn=50);
 
@@ -248,9 +250,9 @@ module 888_2021_drill(){
 
 888_2021();
 
-//rotate([90, 0, 0]) cylinder(d = 110, h = 30, center = true);
+rotate([90, 0, 0]) cylinder(d = 110, h = 30, center = true);
 //translate([49, 0, 50]) rotate([90, 0, 0]) cylinder(d = 30, h = 36, center = true);
 
 //888_2021_drill();
 
-translate([0, 40, 70]) rotate([90, 0, 0]) motor_holder();
+//translate([0, 40, 70]) rotate([90, 0, 0]) motor_holder();
