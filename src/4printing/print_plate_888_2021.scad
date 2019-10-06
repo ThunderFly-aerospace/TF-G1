@@ -1,8 +1,7 @@
 include <../../parameters.scad>
-
 use <../888_2021.scad>
 
-translate([0, -5, 0])
+translate([-10, -10, 0])
     rotate([0, 90, 180])
         888_2021(draft=false);
 
