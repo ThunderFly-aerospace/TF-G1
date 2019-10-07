@@ -212,16 +212,16 @@ hull_strenghtening_pipe_distance = 45;
 
 // Parametry pylonu k rotorove hlave
 
-main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od přední části krytu
+main_pilon_position = 170+68+beam_patern;       // pozice rotorového pilonu měřená od přední části krytu
 
 // vzdalenosti jsou pocitany od stredu rotoru
 // vzdalenosti jednotlivych tyci u podlozky
 //pilon_pipe_base_front_x = 30;
-pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*5.75;
+pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*6.75;
 pilon_pipe_base_front_y = 55;
 pilon_pipe_base_front_z = 0;
 
-pilon_pipe_base_rear_x = -engine_holder_beam_depth + beam_patern*8.75 - main_pilon_position;
+pilon_pipe_base_rear_x = -engine_holder_beam_depth + beam_patern*9.75 - main_pilon_position;
 pilon_pipe_base_rear_z = beam_thickness_above;
 
 // vzhalenosti jednotlivych tyci u rotorove hlavy

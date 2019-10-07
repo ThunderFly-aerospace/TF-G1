@@ -47,29 +47,29 @@ difference(){
 
 // stredni patka pro pripevneni pylonu
         if(pilon_mount)
-            translate([-engine_holder_beam_depth+beam_patern*9.25, 0, beam_thickness_above])
+            translate([-engine_holder_beam_depth+beam_patern*10.25, 0, beam_thickness_above])
                 rotate(180)
                     888_1030();
 
 // bocni patky pro pripevneni pylonu
         if(pilon_mount)
-            translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
+            translate([-engine_holder_beam_depth+beam_patern*6.5, 0, 0])
                 rotate(180)
                     888_1031();
 
         if(pilon_mount)
-            translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
+            translate([-engine_holder_beam_depth+beam_patern*6.5, 0, 0])
                 mirror([0, 1, 0])
                     rotate(180)
                         888_1031();
 
         if(pilon_mount)
-        translate([-engine_holder_beam_depth+beam_patern*7.325, 0, height_of_vertical_tube])
+        translate([-engine_holder_beam_depth+beam_patern*8.325, 0, height_of_vertical_tube])
             rotate(180)
                 pipe_front(10);
 
         if(pilon_mount)
-        translate([-engine_holder_beam_depth+beam_patern*7.325, 0, height_of_vertical_tube])
+        translate([-engine_holder_beam_depth+beam_patern*8.325, 0, height_of_vertical_tube])
             rotate(180)
                 pipe_rear(10);
 
