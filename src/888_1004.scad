@@ -188,7 +188,7 @@ module beam_holes_patern(n = 1){
         // motor mount
         for(i = [-1, 1])
         translate([patern/4, i*(beam_main_pipe_distance/2), 0]){
-            cylinder(d = M3_screw_diameter, h = beam_thickness*2, center = true, $fn = draft ?15:50);
+            cylinder(d = M4_screw_diameter, h = beam_thickness*2, center = true, $fn = draft ?15:50);
         }
 
         rotate([0, 90, 0])

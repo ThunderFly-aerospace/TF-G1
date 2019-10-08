@@ -2,6 +2,7 @@
 draft = true;
 stl = true;
 
+predni_podvozek = true;
 limec = true;
 pilon_mount = true;
 motor = true;
@@ -64,12 +65,18 @@ difference(){
                         888_1031();
 
         if(pilon_mount)
-        translate([-engine_holder_beam_depth+beam_patern*8.325, 0, height_of_vertical_tube])
+        translate([-engine_holder_beam_depth+beam_patern*8.2, 0, height_of_vertical_tube])
             rotate(180)
                 pipe_front(10);
 
         if(pilon_mount)
-        translate([-engine_holder_beam_depth+beam_patern*8.325, 0, height_of_vertical_tube])
+        mirror([0, 1, 0])
+        translate([-engine_holder_beam_depth+beam_patern*8.2, 0, height_of_vertical_tube])
+            rotate(180)
+                pipe_front(10);
+
+        if(pilon_mount)
+        translate([-engine_holder_beam_depth+beam_patern*8.2, 0, height_of_vertical_tube])
             rotate(180)
                 pipe_rear(10);
 
@@ -81,10 +88,11 @@ difference(){
                     if(stl){import("../../STL/888_1026.stl", convexity=4);}
                     else{888_1026();}
 
-translate([0, 0, -beam_thickness_below])
-    rotate([0, 0,0])
-        if(stl){import("../../STL/888_2009.stl", convexity=4);}
-        else{888_2009();}
+if(predni_podvozek)
+    %translate([0, 0, -beam_thickness_below])
+        rotate([0, 0,0])
+            if(stl){import("../../STL/888_2009.stl", convexity=4);}
+            else{888_2009();}
 
 
 /* %translate([main_pilon_position, 0, 0])

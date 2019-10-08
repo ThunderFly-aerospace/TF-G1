@@ -40,17 +40,21 @@ module 888_1026(draft)
     servo_lever = 5; //délka páky serva od středu otáčení ke konci
     distance_shift = (maximum_printable_size-1.2*height+height)-(magnet_displacement+magnet_diameter/2);
     distance_height = (engine_offset-wall_thickness-engine_diameter/2)-magnet_vertical_position;
-    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter-magnet_vertical_position)/distance_height-20;
+    hole_distance = (magnet_displacement+magnet_diameter/2)+distance_shift*(main_tube_outer_diameter-magnet_vertical_position)/distance_height-27;
 
     difference (){
         union(){
             hull(){
-                translate([global_clearance -2 -10 -beam_vertical_space_between_pipes -beam_min_wall +0.01,-(depth/2),0])
-                    cube([beam_thickness+0,depth,height+5]);
+                #translate([global_clearance - beam_thickness_below,-(depth/2),5])
+                    cube([beam_thickness+0,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])
                     rotate([0, engine_angle,0])
                         cylinder(h = height, d = engine_diameter + 2*wall_thickness,  $fn = draft ? 100 : 200);
+
+                translate([beam_thickness_above, 0, engine_holder_beam_depth - beam_patern*1.25])
+                    rotate([0, 90, 0])
+                        cylinder(d = 12, h = 5, $fn = 50);
 
                 //translate([magnet_vertical_position, 0, magnet_displacement])
                 //    rotate([0, 90, 0])
@@ -128,16 +132,16 @@ module 888_1026(draft)
             translate([0, i*((beam_main_pipe_distance)/2), 0]){
                 translate([0, 0, engine_holder_beam_depth - beam_patern/4])
                     rotate([0, 90, 0])
-                        cylinder(d = M3_screw_diameter, h = 100, center = true, $fn = 20);
+                        cylinder(d = M4_screw_diameter, h = 100, center = true, $fn = 50);
                 translate([beam_thickness/2 + 5, 0, engine_holder_beam_depth - beam_patern/4])
                     rotate([0, 90, 0])
-                        cylinder(d = M3_nut_diameter, h = 100, $fn = 6);
+                        cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
             }
 
             translate([-8, i*(beam_main_pipe_distance-15)/2, -5]){
-                cylinder(d = M4_screw_diameter, h = 100, $fn = 20);
+                cylinder(d = M4_screw_diameter, h = 100, $fn = 50);
                 translate([0, 0, 10+engine_holder_beam_depth])
-                    cylinder(d = M4_nut_diameter, h = 100, $fn = 30);
+                    cylinder(d = M4_nut_diameter, h = 100, $fn = 50);
             }
         }
 
@@ -145,10 +149,10 @@ module 888_1026(draft)
         translate([0, 0, 0]){
             translate([0, 0, engine_holder_beam_depth - beam_patern*1.25])
                 rotate([0, 90, 0])
-                    cylinder(d = M4_screw_diameter, h = 100, center = true, $fn = 20);
+                    cylinder(d = M3_screw_diameter, h = 100, center = true, $fn = 20);
             translate([beam_thickness_above + 5, 0, engine_holder_beam_depth - beam_patern*1.25])
                 rotate([0, 90, 0])
-                    cylinder(d = M4_nut_diameter, h = 100, $fn = 50);
+                    cylinder(d = M3_nut_diameter, h = 100, $fn = 50);
         }
 
         //vypouštěcí zařízneí
