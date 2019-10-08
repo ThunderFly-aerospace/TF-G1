@@ -36,7 +36,7 @@ idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
 overal_ht = 17;     // overal height of pulley
 overal_d = 122;     // top cylinder diameter
-overal_rank = 8;    // top cylinder top taper
+overal_rank = 0;    // top cylinder top taper
 pulley_t_ht = 12;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 0;	// pulley base diameter, standard = 20
@@ -105,8 +105,8 @@ module rotor_pulley(draft)
             if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
             if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
-            translate([0, 0, pulley_t_ht+3])
-                cylinder(d1 = overal_d, d2 = overal_d - overal_rank, h = overal_ht - pulley_t_ht - 3, $fn = draft ? 50 : 200);
+            translate([0, 0, pulley_t_ht])
+                cylinder(d1 = overal_d, d2 = overal_d - overal_rank, h = overal_ht - pulley_t_ht, $fn = draft ? 50 : 200);
 
 
             translate([0, 0, pulley_t_ht])
