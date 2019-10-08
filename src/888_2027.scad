@@ -80,6 +80,12 @@ module 888_2027(baselength) {
                 translate([0, 0, kstm_center_height])
                     holes();
 
+
+        translate([0, 0, -100])
+            cylinder(d = M3_screw_diameter, h = 100);
+        translate([0, 0, -105])
+            cylinder(d = M3_nut_diameter, h = 100, $fn = 6);
+
         translate([beam_patern/4, 0, -100])
             cylinder(d = M3_screw_diameter, h = 100);
         translate([beam_patern/4, 0, -105])
