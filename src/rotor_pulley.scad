@@ -34,7 +34,7 @@ retainer_ht = 1.5;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-overal_ht = 20;     // overal height of pulley
+overal_ht = 17;     // overal height of pulley
 overal_d = 122;     // top cylinder diameter
 overal_rank = 8;    // top cylinder top taper
 pulley_t_ht = 12;	// length of toothed part of pulley, standard = 12
@@ -118,11 +118,11 @@ module rotor_pulley(draft)
             cylinder(h = 4+0.1, d=42.5,  $fn = draft ? 50 : 200);
 
         // osazení pro domek
-        translate([0, 0, overal_ht - 5])
+        translate([0, 0, overal_ht - 2])
             cylinder(h = 5+0.1, d=42.5,  $fn = draft ? 50 : 200);
 
         // osazení pro  šikmou část domku
-        translate([0, 0, overal_ht - 5 - 8])
+        translate([0, 0, overal_ht - 2 - 8])
             cylinder(h = 8+0.1, d2=42.5, d1=26.5,  $fn = draft ? 50 : 200);
 
 
