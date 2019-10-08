@@ -3,6 +3,7 @@ include <lib/servo.scad>
 use <lib/igus.scad>
 
 draft = $preview;
+draft = false;
 if (draft) {
     $fn = 10;
 }
@@ -339,10 +340,10 @@ module kardan(draft = false){
                 rotate([-rotor_head_roll_stop,0,0])
                         kardan_brit_oposite_model(70);
             //zuzeni
-            translate([0,rotor_head_bearing_width/2+35,0])
-               cube([100,70,30], center=true);
-            translate([0,-rotor_head_bearing_width/2-35,0])
-               cube([100,70,30], center=true);
+            //#translate([0,rotor_head_bearing_width/2+35,0])
+            //   cube([100,70,30], center=true);
+            //translate([0,-rotor_head_bearing_width/2-35,0])
+            //   cube([100,70,30], center=true);
 
             //elegance
             translate([(rotor_head_bearing_width+global_clearance)/2+1.5*rotor_head_cardan_clearance+rotor_head_brit_width,0,0])
@@ -358,11 +359,6 @@ module kardan(draft = false){
 
             }
             }
-
-            // montazni otvor
-            //translate([-30/2-50-2, -30/2, -rotor_head_bearing_a1-20-4])
-            //    cube([30+50, 30, 13]);
-
         }
 
 }
@@ -392,10 +388,10 @@ if(draft)
             }
 
 if(draft)
-translate([0, 0, rotor_head_height])
-rotate([0, rotor_head_rank_angle, 180])
-translate([rotor_head_bearing_x_shift, 0, -7])
-efsm_12();
+    translate([0, 0, rotor_head_height])
+        rotate([0, rotor_head_rank_angle, 180])
+            translate([rotor_head_bearing_x_shift, 0, -7])
+                efsm_12();
 
 //translate([0, 50, 0]) pipe_front(10);
 //translate([0, 50, 0]) pipe_rear(10);
