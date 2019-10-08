@@ -193,11 +193,11 @@ module beam_holes_patern(n = 1){
 
         rotate([0, 90, 0])
             for (i=[1,-1])
-                    translate([10, i*(beam_main_pipe_distance-8)/2, -global_clearance]){
+                    translate([8, i*(beam_main_pipe_distance-15)/2, -global_clearance]){
                         cylinder(d = M4_screw_diameter, h = 25, $fn = draft ?15:50);
-                        translate([0, 0, 16])
+                        translate([0, 0, 17])
                             cylinder(d = M4_nut_diameter, h = M4_nut_height, $fn = 6);
-                        translate([20, 0, 16+M4_nut_height/2])
+                        translate([20, 0, 17+M4_nut_height/2])
                             cube([40, M4_nut_diameter, M4_nut_height], center = true);
                     }
 
