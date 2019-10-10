@@ -18,8 +18,9 @@ strap_thickness = 3;
                     cube([tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter + 2*beam_min_wall], center = true);
             }
 
-            translate([strap_width - tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter, 0])
-                cube([strap_width*2 +tube_for_undercarriage_outer_diameter+2*beam_min_wall, strap_thickness*3, accumulator_holder_width], center = true);
+
+            translate([strap_width, tube_for_undercarriage_outer_diameter + tube_for_undercarriage_outer_diameter + beam_min_wall/2, 0])
+                cube([strap_width*2 + tube_for_undercarriage_outer_diameter+2*beam_min_wall, strap_thickness*3, accumulator_holder_width], center = true);
         }
 
         cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall, center = true);
