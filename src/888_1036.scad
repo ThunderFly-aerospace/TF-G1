@@ -5,7 +5,7 @@ use <888_1004.scad>
 $fn = 40;
 draft = true;
 
-module 888_1032(){
+module 888_1036(){
 strap_width = 22;
 strap_thickness = 3;
 
@@ -18,10 +18,15 @@ strap_thickness = 3;
                     cube([tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter + 2*beam_min_wall], center = true);
             }
 
-
+            // plochá část s otvorem pro pásku
             translate([strap_width, tube_for_undercarriage_outer_diameter + tube_for_undercarriage_outer_diameter + beam_min_wall/2, 0])
                 cube([strap_width*2 + tube_for_undercarriage_outer_diameter+2*beam_min_wall, strap_thickness*3, accumulator_holder_width], center = true);
         }
+
+        // otvor pro pásku
+        translate([strap_width/2 + tube_for_undercarriage_outer_diameter, tube_for_undercarriage_outer_diameter + tube_for_undercarriage_outer_diameter + beam_min_wall/2, 0])
+            cube([strap_width, strap_thickness, accumulator_holder_width], center = true);
+
 
         cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall, center = true);
         translate([0, tube_for_undercarriage_outer_diameter + beam_vertical_space_between_pipes, 0])
@@ -53,4 +58,4 @@ strap_thickness = 3;
     }
 }
 
-888_1032();
+888_1036();
