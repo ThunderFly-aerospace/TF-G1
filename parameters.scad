@@ -287,15 +287,14 @@ lock_length = 3;
 
 //accumulator
 //základní rozměry akumulátoru
-width_of_accumulator = 45;//45+1;
-depth_of_accumulator = 42;
-height_of_accumulator = 42;
+width_of_accumulator = 40;
+depth_of_accumulator = 138;
+height_of_accumulator = 40;
 //Zapuštění akumulátoru
 sink_of_accumulator = 5; //main_tube_outer_diameter/5 - M3_nut_height*1.5;
 
-//tloušťka hrany spojky
-accumulator_holder_width = 45;
-accumulator_holder_thickness = 10;
+//rozměry držáku akumulátoru
+accumulator_holder_width = 40;
 
 //posunutí akumálátoru na podložce
 move_of_accumulator = 75;   // pozice akumulátoru (ovlivňuje těžiště)
