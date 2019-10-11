@@ -11,21 +11,30 @@ module 888_1022(draft) {
 
     inner_x=rotor_head_kardan_inner_x;
     inner_y=rotor_head_kardan_inner_y;
-    plate_thickness=rotor_head_plate_thickness;
+    plate_thickness=0;
     brit_width=rotor_head_brit_width;
     wall_height=rotor_head_wall_height;
     kardan_clearance=rotor_head_cardan_clearance;
-    
+
     outer_x = inner_x + 2*brit_width;
     outer_y = inner_y + 2*brit_width;
     outer_height = wall_height + plate_thickness ;
-    
-    difference(){     
-        translate ([0,0,outer_height/2]) {
-            cube([outer_x,outer_y,outer_height],center = true);
+
+    echo(outer_height);
+    difference(){
+        translate ([0,0,0]) {
+            //translate([0, 0, outer_height/2]) cube([outer_x,outer_y,outer_height],center = true);
+            translate([-outer_x/2+2, -outer_y/2+2, 0])
+                minkowski(){
+                    cube([outer_x-4,outer_y-4, outer_height/2]);
+                    cylinder(d = 4, h = outer_height/2 , $fn = 60);
+                }
             }
-        translate([0,0,wall_height + plate_thickness]){
-            cube([inner_x,inner_y,wall_height*2],center = true);
+        translate([0,0,wall_height + plate_thickness-0.01]){
+            minkowski(){
+                cube([inner_x-10,inner_y-10,wall_height*2],center = true);
+                cylinder(d = 10, h = wall_height*2, $fn = 60);
+            }
             }
         hull() {
             translate([-(inner_x/2 - hole_r),0,-outer_height]) {
@@ -49,7 +58,7 @@ module 888_1022(draft) {
             rotate ([0,45,0]){
                 cube(b,center=true);
                 }
-            }           
+            }
         }
     }
 

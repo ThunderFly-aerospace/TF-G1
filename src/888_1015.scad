@@ -1,5 +1,6 @@
 include <../parameters.scad>
-draft = true;
+use <888_1022.scad>
+draft = $preview;
 
 /*
 Dil rotorove hlavy.
@@ -191,9 +192,9 @@ module 888_1015(draft){
                     rotate([-rotor_head_roll_stop,0,0])
                             kardan_brit_oposite_model(70);
                 //zuzeni
-                translate([0,rotor_head_bearing_width/2+35,0])
+                translate([0,rotor_head_bearing_width/2+35,2])
                    cube([100,70,30], center=true);
-                translate([0,-rotor_head_bearing_width/2-35,0])
+                translate([0,-rotor_head_bearing_width/2-35,2])
                    cube([100,70,30], center=true);
 
                 //elegance
@@ -220,5 +221,11 @@ module 888_1015(draft){
 
 
 888_1015(draft);
+
+if(draft){
+    translate([0, 0, rotor_head_height+4])
+    rotate([180, 9, 0])
+    888_1022();
+}
 
 //kardan_brit_oposite_model(50);

@@ -461,9 +461,9 @@ rotor_head_roll_stop=10;//max roll angle
 rotor_head_pitch_stop=15;//max pitch angle
 
 rotor_head_brit_width=5;
-rotor_head_plate_thickness=3;
+rotor_head_plate_thickness=0;
 
-rotor_head_cardan_clearance=1;
+rotor_head_cardan_clearance=0.5;
 
 rotor_head_bearing_width=bearing_efsm_12_width;//širka podstavy x
 rotor_head_bearing_h=bearing_efsm_12_h;//delka podstavy y
@@ -476,8 +476,12 @@ rotor_head_bearing_a_center_of_rotation=8; //vyska stredu otaceni
 rotor_head_bearing_screw_head_height=3.5;
 
 //rotor_head computed parameters
-rotor_head_wall_height=2*((rotor_head_bearing_a1+rotor_head_bearing_screw_head_height-rotor_head_bearing_a_center_of_rotation+rotor_head_bearing_width/2*tan(rotor_head_roll_stop))*cos(rotor_head_roll_stop));//height of side wall of center part
-rotor_head_kardan_inner_x=rotor_head_bearing_width+2*rotor_head_cardan_clearance; 
+rotor_head_wall_height = 8;
+rotorhead_neck_height=6;
+rotorhead_neck_plate_diameter = 38;
+rotorhead_neck_plate_thickness = 2;
+rotorhead_desk_thickness = 4;
+rotor_head_kardan_inner_x=rotor_head_bearing_width+2*rotor_head_cardan_clearance;
 rotor_head_kardan_inner_y=2*(rotor_head_bearing_h/2*1/cos(rotor_head_pitch_stop)+rotor_head_wall_height/2*tan(rotor_head_pitch_stop)); //center part
 
 
