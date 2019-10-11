@@ -19,6 +19,7 @@ ax_diameter=8;
 bearing_diameter=12;
 
 draft = $preview;
+draft = true;
 
 
 module neck_model(){

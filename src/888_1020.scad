@@ -2,7 +2,6 @@ include <../parameters.scad>
 
 module kardan_center_part_model()
 {
-
     b=3*rotor_head_wall_height;
 
     inner_x=rotor_head_kardan_inner_x;
@@ -113,7 +112,7 @@ module 888_1020(draft = true){
 
             translate([servo_join_x, -servo_join_y/2 - 1.5, servo_joint_z ])
                 rotate([-90, 0, 0])
-                    cylinder(d1 = M4_screw_diameter+1, d2 = M4_screw_diameter+5.5, h=1.5, $fn = 50);
+                    cylinder(d1 = M4_screw_diameter+1, d2 = M4_screw_diameter+5.5, h=1.5, $fn = 30);
 
             // rameno, na kterem jsou kloubky pro servo
             hull()union(){
