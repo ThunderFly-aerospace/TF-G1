@@ -235,7 +235,7 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
             orientate([-pilon_pipe_base_front_x + pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), height_of_vertical_tube-pilon_pipe_base_front_z],vref=[0,0,1], roll=0)
                 rotate([90,0,0])
                     translate([0, 0, -20])
-                       % cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 60);
+                        cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 60);
    }
 
     //final difference
@@ -742,7 +742,6 @@ translate([0,0,-10])
 
 
 use <888_1000.scad>
-use <666_1027.scad>
 
 use <./lib/naca4.scad>
 include <../parameters.scad>

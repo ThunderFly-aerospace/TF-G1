@@ -245,7 +245,7 @@ ribbon_width = 5; // šířka vyztužovacích lemů.
 width_of_engine_holder = 83;
 
 //Top Cover Division - dělení horního krytu pro tisk
-top_cover_division = [0, 50, 150, 280, 410, 550, hull_x_size-15]; // upraveny seznam tak, aby deleni začinalo od nuly, což umožňí úplně automatické rozdělení.
+top_cover_division = [0, 50, 150, 280, 410, 550, hull_x_size-20];
 
 //Bottom Cover Division - dělení dolního krytu pro tisk
 bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
@@ -347,6 +347,7 @@ Rudder_gap_width = 2*hull_wall_thickness;           //šířka mezery mezi směr
 Rudder_shaft_diameter = 2.6;                        //otočné uchycení směrovky - průměr 2 mm
 
 tail_depth = 50;                                    // hloubka pro vnitrni casti smerovky
+tail_airfoils_angle = 90;
 tail_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2)) - 10; // delka smerovky (ne delka plochy kridla)
 tail_height = 210;                                  // vyska smerovky (ne vyska plochy kridla)
 tail_bottom_height = 30;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
@@ -355,7 +356,6 @@ tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
 tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2;
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
-tail_airfoils_angle = 90;
 
 tail_shape_A_cutter_y_position = 9.2;               // pozice rezace tvaru A
 tail_angle = 90;                                    //tvar A vzájemný náklon
