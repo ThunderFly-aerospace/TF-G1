@@ -342,7 +342,7 @@ Rudder_length = 3*main_tube_outer_diameter;         // delka smerovky (pohiblive
 Rudder_height = 150;                                // vyska smerovky (pohiblive casti)
 Rudder_depth = main_tube_outer_diameter/2;          // hloubka smerovky (pohiblive casti)
 Rudder_wall_thickness = hull_wall_thickness;        //tloustka povrchove steny smerovky
-Rudder_infill_wall_thickness = 1;                   //tloustka vnitrnich sten smerovky
+Rudder_infill_wall_thickness = 0.64;                   //tloustka vnitrnich sten smerovky
 Rudder_gap_width = 2*hull_wall_thickness;           //šířka mezery mezi směrovkou a ocasní plochou
 Rudder_shaft_diameter = 2.6;                        //otočné uchycení směrovky - průměr 2 mm
 
@@ -382,7 +382,7 @@ tail_tube_mount_height = 32;                        // vyska upevneni na trubku
 tail_tube_mount_wings_thickness = 5;                // tloustka kridilek pro uchyceni
 tail_tube_mount_screws_z_position = 12;             // pozice sroubu od stredu trubky
 tail_tube_mount_screws_x_position = 10;             // pozice sroubu od stredu uchyceni trubky
-tail_tube_mount_screws_wall_thickness = 3;          // tloustka steny mezi sroubem a uchycenim
+tail_tube_mount_screws_wall_thickness = 2;          // tloustka steny mezi sroubem a uchycenim
 
 /////spojka 666_1004
 
