@@ -338,19 +338,51 @@ Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samo
 
 
 ////směrové kormidlo
-Rudder_length = 150;
-Rudder_height = 3*main_tube_outer_diameter;
-Rudder_depth = main_tube_outer_diameter/2;
-gap_width = 2*hull_wall_thickness;      //šířka mezery mezi směrovkou a ocasní plochou
-Rudder_shaft_diameter = 2.6; //otočné uchycení směrovky - průměr 2 mm
+Rudder_length = 3*main_tube_outer_diameter;         // delka smerovky (pohiblive casti)
+Rudder_height = 150;                                // vyska smerovky (pohiblive casti)
+Rudder_depth = main_tube_outer_diameter/2;          // hloubka smerovky (pohiblive casti)
+Rudder_wall_thickness = hull_wall_thickness;        //tloustka povrchove steny smerovky
+Rudder_infill_wall_thickness = 1;                   //tloustka vnitrnich sten smerovky
+Rudder_gap_width = 2*hull_wall_thickness;           //šířka mezery mezi směrovkou a ocasní plochou
+Rudder_shaft_diameter = 2.6;                        //otočné uchycení směrovky - průměr 2 mm
 
-tail_airfoils_angle = 90;
-tail_height = 200;                    // vyska smerovky (ne delka plochy kridla)
-tail_pipe_z_position = tail_height/2; // od spodniho okraje smerovky
+tail_depth = 50;                                    // hloubka pro vnitrni casti smerovky
+tail_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2)) - 10; // delka smerovky (ne delka plochy kridla)
+tail_height = 210;                                  // vyska smerovky (ne vyska plochy kridla)
+tail_bottom_height = 30;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
+tail_pipe_z_position = tail_height/2;               // od spodniho okraje smerovky
 tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
 tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2;
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
+tail_airfoils_angle = 90;
+
+tail_shape_A_cutter_y_position = 9.2;               // pozice rezace tvaru A
+tail_angle = 90;                                    //tvar A vzájemný náklon
+
+tail_support_x_position_1 = 20;                     // pozice prvni karbonove tyce
+tail_support_x_position_2 = 80;                     // pozice druhe karbonove tyce
+tail_A_shape_screw_y_pisition = 20;                 // pozice der na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_x_position_2 = 55;               // pozice druhe diry na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_x_position_3 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
+
+tail_servo_z_offset = - 5;                         // posunuti serva vuci uchyceni na trubku (osa Z);
+tail_servo_length = 32;                             // velikost otvoru pro servo (delka)
+tail_servo_height = 30;                             // velikost otvoru pro servo (vyska)
+tail_servo_length_inside = 23.2;                    // velikost otvoru pro servo bez uchyceni (delka)
+tail_servo_screws_gap = 27;                         // mezera mezi srouby pro uchyceni serva
+tail_servo_screws_z_position = 17;                  // pozice sroubu pro uchyceni serva (osa Z)
+tail_servo_wall_y_offset = 3;                       // vyoseni uchyceni pro servo
+tail_servo_wire_hole_length = 5;                   // delka vykusu pro draty
+tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
+
+tail_tube_mount_length = 40;                        // delka upevneni na trubku
+tail_tube_mount_height = 32;                        // vyska upevneni na trubku
+tail_tube_mount_wings_thickness = 5;                // tloustka kridilek pro uchyceni
+tail_tube_mount_screws_z_position = 12;             // pozice sroubu od stredu trubky
+tail_tube_mount_screws_x_position = 10;             // pozice sroubu od stredu uchyceni trubky
+tail_tube_mount_screws_wall_thickness = 3;          // tloustka steny mezi sroubem a uchycenim
 
 /////spojka 666_1004
 
