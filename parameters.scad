@@ -345,6 +345,7 @@ Rudder_wall_thickness = hull_wall_thickness;        //tloustka povrchove steny s
 Rudder_infill_wall_thickness = 0.64;                   //tloustka vnitrnich sten smerovky
 Rudder_gap_width = 2*hull_wall_thickness;           //šířka mezery mezi směrovkou a ocasní plochou
 Rudder_shaft_diameter = 2.6;                        //otočné uchycení směrovky - průměr 2 mm
+Rudder_shaft_outside_diameter = 12;                 // prumer zakonceni smerovky
 
 tail_depth = 50;                                    // hloubka pro vnitrni casti smerovky
 tail_airfoils_angle = 90;
