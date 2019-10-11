@@ -384,78 +384,6 @@ tail_tube_mount_screws_z_position = 12;             // pozice sroubu od stredu t
 tail_tube_mount_screws_x_position = 10;             // pozice sroubu od stredu uchyceni trubky
 tail_tube_mount_screws_wall_thickness = 2;          // tloustka steny mezi sroubem a uchycenim
 
-/////spojka 666_1004
-
-    width_666_1004 = (main_tube_outer_diameter+2*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
-//        echo("width_666_1004 is", width_666_1004);
-
-//        echo("ceil_666_1004 is", ceil(width_666_1004));
-
-    coupling_screw_length_666_1004 = (ceil(width_666_1004)) * basic_screw_length;
-        echo("coupling_screw_length_666_1004 is", coupling_screw_length_666_1004);
-
-    coupling_width_666_1004 = coupling_screw_length_666_1004 + M3_screw_head_height;
-//        echo("coupling_width_666_1004 is", coupling_width_666_1004);
-
-    height_666_1004 = coupling_width_666_1004;
-//        echo("height_666_1004 is", height_666_1004);
-
-    depth_666_1004 = main_tube_outer_diameter*2+2*coupling_wall_thickness+thickness_between_tubes;
-//        echo("depth_666_1004 is", depth_666_1004);
-
-    depth_666_1004_drillhelper = main_tube_outer_diameter*3;
-
-/////spojka 666_1026
-
-
-    width_666_1026 = main_tube_outer_diameter + 2*thickness_between_tubes;
-
-    depth_666_1026 = (main_tube_outer_diameter*2)/basic_screw_length;
-//        echo("depth_666_1026 is", depth_666_1026);
-
-//        echo("ceil_666_1026 is", ceil(depth_666_1026));
-
-    coupling_screw_length_666_1026 = (ceil(depth_666_1026)) * basic_screw_length;
-//        echo("coupling_screw_length_666_1026 is", coupling_screw_length_666_1026);
-
-
-    thickness_of_plate = coupling_screw_length_666_1026 - M4_screw_head_height - 50; //50 mm je konstatní šířka spojky 666_1026
-//    echo("thickness_of_plate is", thickness_of_plate);
-
-    coupling_depth_666_1026 = coupling_screw_length_666_1026 - M4_screw_head_height - thickness_of_plate;      //zde je odečten M4_screw_head_height pro určení šířky, tak aby šroub přesahoval pro potřebnou matku
-//        echo("coupling_depth_666_1026 is", coupling_depth_666_1026);
-
-    height_666_1026 = 2*main_tube_outer_diameter;
-//        echo("height_666_1026 is", height_666_1026);
-
-//tloušťka plechu pro zajištění konstatní šířky spojky 50 mm
-
-    width_666_1026_drillhelper = main_tube_outer_diameter*2;
-
-    depth_666_1026_drillhelper = main_tube_outer_diameter + 4*thickness_between_tubes;
-
-
-////spojka 666_1017
-
-    width_666_1017 = (main_tube_outer_diameter + 4*coupling_wall_thickness - M3_screw_head_height)/basic_screw_length;
-//        echo("width_666_1017 is", width_666_1017);
-
-//        echo("ceil_666_1017 is", ceil(width_666_1017));
-
-    coupling_screw_length_666_1017 = (ceil(width_666_1017)) * basic_screw_length;
-        echo("coupling_screw_length_666_1017 is", coupling_screw_length_666_1017);
-
-    coupling_width_666_1017 = coupling_screw_length_666_1017 + M3_screw_head_height;
-//        echo("coupling_width_666_1017 is", coupling_width_666_1017);
-
-    depth_666_1017 = coupling_width_666_1017;
-
-    height_666_1017= 70; //main_tube_outer_diameter*1.8+main_tube_outer_diameter+wall_thickness;
-
-    width_666_1017_drillhelper = main_tube_outer_diameter+4*thickness_between_tubes;
-
-    depth_666_1017_drillhelper = main_tube_outer_diameter*2;
-
 
 ////spojka 666_1014
 
@@ -467,33 +395,6 @@ tail_tube_mount_screws_wall_thickness = 2;          // tloustka steny mezi sroub
 
 
     width_666_1014_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
-
-
-
-////spojka 666_1015
-
-    width_666_1015 = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
-
-    depth_666_1015 = tube_for_undercarriage_outer_diameter*2 + 2*coupling_wall_thickness_undercarriage + thickness_between_tubes_undercarriage;
-
-    height_666_1015 = width_666_1015;
-
-
-    width_666_1015_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
-
-////spojka 666_1016
-
-    width_666_1016 = tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
-
-    depth_666_1016 = tube_for_undercarriage_outer_diameter + M6_screw_diameter + 2*coupling_wall_thickness_undercarriage + thickness_between_tubes_undercarriage;
-
-    height_666_1016 = width_666_1016;
-
-
-    width_666_1016_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
-
-
-
 
 //umístění podvozkových trubek
 
