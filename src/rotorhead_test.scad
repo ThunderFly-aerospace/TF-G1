@@ -1,12 +1,12 @@
 use <./888_1029.scad>
-use <./888_1022_without_desk.scad>
+use <./888_1022.scad>
 use <./888_1020.scad>
 use <lib/igus.scad>
 
 include <../parameters.scad>
 
 stl = true;
-plastick = true;
+plastick = false;
 
 desk_thickness=rotorhead_desk_thickness;
 plate_thickness=rotorhead_neck_plate_thickness;
@@ -17,6 +17,8 @@ neck_diameter=14;
 
 ax_diameter=8;
 bearing_diameter=12;
+
+draft = $preview;
 
 
 module neck_model(){
@@ -39,8 +41,8 @@ module neck_model(){
 roll=rotor_head_roll_stop;
 pitch=rotor_head_pitch_stop;
 
-//roll=0;
-//pitch=0;
+roll=0;
+pitch=0;
 
 difference()
 {
@@ -50,7 +52,12 @@ difference()
         union(){
             translate([-rotor_head_bearing_x_shift,0,0])
                 rotate([0,0,180])
-                    888_1029();
+                    if(stl){
+                        import("../STL/888_1029.stl", convexity=3);
+                        //888_1022();
+                    }else{
+                        888_1029();
+                    }
             translate([-1,0,rotor_head_height-rotor_head_bearing_a_center_of_rotation])
                 rotate([0,rotor_head_rank_angle,0])
                 union(){
@@ -62,13 +69,18 @@ difference()
                 }
     //}
 
-
+    // streni dil kardanu - ramecek
     translate([0,0,rotor_head_height])
     rotate([0,rotor_head_rank_angle,0])
         rotate([roll,0,0])
             translate([0,0,4])
                 rotate([180,0,0])
-                    888_1022();
+                    if(false){
+                        import("../STL/888_1022.stl", convexity=3);
+                        //888_1022();
+                    }else{
+                        888_1022();
+                    }
     }
     translate([0,0,rotor_head_height])
     rotate([0,rotor_head_rank_angle,0])

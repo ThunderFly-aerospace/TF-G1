@@ -555,7 +555,7 @@ rotor_head_pitch_stop=15;//max pitch angle
 rotor_head_brit_width=5;
 rotor_head_plate_thickness=0;
 
-rotor_head_cardan_clearance=1;
+rotor_head_cardan_clearance=0.5;
 
 rotor_head_bearing_width=bearing_efsm_12_width;//širka podstavy x
 rotor_head_bearing_h=bearing_efsm_12_h;//delka podstavy y

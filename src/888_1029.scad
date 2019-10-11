@@ -3,7 +3,7 @@ include <lib/servo.scad>
 use <lib/igus.scad>
 
 draft = $preview;
-draft = false;
+//draft = false;
 if (draft) {
     $fn = 10;
 }
@@ -67,10 +67,14 @@ module pipes_top_screw(position = 100, draft = false){
             union() for(h = rotor_head_screw_distances){
                 translate([0, 10, h])
                     rotate([90, 180, 0]){
-                        translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
+                        translate([0, 0, -5])
+                            cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
+                        translate([0, 0, 17])
+                            cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
+                                rotate(30)
+                                    cylinder(d = M3_nut_diameter, h = M3_nut_height*1.3, $fn = 6);
+                        translate([-20, -M3_nut_diameter/2, 0])
+                            cube([20, M3_nut_diameter, M3_nut_height]);
                     }
             }
 
@@ -80,10 +84,14 @@ module pipes_top_screw(position = 100, draft = false){
             union() for(h = rotor_head_screw_distances){
                 translate([0, 10, h])
                     rotate([90, 0, 0]){
-                        translate([0, 0, -5]) cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        translate([0, 0, 17]) cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
-                        rotate(30) cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                        translate([-20, -M3_nut_diameter/2, 0]) cube([20, M3_nut_diameter, M3_nut_height]);
+                        translate([0, 0, -5])
+                            cylinder(d = M3_screw_diameter, h = 50 + 5, $fn = draft? 20 : 50);
+                        translate([0, 0, 17])
+                            cylinder(d = M3_nut_diameter, h = 50 + 5, $fn = draft? 20 : 50);
+                                rotate(30)
+                                    cylinder(d = M3_nut_diameter, h = M3_nut_height*1.3, $fn = 6);
+                        translate([-20, -M3_nut_diameter/2, 0])
+                            cube([20, M3_nut_diameter, M3_nut_height]);
                     }
             }
 
@@ -385,6 +393,9 @@ if(draft)
                     import("../STL/666_1265.stl", convexity=3);
                 translate([0,0,0])
                     import("../STL/666_1264.stl", convexity=3);
+                translate([0, 0, -rotor_head_plate_thickness - 11.3])
+                    rotate([180, 0, 0])
+                        import("../STL/888_1022.stl", convexity=3);
             }
 
 if(draft)

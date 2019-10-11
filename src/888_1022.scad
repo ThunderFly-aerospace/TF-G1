@@ -20,9 +20,15 @@ module 888_1022(draft) {
     outer_y = inner_y + 2*brit_width;
     outer_height = wall_height + plate_thickness ;
 
+    echo(outer_height);
     difference(){
-        translate ([0,0,outer_height/2]) {
-            cube([outer_x,outer_y,outer_height],center = true);
+        translate ([0,0,0]) {
+            //translate([0, 0, outer_height/2]) cube([outer_x,outer_y,outer_height],center = true);
+            translate([-outer_x/2+2, -outer_y/2+2, 0])
+                minkowski(){
+                    cube([outer_x-4,outer_y-4, outer_height/2]);
+                    cylinder(d = 4, h = outer_height/2 , $fn = 60);
+                }
             }
         translate([0,0,wall_height + plate_thickness-0.01]){
             minkowski(){
