@@ -1,15 +1,15 @@
 draft = $preview;
-include <../parameters.scad>
-use <888_2013.scad>
-use <888_2016.scad>
-use <888_2017.scad>
-use <888_2027.scad>
-use <lib/igus.scad>
-use <lib/vector.scad>
-use <lib/piston.scad>
-use <666_1027.scad>
-use <888_1004.scad>
-use <888_1005.scad>
+include <../../parameters.scad>
+use <../888_2013.scad>
+use <../888_2016.scad>
+use <../888_2017.scad>
+use <../888_2027.scad>
+use <../lib/igus.scad>
+use <../lib/vector.scad>
+use <../lib/piston.scad>
+use <../666_1027.scad>
+use <../888_1004.scad>
+use <../888_1005.scad>
 //color([0.2, 0.4, 0.4, 0.5]) translate([-second_undercarriage_hole,0,main_tube_outer_diameter/2+2]) rotate([90,0,0]) 666_1027();
 
 translate([-beam_patern*12 + engine_holder_beam_depth - beam_main_pipe_thickness/2, 0, beam_thickness_below]){

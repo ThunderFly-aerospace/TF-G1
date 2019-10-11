@@ -2,7 +2,6 @@ include <../parameters.scad>
 
 module kardan_center_part_model()
 {
-
     b=3*rotor_head_wall_height;
 
     inner_x=rotor_head_kardan_inner_x;
@@ -71,7 +70,7 @@ module 888_1020(draft = true){
 
     //brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
     brit_height=rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
-   
+
     plate_size_y = rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*wall_thickness;
     plate_size_x = plate_overlap + motor_distance + motor_diameter/2;
     plate_size_z = 4;
@@ -79,7 +78,7 @@ module 888_1020(draft = true){
     echo("Delka dilu je:", plate_size_x);
     echo("Vyška břitu je:", brit_height);
 
-    back_part_crop = 30;
+    back_part_crop = 27;
 
     zebra_inplate=plate_size_z-3*layer;
     zebra_x=(rotor_head_kardan_inner_x )/2;
@@ -99,6 +98,8 @@ module 888_1020(draft = true){
                 translate([ ( back_part_crop)/2+5,0, brit_height+plate_size_z/2])
                     cube([plate_size_x - motor_diameter - back_part_crop+5, plate_size_y, plate_size_z],center=true);
 
+                cylinder(d = rotorhead_neck_plate_diameter+2, h = rotorhead_desk_thickness);
+
             }
 
             // rameno, na kterem jsou kloubky pro servo
@@ -108,6 +109,11 @@ module 888_1020(draft = true){
                     translate([0, -plate_size_y/2, 0])
                         cube([plate_size_x - motor_diameter - 1.5*back_part_crop, plate_size_y ,plate_size_z]);
                 }
+
+            translate([servo_join_x, -servo_join_y/2 - 1.5, servo_joint_z ])
+                rotate([-90, 0, 0])
+                    cylinder(d1 = M4_screw_diameter+1, d2 = M4_screw_diameter+5.5, h=1.5, $fn = 30);
+
             // rameno, na kterem jsou kloubky pro servo
             hull()union(){
                 translate([servo_join_x-servo_join_size/2, servo_join_y/2 - servo_join_y/5, 0])
@@ -115,6 +121,10 @@ module 888_1020(draft = true){
                 translate([0, -plate_size_y/2, 0])
                     cube([plate_size_x - motor_diameter - 1.5*back_part_crop, plate_size_y ,plate_size_z]);
             }
+
+            translate([servo_join_x, servo_join_y/2, servo_joint_z ])
+                rotate([-90, 0, 0])
+                    cylinder(d2 = M4_screw_diameter+1, d1 = M4_screw_diameter+5.5, h=1.5, $fn = 50);
 
 
     // Vymezovaci podlozka pod motor, misto hlinikove 6.5mm silne podlozky
@@ -143,7 +153,7 @@ module 888_1020(draft = true){
         translate([motor_distance, 0, -global_clearance/2-10])
             cylinder(d = motor_axis_diameter, h = 50, $fn = draft ? 10 : 100);
 
-        // otvor pro  remenici
+        // otvor pro remenici
         translate([motor_distance, 0, -global_clearance/2-10])
             cylinder(d = motor_puller_diameter, h = 50, $fn = draft ? 10 : 100);
 
@@ -166,26 +176,26 @@ module 888_1020(draft = true){
         // diry pro pripojeni tahla k servu
         translate([servo_join_x, -servo_join_y/2 + 20, servo_joint_z])
             rotate([90, 0, 0])
-                cylinder(d = M3_screw_diameter, h=50, $fn = draft ? 10 : 30);
+                cylinder(d = M4_screw_diameter, h=50, $fn = draft ? 10 : 30);
 
         translate([servo_join_x, -servo_join_y/2 + 5, servo_joint_z ])
             rotate([-90, 0, 0])
-                cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
+                cylinder(d = M4_nut_diameter, h=M4_nut_height, $fn = 6);
 
 
-        translate([servo_join_x, -servo_join_y/2 + 5,  -M3_nut_pocket/2 + servo_joint_z])
-            cube([plate_size_z*5, M3_nut_height, M3_nut_pocket]);
+        translate([servo_join_x, -servo_join_y/2 + 5,  -M4_nut_pocket/2 + servo_joint_z])
+            cube([plate_size_z*5, M3_nut_height, M4_nut_pocket]);
 
         translate([servo_join_x, servo_join_y/2 - 20, servo_joint_z])
             rotate([-90, 0, 0])
-                cylinder(d = M3_screw_diameter, h=50, $fn = draft ? 10 : 30);
+                cylinder(d = M4_screw_diameter, h=50, $fn = draft ? 10 : 30);
 
-        translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, servo_joint_z])
+        translate([servo_join_x, servo_join_y/2 - M4_nut_height - 5, servo_joint_z])
             rotate([-90, 0, 0])
-                cylinder(d = M3_nut_diameter, h=M3_nut_height, $fn = 6);
+                cylinder(d = M4_nut_diameter, h=M4_nut_height, $fn = 6);
 
-        translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, -M3_nut_pocket/2 + servo_joint_z])
-            cube([plate_size_z*5, M3_nut_height, M3_nut_pocket]);
+        translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, -M4_nut_pocket/2 + servo_joint_z])
+            cube([plate_size_z*5, M3_nut_height, M4_nut_pocket]);
 
         //Otvor na hallovu sondu
         translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, -global_clearance/2])
@@ -193,12 +203,12 @@ module 888_1020(draft = true){
 
         difference(){
             translate([hall_distance+hall_length_offset+hall_length/2, 0, hall_thickness])
-                rotate([0,40,0])
+                rotate([0,10,0])
                     translate([-1.5,0,0])
                         cube([3, 6, 50], center=true);
 
-             translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, 0])
-            cube([hall_length, hall_width, hall_thickness+global_clearance]);
+            translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, 0])
+                cube([hall_length, hall_width, hall_thickness+global_clearance]);
         }
 
        //otvor por kardan
@@ -206,7 +216,7 @@ module 888_1020(draft = true){
             cube([rotor_head_kardan_inner_x+2*rotor_head_brit_width,
                   rotor_head_kardan_inner_y,
                   2*brit_height],center=true);
-        
+
         //brity
         translate([0,0,plate_size_z+brit_height])
             rotate([0,rotor_head_pitch_stop,0])
@@ -220,7 +230,7 @@ module 888_1020(draft = true){
 
         xdst=(rotor_head_kardan_inner_x/2+rotor_head_brit_width-(rotor_head_wall_height/2+rotor_head_plate_thickness)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
         xsize=(plate_size_x - motor_diameter)/2-(rotor_head_kardan_inner_x/2+rotor_head_brit_width)-global_clearance;
-        
+
         translate([xdst+(zebra_x+rotor_ax_neck_diameter/2-xdst)/2,
                     0,
                     15+plate_size_z])
@@ -235,12 +245,12 @@ module 888_1020(draft = true){
                 cube([4*brit_height,
                 rotor_head_kardan_inner_y+2*(rotor_head_brit_width+rotor_head_cardan_clearance),
                 4*brit_height],center=true);
-                
-        
+
+
         //otvor pro soustružený krček
         translate([0, 0, -brit_height])
             cylinder(d = rotor_ax_neck_diameter, h = 2*brit_height, $fn = draft ? 20 : 80);
-            
+
          //žebra
          for(i=[45,135,225,315]){
             translate([0,0,plate_size_z-zebra_inplate])
@@ -264,8 +274,16 @@ module 888_1020(draft = true){
                                 translate([rotor_ax_neck_diameter/2+zebra_th/2+j*3*zebra_th,0,brit_height])
                                     cube([zebra_th,2*zebra_th,2*brit_height],center=true);
                         }
-         }    
-                                   
+         }
+
+        // Otvory pro dotahovani kuloveho loziska
+        for (i=[1:4]) {
+            rotate([0, 0, 45+90*i])
+                translate([rotorhead_neck_plate_diameter/2+2, 0, 0])
+                    cylinder(d = 4.5, h = 20, $fn = 20);
+        }
+
+
 
 
      }

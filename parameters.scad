@@ -24,6 +24,7 @@ pilon_pipe_diameter_inner = carbon_pipe_10_inner_diameter;
 
 beam_vertical_space_between_pipes = 1;
 beam_min_wall = 3;
+beam_socket_width = 25;
 
 // tloustka limce
 ring_thickness = 2*10 + beam_vertical_space_between_pipes + 3*beam_min_wall;
@@ -74,10 +75,10 @@ rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loz
 
 // nastavení parametrů motoru
 
-engine_angle = -10;
+engine_angle = -3;
 engine_diameter = 55;
-engine_offset = 75;
-engine_holder_beam_depth = 55; // jak moc je nosnik zapusten v dilu
+engine_offset = 65;
+engine_holder_beam_depth = 50; // jak moc je nosnik zapusten v dilu
 
 engine_screws_radius = 15;
 engine_holes_radius = (24 + 44)/4;
@@ -211,16 +212,16 @@ hull_strenghtening_pipe_distance = 45;
 
 // Parametry pylonu k rotorove hlave
 
-main_pilon_position = 170+68;       // pozice rotorového pilonu měřená od přední části krytu
+main_pilon_position = 170+68+beam_patern;       // pozice rotorového pilonu měřená od přední části krytu
 
 // vzdalenosti jsou pocitany od stredu rotoru
 // vzdalenosti jednotlivych tyci u podlozky
 //pilon_pipe_base_front_x = 30;
-pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*5.75;
+pilon_pipe_base_front_x = +engine_holder_beam_depth + main_pilon_position - beam_patern*6.75;
 pilon_pipe_base_front_y = 55;
 pilon_pipe_base_front_z = 0;
 
-pilon_pipe_base_rear_x = -engine_holder_beam_depth + beam_patern*8.75 - main_pilon_position;
+pilon_pipe_base_rear_x = -engine_holder_beam_depth + beam_patern*9.75 - main_pilon_position;
 pilon_pipe_base_rear_z = beam_thickness_above;
 
 // vzhalenosti jednotlivych tyci u rotorove hlavy
@@ -286,15 +287,14 @@ lock_length = 3;
 
 //accumulator
 //základní rozměry akumulátoru
-width_of_accumulator = 136;//45+1;
-depth_of_accumulator = 42;
-height_of_accumulator = 42;
+width_of_accumulator = 40;
+depth_of_accumulator = 138;
+height_of_accumulator = 40;
 //Zapuštění akumulátoru
 sink_of_accumulator = 5; //main_tube_outer_diameter/5 - M3_nut_height*1.5;
 
-//tloušťka hrany spojky
-accumulator_holder_width = 18;
-accumulator_holder_thickness = 10;
+//rozměry držáku akumulátoru
+accumulator_holder_width = 40;
 
 //posunutí akumálátoru na podložce
 move_of_accumulator = 75;   // pozice akumulátoru (ovlivňuje těžiště)
@@ -572,8 +572,8 @@ servo_20kg_nut_d = 5+0.3;
 
 rotor_head_pitch = 0;
 rotor_head_roll = 0;
-
-rotor_head_servo_shift = [-6, -49, -40];
+rotor_head_screw_distances = [0, 10, 64];
+rotor_head_servo_shift = [-7, -49, -45];
 rotor_head_height = 17; // vzdalenost spodni zakladny rotorove hlavy od stredu kuloveho loziska
 rotor_head_width = 30; // je to "sirka" v ose X
 rotor_head_rank_angle = 9; // zakloneni rotorove hlavy pri nulove vychylce.
@@ -587,7 +587,7 @@ rotor_head_pitch_stop=15;//max pitch angle
 rotor_head_brit_width=5;
 rotor_head_plate_thickness=0;
 
-rotor_head_cardan_clearance=1;
+rotor_head_cardan_clearance=0.5;
 
 rotor_head_bearing_width=bearing_efsm_12_width;//širka podstavy x
 rotor_head_bearing_h=bearing_efsm_12_h;//delka podstavy y
@@ -603,6 +603,9 @@ rotor_head_bearing_screw_head_height=3.5;
 //rotor_head_wall_height=2*((rotor_head_bearing_a1+rotor_head_bearing_screw_head_height-rotor_head_bearing_a_center_of_rotation+rotor_head_bearing_width/2*tan(rotor_head_roll_stop))*cos(rotor_head_roll_stop));//height of side wall of center part
 rotor_head_wall_height = 8;
 rotorhead_neck_height=6;
+rotorhead_neck_plate_diameter = 38;
+rotorhead_neck_plate_thickness = 2;
+rotorhead_desk_thickness = 4;
 rotor_head_kardan_inner_x=rotor_head_bearing_width+2*rotor_head_cardan_clearance;
 rotor_head_kardan_inner_y=2*(rotor_head_bearing_h/2*1/cos(rotor_head_pitch_stop)+rotor_head_wall_height/2*tan(rotor_head_pitch_stop)); //center part
 

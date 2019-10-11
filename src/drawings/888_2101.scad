@@ -1,14 +1,14 @@
 draft = true;
 
 use <./lib/naca4.scad>
-include <../parameters.scad>
+include <../../parameters.scad>
 
-use <888_2002.scad>
-use <888_2003.scad>
-use <888_2004.scad>
-use <888_2005.scad>
-use <888_2006.scad>
-use <888_2007.scad>
+use <../888_2002.scad>
+use <../888_2003.scad>
+use <../888_2004.scad>
+use <../888_2005.scad>
+use <../888_2006.scad>
+use <../888_2007.scad>
 
 
 difference(){
@@ -28,19 +28,19 @@ difference(){
        888_2005();
         rotate([0,0,180])
             888_2006();
-        
-        translate([47, 0, 15]) 
+
+        translate([47, 0, 15])
             888_2007();
 
         translate([0,0,-25.8])
 
         difference()
         {
-            cylinder(h=150, d = main_tube_outer_diameter, $fn = 100);    
-            cylinder(h=150, d = main_tube_inner_diameter, $fn = 100);    
+            cylinder(h=150, d = main_tube_outer_diameter, $fn = 100);
+            cylinder(h=150, d = main_tube_inner_diameter, $fn = 100);
         }
     }
 
-    translate([-200, 0, -100]) 
-        cube(200);    
+    translate([-200, 0, -100])
+        cube(200);
 }

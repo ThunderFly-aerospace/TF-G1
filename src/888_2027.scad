@@ -1,7 +1,7 @@
 //========== drzak KSTM lozisek podvozku pod nosnikem virniku ==========//
 
 include <../parameters.scad>
-use <lib/vector.scad>
+include <lib/vector.scad>
 
 kstm_width = 9;
 kstm_length = 47;
@@ -9,6 +9,7 @@ kstm_holes = 35;
 kstm_center_height = 10;
 kstm_screw = 4;
 
+draft = true;
 
 module holes(){
     rotate([180, 0, 0]){
@@ -79,11 +80,23 @@ module 888_2027(baselength) {
                 translate([0, 0, kstm_center_height])
                     holes();
 
-        translate([0, 0, -100])
-            cylinder(d = M4_screw_diameter, h = 100);
-        translate([0, 0, -110])
-            cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
-        
+
+        /* translate([0, 0, -100])
+            cylinder(d = M3_screw_diameter, h = 100);
+        translate([0, 0, -105])
+            cylinder(d = M3_nut_diameter, h = 100, $fn = 6); */
+
+        translate([beam_patern/4, 0, -100])
+            cylinder(d = M3_screw_diameter, h = 100);
+        translate([beam_patern/4, 0, -105])
+            cylinder(d = M3_nut_diameter, h = 100, $fn = 6);
+
+        translate([-beam_patern/4, 0, -100])
+            cylinder(d = M3_screw_diameter, h = 100);
+        translate([-beam_patern/4, 0, -105])
+            cylinder(d = M3_nut_diameter, h = 100, $fn = 6);
+
+
 
         /* for (i=[-5:5]) {
             #translate([beam_patern*i - chassis_suspension_basewidth/2, 0, -100]) {

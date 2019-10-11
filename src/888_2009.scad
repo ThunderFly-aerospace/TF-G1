@@ -5,7 +5,7 @@ use <888_1004.scad>
 
 column_upper_diameter = 20;
 column_lower_diameter = 40;
-column_height = 70;
+column_height = 65;
 column_offset = 50;
 
 joint_diameter = 40;
@@ -23,10 +23,9 @@ module 888_2009(){
         //sloupek
         union(){
             hull(){
-                translate([-engine_holder_beam_depth-10, -(beam_width-22)/2, -0.1])
-                    cube([engine_holder_beam_depth-10, beam_width-22, 0.1]);
-                translate([0, 0, -5])
-                    //rotate([0, 5, 0])
+                translate([-engine_holder_beam_depth, -(beam_width-22)/2, -2])
+                    cube([engine_holder_beam_depth/5*2, beam_width-22, 2]);
+                translate([-engine_holder_beam_depth+beam_patern*1.25, 0, -5])
                         cylinder (h=5, d=10, $fn=60);
                 translate([-column_offset, 0, -column_height])
                         rotate([0, slope, 0])
@@ -40,15 +39,15 @@ module 888_2009(){
 
             translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
-                    rotate([0, 0, max_angle_of_ratation/2])
-                        translate([column_lower_diameter/2-3, stop_width/2, -10])
+                    rotate([0, 0, max_angle_of_ratation/2+180])
+                        translate([column_lower_diameter/2-3, stop_width/2, -7])
                             rotate([0, -15, 0])
                                 cube([13, 5, 50]);
 
             translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
-                    rotate([0, 0, -max_angle_of_ratation/2])
-                        translate([column_lower_diameter/2-3, -5-stop_width/2, -10])
+                    rotate([0, 0, -max_angle_of_ratation/2+180])
+                        translate([column_lower_diameter/2-3, -5-stop_width/2, -7])
                             rotate([0, -15, 0])
                                 cube([13, 5, 50]);
 
@@ -84,20 +83,17 @@ module 888_2009(){
                     rotate([90, 0, 0])
                         cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
 
-
         translate([-column_offset, 0, -column_height])
             rotate([0, slope, 0])
                 translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5 + 10])
                     rotate([90, 0, 0])
                         cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
 
-
         translate([-column_offset, 0, -column_height])
             rotate([0, slope, 0])
                 translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5+10])
                     rotate([90, 30, 0])
                         cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-
 
         translate([-column_offset, 0, -column_height])
             rotate([0, slope, 0])
@@ -110,39 +106,41 @@ module 888_2009(){
                 translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5+10 - M3_nut_diameter/2])
                     cube([20, M3_nut_height, M3_nut_diameter]);
 
-
         translate([-column_offset, 0, -column_height])
             rotate([0, slope, 0])
                 translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5 - M3_nut_diameter/2])
                     cube([20, M3_nut_height, M3_nut_diameter]);
 
-        translate([-engine_holder_beam_depth + beam_patern/2, (beam_main_pipe_distance/2-beam_main_pipe_thickness-3), -beam_thickness/2]){
-            translate([0, 0, -30])
-                cylinder(d = M4_screw_diameter, h = 50, $fn = 20);
-            translate([0, 0, -95])
-                cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
 
-        }
-
-        translate( [-engine_holder_beam_depth + beam_patern/2, -(beam_main_pipe_distance/2-beam_main_pipe_thickness-3), -beam_thickness/2]){
+        // diry na svisle srouby skrze nosnik
+        translate([-engine_holder_beam_depth + beam_patern/4, (beam_main_pipe_distance/2), 0]){
             translate([0, 0, -20])
-                cylinder(d = M4_screw_diameter, h = 50, $fn = 20);
-            translate([0, 0, -95])
-                cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
+                cylinder(d = M4_screw_diameter, h = 31, $fn = 20);
+            translate([0, 0, -15])
+                cylinder(d = M4_nut_diameter, h = M4_nut_height*1.5, $fn = 6);
+            translate([-M4_nut_diameter/2, 0, -15])
+                cube([M4_nut_diameter, 50, M4_nut_height]);
         }
 
+        translate([-engine_holder_beam_depth + beam_patern/4, -(beam_main_pipe_distance/2), 0]){
+            translate([0, 0, -20])
+                cylinder(d = M4_screw_diameter, h = 31, $fn = 20);
+            translate([0, 0, -15])
+                cylinder(d = M4_nut_diameter, h = M4_nut_height*1.5, $fn = 6);
+            translate([-M4_nut_diameter/2, -50, -15])
+                cube([M4_nut_diameter, 50, M4_nut_height]);
+        }
+
+        // otvor pro predni pripevnovaci sroub
         translate([-engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/3]){
-            translate([0, 0, -10])
-                cylinder(d = M4_screw_diameter, h = 50, $fn = 20);
+            cylinder(d = M3_screw_diameter, h = 30, $fn = 20);
             translate([0, 0, 0])
                 rotate(30)
-                    cylinder(d = M4_nut_diameter, h = M4_nut_height, $fn = 6);
+                    cylinder(d = M3_nut_diameter, h = M3_nut_height*1.5, $fn = 6);
             rotate(-90)
-                translate([-M4_nut_diameter/2, 0, 0])
-                    cube([M4_nut_diameter, 50, M4_nut_height]);
+                translate([-M3_nut_diameter/2, 0, 0])
+                    cube([M3_nut_diameter, 50, M3_nut_height]);
         }
-
-
     }
 }
 

@@ -1,10 +1,10 @@
 // sestava podvozkoveho kola
 
 
-include <../parameters.scad>
-use <888_2011.scad>
-use <888_2012.scad>
-use <888_2021.scad>
+include <../../parameters.scad>
+use <../888_2011.scad>
+use <../888_2012.scad>
+use <../888_2021.scad>
 
 module wheel_tiere(){
      rotate([90, 0, 0]){

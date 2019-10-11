@@ -34,8 +34,9 @@ retainer_ht = 1.5;	// height of retainer flange over pulley, standard = 1.5
 idler = 0;			// Belt retainer below teeth, 0 = No, 1 = Yes
 idler_ht = 1;		// height of idler flange over pulley, standard = 1.5
 
-overal_ht = 20;     // overal height of pulley
+overal_ht = 17;     // overal height of pulley
 overal_d = 122;     // top cylinder diameter
+overal_rank = 0;    // top cylinder top taper
 pulley_t_ht = 12;	// length of toothed part of pulley, standard = 12
 pulley_b_ht = 0;		// pulley base height, standard = 8. Set to same as idler_ht if you want an idler but no pulley.
 pulley_b_dia = 0;	// pulley base diameter, standard = 20
@@ -89,23 +90,27 @@ module rotor_pulley(draft)
 {
     difference(){
         union(){
-        if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
-        if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
-        if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
-        if ( profile == 4 ) { pulley ( "H" , H_pulley_dia ,1.905 , 5.359 ); }
-        if ( profile == 5 ) { pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678 ); }
-        if ( profile == 6 ) { pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264 ); }
-        if ( profile == 7 ) { pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13 ); }
-        if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
-        if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
-        if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
-        if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
-        if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
-        if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
-        if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
+            if ( profile == 1 ) { pulley ( "MXL" , MXL_pulley_dia , 0.508 , 1.321 ); }
+            if ( profile == 2 ) { pulley ( "40 D.P." , 40DP_pulley_dia , 0.457 , 1.226 ); }
+            if ( profile == 3 ) { pulley ( "XL" , XL_pulley_dia , 1.27, 3.051 ); }
+            if ( profile == 4 ) { pulley ( "H" , H_pulley_dia ,1.905 , 5.359 ); }
+            if ( profile == 5 ) { pulley ( "T2.5" , T2_5_pulley_dia , 0.7 , 1.678 ); }
+            if ( profile == 6 ) { pulley ( "T5" , T5_pulley_dia , 1.19 , 3.264 ); }
+            if ( profile == 7 ) { pulley ( "T10" , T10_pulley_dia , 2.5 , 6.13 ); }
+            if ( profile == 8 ) { pulley ( "AT5" , AT5_pulley_dia , 1.19 , 4.268 ); }
+            if ( profile == 9 ) { pulley ( "HTD 3mm" , HTD_3mm_pulley_dia , 1.289 , 2.27 ); }
+            if ( profile == 10 ) { pulley ( "HTD 5mm" , HTD_5mm_pulley_dia , 2.199 , 3.781 ); }
+            if ( profile == 11 ) { pulley ( "HTD 8mm" , HTD_8mm_pulley_dia , 3.607 , 6.603 ); }
+            if ( profile == 12 ) { pulley ( "GT2 2mm" , GT2_2mm_pulley_dia , 0.764 , 1.494 ); }
+            if ( profile == 13 ) { pulley ( "GT2 3mm" , GT2_3mm_pulley_dia , 1.169 , 2.31 ); }
+            if ( profile == 14 ) { pulley ( "GT2 5mm" , GT2_5mm_pulley_dia , 1.969 , 3.952 ); }
 
-        translate([0, 0, pulley_t_ht])
-            cylinder(d = overal_d, h = overal_ht - pulley_t_ht, $fn = draft ? 50 : 200);
+            translate([0, 0, pulley_t_ht])
+                cylinder(d1 = overal_d, d2 = overal_d - overal_rank, h = overal_ht - pulley_t_ht, $fn = draft ? 50 : 200);
+
+
+            translate([0, 0, pulley_t_ht])
+                cylinder(d = overal_d, h = 3, $fn = draft ? 50 : 200);
         }
 
         // osazení pro kroužek
@@ -113,11 +118,11 @@ module rotor_pulley(draft)
             cylinder(h = 4+0.1, d=42.5,  $fn = draft ? 50 : 200);
 
         // osazení pro domek
-        translate([0, 0, overal_ht - 5])
+        translate([0, 0, overal_ht - 2])
             cylinder(h = 5+0.1, d=42.5,  $fn = draft ? 50 : 200);
 
         // osazení pro  šikmou část domku
-        translate([0, 0, overal_ht - 5 - 8])
+        translate([0, 0, overal_ht - 2 - 8])
             cylinder(h = 8+0.1, d2=42.5, d1=26.5,  $fn = draft ? 50 : 200);
 
 
@@ -234,8 +239,8 @@ module pulley( belt_type , pulley_OD , tooth_depth , tooth_width )
 			//shaft - diameter is outside diameter of pulley
 
 			translate([0,0,pulley_b_ht])
-			rotate ([0,0,360/(teeth*4)])
-			cylinder(r=pulley_OD/2,h=pulley_t_ht, $fn=teeth*4);
+			    rotate ([0,0,360/(teeth*4)])
+			        cylinder(r=pulley_OD/2,h=pulley_t_ht, $fn=teeth*4);
 
 			//teeth - cut out of shaft
 
