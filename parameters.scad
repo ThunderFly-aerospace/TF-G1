@@ -397,15 +397,6 @@ tail_tube_mount_screws_wall_thickness = 2;          // tloustka steny mezi sroub
 
     width_666_1014_drillhelper = 2*tube_for_undercarriage_outer_diameter + 2*coupling_wall_thickness_undercarriage;
 
-//umístění podvozkových trubek
-
-//second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 160;
-second_undercarriage_hole = height_666_1026 + height_666_1004/2 + 170 + 120 + 100;
-
-
-//Base Divison - dělení podložky
-base_division = [0, 159, main_pilon_position + coupling_width_666_1017/2 + global_clearance/2, second_undercarriage_hole + coupling_width_666_1004/2 + global_clearance/2, hull_x_size];
-
 // šrouby pro připevnění podložky k hlavní trubce
 base_mounting_screw_length = 50;
 
