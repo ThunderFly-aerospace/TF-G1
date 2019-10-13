@@ -30,14 +30,14 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
                     translate([0, 0, tail_length * 2])
                         rotate([0, 45, 0])
                             for (i = [0:30]) {
-                                translate([i * 25, 0, 0])
+                                translate([i * 32.5, 0, 0])
                                     cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                             }
 
                     translate([0, 0, 0])
                         rotate([0, - 45, 0])
                             for (i = [0:30]) {
-                                translate([i * 25, 0, 0])
+                                translate([i * 32.5, 0, 0])
                                     cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                             }
 
@@ -78,14 +78,14 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                         translate([0, 0, tail_length * 2])
                             rotate([0, 45, 0])
                                 for (i = [0:30]) {
-                                    translate([i * 25, 0, 0])
+                                    translate([i * 32.5, 0, 0])
                                         cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                                 }
 
                         translate([0, 0, 0])
                             rotate([0, - 45, 0])
                                 for (i = [0:30]) {
-                                    translate([i * 25, 0, 0])
+                                    translate([i * 32.5, 0, 0])
                                         cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                                 }
 
@@ -222,7 +222,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
         //Main Wall-------------------------------------------------
         airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_height - tail_bottom_height - Rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
 
-        //Removing material-----------------------------------------
+        //Removing material----------------------------------------- 
 
         //Holes for rudder shaft------------------------------------
         translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, - 1])
