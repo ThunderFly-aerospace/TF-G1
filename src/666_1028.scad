@@ -41,13 +41,6 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
                                     cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                             }
 
-                    //Material for support tubes-----------------------------------
-                    translate([tail_support_x_position_1, 0, tail_bottom_height / 2 + 1])
-                        cube([Rudder_shaft_diameter + 10, tail_depth, tail_bottom_height + 2], center = true);
-
-                    translate([tail_support_x_position_2, 0, tail_bottom_height / 2 + 1])
-                        cube([Rudder_shaft_diameter + 10, tail_depth, tail_bottom_height + 2], center = true);
-
                     //Material for rudder shaft------------------------------------
                     translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, tail_bottom_height / 2 + 1])
                         cube([Rudder_shaft_diameter + 10, tail_depth, tail_bottom_height + 2], center = true);
@@ -57,13 +50,6 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
         }
 
     //Removing material-----------------------------------------
-
-    //Holes for support tubes-----------------------------------
-    translate([tail_support_x_position_1, 0, - 1])
-        cylinder(d = Rudder_shaft_diameter, h = tail_bottom_height + 2, $fn = draft ? 10 : 50);
-
-    translate([tail_support_x_position_2, 0, - 1])
-        cylinder(d = Rudder_shaft_diameter, h = tail_bottom_height + 2, $fn = draft ? 10 : 50);
 
     //Holes for rudder shaft------------------------------------
     translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, - 1])
@@ -103,13 +89,6 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                                         cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                                 }
 
-                        //Material for support tubes-----------------------------------
-                        translate([tail_support_x_position_1, 0, Rudder_height / 2 + 1])
-                            cube([Rudder_shaft_diameter + 10, tail_depth, Rudder_height + 2], center = true);
-
-                        translate([tail_support_x_position_2, 0, Rudder_height / 2 + 1])
-                            cube([Rudder_shaft_diameter + 10, tail_depth, Rudder_height + 2], center = true);
-
                         translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
                             //Mount and servo material----------------------------------
                             union(){
@@ -122,13 +101,6 @@ module 666_1028_body_middle(side_choose = 1, draft) {
             }
 
         //Removing material-----------------------------------------
-
-        //Holes for support tubes-----------------------------------
-        translate([tail_support_x_position_1, 0, - 1])
-            cylinder(d = Rudder_shaft_diameter, h = Rudder_height + 2, $fn = draft ? 10 : 50);
-
-        translate([tail_support_x_position_2, 0, - 1])
-            cylinder(d = Rudder_shaft_diameter, h = Rudder_height + 2, $fn = draft ? 10 : 50);
 
         //Hole for rudder-------------------------------------------
         translate([tail_length - Rudder_length - Rudder_gap_width, - tail_depth / 2, - 1])
@@ -240,14 +212,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
 
             cube([tail_tube_mount_length - 11, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2 - 2, tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2 + 2], center = true);
         }
-
-        // servo support
-        // (not dynamic at all)
-    /*translate([(tail_tube_mount_length) / 2 + Rudder_infill_wall_thickness + tail_servo_length + 5, 0, tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset + tail_pipe_z_position - tail_bottom_height])
-        difference() {
-            cube([tail_servo_length_inside / 2, Rudder_depth, tail_servo_height + Rudder_infill_wall_thickness * 2], center = true);
-            cube([tail_servo_length_inside / 2 - 1, Rudder_depth - 1, tail_servo_height + Rudder_infill_wall_thickness * 2], center = true);
-        }*/
+        
     //------------------------------------------------------------
     }
 }
@@ -258,13 +223,6 @@ module 666_1028_body_top(side_choose = 1, draft) {
         airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_height - tail_bottom_height - Rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
 
         //Removing material-----------------------------------------
-
-        //Holes for support tubes-----------------------------------
-        translate([tail_support_x_position_1, 0, - 1])
-            cylinder(d = Rudder_shaft_diameter, h = tail_height - tail_bottom_height - Rudder_height + 2, $fn = draft ? 10 : 50);
-
-        translate([tail_support_x_position_2, 0, - 1])
-            cylinder(d = Rudder_shaft_diameter, h = tail_height - tail_bottom_height - Rudder_height + 2, $fn = draft ? 10 : 50);
 
         //Holes for rudder shaft------------------------------------
         translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, - 1])
