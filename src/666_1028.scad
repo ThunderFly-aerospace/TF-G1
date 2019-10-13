@@ -52,7 +52,7 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
     //Removing material-----------------------------------------
 
     //Holes for rudder shaft------------------------------------
-    translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, - 1])
+    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, - 1])
         cylinder(d = Rudder_shaft_diameter, h = tail_bottom_height + 2, $fn = draft ? 10 : 50);
 
 
@@ -225,7 +225,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
         //Removing material----------------------------------------- 
 
         //Holes for rudder shaft------------------------------------
-        translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, - 1])
+        translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, - 1])
             cylinder(d = Rudder_shaft_diameter, h = tail_height - tail_bottom_height - Rudder_height + 2, $fn = draft ? 10 : 50);
 
         //Cut to make shape A angle---------------------------------
@@ -329,7 +329,7 @@ module 666_1028_rudder() {
                         cube([tail_length - Rudder_length - Rudder_gap_width, Rudder_depth * 2, tail_height + 2]);
                 }
                 union() {
-                    translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, Rudder_height / 2])
+                    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
                         cylinder(d = Rudder_shaft_outside_diameter, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
                     
                     
@@ -343,7 +343,7 @@ module 666_1028_rudder() {
                     cube([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2, Rudder_depth * 2, tail_height + 2]);
             }
         }
-        translate([tail_length - Rudder_length + Rudder_gap_width + 5, 0, Rudder_height / 2])
+        translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
             cylinder(d = Rudder_shaft_diameter, h = Rudder_height * 2, $fn = draft ? 10 : 50, center = true);
         
         //páka pro táhlo
