@@ -7,7 +7,7 @@ height = 10;
 
 module 888_2025(piston=false) {
     if(piston) {
-        
+
     }
 
     difference() {
@@ -25,9 +25,9 @@ module 888_2025(piston=false) {
                 cylinder(d=RT57208M25_BE, h=RT57208M25_MR+RT57208M25_LB+0.1, $fn=50);
 
                 translate([RT57208M25_EW/-2, RT57208M25_BE/-2, 0])
-                    cube([RT57208M25_EW, RT57208M25_BE, RT57208M25_MR+RT57208M25_LB+0.1]);
+                    cube([RT57208M25_EW, RT57208M25_BE, RT57208M25_MR+RT57208M25_LB]);
             }
-        
+
         //šroub pro přišroubování k pístu
         translate([0, 0, RT57208M25_LB])
             rotate([0, 90, 0])
