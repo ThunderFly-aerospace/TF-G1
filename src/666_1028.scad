@@ -110,21 +110,23 @@ module 666_1028_body_middle(side_choose = 1, draft) {
         translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
             union() {
                 //hole for servo
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, 0, tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
-                    cube([tail_servo_length_inside, Rudder_depth * 4, tail_servo_height], center = true);
+                //TODO: Y axis not dynamic
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, tail_servo_wall_and_screws_y_position, tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
+                    cube([tail_servo_length_inside, Rudder_depth * 2, tail_servo_height], center = true);
 
                 //servo mount wall
                 translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, - side_choose * (- Rudder_depth + tail_servo_wall_y_offset), tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
                     cube([tail_servo_length, Rudder_depth * 2, tail_servo_height], center = true);
 
                 //servo screw holes
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length + tail_servo_screws_gap) / 2, 0, Rudder_infill_wall_thickness + tail_servo_z_offset + tail_servo_screws_z_position])
+                //TODO: Y axis not dynamic
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length + tail_servo_screws_gap) / 2, tail_servo_wall_and_screws_y_position, Rudder_infill_wall_thickness + tail_servo_z_offset + tail_servo_screws_z_position])
                     rotate([90, 0, 0])
-                        cylinder(h = Rudder_depth * 2, d = M2_screw_diameter, $fn = 100, center = true);
+                        cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = 100, center = true);
 
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length - tail_servo_screws_gap) / 2, 0, Rudder_infill_wall_thickness + tail_servo_z_offset + tail_servo_screws_z_position])
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length - tail_servo_screws_gap) / 2, tail_servo_wall_and_screws_y_position, Rudder_infill_wall_thickness + tail_servo_z_offset + tail_servo_screws_z_position])
                     rotate([90, 0, 0])
-                        cylinder(h = Rudder_depth * 2, d = M2_screw_diameter, $fn = 100, center = true);
+                        cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = 100, center = true);
 
                 //wire hole
                 cube([tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_wire_hole_length * 2, tail_servo_wire_hole_width, tail_servo_wire_hole_width], center = true);

@@ -368,15 +368,17 @@ tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na srou
 tail_A_shape_screw_x_position_2 = 55;               // pozice druhe diry na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_3 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
 
-tail_servo_z_offset = - 5;                         // posunuti serva vuci uchyceni na trubku (osa Z);
+tail_servo_z_offset = - 5;                          // posunuti serva vuci uchyceni na trubku (osa Z);
 tail_servo_length = 32;                             // velikost otvoru pro servo (delka)
 tail_servo_height = 30;                             // velikost otvoru pro servo (vyska)
 tail_servo_length_inside = 23.2;                    // velikost otvoru pro servo bez uchyceni (delka)
 tail_servo_screws_gap = 28;                         // mezera mezi srouby pro uchyceni serva
 tail_servo_screws_z_position = 17;                  // pozice sroubu pro uchyceni serva (osa Z)
+tail_servo_screws_diameter = 1.8;                   // prumer der na srouby
 tail_servo_wall_y_offset = 2;                       // vyoseni uchyceni pro servo
-tail_servo_wire_hole_length = 5;                   // delka vykusu pro draty
+tail_servo_wire_hole_length = 5;                    // delka vykusu pro draty
 tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
+tail_servo_wall_and_screws_y_position = 5;          // pozice steny a sroubu pro uchyceni serva (osa Y)
 
 tail_tube_mount_length = 40;                        // delka upevneni na trubku
 tail_tube_mount_height = 32;                        // vyska upevneni na trubku
