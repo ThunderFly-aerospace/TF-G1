@@ -52,7 +52,7 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
     //Removing material-----------------------------------------
 
     //Holes for rudder shaft------------------------------------
-    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, - 1])
+    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, 1])
         cylinder(d = Rudder_shaft_diameter, h = tail_bottom_height + 2, $fn = draft ? 10 : 50);
 
 
@@ -106,10 +106,8 @@ module 666_1028_body_middle(side_choose = 1, draft) {
         translate([tail_length - Rudder_length - Rudder_gap_width, - tail_depth / 2, - 1])
             cube([Rudder_length + Rudder_gap_width + 5, tail_depth, Rudder_height + 2]);
 
-
-
-       //Removing material for mount and servo-----------------------
-       translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
+        //Removing material for mount and servo---------------------
+        translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
             union() {
                 //hole for servo
                 translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, 0, tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
