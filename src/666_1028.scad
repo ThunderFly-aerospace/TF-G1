@@ -143,7 +143,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                     cube([tail_tube_mount_length + 2, tail_tube_mount_wings_thickness + global_clearance * 2, tail_tube_mount_height + global_clearance * 2], center = true);
 
                 //tube mount screws
-                translate([tail_tube_mount_screws_x_position, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
+                translate([tail_tube_mount_screws_x_position, side_choose * (Rudder_depth + 1) , tail_tube_mount_screws_z_position])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = 100);
@@ -157,7 +157,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                                         cube([tail_tube_mount_length + 2, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2, tail_tube_mount_height + global_clearance * 2], center = true);
                             }
                         }
-                translate([- tail_tube_mount_screws_x_position, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
+                translate([- tail_tube_mount_screws_x_position, side_choose * (Rudder_depth + 1) , tail_tube_mount_screws_z_position])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = 100);
@@ -171,7 +171,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                                         cube([tail_tube_mount_length + 2, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2, tail_tube_mount_height + global_clearance * 2], center = true);
                             }
                         }
-                translate([tail_tube_mount_screws_x_position, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
+                translate([tail_tube_mount_screws_x_position, side_choose * (Rudder_depth + 1) , - tail_tube_mount_screws_z_position])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = 100);
@@ -185,7 +185,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                                         cube([tail_tube_mount_length + 2, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2, tail_tube_mount_height + global_clearance * 2], center = true);
                             }
                         }
-                translate([- tail_tube_mount_screws_x_position, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
+                translate([- tail_tube_mount_screws_x_position, side_choose * (Rudder_depth + 1) , - tail_tube_mount_screws_z_position])
                     rotate([side_choose * 90, 0, 0])
                         union() {
                             cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = 100);
