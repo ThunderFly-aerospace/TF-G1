@@ -129,7 +129,13 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                         cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = 100, center = true);
 
                 //wire hole
-                cube([tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_wire_hole_length * 2, tail_servo_wire_hole_width, tail_servo_wire_hole_width], center = true);
+                difference() {
+                    cube([tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_wire_hole_length * 2, tail_servo_wire_hole_width, tail_servo_wire_hole_width], center = true);
+                    
+                    //TODO: cutter is not dynamic
+                    translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, 0, tail_servo_height / 2 + tail_servo_z_offset + 10])
+                        cube([tail_servo_length + Rudder_infill_wall_thickness * 2, Rudder_depth * 2, tail_servo_height + Rudder_infill_wall_thickness * 2], center = true);
+                }
 
                 //tube
                 translate([- 2 - Rudder_infill_wall_thickness / 2, 0, 0])
