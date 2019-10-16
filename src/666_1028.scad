@@ -116,10 +116,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                     cube([tail_servo_length_inside, Rudder_depth * 4, tail_servo_height], center = true);
 
                 //servo mount wall
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, side_choose * (Rudder_depth + Rudder_infill_wall_thickness + tail_servo_wall_y_offset), tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
-                    cube([tail_servo_length, Rudder_depth * 2, tail_servo_height], center = true);
-
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, side_choose * (- Rudder_depth + tail_servo_wall_y_offset), tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, - side_choose * (- Rudder_depth + tail_servo_wall_y_offset), tail_servo_height / 2 + Rudder_infill_wall_thickness + tail_servo_z_offset])
                     cube([tail_servo_length, Rudder_depth * 2, tail_servo_height], center = true);
 
                 //servo screw holes
