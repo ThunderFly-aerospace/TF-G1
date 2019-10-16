@@ -329,8 +329,8 @@ module 666_1028_rudder() {
                     translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
                         cylinder(d = Rudder_shaft_outside_diameter, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
                     
-                    
-                    translate([tail_length - Rudder_length * 2 / 3, 0, Rudder_height / 2 + 20])
+                    // material for holes for servo arm
+                    translate([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2 + 7 + Rudder_arm_x_offset, 0, Rudder_height / 2 + 20])
                         cube([14, Rudder_depth, 14], center = true);
                 }
             }
@@ -360,7 +360,7 @@ module 666_1028_rudder() {
         screw_xposition = (lenght/diagonal)*(screws_distance/2);
         screw_yposition = (height/diagonal)*(screws_distance/2);
 
-        translate([tail_length - Rudder_length * 2 / 3, 0, Rudder_height / 2 + 20]){
+        translate([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2 + 7 + Rudder_arm_x_offset, 0, Rudder_height / 2 + 20]){
             translate([screw_xposition, 0, screw_yposition])
                 rotate([90,0,0])
                     cylinder(h = 100, d = 2.3, $fn = 10, center = true);
