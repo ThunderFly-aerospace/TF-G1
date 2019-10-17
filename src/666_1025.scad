@@ -36,7 +36,7 @@ module screw_top (position_number, draft){
 
                 translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
 
-                    #cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                    cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
 
             //final if
             }
@@ -191,21 +191,7 @@ union(){
                                 cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                     }
 
-         /*   //nápis
-            translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
-                linear_extrude(hull_wall_thickness)
-                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-
-            // boční text s identifikací
-
-            translate([hull_x_size/4 + 35, hull_y_size/4, -hull_z_size/2 + hull_wall_thickness/5])
-                rotate([0,180,0])
-                    linear_extrude(hull_wall_thickness)
-                        text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-        */
-
     //uchycení rotorové hlavy
-
 pozadovana_vyska = 70;
 pozadovany_uhel = 10;
 tyc = pozadovana_vyska / (sin(pozadovany_uhel));
@@ -273,19 +259,6 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
                         //difference(){
                             translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
                                 cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                        //odečtení nápisu od příčné výztuhy
-                        //nápis
-                        /*    translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
-                                linear_extrude(hull_wall_thickness)
-                                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-
-                        // boční text s identifikací
-                            translate([hull_x_size/4 + 35, hull_y_size/4, -hull_z_size/2 + hull_wall_thickness/5])
-                                rotate([0,180,0])
-                                    linear_extrude(hull_wall_thickness)
-                                        text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-                        */
-                        //}
 
                         //pro lepení - čtverec
                         difference(){
@@ -341,24 +314,7 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
                                         cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
 
                             }
-                        //odečtení nápisu od podélné výztuhy
-                        //nápis
-                        /*    translate([hull_x_size/4 + 35, hull_y_size/4, hull_z_size/2 - hull_wall_thickness/5])
-                                linear_extrude(hull_wall_thickness)
-                                    text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-
-                        // boční text s identifikací
-
-                            translate([hull_x_size/4 + 35, hull_y_size/4, -hull_z_size/2 + hull_wall_thickness/5])
-                                rotate([0,180,0])
-                                    linear_extrude(hull_wall_thickness)
-                                        text("TF-G1", size = 30, halign = "center", valign = "center", font = "PT Sans");
-                        */
-                        //}
-
                     }
-
-
                     //pro lepení - odstranění kusu z díry pro horní držák
                     translate ([180+2*hull_wall_thickness,-10,0])
                         rotate ([-90,0,0])
@@ -375,8 +331,6 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
         }
 
  //šrouby mezi díly 2 a 3
-
-
        intersection(){
        		union(){
                 difference(){
@@ -723,8 +677,6 @@ module 666_1025_part_B(part_number, draft){
         }
 
     }
-
-
 //final module
 }
 

@@ -23,7 +23,6 @@ use <../888_2027.scad>
 use <../lib/igus.scad>
 use <../lib/vector.scad>
 use <../lib/piston.scad>
-use <../666_1027.scad>
 
 
 
