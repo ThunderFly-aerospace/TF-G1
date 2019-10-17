@@ -4,7 +4,8 @@ PLATE_DIMMENSIONS=130
 SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
 OPENSCAD_APP=openscad
-SLIC3R_APP=slic3r-prusa3d
+#SLIC3R_APP=slic3r-prusa3d
+SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
@@ -53,9 +54,10 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 
 gcode: $(GCODE_TARGETS)
 
+	echo $(GCODE_TARGETS)
 $(GCD_DIR)/%.gcode : $(INI_DIR)/%.ini
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
-	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF)
+	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_DIR)/$(CFG_FILE).ini
 	@$(SLIC3R_APP) --load $(INI_DIR)/$(CFG_FILE).ini -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing" $(DEF)
 
 arrange: default
