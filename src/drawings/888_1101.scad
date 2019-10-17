@@ -1,11 +1,10 @@
 draft = true;
-include <../parameters.scad>
-include <lib/servo.scad>
-use <lib/igus.scad>
-use <888_1015.scad>
-use <888_1020.scad>
-use <888_1029.scad>
-use <888_1022_without_desk.scad>
+include <../../parameters.scad>
+include <../lib/servo.scad>
+use <../lib/igus.scad>
+use <../888_1020.scad>
+use <../888_1029.scad>
+use <../888_1022_without_desk_lower_wall.scad>
 
 rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5
@@ -14,11 +13,9 @@ rotx = -0;
 roty = -10.5;
 //roty = 0;
 
-use <888_1015.scad>
-use <888_1020.scad>
-use <lib/servo.scad>
-use <lib/igus.scad>
-use <lib/motor.scad>
+use <../lib/servo.scad>
+use <../lib/igus.scad>
+use <../lib/motor.scad>
 
 
 function 888_1101_translation() = [rotor_head_width/2 - 17.5, 0, -height_666_1026];
