@@ -198,7 +198,7 @@ tyc = pozadovana_vyska / (sin(pozadovany_uhel));
 uhlopricka = pozadovana_vyska / (tan(pozadovany_uhel));
 strana_a = (uhlopricka*(cos(45)))/2;
 
-    translate([-strana_a/2 + main_pilon_position,0,strana_a/2])
+    %translate([-strana_a/2 + main_pilon_position,0,strana_a/2])
         union(){
                 rotate([-90 - pozadovany_uhel,0,-pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
@@ -213,16 +213,6 @@ strana_a = (uhlopricka*(cos(45)))/2;
                 rotate([-90 + pozadovany_uhel,0,-pozadovany_uhel])
                     cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
         }
-translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
-
-   rotate([180,0,0])
-   union(){
-        translate([0, pilon_pipe_base_front_y, pilon_pipe_base_front_z])
-            orientate([-pilon_pipe_base_front_x + pilon_pipe_head_front_x, -(pilon_pipe_base_front_y-pilon_pipe_head_front_y), height_of_vertical_tube-pilon_pipe_base_front_z],vref=[0,0,1], roll=0)
-                rotate([90,0,0])
-                    translate([0, 0, -20])
-                        cylinder(d = pilon_pipe_diameter, h = 500, $fn = draft? 20 : 60);
-   }
 
     //final difference
     }
@@ -239,7 +229,7 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
                     cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                 //pro rovnou horní hranu předního lemu
-                difference()
+                /*difference()
                 {
                     translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter, -width_of_engine_holder/2 - hull_wall_thickness])
                         cube([hull_wall_thickness, hull_y_size, width_of_engine_holder + 2* hull_wall_thickness]);
@@ -247,7 +237,7 @@ translate([-engine_holder_beam_depth+beam_patern*5.5, 0, 0])
                     // otvor pro prostup přívodů k motoru
                     translate([top_cover_division[1] - hull_wall_thickness*2, main_tube_outer_diameter, width_of_engine_holder/2 - 10])
                         cube([hull_wall_thickness*4, 400, 7]);
-                }
+                }*/
 
                 // lem pro výztuhu a slepení dílu A
                 difference(){
@@ -691,7 +681,6 @@ translate([0,0,-10])
 
 
 666_1025(draft);
-
 
 use <888_1000.scad>
 
