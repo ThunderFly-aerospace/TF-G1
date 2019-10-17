@@ -7,16 +7,18 @@ PLATE_DIMMENSIONS=130
 SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
 OPENSCAD_APP=openscad
-CURA_APP=CuraEngine
+SLIC3R_APP=slic3r-prusa3d
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
 IMAGES=$(patsubst $(SRC_DIR)/%.scad, $(IMG_DIR)/%.png, $(SOURCES))
-#GCODES=$(patsubst slicing/%.json, gcode/%.gcode, $(SOURCES))
-#GCODES=$(wildcard ./slicing/%.cfg)
-GCODES=$(wildcard $(SLICE_DIR)/*.cfg)
 
-all: default images
+SLICES=$(wildcard $(SLICE_DIR)/*.ini)
+STLFILES=$(wildcard $(STL_DIR)/*.stl)
+GCODESINI=$(patsubst $(SLICE_DIR)/*.ini, $(GCD_DIR)/%.gcode, $(SLICES))
+GCODESSTL=$(patsubst $(STL_DIR)/*.stl, $(GCD_DIR)/%.gcode, $(STLFILES))
+
+all: default images gcode
 
 calibration:
 	$(OPENSCAD_APP) -m make -o calibration.stl calibration.scad
@@ -32,13 +34,10 @@ images: $(IMAGES)
 $(IMG_DIR)/%.png: $(SRC_DIR)/%.scad
 	$(OPENSCAD_APP) -m make --render -o $@ $<
 
-gcode: $(GCODES)
-
-#$(GCD_DIR)/%.scf: $(SLICE_DIR)/%.json
-	echo $<
+gcode: $(GCODESINI) $(GCODESSTL)
+#$(GCD_DIR)/%.gcode: $(STL_DIR)/%.stl
 	$(eval CFG_FILE=$(basename $(notdir $<)))
-	echo $(CFG_FILE)
-	$(CURA_APP) slice -j utils/slicer/cura/fdmprinter.def.json -o $(GCD_DIR)/$(CFG_FILE).gcode -l $(STL_DIR)/$(CFG_FILE).stl
+	$(SLIC3R_APP) --load $< -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl
 
 arrange: default
 	 $(SIMARRANGE) -x $(PLATE_DIMMENSIONS) -y $(PLATE_DIMMENSIONS) $(ARRANGE_TARGETS)
