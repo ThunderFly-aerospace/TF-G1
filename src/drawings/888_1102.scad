@@ -5,6 +5,7 @@ stl = true;
 predni_podvozek = true;
 zadni_podvozek = true;
 limec = true;
+cover = true;
 pilon_mount = true;
 motor = true;
 
@@ -12,6 +13,7 @@ include <../../parameters.scad>
 use <../888_1004.scad>
 use <../888_1005.scad>
 use <../888_2009.scad>
+use <../888_1025.scad>
 use <../888_1026.scad>
 use <../888_1029.scad>
 use <../888_1030.scad>
@@ -46,6 +48,14 @@ module piston(shift = 32){
 difference(){
     union(){
 
+      if(cover){
+
+// Top cover
+        translate([-engine_holder_beam_depth - 6, 0, 0]) // musí to být posunuto asi o těch 6mm a nevím proč.
+          rotate([90,0,0])
+              if(stl){import("../../STL/888_1025.stl", convexity=4);}
+              else{888_1025();}
+      }
 
 // Nosnik
         translate([-engine_holder_beam_depth, 0, 0])

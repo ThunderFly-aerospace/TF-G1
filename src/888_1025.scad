@@ -82,7 +82,7 @@ module screw_top (position_number, draft){
 
 
 /////////////////////////////////////
-module 666_1025(draft = true){
+module 888_1025(draft = true){
 
     //UPPER SCREWS
 
@@ -142,10 +142,10 @@ union(){
                    cube ([ top_cover_division[1] + global_clearance, hull_y_size+10, width_of_engine_holder]);
 
             //for tube in back
-            translate ([hull_x_size-70,0,0])
+          /*  translate ([hull_x_size-70,0,0])
                 rotate ([0,90,0])
                     cylinder (h = 80, r =  main_tube_outer_diameter/2, $fn = draft ? 20 : 50);
-
+          */
             //for rotor pilon
             translate ([cover_pilon_position+2*hull_wall_thickness,-10,0])
                 rotate ([-90,0,0])
@@ -424,7 +424,7 @@ strana_a = (uhlopricka*(cos(45)))/2;
 
 
 
-module 666_1025_part_A(part_number, draft){
+module 888_1025_part_A(part_number, draft){
 
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
@@ -548,7 +548,7 @@ module 666_1025_part_A(part_number, draft){
 }
 
 
-module 666_1025_part_B(part_number, draft){
+module 888_1025_part_B(part_number, draft){
     beta = 90 - trailing_edge_angle(naca = hull_airfoil_thickness); // calculate the angle of trailing edge
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
 
@@ -680,7 +680,7 @@ translate([0,0,-10])
 */
 
 
-666_1025(draft);
+888_1025(draft);
 
 use <888_1000.scad>
 
