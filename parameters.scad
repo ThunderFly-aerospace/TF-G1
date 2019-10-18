@@ -1,5 +1,6 @@
 use <src/lib/vector.scad>
 
+
 global_clearance = 0.5;
 layer = 0.2;
 
