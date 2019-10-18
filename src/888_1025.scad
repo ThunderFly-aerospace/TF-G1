@@ -441,7 +441,7 @@ module 888_1025_part_A(part_number, draft){
             union(){
                 //základní dělení pro tisk
                 intersection(){
-                    666_1025(draft);
+                    888_1025(draft);
                     translate([previous_division + global_clearance/100,-20,0])
                         cube([part_lenght - global_clearance/100, 150*2, 150]);
                 }
@@ -496,7 +496,7 @@ module 888_1025_part_A(part_number, draft){
             union(){
                 //základní dělení pro tisk
                 intersection(){
-                    666_1025(draft);
+                    888_1025(draft);
                     translate([previous_division - global_clearance/100, -20,0])
                         cube([part_lenght - global_clearance/100, 150*2, 150]);
                 }
@@ -564,7 +564,7 @@ module 888_1025_part_B(part_number, draft){
             union(){
                 //základní dělení pro tisk
                 intersection(){
-                    666_1025(draft);
+                    888_1025(draft);
                     translate([previous_division + global_clearance/100,-20,-150])
                         cube([part_lenght - global_clearance/100, 150*2, 150]);
                 }
@@ -619,7 +619,7 @@ module 888_1025_part_B(part_number, draft){
             union(){
                 //základní dělení pro tisk
                 intersection(){
-                    666_1025(draft);
+                    888_1025(draft);
                     translate([previous_division - global_clearance/100, -20,0])
                         cube([part_lenght - global_clearance/100, 150*2, 150]);
                 }
@@ -672,10 +672,10 @@ module 888_1025_part_B(part_number, draft){
 
 /*
 
-666_1025_part_A(1, draft);
+888_1025_part_A(1, draft);
 
 translate([0,0,-10])
-666_1025_part_B(1, draft);
+888_1025_part_B(1, draft);
 
 */
 
