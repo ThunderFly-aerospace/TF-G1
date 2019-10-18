@@ -5,4 +5,5 @@ DEP_DIR=../../dep
 GCD_DIR=../../gcode/4printing
 INI_DIR=../../slicing/4printing
 GIT_ROOT=../..
+SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 include ../../utils/Makefile

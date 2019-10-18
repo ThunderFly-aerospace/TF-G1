@@ -7,7 +7,6 @@ OPENSCAD_APP=openscad
 SLIC3R_APP=slic3r-prusa3d
 #SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
 
-SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
 IMAGES=$(patsubst $(SRC_DIR)/%.scad, $(IMG_DIR)/%.png, $(SOURCES))
 
@@ -33,7 +32,7 @@ default: $(TARGETS)
 $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
-	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
+	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
