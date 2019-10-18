@@ -191,29 +191,6 @@ union(){
                                 cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                     }
 
-    //uchycení rotorové hlavy
-pozadovana_vyska = 70;
-pozadovany_uhel = 10;
-tyc = pozadovana_vyska / (sin(pozadovany_uhel));
-uhlopricka = pozadovana_vyska / (tan(pozadovany_uhel));
-strana_a = (uhlopricka*(cos(45)))/2;
-
-    %translate([-strana_a/2 + main_pilon_position,0,strana_a/2])
-        union(){
-                rotate([-90 - pozadovany_uhel,0,-pozadovany_uhel])
-                    cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-            translate([strana_a,0,0])
-                rotate([-90 - pozadovany_uhel,0,pozadovany_uhel])
-                   cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-
-            translate([strana_a,0,-strana_a])
-                rotate([-90 + pozadovany_uhel,0,pozadovany_uhel])
-                    cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-            translate([0,0,- strana_a])
-                rotate([-90 + pozadovany_uhel,0,-pozadovany_uhel])
-                    cylinder(h= tyc, r = main_tube_outer_diameter/4, $fn = 100);
-        }
-
     //final difference
     }
 
@@ -273,6 +250,9 @@ strana_a = (uhlopricka*(cos(45)))/2;
                         translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
+                        translate([top_cover_division[5], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
                         //výztuha uprostřed
                         difference(){
                             translate([0,0,-hull_wall_thickness])
@@ -290,9 +270,9 @@ strana_a = (uhlopricka*(cos(45)))/2;
                         //difference(){
                             union(){
                                 translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])
-                                    cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                                    cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
                                 translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])
-                                    cube([top_cover_division[4] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                                    cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
 
                                 translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
                                     rotate([-48,0,0])
