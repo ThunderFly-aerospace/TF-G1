@@ -128,5 +128,5 @@ drop_skin();
 
 
 
-use <./lib/naca4.scad>
+use <./lib/stdlib/naca4.scad>
 include <../parameters.scad>
