@@ -2,85 +2,85 @@ solid model
   facet normal -1 -0 0
     outer loop
       vertex 0 0 0
-      vertex 0 0 37
-      vertex 0 42 37
+      vertex 0 0 35
+      vertex 0 138 35
     endloop
   endfacet
   facet normal -0 0 -1
     outer loop
       vertex 0 0 0
-      vertex 0 42 0
-      vertex 136 42 0
+      vertex 0 138 0
+      vertex 40 138 0
     endloop
   endfacet
   facet normal -1 0 0
     outer loop
       vertex 0 0 0
-      vertex 0 42 37
-      vertex 0 42 0
+      vertex 0 138 35
+      vertex 0 138 0
     endloop
   endfacet
   facet normal 0 -1 -0
     outer loop
       vertex 0 0 0
-      vertex 136 0 0
-      vertex 136 0 37
+      vertex 40 0 0
+      vertex 40 0 35
     endloop
   endfacet
   facet normal 0 -1 0
     outer loop
       vertex 0 0 0
-      vertex 136 0 37
-      vertex 0 0 37
+      vertex 40 0 35
+      vertex 0 0 35
     endloop
   endfacet
   facet normal 0 0 -1
     outer loop
       vertex 0 0 0
-      vertex 136 42 0
-      vertex 136 0 0
+      vertex 40 138 0
+      vertex 40 0 0
     endloop
   endfacet
   facet normal 0 0 1
     outer loop
-      vertex 0 0 37
-      vertex 136 0 37
-      vertex 0 42 37
+      vertex 0 0 35
+      vertex 40 0 35
+      vertex 0 138 35
     endloop
   endfacet
   facet normal 0 1 0
     outer loop
-      vertex 0 42 0
-      vertex 0 42 37
-      vertex 136 42 0
+      vertex 0 138 0
+      vertex 0 138 35
+      vertex 40 138 0
     endloop
   endfacet
   facet normal -0 0 1
     outer loop
-      vertex 0 42 37
-      vertex 136 0 37
-      vertex 136 42 37
+      vertex 0 138 35
+      vertex 40 0 35
+      vertex 40 138 35
     endloop
   endfacet
   facet normal 0 1 -0
     outer loop
-      vertex 0 42 37
-      vertex 136 42 37
-      vertex 136 42 0
+      vertex 0 138 35
+      vertex 40 138 35
+      vertex 40 138 0
     endloop
   endfacet
   facet normal 1 0 0
     outer loop
-      vertex 136 0 0
-      vertex 136 42 0
-      vertex 136 0 37
+      vertex 40 0 0
+      vertex 40 138 0
+      vertex 40 0 35
     endloop
   endfacet
   facet normal 1 -0 0
     outer loop
-      vertex 136 0 37
-      vertex 136 42 0
-      vertex 136 42 37
+      vertex 40 0 35
+      vertex 40 138 0
+      vertex 40 138 35
     endloop
   endfacet
 endsolid model

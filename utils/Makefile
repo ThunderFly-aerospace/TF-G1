@@ -4,15 +4,18 @@ PLATE_DIMMENSIONS=130
 SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
 OPENSCAD_APP=openscad
-#SLIC3R_APP=slic3r-prusa3d
-SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
+SLIC3R_APP=slic3r-prusa3d
+#SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
 IMAGES=$(patsubst $(SRC_DIR)/%.scad, $(IMG_DIR)/%.png, $(SOURCES))
 
+#STL=$(wildcard $(INI_DIR)/*.ini)
+#GCODES=$(patsubst $(INI_DIR)/*.ini, $(GCD_DIR)/%.gcode, $(STL))
+
 STL=$(wildcard $(STL_DIR)/*.stl)
-GCODES=$(patsubst $(STL_DIR)/*.stl, $(GCD_DIR)/%.gcode, $(STL))
+GCODES=$(patsubst $(STL_DIR)/%.stl, $(GCD_DIR)/%.gcode, $(STL))
 
 RED=" \e[91m "
 GRN=" \e[32m "
@@ -25,7 +28,6 @@ calibration:
 	$(OPENSCAD_APP) -m make -o calibration.stl calibration.scad
 
 default: $(TARGETS)
-
 $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF)
@@ -38,7 +40,7 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 
-#include $(wildcard $(DEP_DIR)/*.deps)
+#-include $(wildcard $(DEP_DIR)/*.deps)
 
 
 images: $(IMAGES)
@@ -52,13 +54,23 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@rm -f tmp.scad
 
 
-gcode: $(GCODE_TARGETS)
+gcode: $(GCODES)
 
-	echo $(GCODE_TARGETS)
-$(GCD_DIR)/%.gcode : $(INI_DIR)/%.ini
+$(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
+	@$(eval INI_FILE=$(INI_DIR)/$(CFG_FILE).ini)
+	echo $(INI_FILE)
+#cat $(INI_FILE)
+
+#	test ! -f $(INI_FILE) || 
+#	INI_FILE=$(GIT_ROOT)/slicing/generic/basic_part.ini
 	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_DIR)/$(CFG_FILE).ini
-	@$(SLIC3R_APP) --load $(INI_DIR)/$(CFG_FILE).ini -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing" $(DEF)
+	$(SLIC3R_APP) --load $(INI_FILE) -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing" $(DEF)
+
+
+gcode_clean:
+	rm -f $(GCD_DIR)/*.gcode
+
 
 arrange: default
 	 $(SIMARRANGE) -x $(PLATE_DIMMENSIONS) -y $(PLATE_DIMMENSIONS) $(ARRANGE_TARGETS)
