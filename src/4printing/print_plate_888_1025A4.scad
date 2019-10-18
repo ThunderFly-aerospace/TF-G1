@@ -1,8 +1,8 @@
 include <../../parameters.scad>
 use <../888_1025.scad>
 
-draft = true;
+draft = false;
 
-translate([150/4,150/2,0])
-	rotate([90,0,45])
+translate([0,0,-maximum_printable_size*2])
+	rotate([0,-90,0])
 		888_1025_part_A(4,draft);

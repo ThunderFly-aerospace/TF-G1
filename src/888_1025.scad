@@ -630,10 +630,10 @@ module 888_1025_part_B(part_number, draft){
                         drop_skin(draft);
                         union(){
                             //čtverec pro zámek horní
-                            translate([division_position - hull_wall_thickness, main_tube_outer_diameter, -lock_width/2])
+                            translate([division_position - hull_wall_thickness, main_tube_outer_diameter, 0])
                                     cube([lock_length, hull_y_size, lock_width/2]);
                             //čtverec pro zámek Z-
-                            translate([division_position - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + 3*hull_wall_thickness, -main_tube_outer_diameter - hull_z_size ])
+                            translate([division_position - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + 3*hull_wall_thickness, 0 ])
                                     cube([lock_length, lock_width, hull_z_size]);
                         //union
                         }
