@@ -684,5 +684,5 @@ translate([0,0,-10])
 
 use <888_1000.scad>
 
-use <./lib/naca4.scad>
+use <./lib/stdlib/naca4.scad>
 include <../parameters.scad>

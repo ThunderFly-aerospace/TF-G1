@@ -3,7 +3,7 @@ DOC_HEIGHT = 50;
 
 include <./lib/dimlines.scad>
 include <../parameters.scad>
-use <./lib/naca4.scad>
+use <./lib/stdlib/naca4.scad>
 
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
@@ -131,7 +131,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                 //wire hole
                 difference() {
                     cube([tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_wire_hole_length * 2, tail_servo_wire_hole_width, tail_servo_wire_hole_width], center = true);
-                    
+
                     //TODO: cutter is not dynamic
                     translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, 0, tail_servo_height / 2 + tail_servo_z_offset + 10])
                         cube([tail_servo_length + Rudder_infill_wall_thickness * 2, Rudder_depth * 2, tail_servo_height + Rudder_infill_wall_thickness * 2], center = true);
@@ -215,7 +215,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
 
             cube([tail_tube_mount_length - 11, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2 - 2, tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2 + 2], center = true);
         }
-        
+
     //------------------------------------------------------------
     }
 }
@@ -225,7 +225,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
         //Main Wall-------------------------------------------------
         airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_height - tail_bottom_height - Rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
 
-        //Removing material----------------------------------------- 
+        //Removing material-----------------------------------------
 
         //Holes for rudder shaft------------------------------------
         translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, - 1])
@@ -291,11 +291,11 @@ module 666_1028_tube_mount(draft) {
             rotate([0, 90, 0])
                 cylinder(d = tube_for_undercarriage_outer_diameter + Rudder_wall_thickness * 2, h = tail_tube_mount_length, center = true);
         }
-        
+
         //tube hole
         rotate([0, 90, 0])
             cylinder(d = tube_for_undercarriage_outer_diameter, h = tail_tube_mount_length + 2, center = true);
-        
+
         //tube mount screws
         translate([tail_tube_mount_screws_x_position, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
             rotate([90, 0, 0])
@@ -309,7 +309,7 @@ module 666_1028_tube_mount(draft) {
         translate([- tail_tube_mount_screws_x_position, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
             rotate([90, 0, 0])
                 cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = 100);
-        
+
         //wings cut
         translate([0, (Rudder_depth + tail_tube_mount_wings_thickness) / 2, (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 + Rudder_infill_wall_thickness])
             cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
@@ -334,7 +334,7 @@ module 666_1028_rudder() {
                 union() {
                     translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
                         cylinder(d = Rudder_shaft_outside_diameter, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
-                    
+
                     // material for holes for servo arm
                     translate([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2 + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20])
                         cube([14, Rudder_depth, 14], center = true);
@@ -348,7 +348,7 @@ module 666_1028_rudder() {
         }
         translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
             cylinder(d = Rudder_shaft_diameter, h = Rudder_height * 2, $fn = draft ? 10 : 50, center = true);
-        
+
         //páka pro táhlo
         height = 10;
         lenght = 11;
