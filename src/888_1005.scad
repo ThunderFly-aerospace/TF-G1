@@ -1,5 +1,5 @@
 include <../parameters.scad>
-use <./lib/naca4.scad>
+use <./lib/stdlib/naca4.scad>
 //use <666_1025.scad>
 use <888_1000.scad>
 

@@ -43,7 +43,7 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@echo $(DEF)
 
-#-include $(wildcard $(DEP_DIR)/*.deps)
+-include $(wildcard $(DEP_DIR)/*.deps)
 
 
 images: $(IMAGES)
