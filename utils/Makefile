@@ -24,6 +24,7 @@ DEF=" \e[39m "
 
 
 all: default images gcode
+slice: default images
 
 calibration:
 	$(OPENSCAD_APP) -m make -o calibration.stl calibration.scad
@@ -63,8 +64,11 @@ gcode: $(GCODES)
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
 	@$(eval INI_FILE=$(INI_DIR)/$(CFG_FILE).ini)
-	echo $(INI_FILE)
-#cat $(INI_FILE)
+	@echo $(INI_FILE)
+	@if [ ! -f $(INI_FILE) ]; then\
+		$(eval INI_FILE=$(GIT_DIR)/slicing/generic/basic_part.ini) echo "Zmeneno";\
+	fi
+	@echo "$(INI_FILE)"
 
 #	test ! -f $(INI_FILE) || 
 #	INI_FILE=$(GIT_ROOT)/slicing/generic/basic_part.ini
