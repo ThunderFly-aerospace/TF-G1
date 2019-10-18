@@ -19,10 +19,12 @@ GCODES=$(patsubst $(STL_DIR)/%.stl, $(GCD_DIR)/%.gcode, $(STL))
 
 RED=" \e[91m "
 GRN=" \e[32m "
+YEL=" \e[33m "
 DEF=" \e[39m "
 
 
 all: default images gcode
+slice: default images
 
 calibration:
 	$(OPENSCAD_APP) -m make -o calibration.stl calibration.scad
@@ -30,8 +32,8 @@ calibration:
 default: $(TARGETS)
 $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
-	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF)
-	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< || echo $(RED) "Chyba v renderovani" $(DEF)
+	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
+	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
@@ -39,8 +41,9 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	$(STLSORT) $@ || :
 	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
+	@echo $(DEF)
 
-#-include $(wildcard $(DEP_DIR)/*.deps)
+-include $(wildcard $(DEP_DIR)/*.deps)
 
 
 images: $(IMAGES)
@@ -49,9 +52,11 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Create temporary file for fast image rendering.
 	@-echo "import(\"$<\");" > tmp.scad
 	@# Render PNG image from temporary file.
+	@echo $(YEL)
 	$(OPENSCAD_APP) -o $@ tmp.scad
 	@# Remove temporary file
 	@rm -f tmp.scad
+	@echo $(DEF)
 
 
 gcode: $(GCODES)
@@ -59,13 +64,16 @@ gcode: $(GCODES)
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
 	@$(eval INI_FILE=$(INI_DIR)/$(CFG_FILE).ini)
-	echo $(INI_FILE)
-#cat $(INI_FILE)
+	@echo $(INI_FILE)
+	@if [ ! -f $(INI_FILE) ]; then\
+		$(eval INI_FILE=$(GIT_DIR)/slicing/generic/basic_part.ini) echo "Zmeneno";\
+	fi
+	@echo "$(INI_FILE)"
 
 #	test ! -f $(INI_FILE) || 
 #	INI_FILE=$(GIT_ROOT)/slicing/generic/basic_part.ini
-	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_DIR)/$(CFG_FILE).ini
-	$(SLIC3R_APP) --load $(INI_FILE) -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing" $(DEF)
+	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_DIR)/$(CFG_FILE).ini $(YEL)
+	$(SLIC3R_APP) --load $(INI_FILE) -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl && $(DEF) || echo $(RED) "Error in slicing" $(DEF)
 
 
 gcode_clean:
