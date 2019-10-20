@@ -320,17 +320,17 @@ module 666_1028_tube_mount(draft) {
             intersection() {
                 //main body
                 translate([- tail_tube_mount_length / 2, 0, - tail_tube_mount_height / 2])
-                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_tube_mount_height, open = false);
+                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 200, h = tail_tube_mount_height, open = false);
                 cube([tail_tube_mount_length, Rudder_depth * 2, tail_tube_mount_height], center = true);
             }
             //tube wall
             rotate([0, 90, 0])
-                cylinder(d = tube_for_undercarriage_outer_diameter + Rudder_wall_thickness * 2, h = tail_tube_mount_length, center = true);
+                cylinder(d = tube_for_undercarriage_outer_diameter + Rudder_wall_thickness * 2, h = tail_tube_mount_length, center = true, $fn = draft ? 10 : 50);
         }
 
         //tube hole
         rotate([0, 90, 0])
-            cylinder(d = tube_for_undercarriage_outer_diameter, h = tail_tube_mount_length + 2, center = true);
+            cylinder(d = tube_for_undercarriage_outer_diameter, h = tail_tube_mount_length + 2, center = true, $fn = draft ? 10 : 50);
 
         //tube mount screws
         translate([tail_tube_mount_screws_x_position, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
@@ -358,7 +358,7 @@ module 666_1028_tube_mount(draft) {
     }
 }
 
-module 666_1028_rudder() {
+module 666_1028_rudder(draft) {
     difference() {
         union() {
             intersection() {
