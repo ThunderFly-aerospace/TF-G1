@@ -238,7 +238,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
     
             //Adding material inside rudder-----------------------------
             intersection(){
-                airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_height - tail_bottom_height - Rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
+                airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_height - tail_bottom_height - Rudder_height, open = false);
                 
                     union(){
                         //Ribs------------------------------------------------------
