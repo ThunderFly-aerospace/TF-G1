@@ -367,8 +367,7 @@ tail_support_x_position_1 = 20;                     // pozice prvni karbonove ty
 tail_support_x_position_2 = 80;                     // pozice druhe karbonove tyce
 tail_A_shape_screw_y_pisition = 20;                 // pozice der na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na sroub (uchyceni dvou smerovek)
-tail_A_shape_screw_x_position_2 = 55;               // pozice druhe diry na sroub (uchyceni dvou smerovek)
-tail_A_shape_screw_x_position_3 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_x_position_2 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
 
 tail_servo_z_offset = - 5;                          // posunuti serva vuci uchyceni na trubku (osa Z);
 tail_servo_length = 32;                             // velikost otvoru pro servo (delka)
