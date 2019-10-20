@@ -8,6 +8,9 @@ use <./lib/stdlib/naca4.scad>
 DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
+
+Rudder_shaft_outside_diameter = tail_length * surface_distance(x = Rudder_shaft_x_position / tail_length, naca = 0009, open = false) * 2;
+
 draft = true;
 
 // side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
@@ -42,7 +45,7 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
                             }
 
                     //Material for rudder shaft------------------------------------
-                    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, tail_bottom_height / 2 + 1])
+                    translate([Rudder_shaft_x_position, 0, tail_bottom_height / 2 + 1])
                         cube([Rudder_shaft_diameter + 10, tail_depth, tail_bottom_height + 2], center = true);
 
                  }
@@ -52,7 +55,7 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
     //Removing material-----------------------------------------
 
     //Holes for rudder shaft------------------------------------
-    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, 1])
+    translate([Rudder_shaft_x_position, 0, 1])
         cylinder(d = Rudder_shaft_diameter, h = tail_bottom_height + 2, $fn = draft ? 10 : 50);
 
 
@@ -103,15 +106,18 @@ module 666_1028_body_middle(side_choose = 1, draft) {
         //Removing material-----------------------------------------
 
         //Hole for rudder-------------------------------------------
-        translate([tail_length - Rudder_length - Rudder_gap_width, - tail_depth / 2, - 1])
+        translate([Rudder_shaft_x_position, - tail_depth / 2, - 1])
             cube([Rudder_length + Rudder_gap_width + 5, tail_depth, Rudder_height + 2]);
+            
+        translate([Rudder_shaft_x_position, 0, Rudder_height/ 2])   
+            cylinder(d = Rudder_shaft_outside_diameter + Rudder_gap_width + global_clearance, h = Rudder_height + 2, $fn = draft ? 10 : 50, center = true);
 
         //Removing material for mount and servo---------------------
         translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
             union() {
                 //hole for servo
                 //TODO: Y axis not dynamic
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, tail_servo_wall_and_screws_y_position, - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, side_choose *  tail_servo_wall_and_screws_y_position, - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
                     cube([tail_servo_length_inside, Rudder_depth * 2, tail_servo_height], center = true);
 
                 //servo mount wall
@@ -120,11 +126,11 @@ module 666_1028_body_middle(side_choose = 1, draft) {
 
                 //servo screw holes
                 //TODO: Y axis not dynamic
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length + tail_servo_screws_gap) / 2, tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length + tail_servo_screws_gap) / 2, side_choose * tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = draft ? 10 : 50, center = true);
 
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length - tail_servo_screws_gap) / 2, tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length - tail_servo_screws_gap) / 2, side_choose *  tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = draft ? 10 : 50, center = true);
 
@@ -254,7 +260,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
                                 
 
                         //Material for rudder shaft------------------------------------
-                        translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
+                        translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
                             cube([Rudder_shaft_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
 
                         //Material for A shape screws----------------------------------
@@ -270,7 +276,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
         //Removing material-----------------------------------------
 
         //Holes for rudder shaft------------------------------------
-        translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, - 1])
+        translate([Rudder_shaft_x_position, 0, - 1])
             cylinder(d = Rudder_shaft_diameter, h = tail_height - tail_bottom_height - Rudder_height + 2, $fn = draft ? 10 : 50);
 
         //Cut to make shape A angle---------------------------------
@@ -362,21 +368,21 @@ module 666_1028_rudder() {
                         cube([tail_length - Rudder_length - Rudder_gap_width, Rudder_depth * 2, tail_height + 2]);
                 }
                 union() {
-                    translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
+                    translate([Rudder_shaft_x_position, 0, Rudder_height / 2])
                         cylinder(d = Rudder_shaft_outside_diameter, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
 
                     // material for holes for servo arm
-                    translate([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2 + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20])
+                    translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20])
                         cube([14, Rudder_depth, 14], center = true);
                 }
             }
             difference() {
                 hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
                 translate([0, - Rudder_depth, - 1])
-                    cube([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2, Rudder_depth * 2, tail_height + 2]);
+                    cube([Rudder_shaft_x_position, Rudder_depth * 2, tail_height + 2]);
             }
         }
-        translate([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, 0, Rudder_height / 2])
+        translate([Rudder_shaft_x_position, 0, Rudder_height / 2])
             cylinder(d = Rudder_shaft_diameter, h = Rudder_height * 2, $fn = draft ? 10 : 50, center = true);
 
         //páka pro táhlo
@@ -396,7 +402,7 @@ module 666_1028_rudder() {
         screw_xposition = (lenght/diagonal)*(screws_distance/2);
         screw_yposition = (height/diagonal)*(screws_distance/2);
 
-        translate([tail_length - Rudder_length + Rudder_shaft_outside_diameter / 2 + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20]){
+        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20]){
             translate([screw_xposition, 0, screw_yposition])
                 rotate([90,0,0])
                     cylinder(h = 100, d = 2.3, $fn = 10, center = true);
@@ -416,16 +422,16 @@ module 666_1028_rudder() {
     }
 }
 
-666_1028_body_bottom();
-
+//666_1028_body_bottom();
+//
 translate([0, 0, tail_bottom_height])
     666_1028_body_middle();
 
 translate([0, 0, tail_bottom_height + global_clearance])
     666_1028_rudder();
-
-translate([tail_tube_mount_length / 2, 0, tail_pipe_z_position])
-    666_1028_tube_mount();
-
-translate([0, 0, tail_bottom_height + Rudder_height])
-    666_1028_body_top();
+//
+//translate([tail_tube_mount_length / 2, 0, tail_pipe_z_position])
+//    666_1028_tube_mount();
+//
+//translate([0, 0, tail_bottom_height + Rudder_height])
+//    666_1028_body_top();

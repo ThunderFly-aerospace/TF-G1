@@ -346,7 +346,6 @@ Rudder_wall_thickness = hull_wall_thickness;        //tloustka povrchove steny s
 Rudder_infill_wall_thickness = 0.64;                //tloustka vnitrnich sten smerovky
 Rudder_gap_width = 2*hull_wall_thickness;           //šířka mezery mezi směrovkou a ocasní plochou
 Rudder_shaft_diameter = 2.6;                        //otočné uchycení směrovky - průměr 2 mm
-Rudder_shaft_outside_diameter = 12;                 //prumer zakonceni smerovky
 Rudder_arm_x_offset = 5.5;                          //odsazeni paky servo od osy smerovky
 
 tail_depth = 50;                                    // hloubka pro vnitrni casti smerovky
@@ -360,6 +359,8 @@ tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_posit
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
 tail_front_mount_edge_cut_x_position = 5;           // pozice seriznuti predni hrany (osa X)
+
+Rudder_shaft_x_position = tail_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
 
 tail_shape_A_cutter_y_position = 9.2;               // pozice rezace tvaru A
 tail_angle = 90;                                    //tvar A vzájemný náklon
