@@ -144,6 +144,10 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                 //wings
                 translate([- 2 - Rudder_infill_wall_thickness / 2, 0, 0])
                     cube([tail_tube_mount_length + 2, tail_tube_mount_wings_thickness + global_clearance * 2, tail_tube_mount_height + global_clearance * 2], center = true);
+                
+                //front side cut
+                translate([- tail_tube_mount_length + tail_front_mount_edge_cut_x_position, 0, 0])
+                    cube([tail_tube_mount_length, Rudder_depth * 2, tail_tube_mount_height + global_clearance * 2], center = true);
 
                 //tube mount screws
                 translate([tail_tube_mount_screws_x_position, side_choose * (Rudder_depth + 1) , tail_tube_mount_screws_z_position])
@@ -209,11 +213,11 @@ module 666_1028_body_middle(side_choose = 1, draft) {
 
         // front mount support
         // (not dynamic at all)
-    translate([tail_tube_mount_length / 2 + 3, 0, tail_pipe_z_position - tail_bottom_height])
+    translate([tail_tube_mount_length / 2 + 2, 0, tail_pipe_z_position - tail_bottom_height])
         difference() {
-            cube([tail_tube_mount_length - 10, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2,tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2], center = true);
+            cube([tail_tube_mount_length - 7, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2,tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2], center = true);
 
-            cube([tail_tube_mount_length - 11, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2 - 2, tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2 + 2], center = true);
+            cube([tail_tube_mount_length - 8, tail_tube_mount_wings_thickness + (global_clearance + tail_tube_mount_screws_wall_thickness) * 2 - 2, tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2 + 2], center = true);
         }
 
     //------------------------------------------------------------
@@ -414,8 +418,8 @@ module 666_1028_rudder() {
 
 666_1028_body_bottom();
 
-//translate([0, 0, tail_bottom_height])
-    //666_1028_body_middle();
+translate([0, 0, tail_bottom_height])
+    666_1028_body_middle();
 
 translate([0, 0, tail_bottom_height + global_clearance])
     666_1028_rudder();
