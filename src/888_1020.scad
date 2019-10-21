@@ -45,7 +45,7 @@ module 888_1020(draft = true){
     hall_width = 25+2;
     hall_thickness = 3;
 
-    rotor_ax_neck_diameter = 14;
+    rotor_ax_neck_diameter = 14.6;
 
 
     // 666_1236
@@ -250,6 +250,13 @@ module 888_1020(draft = true){
         //otvor pro soustružený krček
         translate([0, 0, -brit_height])
             cylinder(d = rotor_ax_neck_diameter, h = 2*brit_height, $fn = draft ? 20 : 80);
+
+        //sražení hran otvoru
+            cylinder(d1 = rotor_ax_neck_diameter + global_clearance, d2 = rotor_ax_neck_diameter, h = global_clearance, $fn = draft ? 20 : 80);
+
+        translate([0, 0, wall_thickness - global_clearance])
+            cylinder(d1 = rotor_ax_neck_diameter, d2 = rotor_ax_neck_diameter + global_clearance, h = global_clearance, $fn = draft ? 20 : 80);
+
 
          //žebra
          for(i=[45,135,225,315]){
