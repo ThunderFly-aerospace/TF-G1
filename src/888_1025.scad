@@ -12,9 +12,7 @@ $fa = 10;
 /*
 TODO:
 
-Přední díl obsahuje převis ve směru vybrání pro držák motoru. (U horního zámku)
 Otvory pro šrouby v předním dílu jsou oválné, protože nejsou kolmo k rovině modelu.
-
 
 */
 
@@ -105,12 +103,12 @@ union(){
                     }
 
                     intersection(){
-                    // 666_1032 part holder - limit the size to maximum printable size by intersection with cube
+                    // kryt pylonu - limit the size to maximum printable size by intersection with cube
                     translate([cover_pilon_position,0,0])
                         rotate ([-90,0,0])
                             translate ([hull_wall_thickness,0,0])
                                 resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                                    airfoil(naca = 0030, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
+                                    airfoil(naca = 0060, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
 
                     translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
                             cube ([hull_x_size, hull_y_size,hull_z_size]);
@@ -138,8 +136,12 @@ union(){
         }
 
             //engine holder
-            translate ([-global_clearance,-1 - main_tube_outer_diameter/2 - hull_wall_thickness, - width_of_engine_holder/2])
-                   cube ([ top_cover_division[1] + global_clearance, hull_y_size+10, width_of_engine_holder]);
+            translate ([-global_clearance,0 , - width_of_engine_holder/2])
+                cube ([ top_cover_division[1] + global_clearance, hull_y_size/4, width_of_engine_holder]);
+
+            translate ([0,hull_y_size/4 ,0])
+                rotate ([0,90,0])
+                   cylinder(d = width_of_engine_holder, h = width_of_engine_holder);
 
             //for tube in back
           /*  translate ([hull_x_size-70,0,0])
@@ -150,7 +152,7 @@ union(){
             translate ([cover_pilon_position+2*hull_wall_thickness,-10,0])
                 rotate ([-90,0,0])
                     resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                        airfoil(naca = 0030, L = 170, N = draft ? 30 : 100, h = 200, open = false);
+                        airfoil(naca = 0060, L = 170, N = draft ? 30 : 100, h = 200, open = false);
 
             //šrouby
 
@@ -457,7 +459,7 @@ module 888_1025_part_A(part_number, draft){
                             translate([division_position - lock_length - global_clearance/2 + hull_wall_thickness, main_tube_outer_diameter,- global_clearance/2])
                                 cube([lock_length + global_clearance/2, hull_y_size, lock_width/2 + global_clearance]);
                             //čtverec pro zámek Z+
-                            translate([division_position - lock_length - global_clearance/2 + hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness - global_clearance/2 + 3*hull_wall_thickness,hull_z_size/2 - main_tube_outer_diameter])
+                            translate([division_position - lock_length - global_clearance/2 + hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness - global_clearance/2 + 3*hull_wall_thickness, 0])
                                 cube([lock_length + global_clearance/2, lock_width + global_clearance, hull_z_size]);
                         //union
                         }
