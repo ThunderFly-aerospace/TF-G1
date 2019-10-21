@@ -3,7 +3,7 @@ use <../666_1028.scad>
 
 draft = false;
 
-666_1028_body_middle(side_choose = -1, draft = draft);
+666_1028_body_middle(side_choose = 1, draft = draft);
 
 // plochy pro zlepšení adheze k podložce při tisku
 //translate ([120,-75,0])
