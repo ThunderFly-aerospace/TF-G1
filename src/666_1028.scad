@@ -497,19 +497,19 @@ module 666_1028_rudder(draft) {
 
 //difference() {
 //    union(){
-666_1028_body_bottom();
+//666_1028_body_bottom();
 
 translate([0, 0, tail_bottom_height])
     666_1028_body_middle();
 
-translate([0, 0, tail_bottom_height + global_clearance])
-    666_1028_rudder();
-
-translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-    666_1028_tube_mount();
-
-translate([0, 0, tail_bottom_height + Rudder_height])
-    666_1028_body_top();
+//translate([0, 0, tail_bottom_height + global_clearance])
+//    666_1028_rudder();
+//
+//translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
+//    666_1028_tube_mount();
+//
+//translate([0, 0, tail_bottom_height + Rudder_height])
+//    666_1028_body_top();
 //    }
 //    cube([500,20,500]);
 //}
