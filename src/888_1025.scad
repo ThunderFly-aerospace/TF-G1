@@ -107,8 +107,8 @@ union(){
                     translate([cover_pilon_position,0,0])
                         rotate ([-90,0,0])
                             translate ([hull_wall_thickness,0,0])
-                                resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*0030/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                                    airfoil(naca = 0060, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
+                                resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
+                                    airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
 
                     translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
                             cube ([hull_x_size, hull_y_size,hull_z_size]);
@@ -151,8 +151,8 @@ union(){
             //for rotor pilon
             translate ([cover_pilon_position+2*hull_wall_thickness,-10,0])
                 rotate ([-90,0,0])
-                    resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                        airfoil(naca = 0060, L = 170, N = draft ? 30 : 100, h = 200, open = false);
+                    resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
+                        airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = 200, open = false);
 
             //šrouby
 
@@ -282,10 +282,10 @@ union(){
                             }
                     }
                     //pro lepení - odstranění kusu lemů  z díry pro horní otvor
-                    translate ([180+2*hull_wall_thickness,-10,0])
+                    translate ([cover_pilon_position + 2*hull_wall_thickness,-10,0])
                         rotate ([-90,0,0])
-                            resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*0030/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                               airfoil(naca = 0030, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+                            resize([170 - 2*hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
+                               airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 50 : 100, h = 200, open = false);
 
                    // odstranění výztuhy v místě držáku předního motoru
                    translate ([-global_clearance,0 , - width_of_engine_holder/2])
