@@ -139,7 +139,7 @@ if(predni_podvozek)
     rotate([0, 90, 0])
         cylinder(d = 20, h = length_of_main_tube); */
 
-
+/*
 %translate([250, tail_pipe_distance/2, 0])
     rotate([0, 90, 0])
         cylinder(d = 10, h = 500);
@@ -147,7 +147,7 @@ if(predni_podvozek)
 %translate([250, -tail_pipe_distance/2, 0])
     rotate([0, 90, 0])
         cylinder(d = 10, h = 500);
-
+*/
 
 if(zadni_podvozek)translate([beam_patern*9.5, 0, -beam_thickness_below]){
 
@@ -168,13 +168,13 @@ if(zadni_podvozek)translate([beam_patern*9.5, 0, -beam_thickness_below]){
     echo(str("Delka predniho ramene je ", mod([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
     echo(str("Delka  zadniho ramene je ", mod([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
     //
-    color("blue")
+    /*color("blue")
         translate([ -2017_pipe_mount_offset[0], -2017_bearing_mount_offset[1] - chassis_pipe_wheelbase, -ch + 2017_pipe_mount_offset[2]])
             rotate([0, 0, 0])
             orientate([-chassis_pipe_baselength_f, chassis_wheelbase, chassis_height], [0, 0, 1])
                 cylinder(d = 10, h = 500);
 
-
+                */
 
     ////////////////////////
     color("red")
@@ -258,13 +258,13 @@ if(zadni_podvozek)translate([beam_patern*9.5, 0, -beam_thickness_below]){
             888_2017(right = 0);
 
 
-    translate([0, -chassis_suspension_basewidth/2, -50])
+  /*  translate([0, -chassis_suspension_basewidth/2, -50])
         sphere(d = 10);
     translate(-chassis_top_bearing_position_r)
         sphere(d = 10);
     translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
         sphere(d = 10);
-
+*/
 
     //
     //
