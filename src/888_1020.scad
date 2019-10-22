@@ -12,7 +12,7 @@ module kardan_center_part_model()
     kardan_clearance=rotor_head_cardan_clearance;
 
     outer_x = inner_x + 2*brit_width;
-    outer_y = inner_y + 2*brit_width+2*kardan_clearance;
+    outer_y = inner_y + 2*brit_width+kardan_clearance;
     outer_height = wall_height + plate_thickness +10;
 
     translate([0,0,-plate_thickness-wall_height/2])
@@ -65,11 +65,16 @@ module 888_1020(draft = true){
     servo_join_x = 45; // vzdalenost kloubku od osy rotoru
     servo_join_size = 10;
     servo_joint_z = 10; // jak moc nizko bude kloubek
+    servo_joint_d =M4_screw_diameter;
+    servo_joint_nut_d=M4_nut_diameter;
+    servo_joint_nut_h=M4_nut_height;
+    servo_join_nut_pocket=M4_nut_pocket;
+    servo_join_nut_pocket_h=M3_nut_height;
 
     wall_thickness=4;
 
     //brit_height=(rotor_head_wall_height/2+rotor_head_plate_thickness+(rotor_head_bearing_width/2+rotor_head_brit_width+rotor_head_cardan_clearance)*tan(rotor_head_pitch_stop))*cos(rotor_head_pitch_stop);
-    brit_height=rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation);
+    brit_height=rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+rotor_head_kardan_prestress;
 
     plate_size_y = rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*wall_thickness;
     plate_size_x = plate_overlap + motor_distance + motor_diameter/2;
@@ -124,7 +129,7 @@ module 888_1020(draft = true){
 
             translate([servo_join_x, servo_join_y/2, servo_joint_z ])
                 rotate([-90, 0, 0])
-                    cylinder(d2 = M4_screw_diameter+1, d1 = M4_screw_diameter+5.5, h=1.5, $fn = 50);
+                    cylinder(d2 = servo_joint_d+1, d1 = servo_joint_d+5.5, h=1.5, $fn = 50);
 
 
     // Vymezovaci podlozka pod motor, misto hlinikove 6.5mm silne podlozky
@@ -176,26 +181,26 @@ module 888_1020(draft = true){
         // diry pro pripojeni tahla k servu
         translate([servo_join_x, -servo_join_y/2 + 20, servo_joint_z])
             rotate([90, 0, 0])
-                cylinder(d = M4_screw_diameter, h=50, $fn = draft ? 10 : 30);
+                cylinder(d = servo_joint_d, h=50, $fn = draft ? 10 : 30);
 
         translate([servo_join_x, -servo_join_y/2 + 5, servo_joint_z ])
             rotate([-90, 0, 0])
-                cylinder(d = M4_nut_diameter, h=M4_nut_height, $fn = 6);
+                cylinder(d = servo_joint_nut_d, h=servo_joint_nut_h, $fn = 6);
 
 
-        translate([servo_join_x, -servo_join_y/2 + 5,  -M4_nut_pocket/2 + servo_joint_z])
-            cube([plate_size_z*5, M3_nut_height, M4_nut_pocket]);
+        translate([servo_join_x, -servo_join_y/2 + 5,  -servo_join_nut_pocket/2 + servo_joint_z])
+            cube([plate_size_z*5, servo_join_nut_pocket_h, servo_join_nut_pocket]);
 
         translate([servo_join_x, servo_join_y/2 - 20, servo_joint_z])
             rotate([-90, 0, 0])
-                cylinder(d = M4_screw_diameter, h=50, $fn = draft ? 10 : 30);
+                cylinder(d = servo_joint_d, h=50, $fn = draft ? 10 : 30);
 
-        translate([servo_join_x, servo_join_y/2 - M4_nut_height - 5, servo_joint_z])
+        translate([servo_join_x, servo_join_y/2 - servo_joint_nut_h - 5, servo_joint_z])
             rotate([-90, 0, 0])
-                cylinder(d = M4_nut_diameter, h=M4_nut_height, $fn = 6);
+                cylinder(d = servo_joint_nut_d, h=servo_joint_nut_h, $fn = 6);
 
-        translate([servo_join_x, servo_join_y/2 - M3_nut_height - 5, -M4_nut_pocket/2 + servo_joint_z])
-            cube([plate_size_z*5, M3_nut_height, M4_nut_pocket]);
+        translate([servo_join_x, servo_join_y/2 - servo_join_nut_pocket_h - 5, -servo_join_nut_pocket/2 + servo_joint_z])
+            cube([plate_size_z*5, servo_join_nut_pocket_h, servo_join_nut_pocket]);
 
         //Otvor na hallovu sondu
         translate([hall_distance - hall_length/2 + hall_length_offset, -hall_width/2, -global_clearance/2])
@@ -235,7 +240,7 @@ module 888_1020(draft = true){
                     0,
                     15+plate_size_z])
                 cube([(zebra_x+rotor_ax_neck_diameter/2-xdst),
-                    rotor_head_kardan_inner_y+2*rotor_head_brit_width+2*rotor_head_cardan_clearance,
+                    rotor_head_kardan_inner_y+2*rotor_head_brit_width+rotor_head_cardan_clearance,
                     30], center=true);
 
 
