@@ -493,8 +493,8 @@ module 666_1028_rudder(side_choose = 1, draft) {
 //    union(){
 //666_1028_body_bottom();
 //
-//translate([0, 0, tail_bottom_height])
-//    666_1028_body_middle();
+translate([0, 0, tail_bottom_height])
+    666_1028_body_middle();
 
 translate([0, 0, tail_bottom_height + global_clearance])
     666_1028_rudder();
