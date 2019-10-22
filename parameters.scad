@@ -384,6 +384,12 @@ tail_servo_wall_y_offset = 2;                       // vyoseni uchyceni pro serv
 tail_servo_wire_hole_length = 8;                    // delka vykusu pro draty
 tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
 tail_servo_wall_and_screws_y_position = 5;          // pozice steny a sroubu pro uchyceni serva (osa Y)
+tail_servo_arm_depth = 15.1;                        // hloubka ramena u serva
+
+tail_servo_rudder_arm_z_offset = - 21;                // posunuti paky smerovky vuci stredu
+tail_servo_rudder_arm_side_size = 14;               // delka a sirka zkladny pro rameno pro uchyceni serva
+tail_servo_rudder_arm_depth = 12.95;                // hloubka ramena pro uchyceni serva na smerovku
+tail_servo_rudder_arm_y_offset = - tail_servo_rudder_arm_depth + tail_servo_arm_depth + tail_servo_wing_depth / 2 - tail_servo_wall_y_offset;
 
 tail_tube_mount_length = 40;                        // delka upevneni na trubku
 tail_tube_mount_height = 32;                        // vyska upevneni na trubku
