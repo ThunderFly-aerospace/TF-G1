@@ -384,6 +384,12 @@ tail_servo_wall_y_offset = 2;                       // vyoseni uchyceni pro serv
 tail_servo_wire_hole_length = 8;                    // delka vykusu pro draty
 tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
 tail_servo_wall_and_screws_y_position = 5;          // pozice steny a sroubu pro uchyceni serva (osa Y)
+tail_servo_arm_depth = 15.1;                        // hloubka ramena u serva
+
+tail_servo_rudder_arm_z_offset = - 21;                // posunuti paky smerovky vuci stredu
+tail_servo_rudder_arm_side_size = 14;               // delka a sirka zkladny pro rameno pro uchyceni serva
+tail_servo_rudder_arm_depth = 12.95;                // hloubka ramena pro uchyceni serva na smerovku
+tail_servo_rudder_arm_y_offset = - tail_servo_rudder_arm_depth + tail_servo_arm_depth + tail_servo_wing_depth / 2 - tail_servo_wall_y_offset;
 
 tail_tube_mount_length = 40;                        // delka upevneni na trubku
 tail_tube_mount_height = 32;                        // vyska upevneni na trubku
@@ -503,6 +509,7 @@ rotor_head_bearing_screw_head_height=3.5;
 //rotor_head_wall_height=2*((rotor_head_bearing_a1+rotor_head_bearing_screw_head_height-rotor_head_bearing_a_center_of_rotation+rotor_head_bearing_width/2*tan(rotor_head_roll_stop))*cos(rotor_head_roll_stop));//height of side wall of center part
 rotor_head_wall_height = 8;
 rotorhead_neck_height=6;
+rotor_head_kardan_prestress=0.5;
 rotorhead_neck_plate_diameter = 38;
 rotorhead_neck_plate_thickness = 2;
 rotorhead_desk_thickness = 4;

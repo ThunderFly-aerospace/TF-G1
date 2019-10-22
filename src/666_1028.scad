@@ -135,7 +135,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                 translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2 + Rudder_infill_wall_thickness, side_choose *  tail_servo_wall_and_screws_y_position, - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
                     cube([tail_servo_length_inside, Rudder_depth * 2, tail_servo_height], center = true);
 
-                //servo mount wall
+                //servo mount walls
                 translate([(tail_tube_mount_length + tail_servo_length) / 2 + Rudder_infill_wall_thickness, - side_choose * (- Rudder_depth + tail_servo_wall_y_offset), - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
                     cube([tail_servo_length, Rudder_depth * 2, tail_servo_height], center = true);
 
@@ -410,8 +410,8 @@ module 666_1028_rudder(side_choose = 1, draft) {
                         }
                     
                     // material for holes for servo arm
-                    translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20])
-                        cube([16, Rudder_depth, 16], center = true);
+                    translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 + tail_servo_rudder_arm_z_offset])
+                        cube([tail_servo_rudder_arm_side_size + 2, Rudder_depth, tail_servo_rudder_arm_side_size + 2], center = true);
                     
                     //Ribs------------------------------------------------------
                     //TODO: check if they are dynamic
@@ -445,12 +445,16 @@ module 666_1028_rudder(side_choose = 1, draft) {
             cylinder(d = Rudder_shaft_diameter, h = Rudder_height * 2, $fn = draft ? 10 : 50, center = true);
         
         // cutting back side of servo arm holder to make it square
-        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (- Rudder_depth / 2 - tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + 7 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false)), Rudder_height / 2 - 20])
-            cube([14, Rudder_depth, 14], center = true);
+        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (- Rudder_depth / 2 - tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + tail_servo_rudder_arm_side_size / 2 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false)), Rudder_height / 2 + tail_servo_rudder_arm_z_offset])
+            cube([tail_servo_rudder_arm_side_size, Rudder_depth, tail_servo_rudder_arm_side_size], center = true);
         
         // cutting front side of servo arm holder to make it square and same position as servo
-        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (Rudder_depth / 2 + tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + 7 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false)), Rudder_height / 2 - 20])
-            cube([14, Rudder_depth, 14], center = true);
+        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (tail_servo_rudder_arm_depth / 2 + tail_servo_rudder_arm_y_offset), Rudder_height / 2 + tail_servo_rudder_arm_z_offset])
+            union() {
+                cube([tail_servo_rudder_arm_side_size, tail_servo_rudder_arm_depth, tail_servo_rudder_arm_side_size], center = true);
+                translate([- 2.35 / 2, 0, 0])
+                    cube([tail_servo_rudder_arm_side_size + 2.35, tail_servo_rudder_arm_depth, 5], center = true);
+            }
 
         //páka pro táhlo
         height = 10;
@@ -469,7 +473,7 @@ module 666_1028_rudder(side_choose = 1, draft) {
         screw_xposition = (lenght/diagonal)*(screws_distance/2);
         screw_yposition = (height/diagonal)*(screws_distance/2);
 
-        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 - 20]){
+        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 + tail_servo_rudder_arm_z_offset]){
             translate([screw_xposition, 0, screw_yposition])
                 rotate([90,0,0])
                     cylinder(h = 100, d = 2.3, $fn = 10, center = true);
@@ -491,20 +495,19 @@ module 666_1028_rudder(side_choose = 1, draft) {
 
 //difference() {
 //    union(){
-//666_1028_body_bottom();
-//
+666_1028_body_bottom();
+
 translate([0, 0, tail_bottom_height])
     666_1028_body_middle();
 
 translate([0, 0, tail_bottom_height + global_clearance])
     666_1028_rudder();
 
-//translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-//    666_1028_tube_mount();
-//
-//translate([0, 0, tail_bottom_height + Rudder_height])
-//    666_1028_body_top();
+translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
+    666_1028_tube_mount();
+
+translate([0, 0, tail_bottom_height + Rudder_height])
+    666_1028_body_top();
 //    }
 //    cube([500,20,500]);
 //}
-echo(Rudder_depth / 2 + tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + 7 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false));
