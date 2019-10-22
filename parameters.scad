@@ -1,4 +1,8 @@
 
+layer = 0.2;
+global_clearance = 0.5;
+layer_thickness = 0.3;
+
 //Main tube diameter - hole [mm]
 main_tube_outer_diameter = 25.4;
 main_tube_inner_diameter = 23.05;
@@ -6,8 +10,6 @@ main_tube_inner_diameter = 23.05;
 //Tube for undercarriage - rendered hole [mm]
 tube_for_undercarriage_outer_diameter = 10.6;
 tube_for_undercarriage_inner_diameter = 6;
-global_clearance = 0.5;
-layer_thickness = 0.3;
 
 // Nastavení parametrů rotoru
 
@@ -478,6 +480,7 @@ rotor_head_bearing_screw_head_height=3.5;
 //rotor_head computed parameters
 rotor_head_wall_height = 8;
 rotorhead_neck_height=6;
+rotor_head_kardan_prestress=0.5;
 rotorhead_neck_plate_diameter = 38;
 rotorhead_neck_plate_thickness = 2;
 rotorhead_desk_thickness = 4;
