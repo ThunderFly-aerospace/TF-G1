@@ -51,7 +51,7 @@ difference(){
       if(cover){
 
 // Top cover
-        translate([-engine_holder_beam_depth - 6, 0, 0]) // musí to být posunuto asi o těch 6mm a nevím proč.
+        translate([-engine_holder_beam_depth - hull_wall_thickness, 0, 0]) // musí to být posunuto asi o těch 6mm a nevím proč.
           rotate([90,0,0])
               if(stl){import("../../STL/888_1025.stl", convexity=4);}
               else{888_1025();}
