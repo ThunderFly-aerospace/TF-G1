@@ -128,7 +128,7 @@ module 666_1028_body_middle(side_choose = 1, draft) {
             cylinder(d = Rudder_shaft_outside_diameter + Rudder_gap_width + global_clearance, h = Rudder_height + 2, $fn = draft ? 10 : 50, center = true);
 
         //Removing material for mount and servo---------------------
-        translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
+        translate([(tail_tube_mount_length) / 2, 0, tail_pipe_z_position - tail_bottom_height])
             union() {
                 //hole for servo
                 //TODO: Y axis not dynamic
@@ -159,11 +159,11 @@ module 666_1028_body_middle(side_choose = 1, draft) {
                 }
 
                 //tube
-                translate([- 2 - Rudder_infill_wall_thickness / 2, 0, 0])
+                translate([- 1 - Rudder_infill_wall_thickness / 2, 0, 0])
                     cube([tail_tube_mount_length + 2, Rudder_depth * 4, tube_for_undercarriage_outer_diameter + (global_clearance + Rudder_infill_wall_thickness) * 2], center = true);
 
                 //wings
-                translate([- 2 - Rudder_infill_wall_thickness / 2, 0, 0])
+                translate([- 1 - Rudder_infill_wall_thickness / 2, 0, 0])
                     cube([tail_tube_mount_length + 2, tail_tube_mount_wings_thickness + global_clearance * 2, tail_tube_mount_height + global_clearance * 2], center = true);
 
                 //front side cut
@@ -336,7 +336,7 @@ module 666_1028_tube_mount(draft) {
                 //main body
                 translate([- tail_tube_mount_length / 2, 0, - tail_tube_mount_height / 2])
                     airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 200, h = tail_tube_mount_height, open = false);
-                cube([tail_tube_mount_length, Rudder_depth * 2, tail_tube_mount_height], center = true);
+                cube([tail_tube_mount_length - global_clearance, Rudder_depth * 2, tail_tube_mount_height], center = true);
             }
             //tube wall
             rotate([0, 90, 0])
@@ -348,28 +348,36 @@ module 666_1028_tube_mount(draft) {
             cylinder(d = tube_for_undercarriage_outer_diameter, h = tail_tube_mount_length + 2, center = true, $fn = draft ? 10 : 50);
 
         //tube mount screws
-        translate([tail_tube_mount_screws_x_position, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
+        translate([tail_tube_mount_screws_x_position + global_clearance / 2, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
             rotate([90, 0, 0])
                 cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = draft ? 10 : 50);
-        translate([- tail_tube_mount_screws_x_position, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
+        translate([- tail_tube_mount_screws_x_position + global_clearance / 2, Rudder_depth + 1  , tail_tube_mount_screws_z_position])
             rotate([90, 0, 0])
                 cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = draft ? 10 : 50);
-        translate([tail_tube_mount_screws_x_position, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
+        translate([tail_tube_mount_screws_x_position + global_clearance / 2, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
             rotate([90, 0, 0])
                 cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = draft ? 10 : 50);
-        translate([- tail_tube_mount_screws_x_position, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
+        translate([- tail_tube_mount_screws_x_position + global_clearance / 2, Rudder_depth + 1  , - tail_tube_mount_screws_z_position])
             rotate([90, 0, 0])
                 cylinder(h = Rudder_depth * 2 + 2, d = M3_screw_diameter, $fn = draft ? 10 : 50);
 
         //wings cut
-        translate([0, (Rudder_depth + tail_tube_mount_wings_thickness) / 2, (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 + Rudder_infill_wall_thickness])
-            cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
-        translate([0, (Rudder_depth + tail_tube_mount_wings_thickness) / 2, - (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 - Rudder_infill_wall_thickness])
-            cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
-        translate([0, - (Rudder_depth + tail_tube_mount_wings_thickness) / 2, (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 + Rudder_infill_wall_thickness])
-            cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
-        translate([0, - (Rudder_depth + tail_tube_mount_wings_thickness) / 2, - (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 - Rudder_infill_wall_thickness])
-            cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
+        difference() {
+            union() {
+                translate([0, (Rudder_depth + tail_tube_mount_wings_thickness) / 2, (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 + Rudder_infill_wall_thickness])
+                    cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
+                translate([0, (Rudder_depth + tail_tube_mount_wings_thickness) / 2, - (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 - Rudder_infill_wall_thickness])
+                    cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
+                translate([0, - (Rudder_depth + tail_tube_mount_wings_thickness) / 2, (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 + Rudder_infill_wall_thickness])
+                    cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
+                translate([0, - (Rudder_depth + tail_tube_mount_wings_thickness) / 2, - (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 - Rudder_infill_wall_thickness])
+                    cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
+            }
+        
+            //front side cut
+            translate([- tail_tube_mount_length + tail_front_mount_edge_cut_x_position, 0, 0])
+                cube([tail_tube_mount_length, Rudder_depth * 2, tail_tube_mount_height + global_clearance * 2], center = true);
+        }
     }
 }
 
@@ -487,6 +495,8 @@ module 666_1028_rudder(draft) {
     }
 }
 
+//difference() {
+//    union(){
 666_1028_body_bottom();
 
 translate([0, 0, tail_bottom_height])
@@ -495,8 +505,11 @@ translate([0, 0, tail_bottom_height])
 translate([0, 0, tail_bottom_height + global_clearance])
     666_1028_rudder();
 
-translate([tail_tube_mount_length / 2, 0, tail_pipe_z_position])
+translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
     666_1028_tube_mount();
 
 translate([0, 0, tail_bottom_height + Rudder_height])
     666_1028_body_top();
+//    }
+//    cube([500,20,500]);
+//}
