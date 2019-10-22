@@ -132,20 +132,20 @@ module 666_1028_body_middle(side_choose = 1, draft) {
             union() {
                 //hole for servo
                 //TODO: Y axis not dynamic
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, side_choose *  tail_servo_wall_and_screws_y_position, - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
+                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2 + Rudder_infill_wall_thickness, side_choose *  tail_servo_wall_and_screws_y_position, - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
                     cube([tail_servo_length_inside, Rudder_depth * 2, tail_servo_height], center = true);
 
                 //servo mount wall
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length) / 2, - side_choose * (- Rudder_depth + tail_servo_wall_y_offset), - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
+                translate([(tail_tube_mount_length + tail_servo_length) / 2 + Rudder_infill_wall_thickness, - side_choose * (- Rudder_depth + tail_servo_wall_y_offset), - tail_servo_height / 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
                     cube([tail_servo_length, Rudder_depth * 2, tail_servo_height], center = true);
 
                 //servo screw holes
                 //TODO: Y axis not dynamic
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length + tail_servo_screws_gap) / 2, side_choose * tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
+                translate([(tail_tube_mount_length + tail_servo_length + tail_servo_screws_gap) / 2 + Rudder_infill_wall_thickness, side_choose * tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = draft ? 10 : 50, center = true);
 
-                translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length - tail_servo_screws_gap) / 2, side_choose *  tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
+                translate([(tail_tube_mount_length + tail_servo_length - tail_servo_screws_gap) / 2 + Rudder_infill_wall_thickness, side_choose *  tail_servo_wall_and_screws_y_position, - Rudder_infill_wall_thickness - tail_servo_z_offset - tail_servo_screws_z_position])
                     rotate([90, 0, 0])
                         cylinder(h = Rudder_depth * 2, d = tail_servo_screws_diameter, $fn = draft ? 10 : 50, center = true);
 
