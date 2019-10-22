@@ -1,11 +1,11 @@
-use <./888_1029.scad>
-use <./888_1022.scad>
-use <./888_1020.scad>
-use <lib/igus.scad>
+use <../888_1029.scad>
+use <../888_1022.scad>
+use <../888_1020.scad>
+use <../lib/igus.scad>
 
-include <../parameters.scad>
+include <../../parameters.scad>
 
-stl = true;
+stl = false;
 plastick = false;
 
 desk_thickness=rotorhead_desk_thickness;
