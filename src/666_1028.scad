@@ -431,16 +431,26 @@ module 666_1028_rudder(side_choose = 1, draft) {
                             }
                 }
             }
+            
+            //main rudder wall
             difference() {
                 hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
                 translate([0, - Rudder_depth, - 1])
                     cube([Rudder_shaft_x_position, Rudder_depth * 2, tail_height + 2]);
             }
         }
+        
+        //shaft hole
         translate([Rudder_shaft_x_position, 0, Rudder_height / 2])
             cylinder(d = Rudder_shaft_diameter, h = Rudder_height * 2, $fn = draft ? 10 : 50, center = true);
-
-
+        
+        // cutting back side of servo arm holder to make it square
+        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (- Rudder_depth / 2 - tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + 7 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false)), Rudder_height / 2 - 20])
+            cube([14, Rudder_depth, 14], center = true);
+        
+        // cutting front side of servo arm holder to make it square and same position as servo
+        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (Rudder_depth / 2 + tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + 7 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false)), Rudder_height / 2 - 20])
+            cube([14, Rudder_depth, 14], center = true);
 
         //páka pro táhlo
         height = 10;
@@ -497,3 +507,4 @@ translate([0, 0, tail_bottom_height + global_clearance])
 //    }
 //    cube([500,20,500]);
 //}
+echo(Rudder_depth / 2 + tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + 7 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false));
