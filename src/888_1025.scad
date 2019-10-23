@@ -159,7 +159,7 @@ union(){
 
             //spojení částí C a D
 
-            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
+/*            #translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
                 rotate([ 2* (surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)),90,0])
                    union(){
                         cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
@@ -186,7 +186,7 @@ union(){
                         translate([0,0,3])
                             cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
                     }
-
+*/
     //final difference
     }
 
@@ -216,13 +216,15 @@ union(){
                 // lem pro výztuhu a slepení dílu A
                 difference(){
                     union(){
+
+                        //lemy pro slepení dílů ve směru délky krytu (v podélném směru)
+
                         translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
-                        //pro lepení - čtverec
                         //difference(){
-                            translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
-                                cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+                        translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
+                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         //pro lepení - čtverec
 /*                        difference(){
@@ -262,7 +264,7 @@ union(){
                                 translate([0,0,-hull_wall_thickness])
                                      cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
 
-
+                                // malé výztuhy v přední části krytu
                                 translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
                                     rotate([-48,0,0])
                                         cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
