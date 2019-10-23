@@ -50,12 +50,14 @@ images: $(IMAGES)
 
 $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Create temporary file for fast image rendering.
-	@-echo "import(\"$<\");" > tmp.scad
+	@mkdir $(GIT_DIR)/tpm 2> /dev/null
+	@$(eval FILE=$(basename $(notdir $<)))
+	@echo "import(\"$<\");" > $(GIT_DIR)/tmp/$<
 	@# Render PNG image from temporary file.
 	@echo $(YEL)
-	$(OPENSCAD_APP) -o $@ tmp.scad
+	$(OPENSCAD_APP) -o $@ $(GIT_DIR)/tmp/$<
 	@# Remove temporary file
-	@rm -f tmp.scad
+	@rm -f $(GIT_DIR)/tmp/$<
 	@echo $(DEF)
 
 
