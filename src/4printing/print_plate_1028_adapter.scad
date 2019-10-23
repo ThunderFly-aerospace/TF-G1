@@ -3,9 +3,5 @@ use <../666_1028.scad>
 
 draft = false;
 
-
-rotate([0, 90, 0]){
+rotate([0, 90, 0])
     666_1028_tube_mount(draft = draft);
-    translate([0, 20, 0])
-        666_1028_tube_mount(draft = draft);
-}
