@@ -4,7 +4,7 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
-module 666_1032(draft){
+module 888_1024(draft){
 
     airfoil_thickness = 0030;
     depth = main_tube_outer_diameter*2;
@@ -190,44 +190,29 @@ module 666_1032(draft){
 
     //final difference
     }
-
-/*
-//jen pro kontrolu, zda se vejde v pohodě vertikální trubka
-            difference(){
-        translate ([main_pilon_position - cover_pilon_position,0,0])
-                color([1,0,0])
-                cylinder (h = height_of_vertical_tube, r = Help_main_tube_outer/2, $fn = 200);
-
-        translate ([main_pilon_position - cover_pilon_position,0,0])
-                color([1,0,0])
-               % cylinder (h = height_of_vertical_tube + global_clearance, r = Help_main_tube_inner/2, $fn = 200);
-
-        }
-*/
-//final module
 }
 
 
 //pro tisk
 
-module 666_1032_A(draft){
+module 888_1024_A(draft){
         intersection(){
-                666_1032(draft);
+                888_1024(draft);
             translate([0,- 75,0])
                 cube([180,150,cover_pilon_division[1]]);
         }
 }
 
-module 666_1032_B(draft){
+module 888_1024_B(draft){
     translate([0,0,20])
         intersection(){
-                666_1032(draft);
+                888_1024(draft);
             translate([0,- 75,cover_pilon_division[1]])
                 cube([180,150,cover_pilon_division[2] - cover_pilon_division[1]]);
         }
 }
 
-666_1032(draft);
+888_1024(draft);
 //666_1032_A(draft);
 //666_1032_B(draft);
 
