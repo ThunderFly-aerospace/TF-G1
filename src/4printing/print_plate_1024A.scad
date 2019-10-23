@@ -1,12 +1,7 @@
 include <../../parameters.scad>
-use <../666_1032.scad>
+use <../888_1024.scad>
 
 draft = false;
 
 rotate([0,180,0])
-    666_1032_A(draft);
-
-
-
-
-
+    888_1024_A(draft);
