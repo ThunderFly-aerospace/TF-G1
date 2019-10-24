@@ -117,7 +117,7 @@ module 888_1020(draft = true){
 
             translate([servo_join_x, -servo_join_y/2 - 1.5, servo_joint_z ])
                 rotate([-90, 0, 0])
-                    cylinder(d1 = M4_screw_diameter+1, d2 = M4_screw_diameter+5.5, h=1.5, $fn = 30);
+                    cylinder(d1 = servo_joint_d+1, d2 = servo_joint_d+5.5, h=1.5, $fn = 50);
 
             // rameno, na kterem jsou kloubky pro servo
             hull()union(){
@@ -130,18 +130,6 @@ module 888_1020(draft = true){
             translate([servo_join_x, servo_join_y/2, servo_joint_z ])
                 rotate([-90, 0, 0])
                     cylinder(d2 = servo_joint_d+1, d1 = servo_joint_d+5.5, h=1.5, $fn = 50);
-
-
-    // Vymezovaci podlozka pod motor, misto hlinikove 6.5mm silne podlozky
-            /* translate([motor_distance, 0, 0])
-                hull(){
-                    rotate([180, 0, 0])
-                        cylinder(d = motor_diameter, h=6.5, $fn = draft ? 20 : 50);
-
-                    rotate([180, 0, 0])
-                        cylinder(d = motor_diameter+10, h=0.1, $fn = draft ? 20 : 50);
-                } */
-
 
             // Otvory pro pridelani motoru
             translate([motor_distance, 0, -global_clearance/2 ])
