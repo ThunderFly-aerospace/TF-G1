@@ -1,4 +1,4 @@
-VPATH = $(SRC_DIR):$(DEP_DIR):$(STL_DIR):$(IMG_DIR):$(GCD_DIR)
+	VPATH = $(SRC_DIR):$(DEP_DIR):$(STL_DIR):$(IMG_DIR):$(GCD_DIR)
 
 PLATE_DIMMENSIONS=130
 SIMARRANGE=/usr/local/bin/simarrange
@@ -34,7 +34,7 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
 	@-mkdir $(DEP_DIR) 2> /dev/null
-	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
+	$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
@@ -51,15 +51,15 @@ images: $(IMAGES)
 
 $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Create temporary file for fast image rendering.
-	@-mkdir $(GIT_DIR)/tmp 2> /dev/null
-	@-mkdir $(GIT_DIR)/tmp/$(STL_DIR) 2> /dev/null
+	@-mkdir /tmp 2> /dev/null
+	@-mkdir /tmp/$(STL_DIR) 2> /dev/null
 	@$(eval FILE=$(basename $(notdir $<)))
-	@echo "import(\"$<\");" > $(GIT_DIR)/tmp/$<
+	@echo "import(\"$<\");" > /tmp/$<
 	@# Render PNG image from temporary file.
 	@echo $(YEL)
-	$(OPENSCAD_APP) -o $@ $(GIT_DIR)/tmp/$<
+	$(OPENSCAD_APP) -o $@ /tmp/$<
 	@# Remove temporary file
-	@rm -f $(GIT_DIR)/tmp/$<
+	@rm -f /tmp/$<
 	@echo $(DEF)
 
 
