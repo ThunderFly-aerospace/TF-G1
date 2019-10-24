@@ -158,13 +158,13 @@ module 888_1025(draft = true){
             rotate([45,0,0])
                 translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                     rotate([90,0,-60])
-                        translate([6,0,0])
+                        translate([8,0,0])
                             bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             rotate([-45,0,0])
                 translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                     rotate([90,0,-60])
-                        translate([6,0,0])
+                        translate([8,0,0])
                             bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             //šrouby
@@ -179,7 +179,7 @@ module 888_1025(draft = true){
         }
 
         intersection(){
-                // lem pro výztuhu a slepení dílu A
+                // lemy pro výztuhu a slepení
                 difference(){
                     union(){
 
@@ -192,39 +192,38 @@ module 888_1025(draft = true){
                         translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, - hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
-                        //difference(){
                         translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
-                        //pro lepení - čtverec
+                        // lem u šroubového spoje
+                        translate([top_cover_division[3] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
+                            cube([hull_wall_thickness * 2, hull_y_size, hull_z_size*2]);
+
                         translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
                         translate([top_cover_division[5], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
 
-                        //podélná výztuha
-                        //difference(){
-                            union(){
-                                translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])
-                                    cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
-                                translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])
-                                    cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        //podélná výztuha boční
+                        translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])
+                            cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])
+                            cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                                // honí podélná výztuha
-                                translate([0,0,-hull_wall_thickness])
-                                     cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
+                        // honí podélná výztuha
+                        translate([0,0,-hull_wall_thickness])
+                             cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
 
-                                // malé výztuhy v přední části krytu
-                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
-                                    rotate([-48,0,0])
-                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                        // malé výztuhy v přední části krytu
+                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                            rotate([-48,0,0])
+                                cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
 
-                                mirror([0,0,1])
-                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
-                                    rotate([-48,0,0])
-                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
-                            }
+                        mirror([0,0,1])
+                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                            rotate([-48,0,0])
+                                cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
                     }
                     //pro lepení - odstranění kusu lemů  z díry pro horní otvor
                     translate ([cover_pilon_position + 2*hull_wall_thickness,-10,0])
