@@ -40,6 +40,7 @@ beam_length = 490;
 beam_edge_angle = 60/2;
 beam_division = [0, 145, 275, 417, 1000];
 
+beam_main_pipe_diameter = carbon_pipe_10_outer_diameter;
 beam_main_pipe_distance = 45;
 beam_main_pipe_thickness = carbon_pipe_10_outer_diameter;
 

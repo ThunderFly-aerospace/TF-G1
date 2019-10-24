@@ -33,6 +33,7 @@ default: $(TARGETS)
 $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
+	@-mkdir $(DEP_DIR)/%.deps
 	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
@@ -50,7 +51,7 @@ images: $(IMAGES)
 
 $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Create temporary file for fast image rendering.
-	@mkdir $(GIT_DIR)/tpm 2> /dev/null
+	@-mkdir $(GIT_DIR)/tpm
 	@$(eval FILE=$(basename $(notdir $<)))
 	@echo "import(\"$<\");" > $(GIT_DIR)/tmp/$<
 	@# Render PNG image from temporary file.
@@ -60,6 +61,13 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@rm -f $(GIT_DIR)/tmp/$<
 	@echo $(DEF)
 
+
+do:
+	@$(eval args = `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`)
+	@echo $(call args,defaultstring)
+	@echo action $(filter-out $@,$(MAKECMDGOALS))
+%:      # thanks to chakrit
+    @:    # thanks to William Pursell
 
 gcode: $(GCODES)
 
