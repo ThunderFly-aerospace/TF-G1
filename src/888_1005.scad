@@ -233,7 +233,7 @@ module 888_1005_rear(){
     translate([0, 0, 0])
     difference(){
         intersection(){
-            translate([beam_length, -100, -beam_thickness_below]) cube([30, 200, beam_thickness_below+beam_thickness_above]);
+            translate([beam_length , -100, -beam_thickness_below]) cube([30, 200, beam_thickness_below+beam_thickness_above]);
             rotate([90, 0, 0])
                 translate([-engine_holder_beam_depth, 0, 0])
                     hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
