@@ -158,13 +158,13 @@ module 888_1025(draft = true){
             rotate([45,0,0])
                 translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                     rotate([90,0,-60])
-                        translate([8,0,0])
+                        translate([10,0,0])
                             bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             rotate([-45,0,0])
                 translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                     rotate([90,0,-60])
-                        translate([8,0,0])
+                        translate([10,0,0])
                             bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             //šrouby
