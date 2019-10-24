@@ -1,4 +1,4 @@
-	VPATH = $(SRC_DIR):$(DEP_DIR):$(STL_DIR):$(IMG_DIR):$(GCD_DIR)
+VPATH = $(SRC_DIR):$(DEP_DIR):$(STL_DIR):$(IMG_DIR):$(GCD_DIR)
 
 PLATE_DIMMENSIONS=130
 SIMARRANGE=/usr/local/bin/simarrange
@@ -34,17 +34,17 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
 	@mkdir $(DEP_DIR) 2> /dev/null || echo ""
-	$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
+	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@# Sort stl and deps file to keep git changes to minimum.
-	$(STLSORT) $@ || :
+	@$(STLSORT) $@ || :
 	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@echo $(DEF)
 
--include $(wildcard $(DEP_DIR)/*.deps)
+#-include $(wildcard $(DEP_DIR)/*.deps)
 
 
 images: $(IMAGES)
