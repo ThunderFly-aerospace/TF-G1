@@ -1,6 +1,6 @@
-/*
+
 // Nastavení zobrazení
-$vpr = [ 80.90, 0.00, 27.10 ];
+/*$vpr = [ 80.90, 0.00, 27.10 ];
 $vpt = [ 307.28, 104.40, -30.79 ];
 $vpd = 1433.98;
 */
@@ -90,50 +90,55 @@ module 888_1025(draft = true){
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
 
 
-union(){
-    difference(){
-        union(){
-            difference(){
-                union(){
-                    //základní kapka
-                    intersection (){
-                            drop_skin(draft);
-                    translate([0,0,- hull_z_size/2])
-                            cube([hull_drop_length, hull_y_size + 10, hull_z_size]);
+    union(){
+        difference(){
+            union(){
+                difference(){
+                    union(){
+                        //základní kapka
+                        intersection (){
+                            drop(draft);
+                            translate([0,0,- hull_z_size/2])
+                                    cube([hull_drop_length, hull_y_size + 10, hull_z_size]);
+                        }
+
+                        intersection(){
+                            // kryt pylonu - limit the size to maximum printable size by intersection with cube
+                            translate([cover_pilon_position,0,0])
+                                rotate ([-90,0,0])
+                                    translate ([hull_wall_thickness,0,0])
+                                        resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
+                                            airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
+
+                            translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
+                                    cube ([hull_x_size, hull_y_size,hull_z_size]);
+                        }
                     }
+                    difference(){
+                        translate([hull_wall_thickness,0,0])
+                            hollowing_skeleton(hull_wall_thickness, draft);
 
-                    intersection(){
-                    // kryt pylonu - limit the size to maximum printable size by intersection with cube
-                    translate([cover_pilon_position,0,0])
-                        rotate ([-90,0,0])
-                            translate ([hull_wall_thickness,0,0])
-                                resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                                    airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
+                        // materiál pro šrouby mezi díly 2 a 3
+                        rotate([45,0,0])
+                           translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                            scale([1.5, 1, 1])
+                              sphere (r = 20, $fs = 0.5, $fa = 10);
 
-                    translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
-                            cube ([hull_x_size, hull_y_size,hull_z_size]);
+                        rotate([-45,0,0])
+                           translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                            scale([1.5, 1, 1])
+                              sphere (r = 20, $fs = 0.5, $fa = 10);
+
+                        //přední stěna Z+
+                        translate([0, 0, width_of_engine_holder/2 ])
+                         cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
+
+                        //přední stěna Z-
+                        translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])
+                          cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
                     }
                 }
-
-                translate([hull_wall_thickness,0,0])
-                    hollowing_skeleton(hull_wall_thickness, draft);
             }
-
-            //lem
-                intersection(){
-                    difference(){
-                        translate([0,0,-hull_z_size/2])
-                            cube([hull_x_size, hull_wall_thickness, hull_z_size]); // spodní lem
-
-                        //odebrání dna
-                        translate([ribbon_width/2,0,0])
-                            hollowing_skeleton(ribbon_width, draft);
-                    }
-
-                //odstranění dna z vnější strany krytu
-                    drop(draft);
-              }
-        }
 
             //engine holder
             translate ([-global_clearance,0 , - width_of_engine_holder/2])
@@ -149,6 +154,19 @@ union(){
                     resize([170 - 2*hull_wall_thickness  - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
                         airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = 200, open = false);
 
+            // díry pro šrouby ke spojení krytu
+            rotate([45,0,0])
+                translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                    rotate([90,0,-60])
+                        translate([6,0,0])
+                            bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
+
+            rotate([-45,0,0])
+                translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                    rotate([90,0,-60])
+                        translate([6,0,0])
+                            bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
+
             //šrouby
             for (position_number = [1:5])
             {
@@ -157,65 +175,17 @@ union(){
                     screw_top(position_number, draft);
             }
 
-            //spojení částí C a D
-
-/*            #translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
-                rotate([ 2* (surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)),90,0])
-                   union(){
-                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                        translate([0,0, - M3_nut_height - 5])
-                            cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-                        translate([M3_nut_diameter/2,0, - M3_nut_height - 5])
-                            rotate([0,0,90])
-                                cube([20,M3_nut_diameter, M3_nut_height]);
-                        translate([0,0,3])
-                            cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
-                    }
-
-            mirror([0,0,1])
-
-            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
-                rotate([ 2* (surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)),90,0])
-                    union(){
-                        cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                        translate([0,0, - M3_nut_height - 5])
-                            cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-                        translate([M3_nut_diameter/2,0, - M3_nut_height - 5])
-                            rotate([0,0,90])
-                                cube([20,M3_nut_diameter, M3_nut_height]);
-                        translate([0,0,3])
-                            cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
-                    }
-*/
-    //final difference
-    }
+        //final difference
+        }
 
         intersection(){
-            union(){
-
-                //přední stěna Z+
-                translate([0, 0, width_of_engine_holder/2 ])
-                   cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
-
-                //přední stěna Z-
-                translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])
-                    cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
-
-                // materiál pro šrouby mezi díly 2 a 3
-                rotate([45,0,0])
-                   translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                    scale([1.5, 1, 1])
-                      sphere (r = 20,$fs = 0.5, $fa = 10);
-
-                rotate([-45,0,0])
-                   translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                    scale([1.5, 1, 1])
-                      sphere (r = 20,$fs = 0.5, $fa = 10);
-
-
                 // lem pro výztuhu a slepení dílu A
                 difference(){
                     union(){
+
+                        // spodní lem
+                        translate([0,0,-hull_z_size/2])
+                            cube([hull_x_size, hull_wall_thickness, hull_z_size]);
 
                         //lemy pro slepení dílů ve směru délky krytu (v podélném směru)
 
@@ -225,25 +195,6 @@ union(){
                         //difference(){
                         translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
                             cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        //pro lepení - čtverec
-/*                        difference(){
-                            #union(){
-                                translate([top_cover_division[3] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
-                                        cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                                translate([top_cover_division[3], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
-                                        cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-                            }
-
-/*                            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
-                                rotate([ 2* (surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)),90,0])
-                                    cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-                          #  mirror([0,0,1])
-                            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
-                                rotate([ 2* (surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)),90,0])
-                                    cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                        }*/
 
                         //pro lepení - čtverec
                         translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
@@ -289,78 +240,14 @@ union(){
                        rotate ([0,90,0])
                           cylinder(d = width_of_engine_holder, h = width_of_engine_holder);
 
-                   translate([ribbon_width/2,0,0])
+                   translate([ribbon_width + hull_wall_thickness, 0, 0])
                         hollowing_skeleton(ribbon_width, draft);
                 }
 
-            }
             //odstranění přesahů z vnější strany
             drop(draft);
         }
-
- //šrouby mezi díly 2 a 3
-/*        intersection(){
-          }
-          drop(draft);
-        //intersection
-        // materiál pro šrouby mezi díly 2 a 3
-        rotate([45,0,0])
-        %   translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-            scale([1.5, 1, 1])
-              sphere (r = 20,$fs = 0.5, $fa = 10);
-
-  /*  mirror([0,0,1])
-       intersection(){
-
-            union(){
-                difference(){
-            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 12,38])
-                rotate([90,0,0])
-                            union(){
-                                translate([15,7,-13])
-                                    rotate([0,-75,0])
-                                        union(){
-                                                cylinder(h = 20, r = 20, $fn = draft ? 100 : 200);
-                                            translate([0,0,20])
-                                                sphere (r = 20,$fs = 0.5, $fa = 10);
-                                                sphere (r = 20,$fs = 0.5, $fa = 10);
-                                        }
-                                mirror([1,0,0])
-                                translate([21,7,-12])
-                                    rotate([0,-75,0])
-                                        union(){
-                                                cylinder(h = 15, r = 20, $fn = draft ? 100 : 200);
-                                            translate([0,0,15])
-                                                sphere (r = 20,$fs = 0.5, $fa = 10);
-                                                sphere (r = 20,$fs = 0.5, $fa = 10);
-                                        }
-                            }
-            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false) - 15,40])
-                rotate([ 2* (surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false)),90,0])
-                    union(){
-                                cylinder(h = 30, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-                        translate([0,0, - M3_nut_height - 5])
-                                cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
-                        translate([M3_nut_diameter/2,0, - M3_nut_height - 5])
-                            rotate([0,0,90])
-                                cube([20,M3_nut_diameter, M3_nut_height]);
-                        translate([0,0,3])
-                                cylinder(h = 30, r = M3_nut_diameter/2, $fn = draft ? 100 : 200);
-
-                    }
-
-                }
-            }
-            drop(draft);
-
-        //intersection
-        }*/
-
-//final union
-
-}
-
-
+    }
 //konec model celek
 }
 
@@ -627,4 +514,5 @@ translate([0,0,-10])
 use <888_1000.scad>
 
 use <./lib/stdlib/naca4.scad>
+use <./lib/stdlib/bolts.scad>
 include <../parameters.scad>
