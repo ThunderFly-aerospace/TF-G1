@@ -256,7 +256,7 @@ union(){
                        rotate ([0,90,0])
                           cylinder(d = width_of_engine_holder, h = width_of_engine_holder);
 
-                   translate([ribbon_width/2,0,0])
+                   translate([ribbon_width + hull_wall_thickness, 0, 0])
                         hollowing_skeleton(ribbon_width, draft);
                 }
 
