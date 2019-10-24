@@ -10,7 +10,7 @@ $vpt = [180, 25, -18];
 $vpd = 1280;
 */
 
-draft = true;
+draft = $preview;
 
 module screw_top (position_number, draft){
     //funkce
@@ -133,13 +133,13 @@ module 888_1005(draft){
                     }
                 }
 
-  //šrouby a matky HORNÍ kryt - vždy spojení šroubu a matky dohromady
+          //šrouby a matky HORNÍ kryt - vždy spojení šroubu a matky dohromady
 
-    rotate([90,0,0])
-        for (position_number = [2:4])
-        {
-                screw_top(position_number, draft);
-        }
+            rotate([90,0,0])
+                for (position_number = [2:4])
+                {
+                        screw_top(position_number, draft);
+                }
 
             // drazka podel pro zastrceni krytu
             intersection(){
@@ -228,8 +228,53 @@ module 888_1005_cut(){
                 888_1005(); */
 }
 
-//translate([55,0,0])
-888_1005();
+
+module 888_1005_rear(){
+    translate([0, 0, 0])
+    difference(){
+        intersection(){
+            translate([beam_length, -100, -beam_thickness_below]) cube([30, 200, beam_thickness_below+beam_thickness_above]);
+            rotate([90, 0, 0])
+                translate([-engine_holder_beam_depth, 0, 0])
+                    hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
+
+        }
+
+        translate([beam_length, -beam_main_pipe_distance/2, 0])
+            rotate([0, 90, 0])
+                cylinder(d = beam_main_pipe_diameter, h = 50);
+
+        translate([beam_length, beam_main_pipe_distance/2, 0])
+            rotate([0, 90, 0])
+                cylinder(d = beam_main_pipe_diameter, h = 50);
+
+        translate([-engine_holder_beam_depth, 0, 0])
+        intersection(){
+            difference(){
+                translate([0,-hull_z_size/2, 0])
+                    cube([hull_x_size, hull_z_size, hull_wall_thickness*2]); // spodní lem
+
+                //odebrání dna
+                translate([ribbon_width/2,0,0])
+                    rotate([90, 0, 0])
+                        hollowing_skeleton(ribbon_width, draft);
+            }
+
+        //odstranění dna z vnější strany krytu
+            drop(draft);
+        }
+
+    }
+}
+
+translate([55,0,0])
+    888_1005(draft);
+//mirror([0, 1, 0])
+//888_1005();
+
+//translate([55, 0, 0])
+//888_1005_rear();
+
 //88_1005_cut();
 //rotate([90,0,0])
 //666_1025(draft);

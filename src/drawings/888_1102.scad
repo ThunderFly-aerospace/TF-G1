@@ -64,8 +64,10 @@ difference(){
 
 // Limce
         if(limec){
-            if(stl){import("../../STL/888_1005.stl", convexity=4);}
+            if(false){import("../../STL/888_1005.stl", convexity=4);}
             else{888_1005();}
+
+            888_1005_rear();
 
             mirror([0, 1, 0])
                 if(stl){import("../../STL/888_1005.stl", convexity=4);}
