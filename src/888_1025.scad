@@ -90,50 +90,55 @@ module 888_1025(draft = true){
     trailing_wall= 1/(cos(beta)); //calculate lenght of wall cut relative to wall thickness
 
 
-union(){
-    difference(){
-        union(){
-            difference(){
-                union(){
-                    //základní kapka
-                    intersection (){
-                            drop_skin(draft);
-                    translate([0,0,- hull_z_size/2])
-                            cube([hull_drop_length, hull_y_size + 10, hull_z_size]);
+    union(){
+        difference(){
+            union(){
+                difference(){
+                    union(){
+                        //základní kapka
+                        intersection (){
+                            drop(draft);
+                            translate([0,0,- hull_z_size/2])
+                                    cube([hull_drop_length, hull_y_size + 10, hull_z_size]);
+                        }
+
+                        intersection(){
+                            // kryt pylonu - limit the size to maximum printable size by intersection with cube
+                            translate([cover_pilon_position,0,0])
+                                rotate ([-90,0,0])
+                                    translate ([hull_wall_thickness,0,0])
+                                        resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
+                                            airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
+
+                            translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
+                                    cube ([hull_x_size, hull_y_size,hull_z_size]);
+                        }
                     }
+                    difference(){
+                        translate([hull_wall_thickness,0,0])
+                            hollowing_skeleton(hull_wall_thickness, draft);
 
-                    intersection(){
-                        // kryt pylonu - limit the size to maximum printable size by intersection with cube
-                        translate([cover_pilon_position,0,0])
-                            rotate ([-90,0,0])
-                                translate ([hull_wall_thickness,0,0])
-                                    resize([170 - hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance - global_clearance ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                                        airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
+                        // materiál pro šrouby mezi díly 2 a 3
+                        rotate([45,0,0])
+                           translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                            scale([1.5, 1, 1])
+                              sphere (r = 20, $fs = 0.5, $fa = 10);
 
-                        translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
-                                cube ([hull_x_size, hull_y_size,hull_z_size]);
+                        rotate([-45,0,0])
+                           translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                            scale([1.5, 1, 1])
+                              sphere (r = 20, $fs = 0.5, $fa = 10);
+
+                        //přední stěna Z+
+                        translate([0, 0, width_of_engine_holder/2 ])
+                         cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
+
+                        //přední stěna Z-
+                        translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])
+                          cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
                     }
                 }
-
-                translate([hull_wall_thickness,0,0])
-                    hollowing_skeleton(hull_wall_thickness, draft);
             }
-
-            //lem
-                /*intersection(){
-                    difference(){
-                        translate([0,0,-hull_z_size/2])
-                            cube([hull_x_size, hull_wall_thickness, hull_z_size]); // spodní lem
-
-                        //odebrání dna
-                        translate([ribbon_width/2,0,0])
-                            hollowing_skeleton(ribbon_width, draft);
-                    }
-
-                //odstranění dna z vnější strany krytu
-                    drop(draft);
-              }*/
-        }
 
             //engine holder
             translate ([-global_clearance,0 , - width_of_engine_holder/2])
@@ -151,13 +156,16 @@ union(){
 
             // díry pro šrouby ke spojení krytu
             rotate([45,0,0])
-               translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-               rotate([90,0,-60])
-                translate([6,0,0])
-                union(){
-                bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
-                sphere(30);
-                }
+                translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                    rotate([90,0,-60])
+                        translate([6,0,0])
+                            bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
+
+            rotate([-45,0,0])
+                translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                    rotate([90,0,-60])
+                        translate([6,0,0])
+                            bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             //šrouby
             for (position_number = [1:5])
@@ -167,41 +175,17 @@ union(){
                     screw_top(position_number, draft);
             }
 
-
-
-    //final difference
-    }
+        //final difference
+        }
 
         intersection(){
-            union(){
-
-                //přední stěna Z+
-                translate([0, 0, width_of_engine_holder/2 ])
-                   cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
-
-                //přední stěna Z-
-                translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])
-                    cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
-
-                // materiál pro šrouby mezi díly 2 a 3
-                rotate([45,0,0])
-                   translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                    scale([1.5, 1, 1])
-                      sphere (r = 20, $fs = 0.5, $fa = 10);
-
-                rotate([-45,0,0])
-                   translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                    scale([1.5, 1, 1])
-                      sphere (r = 20, $fs = 0.5, $fa = 10);
-
-
                 // lem pro výztuhu a slepení dílu A
                 difference(){
                     union(){
 
-
+                        // spodní lem
                         translate([0,0,-hull_z_size/2])
-                            cube([hull_x_size, hull_wall_thickness, hull_z_size]); // spodní lem
+                            cube([hull_x_size, hull_wall_thickness, hull_z_size]);
 
                         //lemy pro slepení dílů ve směru délky krytu (v podélném směru)
 
@@ -260,13 +244,10 @@ union(){
                         hollowing_skeleton(ribbon_width, draft);
                 }
 
-            }
             //odstranění přesahů z vnější strany
             drop(draft);
         }
-}
-
-
+    }
 //konec model celek
 }
 
