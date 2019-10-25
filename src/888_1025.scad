@@ -121,12 +121,12 @@ module 888_1025(draft = true){
                         // materiál pro šrouby mezi díly 2 a 3
                         rotate([45,0,0])
                            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                            scale([1.5, 1, 1])
+                            scale([1.8, 1, 1])
                               sphere (r = 20, $fs = 0.5, $fa = 10);
 
                         rotate([-45,0,0])
                            translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                            scale([1.5, 1, 1])
+                            scale([1.8, 1, 1])
                               sphere (r = 20, $fs = 0.5, $fa = 10);
 
                         //přední stěna Z+
@@ -157,15 +157,17 @@ module 888_1025(draft = true){
             // díry pro šrouby ke spojení krytu
             rotate([45,0,0])
                 translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                    rotate([90,0,-60])
-                        translate([10,0,0])
-                            bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
+                    translate([7,-5,0])
+                        rotate([0,0,(15 + surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false))])
+                            rotate([90,0,-90])
+                                bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             rotate([-45,0,0])
                 translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                    rotate([90,0,-60])
-                        translate([10,0,0])
-                            bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
+                    translate([7,-5,0])
+                        rotate([0,0,(15 + surface_angle(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false))])
+                            rotate([90,0,-90])
+                                bolt(size = 3, length = 12, pocket = true, pocket_size = 35);
 
             //šrouby
             for (position_number = [1:5])
