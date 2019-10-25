@@ -51,15 +51,17 @@ images: $(IMAGES)
 
 $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Create temporary file for fast image rendering.
-	@-mkdir /tmp 2> /dev/null
-	@-mkdir /tmp/$(STL_DIR) 2> /dev/null
+	@-mkdir tmp 2> /dev/null
+	@-mkdir tmp/$(STL_DIR) 2> /dev/null
 	@$(eval FILE=$(basename $(notdir $<)))
-	@echo "import(\"$<\");" > /tmp/$<
+	@#echo "import('../$<'');" > tmp/$<
+	@echo "import(\"../$<\");" > tmp/$(FILE).scad
+	
 	@# Render PNG image from temporary file.
 	@echo $(YEL)
-	$(OPENSCAD_APP) -o $@ /tmp/$<
-	@# Remove temporary file
-	@rm -f /tmp/$<
+	@$(OPENSCAD_APP) -o $@ tmp/$(FILE).scad
+#	@# Remove temporary file
+	@rm -f tmp/$<
 	@echo $(DEF)
 
 
@@ -68,16 +70,16 @@ gcode: $(GCODES)
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
 	@$(eval INI_FILE=$(INI_DIR)/$(CFG_FILE).ini)
-	@echo $(INI_FILE)
 	@if [ ! -f $(INI_FILE) ]; then\
-		$(eval INI_FILE=$(GIT_DIR)/slicing/generic/basic_part.ini) echo "Zmeneno";\
+		$(eval INI_FILE=$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
 	fi
 	@echo "$(INI_FILE)"
 
 #	test ! -f $(INI_FILE) || 
 #	INI_FILE=$(GIT_ROOT)/slicing/generic/basic_part.ini
 	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_DIR)/$(CFG_FILE).ini $(YEL)
-	$(SLIC3R_APP) --load $(INI_FILE) -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl && $(DEF) || echo $(RED) "Error in slicing" $(DEF)
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
+	@echo $(DEF)
 
 
 gcode_clean:
