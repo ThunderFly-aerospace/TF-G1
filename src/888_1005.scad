@@ -101,6 +101,7 @@ module 888_1005(draft){
                 intersection (){
                     rotate([90, 0, 0])
                         hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
+                    
                     translate([main_tube_outer_diameter, - (hull_z_size - 2*hull_wall_thickness - 2*global_clearance)/2, -beam_thickness_below]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
                         cube([hull_drop_length - main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*global_clearance, ring_thickness]);
 
@@ -230,13 +231,17 @@ module 888_1005_cut(){
 
 
 module 888_1005_rear(){
-    translate([0, 0, 0])
+    //translate([55, 0, 0])
     difference(){
-        intersection(){
-            translate([beam_length , -100, -beam_thickness_below]) cube([30, 200, beam_thickness_below+beam_thickness_above]);
-            rotate([90, 0, 0])
-                translate([-engine_holder_beam_depth, 0, 0])
-                    hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
+        union(){
+            intersection(){
+                translate([beam_length , -100, -beam_thickness_below])
+                    cube([50, 200, ring_thickness]);
+                rotate([90, 0, 0])
+                    translate([-engine_holder_beam_depth, 0, 0])
+                        hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
+
+            }
 
         }
 
@@ -248,7 +253,16 @@ module 888_1005_rear(){
             rotate([0, 90, 0])
                 cylinder(d = beam_main_pipe_diameter, h = 50);
 
+        translate([ribbon_width-55,0,0])
+            rotate([90, 0, 0])
+                #screw_top(6, draft);
+
         translate([-engine_holder_beam_depth, 0, 0])
+
+        
+        
+
+        // drazka pro kryt
         intersection(){
             difference(){
                 translate([0,-hull_z_size/2, 0])
@@ -261,20 +275,41 @@ module 888_1005_rear(){
             }
 
         //odstranění dna z vnější strany krytu
-            drop(draft);
+        drop(draft);
         }
 
     }
 }
 
-translate([55,0,0])
+
+module 888_1005_pipe(draft = true){
+
+    echo("Vzdalenost der v limci:", 108*2);
+    echo("Vzdalenost hran v limci:", hull_z_size);
+
+    difference(){
+        rotate([90, 0, 0])
+            cylinder(d = beam_main_pipe_diameter, h = hull_z_size, center = true, $fn = draft? 8:50);
+        rotate([90, 0, 0])
+            cylinder(d = beam_main_pipe_diameter-3, h = hull_z_size+1, center = true, $fn = draft? 8:50);
+
+        translate([0, 0, 0])
+            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 6:20);
+        translate([0, beam_side_pipe_distance/2, 0])
+            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 6:20);
+        translate([0,-beam_side_pipe_distance/2, 0])
+            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 6:20);
+    }
+
+}
+
+translate([0,0,0])
     888_1005(draft);
-//mirror([0, 1, 0])
-//888_1005();
+mirror([0, 1, 0])
+    888_1005();
 
-//translate([55, 0, 0])
-//888_1005_rear();
+888_1005_rear();
 
-//88_1005_cut();
-//rotate([90,0,0])
-//666_1025(draft);
+for (i=[3,4])
+    translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)])
+        888_1005_pipe(draft);

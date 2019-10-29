@@ -42,10 +42,9 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@$(STLSORT) $@ || :
 	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
-	@echo $(DEF)
+	@echo $(GRN) "DONE: Render" $< $(DEF)
 
 #-include $(wildcard $(DEP_DIR)/*.deps)
-
 
 images: $(IMAGES)
 

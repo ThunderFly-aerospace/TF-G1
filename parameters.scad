@@ -270,7 +270,8 @@ top_screw_position = [0,
                     (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1],
                     (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2],
                     (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3],
-                    (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3];
+                    (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3,
+                    (top_cover_division[5] - 20)   ];
 	//spodní kryt
 bottom_screw_position = [0,
                         (bottom_cover_division[0] + bottom_cover_division[1])*(2/6),

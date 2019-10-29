@@ -17,7 +17,6 @@ $vpt = [0, 0, 0];
 $vpd = 1960;
 */
 
-
 module 666_1201(draft = false, holes = true){
 
     airfoil_NACA = 0016;    // typ použitého profilu
