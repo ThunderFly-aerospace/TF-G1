@@ -2,12 +2,13 @@
 draft = true;
 stl = true;
 
-predni_podvozek = true;
+predni_podvozek = false;
 zadni_podvozek = true;
 limec = true;
 cover = true;
-pilon_mount = true;
-motor = true;
+pilon_mount = false;
+rotor_head = false;
+motor = false;
 
 include <../../parameters.scad>
 use <../888_1004.scad>
@@ -64,23 +65,26 @@ difference(){
 
 // Limce
         if(limec){
-            if(false){import("../../STL/888_1005.stl", convexity=4);}
-            else{888_1005();}
-
-            888_1005_rear();
-
-            mirror([0, 1, 0])
-                if(stl){import("../../STL/888_1005.stl", convexity=4);}
-                else{888_1005();}
+            if(stl){import("../../STL/888_1005.stl", convexity=4);}
+            else{
+                888_1005();
+                888_1005_rear();
+                mirror([0, 1, 0])
+                   888_1005();
+            }
         }
 // rotorova hlava
-        translate([main_pilon_position, 0, height_of_vertical_tube])
-            rotate(180)
-                888_1029();
+        if(rotor_head)
+            translate([main_pilon_position, 0, height_of_vertical_tube])
+                rotate(180)
+                    if(stl){import("../../STL/888_1029.stl");}
+                    else{888_1029();}
 
-        translate([main_pilon_position, 0, height_of_vertical_tube])
-            rotate(180)
-                888_1029_servoholder();
+        if(rotor_head)
+            translate([main_pilon_position, 0, height_of_vertical_tube])
+                rotate(180)
+                    if(stl){import("../../STL/888_1029_servoholder.stl");}
+                    else{888_1029_servoholder();}
 
 
 
@@ -151,8 +155,8 @@ if(predni_podvozek)
         cylinder(d = 10, h = 500);
 */
 
-if(zadni_podvozek)translate([beam_patern*9.5, 0, -beam_thickness_below]){
-
+if(zadni_podvozek)
+    translate([beam_patern*9.5, 0, -beam_thickness_below]){
     washer_thickness = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
 
 
@@ -180,24 +184,24 @@ if(zadni_podvozek)translate([beam_patern*9.5, 0, -beam_thickness_below]){
 
     ////////////////////////
     color("red")
-    translate([0, chassis_top_bearing_position_y, kstm_ball_height(8)])
-    rotate([-15, 0, 0])
-    translate([0, -chassis_top_bearing_position_y+5, -kstm_ball_height(8)-9])
-    {
+        translate([0, chassis_top_bearing_position_y, kstm_ball_height(8)])
+            rotate([-15, 0, 0])
+                translate([0, -chassis_top_bearing_position_y+5, -kstm_ball_height(8)-9])
+                    {
 
-    /* translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
-        rotate([0, 0, 180]) 888_2013(front = 1, left = 0);
-    translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
-        rotate([0, 0, 180]) 888_2013(front = 0, left = 0);
-    translate([0, -chassis_wheelbase/2, -chassis_height])
-        rotate([-90, -90, 0])
-            888_2017(right = 0); */
+                    /* translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
+                        rotate([0, 0, 180]) 888_2013(front = 1, left = 0);
+                    translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
+                        rotate([0, 0, 180]) 888_2013(front = 0, left = 0);
+                    translate([0, -chassis_wheelbase/2, -chassis_height])
+                        rotate([-90, -90, 0])
+                            888_2017(right = 0); */
 
-    /* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
-        rotate([-28, 0, 0])
-            piston(); */
+                    /* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
+                        rotate([-28, 0, 0])
+                            piston(); */
 
-    }
+                    }
 
     ////////////////////
 

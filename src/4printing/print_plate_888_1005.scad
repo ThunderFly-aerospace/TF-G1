@@ -1,8 +1,7 @@
 include <../../parameters.scad>
-
 use <../888_1005.scad>
 
-draft = false;
+draft = $preview;
 
 translate([0, 15, 0])
     888_1005_cut();

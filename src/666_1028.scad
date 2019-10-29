@@ -493,6 +493,7 @@ module 666_1028_rudder(side_choose = 1, draft) {
     }
 }
 
+
 //difference() {
 //    union(){
 666_1028_body_bottom();
@@ -511,3 +512,6 @@ translate([0, 0, tail_bottom_height + Rudder_height])
 //    }
 //    cube([500,20,500]);
 //}
+
+
+echo("vzdálenost tyci:", tail_pipe_distance);
