@@ -257,6 +257,11 @@ module 888_1005_rear(){
             rotate([90, 0, 0])
                 #screw_top(6, draft);
 
+        mirror([0, 1, 0])
+            translate([ribbon_width-55,0,0])
+                rotate([90, 0, 0])
+                    #screw_top(6, draft);
+
         translate([-engine_holder_beam_depth, 0, 0])
 
         
