@@ -275,8 +275,14 @@ module 666_1028_body_top(side_choose = 1, draft) {
 
 
                         //Material for rudder shaft------------------------------------
-                        translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
-                            cube([Rudder_shaft_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
+                        difference() {
+                            translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
+                                cube([Rudder_shaft_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
+                            
+                            translate([tail_length / 2, side_choose * (sqrt(pow(tail_depth, 2) * 2) / 2 - tail_shape_A_cutter_y_position), tail_height - tail_bottom_height - Rudder_height - Rudder_shaft_end_cut])
+                                rotate([tail_angle / 2, 0, 0])
+                                    cube([tail_length, tail_depth, tail_depth], center = true);
+                        }
 
                         //Material for A shape screws----------------------------------
                         translate([tail_A_shape_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
@@ -507,8 +513,8 @@ module 666_1028_rudder(side_choose = 1, draft) {
 translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
     666_1028_tube_mount();
 //
-//translate([0, 0, tail_bottom_height + Rudder_height])
-//    666_1028_body_top();
+translate([0, 0, tail_bottom_height + Rudder_height])
+    666_1028_body_top();
 //    }
 //    cube([500,20,500]);
 //}

@@ -345,11 +345,12 @@ Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samo
 Rudder_length = 3*main_tube_outer_diameter;         // delka smerovky (pohiblive casti)
 Rudder_height = 150;                                // vyska smerovky (pohiblive casti)
 Rudder_depth = main_tube_outer_diameter/2;          // hloubka smerovky (pohiblive casti)
-Rudder_wall_thickness = hull_wall_thickness;        //tloustka povrchove steny smerovky
-Rudder_infill_wall_thickness = 0.64;                //tloustka vnitrnich sten smerovky
-Rudder_gap_width = 2*hull_wall_thickness;           //šířka mezery mezi směrovkou a ocasní plochou
-Rudder_shaft_diameter = 2.6;                        //otočné uchycení směrovky - průměr 2 mm
-Rudder_arm_x_offset = 5.5;                          //odsazeni paky servo od osy smerovky
+Rudder_wall_thickness = hull_wall_thickness;        // tloustka povrchove steny smerovky
+Rudder_infill_wall_thickness = 0.64;                // tloustka vnitrnich sten smerovky
+Rudder_gap_width = 2*hull_wall_thickness;           // šířka mezery mezi směrovkou a ocasní plochou
+Rudder_shaft_diameter = 2.6;                        // otočné uchycení směrovky - průměr 2 mm
+Rudder_arm_x_offset = 5.5;                          // odsazeni paky servo od osy smerovky
+Rudder_shaft_end_cut = 5;                           // hloubka vykousnuti konce osy
 
 tail_depth = 50;                                    // hloubka pro vnitrni casti smerovky
 tail_airfoils_angle = 90;
