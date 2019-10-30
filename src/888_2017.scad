@@ -1,7 +1,7 @@
 include <../parameters.scad>
 draft = true;
 
-module 888_2017(right = 0, draft){
+module 888_2017(right = 0, draft, print_orientation = 0){
 
     suspension_bolt_length = 20+1;
     suspension_pipe_screw_length = 20 - M3_nut_height*2;                        // delka sroubu skrz tenkou trubu
@@ -15,6 +15,9 @@ module 888_2017(right = 0, draft){
     vec_r = [chassis_height, chassis_pipe_baselength_r, chassis_pipe_wheelbase];
     vec_f = [chassis_height, -chassis_pipe_baselength_f, chassis_pipe_wheelbase];
 
+    rotate([180, 0, 0] * print_orientation)
+    orientate([chassis_height, 0, chassis_pipe_wheelbase/2+10/2] * print_orientation)
+    
     mirror([0, 1, 0]*right)
     difference(){
         union(){
@@ -148,14 +151,14 @@ module 888_2017(right = 0, draft){
 
             rotate([0, chassis_camber, 0]){
                 // Diry na srouby pro sesroubovani do vidlice
-                translate([suspension_mount_offset[0]+10 - 25, 0, 5+layer])
+                translate([suspension_mount_offset[0]+10 - 25, 0, 0])
                     cylinder(h = 50, d = M4_screw_diameter, $fn = 60);
-                translate([suspension_mount_offset[0]+10 - 25, 0, 8])
+                translate([suspension_mount_offset[0]+10 - 25, 0, 8+5])
                     cylinder(h = 50, d = M4_nut_diameter, $fn = 60);
 
-                translate([suspension_mount_offset[0]-10 - 25, 0, 5+layer])
+                translate([suspension_mount_offset[0]-10 - 25, 0, 0])
                     cylinder(h = 50, d = M4_screw_diameter, $fn = 60);
-                translate([suspension_mount_offset[0]-10 - 25, 0, 8])
+                translate([suspension_mount_offset[0]-10 - 25, 0, 8+5])
                     cylinder(h = 50, d = M4_nut_diameter, $fn = 60);
             }
 
