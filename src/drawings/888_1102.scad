@@ -2,13 +2,13 @@
 draft = true;
 stl = true;
 
-predni_podvozek = false;
+predni_podvozek = true;
 zadni_podvozek = true;
 limec = true;
 cover = true;
 pilon_mount = false;
 rotor_head = false;
-motor = false;
+motor = true;
 
 include <../../parameters.scad>
 use <../888_1004.scad>
@@ -137,15 +137,15 @@ if(predni_podvozek)
             if(stl){import("../../STL/888_2009.stl", convexity=4);}
             else{888_2009();}
 
-
-/* %translate([main_pilon_position, 0, 0])
+/*
+ %translate([main_pilon_position, 0, 0])
     cylinder(d = 20, h = height_of_vertical_tube);
 
 %translate([-2*main_tube_outer_diameter, -100, 0])
     rotate([0, 90, 0])
-        cylinder(d = 20, h = length_of_main_tube); */
+        cylinder(d = 20, h = length_of_main_tube);
 
-/*
+
 %translate([250, tail_pipe_distance/2, 0])
     rotate([0, 90, 0])
         cylinder(d = 10, h = 500);
@@ -182,29 +182,29 @@ if(zadni_podvozek)
 
                 */
 
-    ////////////////////////
+/*    ////////////////////////
     color("red")
         translate([0, chassis_top_bearing_position_y, kstm_ball_height(8)])
             rotate([-15, 0, 0])
                 translate([0, -chassis_top_bearing_position_y+5, -kstm_ball_height(8)-9])
                     {
 
-                    /* translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
+                    translate([chassis_baselength_f, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
                         rotate([0, 0, 180]) 888_2013(front = 1, left = 0);
                     translate([-chassis_baselength_r, -chassis_top_bearing_position_y, -kstm_ball_height(8)])
                         rotate([0, 0, 180]) 888_2013(front = 0, left = 0);
                     translate([0, -chassis_wheelbase/2, -chassis_height])
                         rotate([-90, -90, 0])
-                            888_2017(right = 0); */
+                            888_2017(right = 0);
 
-                    /* translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
+                    translate([0, -chassis_wheelbase/2 + 2017_bearing_mount_offset[1], -chassis_height + 2017_bearing_mount_offset[2]])
                         rotate([-28, 0, 0])
-                            piston(); */
+                            piston();
 
                     }
 
     ////////////////////
-
+*/
 
 
     translate([-chassis_baselength_f, chassis_top_bearing_position_y, -kstm_ball_height(8)-chassis_top_bearing_position_z])
