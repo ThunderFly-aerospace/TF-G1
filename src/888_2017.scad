@@ -172,11 +172,11 @@ module 888_2017(right = 0, draft, print_orientation = 0){
 
 
             //rotate([0, chassis_camber, 0])
-                translate([-250, -250, -500])
-                    cube(500);
+                //translate([-250, -250, -500])
+                  //  cube(500);
 
             rotate([0, chassis_camber, 0])
-                translate([-250, -fork_cutout_width/2, -500+5])
+                translate([-250, -fork_cutout_width/2, -500+3])
                     cube([500, fork_cutout_width, 500]);
         }
     }
