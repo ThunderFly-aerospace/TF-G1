@@ -16,7 +16,12 @@ stops_overhang = 5;
 layer_height = 0.2;
 slope = 10;
 
-shoulder_screw_length = 20; // jak hluboko je licovani v tomto dile
+reinforcement_hole_diameter = 1;
+
+reinforcement_vertical_hole_count = 10;
+reinforcement_horizontal_hole_count = 20;
+
+shoulder_screw_length = 48; // jak hluboko je licovani v tomto dile
 module 888_2009(){
     difference(){
 
@@ -66,14 +71,25 @@ module 888_2009(){
                     cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
 
                 translate([0, 0, shoulder_screw_length + layer])
-                    rotate([0, 0, 30])
-                        cylinder(d = M6_nut_diameter, h = M6_nut_height, $fn = 6);
-
-                translate([0, 0, shoulder_screw_length + layer])
                     cylinder(d = M6_screw_diameter, h = 15, $fn = 50);
 
-                translate([0, -M6_nut_diameter/2, shoulder_screw_length + layer])
-                    cube([50, M6_nut_diameter, M6_nut_height]);
+                translate([-50, -M6_nut_diameter/2, shoulder_screw_length + layer])
+                    cube([50*2, M6_nut_diameter, M6_nut_height]);
+
+
+                //vyztuzovaci otvory svisle
+                for(i = [0 : 360/reinforcement_vertical_hole_count : 360]) {
+                    rotate([0, 0, i])
+                        translate([M8_screw_diameter/2+3, 0, 0])
+                            cylinder(d=reinforcement_hole_diameter, h=shoulder_screw_length+1, $fn=10);
+                }
+
+                //vyztuzovaci otvory vodorovne
+                for(i = [0 : 1 : reinforcement_horizontal_hole_count]) {
+                    translate([0, 0, i*((shoulder_screw_length-1)/reinforcement_horizontal_hole_count)])
+                        rotate([90, 0, i*25])
+                            cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
+                }
             }
 
 
