@@ -87,7 +87,7 @@ module 888_2009(){
                 //vyztuzovaci otvory vodorovne
                 for(i = [0 : 1 : reinforcement_horizontal_hole_count]) {
                     translate([0, 0, i*((shoulder_screw_length-1)/reinforcement_horizontal_hole_count)])
-                        rotate([90, 0, i*25])
+                        rotate([90, 0, i*110])
                             cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
                 }
             }
