@@ -35,10 +35,10 @@ module 888_2009(){
                 translate([-column_offset, 0, -column_height])
                         rotate([0, slope, 0])
                             cylinder (h=10, d=column_lower_diameter, $fn=60);
-                translate([-column_offset, 0, -column_height])
-                    rotate([0, slope, 0])
-                        translate([-25/2, -column_lower_diameter/2 - 10, 10])
-                            cube([10, column_lower_diameter/2+5, 25]);
+                //translate([-column_offset, 0, -column_height])
+                //    rotate([0, slope, 0])
+                //        translate([-25/2, -column_lower_diameter/2 - 10, 10])
+                //            cube([10, column_lower_diameter/2+5, 25]);
             }
 
 
@@ -67,7 +67,7 @@ module 888_2009(){
                     cylinder(d=column_lower_diameter+global_clearance+1, h=50, $fn=50);
 
                 translate([0, 0, -50-3])
-                    cylinder(d=column_lower_diameter+20, h=50, $fn=50);
+                    cylinder(d=column_lower_diameter+50, h=50, $fn=50);
 
 
                 // Otvory pro licovany sroub
@@ -93,10 +93,10 @@ module 888_2009(){
                     translate([0, 0, i*((shoulder_screw_length-10)/reinforcement_horizontal_hole_count)+1])
                         rotate([90, 0, i*115]){
                             //cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
-                            #translate([M8_screw_diameter/2+0.3, 0, 0])
+                            translate([M8_screw_diameter/2+0.3, 0, 0])
                                 cube([100, 10, 0.2]);
                             
-                            #translate([-100-M8_screw_diameter/2-0.3, 0, 0])
+                            translate([-100-M8_screw_diameter/2-0.3, 0, 0])
                                 cube([100, 10, 0.2]);
 
 
@@ -105,39 +105,39 @@ module 888_2009(){
             }
 
 
-        translate([-column_offset, 0, -column_height])
-            rotate([0, slope, 0])
-                translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5])
-                    rotate([90, 0, 0])
-                        cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
+        // translate([-column_offset, 0, -column_height])
+        //     rotate([0, slope, 0])
+        //         translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5])
+        //             rotate([90, 0, 0])
+        //                 cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
 
-        translate([-column_offset, 0, -column_height])
-            rotate([0, slope, 0])
-                translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5 + 10])
-                    rotate([90, 0, 0])
-                        cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
+        // translate([-column_offset, 0, -column_height])
+        //     rotate([0, slope, 0])
+        //         translate([-25/2 +5, -column_lower_diameter/2 -10 + 13, 10+5 + 10])
+        //             rotate([90, 0, 0])
+        //                 cylinder(d = M3_screw_diameter, h = 50, $fn = 30);
 
-        translate([-column_offset, 0, -column_height])
-            rotate([0, slope, 0])
-                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5+10])
-                    rotate([90, 30, 0])
-                        cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+        // translate([-column_offset, 0, -column_height])
+        //     rotate([0, slope, 0])
+        //         translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5+10])
+        //             rotate([90, 30, 0])
+        //                 cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
 
-        translate([-column_offset, 0, -column_height])
-            rotate([0, slope, 0])
-                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5])
-                    rotate([90, 30, 0])
-                        cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
+        // translate([-column_offset, 0, -column_height])
+        //     rotate([0, slope, 0])
+        //         translate([-25/2 +5, -column_lower_diameter/2 -10 + 7, 10+5])
+        //             rotate([90, 30, 0])
+        //                 cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
 
-        translate([-column_offset, 0, -column_height])
-            rotate([0, slope, 0])
-                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5+10 - M3_nut_diameter/2])
-                    cube([20, M3_nut_height, M3_nut_diameter]);
+        // translate([-column_offset, 0, -column_height])
+        //     rotate([0, slope, 0])
+        //         translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5+10 - M3_nut_diameter/2])
+        //             cube([20, M3_nut_height, M3_nut_diameter]);
 
-        translate([-column_offset, 0, -column_height])
-            rotate([0, slope, 0])
-                translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5 - M3_nut_diameter/2])
-                    cube([20, M3_nut_height, M3_nut_diameter]);
+        // translate([-column_offset, 0, -column_height])
+        //     rotate([0, slope, 0])
+        //         translate([-25/2 +5, -column_lower_diameter/2 -10 + 7 - M3_nut_height, 10+5 - M3_nut_diameter/2])
+        //             cube([20, M3_nut_height, M3_nut_diameter]);
 
 
         // diry na svisle srouby skrze nosnik
