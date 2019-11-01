@@ -60,11 +60,42 @@ module 888_2009(){
 
         translate([-column_offset, 0, -column_height])
             rotate([0, slope, 0])
-                translate([0, 0, 7]){
+                translate([0, 0, 8]){
 
-                translate([0, -10, 0]) cube([100, 20, 2]);
 
-                translate([25, 0, 0]) rotate([90, 0, -90])%LW_20MG();
+
+                //translate([50, 0, -10])
+                //    rotate([90, 0, -90])
+                //        LW_20MG();
+
+                difference(){
+                    union(){
+                        translate([0, -15, 0])
+                            cube([90, 30, 4]);
+
+                        hull(){
+                            translate([0, -15, 0])
+                                cube([90, 2, 5]);
+                            translate([20, -15, 60])
+                                cube([5, 2, 1]);
+                        }
+
+                        hull(){
+                            translate([0, 15-2, 0])
+                                cube([90, 2, 5]);
+                            translate([20, 15-2, 60])
+                                cube([5, 2, 1]);
+                        }
+
+                    }
+                    translate([50, 0, -20])
+                        rotate([90, 0, -90])
+                            #LW_20MG_screw(depth = 15, pocket = false);
+
+                    translate([50, 0, -20])
+                        rotate([90, 0, -90])
+                            LW_20MG_base_cube(border = 0.5);
+                }
             }
 
         }

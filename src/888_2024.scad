@@ -42,7 +42,7 @@ module 888_2024(orientate = 0) {
                     cylinder(d=joint_diameter, h=joint_height, $fn=100);
 
             hull() {
-                translate([-joint_width/2, holder_length-joint_diameter*2, -1.3])
+                translate([-joint_width/2, holder_length-joint_diameter, 0])
                     cube([joint_width, joint_diameter*3/4, 696_bearing_outer_diameter+material_around_bearing*2]);
 
                 translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
