@@ -1,6 +1,7 @@
 /*============= Dil pro pripevneni predniho kolecka k nosniku =============== */
 
 include <../parameters.scad>
+include <lib/servo.scad>
 use <888_1004.scad>
 
 column_upper_diameter = 20;
@@ -56,6 +57,16 @@ module 888_2009(){
                             rotate([0, -15, 0])
                                 cube([13, 5, 50]);
 
+
+        translate([-column_offset, 0, -column_height])
+            rotate([0, slope, 0])
+                translate([0, 0, 7]){
+
+                translate([0, -10, 0]) cube([100, 20, 2]);
+
+                translate([25, 0, 0]) rotate([90, 0, -90])%LW_20MG();
+            }
+
         }
 
         // odcteni sikme plochy
@@ -94,10 +105,10 @@ module 888_2009(){
                         rotate([90, 0, i*115]){
                             //cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
                             translate([M8_screw_diameter/2+0.3, 0, 0])
-                                cube([100, 10, 0.2]);
+                                #cube([28, 10, 0.2]);
                             
-                            translate([-100-M8_screw_diameter/2-0.3, 0, 0])
-                                cube([100, 10, 0.2]);
+                            translate([-28-M8_screw_diameter/2-0.3, 0, 0])
+                                cube([28, 10, 0.2]);
 
 
                             }
