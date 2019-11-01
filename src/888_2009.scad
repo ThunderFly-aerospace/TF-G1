@@ -19,7 +19,7 @@ slope = 10;
 reinforcement_hole_diameter = 1;
 
 reinforcement_vertical_hole_count = 10;
-reinforcement_horizontal_hole_count = 20;
+reinforcement_horizontal_hole_count = 30;
 
 shoulder_screw_length = 70 - 2*7 - front_undercarriage_bearing_distance + 3; // jak hluboko je licovani v tomto dile
 module 888_2009(){
@@ -28,7 +28,7 @@ module 888_2009(){
         //sloupek
         union(){
             hull(){
-                translate([-engine_holder_beam_depth, -(beam_width-22)/2, -2])
+                translate([-engine_holder_beam_depth-5, -(beam_width-22)/2, -2])
                     cube([engine_holder_beam_depth/5*2, beam_width-22, 2]);
                 translate([-engine_holder_beam_depth+beam_patern*1.25, 0, -5])
                         cylinder (h=5, d=10, $fn=60);
@@ -66,6 +66,10 @@ module 888_2009(){
                 translate([0, 0, -50])
                     cylinder(d=column_lower_diameter+global_clearance+1, h=50, $fn=50);
 
+                translate([0, 0, -50-3])
+                    cylinder(d=column_lower_diameter+20, h=50, $fn=50);
+
+
                 // Otvory pro licovany sroub
                 translate([0, 0, -1])
                     cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
@@ -86,9 +90,17 @@ module 888_2009(){
 
                 //vyztuzovaci otvory vodorovne
                 for(i = [0 : 1 : reinforcement_horizontal_hole_count]) {
-                    translate([0, 0, i*((shoulder_screw_length-1)/reinforcement_horizontal_hole_count)])
-                        rotate([90, 0, i*110])
-                            cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
+                    translate([0, 0, i*((shoulder_screw_length-10)/reinforcement_horizontal_hole_count)+1])
+                        rotate([90, 0, i*115]){
+                            //cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
+                            #translate([M8_screw_diameter/2+0.3, 0, 0])
+                                cube([100, 10, 0.2]);
+                            
+                            #translate([-100-M8_screw_diameter/2-0.3, 0, 0])
+                                cube([100, 10, 0.2]);
+
+
+                            }
                 }
             }
 

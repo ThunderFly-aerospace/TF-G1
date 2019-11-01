@@ -8,7 +8,19 @@ joint_diameter = 40;
 joint_height = 5;
 bearing_extension = 0;
 
-module 888_2024() {
+module 888_2024(orientate = 0) {
+    rotate([6.7, 0, 0]*orientate)
+    //rotate([atan(((holder_length) / (-696_bearing_outer_diameter/2-material_around_bearing) )), 0, 0])
+
+    //translate([0, 0, 0])
+    //#rotate([0, 90, 0])
+    //cylinder(d = 10, h = 100, center = true);
+
+
+    //translate([0, holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
+    //#rotate([0, 90, 0])
+    //cylinder(d = 10, h = 100, center = true);
+
     translate([0, 0, -696_bearing_outer_diameter/2-material_around_bearing])
     difference() {
         union() {
@@ -30,7 +42,7 @@ module 888_2024() {
                     cylinder(d=joint_diameter, h=joint_height, $fn=100);
 
             hull() {
-                translate([-joint_width/2, holder_length-joint_diameter*3/4, 0])
+                #translate([-joint_width/2, holder_length-joint_diameter*2, -1])
                     cube([joint_width, joint_diameter*3/4, 696_bearing_outer_diameter+material_around_bearing*2]);
 
                 translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
@@ -40,8 +52,9 @@ module 888_2024() {
                 // kostka pro tahlo serva
                 translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
                     rotate([-holder_angle, 0, 0])
-                        translate([5, -10, -10])
-                            cube([joint_diameter/2, 20, 10]);
+                        translate([32, 0, -10])
+                            cylinder(d = 10, h = 10);
+                            //cube([joint_diameter/2+10, 10, 10]);
 
                 translate([0, holder_length, 0])
                     rotate([0, 90, 0])
@@ -53,8 +66,6 @@ module 888_2024() {
                 rotate([-holder_angle, 0, 0])
                     translate([0, -joint_diameter/2-stop_size, -40])
                         cube([stop_width, stop_size+10, joint_height+40]);
-
-
         }
 
         //šroub úchytu
@@ -70,7 +81,7 @@ module 888_2024() {
             rotate([0, -90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=60);
 
-        //šOsa pro pripevneni k hornimu dilu
+        //Osa pro pripevneni k hornimu dilu
         translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
             rotate([-holder_angle, 0, 0])
                 cylinder(d=15, h=600, $fn=100, center=true);
@@ -96,6 +107,20 @@ module 888_2024() {
                     cylinder(d=18, h=608_bearing_thickness+100, $fn=100);
 
 
+        // Otvory pro tahlo
+        translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
+            rotate([-holder_angle, 0, 0])
+                translate([32, 0, 0])
+                   cylinder(d=M3_screw_diameter, h=600, $fn=100, center=true);
+
+
+        translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
+            rotate([-holder_angle, 0, 0])
+                translate([32, 0, -100-10])
+                   cylinder(d=M3_nut_diameter, h=100, $fn=6);
+                   //cylinder(d=14, h=600, $fn=100, center=true);
+
+
 
         //šroub pro připevnění pístů
         translate([0, holder_length, 0])
@@ -110,20 +135,6 @@ module 888_2024() {
             rotate([0, -90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+10, $fn=50);
 
-        // Otvory pro zataceci tahlo
-        translate([0, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
-            rotate([-holder_angle, 0, 0])
-                translate([joint_diameter/2, -0, -5])
-                    rotate([0, 90, 0])
-                        for(i = [-5, 5]) translate([0, i, 0]){
-                            translate([0, 0, -8])
-                                cylinder(d = M3_screw_diameter, h = 15, $fn = 20);
-                            translate([0, 0, 0])
-                                rotate(30)
-                                    cylinder(d = M3_nut_diameter, h = M3_nut_height, $fn = 6);
-                            translate([-20, -M3_nut_diameter/2, 0])
-                                cube([20, M3_nut_diameter, M3_nut_height]);
-                }
     }
 }
 
