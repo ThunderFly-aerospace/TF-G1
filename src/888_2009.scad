@@ -48,14 +48,28 @@ module 888_2009(){
                     rotate([0, 0, max_angle_of_ratation/2+180])
                         translate([column_lower_diameter/2-3, stop_width/2, -7])
                             rotate([0, -15, 0])
-                                cube([13, 5, 50]);
+                                cube([13, stop_width, 50]);
 
             translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
                     rotate([0, 0, -max_angle_of_ratation/2+180])
-                        translate([column_lower_diameter/2-3, -5-stop_width/2, -7])
+                        translate([column_lower_diameter/2-3, -stop_width-stop_width/2, -7])
                             rotate([0, -15, 0])
-                                cube([13, 5, 50]);
+                                cube([13, stop_width, 50]);
+
+            // translate([-column_offset, 0, -column_height])
+            //     rotate([0, slope, 0])
+            //         translate([0, 0, -20]){
+
+
+            //             rotate([0, 0, max_angle_of_ratation/2])
+            //             translate([-50, -stop_width*1.5, 0])
+            //                 #cube([50, stop_width, 5]);
+
+            //             rotate([0, 0, -max_angle_of_ratation/2])
+            //                 translate([-50, stop_width*0.5, 0])
+            //                     #cube([50, stop_width, 5]);
+            //         }
 
 
         translate([-column_offset, 0, -column_height])
@@ -109,6 +123,9 @@ module 888_2009(){
 
                 translate([0, 0, -50])
                     cylinder(d=column_lower_diameter+global_clearance+1, h=50, $fn=50);
+
+                translate([0, 0, -50+0.8])
+                    cylinder(d= 19, h=50, $fn=50);
 
                 translate([0, 0, -50-3])
                     cylinder(d=column_lower_diameter+50, h=50, $fn=50);

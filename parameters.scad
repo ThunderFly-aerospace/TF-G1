@@ -704,9 +704,9 @@ screw_spring_distance = 15;
 material_around_bearing = 3;
 chasis_fork_thickness = 10;
 888_2025_distance_space = 0.5;
-stop_size = 5;
-stop_width = 5;
-max_angle_of_ratation = 60; //úhel mezi maximálními výchilkami podvozku při zatáčení
+stop_size = 8;
+stop_width = 6;
+max_angle_of_ratation = 40; //úhel mezi maximálními výchilkami podvozku při zatáčení
 joint_width = 25;
 
 
