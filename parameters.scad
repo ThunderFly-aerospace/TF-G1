@@ -336,6 +336,11 @@ uhel_x = 90 - 79;
 maximum_printable_size = 150;
 
 
+// Predni PODVOZEK
+
+front_undercarriage_bearing_distance = 10;
+
+
 ////Pitotova trubice
 Pitot_tube_diameter = 4.02 + 1;
 Distance_hole_from_tube = 11.92;  //vzdálenost otvoru pro připevnění od samotné trubičky

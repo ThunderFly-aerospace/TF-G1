@@ -21,7 +21,7 @@ reinforcement_hole_diameter = 1;
 reinforcement_vertical_hole_count = 10;
 reinforcement_horizontal_hole_count = 20;
 
-shoulder_screw_length = 48; // jak hluboko je licovani v tomto dile
+shoulder_screw_length = 70 - 2*7 - front_undercarriage_bearing_distance + 3; // jak hluboko je licovani v tomto dile
 module 888_2009(){
     difference(){
 
