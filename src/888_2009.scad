@@ -63,10 +63,12 @@ module 888_2009(){
                 translate([0, 0, 8]){
 
 
-
                 //translate([50, 0, -10])
                 //    rotate([90, 0, -90])
                 //        LW_20MG();
+
+                translate([0, -15, 4-layer])
+                    cube([90, 30, layer]);
 
                 difference(){
                     union(){
@@ -88,9 +90,9 @@ module 888_2009(){
                         }
 
                     }
-                    translate([50, 0, -20])
+                    translate([50, 0, -23])
                         rotate([90, 0, -90])
-                            #LW_20MG_screw(depth = 15, pocket = false);
+                            LW_20MG_screw(depth = 15, pocket = false);
 
                     translate([50, 0, -20])
                         rotate([90, 0, -90])
@@ -116,11 +118,11 @@ module 888_2009(){
                 translate([0, 0, -1])
                     cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
 
-                translate([0, 0, shoulder_screw_length + layer])
+                #translate([0, 0, shoulder_screw_length + layer])
                     cylinder(d = M6_screw_diameter, h = 15, $fn = 50);
 
-                translate([-50, -M6_nut_diameter/2, shoulder_screw_length + layer])
-                    cube([50*2, M6_nut_diameter, M6_nut_height]);
+                translate([-50, -M6_nut_pocket/2, shoulder_screw_length + layer])
+                    cube([50*2, M6_nut_pocket, M6_nut_height]);
 
 
                 //vyztuzovaci otvory svisle
@@ -136,7 +138,7 @@ module 888_2009(){
                         rotate([90, 0, i*115]){
                             //cylinder(d=reinforcement_hole_diameter, h=120, $fn=10, center=true);
                             translate([M8_screw_diameter/2+0.3, 0, 0])
-                                #cube([28, 10, 0.2]);
+                                cube([28, 10, 0.2]);
                             
                             translate([-28-M8_screw_diameter/2-0.3, 0, 0])
                                 cube([28, 10, 0.2]);

@@ -353,7 +353,7 @@ module LW_20MG(circle = 0, circle_pos = 0, depth_offset = 0, screw_diameter = 3.
   }
 }
 
-module LW_20MG_screw(depth = 15){
+module LW_20MG_screw(depth = 15, pocket = true){
 
     body_height = 39.5;
     body_thickness = 20.5;
@@ -371,8 +371,9 @@ module LW_20MG_screw(depth = 15){
                 cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
                 translate([0, 0, 8])
                     cylinder(d=M3_nut_diameter, h=M3_nut_height*1.5, $fn=6);
-                translate([-M3_nut_diameter/2, 0, 8])
-                    cube([M3_nut_diameter, 30, M3_nut_height]);
+                if(pocket)
+                    translate([-M3_nut_diameter/2, 0, 8])
+                        cube([M3_nut_diameter, 30, M3_nut_height]);
         }
 
         translate([ body_thickness/2 - holes_distance/2,9 + depth,-(holes_ears_distance - body_length)/2])
@@ -380,8 +381,9 @@ module LW_20MG_screw(depth = 15){
                 cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
                 translate([0, 0, 8])
                     cylinder(d=M3_nut_diameter, h=M3_nut_height*1.5, $fn=6);
-                translate([-M3_nut_diameter/2, 0, 8])
-                    cube([M3_nut_diameter, 30, M3_nut_height]);
+                if(pocket)
+                    translate([-M3_nut_diameter/2, 0, 8])
+                        cube([M3_nut_diameter, 30, M3_nut_height]);
         }
 
         translate([ body_thickness/2 + holes_distance/2,9 + depth, body_length+(holes_ears_distance - body_length)/2])
@@ -389,8 +391,9 @@ module LW_20MG_screw(depth = 15){
                 cylinder(d=M3_screw_diameter, h=4+depth, $fn=100);
                 translate([0, 0, 8])
                     cylinder(d=M3_nut_diameter, h=M3_nut_height*1.5, $fn=6);
-                translate([-M3_nut_diameter/2, -20, 8])
-                    cube([M3_nut_diameter, 20, M3_nut_height]);
+                if(pocket)
+                    translate([-M3_nut_diameter/2, -20, 8])
+                        cube([M3_nut_diameter, 20, M3_nut_height]);
         }
 
         translate([ body_thickness/2 - holes_distance/2,9 + depth, body_length+(holes_ears_distance - body_length)/2])
@@ -398,8 +401,9 @@ module LW_20MG_screw(depth = 15){
                 cylinder(d=M3_screw_diameter, h=4+depth, $fn=30);
                 translate([0, 0, 8])
                     cylinder(d=M3_nut_diameter, h=M3_nut_height*1.5, $fn=6);
-                translate([-M3_nut_diameter/2, -20, 8])
-                    cube([M3_nut_diameter, 20, M3_nut_height]);
+                if(pocket)
+                    translate([-M3_nut_diameter/2, -20, 8])
+                        cube([M3_nut_diameter, 20, M3_nut_height]);
         }
     }
 
