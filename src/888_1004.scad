@@ -1,6 +1,7 @@
 // hlavni nosnik virniku
+
 include <../parameters.scad>
-draft = true;   // sets rendering quality to draft.
+draft = $preview;   // sets rendering quality to draft.
 
 
 module beam_profile(l = 100, draft = true){
@@ -31,11 +32,11 @@ module beam_profile(l = 100, draft = true){
         // podelne diry na tyce
         translate([-global_clearance/2, -beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?15:50);
+                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?10:100);
 
         translate([-global_clearance/2, beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?15:50);
+                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?10:100);
 
 
         // drazky na matice
@@ -211,4 +212,4 @@ module 888_1004(draft = false){
     }
 }
 
-888_1004();
+888_1004(draft);

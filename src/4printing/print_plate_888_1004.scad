@@ -11,7 +11,7 @@ for (i=[1:len(beam_division)-1]) {
             rotate([0, -90, 0])
                 intersection(){
                     translate([-beam_division[i-1], 0, 0])
-                        888_1004();
+                        888_1004(draft);
                     translate([0, -50, -50])
                         cube([beam_division[i]-beam_division[i-1], 100, 100]);
 
