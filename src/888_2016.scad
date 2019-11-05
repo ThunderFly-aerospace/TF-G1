@@ -135,6 +135,25 @@ module 888_2016_drill_center(){
     }
 }
 
+module 888_2016_pipe(){
+    rotate([90, 0, 0])
+    difference(){
+        cylinder(d = tube_for_undercarriage_outer_diameter, h = chassis_suspension_basewidth, center = true, $fn = $preview? 10:90);
+        cylinder(d = tube_for_undercarriage_outer_diameter-3, h = chassis_suspension_basewidth, center = true, $fn = $preview? 10:90);
+
+        rotate([90, 0, 0])
+            cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview? 10:50);
+
+        rotate([0, 90, 0]){
+            translate([chassis_suspension_basewidth/2 - 12, 0, 0])
+                cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview? 10:50);
+            translate([-chassis_suspension_basewidth/2 + 12, 0, 0])
+                cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = $preview? 10:50);
+
+        }
+    }
+}
+
 
 //translate([0, 0, pipe_recessed])
 888_2016();

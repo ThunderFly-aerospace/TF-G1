@@ -1,7 +1,8 @@
 //========== drzak KSTM lozisek podvozku pod nosnikem virniku ==========//
 
 include <../parameters.scad>
-include <lib/vector.scad>
+use <lib/vector.scad>
+use <lib/igus.scad>
 
 kstm_width = 9;
 kstm_length = 47;
@@ -44,12 +45,27 @@ module holes(){
 //    orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
 
 
-module 888_2027(baselength) {
+module 888_2027(front = true) {
+
+    tran_f = [0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z];
+    vec_f = [front? chassis_baselength_f-2017_pipe_mount_offset[0]:chassis_baselength_r-2017_pipe_mount_offset[0], -chassis_pipe_wheelbase+chassis_top_bearing_position_z/2, chassis_height];
+
+    /*translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
+        orientate(vec_f){
+            rotate([180, 0, 90]) kstm_08();
+        }
+    mirror([0,1,0])
+    translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
+        orientate(vec_f){
+            rotate([180, 0, 90]) kstm_08();
+        }
+    */
+
     difference() {
         hull(){
 
-            translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-                orientate([baselength, -chassis_pipe_wheelbase, chassis_height])
+            translate(tran_f)
+                orientate(vec_f)
                     translate([0, 0, kstm_center_height])
                         hull(){
                             translate([0, (kstm_length-kstm_width)/2, 0])
@@ -57,8 +73,10 @@ module 888_2027(baselength) {
                             translate([0, -(kstm_length-kstm_width)/2, 0])
                                 cylinder(d = kstm_width, h = 1);
                         }
-            translate([0, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-                orientate([baselength, chassis_pipe_wheelbase, chassis_height])
+
+            mirror([0, 1, 0])
+            #translate(tran_f)
+                orientate(vec_f)
                     translate([0, 0, kstm_center_height])
                         hull(){
                             translate([0, (kstm_length-kstm_width)/2, 0])
@@ -71,12 +89,13 @@ module 888_2027(baselength) {
         }
 
         // diry pro prisroubovani KSTM lozisek
-        translate([0, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-            orientate([baselength, chassis_pipe_wheelbase, chassis_height])
+        translate(tran_f)
+            orientate(vec_f)
                 translate([0, 0, kstm_center_height])
                     holes();
-        translate([0, chassis_top_bearing_position_y, -chassis_top_bearing_position_z  - kstm_center_height])
-            orientate([baselength, -chassis_pipe_wheelbase, chassis_height])
+        mirror([0, 1, 0])
+        translate(tran_f)
+            orientate(vec_f)
                 translate([0, 0, kstm_center_height])
                     holes();
 
@@ -97,19 +116,13 @@ module 888_2027(baselength) {
             cylinder(d = M3_nut_diameter, h = 100, $fn = 6);
 
 
+        translate([0, 0, -0.3])
+            rotate([0, 0, 90])
+                linear_extrude(0.5)
+                    text(front?"front":"rear", halign = "center", valign = "center", size = 8);
 
-        /* for (i=[-5:5]) {
-            #translate([beam_patern*i - chassis_suspension_basewidth/2, 0, -100]) {
-                cylinder(d = M4_screw_diameter, h = 100);
-
-                translate([0, 0, -10]) {
-                    cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
-                }
-            }
-        } */
 
     }
-
 }
 
-888_2027();
+888_2027(front = true);

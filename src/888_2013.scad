@@ -8,7 +8,7 @@ use <lib/vector.scad>
 draft = true;   // sets rendering quality to draft.
 
 
-module 888_2013(front = true, left = 1, rotate = false){
+module 888_2013(rotate = false){
     tube_wall = 5;
     kstm_ball_thickness = 12;
     kstm_screw_length = 20;

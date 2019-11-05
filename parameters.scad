@@ -646,7 +646,6 @@ chassis_wheelbase = 600;        // rozvor kolecek
 chassis_height = 200;           // vyska podvozku
 chassis_baselength_r = beam_patern*2.25;       // podelna roztec podvozku dozade
 chassis_baselength_f = beam_patern*2.75;       // podelna roztec podvozku dopredu
-chassis_bearing_distance = 60;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 250;//vzdalenost prichyceni tlumicu na pricne tyci
 chassis_camber = -3;    //Odklon kola
 
@@ -681,11 +680,12 @@ chassis_suspension_angle_z = 0;
 
 // parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
 // hodnoty jsou oproti stredu podvozku
+chassis_bearing_distance = 60;   // vzdalenost kulovych lozisek na podlozek
 chassis_top_bearing_position_f = [chassis_pipe_baselength_r/2, chassis_bearing_distance/2, 0];
 chassis_top_bearing_position_r = [chassis_pipe_baselength_f/2, chassis_bearing_distance/2, 0];
 //chassis_top_bearing_position_x = chassis_top_bearing_position[0];
 chassis_top_bearing_position_y = chassis_bearing_distance/2;
-chassis_top_bearing_position_z = 20;
+chassis_top_bearing_position_z = 30;
 chassis_top_bearing_rotation_f = [chassis_pipe_angle_x, 0, chassis_pipe_angle_f_z];
 chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_z];
 

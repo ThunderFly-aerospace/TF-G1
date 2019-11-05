@@ -32,11 +32,11 @@ module beam_profile(l = 100, draft = true){
         // podelne diry na tyce
         translate([-global_clearance/2, -beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?10:100);
+                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft?8:80);
 
         translate([-global_clearance/2, beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?10:100);
+                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft?8:80);
 
 
         // drazky na matice
@@ -117,7 +117,7 @@ module beam_plug(l = 100, side_pipes = true){
     }
 }
 
-module beam_holes_patern(n = 1){
+module beam_holes_patern(n = 1, draft){
 
     screw_length = 20 - M3_nut_height*1.5;
     screw2_length = beam_main_pipe_thickness*3+6;
@@ -130,7 +130,7 @@ module beam_holes_patern(n = 1){
             // diry pro pricne tyce
             for (j=[-1]) translate([10, 0, j*(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
                 rotate([90, 0, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = draft ?15:50);
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = draft ?15:100);
             }
 
             /* #for (k=[-1])
@@ -205,10 +205,10 @@ module beam_holes_patern(n = 1){
 
 }
 
-module 888_1004(draft = false){
+module 888_1004(draft = true){
     difference(){
-        beam_profile(beam_length + engine_holder_beam_depth);
-        beam_holes_patern((beam_length+engine_holder_beam_depth)/30);
+        beam_profile(beam_length + engine_holder_beam_depth, draft);
+        beam_holes_patern((beam_length+engine_holder_beam_depth)/30, draft);
     }
 }
 

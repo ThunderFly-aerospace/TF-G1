@@ -376,7 +376,7 @@ module kardan(draft = false){
 kardan();
 } */
 
-translate([0, 80, 0]) pipe_drill();
+//translate([0, 80, 0]) pipe_drill();
 
 888_1029();
 888_1029_servoholder();

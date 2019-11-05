@@ -8,7 +8,7 @@ use <../888_2021.scad>
 
 module wheel_tiere(){
      rotate([90, 0, 0]){
-        rotate_extrude($fn=200)
+        rotate_extrude($fn=$preview?30:200)
         hull(){
             translate([wheel_inner_diameter/2, -wheel_inner_thickness/2+wheel_disc_upper_thickness, 0])
                 square([4, wheel_inner_thickness-wheel_disc_upper_thickness*2]);

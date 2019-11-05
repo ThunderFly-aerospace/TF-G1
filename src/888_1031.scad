@@ -15,13 +15,13 @@ module 888_1031(draft){
             for (i=[-beam_patern/2,0])
                 translate([i, 0, 0])
                     rotate([-90, 0, 0])
-                        cylinder(d = M4_nut_diameter+8, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 60);
+                        cylinder(d = M4_nut_diameter+8, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 100);
 
         // Tvar pro pripevneni pro tyce
             for (i=[-beam_patern/2, beam_patern/2])
                 translate([i - beam_patern/4, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes])
                     rotate([-90, 0, 0])
-                        cylinder(d = beam_main_pipe_thickness+4.75, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 60);
+                        cylinder(d = beam_main_pipe_thickness+4.75, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 100);
         }
 
         translate([-40, 0, 0])
@@ -41,7 +41,7 @@ module 888_1031(draft){
         for (i=[[-beam_patern/2, 0], [beam_patern/2, 180]])
             translate([i[0] - beam_patern/4, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes]){
                 rotate([-90, 0, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = beam_width/2 + 5 + 15 + global_clearance, $fn = draft? 10 : 60);
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width/2 + 30 + global_clearance, $fn = draft? 20 : 80);
                 rotate([0, 90, 0])
                     translate([0, beam_width/2+5, 0])
                         rotate([i[1], 0, 0]){
@@ -226,5 +226,5 @@ module 888_1031_info(){
 888_1031(draft);
 //888_1031_pipe();
 
-//translate([20, 0, 0]) 888_1031_drill_a($preview);
+//translate([20, -40, 0]) 888_1031_drill_a($preview);
 //translate([20, 0, 0]) 888_1031_drill_b($preview);

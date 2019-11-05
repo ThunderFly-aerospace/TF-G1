@@ -1,3 +1,6 @@
+
+// Drzak vidlice podvozku
+
 include <../parameters.scad>
 draft = $preview;
 
@@ -12,8 +15,8 @@ module 888_2017(left = 0, draft = true, print_orientation = 0){
     suspension_mount_pipe_end = 2017_pipe_bottom;                                              // Jak daleko nad zemi konci tyc
     fork_cutout_width = 20+1;
 
-    vec_r = [chassis_height, chassis_pipe_baselength_r + beam_patern/2, chassis_pipe_wheelbase];
-    vec_f = [chassis_height, -chassis_pipe_baselength_f + beam_patern/2, chassis_pipe_wheelbase];
+    vec_r = [chassis_height+2, chassis_pipe_baselength_r + beam_patern/2 - 2017_pipe_mount_offset[0]/2 - global_clearance, chassis_pipe_wheelbase - chassis_top_bearing_position_y/2];
+    vec_f = [chassis_height+2, -chassis_pipe_baselength_f + beam_patern/2 + 2017_pipe_mount_offset[0]/2 + global_clearance, chassis_pipe_wheelbase - chassis_top_bearing_position_y/2];
 
     rotate([180, 0, 0] * print_orientation)
     orientate([chassis_height, 0, chassis_pipe_wheelbase/2+10/2] * print_orientation)
@@ -183,14 +186,16 @@ module 888_2017(left = 0, draft = true, print_orientation = 0){
 }
 
 module 888_2017_pipe_front(draft = draft){
-pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];    
-    vec_f = [chassis_height, chassis_pipe_baselength_f - beam_patern/2, chassis_pipe_wheelbase];
+    pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];
+    vec_f = [chassis_height+2, chassis_pipe_baselength_f - beam_patern/2 - 2017_pipe_mount_offset[0]/2 + global_clearance, chassis_pipe_wheelbase - chassis_top_bearing_position_y/2];
+    length = mod(vec_f) - 20;
 
             translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
                 orientate(vec_f)
                     translate([0, 0, 2017_pipe_bottom+global_clearance/2])
                         difference(){
-                            cylinder(d = tube_for_undercarriage_outer_diameter, h = 400, $fn = draft? 15 : 100);
+                            cylinder(d = tube_for_undercarriage_outer_diameter, h = length, $fn = draft? 15 : 100);
+                            cylinder(d = tube_for_undercarriage_outer_diameter-3, h = length+1, $fn = draft? 15 : 100);
 
                             translate([0, 0, 15])
                                 rotate([90, 0, 0])
@@ -199,19 +204,30 @@ pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_
                             translate([0, 0, 15+20])
                                 rotate([90, 0, 0])
                                     cylinder(d= M3_screw_diameter, h= 20, center= true, $fn= draft? 8:30);
+
+                            translate([0, 0, length - 5])
+                                rotate([90, 0, 0])
+                                    cylinder(d= M3_screw_diameter, h= 40, center= true, $fn= draft? 8:30);
+
+
+                            translate([0, 0, length - 5-15])
+                                rotate([90, 0, 0])
+                                    cylinder(d= M3_screw_diameter, h= 40, center= true, $fn= draft? 8:30);
                         }
 }
 
 
 module 888_2017_pipe_rear(draft = draft){
-pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];    
-    vec_r = [chassis_height, -chassis_pipe_baselength_r - beam_patern/2, chassis_pipe_wheelbase];
-    
+    pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_pipe_mount_offset[1]];    
+    vec_r = [chassis_height+2, -chassis_pipe_baselength_r-beam_patern/2+2017_pipe_mount_offset[0]/2 - global_clearance, chassis_pipe_wheelbase-chassis_top_bearing_position_y/2];
+    length = mod(vec_r) - 20;
+
             translate([pipe_mount_offset[0], -pipe_mount_offset[1], 0])
                 orientate(vec_r)
                     translate([0, 0, 2017_pipe_bottom+global_clearance/2])
                         difference(){
-                            cylinder(d = tube_for_undercarriage_outer_diameter, h = 400, $fn = draft? 15 : 100);
+                            cylinder(d = tube_for_undercarriage_outer_diameter, h = length, $fn = draft? 15 : 100);
+                            cylinder(d = tube_for_undercarriage_outer_diameter-3, h = length+1, $fn = draft? 15 : 100);
 
                             translate([0, 0, 15])
                                 rotate([90, 0, 0])
@@ -220,6 +236,15 @@ pipe_mount_offset = [2017_pipe_mount_offset[2], 2017_pipe_mount_offset[0], 2017_
                             translate([0, 0, 15+20])
                                 rotate([90, 0, 0])
                                     cylinder(d= M3_screw_diameter, h= 20, center= true, $fn= draft? 8:30);
+
+                            translate([0, 0, length - 5])
+                                rotate([90, 0, 0])
+                                    cylinder(d= M3_screw_diameter, h= 40, center= true, $fn= draft? 8:30);
+
+
+                            translate([0, 0, length - 5-15])
+                                rotate([90, 0, 0])
+                                    cylinder(d= M3_screw_diameter, h= 40, center= true, $fn= draft? 8:30);
                         }
 }
 
