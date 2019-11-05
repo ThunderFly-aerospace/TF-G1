@@ -78,7 +78,7 @@ module 888_2022(wheel=false) {
                 cylinder(d=fork_wheel_width, h=height*2, $fn=50, center=true);
 
         //uchycení
-        #translate([-joint_width/2-0.2, -connector_width-10, -height*5])
+        translate([-joint_width/2-0.2, -connector_width-10, -height*5])
             cube([joint_width+0.4, 300, height*10]);
 
         //šroub u kola

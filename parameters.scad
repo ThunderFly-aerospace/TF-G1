@@ -368,6 +368,7 @@ tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_posit
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
 tail_front_mount_edge_cut_x_position = 5;           // pozice seriznuti predni hrany (osa X)
+tail_y_pos = 850;                                   // jak je smerovka daleko od prvni prince trubky
 
 Rudder_shaft_x_position = tail_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
 
@@ -667,10 +668,6 @@ chassis_arm_r = [chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_heig
 chassis_arm_length_f = mod(chassis_arm_f);
 chassis_arm_length_r = mod(chassis_arm_r);
 
-//chassis_arm_piston_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
-//echo("Delka podvozkoveho tlumice:", chassis_arm_piston_length);
-
-
 chassis_pipe_angle_x = atan((chassis_pipe_wheelbase)/(chassis_height));
 chassis_pipe_angle_y = 0;
 chassis_pipe_angle_r_z = atan((chassis_pipe_baselength_r)/(chassis_pipe_wheelbase));
@@ -692,6 +689,14 @@ chassis_top_bearing_position_z = 20;
 chassis_top_bearing_rotation_f = [chassis_pipe_angle_x, 0, chassis_pipe_angle_f_z];
 chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_z];
 
+
+// VIDLICE ZADNIHO KOLECKA
+chassis_fork_screw_length = 55;
+chassis_fork_thickness = 20;
+chassis_fork_width = 10;
+chassis_fork_hole_diameter = 10;
+chassis_fork_lenght = 90/2;
+chassis_fork_length_overlap = 18;       // prodlouzeni smerem dolu
 
 //chassis_arm_mount_plate = [40, 25];
 

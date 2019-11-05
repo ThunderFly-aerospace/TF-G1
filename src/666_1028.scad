@@ -11,7 +11,7 @@ DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
 Rudder_shaft_outside_diameter = tail_length * surface_distance(x = Rudder_shaft_x_position / tail_length, naca = 0009, open = false) * 2;
 
-draft = true;
+draft = $preview;
 
 // side_choose -tvar A levá (- 1) nebo pravá (1) strana (ve směru letu)
 
@@ -493,25 +493,41 @@ module 666_1028_rudder(side_choose = 1, draft) {
     }
 }
 
+// tyc ke smerovce
+module 666_1028_pipe(){
+    translate([0, 0, tail_pipe_z_position])
+        rotate([0, -90, 0])
+            translate([0, 0, -tail_tube_mount_length])
+                difference(){
+                    cylinder(d = tube_for_undercarriage_outer_diameter, h = 1000, $fn = 40);
+                    cylinder(d = tube_for_undercarriage_outer_diameter-3, h = 1000, $fn = 40);
+                }
 
-//difference() {
-//    union(){
-666_1028_body_bottom();
+}
 
-translate([0, 0, tail_bottom_height])
-    666_1028_body_middle();
+module 666_1028(rudder = true, rudder_angle = 15, pipe = false){
 
-translate([0, 0, tail_bottom_height + global_clearance])
-    666_1028_rudder();
+    666_1028_body_bottom();
 
-translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-    666_1028_tube_mount();
+    translate([0, 0, tail_bottom_height])
+        666_1028_body_middle();
 
-translate([0, 0, tail_bottom_height + Rudder_height])
-    666_1028_body_top();
-//    }
-//    cube([500,20,500]);
-//}
+    if(rudder)
+        translate([Rudder_shaft_x_position, 0, tail_bottom_height + global_clearance])
+            rotate([0, 0, rudder_angle])
+                translate([-Rudder_shaft_x_position, 0, 0])
+                666_1028_rudder();
+
+    translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
+        666_1028_tube_mount();
+
+    translate([0, 0, tail_bottom_height + Rudder_height])
+        666_1028_body_top();
+    
+    if(pipe)
+        666_1028_pipe();
+}
 
 
+666_1028();
 echo("vzdálenost tyci:", tail_pipe_distance);

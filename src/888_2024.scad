@@ -138,4 +138,7 @@ module 888_2024(orientate = 0) {
     }
 }
 
-888_2024();
+
+translate([0, -holder_length/2, 0])
+    rotate([holder_angle, 0, 0])
+        888_2024();
