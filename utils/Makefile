@@ -34,7 +34,7 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
 	@mkdir $(DEP_DIR) 2> /dev/null || echo ""
-	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" $(YEL) 
+	@$(OPENSCAD_APP) -D "draft = false" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL) 
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
