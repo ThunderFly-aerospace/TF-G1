@@ -711,7 +711,7 @@ chasis_fork_thickness = 10;
 888_2025_distance_space = 0.5;
 stop_size = 8;
 stop_width = 6;
-max_angle_of_ratation = 40; //úhel mezi maximálními výchilkami podvozku při zatáčení
+max_angle_of_ratation = 25; //úhel mezi maximálními výchilkami podvozku při zatáčení
 joint_width = 25;
 
 
