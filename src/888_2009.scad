@@ -124,7 +124,7 @@ module 888_2009(){
                 translate([0, 0, -50])
                     cylinder(d=column_lower_diameter+global_clearance+1, h=50, $fn=50);
 
-                translate([0, 0, -50+0.8])
+                translate([0, 0, -50+1.5])
                     cylinder(d= 19, h=50, $fn=50);
 
                 translate([0, 0, -50-3])
