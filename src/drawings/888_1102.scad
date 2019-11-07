@@ -6,11 +6,12 @@ nosnik = true;
 predni_podvozek = false;
 zadni_podvozek = true;
 limec = true;
-cover = false;
+cover = true;
 pilon_mount = true;
 rotor_head = true;
 motor = true;
 tail = true;
+battery = true;
 
 
 print = true;
@@ -29,6 +30,8 @@ use <../888_1026.scad>
 use <../888_1029.scad>
 use <../888_1030.scad>
 use <../888_1031.scad>
+use <../888_1036.scad>
+use <../888_1036_single.scad>
 use <../888_2013.scad>
 use <../888_2016.scad>
 use <../888_2017.scad>
@@ -85,7 +88,7 @@ difference(){
     if(carbon)
         for(i=[-1, 1])
             translate([0, i*beam_main_pipe_distance/2, 0])
-                if(false){import("../../STL/888_1004_pipe.stl");}
+                if(stl){import("../../STL/888_1004_pipe.stl");}
                 else{888_1004_pipe();}
 
 // Limce
@@ -100,7 +103,7 @@ difference(){
         }
 
         if(carbon)
-            for(i = [3])
+            for(i = [2])
                 translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
                     if(stl){import("../../STL/888_1005_pipe.stl", convexity=4);}
                     else{
@@ -116,6 +119,44 @@ difference(){
                         888_1031_pipe();
                     }
                 }
+
+
+
+
+// drzaky baterek
+    if(battery && print){
+        translate([beam_patern*2, tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1036.stl");
+
+        translate([beam_patern*2, -tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1036.stl");
+
+        translate([beam_patern*4, tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1036_single.stl");
+
+        translate([beam_patern*4, -tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1036_single.stl");
+
+    }
+
+
+    if(tail && print){
+        translate([beam_patern*9, tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1034.stl");
+
+        translate([beam_patern*9, -tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1034.stl");
+
+        translate([beam_patern*10, tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1034.stl");
+
+        translate([beam_patern*10, -tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
+        rotate([-90, 0, 0]) import("../../STL/888_1034.stl");
+
+    }
+
+
+
 // rotorova hlava
         translate([main_pilon_position, 0, height_of_vertical_tube]){
             if(rotor_head && print)
@@ -236,7 +277,7 @@ difference(){
         //color([0.8, 0.8, 0.8, 0.2])
             translate([0, 0, 0])
                 rotate([0,-90,0])
-                    if(false){import("../../STL/888_1026.stl", convexity=4);}
+                    if(stl){import("../../STL/888_1026.stl", convexity=4);}
                     else{888_1026();}
 
 
@@ -363,14 +404,14 @@ if(zadni_podvozek)
     if(carbon)color("Teal")
         translate([0, -chassis_wheelbase/2, -chassis_height])
             rotate([-90, -90, 0])
-                if(false){import("../../STL/888_2017_pipes.stl", convexity=4);}
+                if(stl){import("../../STL/888_2017_pipes.stl", convexity=4);}
                 else{888_2017_pipe_front(); 888_2017_pipe_rear();}
 
     if(carbon)color("Teal")
         mirror([0, 1, 0])
             translate([0, -chassis_wheelbase/2, -chassis_height])
                 rotate([-90, -90, 0])
-                    if(false){import("../../STL/888_2017_pipes.stl", convexity=4);}
+                    if(stl){import("../../STL/888_2017_pipes.stl", convexity=4);}
                     else{888_2017_pipe_front(); 888_2017_pipe_rear();}
 
 
@@ -524,7 +565,7 @@ if(other){
 
 
 if(tail)
-    translate([0, 0, -beam_min_wall-beam_main_pipe_thickness*2]){
+    translate([0, 0, -beam_vertical_space_between_pipes*2-beam_main_pipe_thickness*2]){
 
     if(print)
         translate([tail_y_pos, -tail_pipe_distance/2, 0])

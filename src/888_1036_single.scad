@@ -10,14 +10,15 @@ strap_width = 22;
 strap_thickness = 3;
 
 
-module 888_1036(){
+module 888_1036_single(){
+
 
     difference(){
         union(){
             hull(){
                 //cylinder(d = tube_for_undercarriage_outer_diameter + 2* beam_min_wall, h = tube_for_undercarriage_outer_diameter + 2*beam_min_wall, center = true);
-                height = tube_for_undercarriage_outer_diameter+4.5*beam_min_wall*2;
-                translate([0, height*0.5 - tube_for_undercarriage_outer_diameter*1.25, 0])
+                height = tube_for_undercarriage_outer_diameter+2.5*beam_min_wall*2;
+                translate([0, height*0.5 - tube_for_undercarriage_outer_diameter*0.2, 0])
                     cube([tube_for_undercarriage_outer_diameter+2*beam_min_wall, height, tube_for_undercarriage_outer_diameter + 2*beam_min_wall], center = true);
             }
 
@@ -31,13 +32,12 @@ module 888_1036(){
             cube([strap_width, strap_thickness, accumulator_holder_width+1], center = true);
 
 
-        cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall + 1, center = true);
         translate([0, tube_for_undercarriage_outer_diameter + beam_vertical_space_between_pipes, 0])
             rotate([0, 90, 0])
                 cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall + 1, center = true);
 
         // otvory pro srouby
-        translate([0, tube_for_undercarriage_outer_diameter + beam_vertical_space_between_pipes, 0]){
+        translate([0, tube_for_undercarriage_outer_diameter*0.25 + beam_vertical_space_between_pipes , 0]){
             cylinder(d = M3_screw_diameter, h = 20, center = true);
 
             translate([0, 0, 6.5])
@@ -47,27 +47,12 @@ module 888_1036(){
                 cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
         }
 
-        translate([0, -tube_for_undercarriage_outer_diameter*0.75, 0])
-            difference(){
-                cube([1, 20, tube_for_undercarriage_outer_diameter+2*beam_min_wall-0.6], center = true);
-                rotate([0, 90, 0])
-                    cylinder(d = M3_screw_diameter+0.5, h = 20, center = true);
-            }
+        cube([30, 20, 1], center = true);
 
-        translate([0, -tube_for_undercarriage_outer_diameter*0.75, 0])
-            rotate([0, 90, 0]){
-                cylinder(d = M3_screw_diameter, h = 20, center = true);
-
-                translate([0, 0, 5])
-                    cylinder(d = M3_nut_diameter, h = 20);
-
-                translate([0, 0, -20-5])
-                    cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
-            }
     }
 }
 
 
 
 
-888_1036();
+888_1036_single();
