@@ -120,7 +120,7 @@ module 888_1026(draft)
 
         translate([0, 0, engine_holder_beam_depth])
             rotate([0, 90, 0])
-                beam_plug(engine_holder_beam_depth);
+                beam_plug(engine_holder_beam_depth + 20);
 
         translate([-50, -beam_width/2-1, engine_holder_beam_depth-100+global_clearance])
             cube([50, beam_width+2, 100]);

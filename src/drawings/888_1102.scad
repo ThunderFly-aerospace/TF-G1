@@ -82,6 +82,12 @@ difference(){
             if(stl){import("../../STL/888_1004.stl", convexity=3);}
             else{888_1004();}
 
+    if(carbon)
+        for(i=[-1, 1])
+            translate([0, i*beam_main_pipe_distance/2, 0])
+                if(false){import("../../STL/888_1004_pipe.stl");}
+                else{888_1004_pipe();}
+
 // Limce
         if(limec && print){
             if(stl){import("../../STL/888_1005.stl", convexity=4);}
@@ -92,6 +98,24 @@ difference(){
                    888_1005();
             }
         }
+
+        if(carbon)
+            for(i = [3])
+                translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
+                    if(stl){import("../../STL/888_1005_pipe.stl", convexity=4);}
+                    else{
+                        888_1005_pipe();
+                    }
+                }
+
+        if(carbon)
+            for(i = [5,6])
+                translate([beam_patern*(i), 0, 0]) rotate([0, 0, 90]){
+                    if(stl){import("../../STL/888_1031_pipe.stl", convexity=4);}
+                    else{
+                        888_1031_pipe();
+                    }
+                }
 // rotorova hlava
         translate([main_pilon_position, 0, height_of_vertical_tube]){
             if(rotor_head && print)

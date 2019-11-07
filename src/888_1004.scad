@@ -212,4 +212,33 @@ module 888_1004(draft = true){
     }
 }
 
+
+module 888_1004_pipe(draft = true){
+    leng = beam_patern*(2 + 13);
+
+    rotate([0, 90, 0])
+        difference(){
+            translate([0, 0, -beam_patern*2])
+                cylinder(d = beam_main_pipe_diameter, h = leng, $fn = 50);
+            translate([0, 0, -beam_patern*2])
+                cylinder(d = beam_main_pipe_diameter-3, h = leng, $fn = 25);
+
+        for(i = [0:13])
+            translate([0, 0, beam_patern*(0.25+i)])
+                rotate([0, 90, 0])
+                    cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 20);
+
+        translate([0, 0, beam_patern*-1])
+                rotate([0, 90, 0])
+                    cylinder(d = M4_screw_diameter, h = 200, center = true, $fn = 20);
+
+        translate([0, 0, beam_patern*-1.5])
+                rotate([90, 0, 0])
+                    cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 20);
+
+
+
+        }
+}
+
 888_1004(draft);
