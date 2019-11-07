@@ -77,7 +77,7 @@ rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loz
 
 // nastavení parametrů motoru
 
-engine_angle = -3;
+engine_angle = -1.5;
 engine_diameter = 55;
 engine_offset = 65;
 engine_holder_beam_depth = 50; // jak moc je nosnik zapusten v dilu
@@ -364,7 +364,7 @@ tail_height = 210;                                  // vyska smerovky (ne vyska 
 tail_bottom_height = 30;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
 tail_pipe_z_position = tail_height/2;               // od spodniho okraje smerovky
 tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
-tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2;
+tail_pipe_distance = sin(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2-12.5;
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
 tail_front_mount_edge_cut_x_position = 5;           // pozice seriznuti predni hrany (osa X)

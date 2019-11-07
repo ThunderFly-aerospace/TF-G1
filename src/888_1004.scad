@@ -78,7 +78,7 @@ module beam_profile(l = 100, draft = true){
 
 module beam_plug(l = 100, side_pipes = true){
     difference(){
-        translate([l/2 - global_clearance, 0, -beam_thickness/2 + 5 + beam_min_wall + global_clearance])
+        translate([l/2 - global_clearance, 0, -beam_thickness/2 + 5 + beam_min_wall])
             cube([l, beam_width+1, beam_thickness+1], center = true);
 
         for (i=[0,2])
