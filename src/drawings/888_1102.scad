@@ -5,6 +5,7 @@ stl = true;
 nosnik = false;
 predni_podvozek = false;
 zadni_podvozek = false;
+mechova_kolecka = false;
 limec = false;
 cover = false;
 rotor_heat_pulley_motor = false;
@@ -16,6 +17,7 @@ rotor_head = false;
 motor = false;
 tail = false;
 battery = false;
+propeller = false;
 
 
 print = false;
@@ -207,6 +209,14 @@ difference(){
                                         rotor_pulley();
                                     }
 
+            if(rotor_heat_pulley_rotor && other)
+                translate([rotor_head_bearing_x_shift,0,rotor_head_height])
+                    rotate([0,rotor_head_rank_angle,0])
+                        rotate([0,0,0])
+                            translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2+20])
+                                    import("../../STL/external/666_1207.stl");
+                                    
+
             if(rotor_heat_pulley_motor && print)
                 translate([rotor_head_bearing_x_shift,0,rotor_head_height])
                     rotate([0,rotor_head_rank_angle,0])
@@ -290,6 +300,12 @@ difference(){
             motor_main();
     }
 
+    if(propeller){
+        position_main_motor()
+            translate([1.5, 0, -15]) rotate([-90, 0, 0]) scale(9)
+            import("../../STL/APC_15x4C.stl");
+    }
+
 
 if(predni_podvozek && print)
     translate([0, 0, -beam_thickness_below])
@@ -334,14 +350,6 @@ if(predni_podvozek && print)
 
 if(zadni_podvozek)
     translate([beam_patern*9.5, 0, -beam_thickness_below]){
-    washer_thickness = main_tube_outer_diameter + thickness_between_tubes + coupling_wall_thickness;
-
-    ch = chassis_height;
-  
-    echo(str("Delka predniho ramene je ", mod([chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
-    echo(str("Delka  zadniho ramene je ", mod([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])-2017_pipe_bottom));
-
-
     // Dily na pripevneni podvozkovych trubek do KSTM lozisek pod nosnikem
 
     if(print)
@@ -466,23 +474,7 @@ if(print){
                     }
     }
 
-// mechova kolecka
-if(other){
-    translate ([0, -chassis_wheelbase/2 , -chassis_height])
-        rotate([-3, 0, 0])
-            translate([0, -chassis_fork_width-fork_wheel_width/2, 0])
-                translate([0, 0, -25]){
-                    wheel_tiere();
-                }
 
-    mirror([0, 1, 0])
-        translate ([0, -chassis_wheelbase/2 , -chassis_height])
-            rotate([-3, 0, 0])
-                translate([0, -chassis_fork_width-fork_wheel_width/2, 0])
-                    translate([0, 0, -25]){
-                        wheel_tiere();
-                    }
-    }
 // zadni kolecka
 
 
@@ -557,20 +549,30 @@ if(other){
 
         }
     }
-
-
-
-
-
-
-
-
-}
-
-
+ }
 }
 //cube(1000);
 }
+
+// mechova kolecka
+if(mechova_kolecka && other)
+    translate([beam_patern*9.5, 0, -beam_thickness_below]){
+
+        translate ([0, -chassis_wheelbase/2 , -chassis_height])
+            rotate([-3, 0, 0])
+                translate([0, -chassis_fork_width-fork_wheel_width/2, 0])
+                    translate([0, 0, -25]){
+                        wheel_tiere();
+                    }
+
+        mirror([0, 1, 0])
+            translate ([0, -chassis_wheelbase/2 , -chassis_height])
+                rotate([-3, 0, 0])
+                    translate([0, -chassis_fork_width-fork_wheel_width/2, 0])
+                        translate([0, 0, -25]){
+                            wheel_tiere();
+                        }
+    }
 
 
 
@@ -605,8 +607,7 @@ if(tail)
                 translate([0, 0, -tail_height/2])
                     if(stl){import("../../STL/666_1028_pipes.stl", convexity=4);}
                     else{666_1028_pipe();}
-
-}
+} // end of tail
 
 } // end of module assembly
 
