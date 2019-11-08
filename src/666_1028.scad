@@ -505,7 +505,7 @@ module 666_1028_pipe(){
 
 }
 
-module 666_1028(rudder = true, rudder_angle = 15, pipe = false){
+module 666_1028(rudder = false, rudder_angle = 15, pipe = false){
 
     666_1028_body_bottom();
 

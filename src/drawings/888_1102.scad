@@ -2,23 +2,27 @@
 draft = true;
 stl = true;
 
-nosnik = true;
-predni_podvozek = true;
-zadni_podvozek = true;
-limec = true;
-cover = true;
-pilon_mount = true;
-rotor_head = true;
-motor = true;
-tail = true;
-battery = true;
+nosnik = false;
+predni_podvozek = false;
+zadni_podvozek = false;
+limec = false;
+cover = false;
+rotor_heat_pulley_motor = false;
+rotor_heat_pulley_rotor = false;
+rotor_head_move = false;
+rotor_head_prerotator = false;
+pilon_mount = false;
+rotor_head = false;
+motor = false;
+tail = false;
+battery = false;
 
 
-print = true;
-alu = true;
-piston = true;
-carbon = true;
-other = true;
+print = false;
+alu = false;
+piston = false;
+carbon = false;
+other = false;
 
 include <../../parameters.scad>
 use <../666_1028.scad>
@@ -179,7 +183,7 @@ difference(){
                                     }
 
 // Tistena deska rotorove hlavy
-            if(rotor_head && print)
+            if(rotor_head_move && print)
                 translate([rotor_head_bearing_x_shift,0,rotor_head_height])
                     rotate([0,rotor_head_rank_angle,0])
                         rotate([0,0,0])
@@ -191,7 +195,7 @@ difference(){
                                         888_1020();
                                     }
 
-            if(rotor_head && print)
+            if(rotor_heat_pulley_rotor && print)
                 translate([rotor_head_bearing_x_shift,0,rotor_head_height])
                     rotate([0,rotor_head_rank_angle,0])
                         rotate([0,0,0])
@@ -203,7 +207,7 @@ difference(){
                                         rotor_pulley();
                                     }
 
-            if(rotor_head && print)
+            if(rotor_heat_pulley_motor && print)
                 translate([rotor_head_bearing_x_shift,0,rotor_head_height])
                     rotate([0,rotor_head_rank_angle,0])
                         rotate([0,0,0])
@@ -215,7 +219,7 @@ difference(){
                                         prerotator_pulley_motor();
                                     }
 
-            if(rotor_head && print)
+            if(rotor_head_prerotator && print)
                 translate([rotor_head_bearing_x_shift,0,rotor_head_height])
                     rotate([0,rotor_head_rank_angle,0])
                         rotate([0,0,0])
@@ -606,4 +610,4 @@ if(tail)
 
 } // end of module assembly
 
-assembly();
+//assembly();
