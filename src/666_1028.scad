@@ -310,7 +310,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
                         if(side_choose == 1) {
                             cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
                         } else {
-                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = draft ? 10 : 50, center = true);
+                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
                         }
                 }
 
@@ -322,7 +322,7 @@ module 666_1028_body_top(side_choose = 1, draft) {
                         if(side_choose == 1) {
                             cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
                         } else {
-                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = draft ? 10 : 50, center = true);
+                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
                         }
                 }
          //----------------------------------------------------------
@@ -505,29 +505,29 @@ module 666_1028_pipe(){
 
 }
 
-module 666_1028(rudder = false, rudder_angle = 15, pipe = false){
+module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false){
 
-    666_1028_body_bottom();
+    666_1028_body_bottom(side_choose);
 
     translate([0, 0, tail_bottom_height])
-        666_1028_body_middle();
+        666_1028_body_middle(side_choose);
 
     if(rudder)
         translate([Rudder_shaft_x_position, 0, tail_bottom_height + global_clearance])
             rotate([0, 0, rudder_angle])
                 translate([-Rudder_shaft_x_position, 0, 0])
-                666_1028_rudder();
+                666_1028_rudder(side_choose);
 
     translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-        666_1028_tube_mount();
+        666_1028_tube_mount(side_choose);
 
     translate([0, 0, tail_bottom_height + Rudder_height])
-        666_1028_body_top();
-    
+        666_1028_body_top(side_choose);
+
     if(pipe)
-        666_1028_pipe();
+        666_1028_pipe(side_choose);
 }
 
 
-666_1028();
+666_1028(side_choose = -1);
 echo("vzdálenost tyci:", tail_pipe_distance);
