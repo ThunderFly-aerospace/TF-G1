@@ -373,7 +373,7 @@ module 666_1028_tube_mount(draft) {
                 translate([0, - (Rudder_depth + tail_tube_mount_wings_thickness) / 2, - (tail_tube_mount_height +  tube_for_undercarriage_outer_diameter) / 2 - Rudder_infill_wall_thickness])
                     cube([tail_tube_mount_length + 2, Rudder_depth, tail_tube_mount_height], center = true);
             }
-
+        
             //front side cut
             translate([- tail_tube_mount_length + tail_front_mount_edge_cut_x_position, 0, 0])
                 cube([tail_tube_mount_length, Rudder_depth * 2, tail_tube_mount_height + global_clearance * 2], center = true);
@@ -398,7 +398,7 @@ module 666_1028_rudder(side_choose = 1, draft) {
                     // material around shaft
                     translate([Rudder_shaft_x_position, 0, Rudder_height / 2 - 1])
                         cylinder(d = Rudder_shaft_diameter + 2, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
-
+                    
                     // material at front half cylinder
                     translate([Rudder_shaft_x_position, 0, Rudder_height / 2 - 1])
                         difference() {
@@ -408,11 +408,11 @@ module 666_1028_rudder(side_choose = 1, draft) {
                             translate([Rudder_shaft_outside_diameter / 2, 0, 0])
                                 cube([Rudder_shaft_outside_diameter, Rudder_depth, Rudder_height + 2], center = true);
                         }
-
+                    
                     // material for holes for servo arm
                     translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, Rudder_height / 2 + tail_servo_rudder_arm_z_offset])
                         cube([tail_servo_rudder_arm_side_size + 2, Rudder_depth, tail_servo_rudder_arm_side_size + 2], center = true);
-
+                    
                     //Ribs------------------------------------------------------
                     //TODO: check if they are dynamic
 
@@ -431,7 +431,7 @@ module 666_1028_rudder(side_choose = 1, draft) {
                             }
                 }
             }
-
+            
             //main rudder wall
             difference() {
                 hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
@@ -439,15 +439,15 @@ module 666_1028_rudder(side_choose = 1, draft) {
                     cube([Rudder_shaft_x_position, Rudder_depth * 2, tail_height + 2]);
             }
         }
-
+        
         //shaft hole
         translate([Rudder_shaft_x_position, 0, Rudder_height / 2])
             cylinder(d = Rudder_shaft_diameter, h = Rudder_height * 2, $fn = draft ? 10 : 50, center = true);
-
+        
         // cutting back side of servo arm holder to make it square
         translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (- Rudder_depth / 2 - tail_length * surface_distance(x = (Rudder_shaft_x_position + 4.35 + tail_servo_rudder_arm_side_size / 2 + Rudder_arm_x_offset) / tail_length, naca = 0009, open = false)), Rudder_height / 2 + tail_servo_rudder_arm_z_offset])
             cube([tail_servo_rudder_arm_side_size, Rudder_depth, tail_servo_rudder_arm_side_size], center = true);
-
+        
         // cutting front side of servo arm holder to make it square and same position as servo
         translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, side_choose * (tail_servo_rudder_arm_depth / 2 + tail_servo_rudder_arm_y_offset), Rudder_height / 2 + tail_servo_rudder_arm_z_offset])
             union() {
