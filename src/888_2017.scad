@@ -119,10 +119,10 @@ module 888_2017(left = 0, draft = true, print_orientation = 0){
 
 
             // Dira pro tyc k podvozku
-            translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
+            #translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])
                 orientate(vec_r)
                     translate([0, 0, suspension_mount_pipe_end])
-                        cylinder(d = tube_for_undercarriage_outer_diameter, h = 400, $fn = draft? 15 : 100);
+                        cylinder(d = tube_for_undercarriage_outer_diameter, h = 400, $fn = draft? 10 : 100);
 
             // otvory pro matky s kapsou
             translate([pipe_mount_offset[0], pipe_mount_offset[1], 0])

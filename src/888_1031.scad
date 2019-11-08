@@ -215,6 +215,14 @@ module 888_1031_drill_b(draft){
 }
 
 
+module position_888_1031_pipe_tranverse(i = 0){
+    //translate([0, 0, -50])
+    translate([beam_patern*(i), 0, 0])
+    rotate([0, 0, 90])
+    children();
+}
+
+
 module 888_1031_info(){
     echo("==========INFO 888_1031 ==========");
     echo("Dil pro pripevneni prednich tyci pylonu");

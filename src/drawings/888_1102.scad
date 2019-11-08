@@ -3,7 +3,7 @@ draft = true;
 stl = true;
 
 nosnik = true;
-predni_podvozek = false;
+predni_podvozek = true;
 zadni_podvozek = true;
 limec = true;
 cover = true;
@@ -44,6 +44,8 @@ use <../888_2011.scad>
 use <../888_2012.scad>
 use <../888_2021.scad>
 use <888_2103.scad>
+use <../main_motor.scad>
+use <../lib/motor.scad>
 use <../lib/igus.scad>
 use <../lib/vector.scad>
 use <../lib/piston.scad>
@@ -73,23 +75,20 @@ difference(){
       if(cover && print){
 
 // Top cover
-        %translate([-engine_holder_beam_depth - hull_wall_thickness, 0, 0]) // musí to být posunuto asi o těch 6mm a nevím proč.
-          rotate([90,0,0])
-              if(stl){import("../../STL/888_1025.stl", convexity=4);}
-              else{888_1025();}
+        %if(stl){import("../../STL/888_1025.stl", convexity=4);}
+         else{position_888_1025() 888_1025();}
       }
 
 // Nosnik
     if(nosnik && print)
-        translate([-engine_holder_beam_depth, 0, 0])
             if(stl){import("../../STL/888_1004.stl", convexity=3);}
-            else{888_1004();}
+            else{position_888_1004() 888_1004();}
 
+// podelne tyce nosniku
     if(carbon)
         for(i=[-1, 1])
-            translate([0, i*beam_main_pipe_distance/2, 0])
-                if(stl){import("../../STL/888_1004_pipe.stl");}
-                else{888_1004_pipe();}
+                if(stl){import("../../STL/888_1004_pipe_a.stl");}
+                else{position_888_1004_pipe(i) 888_1004_pipe();}
 
 // Limce
         if(limec && print){
@@ -102,18 +101,20 @@ difference(){
             }
         }
 
+// pricne tyce nosnikem
         if(carbon)
             for(i = [2])
-                translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
+                position_888_1004_pipe_traverse(i){
                     if(stl){import("../../STL/888_1005_pipe.stl", convexity=4);}
                     else{
                         888_1005_pipe();
                     }
                 }
 
+// pricne tyce nonikem.
         if(carbon)
             for(i = [5,6])
-                translate([beam_patern*(i), 0, 0]) rotate([0, 0, 90]){
+                position_888_1031_pipe_tranverse(i){
                     if(stl){import("../../STL/888_1031_pipe.stl", convexity=4);}
                     else{
                         888_1031_pipe();
@@ -279,6 +280,11 @@ difference(){
                 rotate([0,-90,0])
                     if(stl){import("../../STL/888_1026.stl", convexity=4);}
                     else{888_1026();}
+
+    if(motor && other){
+        position_main_motor()
+            motor_main();
+    }
 
 
 if(predni_podvozek && print)

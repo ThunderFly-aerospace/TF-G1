@@ -4,7 +4,7 @@ include <../lib/servo.scad>
 use <../lib/igus.scad>
 use <../888_1020.scad>
 use <../888_1029.scad>
-use <../888_1022_without_desk_lower_wall.scad>
+use <../888_1022.scad>
 
 rotx = ($t)*20 - 10;      //  -10 .. +10
 roty = -(($t)*10 - 5);       //   -5 .. +5

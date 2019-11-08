@@ -500,6 +500,13 @@ module 888_1025_part_B(part_number, draft){
 //final module
 }
 
+
+module position_888_1025(){
+    translate([-engine_holder_beam_depth - hull_wall_thickness, 0, 0]) // musí to být posunuto asi o těch 6mm a nevím proč.
+        rotate([90,0,0])
+            children();
+}
+
 /*
 
 888_1025_part_A(1, draft);
@@ -509,8 +516,8 @@ translate([0,0,-10])
 
 */
 
-
-888_1025(draft);
+position_888_1025()
+    888_1025(draft);
 
 use <888_1000.scad>
 

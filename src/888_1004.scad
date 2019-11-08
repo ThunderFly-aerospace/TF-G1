@@ -241,4 +241,20 @@ module 888_1004_pipe(draft = true){
         }
 }
 
-888_1004(draft);
+module position_888_1004(){
+    translate([-engine_holder_beam_depth, 0, 0])
+        children();
+}
+
+module position_888_1004_pipe(i = 1){
+    translate([0, i*beam_main_pipe_distance/2, 0])
+        children();
+}
+
+module position_888_1004_pipe_traverse(i = 0){
+    translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)])
+        children();
+}
+
+position_888_1004()
+    888_1004(draft);
