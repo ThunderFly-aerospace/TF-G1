@@ -24,15 +24,15 @@ module 888_2022(wheel=false) {
     translate([0, 0, 0]) {
     if(wheel) {
         union() {
-            translate([-fork_wheel_width*1/3/2, -888_2022_wheel_diameter/2, 0])
+            translate([-fork_wheel_width*1/3/2, -front_fork_length, 0])
                 rotate([0, -90, 0])
-                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=20);
-            translate([fork_wheel_width*1/3/2, -888_2022_wheel_diameter/2, 0])
+                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=50);
+            translate([fork_wheel_width*1/3/2, -front_fork_length, 0])
                 rotate([0, 90, 0])
-                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=20);
-            translate([0, -888_2022_wheel_diameter/2, 0])
+                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=50);
+            translate([0, -front_fork_length, 0])
                 rotate([0, 90, 0])
-                    cylinder(d=wheel_diameter, h=fork_wheel_width*1/3, center=true, $fn=20);
+                    cylinder(d=wheel_diameter, h=fork_wheel_width*1/3, center=true, $fn=50);
         }
     }
 
@@ -123,4 +123,4 @@ module 888_2022(wheel=false) {
     }
 }
 
-888_2022(false);
+888_2022();
