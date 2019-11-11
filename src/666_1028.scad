@@ -24,7 +24,11 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
 
             //Adding material inside rudder-----------------------------
             intersection(){
-                airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_bottom_height, open = false);
+                union() {
+                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_bottom_height, open = false);
+                    translate([Rudder_shaft_x_position, 0, (tail_bottom_height + 0.5) / 2])
+                        cylinder(d = M3_nut_diameter, h = tail_bottom_height + 0.5,center = true);
+                }
 
                 union(){
                     //Ribs------------------------------------------------------
