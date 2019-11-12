@@ -340,7 +340,7 @@ module 666_1028_tube_mount(draft) {
             }
             //tube wall
             rotate([0, 90, 0])
-                cylinder(d = tube_for_undercarriage_outer_diameter + Rudder_wall_thickness * 2, h = tail_tube_mount_length, center = true, $fn = draft ? 10 : 50);
+                cylinder(d = tube_for_undercarriage_outer_diameter + Rudder_wall_thickness * 2, h = tail_tube_mount_length - global_clearance, center = true, $fn = draft ? 10 : 50);
         }
 
         //tube hole
@@ -512,25 +512,25 @@ module 666_1028_pipe(){
 
 module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false){
 
-//    666_1028_body_bottom(side_choose);
-//
-////    translate([0, 0, tail_bottom_height])
-////        666_1028_body_middle(side_choose);
-//
+    666_1028_body_bottom(side_choose);
+
+    translate([0, 0, tail_bottom_height])
+        666_1028_body_middle(side_choose);
+
     if(rudder)
         translate([Rudder_shaft_x_position, 0, tail_bottom_height + global_clearance])
             rotate([0, 0, rudder_angle])
                 translate([-Rudder_shaft_x_position, 0, 0])
                 666_1028_rudder(side_choose);
-//
-//    translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-//        666_1028_tube_mount(side_choose);
-//
-//    translate([0, 0, tail_bottom_height + Rudder_height])
-//        666_1028_body_top(side_choose);
-//
-//    if(pipe)
-//        666_1028_pipe(side_choose);
+
+    translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
+        666_1028_tube_mount(side_choose);
+
+    translate([0, 0, tail_bottom_height + Rudder_height])
+        666_1028_body_top(side_choose);
+
+    if(pipe)
+        666_1028_pipe(side_choose);
 }
 
 
