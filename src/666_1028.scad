@@ -386,7 +386,11 @@ module 666_1028_rudder(side_choose = 1, draft) {
         union() {
             intersection() {
                 union() {
-                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
+                    difference() {
+                        airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
+                        translate([0, - Rudder_depth, - 1])
+                            cube([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, Rudder_depth * 2, Rudder_height + 2]);
+                    }
                     
                     translate([Rudder_shaft_x_position, 0, Rudder_height / 2])
                         cylinder(d = Rudder_shaft_outside_diameter, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
