@@ -24,11 +24,7 @@ module 666_1028_body_bottom(side_choose = 1, draft) {
 
             //Adding material inside rudder-----------------------------
             intersection(){
-                union() {
-                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_bottom_height, open = false);
-                    translate([Rudder_shaft_x_position, 0, (tail_bottom_height + 0.5) / 2])
-                        cylinder(d = M3_nut_diameter, h = tail_bottom_height + 0.5,center = true);
-                }
+                airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_bottom_height, open = false);
 
                 union(){
                     //Ribs------------------------------------------------------
@@ -390,11 +386,8 @@ module 666_1028_rudder(side_choose = 1, draft) {
         union() {
             intersection() {
                 union() {
-                    difference() {
-                        airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
-                        translate([0, - Rudder_depth, - 1])
-                            cube([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, Rudder_depth * 2, Rudder_height + 2]);
-                    }
+                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
+                    
                     translate([Rudder_shaft_x_position, 0, Rudder_height / 2])
                         cylinder(d = Rudder_shaft_outside_diameter, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
                 }
@@ -402,6 +395,10 @@ module 666_1028_rudder(side_choose = 1, draft) {
                     // material around shaft
                     translate([Rudder_shaft_x_position, 0, Rudder_height / 2 - 1])
                         cylinder(d = Rudder_shaft_diameter + 2, h = Rudder_height, $fn = draft ? 10 : 50, center = true);
+                    
+                    // washer like material on top
+                    translate([Rudder_shaft_x_position, 0, Rudder_height - global_clearance * 2])
+                        cylinder(d = M3_nut_diameter, h = 1, $fn = draft ? 10 : 50, center = true);
                     
                     // material at front half cylinder
                     translate([Rudder_shaft_x_position, 0, Rudder_height / 2 - 1])
@@ -511,25 +508,25 @@ module 666_1028_pipe(){
 
 module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false){
 
-    666_1028_body_bottom(side_choose);
-
-    translate([0, 0, tail_bottom_height])
-        666_1028_body_middle(side_choose);
-
+//    666_1028_body_bottom(side_choose);
+//
+////    translate([0, 0, tail_bottom_height])
+////        666_1028_body_middle(side_choose);
+//
     if(rudder)
         translate([Rudder_shaft_x_position, 0, tail_bottom_height + global_clearance])
             rotate([0, 0, rudder_angle])
                 translate([-Rudder_shaft_x_position, 0, 0])
                 666_1028_rudder(side_choose);
-
-    translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-        666_1028_tube_mount(side_choose);
-
-    translate([0, 0, tail_bottom_height + Rudder_height])
-        666_1028_body_top(side_choose);
-
-    if(pipe)
-        666_1028_pipe(side_choose);
+//
+//    translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
+//        666_1028_tube_mount(side_choose);
+//
+//    translate([0, 0, tail_bottom_height + Rudder_height])
+//        666_1028_body_top(side_choose);
+//
+//    if(pipe)
+//        666_1028_pipe(side_choose);
 }
 
 
