@@ -361,7 +361,7 @@ tail_depth = 50;                                    // hloubka pro vnitrni casti
 tail_airfoils_angle = 90;
 tail_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2)) - 10; // delka smerovky (ne delka plochy kridla)
 tail_height = 210;                                  // vyska smerovky (ne vyska plochy kridla)
-tail_bottom_height = 30;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
+tail_bottom_height = 10;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
 tail_pipe_z_position = tail_height/2;               // od spodniho okraje smerovky
 tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
 tail_pipe_distance = sin(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2-12.5;
@@ -377,7 +377,7 @@ tail_angle = 90;                                    //tvar A vzájemný náklon
 
 tail_support_x_position_1 = 20;                     // pozice prvni karbonove tyce
 tail_support_x_position_2 = 80;                     // pozice druhe karbonove tyce
-tail_A_shape_screw_y_pisition = 20;                 // pozice der na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 15; // pozice der na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_2 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
 
@@ -389,13 +389,13 @@ tail_servo_wing_depth = 1.2;                        // tloustka steny upevneni s
 tail_servo_screws_gap = 28;                         // mezera mezi srouby pro uchyceni serva
 tail_servo_screws_z_position = 18;                  // pozice sroubu pro uchyceni serva (osa Z)
 tail_servo_screws_diameter = 1.8;                   // prumer der na srouby
-tail_servo_wall_y_offset = - 2;                       // vyoseni uchyceni pro servo
+tail_servo_wall_y_offset = - 2;                     // vyoseni uchyceni pro servo
 tail_servo_wire_hole_length = 8;                    // delka vykusu pro draty
 tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
 tail_servo_wall_and_screws_y_position = 5;          // pozice steny a sroubu pro uchyceni serva (osa Y)
 tail_servo_arm_depth = 15.1;                        // hloubka ramena u serva
 
-tail_servo_rudder_arm_z_offset = - 21;              // posunuti paky smerovky vuci stredu
+tail_servo_rudder_arm_z_position = Rudder_height / 2 + 9 - tail_bottom_height; // posunuti paky smerovky vuci stredu
 tail_servo_rudder_arm_side_size = 14;               // delka a sirka zkladny pro rameno pro uchyceni serva
 tail_servo_rudder_arm_depth = 12.95;                // hloubka ramena pro uchyceni serva na smerovku
 tail_servo_rudder_arm_y_offset = - tail_servo_rudder_arm_depth + tail_servo_arm_depth + tail_servo_wing_depth / 2 - tail_servo_wall_y_offset;
