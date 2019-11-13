@@ -2,10 +2,10 @@
 
 include <../parameters.scad>
 
-holder_length = 90;
-holder_angle = 55;
+holder_length = 888_2024_holder_length;
+holder_angle = 888_2024_holder_angle;
 joint_diameter = 40;
-joint_height = 5;
+joint_height = 888_2024_joint_height;
 bearing_extension = 0;
 
 module 888_2024(orientate = 0) {
@@ -73,7 +73,7 @@ module 888_2024(orientate = 0) {
             rotate([0, 90, 0])
                 cylinder(d=M6_screw_diameter+2, h=fork_wheel_width+10, $fn=20, center=true);
 
-        //ložiska
+        //ložiska úchytu
         translate([-joint_width/2-0.1, 0, 696_bearing_outer_diameter/2+material_around_bearing])
             rotate([0, 90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=60);
@@ -135,10 +135,15 @@ module 888_2024(orientate = 0) {
             rotate([0, -90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+10, $fn=50);
 
+
+        //zářez pro 888_2025
+        translate([25+fork_wheel_width/2+696_bearing_thickness/2, holder_length, 0])
+            rotate([-60, 0, 0])
+                translate([0, 0, -25])
+                cube([50, 696_bearing_outer_diameter, 50], center=true);
     }
 }
 
 
-translate([0, -holder_length/2, 0])
-    rotate([holder_angle, 0, 0])
-        888_2024();
+
+888_2024();

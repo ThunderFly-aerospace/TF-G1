@@ -96,7 +96,7 @@ module 888_1025(draft = true){
                 difference(){
                     union(){
                         //základní kapka
-                        intersection (){
+                        intersection(){
                             drop(draft);
                             translate([0,0,- hull_z_size/2])
                                     cube([hull_drop_length, hull_y_size + 10, hull_z_size]);
@@ -111,7 +111,7 @@ module 888_1025(draft = true){
                                             airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 30 : 100, h = draft ? 30 : 100, open = false);
 
                             translate ([0,-(main_tube_outer_diameter/2)-hull_wall_thickness, -hull_z_size/2])
-                                    cube ([hull_x_size, hull_y_size,hull_z_size]);
+                                cube ([hull_x_size, hull_y_size,hull_z_size]);
                         }
                     }
                     difference(){
@@ -120,22 +120,86 @@ module 888_1025(draft = true){
 
                         // materiál pro šrouby mezi díly 2 a 3
                         rotate([45,0,0])
-                           translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                          translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             scale([1.8, 1, 1])
                               sphere (r = 20, $fs = 0.5, $fa = 10);
 
                         rotate([-45,0,0])
-                           translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                          translate([hull_drop_length * (top_cover_division[3]/hull_drop_length), hull_drop_length * surface_distance(x = top_cover_division[3]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
                             scale([1.8, 1, 1])
                               sphere (r = 20, $fs = 0.5, $fa = 10);
 
                         //přední stěna Z+
                         translate([0, 0, width_of_engine_holder/2 ])
-                         cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
+                          cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                         //přední stěna Z-
                         translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])
                           cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
+
+                        // lemy pro výztuhu a slepení
+                        difference(){
+                            union(){
+
+                                // spodní lem
+                                translate([0,0,-hull_z_size/2])
+                                    cube([hull_x_size, hull_wall_thickness, hull_z_size]);
+
+                                //lemy pro slepení dílů ve směru délky krytu (v podélném směru)
+
+                                translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, - hull_z_size])
+                                    cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                                translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
+                                    cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                                // lem u šroubového spoje
+                                translate([top_cover_division[3] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
+                                    cube([hull_wall_thickness * 2, hull_y_size, hull_z_size*2]);
+
+                                translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
+                                    cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                                translate([top_cover_division[5], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
+                                    cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
+
+                                //podélná výztuha boční
+                                translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])
+                                    cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                                translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])
+                                    cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                                // honí podélná výztuha
+                                translate([0,0,-hull_wall_thickness])
+                                     cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
+
+                                // malé výztuhy v přední části krytu
+                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                                    rotate([-48,0,0])
+                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+
+                                mirror([0,0,1])
+                                translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
+                                    rotate([-48,0,0])
+                                        cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
+                            }
+                            //pro lepení - odstranění kusu lemů  z díry pro horní otvor
+                            translate ([cover_pilon_position + 2*hull_wall_thickness,-10,0])
+                                rotate ([-90,0,0])
+                                    resize([170 - 2*hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
+                                       airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 50 : 100, h = 200, open = false);
+
+                           // odstranění výztuhy v místě držáku předního motoru
+                           translate ([-global_clearance,0 , - width_of_engine_holder/2])
+                               cube ([ top_cover_division[1] + global_clearance, hull_y_size/4, width_of_engine_holder]);
+
+                           translate ([0,hull_y_size/4 ,0])
+                               rotate ([0,90,0])
+                                  cylinder(d = width_of_engine_holder, h = width_of_engine_holder);
+
+                           translate([ribbon_width + hull_wall_thickness, 0, 0])
+                                hollowing_skeleton(ribbon_width, draft);
+                        }
                     }
                 }
             }
@@ -178,75 +242,6 @@ module 888_1025(draft = true){
             }
 
         //final difference
-        }
-
-        intersection(){
-                // lemy pro výztuhu a slepení
-                difference(){
-                    union(){
-
-                        // spodní lem
-                        translate([0,0,-hull_z_size/2])
-                            cube([hull_x_size, hull_wall_thickness, hull_z_size]);
-
-                        //lemy pro slepení dílů ve směru délky krytu (v podélném směru)
-
-                        translate([top_cover_division[1] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, - hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        translate([top_cover_division[2] - hull_wall_thickness,main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        // lem u šroubového spoje
-                        translate([top_cover_division[3] - hull_wall_thickness, main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance,-hull_z_size])
-                            cube([hull_wall_thickness * 2, hull_y_size, hull_z_size*2]);
-
-                        translate([top_cover_division[4], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        translate([top_cover_division[5], main_tube_outer_diameter/2 + coupling_wall_thickness + global_clearance, -hull_z_size])
-                            cube([hull_wall_thickness, hull_y_size, hull_z_size*2]);
-
-                        //podélná výztuha boční
-                        translate([top_cover_division[1],main_tube_outer_diameter/2 + 4*coupling_wall_thickness + global_clearance,-hull_z_size/2])
-                            cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
-                        translate([top_cover_division[1],main_tube_outer_diameter/2 + 2*coupling_wall_thickness + global_clearance,-hull_z_size/2])
-                            cube([top_cover_division[5] - top_cover_division[1], hull_wall_thickness, hull_z_size]);
-
-                        // honí podélná výztuha
-                        translate([0,0,-hull_wall_thickness])
-                             cube([hull_x_size, hull_z_size*2, 2*hull_wall_thickness]);
-
-                        // malé výztuhy v přední části krytu
-                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
-                            rotate([-48,0,0])
-                                cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
-
-                        mirror([0,0,1])
-                        translate([0,0,width_of_engine_holder/2 + hull_wall_thickness])       // výztuha v přední části krytu
-                            rotate([-48,0,0])
-                                cube([top_cover_division[1], hull_wall_thickness, hull_z_size]);
-                    }
-                    //pro lepení - odstranění kusu lemů  z díry pro horní otvor
-                    translate ([cover_pilon_position + 2*hull_wall_thickness,-10,0])
-                        rotate ([-90,0,0])
-                            resize([170 - 2*hull_wall_thickness - trailing_wall*hull_wall_thickness - trailing_wall*global_clearance  - global_clearance - trailing_wall*hull_wall_thickness ,(170*cover_pilon_naca/100) - 2*hull_wall_thickness - 2*hull_wall_thickness - 2*global_clearance ,200], auto=true)
-                               airfoil(naca = cover_pilon_naca, L = 170, N = draft ? 50 : 100, h = 200, open = false);
-
-                   // odstranění výztuhy v místě držáku předního motoru
-                   translate ([-global_clearance,0 , - width_of_engine_holder/2])
-                       cube ([ top_cover_division[1] + global_clearance, hull_y_size/4, width_of_engine_holder]);
-
-                   translate ([0,hull_y_size/4 ,0])
-                       rotate ([0,90,0])
-                          cylinder(d = width_of_engine_holder, h = width_of_engine_holder);
-
-                   translate([ribbon_width + hull_wall_thickness, 0, 0])
-                        hollowing_skeleton(ribbon_width, draft);
-                }
-
-            //odstranění přesahů z vnější strany
-            drop(draft);
         }
     }
 //konec model celek

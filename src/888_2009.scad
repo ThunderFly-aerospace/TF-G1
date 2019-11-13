@@ -1,4 +1,4 @@
-/*============= Dil pro pripevneni predniho kolecka k nosniku =============== */
+/*============= Dil pro pripevneni predniho kolecka k nosniku ===============*/
 
 include <../parameters.scad>
 include <lib/servo.scad>
@@ -15,8 +15,9 @@ washer_diameter = 20;
 screw_distance = 42.5;
 stops_overhang = 5;
 layer_height = 0.2;
-slope = 10;
+slope = 0;
 
+reinforcement_screw_length = 55;
 reinforcement_hole_diameter = 1;
 
 reinforcement_vertical_hole_count = 10;
@@ -47,14 +48,14 @@ module 888_2009(){
                 rotate([0, slope, 0])
                     rotate([0, 0, max_angle_of_ratation/2+180])
                         translate([column_lower_diameter/2-3, stop_width/2, -7])
-                            rotate([0, -15, 0])
+                            rotate([0, -22, 0])
                                 cube([13, stop_width, 50]);
 
             translate([-column_offset, 0, -column_height])
                 rotate([0, slope, 0])
                     rotate([0, 0, -max_angle_of_ratation/2+180])
                         translate([column_lower_diameter/2-3, -stop_width-stop_width/2, -7])
-                            rotate([0, -15, 0])
+                            rotate([0, -22, 0])
                                 cube([13, stop_width, 50]);
 
             // translate([-column_offset, 0, -column_height])
@@ -77,6 +78,9 @@ module 888_2009(){
                 translate([0, 0, 8]){
 
 
+                translate([0, 0, -1])
+                    cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
+                
                 //translate([50, 0, -10])
                 //    rotate([90, 0, -90])
                 //        LW_20MG();
@@ -92,14 +96,14 @@ module 888_2009(){
                         hull(){
                             translate([0, -15, 0])
                                 cube([90, 2, 5]);
-                            translate([20, -15, 60])
+                            translate([20, -15, 50])
                                 cube([5, 2, 1]);
                         }
 
                         hull(){
                             translate([0, 15-2, 0])
                                 cube([90, 2, 5]);
-                            translate([20, 15-2, 60])
+                            translate([20, 15-2, 50])
                                 cube([5, 2, 1]);
                         }
 
@@ -135,10 +139,10 @@ module 888_2009(){
                 translate([0, 0, -1])
                     cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
 
-                #translate([0, 0, shoulder_screw_length + layer])
+                translate([0, 0, shoulder_screw_length + layer])
                     cylinder(d = M6_screw_diameter, h = 15, $fn = 50);
 
-                translate([-50, -M6_nut_pocket/2, shoulder_screw_length + layer])
+                translate([-40, -M6_nut_pocket/2, shoulder_screw_length + layer])
                     cube([50*2, M6_nut_pocket, M6_nut_height]);
 
 
@@ -219,6 +223,59 @@ module 888_2009(){
             translate([-M4_nut_diameter/2, -50, -15])
                 cube([M4_nut_diameter, 50, M4_nut_height]);
         }
+
+        //diry na srouby pro zpevneni
+        translate([-engine_holder_beam_depth*1.2, M6_nut_diameter, -reinforcement_screw_length])
+        rotate([0, 10, 0]) {
+            difference() {
+                cylinder(d=M4_screw_diameter, h=reinforcement_screw_length, $fn=20);
+                translate([0, 0, reinforcement_screw_length*1/3+M4_nut_height])
+                    cylinder(d=100, h=layer_height, $fn=10);
+            }
+
+            translate([0, 0, reinforcement_screw_length-M4_screw_head_height])
+                cylinder(d=M4_nut_diameter, h=50, $fn=30);
+
+            translate([0, 0, reinforcement_screw_length*1/3])
+                cylinder(d=M4_nut_diameter, h=M4_nut_height, $fn=6);
+            translate([-50, -M4_nut_pocket/2, reinforcement_screw_length*1/3])
+                cube([50, M4_nut_pocket, M4_nut_height]);
+        }
+
+        translate([-engine_holder_beam_depth*1.2, -M6_nut_diameter, -reinforcement_screw_length])
+        rotate([0, 10, 0]) {
+            difference() {
+                cylinder(d=M4_screw_diameter, h=reinforcement_screw_length, $fn=20);
+                translate([0, 0, reinforcement_screw_length*1/3+M4_nut_height])
+                    cylinder(d=100, h=layer_height, $fn=10);
+            }
+
+            translate([0, 0, reinforcement_screw_length-M4_screw_head_height])
+                cylinder(d=M4_nut_diameter, h=50, $fn=30);
+
+            translate([0, 0, reinforcement_screw_length*1/3])
+                cylinder(d=M4_nut_diameter, h=M4_nut_height, $fn=6);
+            translate([-50, -M4_nut_pocket/2, reinforcement_screw_length*1/3])
+                cube([50, M4_nut_pocket, M4_nut_height]);
+        }
+
+        translate([-engine_holder_beam_depth/1.25, 0, -reinforcement_screw_length+6.5])
+        rotate([0, 31, 0]) {
+            difference() {
+                cylinder(d=M4_screw_diameter, h=reinforcement_screw_length, $fn=20);
+                translate([0, 0, reinforcement_screw_length*1/3+M4_nut_height])
+                    cylinder(d=100, h=layer_height, $fn=10);
+            }
+
+            translate([0, 0, reinforcement_screw_length-M4_screw_head_height])
+                cylinder(d=M4_nut_diameter, h=50, $fn=30);
+
+            translate([0, 0, reinforcement_screw_length*1/3])
+                cylinder(d=M4_nut_diameter, h=M4_nut_height, $fn=6);
+            translate([0, -M4_nut_pocket/2, reinforcement_screw_length*1/3])
+                cube([30, M4_nut_pocket, M4_nut_height]);
+        }
+
 
         // otvor pro predni pripevnovaci sroub
         translate([-engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/3]){
