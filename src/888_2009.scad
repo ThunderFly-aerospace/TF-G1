@@ -17,6 +17,7 @@ stops_overhang = 5;
 layer_height = 0.2;
 slope = 10;
 
+reinforcement_screw_length = 55;
 reinforcement_hole_diameter = 1;
 
 reinforcement_vertical_hole_count = 10;
@@ -135,7 +136,7 @@ module 888_2009(){
                 translate([0, 0, -1])
                     cylinder(d = M8_screw_diameter, h = shoulder_screw_length+1, $fn = 50);
 
-                #translate([0, 0, shoulder_screw_length + layer])
+                translate([0, 0, shoulder_screw_length + layer])
                     cylinder(d = M6_screw_diameter, h = 15, $fn = 50);
 
                 translate([-50, -M6_nut_pocket/2, shoulder_screw_length + layer])
@@ -219,6 +220,40 @@ module 888_2009(){
             translate([-M4_nut_diameter/2, -50, -15])
                 cube([M4_nut_diameter, 50, M4_nut_height]);
         }
+
+        //diry na srouby pro zpevneni
+        translate([-engine_holder_beam_depth, M6_nut_diameter, -reinforcement_screw_length]) {
+            difference() {
+                cylinder(d=M4_screw_diameter, h=reinforcement_screw_length, $fn=20);
+                translate([0, 0, reinforcement_screw_length*1/3+M4_nut_height])
+                    cylinder(d=100, h=layer_height, $fn=10);
+            }
+
+            translate([0, 0, reinforcement_screw_length-M4_screw_head_height])
+                cylinder(d=M4_nut_diameter*1.5, h=M4_screw_head_height, $fn=30);
+
+            translate([0, 0, reinforcement_screw_length*1/3])
+                cylinder(d=M4_nut_diameter, h=M4_nut_height, $fn=6);
+            translate([-50, -M4_nut_pocket/2, reinforcement_screw_length*1/3])
+                cube([50, M4_nut_pocket, M4_nut_height]);
+        }
+
+        translate([-engine_holder_beam_depth, -M6_nut_diameter, -reinforcement_screw_length]) {
+            difference() {
+                cylinder(d=M4_screw_diameter, h=reinforcement_screw_length, $fn=20);
+                translate([0, 0, reinforcement_screw_length*1/3+M4_nut_height])
+                    cylinder(d=100, h=layer_height, $fn=10);
+            }
+
+            translate([0, 0, reinforcement_screw_length-M4_screw_head_height])
+                cylinder(d=M4_nut_diameter*1.5, h=M4_screw_head_height, $fn=30);
+
+            translate([0, 0, reinforcement_screw_length*1/3])
+                cylinder(d=M4_nut_diameter, h=M4_nut_height, $fn=6);
+            translate([-50, -M4_nut_pocket/2, reinforcement_screw_length*1/3])
+                cube([50, M4_nut_pocket, M4_nut_height]);
+        }
+
 
         // otvor pro predni pripevnovaci sroub
         translate([-engine_holder_beam_depth + beam_patern*1.25, 0, -beam_thickness/3]){
