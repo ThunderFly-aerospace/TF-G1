@@ -1,4 +1,4 @@
-/*============= Dil pro pripevneni predniho kolecka k nosniku =============== */
+/*============= Dil pro pripevneni predniho kolecka k nosniku ===============*/
 
 include <../parameters.scad>
 include <lib/servo.scad>
