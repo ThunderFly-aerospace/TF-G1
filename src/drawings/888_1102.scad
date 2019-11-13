@@ -2,15 +2,15 @@
 draft = true;
 stl = true;
 
-nosnik = false;
+nosnik = true;
 predni_podvozek = false;
 zadni_podvozek = false;
 mechova_kolecka = false;
 limec = false;
-cover = false;
-rotor_heat_pulley_motor = false;
-rotor_heat_pulley_rotor = false;
-rotor_head_move = false;
+cover = true;
+rotor_head_pulley_motor = false;
+rotor_head_pulley_rotor = false;
+rotor_head_plate = false;
 rotor_head_prerotator = false;
 pilon_mount = false;
 rotor_head = false;
@@ -20,11 +20,11 @@ battery = false;
 propeller = false;
 
 
-print = false;
-alu = false;
-piston = false;
-carbon = false;
-other = false;
+print = true;
+alu = true;
+piston = true;
+carbon = true;
+other = true;
 
 include <../../parameters.scad>
 use <../666_1028.scad>
@@ -75,8 +75,6 @@ module piston(shift = 32){
 
 
 module assembly(){
-difference(){
-    union(){
 
       if(cover && print){
 
@@ -165,16 +163,20 @@ difference(){
 
 
 // rotorova hlava
-        translate([main_pilon_position, 0, height_of_vertical_tube]){
-            if(rotor_head && print)
-                    rotate(180)
+        
+    
+        if(rotor_head && print)
+            translate([main_pilon_position, 0, height_of_vertical_tube])
+                rotate(180)
                         if(stl){import("../../STL/888_1029.stl");}
                         else{888_1029();888_1029_servoholder();}
 
 // stredni dil kardanu
+
+    translate([main_pilon_position + rotor_head_bearing_x_shift, 0, height_of_vertical_tube+rotor_head_height])rotate([0,rotor_head_rank_angle,0]){
+    //union(){
+
             if(rotor_head && print)
-                translate([12,0,rotor_head_height])
-                    rotate([0,rotor_head_rank_angle,0])
                         rotate([0,0,0])
                             translate([0,0,4])
                                 rotate([180,0,0])
@@ -183,11 +185,10 @@ difference(){
                                     }else{
                                         888_1022();
                                     }
+        
 
 // Tistena deska rotorove hlavy
-            if(rotor_head_move && print)
-                translate([rotor_head_bearing_x_shift,0,rotor_head_height])
-                    rotate([0,rotor_head_rank_angle,0])
+            if(rotor_head_plate && print)
                         rotate([0,0,0])
                             translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
                                 rotate([180,0,0])
@@ -197,9 +198,7 @@ difference(){
                                         888_1020();
                                     }
 
-            if(rotor_heat_pulley_rotor && print)
-                translate([rotor_head_bearing_x_shift,0,rotor_head_height])
-                    rotate([0,rotor_head_rank_angle,0])
+            if(rotor_head_pulley_rotor && print)
                         rotate([0,0,0])
                             translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2])
                                 //rotate([180,0,0])
@@ -209,17 +208,13 @@ difference(){
                                         rotor_pulley();
                                     }
 
-            if(rotor_heat_pulley_rotor && other)
-                translate([rotor_head_bearing_x_shift,0,rotor_head_height])
-                    rotate([0,rotor_head_rank_angle,0])
+            if(rotor_head_pulley_rotor && other)
                         rotate([0,0,0])
                             translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2+20])
                                     import("../../STL/external/666_1207.stl");
                                     
 
-            if(rotor_heat_pulley_motor && print)
-                translate([rotor_head_bearing_x_shift,0,rotor_head_height])
-                    rotate([0,rotor_head_rank_angle,0])
+            if(rotor_head_pulley_motor && print)
                         rotate([0,0,0])
                             translate([rotor_head_prerotator_distance,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2])
                                 //rotate([180,0,0])
@@ -230,8 +225,6 @@ difference(){
                                     }
 
             if(rotor_head_prerotator && print)
-                translate([rotor_head_bearing_x_shift,0,rotor_head_height])
-                    rotate([0,rotor_head_rank_angle,0])
                         rotate([0,0,0])
                             translate([rotor_head_prerotator_distance,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)-8])
                                 rotate([180,0,0])
@@ -549,8 +542,6 @@ if(print){
 
         }
     }
- }
-}
 //cube(1000);
 }
 
