@@ -251,7 +251,7 @@ width_of_engine_holder = 83;
 top_cover_division = [0, 50, 150, 290, 435, 580, hull_x_size];
 
 //Bottom Cover Division - dělení dolního krytu pro tisk
-bottom_cover_division = [0,100,232.5,365, 470, hull_x_size];
+bottom_cover_division = [0,145,290,365, 470, hull_x_size];
 // zkrácená část pro payload pro testovací tisk
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
@@ -274,10 +274,12 @@ top_screw_position = [0,
                     (top_cover_division[5] - 20)   ];
 	//spodní kryt
 bottom_screw_position = [0,
-                        (bottom_cover_division[0] + bottom_cover_division[1])*(2/6),
-                        bottom_cover_division[1]*(9/10),
-                        bottom_cover_division[3] + bottom_cover_division[1]*(1/10),
-                        bottom_cover_division[3] + bottom_cover_division[1]*(3/5)];
+                    (top_cover_division[0] + top_cover_division[1]/2),
+                    (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1],
+                    (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2],
+                    (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3],
+                    (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3,
+                    (top_cover_division[5] - 20)   ];
 
 
 
