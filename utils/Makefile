@@ -4,8 +4,10 @@ PLATE_DIMMENSIONS=130
 SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
 OPENSCAD_APP=openscad
-SLIC3R_APP=slic3r-prusa3d
+#SLIC3R_APP=slic3r-prusa3d
 #SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
+SLIC3R_APP=$(GIT_ROOT)/utils/slicer/PrusaSlicer-2.1.0.AppImage
+
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
