@@ -2,15 +2,26 @@
 
 include <../parameters.scad>
 
-wall_thickness = 2;
-height = 10;
-
-module 888_2025(piston=false) {
+wall_thickness = 888_2025_wall_thickness;
+height = 888_2025_height;
+//piston_position je udavana v procentech (0 - 100)
+module 888_2025(piston=false, piston_position = 0) {
     translate([RT57208M25_EW/-2-wall_thickness+(KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2+RT57208M25_EW/2), 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]) {
 
     if(piston) {
+        translate([0, 0, -RT57208M25_XC+RT57208M25_LB+RT57208M25_WF])
+            #cylinder(d=RT57208M25_D, h=RT57208M25_XC-RT57208M25_LB-RT57208M25_WF, $fn=50);
+
         translate([0, 0, -RT57208M25_XC+RT57208M25_LB])
-            #cylinder(d=RT57208M25_D, h=RT57208M25_XC-RT57208M25_LB, $fn=50);
+            #cylinder(d=RT57208M25_BE, h=RT57208M25_WF, $fn=50);
+
+        translate([0, 0, -RT57208M25_XC+RT57208M25_LB-RT57208M25_stroke*piston_position/100]) {
+            #cylinder(d=RT57208M25_MMh9, h=RT57208M25_stroke, $fn=50);
+
+            translate([0, 0, -RT57208M25_A])
+                #cylinder(d=RT57208M25_KK, h=RT57208M25_A, $fn=50);
+        }
+        
     }
     
     difference() {
@@ -51,4 +62,4 @@ module 888_2025(piston=false) {
     }
 }
 
-888_2025();
+888_2025(true, 100);

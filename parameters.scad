@@ -708,28 +708,41 @@ wheel_diameter = 110;
 screw_spring_distance = 15;
 material_around_bearing = 3;
 chasis_fork_thickness = 10;
-888_2025_distance_space = 0.5;
-888_2024_holder_angle = 40;
-888_2024_holder_length = 110;
-888_2024_joint_height = 5;
-888_2025_wall_thickness = 2;
-888_2025_height = 10;
 stop_size = 8;
 stop_width = 6;
 max_angle_of_ratation = 25; //úhel mezi maximálními výchilkami podvozku při zatáčení
 joint_width = 25;
 
+//888_2024
+888_2025_distance_space = 0.5;
+888_2024_holder_angle = 40;
+888_2024_holder_length = 120;
+888_2024_joint_height = 5;
+
+//888_2025
+888_2025_wall_thickness = 2;
+888_2025_height = 10;
+
+//888_2022
+888_2022_front_fork_length = 100;
+888_2022_piston_mount_offset = -15;
+
 
 //RT/57208/M/25 - https://www.tme.eu/cz/details/rt_57208_m_25/pracovni-valce/norgren-herion/
 //https://www.tme.eu/Document/ff73b4843b8c955086fd9fea378c9c65/RT57200.PDF
 //https://www.tme.eu/html/gfx/image_9212.gif
+RT57208M25_A = 8;
 RT57208M25_BE = M10_screw_diameter;
+RT57208M25_KK = M3_screw_diameter;
+RT57208M25_MMh9 = 3;
 RT57208M25_EW = 6;
 RT57208M25_CD = 3;
 RT57208M25_D  = 12;
 RT57208M25_MR = 4;
 RT57208M25_LB = 4.5;
 RT57208M25_XC = 48;
+RT57208M25_WF = 8.5;
+RT57208M25_stroke = 25;
 
 //KBRM-03
 //https://www.igus.cz/product/160

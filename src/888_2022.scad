@@ -32,27 +32,16 @@ wheel_nut_height = M4_nut_height;
 wheel_screw_head_height = M4_nut_height;
 wheel_screw_head_diameter = M4_nut_diameter;
 
-wheel_tolerance = 15;
+wheel_tolerance = -5;
 888_2022_wheel_diameter = wheel_diameter+wheel_tolerance;
 lifting_size = 10;
 
 height = 696_bearing_outer_diameter+material_around_bearing*2;
-connector_width = 25;
+connector_width = 15;
 wheel_screw_overhang = 8;
 
-front_fork_length = 120;
-        *union() {
-            translate([-fork_wheel_width*1/3/2, -front_fork_length, 0])
-                rotate([0, -90, 0])
-                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=50);
-            translate([fork_wheel_width*1/3/2, -front_fork_length, 0])
-                rotate([0, 90, 0])
-                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=50);
-            translate([0, -front_fork_length, 0])
-                rotate([0, 90, 0])
-                    cylinder(d=wheel_diameter, h=fork_wheel_width*1/3, center=true, $fn=50);
-        }
-piston_mount_offset = -15;
+front_fork_length = 888_2022_front_fork_length;
+piston_mount_offset = 888_2022_piston_mount_offset;
 
 module 888_2022(set_wheel=false) {
     translate([0, 0, 0]) {
