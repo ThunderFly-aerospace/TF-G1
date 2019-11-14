@@ -260,7 +260,7 @@ module 888_1005_rear(){
         mirror([0, 1, 0])
             translate([ribbon_width-55,0,0])
                 rotate([90, 0, 0])
-                    #screw_top(6, draft);
+                        #screw_top(6, draft);
 
         translate([-engine_holder_beam_depth, 0, 0])
 
@@ -289,21 +289,21 @@ module 888_1005_rear(){
 
 module 888_1005_pipe(draft = true){
 
-    echo("Vzdalenost der v limci:", 108*2);
+    echo("Vzdalenost der v limci:", -beam_side_pipe_distance/2-8);
     echo("Vzdalenost hran v limci:", hull_z_size);
 
     difference(){
         rotate([90, 0, 0])
-            cylinder(d = beam_main_pipe_diameter, h = hull_z_size, center = true, $fn = draft? 8:50);
+            cylinder(d = beam_main_pipe_diameter, h = hull_z_size, center = true, $fn = draft? 20:50);
         rotate([90, 0, 0])
-            cylinder(d = beam_main_pipe_diameter-3, h = hull_z_size+1, center = true, $fn = draft? 8:50);
+            cylinder(d = beam_main_pipe_diameter-3, h = hull_z_size+1, center = true, $fn = draft? 20:50);
 
         translate([0, 0, 0])
-            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 6:20);
-        translate([0, beam_side_pipe_distance/2, 0])
-            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 6:20);
-        translate([0,-beam_side_pipe_distance/2, 0])
-            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 6:20);
+            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 12:30);
+        translate([0, beam_side_pipe_distance/2+8, 0])
+            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 12:30);
+        translate([0,-beam_side_pipe_distance/2-8, 0])
+            cylinder(d = M3_screw_diameter, h=50, center = true, $fn = draft? 12:30);
     }
 
 }
@@ -315,6 +315,6 @@ mirror([0, 1, 0])
 
 888_1005_rear();
 
-for (i=[3,4])
-    translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)])
-        888_1005_pipe(draft);
+//for (i=[3,4])
+//    translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)])
+//        888_1005_pipe(draft);

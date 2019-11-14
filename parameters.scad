@@ -77,7 +77,7 @@ rotor_head_limiter_below = 3; // jak moc nizko ma byt divnostvar pod stredem loz
 
 // nastavení parametrů motoru
 
-engine_angle = -3;
+engine_angle = -1.5;
 engine_diameter = 55;
 engine_offset = 65;
 engine_holder_beam_depth = 50; // jak moc je nosnik zapusten v dilu
@@ -361,13 +361,14 @@ tail_depth = 50;                                    // hloubka pro vnitrni casti
 tail_airfoils_angle = 90;
 tail_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2)) - 10; // delka smerovky (ne delka plochy kridla)
 tail_height = 210;                                  // vyska smerovky (ne vyska plochy kridla)
-tail_bottom_height = 30;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
+tail_bottom_height = 10;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
 tail_pipe_z_position = tail_height/2;               // od spodniho okraje smerovky
 tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
-tail_pipe_distance = tan(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2;
+tail_pipe_distance = sin(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2-12.5;
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
 tail_front_mount_edge_cut_x_position = 5;           // pozice seriznuti predni hrany (osa X)
+tail_y_pos = 850;                                   // jak je smerovka daleko od prvni prince trubky
 
 Rudder_shaft_x_position = tail_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
 
@@ -376,7 +377,7 @@ tail_angle = 90;                                    //tvar A vzájemný náklon
 
 tail_support_x_position_1 = 20;                     // pozice prvni karbonove tyce
 tail_support_x_position_2 = 80;                     // pozice druhe karbonove tyce
-tail_A_shape_screw_y_pisition = 20;                 // pozice der na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 15; // pozice der na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_2 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
 
@@ -388,13 +389,13 @@ tail_servo_wing_depth = 1.2;                        // tloustka steny upevneni s
 tail_servo_screws_gap = 28;                         // mezera mezi srouby pro uchyceni serva
 tail_servo_screws_z_position = 18;                  // pozice sroubu pro uchyceni serva (osa Z)
 tail_servo_screws_diameter = 1.8;                   // prumer der na srouby
-tail_servo_wall_y_offset = - 2;                       // vyoseni uchyceni pro servo
+tail_servo_wall_y_offset = - 2;                     // vyoseni uchyceni pro servo
 tail_servo_wire_hole_length = 8;                    // delka vykusu pro draty
 tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
 tail_servo_wall_and_screws_y_position = 5;          // pozice steny a sroubu pro uchyceni serva (osa Y)
 tail_servo_arm_depth = 15.1;                        // hloubka ramena u serva
 
-tail_servo_rudder_arm_z_offset = - 21;              // posunuti paky smerovky vuci stredu
+tail_servo_rudder_arm_z_position = Rudder_height / 2 + 9 - tail_bottom_height; // posunuti paky smerovky vuci stredu
 tail_servo_rudder_arm_side_size = 14;               // delka a sirka zkladny pro rameno pro uchyceni serva
 tail_servo_rudder_arm_depth = 12.95;                // hloubka ramena pro uchyceni serva na smerovku
 tail_servo_rudder_arm_y_offset = - tail_servo_rudder_arm_depth + tail_servo_arm_depth + tail_servo_wing_depth / 2 - tail_servo_wall_y_offset;
@@ -645,7 +646,6 @@ chassis_wheelbase = 600;        // rozvor kolecek
 chassis_height = 200;           // vyska podvozku
 chassis_baselength_r = beam_patern*2.25;       // podelna roztec podvozku dozade
 chassis_baselength_f = beam_patern*2.75;       // podelna roztec podvozku dopredu
-chassis_bearing_distance = 60;   // vzdalenost kulovych lozisek na podlozek
 chassis_suspension_basewidth = 250;//vzdalenost prichyceni tlumicu na pricne tyci
 chassis_camber = -3;    //Odklon kola
 
@@ -667,10 +667,6 @@ chassis_arm_r = [chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_heig
 chassis_arm_length_f = mod(chassis_arm_f);
 chassis_arm_length_r = mod(chassis_arm_r);
 
-//chassis_arm_piston_length = sqrt(pow(calc_chassis_height, 2) + pow(calc_chassis_baselength/2, 2) + pow(chassis_wheelbase/2, 2)) - 2017_pipe_bottom;
-//echo("Delka podvozkoveho tlumice:", chassis_arm_piston_length);
-
-
 chassis_pipe_angle_x = atan((chassis_pipe_wheelbase)/(chassis_height));
 chassis_pipe_angle_y = 0;
 chassis_pipe_angle_r_z = atan((chassis_pipe_baselength_r)/(chassis_pipe_wheelbase));
@@ -684,14 +680,23 @@ chassis_suspension_angle_z = 0;
 
 // parametry dilu 888_2013 - drzak podvozku za podelnou tyc virniku
 // hodnoty jsou oproti stredu podvozku
+chassis_bearing_distance = 60;   // vzdalenost kulovych lozisek na podlozek
 chassis_top_bearing_position_f = [chassis_pipe_baselength_r/2, chassis_bearing_distance/2, 0];
 chassis_top_bearing_position_r = [chassis_pipe_baselength_f/2, chassis_bearing_distance/2, 0];
 //chassis_top_bearing_position_x = chassis_top_bearing_position[0];
 chassis_top_bearing_position_y = chassis_bearing_distance/2;
-chassis_top_bearing_position_z = 20;
+chassis_top_bearing_position_z = 30;
 chassis_top_bearing_rotation_f = [chassis_pipe_angle_x, 0, chassis_pipe_angle_f_z];
 chassis_top_bearing_rotation_r = [chassis_pipe_angle_x, 0, chassis_pipe_angle_r_z];
 
+
+// VIDLICE ZADNIHO KOLECKA
+chassis_fork_screw_length = 55;
+chassis_fork_thickness = 20;
+chassis_fork_width = 10;
+chassis_fork_hole_diameter = 10;
+chassis_fork_lenght = 90/2;
+chassis_fork_length_overlap = 18;       // prodlouzeni smerem dolu
 
 //chassis_arm_mount_plate = [40, 25];
 
@@ -704,9 +709,14 @@ screw_spring_distance = 15;
 material_around_bearing = 3;
 chasis_fork_thickness = 10;
 888_2025_distance_space = 0.5;
-stop_size = 5;
-stop_width = 5;
-max_angle_of_ratation = 60; //úhel mezi maximálními výchilkami podvozku při zatáčení
+888_2024_holder_angle = 40;
+888_2024_holder_length = 110;
+888_2024_joint_height = 5;
+888_2025_wall_thickness = 2;
+888_2025_height = 10;
+stop_size = 8;
+stop_width = 6;
+max_angle_of_ratation = 25; //úhel mezi maximálními výchilkami podvozku při zatáčení
 joint_width = 25;
 
 

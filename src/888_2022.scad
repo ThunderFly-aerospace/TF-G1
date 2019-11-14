@@ -1,7 +1,30 @@
 //========== VIDLICE TVARU H ==========//
 
 include <../parameters.scad>
+use <888_2011.scad>
+use <888_2012.scad>
+use <888_2021.scad>
 
+module wheel_tiere(){
+     rotate([90, 0, 0]){
+        rotate_extrude($fn=$preview?30:200)
+        hull(){
+            translate([wheel_inner_diameter/2, -wheel_inner_thickness/2+wheel_disc_upper_thickness, 0])
+                square([4, wheel_inner_thickness-wheel_disc_upper_thickness*2]);
+            translate([19+wheel_outer_diameter/2 - wheel_inner_thickness, 0, 0])
+            scale([0.7, 1.3]) circle(wheel_inner_thickness/2, $fn=100);
+        }
+    }
+}
+
+module wheel() {
+    wheel_tiere();
+    //rotate([90, 0, 0]) cylinder(h = 20, d = 110);
+    translate([0, wheel_inner_thickness/2+4.6, 0]) rotate([90, 0, 0]) 888_2011(true);
+    translate([0, -wheel_inner_thickness/2-4.6, 0]) rotate([-90, 0, 0]) 888_2011(false);
+    translate([0, wheel_inner_thickness/2+6.8, 0]) rotate([90, 0, 0]) 888_2012();
+    translate([0, -wheel_inner_thickness/2-6.8, 0]) rotate([-90, 0, 0]) 888_2012();
+}
 
 wheel_screw_diameter = M4_screw_diameter;
 wheel_nut_diameter = M4_nut_diameter;
@@ -18,22 +41,25 @@ connector_width = 25;
 wheel_screw_overhang = 8;
 
 front_fork_length = 120;
+        *union() {
+            translate([-fork_wheel_width*1/3/2, -front_fork_length, 0])
+                rotate([0, -90, 0])
+                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=50);
+            translate([fork_wheel_width*1/3/2, -front_fork_length, 0])
+                rotate([0, 90, 0])
+                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=50);
+            translate([0, -front_fork_length, 0])
+                rotate([0, 90, 0])
+                    cylinder(d=wheel_diameter, h=fork_wheel_width*1/3, center=true, $fn=50);
+        }
 piston_mount_offset = -15;
 
-module 888_2022(wheel=false) {
+module 888_2022(set_wheel=false) {
     translate([0, 0, 0]) {
-    if(wheel) {
-        union() {
-            translate([-fork_wheel_width*1/3/2, -888_2022_wheel_diameter/2, 0])
-                rotate([0, -90, 0])
-                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=20);
-            translate([fork_wheel_width*1/3/2, -888_2022_wheel_diameter/2, 0])
-                rotate([0, 90, 0])
-                    cylinder(d2=wheel_diameter-30, d1=wheel_diameter, h=fork_wheel_width*1/3, $fn=20);
-            translate([0, -888_2022_wheel_diameter/2, 0])
-                rotate([0, 90, 0])
-                    cylinder(d=wheel_diameter, h=fork_wheel_width*1/3, center=true, $fn=20);
-        }
+    if(set_wheel) {
+        translate([0, -front_fork_length, 0])
+            rotate([0, 0, 90])
+                wheel();
     }
 
 
@@ -78,7 +104,7 @@ module 888_2022(wheel=false) {
                 cylinder(d=fork_wheel_width, h=height*2, $fn=50, center=true);
 
         //uchycení
-        #translate([-joint_width/2-0.2, -connector_width-10, -height*5])
+        translate([-joint_width/2-0.2, -connector_width-10, -height*5])
             cube([joint_width+0.4, 300, height*10]);
 
         //šroub u kola
@@ -123,4 +149,4 @@ module 888_2022(wheel=false) {
     }
 }
 
-888_2022(false);
+888_2022();

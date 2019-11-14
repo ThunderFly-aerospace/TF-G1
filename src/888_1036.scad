@@ -2,20 +2,23 @@
 include <../parameters.scad>
 use <888_1004.scad>
 
-$fn = 40;
-draft = true;
+$fn = 80;
+draft = $preview;
 
-module 888_1036(){
+
 strap_width = 22;
 strap_thickness = 3;
 
 
+module 888_1036(){
+
     difference(){
         union(){
             hull(){
-                cylinder(d = tube_for_undercarriage_outer_diameter + 2* beam_min_wall, h = tube_for_undercarriage_outer_diameter + 2*beam_min_wall, center = true);
-                translate([0, tube_for_undercarriage_outer_diameter, 0])
-                    cube([tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter+2*beam_min_wall, tube_for_undercarriage_outer_diameter + 2*beam_min_wall], center = true);
+                //cylinder(d = tube_for_undercarriage_outer_diameter + 2* beam_min_wall, h = tube_for_undercarriage_outer_diameter + 2*beam_min_wall, center = true);
+                height = tube_for_undercarriage_outer_diameter+4.5*beam_min_wall*2;
+                translate([0, height*0.5 - tube_for_undercarriage_outer_diameter*1.25, 0])
+                    cube([tube_for_undercarriage_outer_diameter+2*beam_min_wall, height, tube_for_undercarriage_outer_diameter + 2*beam_min_wall], center = true);
             }
 
             // plochá část s otvorem pro pásku
@@ -25,13 +28,13 @@ strap_thickness = 3;
 
         // otvor pro pásku
         translate([strap_width/2 + tube_for_undercarriage_outer_diameter, tube_for_undercarriage_outer_diameter + tube_for_undercarriage_outer_diameter + beam_min_wall/2, 0])
-            cube([strap_width, strap_thickness, accumulator_holder_width], center = true);
+            cube([strap_width, strap_thickness, accumulator_holder_width+1], center = true);
 
 
-        cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall, center = true);
+        cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall + 1, center = true);
         translate([0, tube_for_undercarriage_outer_diameter + beam_vertical_space_between_pipes, 0])
             rotate([0, 90, 0])
-                cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall, center = true);
+                cylinder(d = tube_for_undercarriage_outer_diameter, h = tube_for_undercarriage_outer_diameter+2*beam_min_wall + 1, center = true);
 
         // otvory pro srouby
         translate([0, tube_for_undercarriage_outer_diameter + beam_vertical_space_between_pipes, 0]){
@@ -44,8 +47,14 @@ strap_thickness = 3;
                 cylinder(d = M3_nut_diameter, h = 20, $fn = 6);
         }
 
+        translate([0, -tube_for_undercarriage_outer_diameter*0.75, 0])
+            difference(){
+                cube([1, 20, tube_for_undercarriage_outer_diameter+2*beam_min_wall-0.6], center = true);
+                rotate([0, 90, 0])
+                    cylinder(d = M3_screw_diameter+0.5, h = 20, center = true);
+            }
 
-        translate([0, -tube_for_undercarriage_outer_diameter/2, 0])
+        translate([0, -tube_for_undercarriage_outer_diameter*0.75, 0])
             rotate([0, 90, 0]){
                 cylinder(d = M3_screw_diameter, h = 20, center = true);
 
@@ -57,5 +66,8 @@ strap_thickness = 3;
             }
     }
 }
+
+
+
 
 888_1036();

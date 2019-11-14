@@ -45,7 +45,7 @@ module 888_1026(draft)
     difference (){
         union(){
             hull(){
-                #translate([global_clearance - beam_thickness_below,-(depth/2),5])
+                translate([global_clearance - beam_thickness_below,-(depth/2),5])
                     cube([beam_thickness+0,depth,height]);
 
                 translate([engine_offset,0,engine_displacement])
@@ -120,7 +120,7 @@ module 888_1026(draft)
 
         translate([0, 0, engine_holder_beam_depth])
             rotate([0, 90, 0])
-                beam_plug(60);
+                beam_plug(engine_holder_beam_depth + 20);
 
         translate([-50, -beam_width/2-1, engine_holder_beam_depth-100+global_clearance])
             cube([50, beam_width+2, 100]);
@@ -138,11 +138,43 @@ module 888_1026(draft)
                         cylinder(d = M4_nut_diameter, h = 100, $fn = 6);
             }
 
-            translate([-8, i*(beam_main_pipe_distance-15)/2, -5]){
-                cylinder(d = M4_screw_diameter, h = 100, $fn = 50);
-                translate([0, 0, 10+engine_holder_beam_depth])
-                    cylinder(d = M4_nut_diameter, h = 100, $fn = 50);
-            }
+            translate([0, i*(beam_main_pipe_distance)/2, 0])
+                cylinder(d = beam_main_pipe_diameter, h = 100, $fn = 50);
+
+            
+            // Srouby pro predni prisroubovani do nosniku
+            // translate([-8, i*(beam_main_pipe_distance-15)/2, -5]){
+            //     cylinder(d = M4_screw_diameter, h = 100, $fn = 50);
+            //     translate([0, 0, 10+engine_holder_beam_depth])
+            //         cylinder(d = M4_nut_diameter, h = 100, $fn = 50);
+            // }
+        }
+
+
+        // otvory pro tyc
+
+        translate([0, 0, beam_patern*(-0.25+1.75)]) rotate([90, 0, 0]){
+                translate([0, 0, beam_main_pipe_distance/2 + beam_main_pipe_diameter/2 + 2])
+                    cylinder(d = M3_nut_diameter, h = 30, center = false, $fn = 40);
+                translate([0, 0, -beam_main_pipe_distance/2 - beam_main_pipe_diameter/2 - 2 - 30])
+                    cylinder(d = M3_nut_diameter, h = 30, center = false, $fn = 40);
+
+
+                translate([0, 0, beam_main_pipe_distance/2 - beam_main_pipe_diameter/2 - 2 - M3_nut_height])
+                    rotate([0, 0, 30]) cylinder(d = M3_nut_diameter, h = M3_nut_height, center = false, $fn = 6);
+                translate([0, 0, -beam_main_pipe_distance/2 + beam_main_pipe_diameter/2 + 2])
+                    rotate([0, 0, 30]) cylinder(d = M3_nut_diameter, h = M3_nut_height, center = false, $fn = 6);
+
+
+                translate([-50, -M3_nut_diameter/2, beam_main_pipe_distance/2 - beam_main_pipe_diameter/2 - 2 - M3_nut_height])
+                    cube([50, M3_nut_diameter, M3_nut_height]);
+                translate([-50, -M3_nut_diameter/2, -beam_main_pipe_distance/2 + beam_main_pipe_diameter/2 + 2])
+                    cube([50, M3_nut_diameter, M3_nut_height]);
+
+                //translate([0, 0, -beam_main_pipe_distance/2 + beam_main_pipe_diameter/2 + 2])
+
+
+                cylinder(d = M3_screw_diameter, h = 100, center = true, $fn = 40);
         }
 
         // Otvor pro pripeveni kolecka

@@ -1,27 +1,27 @@
 //========== SESTAVA PŘEDNÍHO PODVOZKU ==========//
 
-include <../parameters.scad>
+include <../../parameters.scad>
 
 use <../888_2022.scad>
 use <../888_2024.scad>
 use <../888_2025.scad>
 
-rotate([30, 0, 180])
-    888_2022(true);
 
-rotate([45, 0, 0])
-    888_2024();
+translate([0, 0, -888_2024_joint_height])
+rotate([888_2024_holder_angle, 0, 0])
+translate([0, -888_2024_holder_length, -(696_bearing_outer_diameter+material_around_bearing*2)/2]) {
+        888_2024();
 
-translate([chasis_fork_thickness+KBRM03_B/2+fork_wheel_width/2, 57, 22])
-    rotate([0, 0, 0])
-        888_2025();
+        rotate([90, 0, 180])
+            888_2022(true);
 
-translate([fork_wheel_width/2+chasis_fork_thickness+3, 57, 0])
-    rotate([0, 0, 0])
-        piston();
+        translate([(KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2+RT57208M25_EW/2)+696_bearing_thickness, 888_2024_holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
+            rotate([-40, 0, 0])
+                888_2025(true);
 
-module piston() {
-    #cylinder(d=12, h=48, $fn=40, center=true);
-    #translate([0, 0, -48/2-25])
-        cylinder(d=M3_screw_diameter, h=25, $fn=20);
+        rotate([0, 0, 180])
+        translate([(KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2+RT57208M25_EW/2)+696_bearing_thickness, -888_2024_holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
+            rotate([40, 0, 0])
+                888_2025(true);
+
 }

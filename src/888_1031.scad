@@ -3,6 +3,7 @@
 include <../parameters.scad>
 use <888_1004.scad>
 //use <lib/drill.scad>
+use <888_1005.scad>
 draft = $preview;
 
 module 888_1031(draft){
@@ -15,13 +16,13 @@ module 888_1031(draft){
             for (i=[-beam_patern/2,0])
                 translate([i, 0, 0])
                     rotate([-90, 0, 0])
-                        cylinder(d = M4_nut_diameter+8, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 60);
+                        cylinder(d = M4_nut_diameter+8, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 100);
 
         // Tvar pro pripevneni pro tyce
             for (i=[-beam_patern/2, beam_patern/2])
                 translate([i - beam_patern/4, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes])
                     rotate([-90, 0, 0])
-                        cylinder(d = beam_main_pipe_thickness+4.75, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 60);
+                        cylinder(d = beam_main_pipe_thickness+4.75, h = beam_width/2+pilon_pipe_diameter+15, $fn = draft? 10 : 100);
         }
 
         translate([-40, 0, 0])
@@ -41,7 +42,7 @@ module 888_1031(draft){
         for (i=[[-beam_patern/2, 0], [beam_patern/2, 180]])
             translate([i[0] - beam_patern/4, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes]){
                 rotate([-90, 0, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = beam_width/2 + 5 + 15 + global_clearance, $fn = draft? 10 : 60);
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width/2 + 30 + global_clearance, $fn = draft? 20 : 80);
                 rotate([0, 90, 0])
                     translate([0, beam_width/2+5, 0])
                         rotate([i[1], 0, 0]){
@@ -146,20 +147,21 @@ module 888_1031_pipe(draft){
     translate([0, 0, -beam_main_pipe_thickness - beam_vertical_space_between_pipes])
         rotate([0, 0, 90])
             difference(){
-                rotate([0, 90, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = beam_width + 2*(5+15), center = true, $fn =  draft? 10 : 60);
-                rotate([0, 90, 0])
-                    cylinder(d = beam_main_pipe_thickness-2, h = beam_width + 2*(5+15)+1, center = true, $fn =  draft? 10 : 60);
+                888_1005_pipe(draft);
+            //     rotate([0, 90, 0])
+            //         cylinder(d = beam_main_pipe_thickness, h = beam_width + 2*(5+15), center = true, $fn =  draft? 10 : 60);
+            //     rotate([0, 90, 0])
+            //         cylinder(d = beam_main_pipe_thickness-2, h = beam_width + 2*(5+15)+1, center = true, $fn =  draft? 10 : 60);
 
-                rotate([0, 0, 90])
-                    cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
+                // rotate([0, 0, 90])
+                //     cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
 
-                translate([beam_width/2 + 5, 0, 0])
-                    rotate([90, 0, 0])
+                translate([0, beam_width/2 + 5, 0])
+                    rotate([0, 90, 0])
                         cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
 
-                translate([-beam_width/2 - 5, 0, 0])
-                    rotate([90, 0, 0])
+                translate([0, -beam_width/2 - 5, 0])
+                    rotate([0, 90, 0])
                         cylinder(d = M3_screw_diameter, h = 30, center = true, $fn =  draft? 8 : 10);
 
 
@@ -213,6 +215,14 @@ module 888_1031_drill_b(draft){
 }
 
 
+module position_888_1031_pipe_tranverse(i = 0){
+    //translate([0, 0, -50])
+    translate([beam_patern*(i), 0, 0])
+    rotate([0, 0, 90])
+    children();
+}
+
+
 module 888_1031_info(){
     echo("==========INFO 888_1031 ==========");
     echo("Dil pro pripevneni prednich tyci pylonu");
@@ -224,7 +234,7 @@ module 888_1031_info(){
 
 888_1031_info();
 888_1031(draft);
-//888_1031_pipe();
+888_1031_pipe();
 
-//translate([20, 0, 0]) 888_1031_drill_a($preview);
+//translate([20, -40, 0]) 888_1031_drill_a($preview);
 //translate([20, 0, 0]) 888_1031_drill_b($preview);

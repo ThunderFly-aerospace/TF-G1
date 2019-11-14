@@ -1,6 +1,7 @@
 // hlavni nosnik virniku
+
 include <../parameters.scad>
-draft = true;   // sets rendering quality to draft.
+draft = $preview;   // sets rendering quality to draft.
 
 
 module beam_profile(l = 100, draft = true){
@@ -31,11 +32,11 @@ module beam_profile(l = 100, draft = true){
         // podelne diry na tyce
         translate([-global_clearance/2, -beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?15:50);
+                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft?8:80);
 
         translate([-global_clearance/2, beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft ?15:50);
+                cylinder(d = beam_main_pipe_thickness, h = l + global_clearance, $fn = draft?8:80);
 
 
         // drazky na matice
@@ -77,7 +78,7 @@ module beam_profile(l = 100, draft = true){
 
 module beam_plug(l = 100, side_pipes = true){
     difference(){
-        translate([l/2 - global_clearance, 0, -beam_thickness/2 + 5 + beam_min_wall + global_clearance])
+        translate([l/2 - global_clearance, 0, -beam_thickness/2 + 5 + beam_min_wall])
             cube([l, beam_width+1, beam_thickness+1], center = true);
 
         for (i=[0,2])
@@ -116,7 +117,7 @@ module beam_plug(l = 100, side_pipes = true){
     }
 }
 
-module beam_holes_patern(n = 1){
+module beam_holes_patern(n = 1, draft){
 
     screw_length = 20 - M3_nut_height*1.5;
     screw2_length = beam_main_pipe_thickness*3+6;
@@ -129,7 +130,7 @@ module beam_holes_patern(n = 1){
             // diry pro pricne tyce
             for (j=[-1]) translate([10, 0, j*(beam_main_pipe_thickness+beam_vertical_space_between_pipes)]){
                 rotate([90, 0, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = draft ?15:50);
+                    cylinder(d = beam_main_pipe_thickness, h = beam_width, center = true, $fn = draft ?15:100);
             }
 
             /* #for (k=[-1])
@@ -204,11 +205,56 @@ module beam_holes_patern(n = 1){
 
 }
 
-module 888_1004(draft = false){
+module 888_1004(draft = true){
     difference(){
-        beam_profile(beam_length + engine_holder_beam_depth);
-        beam_holes_patern((beam_length+engine_holder_beam_depth)/30);
+        beam_profile(beam_length + engine_holder_beam_depth, draft);
+        beam_holes_patern((beam_length+engine_holder_beam_depth)/30, draft);
     }
 }
 
-888_1004();
+
+module 888_1004_pipe(draft = true){
+    leng = beam_patern*(2 + 13);
+
+    rotate([0, 90, 0])
+        difference(){
+            translate([0, 0, -beam_patern*2])
+                cylinder(d = beam_main_pipe_diameter, h = leng, $fn = 50);
+            translate([0, 0, -beam_patern*2])
+                cylinder(d = beam_main_pipe_diameter-3, h = leng, $fn = 25);
+
+        for(i = [0:13])
+            translate([0, 0, beam_patern*(0.25+i)])
+                rotate([0, 90, 0])
+                    cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 20);
+
+        translate([0, 0, beam_patern*-1])
+                rotate([0, 90, 0])
+                    cylinder(d = M4_screw_diameter, h = 200, center = true, $fn = 20);
+
+        translate([0, 0, beam_patern*-1.5])
+                rotate([90, 0, 0])
+                    cylinder(d = M3_screw_diameter, h = 20, center = true, $fn = 20);
+
+
+
+        }
+}
+
+module position_888_1004(){
+    translate([-engine_holder_beam_depth, 0, 0])
+        children();
+}
+
+module position_888_1004_pipe(i = 1){
+    translate([0, i*beam_main_pipe_distance/2, 0])
+        children();
+}
+
+module position_888_1004_pipe_traverse(i = 0){
+    translate([beam_patern*(i), 0, -(beam_main_pipe_thickness+beam_vertical_space_between_pipes)])
+        children();
+}
+
+position_888_1004()
+    888_1004(draft);

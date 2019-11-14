@@ -1,35 +1,9 @@
 STL_DIR=../../STL/drawings
-IMG_DIR=../../images
-SRC_DIR=./
-PLATE_DIMMENSIONS=120
-SIMARRANGE=/usr/local/bin/simarrange
-STLSORT=stlsort
-OPENSCAD_APP=openscad
-
+IMG_DIR=../../images/drawings
+SRC_DIR=.
+DEP_DIR=../../dep
+GCD_DIR=../../gcode/drawings
+INI_DIR=../../slicing
+GIT_ROOT=../..
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
-TARGETS=$(patsubst $(SRC_DIR)/%.scad, $(STL_DIR)/%.stl, $(SOURCES))
-IMAGES=$(patsubst $(SRC_DIR)/%.scad, $(IMG_DIR)/%.png, $(SOURCES))
-
-all: default images
-
-calibration:
-	openscad -m make -o calibration.stl calibration.scad
-
-default: $(TARGETS)
-
-$(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
-	$(OPENSCAD_APP) -m make -o $@ $<
-	$(STLSORT) $@ || :
-	
-images: $(IMAGES)
-
-$(IMG_DIR)/%.png: $(SRC_DIR)/%.scad
-	$(OPENSCAD_APP) -m make --render -o $@ $<
-
-arrange: default
-	 $(SIMARRANGE) -x $(PLATE_DIMMENSIONS) -y $(PLATE_DIMMENSIONS) $(ARRANGE_TARGETS)
-	 
-clean:
-	rm -f calibration.stl
-	rm -f $(STL_DIR)/*.stl
-	rm -f $(IMG_DIR)/*.png
+include ../../utils/Makefile
