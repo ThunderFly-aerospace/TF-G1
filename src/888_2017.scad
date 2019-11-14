@@ -19,7 +19,7 @@ module 888_2017(left = 0, draft = true, print_orientation = 0){
     vec_f = [chassis_height+2, -chassis_pipe_baselength_f + beam_patern/2 + 2017_pipe_mount_offset[0]/2 + global_clearance, chassis_pipe_wheelbase - chassis_top_bearing_position_y/2];
 
     rotate([180, 0, 0] * print_orientation)
-    orientate([chassis_height, 0, chassis_pipe_wheelbase/2+10/2] * print_orientation)
+    orientate([chassis_height+2, 0, chassis_pipe_wheelbase/2+ chassis_top_bearing_position_y/2+1] * print_orientation)
     
     mirror([0, 1, 0]*left)
     difference(){
@@ -256,4 +256,4 @@ color("blue")
     888_2017_pipe_front();
 
 
-888_2017(left = 1, draft = draft);
+888_2017(left = 1, draft = draft, print_orientation = 0);

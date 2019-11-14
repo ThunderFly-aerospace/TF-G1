@@ -20,11 +20,11 @@ battery = false;
 propeller = false;
 
 
-print = true;
-alu = true;
-piston = true;
-carbon = true;
-other = true;
+print = false;
+alu = false;
+piston = false;
+carbon = false;
+other = false;
 
 include <../../parameters.scad>
 use <../666_1028.scad>
