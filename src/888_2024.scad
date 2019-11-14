@@ -9,7 +9,7 @@ joint_height = 888_2024_joint_height;
 bearing_extension = 0;
 
 module 888_2024(orientate = 0) {
-    rotate([6.7, 0, 0]*orientate)
+    rotate([atan((696_bearing_outer_diameter/2+material_around_bearing)/holder_length), 0, 0]*orientate)
     //rotate([atan(((holder_length) / (-696_bearing_outer_diameter/2-material_around_bearing) )), 0, 0])
 
     //translate([0, 0, 0])
