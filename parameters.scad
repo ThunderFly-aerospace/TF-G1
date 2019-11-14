@@ -725,7 +725,7 @@ joint_width = 25;
 
 //888_2022
 888_2022_front_fork_length = 100;
-888_2022_piston_mount_offset = -15;
+888_2022_piston_mount_offset = -7;
 
 
 //RT/57208/M/25 - https://www.tme.eu/cz/details/rt_57208_m_25/pracovni-valce/norgren-herion/
