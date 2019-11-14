@@ -2,8 +2,8 @@ include <../../parameters.scad>
 use <../666_1028.scad>
 
 draft = false;
-
-666_1028_body_top(side_choose = 1, draft = draft);
+rotate([0,0,45])
+  666_1028_body_top(side_choose = 1, draft = draft);
 
 // plochy pro zlepšení adheze k podložce při tisku
 //translate ([120,-75,0])
