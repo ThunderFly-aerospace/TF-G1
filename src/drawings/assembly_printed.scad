@@ -1,9 +1,4 @@
-
-include <888_1102.scad>
-
-
-draft = $preview;
-stl = true;
+include <../lib/assembly.scad>
 
 nosnik = true;
 predni_podvozek = true;
@@ -16,10 +11,10 @@ motor = true;
 tail = true;
 
 
-print = false;
+print = true;
 alu = false;
 piston = false;
-carbon = true;
+carbon = false;
 other = false;
 
 

@@ -1,13 +1,13 @@
 
-draft = true;
+draft = $preview;
 stl = true;
 
-nosnik = true;
+nosnik = false;
 predni_podvozek = false;
 zadni_podvozek = false;
 mechova_kolecka = false;
 limec = false;
-cover = true;
+cover = false;
 rotor_head_pulley_motor = false;
 rotor_head_pulley_rotor = false;
 rotor_head_plate = false;
@@ -49,7 +49,7 @@ use <../888_2025.scad>
 use <../888_2011.scad>
 use <../888_2012.scad>
 use <../888_2021.scad>
-use <888_2103.scad>
+//use <../888_2103.scad>
 use <../main_motor.scad>
 use <../lib/motor.scad>
 use <../lib/igus.scad>
@@ -89,8 +89,9 @@ module assembly(){
             else{position_888_1004() 888_1004();}
 
 // podelne tyce nosniku
-    if(carbon)
-        for(i=[-1, 1])
+    if(carbon && nosnik)
+        for(i=[0, 1])
+            mirror([0, i, 0])
                 if(stl){import("../../STL/888_1004_pipe_a.stl");}
                 else{position_888_1004_pipe(i) 888_1004_pipe();}
 
@@ -106,7 +107,7 @@ module assembly(){
         }
 
 // pricne tyce nosnikem
-        if(carbon)
+        if(nosnik && carbon)
             for(i = [2])
                 position_888_1004_pipe_traverse(i){
                     if(stl){import("../../STL/888_1005_pipe.stl", convexity=4);}
@@ -116,7 +117,7 @@ module assembly(){
                 }
 
 // pricne tyce nonikem.
-        if(carbon)
+        if(nosnik && carbon)
             for(i = [5,6])
                 position_888_1031_pipe_tranverse(i){
                     if(stl){import("../../STL/888_1031_pipe.stl", convexity=4);}

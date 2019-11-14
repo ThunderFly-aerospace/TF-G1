@@ -1,7 +1,8 @@
-include <888_1102.scad>
-
+include <../lib/assembly.scad>
 
 zadni_podvozek = true;
+
+
 print = true;
 
 

@@ -1,10 +1,7 @@
-include <888_1102.scad>
-
+include <../lib/assembly.scad>
 
 nosnik = true;
 limec = true;
-motor = true;
-propeller = true;
 
 print = true;
 

@@ -1,5 +1,5 @@
 
-include <888_1102.scad>
+include <../lib/assembly.scad>
 
 
 draft = $preview;
@@ -19,8 +19,8 @@ tail = true;
 print = false;
 alu = false;
 piston = false;
-carbon = false;
-other = true;
+carbon = true;
+other = false;
 
 
 assembly();

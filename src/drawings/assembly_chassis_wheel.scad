@@ -1,4 +1,4 @@
-include <888_1102.scad>
+include <../lib/assembly.scad>
 
 mechova_kolecka = true;
 other = true;

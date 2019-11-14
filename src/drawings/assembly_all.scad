@@ -1,22 +1,18 @@
-include <888_1102.scad>
+include <../lib/assembly.scad>
 
-
-draft = $preview;
-stl = true;
-
-nosnik = false;
+nosnik = true;
 predni_podvozek = true;
 zadni_podvozek = true;
 mechova_kolecka = true;
-limec = false;
-cover = false;
+limec = true;
+cover = true;
 pilon_mount = true;
 rotor_head = true;
 rotor_head_pulley_motor = true;
 rotor_head_pulley_rotor = true;
 rotor_head_plate = true;
 motor = true;
-tail = false;
+tail = true;
 propeller = true;
 
 
