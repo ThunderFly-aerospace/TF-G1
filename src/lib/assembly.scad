@@ -50,6 +50,7 @@ use <../888_2011.scad>
 use <../888_2012.scad>
 use <../888_2021.scad>
 //use <../888_2103.scad>
+use <../drawings/888_2105.scad>
 use <../main_motor.scad>
 use <../lib/motor.scad>
 use <../lib/igus.scad>
@@ -301,6 +302,8 @@ module assembly(){
     }
 
 
+
+
 if(predni_podvozek && print)
     translate([0, 0, -beam_thickness_below])
         rotate([0, 0,0])
@@ -310,19 +313,26 @@ if(predni_podvozek && print)
 
 translate([-110, 0, -160]) rotate([0, 0, -90]){
 
-if(predni_podvozek && print)
-    rotate([30, 0, 180])
-        888_2022(true);
+// if(predni_podvozek && print)
+//     rotate([30, 0, 180])
+//         888_2022(true);
 
-if(predni_podvozek && print)
-    rotate([45, 0, 0])
-        888_2024();
+// if(predni_podvozek && print)
+//     rotate([45, 0, 0])
+//         888_2024();
 
-if(predni_podvozek && print)
-    translate([chasis_fork_thickness+KBRM03_B/2+fork_wheel_width/2, 57, 22])
-        rotate([0, 0, 0])
-            888_2025();
+// if(predni_podvozek && print)
+//     translate([chasis_fork_thickness+KBRM03_B/2+fork_wheel_width/2, 57, 22])
+//         rotate([0, 0, 0])
+//             888_2025();
+
 }
+column_height = 65;
+column_offset = 50;
+
+translate([-column_offset, 0, -beam_thickness_below - column_height])
+    rotate([0, 0, -90])
+        888_2105();
 
 /*
  %translate([main_pilon_position, 0, 0])

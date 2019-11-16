@@ -370,7 +370,7 @@ tail_pipe_distance = sin(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_posit
 tail_pipe_convergence = 0;
 tail_airfoils_convergence = 3;
 tail_front_mount_edge_cut_x_position = 5;           // pozice seriznuti predni hrany (osa X)
-tail_y_pos = 850;                                   // jak je smerovka daleko od prvni prince trubky
+tail_y_pos = 850-100;                                   // jak je smerovka daleko od prvni prince trubky
 
 Rudder_shaft_x_position = tail_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
 
