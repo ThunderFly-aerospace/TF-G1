@@ -295,10 +295,16 @@ module assembly(){
             motor_main();
     }
 
-    if(propeller){
+    if(propeller && other){
         position_main_motor()
             translate([1.5, 0, -15]) rotate([-90, 0, 0]) scale(9)
             import("../../STL/APC_15x4C.stl");
+    }
+
+    if(propeller){
+        position_main_motor()
+            translate([1.5, 0, -15]) rotate([0, 0, 0])
+                cylinder(h = 10, d = 380);
     }
 
 
