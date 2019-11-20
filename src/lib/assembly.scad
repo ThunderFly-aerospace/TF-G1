@@ -2,6 +2,8 @@
 draft = $preview;
 stl = true;
 
+rotor = false;
+rotor_position = true;
 nosnik = false;
 predni_podvozek = false;
 zadni_podvozek = false;
@@ -26,11 +28,15 @@ piston = false;
 carbon = false;
 other = false;
 
+collisions = false;
+
 include <../../parameters.scad>
 use <../666_1028.scad>
+use <../666_1201.scad>
 use <../888_1004.scad>
 use <../888_1005.scad>
 use <../888_2009.scad>
+use <../888_1020.scad>
 use <../888_1025.scad>
 use <../888_1026.scad>
 use <../888_1029.scad>
@@ -165,8 +171,8 @@ module assembly(){
 
 
 // rotorova hlava
-        
-    
+
+
         if(rotor_head && print)
             translate([main_pilon_position, 0, height_of_vertical_tube])
                 rotate(180)
@@ -187,20 +193,11 @@ module assembly(){
                                     }else{
                                         888_1022();
                                     }
-        
 
-// Tistena deska rotorove hlavy
-            if(rotor_head_plate && print)
-                        rotate([0,0,0])
-                            translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
-                                rotate([180,0,0])
-                                    if(stl){
-                                        import("../../STL/888_1020.stl", convexity=3);
-                                    }else{
-                                        888_1020();
-                                    }
 
-            if(rotor_head_pulley_rotor && print)
+
+
+            /* if(rotor_head_pulley_rotor && print)
                         rotate([0,0,0])
                             translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2])
                                 //rotate([180,0,0])
@@ -208,13 +205,13 @@ module assembly(){
                                         import("../../STL/rotor_pulley.stl", convexity=3);
                                     }else{
                                         rotor_pulley();
-                                    }
+                                    } */
 
-            if(rotor_head_pulley_rotor && other)
+            /* if(rotor_head_pulley_rotor && other)
                         rotate([0,0,0])
                             translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2+20])
-                                    import("../../STL/external/666_1207.stl");
-                                    
+                                    import("../../STL/external/666_1207.stl"); */
+
 
             if(rotor_head_pulley_motor && print)
                         rotate([0,0,0])
@@ -239,7 +236,68 @@ module assembly(){
 
 
         }
-                    
+
+// Tistena deska rotorove hlavy
+if(rotor_head_plate && print)
+    position_888_1020(enable = rotor_position)
+        rotate([180,0,0]) translate([0, 0, -14])
+            if(stl){
+                import("../../STL/888_1020.stl", convexity=3);
+            }else{
+                888_1020();
+            }
+
+// Rotorove listy
+
+rotor_flapping = rotor_flap0;
+rotor_position = 90;
+
+rotor_placement = true;
+  translate([0, 500, 500]*rotor_placement);
+
+
+//position_888_1020(enable = rotor_position){color("blue") sphere(r=5);}
+
+position_888_1020(enable = rotor_position)
+translate([0, 0, 45]){
+  if(rotor){
+  // rotorove listy
+    if(other)
+      position_666_1201(flapping = rotor_flapping, rotate = rotor_position)
+        666_1201(draft = draft, holes = true);
+    if(other)
+      rotate(180) position_666_1201(flapping = rotor_flapping, rotate = rotor_position)
+        666_1201(draft = draft, holes = true);
+
+  // Rotorovy domek
+  if(alu)
+    translate([0,0,-12.5])
+      rotate([0,0,-rotor_delta+90 + rotor_position])
+        import("../../STL/external/666_1207.stl");
+
+  // Remenice rotoru
+  if(print)
+    rotate([0,0,-rotor_delta+90 + rotor_position])
+      translate([0, 0, -17 - 12.5])
+        if(stl){
+            import("../../STL/rotor_pulley.stl", convexity=3);
+        }else{
+            rotor_pulley();
+        }
+  }
+}
+
+rotor_springing = 100;
+
+if(rotor && collisions){
+  %position_888_1020(enable = rotor_position)
+    translate([0, 0, 45]){
+      rotate_extrude($fn=200)hull(){
+        translate([30,-5,0]) square(10);
+        translate([rotor_blade_length+30,-rotor_springing/2,0]) square([1, rotor_springing]);
+      }
+    }
+}
 
         // if(rotor_head && print)
         //     translate([main_pilon_position, 0, height_of_vertical_tube])
@@ -301,13 +359,11 @@ module assembly(){
             import("../../STL/APC_15x4C.stl");
     }
 
-    if(propeller){
+    if(propeller && collisions){
         position_main_motor()
             translate([1.5, 0, -15]) rotate([0, 0, 0])
                 cylinder(h = 10, d = 380);
     }
-
-
 
 
 if(predni_podvozek && print)
@@ -317,28 +373,14 @@ if(predni_podvozek && print)
             else{888_2009();}
 
 
-translate([-110, 0, -160]) rotate([0, 0, -90]){
-
-// if(predni_podvozek && print)
-//     rotate([30, 0, 180])
-//         888_2022(true);
-
-// if(predni_podvozek && print)
-//     rotate([45, 0, 0])
-//         888_2024();
-
-// if(predni_podvozek && print)
-//     translate([chasis_fork_thickness+KBRM03_B/2+fork_wheel_width/2, 57, 22])
-//         rotate([0, 0, 0])
-//             888_2025();
-
-}
 column_height = 65;
 column_offset = 50;
 
-translate([-column_offset, 0, -beam_thickness_below - column_height])
-    rotate([0, 0, -90])
-        888_2105();
+// Predni podvozek
+if(predni_podvozek && print)
+  translate([-column_offset, 0, -beam_thickness_below - column_height])
+      rotate([0, 0, -90])
+          888_2105();
 
 /*
  %translate([main_pilon_position, 0, 0])
@@ -369,21 +411,21 @@ if(zadni_podvozek)
                     if(stl){import("../../STL/888_2013.stl");}
                     else{888_2013();}
 
-    if(print)                
+    if(print)
         translate([-chassis_baselength_f, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
             orientate([-chassis_pipe_baselength_f, chassis_pipe_wheelbase, chassis_height])
                 rotate([0, 90, 90])
                     if(stl){import("../../STL/888_2013.stl");}
                     else{888_2013();}
 
-    if(print)                
+    if(print)
         translate([chassis_baselength_r, chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
             orientate([chassis_pipe_baselength_r, -chassis_pipe_wheelbase, chassis_height])
                 rotate([0, 90, 90])
                     if(stl){import("../../STL/888_2013.stl");}
                     else{888_2013();}
 
-    if(print)                
+    if(print)
         translate([chassis_baselength_r, -chassis_top_bearing_position_y, -chassis_top_bearing_position_z])
              orientate([chassis_pipe_baselength_r, chassis_pipe_wheelbase, chassis_height])
                  rotate([0, 90, 90])
@@ -499,13 +541,13 @@ if(print){
         //color("green"){
 
             // trmeny k pricne trubce
-            
+
             if(print)
             translate([0, chassis_suspension_basewidth/2, beam_main_pipe_thickness/2 + beam_min_wall])
                 rotate([-90, 180, 0])
                     if(stl){import("../../STL/888_2016.stl");}
                     else{888_2016();}
-            
+
             if(print)
             translate([0, -chassis_suspension_basewidth/2, beam_main_pipe_thickness/2 + beam_min_wall])
                 rotate([90, 0, 0])
@@ -534,13 +576,13 @@ if(print){
             translate([beam_patern/2,0, beam_main_pipe_thickness/2 + beam_min_wall])
                 if(stl){import("../../STL/888_2016_pipe.stl");}
                 else{888_2016_pipe();}
-                
+
 
             if(carbon)
             translate([-beam_patern/2,0, beam_main_pipe_thickness/2 + beam_min_wall])
                 if(stl){import("../../STL/888_2016_pipe.stl");}
                 else{888_2016_pipe();}
-                
+
 
 
             if(other)

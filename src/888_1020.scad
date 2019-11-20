@@ -294,12 +294,15 @@ module 888_1020(draft = true){
                 translate([rotorhead_neck_plate_diameter/2+2, 0, 0])
                     cylinder(d = 4.5, h = 20, $fn = 20);
         }
-
-
-
-
      }
+}
 
+module position_888_1020(enable = true){
+
+        translate([main_pilon_position + rotor_head_bearing_x_shift, 0, height_of_vertical_tube + rotor_head_height])
+          rotate([0, 9+rotor_head_pitch, rotor_head_roll])
+          translate([0,0,0])
+            children();
 }
 
 888_1020(false);

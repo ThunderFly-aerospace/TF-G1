@@ -53,12 +53,11 @@ beam_side_edge_width = 175;
 
 gliding_aggle = 14;         // tenhle úhel by se zřejmě v budoucnu měl počítat z požadované klouzavosti.
 
-rotor_blade_AOA = 1.5;      // nastavení úhlu náběhu rotorového listu
+rotor_blade_AOA = 3;      // nastavení úhlu náběhu rotorového listu
 rotor_blade_length = 970;   // délka rotorového listu
 rotor_blade_depth = 50;     // hloubka rotorového listu
 rotor_flap0 = 2;
 rotor_delta = 20;
-
 
 /* // parametry rotorove hlavy
 
@@ -487,7 +486,7 @@ servo_20kg_nut_d = 5+0.3;
 
 // parametry rotorove hlavy
 
-rotor_head_pitch = 0;
+rotor_head_pitch = 10;
 rotor_head_roll = 0;
 rotor_head_screw_distances = [0, 10, 64];
 rotor_head_servo_shift = [-7, -49, -45];

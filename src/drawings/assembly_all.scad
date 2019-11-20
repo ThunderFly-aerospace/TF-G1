@@ -1,5 +1,6 @@
 include <../lib/assembly.scad>
 
+rotor = true;
 nosnik = true;
 predni_podvozek = true;
 zadni_podvozek = true;

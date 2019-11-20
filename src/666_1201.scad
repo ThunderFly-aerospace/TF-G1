@@ -147,6 +147,16 @@ module 666_1201_doc(length = 970, material_width = 50, twosided = true, draft = 
         }
 }
 
+module position_666_1201(flapping = 0, rotate = 0){
+  rotate([0, 0, -rotor_delta + rotate])
+    rotate([flapping, 0, 0])
+      rotate([0, 0, rotor_delta])
+        translate([rotor_blade_depth/4, rotor_blade_length/2  + 30, 0])
+          rotate([0,-rotor_blade_AOA,0])
+            children();
+}
+
+//position_666_1201()
 666_1201(draft = draft, holes = true);
 666_1201_doc(length=970);
 
