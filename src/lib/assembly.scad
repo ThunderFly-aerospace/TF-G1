@@ -269,6 +269,22 @@ translate([0, 0, 45]){
       rotate(180) position_666_1201(flapping = rotor_flapping, rotate = rotor_position)
         666_1201(draft = draft, holes = true);
 
+    if(alu)
+    for(i = [0, 180]) rotate(i)
+      translate([0, -3, -5])
+        rotate([0, -rotor_flapping, -rotor_delta])
+        translate([-6, -33/2, 0])
+          import("../../STL/666_1232.stl");
+
+    if(alu)
+    color("blue") for(i = [0, 180]) rotate(i)
+      translate([0, 0, 5+3])
+        rotate([0, -rotor_flapping, 0])
+        translate([16, rotor_blade_depth/4 - 5, 0])
+        rotate([180, 0, 0]){
+          import("../../STL/666_1206.stl");
+          translate([0, 0, 14])import("../../STL/666_1206.stl");
+        }
   // Rotorovy domek
   if(alu)
     translate([0,0,-12.5])
@@ -298,12 +314,6 @@ if(rotor && collisions){
       }
     }
 }
-
-        // if(rotor_head && print)
-        //     translate([main_pilon_position, 0, height_of_vertical_tube])
-        //         rotate(180)
-        //             if(stl){import("../../STL/888_1029_servoholder.stl");}
-        //             else{888_1029_servoholder();}
 
 
 // stredni patka pro pripevneni pylonu
@@ -381,24 +391,6 @@ if(predni_podvozek && print)
   translate([-column_offset, 0, -beam_thickness_below - column_height])
       rotate([0, 0, -90])
           888_2105();
-
-/*
- %translate([main_pilon_position, 0, 0])
-    cylinder(d = 20, h = height_of_vertical_tube);
-
-%translate([-2*main_tube_outer_diameter, -100, 0])
-    rotate([0, 90, 0])
-        cylinder(d = 20, h = length_of_main_tube);
-
-
-%translate([250, tail_pipe_distance/2, 0])
-    rotate([0, 90, 0])
-        cylinder(d = 10, h = 500);
-
-%translate([250, -tail_pipe_distance/2, 0])
-    rotate([0, 90, 0])
-        cylinder(d = 10, h = 500);
-*/
 
 if(zadni_podvozek)
     translate([beam_patern*9.5, 0, -beam_thickness_below]){
@@ -528,18 +520,12 @@ if(print){
 
 
 // zadni kolecka
-
-
-
-    //
     //
     //      Dily pro souvisejici s pricnou tyci
-    //
     //
 
     translate([0, 0, 0]){
         //color("green"){
-
             // trmeny k pricne trubce
 
             if(print)
@@ -569,7 +555,6 @@ if(print){
                         rotate([0, 180+45, 90])
                         chassis_piston_assembly();
 
-        //}
 
         color("Teal"){
             if(carbon)
