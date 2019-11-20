@@ -717,7 +717,7 @@ joint_width = 25;
 //888_2024
 888_2025_distance_space = 0.5;
 888_2024_holder_angle = 40;
-888_2024_holder_length = 120;
+888_2024_holder_length = 100;
 888_2024_joint_height = 5;
 
 //888_2025
@@ -749,3 +749,5 @@ RT57208M25_stroke = 25;
 //https://www.igus.cz/product/160
 //https://www.igus.cz/contentData/Products/ProductPictures/p160z22479_1050x700.jpg
 KBRM03_B = 6;
+KBRM03_h1 = 18.5;
+KBRM03_l1 = 8;

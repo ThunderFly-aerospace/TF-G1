@@ -54,7 +54,9 @@ data_kstm_ball_thickness = [[5,25], [6,33], [8,33], [10,46], [12,46]];
 function kstm_ball_thickness(type) = data_kstm_ball_thickness[search(type, data_kstm_ball_thickness)[0]][1];
 
 
-
+module kbrm_03() {
+    import("../../STL/external/igus/KBRM_03_1.stl", convexity = 5);
+}
 module kbrm_06(){
     import("../../STL/external/igus/KBRM_06_2.stl", convexity = 5);
 }

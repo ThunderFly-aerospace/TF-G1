@@ -1,6 +1,9 @@
 //========== DRŽÁK PÍSTU ==========//
 
 include <../parameters.scad>
+use <lib/igus.scad>
+
+
 
 wall_thickness = 888_2025_wall_thickness;
 height = 888_2025_height;
@@ -10,17 +13,21 @@ module 888_2025(piston=false, piston_position = 0) {
 
     if(piston) {
         translate([0, 0, -RT57208M25_XC+RT57208M25_LB+RT57208M25_WF])
-            #cylinder(d=RT57208M25_D, h=RT57208M25_XC-RT57208M25_LB-RT57208M25_WF, $fn=50);
+            cylinder(d=RT57208M25_D, h=RT57208M25_XC-RT57208M25_LB-RT57208M25_WF, $fn=50);
 
         translate([0, 0, -RT57208M25_XC+RT57208M25_LB])
-            #cylinder(d=RT57208M25_BE, h=RT57208M25_WF, $fn=50);
+            cylinder(d=RT57208M25_BE, h=RT57208M25_WF, $fn=50);
 
         translate([0, 0, -RT57208M25_XC+RT57208M25_LB-RT57208M25_stroke*piston_position/100]) {
-            #cylinder(d=RT57208M25_MMh9, h=RT57208M25_stroke, $fn=50);
+            cylinder(d=RT57208M25_MMh9, h=RT57208M25_stroke, $fn=50);
 
             translate([0, 0, -RT57208M25_A])
-                #cylinder(d=RT57208M25_KK, h=RT57208M25_A, $fn=50);
+                cylinder(d=RT57208M25_KK, h=RT57208M25_A, $fn=50);
         }
+
+        translate([0, 0, -KBRM03_h1+KBRM03_l1-RT57208M25_XC+RT57208M25_LB-RT57208M25_stroke*piston_position/100-RT57208M25_A])
+            rotate([180, 0, 90])
+                kbrm_03();
         
     }
     
