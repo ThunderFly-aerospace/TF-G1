@@ -19,6 +19,7 @@ pilon_mount = false;
 rotor_head = false;
 motor = false;
 tail = false;
+pipe_clamps = false;
 battery = false;
 propeller = false;
 
@@ -153,8 +154,8 @@ module assembly(){
 
     }
 
-
-    if(tail && print){
+// Spojky trubek
+    if(pipe_clamps && print){
         translate([beam_patern*9, tail_pipe_distance/2, -beam_main_pipe_thickness-beam_vertical_space_between_pipes])
         rotate([-90, 0, 0]) import("../../STL/888_1034.stl");
 
@@ -591,19 +592,22 @@ if(tail)
     translate([0, 0, -beam_vertical_space_between_pipes*2-beam_main_pipe_thickness*2]){
 
     if(print)
-        translate([tail_y_pos, tail_pipe_distance/2, 0])
-            rotate([tail_airfoils_angle/2, 0, 0])
+    for(i=[0, 1])
+        mirror([0, i, 0])
+        translate([tail_y_pos, -tail_pipe_distance/2, 0])
+            rotate([-tail_airfoils_angle/2, 0, 0])
                 translate([0, 0, -tail_height/2])
-                if(stl){import("../../STL/666_1028.stl", convexity=4);}
+                if(false){import("../../STL/666_1028.stl");}
                 else{666_1028(pipe = false);}
 
-    if(print)
+
+    /* if(print)
         mirror([0, 1, 0])
         translate([tail_y_pos, tail_pipe_distance/2, 0])
             rotate([tail_airfoils_angle/2, 0, 0])
                 translate([0, 0, -tail_height/2])
                 if(stl){import("../../STL/666_1028.stl", convexity=4);}
-                else{666_1028(pipe = false);}
+                else{666_1028(pipe = false);} */
 
     if(carbon)
         translate([tail_y_pos, -tail_pipe_distance/2, 0])
