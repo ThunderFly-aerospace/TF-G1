@@ -12,8 +12,10 @@ rotor_head = true;
 rotor_head_pulley_motor = true;
 rotor_head_pulley_rotor = true;
 rotor_head_plate = true;
+rotor_head_prerotator = true;
 motor = true;
 tail = true;
+battery = true;
 propeller = true;
 
 

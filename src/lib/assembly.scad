@@ -2,8 +2,9 @@
 draft = $preview;
 stl = true;
 
-rotor = false;
 rotor_position = true;
+
+rotor = false;
 nosnik = false;
 predni_podvozek = false;
 zadni_podvozek = false;
@@ -86,7 +87,7 @@ module assembly(){
       if(cover && print){
 
 // Top cover
-        %if(stl){import("../../STL/888_1025.stl", convexity=4);}
+        if(stl){rotate([180, 0, 0]) import("../../STL/888_1025.stl", convexity=4);}
          else{position_888_1025() 888_1025();}
       }
 
@@ -179,63 +180,38 @@ module assembly(){
                         if(stl){import("../../STL/888_1029.stl");}
                         else{888_1029();888_1029_servoholder();}
 
-// stredni dil kardanu
+// stredni dil kardanu (Ramecek)
+if(rotor_head && print)
+    position_888_1020(enable = rotor_position)
+        rotate([0,-rotor_head_rank_angle,0])
+            translate([0,0,3.5])
+                rotate([180,0,0])
+                    if(stl){
+                        import("../../STL/888_1022.stl", convexity=3);
+                    }else{
+                        888_1022();
+                    }
 
-    translate([main_pilon_position + rotor_head_bearing_x_shift, 0, height_of_vertical_tube+rotor_head_height])rotate([0,rotor_head_rank_angle,0]){
-    //union(){
+// Remenice prerotatoru
+if(rotor_head_pulley_motor && print)
+    position_888_1020(enable = rotor_position)
+        translate([rotor_head_prerotator_distance,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4])
+            if(stl){
+                import("../../STL/prerotator_pulley_motor.stl", convexity=3);
+            }else{
+                prerotator_pulley_motor();
+            }
 
-            if(rotor_head && print)
-                        rotate([0,0,0])
-                            translate([0,0,4])
-                                rotate([180,0,0])
-                                    if(stl){
-                                        import("../../STL/888_1022.stl", convexity=3);
-                                    }else{
-                                        888_1022();
-                                    }
-
-
-
-
-            /* if(rotor_head_pulley_rotor && print)
-                        rotate([0,0,0])
-                            translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2])
-                                //rotate([180,0,0])
-                                    if(stl){
-                                        import("../../STL/rotor_pulley.stl", convexity=3);
-                                    }else{
-                                        rotor_pulley();
-                                    } */
-
-            /* if(rotor_head_pulley_rotor && other)
-                        rotate([0,0,0])
-                            translate([0,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2+20])
-                                    import("../../STL/external/666_1207.stl"); */
-
-
-            if(rotor_head_pulley_motor && print)
-                        rotate([0,0,0])
-                            translate([rotor_head_prerotator_distance,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)+4+2])
-                                //rotate([180,0,0])
-                                    if(stl){
-                                        import("../../STL/prerotator_pulley_motor.stl", convexity=3);
-                                    }else{
-                                        prerotator_pulley_motor();
-                                    }
-
-            if(rotor_head_prerotator && print)
-                        rotate([0,0,0])
-                            translate([rotor_head_prerotator_distance,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)-8])
-                                rotate([180,0,0])
-                                    if(stl){
-                                        import("../../STL/prerotator_imitation.stl", convexity=3);
-                                    }else{
-                                        prerotator_imitation();
-                                    }
-
-
-
-        }
+// Prerotator
+if(rotor_head_prerotator && print)
+    position_888_1020(enable = rotor_position)
+        translate([rotor_head_prerotator_distance,0,rotorhead_neck_height+(rotor_head_bearing_ag-rotor_head_bearing_a_center_of_rotation)-10])
+            rotate([180,0,0])
+                if(stl){
+                    import("../../STL/prerotator_imitation.stl", convexity=3);
+                }else{
+                    prerotator_imitation();
+                }
 
 // Tistena deska rotorove hlavy
 if(rotor_head_plate && print)
@@ -250,10 +226,10 @@ if(rotor_head_plate && print)
 // Rotorove listy
 
 rotor_flapping = rotor_flap0;
-rotor_position = 90;
+rotor_orientation = 90;
 
 rotor_placement = true;
-  translate([0, 500, 500]*rotor_placement);
+  //translate([0, 500, 500]*rotor_placement);
 
 
 //position_888_1020(enable = rotor_position){color("blue") sphere(r=5);}
@@ -263,10 +239,10 @@ translate([0, 0, 45]){
   if(rotor){
   // rotorove listy
     if(other)
-      position_666_1201(flapping = rotor_flapping, rotate = rotor_position)
+      position_666_1201(flapping = rotor_flapping, rotate = rotor_orientation)
         666_1201(draft = draft, holes = true);
     if(other)
-      rotate(180) position_666_1201(flapping = rotor_flapping, rotate = rotor_position)
+      rotate(180) position_666_1201(flapping = rotor_flapping, rotate = rotor_orientation)
         666_1201(draft = draft, holes = true);
 
     if(alu)
@@ -288,12 +264,12 @@ translate([0, 0, 45]){
   // Rotorovy domek
   if(alu)
     translate([0,0,-12.5])
-      rotate([0,0,-rotor_delta+90 + rotor_position])
+      rotate([0,0,-rotor_delta+90 + rotor_orientation])
         import("../../STL/external/666_1207.stl");
 
   // Remenice rotoru
   if(print)
-    rotate([0,0,-rotor_delta+90 + rotor_position])
+    rotate([0,0,-rotor_delta+90 + rotor_orientation])
       translate([0, 0, -17 - 12.5])
         if(stl){
             import("../../STL/rotor_pulley.stl", convexity=3);
@@ -615,16 +591,16 @@ if(tail)
     translate([0, 0, -beam_vertical_space_between_pipes*2-beam_main_pipe_thickness*2]){
 
     if(print)
-        translate([tail_y_pos, -tail_pipe_distance/2, 0])
-            rotate([-tail_airfoils_angle/2, 0, 0])
+        translate([tail_y_pos, tail_pipe_distance/2, 0])
+            rotate([tail_airfoils_angle/2, 0, 0])
                 translate([0, 0, -tail_height/2])
                 if(stl){import("../../STL/666_1028.stl", convexity=4);}
                 else{666_1028(pipe = false);}
 
     if(print)
         mirror([0, 1, 0])
-        translate([tail_y_pos, -tail_pipe_distance/2, 0])
-            rotate([-tail_airfoils_angle/2, 0, 0])
+        translate([tail_y_pos, tail_pipe_distance/2, 0])
+            rotate([tail_airfoils_angle/2, 0, 0])
                 translate([0, 0, -tail_height/2])
                 if(stl){import("../../STL/666_1028.stl", convexity=4);}
                 else{666_1028(pipe = false);}

@@ -299,9 +299,9 @@ module 888_1020(draft = true){
 
 module position_888_1020(enable = true){
 
-        translate([main_pilon_position + rotor_head_bearing_x_shift, 0, height_of_vertical_tube + rotor_head_height])
-          rotate([0, 9+rotor_head_pitch, rotor_head_roll])
-          translate([0,0,0])
+        translate(enable? [main_pilon_position + rotor_head_bearing_x_shift, 0, height_of_vertical_tube + rotor_head_height] :  [0,0,0])
+          rotate(enable? [0, 9+rotor_head_pitch, rotor_head_roll] : [0,0,0])
+          //translate([0,0,0])
             children();
 }
 
