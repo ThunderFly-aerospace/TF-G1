@@ -259,14 +259,14 @@ module 666_1028_body_top(side_choose = 1, draft) {
                         //Ribs------------------------------------------------------
                         //TODO: check if they are dynamic
 
-                        translate([0, 0, tail_length * 2])
+                        translate([5, 0, tail_length * 2])
                             rotate([0, 45, 0])
                                 for (i = [0:30]) {
                                     translate([i * 32.5, 0, 0])
                                         cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
                                 }
 
-                        translate([0, 0, 0])
+                        translate([5, 0, 0])
                             rotate([0, - 45, 0])
                                 for (i = [0:30]) {
                                     translate([i * 32.5, 0, 0])
@@ -275,14 +275,21 @@ module 666_1028_body_top(side_choose = 1, draft) {
 
 
                         //Material for rudder shaft------------------------------------
-                        translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
-                            cube([Rudder_shaft_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
+                        translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 - 10])
+                            cube([Rudder_shaft_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height - 20], center = true);
 
                         //Material for A shape screws----------------------------------
                         translate([tail_A_shape_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
                             cube([M3_screw_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
 
                         translate([tail_A_shape_screw_x_position_2, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
+                            cube([M3_screw_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
+                                
+                        //Material for top passive rudder screws----------------------------------
+                        translate([tail_top_passive_rudder_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
+                            cube([M3_screw_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
+
+                        translate([tail_top_passive_rudder_screw_x_position_2, 0, (tail_height - tail_bottom_height - Rudder_height) / 2 + 1])
                             cube([M3_screw_diameter + 10, tail_depth, tail_height - tail_bottom_height - Rudder_height + 2], center = true);
 
                     }
@@ -295,35 +302,59 @@ module 666_1028_body_top(side_choose = 1, draft) {
             cylinder(d = Rudder_shaft_diameter, h = tail_height - tail_bottom_height - Rudder_height + 2, $fn = draft ? 10 : 50);
 
         //Cut to make shape A angle---------------------------------
-        translate([tail_length / 2, side_choose * (sqrt(pow(tail_depth, 2) * 2) / 2 - tail_shape_A_cutter_y_position), tail_height - tail_bottom_height - Rudder_height])
-            rotate([tail_angle / 2, 0, 0])
-                cube([tail_length, tail_depth, tail_depth], center = true);
+        translate([tail_length / 2, side_choose * (sqrt(pow(tail_depth, 2) * 2) / 2 - tail_shape_A_cutter_y_offset), tail_height - tail_bottom_height - Rudder_height + tail_shape_A_cutter_z_offset])
+            rotate([-side_choose * (90 - tail_angle / 2), 0, 0])
+                union() {
+                    cube([tail_length, tail_depth, tail_depth], center = true);
+                    translate([0, - side_choose * (tail_depth - 15), - tail_depth / 2])
+                        cube([tail_length, tail_depth, tail_depth], center = true);
+                }
 
         //Holes for shape A holding screws--------------------------
         //TODO: check if they are dynamic
 
         translate([tail_A_shape_screw_x_position_1, 0, tail_A_shape_screw_y_pisition])
-            rotate([- side_choose * tail_angle / 2, 0, 0])
+            rotate([- side_choose * (90 - tail_angle / 2), 0, 0])
                 union(){
                     cylinder(d = M3_screw_diameter, h = Rudder_depth * 4, $fn = draft ? 10 : 50, center = true);
                     translate([0, 0, - Rudder_depth])
                         if(side_choose == 1) {
-                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
+                            cylinder(d = M3_nut_diameter, h = Rudder_depth * 2, $fn = 6, center = true);
                         } else {
-                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
+                            cylinder(d = M3_nut_diameter, h = Rudder_depth * 2, $fn = 50, center = true);
                         }
                 }
 
         translate([tail_A_shape_screw_x_position_2, 0, tail_A_shape_screw_y_pisition])
-            rotate([- side_choose * tail_angle / 2, 0, 0])
+            rotate([- side_choose * (90 - tail_angle / 2), 0, 0])
                 union(){
                     cylinder(d = M3_screw_diameter, h = Rudder_depth * 4, $fn = draft ? 10 : 50, center = true);
                     translate([0, 0, - Rudder_depth])
                         if(side_choose == 1) {
-                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
+                            cylinder(d = M3_nut_diameter, h = Rudder_depth * 2, $fn = 6, center = true);
                         } else {
-                            cylinder(d = M3_nut_diameter, h = Rudder_depth, $fn = 6, center = true);
+                            cylinder(d = M3_nut_diameter, h = Rudder_depth * 2, $fn = 50, center = true);
                         }
+                }
+                
+                
+        //Holes for top passive rudder holding screws--------------------------
+        //TODO: check if they are dynamic
+
+        translate([tail_top_passive_rudder_screw_x_position_1, 0, tail_top_passive_rudder_screw_y_pisition])
+            rotate([- side_choose * (- tail_angle / 2), 0, 0])
+                union(){
+                    cylinder(d = M3_screw_diameter, h = Rudder_depth * 4, $fn = draft ? 10 : 50, center = true);
+                    translate([0, 0, - Rudder_depth])
+                        cylinder(d = M3_nut_diameter, h = Rudder_depth * 2, $fn = 50, center = true);
+                }
+
+        translate([tail_top_passive_rudder_screw_x_position_2, 0, tail_top_passive_rudder_screw_y_pisition])
+            rotate([- side_choose * (- tail_angle / 2), 0, 0])
+                union(){
+                    cylinder(d = M3_screw_diameter, h = Rudder_depth * 4, $fn = draft ? 10 : 50, center = true);
+                    translate([0, 0, - Rudder_depth])
+                        cylinder(d = M3_nut_diameter, h = Rudder_depth * 2, $fn = 50, center = true);
                 }
          //----------------------------------------------------------
     }
@@ -506,6 +537,71 @@ module 666_1028_rudder(side_choose = 1, draft) {
     }
 }
 
+module 666_1028_top_passive_rudder(side_choose = 1, draft) {
+    difference() {
+        union() {
+            //Main Wall-------------------------------------------------
+            hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_top_passive_rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
+            
+            intersection() {
+                airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_top_passive_rudder_height, open = false);
+            
+                union() {
+                    //Ribs------------------------------------------------------
+                    //TODO: check if they are dynamic
+
+                    translate([5, 0, tail_length * 2])
+                        rotate([0, 45, 0])
+                            for (i = [0:30]) {
+                                translate([i * 32.5, 0, 0])
+                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
+                            }
+
+                    translate([5, 0, 0])
+                        rotate([0, - 45, 0])
+                            for (i = [0:30]) {
+                                translate([i * 32.5, 0, 0])
+                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
+                            }
+                    
+                    //Material for top passive rudder screws----------------------------------
+                    translate([tail_top_passive_rudder_screw_x_position_1, 0, (tail_top_passive_rudder_height) / 2 + 1])
+                        cube([M3_screw_diameter + 10, tail_depth, tail_top_passive_rudder_height + 2], center = true);
+        
+                    translate([tail_top_passive_rudder_screw_x_position_2, 0, (tail_top_passive_rudder_height) / 2 + 1])
+                        cube([M3_screw_diameter + 10, tail_depth, tail_top_passive_rudder_height + 2], center = true);
+                }
+            }
+        }       
+                
+        //Holes for top passive rudder holding screws--------------------------
+        //TODO: check if they are dynamic
+
+        translate([tail_top_passive_rudder_screw_x_position_1, 0, 0])
+            union(){
+                cylinder(d = M3_screw_diameter, h = Rudder_depth * 2, $fn = draft ? 10 : 50, center = true);
+                translate([0, 0, 10])
+                    union() {
+                        cylinder(d = M3_nut_diameter + global_clearance * 2, h = M3_nut_height + global_clearance * 2, $fn = 6, center = true);
+                        translate([0, - Rudder_depth / 2, 0])
+                            cube([M3_nut_diameter + global_clearance * 2, Rudder_depth, M3_nut_height + global_clearance * 2], center = true);
+                    }
+            }
+
+        translate([tail_top_passive_rudder_screw_x_position_2, 0, 0])
+            union(){
+                cylinder(d = M3_screw_diameter, h = Rudder_depth * 2, $fn = draft ? 10 : 50, center = true);
+                translate([0, 0, 10])
+                    union() {
+                        cylinder(d = M3_nut_diameter + global_clearance * 2, h = M3_nut_height + global_clearance * 2, $fn = 6, center = true);
+                        translate([0, - Rudder_depth / 2, 0])
+                            cube([M3_nut_diameter + global_clearance * 2, Rudder_depth, M3_nut_height + global_clearance * 2], center = true);
+                    }
+            }
+         //----------------------------------------------------------
+    }
+}
+
 // tyc ke smerovce
 module 666_1028_pipe(){
     translate([0, 0, tail_pipe_z_position])
@@ -536,11 +632,15 @@ module 666_1028(side_choose = 1, rudder = false, rudder_angle = 15, pipe = false
 
     translate([0, 0, tail_bottom_height + Rudder_height])
         666_1028_body_top(side_choose);
+    
+    translate([0, side_choose * (- 1.6), tail_height - 13])
+        rotate([- side_choose * (- tail_angle / 2), 0, 0])
+            666_1028_top_passive_rudder(side_choose);
 
     if(pipe)
         666_1028_pipe(side_choose);
 }
 
 
-666_1028(side_choose = -1);
+666_1028(side_choose = - 1);
 echo("vzdálenost tyci:", tail_pipe_distance);

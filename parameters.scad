@@ -375,14 +375,18 @@ tail_y_pos = 850-100;                                   // jak je smerovka dalek
 
 Rudder_shaft_x_position = tail_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
 
-tail_shape_A_cutter_y_position = 9.2;               // pozice rezace tvaru A
-tail_angle = 90;                                    //tvar A vzájemný náklon
+tail_shape_A_cutter_y_offset = 10.4;                 // vyoseni rezace tvaru A (osa Y)
+tail_shape_A_cutter_z_offset = - 9;                   // vyoseni rezace tvaru A (osa Z)
+tail_angle = 60;                                    // tvar A vzájemný náklon
 
 tail_support_x_position_1 = 20;                     // pozice prvni karbonove tyce
 tail_support_x_position_2 = 80;                     // pozice druhe karbonove tyce
-tail_A_shape_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 15; // pozice der na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 20; // pozice der na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na sroub (uchyceni dvou smerovek)
-tail_A_shape_screw_x_position_2 = 95;               // pozice treti diry na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_x_position_2 = 95;               // pozice druhe diry na sroub (uchyceni dvou smerovek)
+tail_top_passive_rudder_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 15.8; // pozice der na sroub (uchyceni vrtchni pasivni smerovky)
+tail_top_passive_rudder_screw_x_position_1 = 45;    // pozice prvni diry na sroub (uchyceni vrtchni pasivni smerovky)
+tail_top_passive_rudder_screw_x_position_2 = 105;   // pozice druhe diry na sroub (uchyceni vrtchni pasivni smerovky)
 
 tail_servo_z_offset = - 5;                          // posunuti serva vuci uchyceni na trubku (osa Z);
 tail_servo_length = 36;                             // velikost otvoru pro servo (delka)
@@ -409,6 +413,8 @@ tail_tube_mount_wings_thickness = 5;                // tloustka kridilek pro uch
 tail_tube_mount_screws_z_position = 12;             // pozice sroubu od stredu trubky
 tail_tube_mount_screws_x_position = 10;             // pozice sroubu od stredu uchyceni trubky
 tail_tube_mount_screws_wall_thickness = 2;          // tloustka steny mezi sroubem a uchycenim
+
+tail_top_passive_rudder_height = 50;                // vyska pasivni vrchniho dilu smerovky
 
 
 ////spojka 666_1014
