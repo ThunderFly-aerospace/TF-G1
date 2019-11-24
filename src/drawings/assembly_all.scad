@@ -1,5 +1,9 @@
 include <../lib/assembly.scad>
 
+$vpr = [55.00, 0.00, 25.00];
+$vpd = 3962.06;
+
+
 rotor = true;
 nosnik = true;
 predni_podvozek = true;
