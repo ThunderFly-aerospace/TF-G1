@@ -9,15 +9,6 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
-
-/*
-TODO:
-
-Otvory pro šrouby v předním dílu jsou oválné, protože nejsou kolmo k rovině modelu.
-
-*/
-
-
 ////// otvory pro šrouby pro připevnění k dílu 666_1027
 module screw_top (position_number, draft){
             //funkce
@@ -882,16 +873,19 @@ module position_888_1025(){
 
 
 
-888_1025_part_D(1, draft);
-888_1025_part_D(2, draft);
+/*888_1025_part_D(1, draft);
+/*888_1025_part_D(2, draft);
 
 //translate([0,0,-10])
 888_1025_part_B(1, draft);
+*/
 
 
-
-//position_888_1025()
-//    888_1025(draft, top = false);
+position_888_1025()
+{
+    888_1025(draft, top = false);
+    888_1025(draft, top = true);
+}
 
 use <888_1000.scad>
 
