@@ -118,4 +118,4 @@ difference(){
 }
 
 
-888_2019(support = false, draft = true, rotate = true);
+888_2019(support = false, draft = $preview, rotate = false);
