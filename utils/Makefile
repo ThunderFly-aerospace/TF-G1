@@ -72,14 +72,14 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
 	@$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(CFG_FILE).ini)
 	@if [ ! -f $(INI_FILE) ]; then\
-		$(eval INI_FILE=$(PWD)/$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
-	fi
-	@echo "INI" "$(INI_FILE)"
+		@$(eval INI_FILE=$(PWD)/$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
+	@fi
+#	@echo "INI" "$(INI_FILE)"
 
 #	test ! -f $(INI_FILE) || 
 #	#$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
-	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_FILE) $(YEL)
-	$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
+	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(YEL)
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
 	@echo $(DEF)
 
 
