@@ -36,7 +36,7 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) $(DEF) $(YEL)
 	@mkdir $(DEP_DIR) 2> /dev/null || echo ""
-	@$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL) 
+	@$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
@@ -57,7 +57,7 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@$(eval FILE=$(basename $(notdir $<)))
 	@#echo "import('../$<'');" > tmp/$<
 	@echo "import(\"../$<\");" > tmp/$(FILE).scad
-	
+
 	@# Render PNG image from temporary file.
 	@echo $(YEL)
 	@$(OPENSCAD_APP) -o $@ tmp/$(FILE).scad
@@ -76,10 +76,10 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	fi
 #	@echo "INI" "$(INI_FILE)"
 
-#	test ! -f $(INI_FILE) || 
+#	test ! -f $(INI_FILE) ||
 #	#$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
 	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(YEL)
-	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui --dont-arrange $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
 	@echo $(DEF)
 
 
