@@ -5,8 +5,8 @@ SIMARRANGE=/usr/local/bin/simarrange
 STLSORT=stlsort
 OPENSCAD_APP=openscad
 #SLIC3R_APP=slic3r-prusa3d
-#SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
-SLIC3R_APP=$(GIT_ROOT)/utils/slicer/PrusaSlicer-2.1.0.AppImage
+SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
+#SLIC3R_APP=$(GIT_ROOT)/utils/slicer/PrusaSlicer-2.1.0.AppImage
 
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
@@ -70,16 +70,16 @@ gcode: $(GCODES)
 
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
-	@$(eval INI_FILE=$(INI_DIR)/$(CFG_FILE).ini)
+	@$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(CFG_FILE).ini)
 	@if [ ! -f $(INI_FILE) ]; then\
-		$(eval INI_FILE=$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
+		$(eval INI_FILE=$(PWD)/$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
 	fi
-	@echo "$(INI_FILE)"
+	@echo "INI" "$(INI_FILE)"
 
 #	test ! -f $(INI_FILE) || 
-#	INI_FILE=$(GIT_ROOT)/slicing/generic/basic_part.ini
-	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_DIR)/$(CFG_FILE).ini $(YEL)
-	@$(SLIC3R_APP) --load $(INI_FILE) -o $(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
+#	#$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
+	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(INI_FILE) $(YEL)
+	$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui  $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
 	@echo $(DEF)
 
 
