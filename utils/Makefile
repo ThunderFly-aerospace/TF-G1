@@ -72,8 +72,8 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval CFG_FILE=$(basename $(notdir $<)))
 	@$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(CFG_FILE).ini)
 	@if [ ! -f $(INI_FILE) ]; then\
-		@$(eval INI_FILE=$(PWD)/$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
-	@fi
+		$(eval INI_FILE=$(PWD)/$(INI_DIR)/generic/basic_part.ini) echo "Zmeneno";\
+	fi
 #	@echo "INI" "$(INI_FILE)"
 
 #	test ! -f $(INI_FILE) || 
