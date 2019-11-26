@@ -79,7 +79,7 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 #	test ! -f $(INI_FILE) ||
 #	#$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
 	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(YEL)
-	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui --dont-arrange $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
 	@echo $(DEF)
 
 
