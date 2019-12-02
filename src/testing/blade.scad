@@ -3,10 +3,11 @@ use <../lib/stdlib/naca4.scad>
 
 //rotorblade_naca = 4412;
 rotorblade_naca = 0014;
+rotorblade_depth = 65;
 echo(rotorblade_depth);
-rotorblade_depth = 60;
 
-blade_length = 140*6;
+//blade_length = 140*6;
+blade_length = 140*3;
 
 blade_root_depth = 50;
 blade_root_length = 110-10;
@@ -49,7 +50,7 @@ module blade_basic(){
                 difference(){
                     scale(0.97) // skalovani zde odstranuje nechtene artefakty po skalovani
                         airfoil(naca = rotorblade_naca, L = rotorblade_depth, N= $preview? 100 : 300, h = airfoil_length, open = true);
-                    hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall);
+                    hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall*2.5);
                 }
                 union(){
                     for(i = [-6: 20]){
@@ -82,25 +83,34 @@ module blade_basic_inner(){
     translate([-rotorblade_depth*.25, 0, 0])
         difference(){
             scale(0.97) // skalovani zde odstranuje nechtene artefakty po skalovani
-               airfoil(naca = rotorblade_naca, L = rotorblade_depth+20, N= $preview? 100 : 300, h = airfoil_length, open = false);
-
-            hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth+20, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall);
+               //cube(400, center = true);
+               airfoil(naca = rotorblade_naca, L = rotorblade_depth, N= $preview? 100 : 300, h = airfoil_length, open = false);
+               translate([-0.05, 0, 0]) hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall*2);
         }
 }
 
 
 // modul tvorici otvory pro podelne vyztuhy
-module blade_spine_holes(offset = 0, $preview = true){
+module blade_spine_holes(offset = 0){
     for (i=blade_spine_rod_list) {
         translate([i[0], i[1], 0])
             cylinder(d = i[2] + 2*offset, h = blade_length, $fn = $preview? 7 : 50);
     }
+
+    for (i=[0, 1, 2])
+      for (j=[5:30:blade_length-20])
+        translate([blade_spine_rod_list[i][0], 0, j+i*10]){{
+              rotate([90, 0, 0]) cylinder(d = 1.5, h = 20, center = true, $fn = $preview? 7 : 30);
+        }
+    }
+
+
 }
 
-module blade_root_holes(offset = 0, $preview = true){
+module blade_root_holes(offset = 0){
 
     for(x=blade_root_holes_positions){
-        translate([x[0], 50/2, x[1]])
+        translate([x[0], 50/2, x[1]+10])
             rotate([90, 0, 0])
                 cylinder(d = M3_screw_diameter + 2*offset, h = 50, $fn = $preview? 7 : 50);
     }
@@ -113,8 +123,8 @@ module blade_root(){
 
 
 module blade_root_inner(){
-    translate([-blade_root_depth*0.25 + wall, -blade_root_thickness/2 + wall, 0])
-        cube([blade_root_depth - 2*wall, blade_root_thickness - 2*wall, blade_root_length]);
+    translate([-blade_root_depth*0.25 + wall*1.5, -blade_root_thickness/2 + wall*1.5, 0])
+        cube([blade_root_depth - 3*wall, blade_root_thickness - 3*wall, blade_root_length]);
 }
 
 
@@ -138,10 +148,10 @@ module blade_root2airfoil(){
 module blade_root2airfoil_inner(){
     hull(){
         translate([-rotorblade_depth*.25, 0, blade_root_translation_length - 0.1])
-            #difference(){
+            difference(){
                 scale(0.97) // skalovani zde odstranuje nechtene artefakty po skalovani
                     airfoil(naca = rotorblade_naca, L = rotorblade_depth, N= $preview? 100 : 300, h = 0.1, open = true);
-                hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = 0.1, open = true, wall_thickness = wall);
+                hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N = $preview? 100 : 300, h = 0.1, open = true, wall_thickness = wall*2.5);
             }
 
         translate([-blade_root_depth*0.25 + wall, -blade_root_thickness/2 + wall, 0])
@@ -151,6 +161,8 @@ module blade_root2airfoil_inner(){
 
 }
 
+//blade_basic_inner();
+//blade_root_inner();
 
 module blade_inner(){
     blade_root_inner();
@@ -167,17 +179,19 @@ module blade_infill_structure(){
         if(i%30 == 0){
             translate([0, 0, i])
                 rotate([0, 60, 0])
-                    cube([100, 20, wall], center = true);
+                    cube([100, 20, 0.09], center = true);
         }
 
         if(i%60 == 0){
             translate([0, 0, i])
                 rotate([0, -60, 0])
-                    cube([100, 20, wall], center = true);
+                    cube([100, 20, 0.09], center = true);
         }
 
     }
 }
+
+//blade_inner();
 
 module blade_infill(){
     intersection(){
@@ -186,16 +200,19 @@ module blade_infill(){
         difference(){
             union(){
                 blade_infill_structure();
-                blade_spine_holes(0.1, $preview);
+                blade_spine_holes(0.1);
             }
 
-            difference(){
-                blade_spine_holes(wall, $preview);
-                blade_spine_holes(0, $preview);
-            }
+            // Odebrani vyplne v okoli tycek pro vyztuhy
+            /* difference(){
+                blade_spine_holes(wall*2);
+                blade_spine_holes(0);
+            } */
         }
     }
 }
+
+//blade_infill();
 
 module blade_outer(){
     blade_root();
@@ -209,19 +226,22 @@ module blade_outer(){
 
 //translate([0, 30, 0]) blade_infill();
 
+
 module blade(){
     difference(){
         blade_outer();
 
-        blade_root_holes(0, $preview);
-        blade_spine_holes(0, $preview);
+        blade_root_holes(0);
+        blade_spine_holes(0);
+        blade_infill();
+
+        translate([rotorblade_depth*0.75-2.5, -10, 0]) cube([20, 20, 1000]);
     }
 }
 
-//blade();
+blade();
 
-translate([0, 50, 0])
-blade_inner();
+// translate([0, 50, 0]) blade_inner();
 //    blade_basic_inner();
 
 if(false)
