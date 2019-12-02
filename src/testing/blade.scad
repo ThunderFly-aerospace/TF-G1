@@ -6,8 +6,8 @@ rotorblade_naca = 0014;
 rotorblade_depth = 65;
 echo(rotorblade_depth);
 
-//blade_length = 140*6;
-blade_length = 140*3;
+blade_length = 140*6;
+//blade_length = 140*3;
 
 blade_root_depth = 50;
 blade_root_length = 110-10;
@@ -239,13 +239,23 @@ module blade(){
     }
 }
 
+module blade_printpart(part){
+  height  = blade_print_cuts[part+1] - blade_print_cuts[part];
+
+  translate([0, 0, blade_print_cuts[part+1]])
+  rotate([180, 0, 0])
+  intersection(){
+    blade();
+    translate([-50, -10, blade_print_cuts[part]])
+      cube([100, 20, height]);
+  }
+}
+
 blade();
 
-// translate([0, 50, 0]) blade_inner();
-//    blade_basic_inner();
 
-if(false)
-for(h=blade_print_cuts){
-    %translate([0, 0, h])
-        square(200, center = true);
-}
+if(true)
+  for(h=blade_print_cuts){
+      %translate([0, 0, h])
+          square(200, center = true);
+  }
