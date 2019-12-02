@@ -53,9 +53,14 @@ function kstm_flange_width(type) = data_kstm_flange_thickness[search(type, data_
 data_kstm_ball_thickness = [[5,25], [6,33], [8,33], [10,46], [12,46]];
 function kstm_ball_thickness(type) = data_kstm_ball_thickness[search(type, data_kstm_ball_thickness)[0]][1];
 
-
+module kbrm_02() {
+    import("../../STL/external/igus/KBRM_02_1.stl", convexity = 5);
+}
 module kbrm_03() {
     import("../../STL/external/igus/KBRM_03_1.stl", convexity = 5);
+}
+module kbrm_05() {
+    import("../../STL/external/igus/KBRM_05_2.stl", convexity = 5);
 }
 module kbrm_06(){
     import("../../STL/external/igus/KBRM_06_2.stl", convexity = 5);
@@ -80,3 +85,10 @@ translate([80, 2*distance, 0]) efsm_06();
 translate([80, 3*distance, 0]) efsm_08();
 translate([80, 4*distance, 0]) efsm_10();
 translate([80, 5*distance, 0]) efsm_12();
+
+
+translate([160, 0*distance, 0]) kbrm_02();
+translate([160, 1*distance, 0]) kbrm_03();
+translate([160, 2*distance, 0]) kbrm_05();
+translate([160, 3*distance, 0]) kbrm_06();
+translate([160, 4*distance, 0]) kbrm_08();
