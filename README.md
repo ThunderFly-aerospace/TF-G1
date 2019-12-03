@@ -21,6 +21,8 @@ Most of the components are coded in OpenSCAD. To render all components run follo
 
     sudo pip install stlsort
 
+    sudo apt install python3-numpy-stl
+
     make 
 
 The design files and related documents are covered by [GNU GENERAL PUBLIC LICENSE Version 3](https://www.gnu.org/licenses/gpl-3.0.en.html)

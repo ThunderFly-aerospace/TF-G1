@@ -1,0 +1,70 @@
+#!/usr/bin/python3
+
+import stl
+from stl import mesh
+import sys
+import datetime
+
+class stl_info(object):
+    """Obtainining info from STL files."""
+
+    def __init__(self):
+        super(stl_info, self).__init__()
+
+        self.stl = {}
+        stl_file = sys.argv[1]
+        gcode_file = sys.argv[2]
+
+
+        self.load(file = stl_file)
+        self.find_mins_maxs()
+        self.update_gcode(file = gcode_file)
+
+    def load(self, file):
+        self.obj = mesh.Mesh.from_file(file)
+
+    def update_gcode(self, file):
+        str = ""
+        str += "; Gcode updated with 'stl_info' on {}".format(datetime.datetime.now()) + '\n\n'
+        str += "; stl_min_x = {}\n".format(self.stl['minx'])
+        str += "; stl_max_x = {}\n".format(self.stl['maxx'])
+        str += "; stl_min_y = {}\n".format(self.stl['miny'])
+        str += "; stl_max_y = {}\n".format(self.stl['maxy'])
+        str += "; stl_min_z = {}\n".format(self.stl['minz'])
+        str += "\n"
+
+        print(stl)
+
+        with open(file, 'r') as content:
+            rows = content.read()
+        with open(file, 'w') as content:
+            content.write(str + rows)
+
+    def find_mins_maxs(self):
+        minx = maxx = miny = maxy = minz = maxz = None
+        for p in self.obj.points:
+            # p contains (x, y, z)
+            if minx is None:
+                minx = p[stl.Dimension.X]
+                maxx = p[stl.Dimension.X]
+                miny = p[stl.Dimension.Y]
+                maxy = p[stl.Dimension.Y]
+                minz = p[stl.Dimension.Z]
+                maxz = p[stl.Dimension.Z]
+            else:
+                maxx = max(p[stl.Dimension.X], maxx)
+                minx = min(p[stl.Dimension.X], minx)
+                maxy = max(p[stl.Dimension.Y], maxy)
+                miny = min(p[stl.Dimension.Y], miny)
+                maxz = max(p[stl.Dimension.Z], maxz)
+                minz = min(p[stl.Dimension.Z], minz)
+
+        self.stl['minx'] = minx
+        self.stl['maxx'] = maxx
+        self.stl['miny'] = miny
+        self.stl['maxy'] = maxy
+        self.stl['minz'] = minz
+        self.stl['maxz'] = maxz
+
+
+info = stl_info()

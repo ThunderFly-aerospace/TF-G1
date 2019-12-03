@@ -6,6 +6,7 @@ STLSORT=stlsort
 OPENSCAD_APP=openscad
 #SLIC3R_APP=slic3r-prusa3d
 SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
+STL_INFO=$(GIT_ROOT)/utils/stl_info
 #SLIC3R_APP=$(GIT_ROOT)/utils/slicer/PrusaSlicer-2.1.0.AppImage
 
 
@@ -80,6 +81,7 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 #	#$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
 	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(YEL)
 	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
+	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode || echo $(RED) "Error in STL positioning"
 	@echo $(DEF)
 
 
