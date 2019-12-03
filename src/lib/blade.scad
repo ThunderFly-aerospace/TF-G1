@@ -6,10 +6,11 @@ rotorblade_naca = 0014;
 rotorblade_depth = 65;
 echo(rotorblade_depth);
 
-blade_length = 140*6;
+blade_length = 140*7;
+blade_print_cuts = [0, 140, 140*2, 140*3, 140*4, 140*5, 140*6, 140*7];
 //blade_length = 140*3;
 
-blade_root_depth = 50;
+blade_root_depth = 60;
 blade_root_length = 110-10;
 blade_root_thickness = 12;
 blade_root_angle = 0;
@@ -23,8 +24,6 @@ blade_root_holes_positions = [
         [10+17-10.4, 60],
         [0, 80]
     ];
-
-blade_print_cuts = [0, 140, 140*2, 140*3, 140*4, 140*5, 140*6];
 
 
 airfoil_length = blade_length - blade_root_length - blade_root_translation_length;
@@ -40,7 +39,6 @@ blade_spine_rod_list = [
 [12, 0, 2.3, ],
 
 [-8, 0, 3.3, ],
-//[-10, -1.5, 2.3, ],
 [-12, 0, 3.3, ],
 ];
 
