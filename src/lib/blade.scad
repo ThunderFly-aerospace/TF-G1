@@ -36,10 +36,27 @@ wall = perimeter*1.5;
 height = 0;
 trailing_edge_crop = 1;
 blade_spine_rod_list = [
-[-5, 0, 2.3],
-[-10, 0, 2.3],
-[10, 0, 2.3]
+[-3, 0, 2.3, ],
+[12, 0, 2.3, ],
+
+[-8, 0, 3.3, ],
+//[-10, -1.5, 2.3, ],
+[-12, 0, 3.3, ],
 ];
+
+pla_density = 1.24/100;
+Pi = 3.14159265359;
+
+cog = [10.448649682625529, -0.013320794873607156, 411.71689922234043];
+cog = [6.176342473178948, -0.009428368241757478, 414.13727746306665];
+mass = 51779.103380*Pi*(1.75)/2*(1.75)/2*pla_density;
+echo("Mass", mass);
+
+module new_cog(){
+  echo("Mass", mass);
+  a =0;
+
+}
 
 module blade_basic(){
     translate([-rotorblade_depth*.25, 0, 0])
@@ -85,7 +102,7 @@ module blade_basic_inner(){
             scale(0.97) // skalovani zde odstranuje nechtene artefakty po skalovani
                //cube(400, center = true);
                airfoil(naca = rotorblade_naca, L = rotorblade_depth, N= $preview? 100 : 300, h = airfoil_length, open = false);
-               translate([-0.05, 0, 0]) hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall*2);
+               translate([-0.05, 0, 0]) hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall*1.5);
         }
 }
 
@@ -93,8 +110,8 @@ module blade_basic_inner(){
 // modul tvorici otvory pro podelne vyztuhy
 module blade_spine_holes(offset = 0){
     for (i=blade_spine_rod_list) {
-        translate([i[0], i[1], 0])
-            cylinder(d = i[2] + 2*offset, h = blade_length, $fn = $preview? 7 : 50);
+        translate([i[0], i[1], -0.1])
+            cylinder(d = i[2] + 2*offset, h = blade_length+0.2, $fn = $preview? 7 : 50);
     }
 
     for (i=[0, 1, 2])
@@ -237,6 +254,10 @@ module blade(){
 
         translate([rotorblade_depth*0.75-2.5, -10, 0]) cube([20, 20, 1000]);
     }
+
+    #if($preview)
+    translate(cog) rotate([90,0,0]) cylinder(d = 5, h = 30, center = true);
+    new_cog();
 }
 
 module blade_printpart(part){
