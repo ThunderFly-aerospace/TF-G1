@@ -13,17 +13,17 @@ module 888_2019(support = true, draft = true, rotate = false){
     bearing_screw_length = 17;
 
     screw_length = 25;
-    screw_length_total = screw_length + M3_screw_head_height;
+    screw_length_total = screw_length + M3_screw_head_height+1;
     screw_length_thread = screw_length - M3_nut_height*1.5;
 
     screw_position = [-36, 0, 15-17/2- bearing_distance];
 
 
 
-vect_data = [(screw_length_total/2 - screw_position[0]), 0, -(+5 + screw_position[2]-15)];
+vect_data = [(screw_length_total/2 - screw_position[0]), 0, -( screw_position[2]-5)];
 vect_val = vect_data[2]/vect_data[0];
 rot = rotate? atan(vect_val) : 0;
-    
+
 difference(){
     rotate([0, rot, 0])
         union(){
@@ -31,21 +31,26 @@ difference(){
             union(){
 
                 hull(){
-                    translate([0, 0, 10])
-                        cube([screw_length_total, screw_length_total, 20+10], center = true);
-
                     //translate([0, 0, 10])
-                    //    cylinder(d = screw_length_total, h = 30, center = true);
+                    //    #cube([screw_length_total, screw_length_total, 20+10], center = true);
+
+                    translate([0, 0, -5])
+                        cylinder(d = screw_length_total, h = 13+3+5, $fn = $preview? 10:80);
 
                     translate(screw_position)
                         rotate([90, 0, 0])
-                            cylinder(d = 30, h = screw_length_total, center = true, $fn  = 80);
+                            cylinder(d = 15, h = screw_length_total, center = true, $fn = $preview? 10:80);
 
                 }
 
 
 
             }
+
+          translate([0, 0, -5])
+            rotate([0, -atan(vect_val), 0])
+              translate([-50, -20, -30])
+                cube([100, 40, 30]);
 
 
     // Vyrez pro pist
@@ -66,7 +71,11 @@ difference(){
 
     // Vyrez pro telo pistu
             translate([0, 0, -20])
-                cylinder(d = piston_out_d + 1, h = 20, $fn = 80);
+                cylinder(d = piston_out_d + 1.5, h = 20, $fn = 80);
+
+            translate([0, 0, -7.5-1.5])
+            rotate([90, 0, 0])
+                cylinder(d = 15, h = 50, $fn = 80, center = true, $fn = $preview? 10:80);
 
 
     // Otvor na Srouby do loziska
@@ -81,8 +90,12 @@ difference(){
                     translate([0, 0, -screw_length_thread/2-30]) cylinder(d = M4_nut_diameter, h = 30, $fn = 6);
                 }
 
+    // Vyrez pro kulove lozisko
             translate(screw_position){
-                cube([35, 12.5, 80], center = true);
+                cube([30, 12.5, 80], center = true);
+
+                translate([15, 0, 0])
+                  cylinder(d=12.5, h = 50, center = true, $fn = $preview? 10:80);
             }
 
             // popisek data
