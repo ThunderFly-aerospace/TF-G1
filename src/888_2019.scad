@@ -99,10 +99,11 @@ difference(){
             }
 
             // popisek data
-            translate([screw_length_total/2-0.3, 0, 17])
-                rotate([90, 0, 90])
+            translate([9, 0, 16-0.3])
+                rotate([0, 0, 90])
                     linear_extrude(1)
-                        text(str(week), valign = "center", halign = "center", size = 8);
+                        text(str(week), valign = "center", halign = "center", size = 7);
+                        //text(str(59), valign = "center", halign = "center", size = 7);
         }
 
 
