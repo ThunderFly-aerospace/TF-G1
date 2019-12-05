@@ -71,27 +71,13 @@ gcode: $(GCODES)
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval BASENAME=$(basename $(notdir $<)))
 	@$(eval CFG_FILE=$(BASENAME))
-# grep 888_1005 slicing/cfg -c && VAR=`grep 888_1003 slicing/cfg | cut -d',' -f2` || VAR=NONE
 # Obtain configuration file from cfg file
-#	@$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell cat $(PWD)/$(INI_DIR)/cfg | grep '$(BASENAME)' | cut -d',' -f2 || deafult))
-	echo $(shell (grep $(BASENAME) slicing/cfg -c))
-	$(eval INI_FILE=$(shell (grep $(BASENAME) slicing/cfg -c && echo `$(BASENAME) slicing/cfg | cut -d',' -f2` || echo default.ini) | cut -d' ' -f2))
-	@echo "INI" "$(INI_FILE)"
-	@$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell echo $(INI_FILE) | cut -d' ' -f2))
-
-	@echo "INI" "$(INI_FILE)" "$(INI_FILE2)"
-# 	echo $(shell test -f $(INI_FILE) && echo yes || echo no)
-# ifeq ($(shell test -f $(INI_FILE) || echo no), no)
-# 	$(eval INI_FILE=$(PWD)/$(INI_DIR)/basic_part.ini)
-# else
-# endif
-#    test ! -f $(INI_FILE) ||
-#    #$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
-
-	@echo $(GRN) "Slicing" $(STL_DIR)/$(CFG_FILE).stl $(YEL)
+	$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell grep $(BASENAME) slicing/cfg -c > /dev/null && echo `grep $(BASENAME) slicing/cfg | cut -d',' -f2` || echo default.ini))
+	@echo $(GRN) "Slicing" $(STL_DIR)/$(CFG_FILE).stl ",profile" $(INI_FILE) $(YEL)
 # Slice file with cfg from file
-	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl 2> /dev/null || $(SLIC3R_APP) --load $(INI_FILE_ALT) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl
-	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode || echo $(RED) "Error in STL positioning"
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl
+# add STL informations to gcode
+	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode > /dev/null || echo $(RED) "Error in STL positioning"
 	@echo $(DEF)
 
 
