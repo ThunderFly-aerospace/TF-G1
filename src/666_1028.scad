@@ -9,7 +9,7 @@ DIM_LINE_WIDTH = .025 * DOC_SCALING_FACTOR;
 DIM_SPACE = .1 * DOC_SCALING_FACTOR;
 
 
-Rudder_shaft_outside_diameter = tail_length * surface_distance(x = Rudder_shaft_x_position / tail_length, naca = 0009, open = false) * 2;
+Rudder_shaft_outside_diameter = tail_middle_length * surface_distance(x = Rudder_shaft_x_position / tail_middle_length, naca = 0009, open = false) * 2;
 
 draft = $preview;
 
@@ -82,29 +82,29 @@ module 666_1028_body_middle(side_choose = 1, draft) {
         difference(){
             union(){
                 //Main Wall-------------------------------------------------
-                hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
+                airfoil(naca = 0009, L = tail_middle_length, N = draft ? 50 : 100, h = Rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
 
 
                 //Adding material inside rudder-----------------------------
                 intersection(){
-                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height, open = false);
+                    airfoil(naca = 0009, L = tail_middle_length, N = draft ? 50 : 100, h = Rudder_height, open = false);
 
                     union(){
                         //Ribs------------------------------------------------------
                         //TODO: check if they are dynamic
 
-                        translate([0, 0, tail_length * 2])
+                        translate([0, 0, tail_middle_length * 2])
                             rotate([0, 45, 0])
                                 for (i = [0:30]) {
                                     translate([i * 32.5, 0, 0])
-                                        cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
+                                        cube([Rudder_wall_thickness, Rudder_depth * 4, tail_middle_length * 4], center = true);
                                 }
 
                         translate([0, 0, 0])
                             rotate([0, - 45, 0])
                                 for (i = [0:30]) {
                                     translate([i * 32.5, 0, 0])
-                                        cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
+                                        cube([Rudder_wall_thickness, Rudder_depth * 4, tail_middle_length * 4], center = true);
                                 }
 
                         translate([(tail_tube_mount_length + Rudder_infill_wall_thickness) / 2, 0, tail_pipe_z_position - tail_bottom_height])
@@ -419,9 +419,9 @@ module 666_1028_rudder(side_choose = 1, draft) {
                 union() {
                     // material body rudder
                     difference() {
-                        airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
+                        airfoil(naca = 0009, L = tail_middle_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
                         translate([0, - Rudder_depth, - 1])
-                            cube([tail_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, Rudder_depth * 2, Rudder_height + 2]);
+                            cube([tail_middle_length - Rudder_length + Rudder_gap_width + Rudder_shaft_outside_diameter / 2, Rudder_depth * 2, Rudder_height + 2]);
                     }
 
                     // material shaft
@@ -457,25 +457,25 @@ module 666_1028_rudder(side_choose = 1, draft) {
                     //Ribs------------------------------------------------------
                     //TODO: check if they are dynamic
 
-                    translate([0, 0, tail_length * 2])
+                    translate([0, 0, tail_middle_length * 2])
                         rotate([0, 45, 0])
                             for (i = [0:30]) {
                                 translate([i * 32.5, 0, 0])
-                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
+                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_middle_length * 4], center = true);
                             }
 
                     translate([0, 0, 0])
                         rotate([0, - 45, 0])
                             for (i = [0:30]) {
                                 translate([i * 32.5, 0, 0])
-                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
+                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_middle_length * 4], center = true);
                             }
                 }
             }
 
             //main rudder wall
             difference() {
-                hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
+                hollow_airfoil(naca = 0009, L = tail_middle_length, N = draft ? 50 : 100, h = Rudder_height - global_clearance * 2, open = false);
                 translate([0, - Rudder_depth, - 1])
                     cube([Rudder_shaft_x_position, Rudder_depth * 2, tail_height + 2]);
             }
@@ -541,10 +541,22 @@ module 666_1028_top_passive_rudder(side_choose = 1, draft) {
     difference() {
         union() {
             //Main Wall-------------------------------------------------
-            hollow_airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_top_passive_rudder_height, open = false, wall_thickness = Rudder_wall_thickness);
+            linear_extrude(height = abs(Rudder_wall_thickness), scale = 0.7)
+            polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
+
+            linear_extrude(height = tail_top_passive_rudder_height, scale = 0.7)
+                difference(){
+                    polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
+                    offset(delta = - Rudder_wall_thickness) polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
+                }
+
+            translate([0,0, h - Rudder_wall_thickness])
+                linear_extrude(height = abs(Rudder_wall_thickness), scale = 0.7)
+                    polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
             
             intersection() {
-                airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 100, h = tail_top_passive_rudder_height, open = false);
+                linear_extrude(height = tail_top_passive_rudder_height, scale = 0.7)
+                    polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false, wall_thickness = Rudder_wall_thickness));
             
                 union() {
                     //Ribs------------------------------------------------------
@@ -614,7 +626,7 @@ module 666_1028_pipe(){
 
 }
 
-module 666_1028(side_choose = 1, rudder = false, rudder_angle = 15, pipe = false){
+module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false){
 
     666_1028_body_bottom(side_choose);
 

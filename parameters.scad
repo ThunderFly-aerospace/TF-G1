@@ -363,6 +363,7 @@ Rudder_shaft_end_cut = 5;                           // hloubka vykousnuti konce 
 tail_depth = 50;                                    // hloubka pro vnitrni casti smerovky
 tail_airfoils_angle = 90;
 tail_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 2)) - 10; // delka smerovky (ne delka plochy kridla)
+tail_middle_length = tail_length + 45; // stredni delka smerovky
 tail_height = 210;                                  // vyska smerovky (ne vyska plochy kridla)
 tail_bottom_height = 10;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
 tail_pipe_z_position = tail_height/2;               // od spodniho okraje smerovky
@@ -373,7 +374,7 @@ tail_airfoils_convergence = 3;
 tail_front_mount_edge_cut_x_position = 5;           // pozice seriznuti predni hrany (osa X)
 tail_y_pos = 850-100;                                   // jak je smerovka daleko od prvni prince trubky
 
-Rudder_shaft_x_position = tail_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
+Rudder_shaft_x_position = tail_middle_length - Rudder_length + Rudder_gap_width + 6; // pozice ochyceni smerovky
 
 tail_shape_A_cutter_y_offset = 10.4;                 // vyoseni rezace tvaru A (osa Y)
 tail_shape_A_cutter_z_offset = - 9;                   // vyoseni rezace tvaru A (osa Z)
