@@ -25,7 +25,6 @@ GRN=" \e[32m "
 YEL=" \e[33m "
 DEF=" \e[39m "
 
-
 all: default images gcode
 slice: default images
 
@@ -62,7 +61,7 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Render PNG image from temporary file.
 	@echo $(YEL)
 	@$(OPENSCAD_APP) -o $@ tmp/$(FILE).scad
-#	@# Remove temporary file
+	#    @# Remove temporary file
 	@rm -f tmp/$<
 	@echo $(DEF)
 
@@ -70,18 +69,15 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 gcode: $(GCODES)
 
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
-	@$(eval CFG_FILE=$(basename $(notdir $<)))
-	@$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(CFG_FILE).ini)
-	@if [ ! -f $(INI_FILE) ]; then\
-		$(eval INI_FILE=$(PWD)/$(INI_DIR)/basic_part.ini) echo "Zmeneno";\
-	fi
-	@echo "INI" "$(INI_FILE)"
-
-#	test ! -f $(INI_FILE) ||
-#	#$(eval INI_FILE=$(PWD)/slicing/generic/basic_part.ini)
-	@echo $(GRN) "Slice" $(STL_DIR)/$(CFG_FILE).stl "with" $(SLIC3R_APP) $(DEF) $(YEL)
-	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl || echo $(RED) "Error in slicing"
-	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode || echo $(RED) "Error in STL positioning"
+	@$(eval BASENAME=$(basename $(notdir $<)))
+	@$(eval CFG_FILE=$(BASENAME))
+# Obtain configuration file from cfg file
+	$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell grep $(BASENAME) $(INI_DIR)/cfg -c > /dev/null && echo `grep $(BASENAME) $(INI_DIR)/cfg | cut -d',' -f2` || echo `grep default $(INI_DIR)/cfg | cut -d',' -f2`))
+	@echo $(GRN) "Slicing" $(STL_DIR)/$(CFG_FILE).stl ",profile" $(INI_FILE) $(YEL)
+# Slice file with cfg from file
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl
+# add STL informations to gcode
+	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode > /dev/null || echo $(RED) "Error in STL positioning"
 	@echo $(DEF)
 
 
@@ -90,7 +86,7 @@ gcode_clean:
 
 
 arrange: default
-	 $(SIMARRANGE) -x $(PLATE_DIMMENSIONS) -y $(PLATE_DIMMENSIONS) $(ARRANGE_TARGETS)
+	$(SIMARRANGE) -x $(PLATE_DIMMENSIONS) -y $(PLATE_DIMMENSIONS) $(ARRANGE_TARGETS)
 
 clean:
 	rm -f calibration.stl
