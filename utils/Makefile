@@ -72,7 +72,7 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval BASENAME=$(basename $(notdir $<)))
 	@$(eval CFG_FILE=$(BASENAME))
 # Obtain configuration file from cfg file
-	$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell grep $(BASENAME) slicing/cfg -c > /dev/null && echo `grep $(BASENAME) slicing/cfg | cut -d',' -f2` || echo default.ini))
+	$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell grep $(BASENAME) $(INI_DIR)/cfg -c > /dev/null && echo `grep $(BASENAME) $(INI_DIR)/cfg | cut -d',' -f2` || echo `grep default $(INI_DIR)/cfg | cut -d',' -f2`))
 	@echo $(GRN) "Slicing" $(STL_DIR)/$(CFG_FILE).stl ",profile" $(INI_FILE) $(YEL)
 # Slice file with cfg from file
 	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl
