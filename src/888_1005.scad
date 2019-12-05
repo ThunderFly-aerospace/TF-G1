@@ -87,6 +87,71 @@ module screw_top (position_number, draft){
     }
 }
 
+module screw_bottom (position_number,draft){
+
+  distance_bottom = - hull_drop_length * surface_distance(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
+  //echo (distance_bottom);
+
+  if (position_number > 2 && position_number < 5)
+  {
+      if (distance_bottom <= - maximum_printable_size/2)
+      {
+        distance_bottom = - maximum_printable_size/2;
+        translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size/2])
+          union(){
+              cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                  translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
+                      cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                  translate([0,0, M3_nut_height + 2*hull_wall_thickness])
+                      cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+          }
+      }
+
+      else
+      {
+        distance_bottom = distance_bottom;
+        translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size])
+            union(){
+              cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                  translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
+                      cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                  translate([0,0,M3_nut_height +  2*hull_wall_thickness])
+                      cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+            }
+       }
+    }
+
+    else
+    {
+      if (distance_bottom <= - maximum_printable_size/2)
+      {
+        distance_bottom = - maximum_printable_size/2;
+        translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
+          rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+            union(){
+                  cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                      translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
+                          cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                      translate([0,0, M3_nut_height + 2*hull_wall_thickness])
+                          cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+            }
+      }
+
+      else
+      {
+        distance_bottom = distance_bottom;
+        translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
+          rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+              union(){
+                  cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
+                      translate([- M3_nut_diameter/2, 0,M3_nut_height +  2*hull_wall_thickness])
+                          cube([M3_nut_diameter,M3_nut_diameter+20,M3_nut_height]);
+                      translate([0,0,M3_nut_height +  2*hull_wall_thickness])
+                          cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+              }
+      }
+    }
+}
 
 ////////////////////////////
 module 888_1005(draft){
@@ -101,7 +166,7 @@ module 888_1005(draft){
                 intersection (){
                     rotate([90, 0, 0])
                         hollowing_skeleton(hull_wall_thickness + global_clearance, draft);
-                    
+
                     translate([main_tube_outer_diameter, - (hull_z_size - 2*hull_wall_thickness - 2*global_clearance)/2, -beam_thickness_below]) // podložka je vepředu seříznuta posunutím v ose X, aby vznikla toleranční mezera za přední částí krytu.
                         cube([hull_drop_length - main_tube_outer_diameter, hull_z_size - 2*hull_wall_thickness - 2*global_clearance, ring_thickness]);
 
@@ -142,14 +207,21 @@ module 888_1005(draft){
                         screw_top(position_number, draft);
                 }
 
+            rotate([90,0,0])
+                #for (position_number = [2:4])
+               {
+               		screw_bottom(position_number, draft);
+               	mirror([0,0,1])
+               		screw_bottom(position_number, draft);
+               }
             // drazka podel pro zastrceni krytu
             intersection(){
                 difference(){
                     translate([0,-hull_z_size/2, 0])
-                        cube([hull_x_size, hull_z_size, hull_wall_thickness*2]); // spodní lem
+                        cube([hull_x_size, hull_z_size, hull_wall_thickness*2 + 2*global_clearance]); // spodní lem
 
                     //odebrání dna
-                    translate([ribbon_width/2,0,0])
+                    translate([ribbon_width,0,0])
                         rotate([90, 0, 0])
                             hollowing_skeleton(ribbon_width, draft);
                 }
@@ -255,26 +327,26 @@ module 888_1005_rear(){
 
         translate([ribbon_width-55,0,0])
             rotate([90, 0, 0])
-                #screw_top(6, draft);
+                screw_top(6, draft);
 
         mirror([0, 1, 0])
             translate([ribbon_width-55,0,0])
                 rotate([90, 0, 0])
-                        #screw_top(6, draft);
+                        screw_top(6, draft);
 
         translate([-engine_holder_beam_depth, 0, 0])
 
-        
-        
+
+
 
         // drazka pro kryt
         intersection(){
             difference(){
                 translate([0,-hull_z_size/2, 0])
-                    cube([hull_x_size, hull_z_size, hull_wall_thickness*2]); // spodní lem
+                    cube([hull_x_size, hull_z_size, hull_wall_thickness*2+2*global_clearance]); // spodní lem
 
                 //odebrání dna
-                translate([ribbon_width/2,0,0])
+                translate([ribbon_width,0,0])
                     rotate([90, 0, 0])
                         hollowing_skeleton(ribbon_width, draft);
             }
