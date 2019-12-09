@@ -88,7 +88,7 @@ module assembly(){
       if(cover && print){
 
 // Top cover
-        if(stl){rotate([180, 0, 0]) import("../../STL/888_1025.stl", convexity=4);}
+        if(stl){rotate([180, 0, 0]) %import("../../STL/888_1025.stl", convexity=4);}
          else{position_888_1025() 888_1025();}
       }
 
@@ -106,7 +106,7 @@ module assembly(){
 
 // Limce
         if(limec && print){
-            if(stl){import("../../STL/888_1005.stl", convexity=4);}
+            if(false){import("../../STL/888_1005.stl", convexity=4);}
             else{
                 888_1005();
                 888_1005_rear();

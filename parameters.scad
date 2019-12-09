@@ -47,8 +47,12 @@ beam_main_pipe_distance = 45;
 beam_main_pipe_thickness = carbon_pipe_10_outer_diameter;
 
 beam_patern = 40;
-beam_side_pipe_distance = 200;
 beam_side_edge_width = 175;
+
+// Parametry pro limec
+
+collar_holes_distance = 200; // Vzdalenost der pro sesroubovani pricnych tyci. Vzdalenost na trubce
+beam_side_pipe_distance = collar_holes_distance; // TODO: odstranit tento parametr
 
 
 // Nastavení parametrů rotoru
@@ -272,17 +276,15 @@ top_screw_position = [0,
                     (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2],
                     (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3],
                     (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3,
-                    (top_cover_division[5] - 20)   ];
+                    (top_cover_division[5] - 20) ];
 	//spodní kryt
 bottom_screw_position = [0,
-                    (top_cover_division[0] + top_cover_division[1]/2),
-                    (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1],
-                    (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2],
-                    (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3],
+                    (top_cover_division[0] + top_cover_division[1]/2 + 15),
+                    (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1] + 15,
+                    (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2] + 15,
+                    (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3] - 15,
                     (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3,
-                    (top_cover_division[5] - 20)   ];
-
-
+                    (top_cover_division[5] - 10) ];
 
 
 //šířka zámků
