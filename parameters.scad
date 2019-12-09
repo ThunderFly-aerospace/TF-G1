@@ -254,9 +254,10 @@ width_of_engine_holder = 83;
 
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [0, 50, 150, 290, 435, 580, hull_x_size];
-
+top_cover_strip_zposition = 0;
 //Bottom Cover Division - dělení dolního krytu pro tisk
 bottom_cover_division = [0,145,290,365, 470, hull_x_size];
+bottom_cover_strip_zposition = -15;
 // zkrácená část pro payload pro testovací tisk
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 

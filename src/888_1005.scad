@@ -73,9 +73,9 @@ module 888_1005(draft){
             intersection(){
                 difference(){
                     union(){
-                        translate([0,-hull_z_size/2, 0])
+                        translate([0,-hull_z_size/2, top_cover_strip_zposition])
                             cube([hull_x_size, hull_z_size, hull_wall_thickness*2 + 2*global_clearance]); // horni lem
-                        translate([0,-hull_z_size/2, -15])
+                        translate([0,-hull_z_size/2, bottom_cover_strip_zposition])
                             cube([hull_x_size, hull_z_size, hull_wall_thickness*2 + 2*global_clearance]); // spodní lem
                     }
 
@@ -182,9 +182,9 @@ module 888_1005_rear(){
         intersection(){
             difference(){
                 union(){
-                    translate([0,-hull_z_size/2, 0])
+                    translate([0,-hull_z_size/2, top_cover_strip_zposition])
                         cube([hull_x_size, hull_z_size, hull_wall_thickness*2+2*global_clearance]); // spodní lem
-                    translate([0,-hull_z_size/2, -15])
+                    translate([0,-hull_z_size/2, bottom_cover_strip_zposition])
                         cube([hull_x_size, hull_z_size, hull_wall_thickness*2+2*global_clearance]); // spodní lem
                 }
 
