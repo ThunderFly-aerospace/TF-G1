@@ -54,23 +54,19 @@ module 888_2022(set_wheel=false) {
 
     difference() {
         union() {
-            translate([-chasis_fork_thickness-fork_wheel_width/2, -front_fork_length-chasis_fork_thickness, -height/2])
+
                 hull(){
-                    cube([chasis_fork_thickness*2+fork_wheel_width, 888_2022_wheel_diameter/2+chasis_fork_thickness, height]);
+                    translate([-chasis_fork_thickness-fork_wheel_width/2, -front_fork_length-chasis_fork_thickness, -height/2])
+                        cube([chasis_fork_thickness*2+fork_wheel_width, 90, height]);
 
-                    translate([-chasis_fork_thickness + fork_wheel_width/2 , 0, 0])
-                        cube([chasis_fork_thickness*4, front_fork_length+chasis_fork_thickness*2, height]);
-                }
+                    //translate([-chasis_fork_thickness-fork_wheel_width/2, -front_fork_length-chasis_fork_thickness, -height/2])
+                    //translate([-chasis_fork_thickness + fork_wheel_width/2 , 5, 0])
+                    //    cube([chasis_fork_thickness*4, front_fork_length+chasis_fork_thickness, height]);
 
-            hull() {
-
-                translate([0, 0, 0])
-                    cube([chasis_fork_thickness*2+joint_width, 20, height], center = true);
-
-                //translate([0, connector_width+material_around_bearing*2+696_bearing_outer_diameter, height/2+696_bearing_outer_diameter/2+material_around_bearing+lifting_size])
                     rotate([0, 90, 0])
                         cylinder(d=height, h=chasis_fork_thickness*2+joint_width, $fn=100, center=true);
-            }
+                }
+
 
             translate([0, -front_fork_length - piston_mount_offset, 0])
                 hull() {
@@ -83,6 +79,11 @@ module 888_2022(set_wheel=false) {
             }
         }
 
+        // Diry pro pripevneni LEDmodulu
+        for (x = [chasis_fork_thickness/2+fork_wheel_width/2, -chasis_fork_thickness/2 -fork_wheel_width/2])
+            for(y = [-front_fork_length-chasis_fork_thickness/2, -front_fork_length-chasis_fork_thickness/2+84])
+                translate([x, y, 0])
+                    cylinder(d = 2, h = 30, center = true, $fn = 20);
         //kolo
         translate([0, -front_fork_length, 0])
             cube([fork_wheel_width, 888_2022_wheel_diameter, 888_2022_wheel_diameter], center=true);
@@ -104,12 +105,12 @@ module 888_2022(set_wheel=false) {
         //matka šroubu u kola
         translate([50/2, -front_fork_length, 0])
             rotate([0, 90, 0])
-                cylinder(d=wheel_nut_diameter, h=10+0.1, $fn=6);
+                cylinder(d=wheel_nut_diameter, h=30, $fn=6);
 
         //hlavička šroubu u kola
         translate([-50/2, -front_fork_length, 0])
             rotate([0, -90, 0])
-                cylinder(d=wheel_screw_head_diameter, h=10+0.1, $fn=20);
+                cylinder(d=wheel_screw_head_diameter, h=30, $fn=20);
 
         //šroub pístu
         translate([0, -front_fork_length - piston_mount_offset, screw_spring_distance])
@@ -117,21 +118,29 @@ module 888_2022(set_wheel=false) {
                 cylinder(d=M3_screw_diameter, h=chasis_fork_thickness*2+fork_wheel_width+10, center=true, $fn=20);
 
         //matka šroubu u pístu
-        translate([0, -front_fork_length - piston_mount_offset, screw_spring_distance])
-            rotate([0, 90, 0])
-                cylinder(d=M3_nut_diameter, h=M3_nut_height*2+fork_wheel_width, center=true, $fn=6);
+
+        for(i = [-1, 1])
+        translate([i*(fork_wheel_width+chassis_fork_width)/2, -front_fork_length - piston_mount_offset, screw_spring_distance])
+            rotate([0, 90, 0]){
+                rotate([0, 0, 30])
+                    cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6, center = true);
+                translate([-30, -M3_nut_diameter/2, -M3_nut_height/2])
+                    cube([30, M3_nut_diameter, M3_nut_height]);
+            }
 
         //šroub uchycení
         rotate([0, 90, 0])
             cylinder(d=M6_screw_diameter, h=chasis_fork_thickness*2+fork_wheel_width+10, $fn=20, center=true);
 
-        rotate([0, 90, 0])
-            translate([0, 0, chasis_fork_thickness+joint_width/2-5])
-                cylinder(d=M6_nut_diameter, h=10, $fn=20);
+        screw_length = 35;
 
         rotate([0, 90, 0])
-            translate([0, 0, -(chasis_fork_thickness+joint_width/2)-5])
-                cylinder(d=M5_nut_diameter, h=10, $fn=6);
+            translate([0, 0, screw_length/2])
+                cylinder(d=M6_nut_diameter, h=20, $fn=20);
+
+        rotate([0, 90, 0])
+            translate([0, 0, -(screw_length/2)-20])
+                cylinder(d=M5_nut_diameter, h=20, $fn=6);
 
 
     }
