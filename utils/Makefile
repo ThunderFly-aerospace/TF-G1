@@ -61,7 +61,6 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Render PNG image from temporary file.
 	@echo $(YEL)
 	@$(OPENSCAD_APP) -o $@ tmp/$(FILE).scad
-	#    @# Remove temporary file
 	@rm -f tmp/$<
 	@echo $(DEF)
 

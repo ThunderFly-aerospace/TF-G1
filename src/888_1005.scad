@@ -118,13 +118,13 @@ module 888_1005_cut(){
 
                 rotate([0, 90, 0]){
                     translate([-(cuts[i]-cuts[i-1])+5, 7, -beam_thickness_below - 0.2])
-                        linear_extrude(0.2) text(str(i-1), valign = "center", halign = "center", size = 5);
+                        linear_extrude(0.4) text(str(i-1), valign = "center", halign = "center", size = 5);
 
                     translate([-25, 7, -beam_thickness_below - 0.2])
-                        linear_extrude(0.3) text(str(i), valign = "center", halign = "center", size = 5);
+                        linear_extrude(0.4) text(str(i), valign = "center", halign = "center", size = 5);
 
                     translate([-15, 7, -beam_thickness_below - 0.2])
-                        linear_extrude(0.2) text(str(week), valign = "center", halign = "center", size = 5);
+                        linear_extrude(0.4) text(str(week), valign = "center", halign = "center", size = 5);
                 }
             }
     }
