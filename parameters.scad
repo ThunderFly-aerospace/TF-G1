@@ -4,7 +4,7 @@ use <src/lib/vector.scad>
 global_clearance = 0.5;
 perimeter = 0.41;
 layer = 0.2;
-week = "-"; // Popisek s cislem tydne, nastavuje se z makefilu
+week = "77"; // Popisek s cislem tydne, nastavuje se z makefilu
 
 // obecne rozmery trubek
 carbon_pipe_10_outer_diameter = 10.4;

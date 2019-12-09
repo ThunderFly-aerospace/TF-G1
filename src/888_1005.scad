@@ -15,7 +15,7 @@ draft = $preview;
 
 
 ////////////////////////////
-module 888_1005 (draft){
+module 888_1005(draft){
 
   translate([-engine_holder_beam_depth, 0, 0])
     union(){
@@ -89,9 +89,6 @@ module 888_1005 (draft){
                 drop(draft);
             }
 
-            /* translate([0, collar_holes_distance/2, 0])
-                rotate([0, 90, 0])
-                    cylinder(d = beam_main_pipe_thickness, h = 1000, $fn = draft? 8 : 50); */
 
 
         }
@@ -99,62 +96,39 @@ module 888_1005 (draft){
 }
 
 
+
 module 888_1005_cut(){
-    translate([35, 0, 0])
-        difference(){
-            intersection(){
-                translate([0, -100, beam_patern*(4)])
-                    rotate([0, 90, 0])
-                        translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                            888_1005($preview);
+    //translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+    //888_1005($preview);
 
-                translate([-20, -20, 0])
-                    cube([40, 40, beam_patern*3.5]);
+    cuts = [0, beam_patern*3, beam_patern*5.5, beam_patern*8.5];
+
+    for (i = [1:3]){
+        translate([35*i, 0, 0])
+            difference(){
+                intersection(){
+                    translate([0, -95, cuts[i]])
+                        rotate([0, 90, 0])
+                            translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
+                                888_1005($preview);
+
+                    translate([-40, -40, 0])
+                        cube([80, 80, cuts[i]-cuts[i-1]]);
+                }
+
+                rotate([0, 90, 0]){
+                    translate([-(cuts[i]-cuts[i-1])+5, 7, -beam_thickness_below - 0.2])
+                        linear_extrude(0.2) text(str(i-1), valign = "center", halign = "center", size = 5);
+
+                    translate([-25, 7, -beam_thickness_below - 0.2])
+                        linear_extrude(0.3) text(str(i), valign = "center", halign = "center", size = 5);
+
+                    translate([-15, 7, -beam_thickness_below - 0.2])
+                        linear_extrude(0.2) text(str(week), valign = "center", halign = "center", size = 5);
+                }
             }
-            translate([-17, 0, 0]) linear_extrude(0.2) text("A", valgin = "center", halgin = "center");
-        }
-    translate([0, 0, 0])
-        difference(){
-            intersection(){
-                translate([0, -100, beam_patern*(4+1)])
-                    rotate([0, 90, 0])
-                        translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                            888_1005($preview);
-
-                translate([-20, -20, 0])
-                    cube([40, 40, beam_patern*1]);
-            }
-            translate([-17, 0, 0]) linear_extrude(0.2) text("B", valgin = "center", halgin = "center");
-        }
-    translate([-35, 0, beam_patern*(3.5)]) rotate([180, 0, 0])
-        difference(){
-            intersection(){
-                translate([0, -100, beam_patern*(4+1+3.5)])
-                    rotate([0, 90, 0])
-                        translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                            888_1005($preview);
-
-                translate([-20, -20, 0])
-                    cube([40, 40, beam_patern*3.5]);
-            }
-            translate([-17, 0, beam_patern*(3.5)]) linear_extrude(0.2) text("C", valgin = "center", halgin = "center");
-        }
-
-/*
-
-    translate([-40, 20, beam_patern*(3+0.5)])
-        rotate([0, 90, 0])
-            translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                888_1005();
-
-
-
-    translate([40, 0, beam_patern*3+beam_patern*5])
-        rotate([0, 90, 0])
-            translate([- engine_holder_beam_depth + beam_patern*(1), 0, 0])
-                888_1005(); */
+    }
 }
-
 
 module 888_1005_rear(){
     translate([-engine_holder_beam_depth, 0, 0])
