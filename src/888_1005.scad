@@ -147,11 +147,11 @@ module 888_1005_rear(){
 
         translate([beam_length, -beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_diameter, h = 50);
+                cylinder(d = beam_main_pipe_diameter, h = 200);
 
         translate([beam_length, beam_main_pipe_distance/2, 0])
             rotate([0, 90, 0])
-                cylinder(d = beam_main_pipe_diameter, h = 50);
+                cylinder(d = beam_main_pipe_diameter, h = 200);
 
         //translate([ribbon_width-55,0,0])
         rotate([90, 0, 0]){
