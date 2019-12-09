@@ -39,7 +39,7 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 	@$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
-	@sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
+	@#sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@# Sort stl and deps file to keep git changes to minimum.
 	@$(STLSORT) $@ || :
 	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
@@ -49,11 +49,10 @@ $(STL_DIR)/%.stl: $(SRC_DIR)/%.scad
 #-include $(wildcard $(DEP_DIR)/*.deps)
 
 images: $(IMAGES)
-
 $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 	@# Create temporary file for fast image rendering.
-	@-mkdir tmp 2> /dev/null
-	@-mkdir tmp/$(STL_DIR) 2> /dev/null
+	@-mkdir tmp > /dev/null
+	@-mkdir tmp/$(STL_DIR) > /dev/null
 	@$(eval FILE=$(basename $(notdir $<)))
 	@#echo "import('../$<'');" > tmp/$<
 	@echo "import(\"../$<\");" > tmp/$(FILE).scad
@@ -66,7 +65,6 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 
 
 gcode: $(GCODES)
-
 $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 	@$(eval BASENAME=$(basename $(notdir $<)))
 	@$(eval CFG_FILE=$(BASENAME))
@@ -76,7 +74,7 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.stl
 # Slice file with cfg from file
 	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl
 # add STL informations to gcode
-	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode > /dev/null || echo $(RED) "Error in STL positioning"
+	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode  || echo $(RED) "Error in STL positioning"
 	@echo $(DEF)
 
 
