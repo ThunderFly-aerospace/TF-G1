@@ -76323,7 +76323,7 @@ G1 E-1 F300
 ; gcode_arcs = 0
 ; gcode_comments = 0
 ; gcode_flavor = reprap
-; has_heatbed = 1
+; has_heatbed = 0
 ; infill_acceleration = 0
 ; infill_first = 0
 ; interior_brim_width = 0
