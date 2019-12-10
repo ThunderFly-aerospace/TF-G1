@@ -16,7 +16,6 @@
 
 M107
 G92 E0
-;D3D:START:START
 T0
 M104 S215 T0
 
@@ -56517,7 +56516,7 @@ G1 X67.358 Y89.173 E7.53951
 G1 E5.53951 F2400.00000
 G92 E0
 M107
-; Filament-specific end gcode 
+; Filament-specific end gcode
 ;END gcode for filament
 
 M104 S0
@@ -56532,8 +56531,8 @@ G1 E-1 F300
 ; avoid_crossing_perimeters = 0
 ; bed_shape = 0x0,150x0,150x150,0x150
 ; bed_temperature = 0
-; before_layer_gcode = 
-; between_objects_gcode = 
+; before_layer_gcode =
+; between_objects_gcode =
 ; bridge_acceleration = 0
 ; bridge_fan_speed = 100
 ; brim_connections_width = 0
@@ -56574,7 +56573,7 @@ G1 E-1 F300
 ; infill_first = 0
 ; interior_brim_width = 0
 ; label_printed_objects = 0
-; layer_gcode = 
+; layer_gcode =
 ; max_fan_speed = 100
 ; max_layer_height = 0.3
 ; max_print_speed = 80
@@ -56583,15 +56582,15 @@ G1 E-1 F300
 ; min_layer_height = 0.15
 ; min_print_speed = 10
 ; min_skirt_length = 0
-; notes = 
+; notes =
 ; nozzle_diameter = 0.4
 ; only_retract_when_crossing_perimeters = 0
 ; ooze_prevention = 0
 ; output_filename_format = [input_filename_base].gcode
 ; perimeter_acceleration = 0
-; post_process = 
+; post_process =
 ; pressure_advance = 0
-; printer_notes = 
+; printer_notes =
 ; resolution = 0
 ; retract_before_travel = 2
 ; retract_layer_change = 0
@@ -56613,7 +56612,7 @@ G1 E-1 F300
 ; start_gcode = ;D3D:START:START\nT0\nM104 S215 T0\n\nG21\nG90\nM107\nT0\nG28\nG29\nM109 T0 S215 T0\nG0 F3000\nM107\nT0\nG92 E0\nG0 X0 Y149 Z0.1 F3600\nG1 Y49 E6.5 F1200\nG0 Z1\nG92 E0
 ; temperature = 215
 ; threads = 3
-; toolchange_gcode = 
+; toolchange_gcode =
 ; travel_speed = 130
 ; use_firmware_retraction = 0
 ; use_relative_e_distances = 0
