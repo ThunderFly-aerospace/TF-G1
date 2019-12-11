@@ -208,7 +208,8 @@ module blade_infill_structure(){
 //blade_inner();
 
 module blade_infill(){
-    intersection(){
+    //translate([0, -20, 0])
+    #intersection(){
         blade_inner();
 
         difference(){
@@ -216,13 +217,10 @@ module blade_infill(){
                 blade_infill_structure();
                 blade_spine_holes(0.1);
             }
-
-            // Odebrani vyplne v okoli tycek pro vyztuhy
-            /* difference(){
-                blade_spine_holes(wall*2);
-                blade_spine_holes(0);
-            } */
         }
+
+        translate([blade_root_depth * -0.25, -10, blade_print_cuts[1]])
+            cube([rotorblade_depth, 20, blade_length]);
     }
 }
 

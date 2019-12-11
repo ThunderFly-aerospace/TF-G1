@@ -7,7 +7,7 @@ OPENSCAD_APP=openscad
 #SLIC3R_APP=slic3r-prusa3d
 SLIC3R_APP=$(GIT_ROOT)/utils/slicer/Slic3r-1.3.1-dev.AppImage
 STL_INFO=$(GIT_ROOT)/utils/stl_info
-#SLIC3R_APP=$(GIT_ROOT)/utils/slicer/PrusaSlicer-2.1.0.AppImage
+#SLIC3R_APP=$(GIT_ROOT)/utils/slicer/PrusaSlicer-2.1.1.AppImage
 
 
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
