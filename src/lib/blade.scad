@@ -2,8 +2,8 @@ include <../../parameters.scad>
 use <../lib/stdlib/naca4.scad>
 
 //rotorblade_naca = 4412;
-rotorblade_naca = 0014;
-rotorblade_depth = 65;
+rotorblade_naca = 0016;
+rotorblade_depth = 60;
 echo(rotorblade_depth);
 
 blade_length = 140*7;
@@ -12,7 +12,7 @@ blade_print_cuts = [0, 140, 140*2, 140*3, 140*4, 140*5, 140*6, 140*7];
 
 blade_root_depth = 60;
 blade_root_length = 110-10;
-blade_root_thickness = 12;
+blade_root_thickness = 8;
 blade_root_angle = 0;
 
 blade_root_translation_length = 20+10;
@@ -44,8 +44,7 @@ blade_spine_rod_list = [
 pla_density = 1.24/100;
 Pi = 3.14159265359;
 
-cog = [10.448649682625529, -0.013320794873607156, 411.71689922234043];
-cog = [6.176342473178948, -0.009428368241757478, 414.13727746306665];
+cog = [9.34871083913616, -0.0119379084201654, 414.13727746306665];
 mass = 51779.103380*Pi*(1.75)/2*(1.75)/2*pla_density;
 echo("Mass", mass);
 
