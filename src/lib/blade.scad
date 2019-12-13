@@ -98,7 +98,7 @@ module blade_basic_inner(){
             scale(0.97) // skalovani zde odstranuje nechtene artefakty po skalovani
                //cube(400, center = true);
                airfoil(naca = rotorblade_naca, L = rotorblade_depth, N= $preview? 100 : 300, h = airfoil_length, open = false);
-               translate([-0.05, 0, 0]) hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall*1.5);
+               translate([-0.05, 0, 0]) hollow_airfoil(naca= rotorblade_naca, L = rotorblade_depth, N =  $preview? 100 : 300, h = airfoil_length, open = true, wall_thickness = wall*1.25);
         }
 }
 
