@@ -35,10 +35,11 @@ wall = perimeter*1.5;
 height = 0;
 trailing_edge_crop = 1;
 blade_spine_rod_list = [
-[-3, 0, 2.3, ],
-[13, 0, 2.3, ],
+[-6, 0, 2.3, ],
+[6, 0, 2.3, ],
+[15, 0, 2.3, ],
 
-[-10, 0, 4.3, ],
+//[-10, 0, 4.3, ],
 ];
 
 pla_density = 1.24/100;
@@ -113,7 +114,7 @@ module blade_spine_holes(offset = 0){
     for (i=[0, 1, 2])
       for (j=[5:30:blade_length-20])
         translate([blade_spine_rod_list[i][0], 0, j+i*10]){{
-              rotate([90, 0, 0]) cylinder(d = 1.5, h = 20, center = true, $fn = $preview? 7 : 30);
+              rotate([90, 0, 0]) cylinder(d = 1, h = 20, center = true, $fn = $preview? 7 : 30);
         }
     }
 
@@ -187,19 +188,80 @@ module blade_inner(){
 }
 
 module blade_infill_structure(){
-    for(i=[0:blade_length]){
+    #difference(){
+        translate([0, 0, blade_print_cuts[1]])
+        for(i=[0:blade_length-blade_print_cuts[1]]){
 
-        if(i%30 == 0){
-            translate([0, 0, i])
-                rotate([0, 60, 0])
-                    cube([100, 20, 0.09], center = true);
-        }
+            if(i%30 == 0){
+                translate([0, 0, i])
+                    rotate([0, 60, 0])
+                        cube([150, 20, 0.09], center = true);
+            }
 
-        if(i%60 == 0){
-            translate([0, 0, i])
-                rotate([0, -60, 0])
-                    cube([100, 20, 0.09], center = true);
-        }
+            if(i%60 == 0){
+                translate([0, 0, i])
+                    rotate([0, -60, 0])
+                        cube([150, 20, 0.09], center = true);
+            }
+
+            if(i%60 == 0){
+                translate([0, 0, i+15])
+                    rotate([0, 60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i+15])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i-15])
+                    rotate([0, 60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i-15])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i-30])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+
+            if(i%60 == 0){
+                translate([0, 0, i-15+15/2])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i-15-15/2])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i+30-15/2])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+            if(i%60 == 0){
+                translate([0, 0, i+15/2])
+                    rotate([0, -60, 0])
+                        translate([-25, 0, 0])
+                        cube([50, 20, 0.09], center = true);
+            }
+        translate([0, 0, -blade_print_cuts[1]/2])
+            cube([100, 20, blade_print_cuts[1]], center = true);
+    }
 
     }
 }
@@ -208,7 +270,7 @@ module blade_infill_structure(){
 
 module blade_infill(){
     //translate([0, -20, 0])
-    #intersection(){
+    intersection(){
         blade_inner();
 
         difference(){
