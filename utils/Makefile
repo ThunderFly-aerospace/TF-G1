@@ -38,25 +38,28 @@ default: $(TARGETS)
 $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	@# Update dependencies and make no-draft version of model.
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) "to:" $@ $(DEF) $(YEL)
-	@mkdir $(DEP_DIR) > /dev/null && echo " " || echo " "
+#	@mkdir $(DEP_DIR) > /dev/null && echo " " || echo " "
 #	$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(AMF_DIR)/%.amf, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
-	$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(AMF_DIR)/%.amf, $(SRC_DIR)/%.scad, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
+	@$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(AMF_DIR)/%.amf, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
+	@echo $(DEF)$@ -d $(patsubst $(AMF_DIR)/%.amf, $(STL_DIR)/%.stl, $@)
+	@amf_to_stl
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@#sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@# Sort stl and deps file to keep git changes to minimum.
-#	#@$(STLSORT) $@ || :
-#	#@sort -rf $(patsubst $(STL_DIR)/%.amf, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.amf, $(DEP_DIR)/%.deps, $@)
-#	#@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.amf, $(DEP_DIR)/%.deps, $@)
+	@$(STLSORT) $@ || :
+	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
+	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@echo $(GRN) "DONE: Render" $< $(DEF)
 
 #-include $(wildcard $(DEP_DIR)/*.deps)
 
 images: $(IMAGES)
-$(IMG_DIR)/%.png : $(STL_DIR)/%.stl
+$(IMG_DIR)/%.png : $(AMF_DIR)/%.amf
+	@echo $(GRN) "Image rendering" $< $(DEF)
 	@# Create temporary file for fast image rendering.
-	@mkdir tmp > /dev/null || echo " "
-	@mkdir tmp/$(STL_DIR) > /dev/null || echo " "
+	@#mkdir tmp > /dev/null || echo " "
+	@#mkdir tmp/$(AMF_DIR) > /dev/null || echo " "
 	@$(eval FILE=$(basename $(notdir $<)))
 	@#echo "import('../$<'');" > tmp/$<
 	@echo "import(\"../$<\");" > tmp/$(FILE).scad
@@ -69,14 +72,14 @@ $(IMG_DIR)/%.png : $(STL_DIR)/%.stl
 
 
 gcode: $(GCODES)
-$(GCD_DIR)/%.gcode : $(STL_DIR)/%.amf
+$(GCD_DIR)/%.gcode : $(AMF_DIR)/%.amf
 	@$(eval BASENAME=$(basename $(notdir $<)))
 	@$(eval CFG_FILE=$(BASENAME))
 # Obtain configuration file from cfg file
 	$(eval INI_FILE=$(PWD)/$(INI_DIR)/$(shell grep $(BASENAME) $(INI_DIR)/cfg -c > /dev/null && echo `grep -m 1 $(BASENAME) $(INI_DIR)/cfg | cut -d',' -f2` || echo `grep default $(INI_DIR)/cfg | cut -d',' -f2`))
-	@echo $(GRN) "Slicing " $(STL_DIR)/$(CFG_FILE).amf "with profile" $(INI_FILE) $(YEL)
+	@echo $(GRN) "Slicing " $(AMF_DIR)/$(CFG_FILE).amf "with profile" $(INI_FILE) $(YEL)
 # Slice file with cfg from file
-	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(STL_DIR)/$(CFG_FILE).stl
+	@$(SLIC3R_APP) --load $(INI_FILE) -o $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode --no-gui -j 3 $(PWD)/$(AMF_DIR)/$(CFG_FILE).amf
 # add STL informations to gcode
 #	@$(STL_INFO) $(PWD)/$(STL_DIR)/$(CFG_FILE).stl $(PWD)/$(GCD_DIR)/$(CFG_FILE).gcode > /dev/null  || echo $(RED) "Error in STL positioning"
 	@echo $(DEF)
@@ -84,6 +87,11 @@ $(GCD_DIR)/%.gcode : $(STL_DIR)/%.amf
 
 gcode_clean:
 	rm -f $(GCD_DIR)/*.gcode
+
+print_b:
+	@$(eval SOU=$(wildcard $(GCD_DIR)/*.gcode))
+	@$(eval BASENAME=$(basename $(notdir $(file))))
+	@echo $(printer_b_app) $(printer_b_meta) $(file) 10 10 $(IMG_DIR)/$(BASENAME).png
 
 
 arrange: default
