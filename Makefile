@@ -1,4 +1,5 @@
 STL_DIR=STL
+AMF_DIR=AMF
 IMG_DIR=images
 SRC_DIR=src
 DEP_DIR=dep

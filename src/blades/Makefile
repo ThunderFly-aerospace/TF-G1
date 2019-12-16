@@ -1,8 +1,9 @@
-STL_DIR=../../STL/blades
-IMG_DIR=../../images/blades
+STL_DIR=../../STL
+AMF_DIR=../../AMF
+IMG_DIR=../../images
 SRC_DIR=.
 DEP_DIR=../../dep
-GCD_DIR=../../gcode/blades
+GCD_DIR=../../gcode
 INI_DIR=../../slicing/blades
 GIT_ROOT=../..
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
