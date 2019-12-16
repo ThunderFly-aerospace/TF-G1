@@ -35,9 +35,9 @@ wall = perimeter*1.5;
 height = 0;
 trailing_edge_crop = 1;
 blade_spine_rod_list = [
-[-6, 0, 2.3, ],
-[6, 0, 2.3, ],
-[15, 0, 2.3, ],
+[-8, 0, 2.3, ],
+[4, 0, 2.3, ],
+[13, 0, 2.3, ],
 
 //[-10, 0, 4.3, ],
 ];
@@ -106,7 +106,41 @@ module blade_basic_inner(){
 
 // modul tvorici otvory pro podelne vyztuhy
 module blade_spine_holes(offset = 0){
-    for (i=blade_spine_rod_list) {
+
+    spine = blade_spine_rod_list[0];
+    hole = blade_root_holes_positions[0];
+
+    render()
+    translate([0, 0, hole[1]+10])
+        {
+            rotate([90, 0, 0])
+                rotate_extrude(angle = 180, convexity = 2)
+                    translate([spine[0], spine[1], 0])
+                        circle(d = spine[2] + 2*offset,  $fn = $preview? 7 : 50);
+            translate([spine[0], spine[1], -0.1])
+                cylinder(d = spine[2] + 2*offset, h = blade_length+0.2, $fn = $preview? 7 : 50);
+            translate([spine[0]-2*(spine[0] - hole[0]), spine[1], -0.1])
+                cylinder(d = spine[2] + 2*offset, h = 25, $fn = $preview? 7 : 50);
+        }
+
+    spine2 = blade_spine_rod_list[1];
+    hole2 = blade_root_holes_positions[2];
+
+    render()
+    translate([0, 0, hole2[1]+10])
+        {
+            rotate([-90, 0, 0])
+                rotate_extrude(angle = 180, convexity = 2)
+                    translate([spine2[0], spine2[1], 0])
+                        circle(d = spine2[2] + 2*offset,  $fn = $preview? 7 : 50);
+            translate([spine2[0], spine2[1], -0.1])
+                cylinder(d = spine2[2] + 2*offset, h = blade_length+0.2, $fn = $preview? 7 : 50);
+            translate([spine2[0]-2*(spine2[0] - hole2[0]), spine2[1], -0.1])
+                cylinder(d = spine2[2] + 2*offset, h = 25, $fn = $preview? 7 : 50);
+        }
+
+    for (j = [2]) {
+        i = blade_spine_rod_list[j];
         translate([i[0], i[1], -0.1])
             cylinder(d = i[2] + 2*offset, h = blade_length+0.2, $fn = $preview? 7 : 50);
     }
@@ -328,7 +362,9 @@ module blade_printpart(part){
   }
 }
 
-blade();
+//blade();
+#blade_root_holes(0);
+blade_spine_holes(0);
 
 
 if(true)
