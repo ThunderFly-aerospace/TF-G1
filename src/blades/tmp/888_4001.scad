@@ -1,1 +1,1 @@
-import("../../../STL/blades/888_4001.stl");
+import("../../../AMF/888_4001.amf");
