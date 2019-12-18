@@ -40,17 +40,17 @@ $(AMF_DIR)/%.amf: $(SRC_DIR)/%.scad
 	@echo $(GRN) "Render" $< "with" $(OPENSCAD_APP) "to:" $@ $(DEF) $(YEL)
 #	@mkdir $(DEP_DIR) > /dev/null && echo " " || echo " "
 #	$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(AMF_DIR)/%.amf, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
-	@$(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(AMF_DIR)/%.amf, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
+	@time $(OPENSCAD_APP) -D "draft = false" -D "week = `date +%V`" -m make -o $@ -d $(patsubst $(AMF_DIR)/%.amf, $(DEP_DIR)/%.deps, $@) $< && echo $(DEF) || echo $(RED) "Chyba v renderovani" % $(YEL)
 	@echo $(DEF)$@ -d $(patsubst $(AMF_DIR)/%.amf, $(STL_DIR)/%.stl, $@)
-	@amf_to_stl
+	amf-to-stl $@
 	@# Remove absolute paths in dependencies.
 	@#sed -i "s|$(shell pwd)/||" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@#sed -i "s|$(shell git rev-parse --show-toplevel)/|../../../|" $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
 	@# Sort stl and deps file to keep git changes to minimum.
-	@$(STLSORT) $@ || :
-	@sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
-	@sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
-	@echo $(GRN) "DONE: Render" $< $(DEF)
+	@#$(STLSORT) $@ || :
+	@#sort -rf $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@) -o $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
+	@#sed -i 's|[^\]$$|& \\|' $(patsubst $(STL_DIR)/%.stl, $(DEP_DIR)/%.deps, $@)
+	@echo $(GRN) "DONE: Render" $< $@ $(DEF)
 
 #-include $(wildcard $(DEP_DIR)/*.deps)
 
