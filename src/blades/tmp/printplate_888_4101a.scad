@@ -1,1 +1,1 @@
-import("../../../STL/blades/printplate_888_4101a.stl");
+import("../../../AMF/printplate_888_4101a.amf");

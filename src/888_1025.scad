@@ -9,128 +9,40 @@ draft = true;   // sets rendering quality to draft.
 $fs = draft ? 5 : 0.5;
 $fa = 10;
 
-////// otvory pro šrouby pro připevnění k dílu 666_1027
-module screw_top (position_number, draft){
-            //funkce
 
-            distance_top = - hull_drop_length * surface_distance(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
-            //echo (distance_top);
+module cover_screw(position_number, top = true, draft = true){
+    //funkce
 
-        if (position_number > 2 && position_number < 5) //tato podmínka znamená, že v pozici 2,3 a 4 se šroub neotáčí podle surface_angle a ani neposouvá podle surface_distance, protože je na podložce rovná hrana. Je tam tedy dané pevné posunugí -hull_z_size/2
-        {
+    height = top? main_tube_outer_diameter/4: -main_tube_outer_diameter/4;
+    position = top? top_screw_position[position_number] : bottom_screw_position[position_number];
+    distance_top = hull_drop_length * surface_distance(x = position/hull_drop_length, naca = hull_airfoil_thickness, open = false);
+    //echo (distance_top);
 
-
-            if (distance_top <= - (hull_z_size - 2*hull_corner_radius)/2)
-            {
-                distance_top = - (hull_z_size - 2*hull_corner_radius)/2;
-
-                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size/2])
-
-                    cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-            //final if
-            }
-
-            else
-            {
-                distance_top = distance_top;
-
-                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,- hull_z_size])
-                    cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            //final if
-            }
-
-        //final if
-        }
-        else
-        {
-            if (distance_top <= - (hull_z_size - 2*hull_corner_radius)/2)
-            {
-                distance_top = - (hull_z_size - 2*hull_corner_radius)/2;
-
-                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
-                    rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            //fianl if
-            }
-
-            else
-            {
-                distance_top = distance_top;
-
-                translate([hull_drop_length * (top_screw_position[position_number]/hull_drop_length),main_tube_outer_diameter/4,distance_top])
-                    rotate([0,surface_angle(x = top_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            //final if
-            }
-
-        //final if
+    // Pokud je sroub umisten v serizle plose
+    if (distance_top >= (hull_z_size)/2){
+        distance_top = hull_z_size/2;
+        translate([position, height, -distance_top]){
+                cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 7 : 20, center = true);
+            translate([- M3_nut_diameter/2, 0, M3_nut_height + 2*hull_wall_thickness])
+                cube([M3_nut_diameter, M3_nut_diameter+15, M3_nut_height]);
+            translate([0, 0, M3_nut_height + 2*hull_wall_thickness])
+                cylinder(h = M3_nut_height, d = M3_nut_diameter, $fn = 6);
         }
 
-//final module
-}
-
-
-////// otvory pro šrouby pro připevnění k dílu 666_1027
-module screw_bottom (position_number,draft){
-            //funkce
-
-            distance_bottom = - hull_drop_length * surface_distance(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false);
-            //echo (distance_bottom);
-
-        if (position_number > 1 && position_number < 3)
-        {
-
-            if (distance_bottom <= - (hull_z_size - 2*hull_corner_radius)/2)
-            {
-                distance_bottom = - (hull_z_size - 2*hull_corner_radius)/2;
-
-                translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size/2])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-            //final if
-            }
-
-            else
-            {
-                distance_bottom = distance_bottom;
-
-                translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,- hull_z_size])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-            //final if
-            }
-
-        //final if
+    //final if
+    } else {
+        union(){
+            translate([position, height, -distance_top])
+                rotate([0,surface_angle(x = position/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
+                    union(){
+                        cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 7 : 20, center = true);
+                        translate([- M3_nut_diameter/2, 0, 2*M3_nut_height + 2*hull_wall_thickness])
+                            cube([M3_nut_diameter,M3_nut_diameter+15,M3_nut_height]);
+                        translate([0,0, 2*M3_nut_height + 2*hull_wall_thickness])
+                            cylinder(h = M3_nut_height, r = M3_nut_diameter/2, $fn = 6);
+                    }
         }
-        else
-        {
-
-            if (distance_bottom <= - (hull_z_size - 2*hull_corner_radius)/2)
-            {
-                distance_bottom = - (hull_z_size - 2*hull_corner_radius)/2;
-
-                translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
-                    rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-
-            //fianl if
-            }
-
-            else
-            {
-                distance_bottom = distance_bottom;
-
-                translate([hull_drop_length * (bottom_screw_position[position_number]/hull_drop_length),- main_tube_outer_diameter/4,distance_bottom])
-                    rotate([0,surface_angle(x = bottom_screw_position[position_number]/hull_drop_length, naca = hull_airfoil_thickness, open = false),0])
-                            cylinder(h = 40, r = M3_screw_diameter/2, $fn = draft ? 10 : 20, center = true);
-            //final if
-            }
-
-        //final if
-        }
-
-//final module
+    }
 }
 
 
@@ -308,17 +220,17 @@ module 888_1025(draft = true, top = true){
             if (top == true){
                 for (position_number = [1:5])
                 {
-                    screw_top(position_number, draft);
+                    cover_screw(position_number, top = true, draft = draft);
                     mirror([0,0,1])
-                        screw_top(position_number, draft);
+                        cover_screw(position_number, top = true, draft = draft);
                 }
             }
             else{
                 for (position_number = [1:5])
                 {
-                    screw_bottom(position_number, draft);
+                    cover_screw(position_number, top = false, draft = draft);
                     mirror([0,0,1])
-                        screw_bottom(position_number, draft);
+                        cover_screw(position_number, top = false, draft = draft);
                 }
             }
 

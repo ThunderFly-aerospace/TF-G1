@@ -4,7 +4,7 @@ use <src/lib/vector.scad>
 global_clearance = 0.5;
 perimeter = 0.41;
 layer = 0.2;
-week = "-"; // Popisek s cislem tydne, nastavuje se z makefilu
+week = "77"; // Popisek s cislem tydne, nastavuje se z makefilu
 
 // obecne rozmery trubek
 carbon_pipe_10_outer_diameter = 10.4;
@@ -47,8 +47,12 @@ beam_main_pipe_distance = 45;
 beam_main_pipe_thickness = carbon_pipe_10_outer_diameter;
 
 beam_patern = 40;
-beam_side_pipe_distance = 200;
 beam_side_edge_width = 175;
+
+// Parametry pro limec
+
+collar_holes_distance = 200; // Vzdalenost der pro sesroubovani pricnych tyci. Vzdalenost na trubce
+beam_side_pipe_distance = collar_holes_distance; // TODO: odstranit tento parametr
 
 
 // Nastavení parametrů rotoru
@@ -250,9 +254,10 @@ width_of_engine_holder = 83;
 
 //Top Cover Division - dělení horního krytu pro tisk
 top_cover_division = [0, 50, 150, 290, 435, 580, hull_x_size];
-
+top_cover_strip_zposition = 0;
 //Bottom Cover Division - dělení dolního krytu pro tisk
 bottom_cover_division = [0,145,290,365, 470, hull_x_size];
+bottom_cover_strip_zposition = -15;
 // zkrácená část pro payload pro testovací tisk
 //bottom_cover_division = [0,200,250,365, 470, hull_x_size];
 
@@ -272,17 +277,15 @@ top_screw_position = [0,
                     (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2],
                     (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3],
                     (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3,
-                    (top_cover_division[5] - 20)   ];
+                    (top_cover_division[5] - 20) ];
 	//spodní kryt
 bottom_screw_position = [0,
-                    (top_cover_division[0] + top_cover_division[1]/2),
-                    (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1],
-                    (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2],
-                    (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3],
+                    (top_cover_division[0] + top_cover_division[1]/2 + 15),
+                    (top_cover_division[2] - top_cover_division[1])/2 + top_cover_division[1] + 15,
+                    (top_cover_division[3] - top_cover_division[2])/2.6 + top_cover_division[2] + 15,
+                    (top_cover_division[4] - top_cover_division[3])/3.2 + top_cover_division[3] - 15,
                     (top_cover_division[5] - top_cover_division[4])/2 + top_cover_division[4] - top_cover_division[1]/3,
-                    (top_cover_division[5] - 20)   ];
-
-
+                    (top_cover_division[5] - 10) ];
 
 
 //šířka zámků
@@ -717,7 +720,7 @@ chassis_fork_length_overlap = 18;       // prodlouzeni smerem dolu
 wheel_diameter = 110;
 screw_spring_distance = 15;
 material_around_bearing = 3;
-chasis_fork_thickness = 10;
+chasis_fork_thickness = 15;
 stop_size = 8;
 stop_width = 6;
 max_angle_of_ratation = 25; //úhel mezi maximálními výchilkami podvozku při zatáčení

@@ -125,15 +125,20 @@ module 888_2024(orientate = 0) {
         //šroub pro připevnění pístů
         translate([0, holder_length, 0])
             rotate([0, 90, 0])
-                cylinder(d=M6_screw_diameter+2, h=fork_wheel_width*2, $fn=20, center=true);
+                cylinder(d=M6_screw_diameter+1.5, h=fork_wheel_width*2, $fn=20, center=true);
 
         //ložiska pro písty
-        translate([-fork_wheel_width/2-0.1-2, holder_length, 0])
+        /* translate([-fork_wheel_width/2-0.1-2, holder_length, 0])
             rotate([0, 90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1, $fn=50);
         translate([fork_wheel_width/2+0.1+10+2, holder_length, 0])
             rotate([0, -90, 0])
-                cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+10, $fn=50);
+                cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+10, $fn=50); */
+
+        for(i = [1, -1])
+        rotate([0, i*90, 0])
+            translate([0, holder_length, fork_wheel_width/2 - 696_bearing_thickness])
+                cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+20, $fn=50);
 
 
         //zářez pro 888_2025
