@@ -10,7 +10,7 @@ The main features of that design are:
   * Weather insensitive operation
   * High safety due to stable autorotation mode which does not require autopilot or pilot attention
   * Greater altitude and area coverage than existing UAV designs  like multi-copters or helicopters
-  * Absence of [downwash](https://en.wikipedia.org/wiki/Downwash)
+  * Absence of [downwash](https://en.wikipedia.org/wiki/Downwash), therefore a minimal occurence of [Brownout](https://en.wikipedia.org/wiki/Brownout_(aeronautics))
   * High descent rates
   * Ability to enter and return into the fail-safe mode (stable autorotation)
 
