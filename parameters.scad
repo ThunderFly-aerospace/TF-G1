@@ -369,6 +369,8 @@ tail_length = sqrt(pow(maximum_printable_size, 2) + pow(maximum_printable_size, 
 tail_middle_length = tail_length + 45; // stredni delka smerovky
 tail_height = 210;                                  // vyska smerovky (ne vyska plochy kridla)
 tail_bottom_height = 10;                            // vyska spodniho dilu smerovky (ne vyska plchoy kridla)
+tail_top_height = tail_height - tail_bottom_height - Rudder_height;
+						    // vyska horniho dilu smerovky (ne vyska plchoy kridla)
 tail_pipe_z_position = tail_height/2;               // od spodniho okraje smerovky
 tail_airfoils_length = 1/(cos(tail_airfoils_angle/2)/tail_height);
 tail_pipe_distance = sin(tail_airfoils_angle/2)*(tail_height - tail_pipe_z_position)*2-12.5;
@@ -388,6 +390,7 @@ tail_support_x_position_2 = 80;                     // pozice druhe karbonove ty
 tail_A_shape_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 20; // pozice der na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_1 = 35;               // pozice prvni diry na sroub (uchyceni dvou smerovek)
 tail_A_shape_screw_x_position_2 = 95;               // pozice druhe diry na sroub (uchyceni dvou smerovek)
+tail_A_shape_screw_depth = Rudder_depth + 2;	    // hloubka zapusteni sroubu
 tail_top_passive_rudder_screw_y_pisition = tail_height - tail_bottom_height - Rudder_height - 15.8; // pozice der na sroub (uchyceni vrtchni pasivni smerovky)
 tail_top_passive_rudder_screw_x_position_1 = 45;    // pozice prvni diry na sroub (uchyceni vrtchni pasivni smerovky)
 tail_top_passive_rudder_screw_x_position_2 = 105;   // pozice druhe diry na sroub (uchyceni vrtchni pasivni smerovky)
