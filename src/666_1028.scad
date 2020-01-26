@@ -408,8 +408,8 @@ module 666_1028_tube_mount(draft) {
        union() {
             intersection() {
                 //main body
-                translate([- tail_tube_mount_length / 2, 0, - tail_tube_mount_height / 2])
-                    airfoil(naca = 0009, L = tail_length, N = draft ? 50 : 200, h = tail_tube_mount_height, open = false);
+                translate([- tail_tube_mount_length / 2, 0, - tail_pipe_z_position])
+			666_1028_rudder_shape();
                 cube([tail_tube_mount_length - global_clearance, Rudder_depth * 2, tail_tube_mount_height], center = true);
             }
             //tube wall
@@ -688,11 +688,13 @@ module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false)
 
     //666_1028_body_bottom(side_choose);
 
+	    //translate([0, 0, tail_bottom_height])
+	//	666_1028_body_middle(side_choose);
+
 	difference(){
-	    translate([0, 0, tail_bottom_height])
-		666_1028_body_middle(side_choose);
-			translate([tail_length, -30, tail_height / 2 - 1])
-			cube([tail_length * 2, 60, tail_height + 2], true);
+
+//			translate([tail_length, -30, tail_height / 2 - 1])
+//			cube([tail_length * 2, 60, tail_height + 2], true);
 	}
 
     //if(rudder)
@@ -701,8 +703,8 @@ module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false)
           //      translate([-Rudder_shaft_x_position, 0, 0])
             //    666_1028_rudder(side_choose);
 
-    //translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
-      //  666_1028_tube_mount(side_choose);
+    translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
+        666_1028_tube_mount(side_choose);
 
     //translate([0, 0, tail_bottom_height + Rudder_height])
       //  666_1028_body_top(side_choose);
