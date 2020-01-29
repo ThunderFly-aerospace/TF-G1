@@ -634,54 +634,97 @@ module 666_1028_rudder(side_choose = 1, draft) {
     }
 }
 
+//Shape for top passive rudder------------------------------
+
+module 666_1028_passive_rudder_shape()
+{
+  N = 40;
+  sweep(gen_dat(M=tail_top_passive_rudder_height / 2, dz=1,N=N), showslices = false);
+
+  // specific generator function
+  function gen_dat(M=10,dz=0.1,N=10) = [for (i=[0:dz:M])
+    let( L = extra_length(i))
+    let( af = vec3D(
+        airfoil_data([0,0,0.05+thickness(i)], L=tail_length-extra_length(i), N = N)))
+    T_(0, 0, (i)*2, af)];  // translate airfoil
+
+  function thickness(i) = gauss(i,0.00, 0, 15);
+  function extra_length(i) = gauss(i,300,tail_top_passive_rudder_height / 2 + 20,15);
+}
+
+module 666_1028_passive_rudder_shape_inside()
+{
+  //TODO: wall thickness repair
+  N = 40;
+  sweep(gen_dat(M=tail_top_passive_rudder_height / 2 - Rudder_wall_thickness / 2, dz=1,N=N), showslices = false);
+
+  // specific generator function
+  function gen_dat(M=10,dz=0.1,N=10) = [for (i=[0:dz:M])
+    let( L = extra_length(i))
+    let( af = vec3D(
+        airfoil_data([0,0,0.05+thickness(i)], L=tail_length-extra_length(i)-Rudder_wall_thickness * 2, N = N)))
+    T_(Rudder_wall_thickness, 0, (i)*2 + Rudder_wall_thickness, af)];  // translate airfoil
+
+  function thickness(i) = gauss(i,0.00, 0, 15);
+  function extra_length(i) = gauss(i,300,tail_top_passive_rudder_height / 2 + 20 - Rudder_wall_thickness,15);
+}
+
+
+
+//Top passive rudder----------------------------------------
+
 module 666_1028_top_passive_rudder(side_choose = 1, draft) {
     difference() {
-        union() {
-            //Main Wall-------------------------------------------------
-            linear_extrude(height = abs(Rudder_wall_thickness), scale = 0.7)
-            polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
+	    //Main Wall-------------------------------------------------
+		666_1028_passive_rudder_shape();    
 
-            linear_extrude(height = tail_top_passive_rudder_height, scale = 0.7)
-                difference(){
-                    polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
-                    offset(delta = - Rudder_wall_thickness) polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
-                }
 
-            translate([0,0, h - Rudder_wall_thickness])
-                linear_extrude(height = abs(Rudder_wall_thickness), scale = 0.7)
-                    polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false));
-            
-            intersection() {
-                linear_extrude(height = tail_top_passive_rudder_height, scale = 0.7)
-                    polygon(points = airfoil_data(naca = 0009, L = tail_length, N = draft ? 50 : 100, open = false, wall_thickness = Rudder_wall_thickness));
-            
-                union() {
-                    //Ribs------------------------------------------------------
-                    //TODO: check if they are dynamic
+	    intersection() {
+		666_1028_passive_rudder_shape_inside();
 
-                    translate([5, 0, tail_length * 2])
-                        rotate([0, 45, 0])
-                            for (i = [0:30]) {
-                                translate([i * 32.5, 0, 0])
-                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
-                            }
+		difference(){
+			union() {
 
-                    translate([5, 0, 0])
-                        rotate([0, - 45, 0])
-                            for (i = [0:30]) {
-                                translate([i * 32.5, 0, 0])
-                                    cube([Rudder_wall_thickness, Rudder_depth * 4, tail_length * 4], center = true);
-                            }
-                    
-                    //Material for top passive rudder screws----------------------------------
-                    translate([tail_top_passive_rudder_screw_x_position_1, 0, (tail_top_passive_rudder_height) / 2 + 1])
-                        cube([M3_screw_diameter + 10, tail_depth, tail_top_passive_rudder_height + 2], center = true);
-        
-                    translate([tail_top_passive_rudder_screw_x_position_2, 0, (tail_top_passive_rudder_height) / 2 + 1])
-                        cube([M3_screw_diameter + 10, tail_depth, tail_top_passive_rudder_height + 2], center = true);
-                }
-            }
-        }       
+			    //Material for top passive rudder screws----------------------------------
+			    translate([tail_top_passive_rudder_screw_x_position_1, 0, (tail_top_passive_rudder_height) / 2 + 1])
+				cube([M3_screw_diameter + 10, tail_depth, tail_top_passive_rudder_height + 2], center = true);
+		
+			    translate([tail_top_passive_rudder_screw_x_position_2, 0, (tail_top_passive_rudder_height) / 2 + 1])
+				cube([M3_screw_diameter + 10, tail_depth, tail_top_passive_rudder_height + 2], center = true);
+
+			}
+
+			union(){
+
+			//Holes for top passive rudder holding screws--------------------------
+			//TODO: check if they are dynamic
+
+			translate([tail_top_passive_rudder_screw_x_position_1, 0, 0])
+			    union(){
+				cylinder(d = M3_screw_diameter + Rudder_wall_thickness * 2, h = Rudder_depth * 2 + Rudder_wall_thickness * 2, $fn = draft ? 10 : 50, center = true);
+				translate([0, 0, 10])
+				    union() {
+					cylinder(d = M3_nut_diameter + global_clearance * 2 + Rudder_wall_thickness, h = M3_nut_height + global_clearance * 2 + Rudder_wall_thickness * 2, $fn = 6, center = true);
+					translate([0, - Rudder_depth / 2, 0])
+					    cube([M3_nut_diameter + global_clearance * 2 + Rudder_wall_thickness * 2, Rudder_depth, M3_nut_height + global_clearance * 2 + Rudder_wall_thickness * 2], center = true);
+				    }
+			    }
+
+			translate([tail_top_passive_rudder_screw_x_position_2, 0, 0])
+			    union(){
+				cylinder(d = M3_screw_diameter + Rudder_wall_thickness * 2, h = Rudder_depth * 2 + Rudder_wall_thickness * 2, $fn = draft ? 10 : 50, center = true);
+				translate([0, 0, 10])
+				    union() {
+					cylinder(d = M3_nut_diameter + global_clearance * 2 + Rudder_wall_thickness, h = M3_nut_height + global_clearance * 2 + Rudder_wall_thickness * 2, $fn = 6, center = true);
+					translate([0, - Rudder_depth / 2, 0])
+					    cube([M3_nut_diameter + global_clearance * 2 + Rudder_wall_thickness * 2, Rudder_depth, M3_nut_height + global_clearance * 2 + Rudder_wall_thickness * 2], center = true);
+				    }
+			    }
+			 //----------------------------------------------------------
+
+			}
+		}
+	    }
                 
         //Holes for top passive rudder holding screws--------------------------
         //TODO: check if they are dynamic
@@ -726,11 +769,24 @@ module 666_1028_pipe(){
 module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false){
 
 	/*
-	//inside rudder shape viewer
+	//inside rudder shape viewer--------------------------------
 	difference(){
 		666_1028_rudder_shape();
 
 		666_1028_rudder_shape_inside();
+		
+		translate([tail_length, 0, tail_height])
+		cube([tail_length * 2, 60, tail_height], true);
+
+		translate([tail_length, -30, tail_height / 2 - 1])
+		cube([tail_length * 2, 60, tail_height + 2], true);
+	}
+
+	//inside passive rudder shape viewer-----------------------
+	difference(){
+		666_1028_passive_rudder_shape();
+
+		666_1028_passive_rudder_shape_inside();
 		
 		translate([tail_length, 0, tail_height])
 		cube([tail_length * 2, 60, tail_height], true);
@@ -760,12 +816,12 @@ module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false)
     //translate([tail_tube_mount_length / 2 - global_clearance / 2, 0, tail_pipe_z_position])
         //666_1028_tube_mount(side_choose);
 
-    translate([0, 0, tail_bottom_height + Rudder_height])
-        666_1028_body_top(side_choose);
+    //translate([0, 0, tail_bottom_height + Rudder_height])
+        //666_1028_body_top(side_choose);
     
-    //translate([0, side_choose * (- 1.6), tail_height - 13])
-      //  rotate([- side_choose * (- tail_angle / 2), 0, 0])
-        //    666_1028_top_passive_rudder(side_choose);
+    translate([0, side_choose * (- 1.6), tail_height - 13])
+        rotate([- side_choose * (- tail_angle / 2), 0, 0])
+            666_1028_top_passive_rudder(side_choose);
 
     //if(pipe)
       //  666_1028_pipe(side_choose);
