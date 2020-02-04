@@ -738,6 +738,9 @@ joint_width = 25;
 //888_2025
 888_2025_wall_thickness = 2;
 888_2025_height = 10;
+888_2025_sliding_insert_overlap = 0.25;
+888_2025_washer_diameter = 10;
+888_2025_washer_thickness = 1;
 
 //888_2022
 888_2022_front_fork_length = 100;
@@ -766,3 +769,12 @@ RT57208M25_stroke = 25;
 KBRM03_B = 6;
 KBRM03_h1 = 18.5;
 KBRM03_l1 = 8;
+
+
+//sliding insert plastic
+sliding_insert_plastic_diameter = 6;
+sliding_insert_plastic_width = 18;
+
+//sliding insert metal
+sliding_insert_metal_diameter = 6;
+sliding_insert_metal_width = 7;

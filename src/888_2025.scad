@@ -11,7 +11,7 @@ height = 888_2025_height;
 module 888_2025(piston=false, piston_position = 0) {
 
     //translate([RT57208M25_EW/-2-wall_thickness+(KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2+RT57208M25_EW/2), 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]) {
-    translate([chasis_fork_thickness/2 + KBRM03_B/2+1, 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]){
+    //translate([chasis_fork_thickness/2 + KBRM03_B/2+1, 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]){
     if(piston) {
         translate([0, 0, -RT57208M25_XC+RT57208M25_LB+RT57208M25_WF])
             cylinder(d=RT57208M25_D, h=RT57208M25_XC-RT57208M25_LB-RT57208M25_WF, $fn=50);
@@ -37,9 +37,9 @@ module 888_2025(piston=false, piston_position = 0) {
             cylinder(d=RT57208M25_BE+wall_thickness, h=RT57208M25_MR+RT57208M25_LB+wall_thickness, $fn=60);
 
             //translate([-chassis_fork_thickness/2 - KBRM03_B/2 , 0, 0])
-            translate([RT57208M25_EW/2+2, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
+            translate([0, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
                 rotate([0, -90, 0])
-                    #cylinder(d=M6_screw_diameter+wall_thickness*2, h=KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2+RT57208M25_EW/2, $fn=60);
+                    cylinder(d=sliding_insert_metal_diameter+wall_thickness*2, h=sliding_insert_metal_width-888_2025_sliding_insert_overlap*2, $fn=60, center=true);
         }
 
         //otvor pro píst
@@ -58,17 +58,22 @@ module 888_2025(piston=false, piston_position = 0) {
         translate([-RT57208M25_EW/2-2, 0, RT57208M25_LB])
             rotate([0, -90, 0])
                 cylinder(d=M3_nut_diameter, h=10, $fn=6);
-        translate([RT57208M25_EW/2+2, 0, RT57208M25_LB])
-            rotate([0, 90, 0])
-                cylinder(d=50+height, h=10, $fn=20);
 
         //šroub pro připevnění k 888_2024
         translate([0, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
                 rotate([0, -90, 0])
-                    cylinder(d=M6_screw_diameter, h=(KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2)*2, $fn=60, center=true);
+                    cylinder(d=sliding_insert_metal_diameter, h=100, $fn=60, center=true);
+
+        //plocha pro podložky
+        translate([-sliding_insert_metal_width/2+888_2025_sliding_insert_overlap, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
+            rotate([0, -90, 0])
+                cylinder(d=888_2025_washer_diameter+1, h=50, $fn=50);
+        translate([sliding_insert_metal_width/2-888_2025_sliding_insert_overlap, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
+            rotate([0, 90, 0])
+                cylinder(d=888_2025_washer_diameter+1, h=50, $fn=50);
     }
 
-    }
+    //}
 }
 
-888_2025(true, 100);
+888_2025();
