@@ -61,6 +61,16 @@ module 888_2024(orientate = 0) {
                         cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=fork_wheel_width, $fn=50, center=true);
             }
 
+            hull() {
+                translate([0, holder_length, 0])
+                    rotate([0, 90, 0])
+                        cylinder(d=696_bearing_outer_diameter+material_around_bearing*2, h=fork_wheel_width, $fn=50, center=true);
+
+                translate([0, holder_length, 0])
+                    rotate([0, 90, 0])
+                        cylinder(d=888_2025_washer_diameter, h=chasis_fork_thickness*2+fork_wheel_width+KBRM03_B-sliding_insert_metal_width-888_2025_sliding_insert_overlap*2-888_2025_washer_thickness*2, $fn=50, center=true);
+            }
+
             //doraz
             translate([-stop_width/2, holder_length, 696_bearing_outer_diameter+material_around_bearing*2])
                 rotate([-holder_angle, 0, 0])
@@ -125,7 +135,23 @@ module 888_2024(orientate = 0) {
         //šroub pro připevnění pístů
         translate([0, holder_length, 0])
             rotate([0, 90, 0])
-                cylinder(d=M6_screw_diameter+1.5, h=fork_wheel_width*2, $fn=20, center=true);
+                cylinder(d=M3_screw_diameter, h=fork_wheel_width*5, $fn=20, center=true);
+
+        //matky pro šroub pístů
+        translate([fork_wheel_width/2, holder_length, 0])
+            rotate([0, -90, 0])
+                rotate([0, 0, 30])
+                cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
+        translate([fork_wheel_width/2-M3_nut_height, holder_length, -M3_nut_pocket/2])
+            cube([M3_nut_height, 100, M3_nut_pocket]);
+        mirror([1, 0, 0]) {
+        translate([fork_wheel_width/2, holder_length, 0])
+            rotate([0, -90, 0])
+                rotate([0, 0, 30])
+                cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6);
+        translate([fork_wheel_width/2-M3_nut_height, holder_length, -M3_nut_pocket/2])
+            cube([M3_nut_height, 100, M3_nut_pocket]);
+        }
 
         //ložiska pro písty
         /* translate([-fork_wheel_width/2-0.1-2, holder_length, 0])
@@ -135,6 +161,7 @@ module 888_2024(orientate = 0) {
             rotate([0, -90, 0])
                 cylinder(d=696_bearing_outer_diameter, h=696_bearing_thickness+0.1+10, $fn=50); */
 
+        /*
         for(i = [1, -1])
         rotate([0, i*90, 0])
             translate([0, holder_length, fork_wheel_width/2 - 696_bearing_thickness])
@@ -146,6 +173,7 @@ module 888_2024(orientate = 0) {
             rotate([-60, 0, 0])
                 translate([0, 0, -25])
                 cube([50, 696_bearing_outer_diameter, 50], center=true);
+        */
     }
 }
 

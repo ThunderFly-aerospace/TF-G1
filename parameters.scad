@@ -730,15 +730,15 @@ max_angle_of_ratation = 25; //úhel mezi maximálními výchilkami podvozku při
 joint_width = 25;
 
 //888_2024
-888_2025_distance_space = 0.5;
 888_2024_holder_angle = 40;
 888_2024_holder_length = 100;
 888_2024_joint_height = 5;
 
 //888_2025
+888_2025_distance_space = 0;
 888_2025_wall_thickness = 2;
 888_2025_height = 10;
-888_2025_sliding_insert_overlap = 0.25;
+888_2025_sliding_insert_overlap = 0.1;
 888_2025_washer_diameter = 10;
 888_2025_washer_thickness = 1;
 
