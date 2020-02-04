@@ -11,7 +11,7 @@ height = 888_2025_height;
 module 888_2025(piston=false, piston_position = 0) {
 
     //translate([RT57208M25_EW/-2-wall_thickness+(KBRM03_B/2+chasis_fork_thickness-888_2025_distance_space+2+RT57208M25_EW/2), 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]) {
-    //translate([chasis_fork_thickness/2 + KBRM03_B/2+1, 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]){
+    translate([chasis_fork_thickness/2 + KBRM03_B/2+1, 0, -(RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height)]){
     if(piston) {
         translate([0, 0, -RT57208M25_XC+RT57208M25_LB+RT57208M25_WF])
             cylinder(d=RT57208M25_D, h=RT57208M25_XC-RT57208M25_LB-RT57208M25_WF, $fn=50);
@@ -73,7 +73,7 @@ module 888_2025(piston=false, piston_position = 0) {
                 cylinder(d=888_2025_washer_diameter+1, h=50, $fn=50);
     }
 
-    //}
+    }
 }
 
 888_2025();
