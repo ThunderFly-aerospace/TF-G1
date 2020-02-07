@@ -1,6 +1,5 @@
 use <src/lib/vector.scad>
 
-
 global_clearance = 0.5;
 perimeter = 0.41;
 layer = 0.2;
@@ -403,8 +402,9 @@ tail_servo_screws_gap = 28;                         // mezera mezi srouby pro uc
 tail_servo_screws_z_position = 18;                  // pozice sroubu pro uchyceni serva (osa Z)
 tail_servo_screws_diameter = 1.8;                   // prumer der na srouby
 tail_servo_wall_y_offset = - 2;                     // vyoseni uchyceni pro servo
-tail_servo_wire_hole_length = 8;                    // delka vykusu pro draty
+tail_servo_wire_hole_length = 10;                   // delka vykusu pro draty
 tail_servo_wire_hole_width = 13;                    // sirka vykusu pro draty
+tail_servo_wire_hole_height = 10.7;					// vyska vykusu pro draty
 tail_servo_wall_and_screws_y_position = 5;          // pozice steny a sroubu pro uchyceni serva (osa Y)
 tail_servo_arm_depth = 15.1;                        // hloubka ramena u serva
 
