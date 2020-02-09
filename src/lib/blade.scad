@@ -7,6 +7,7 @@ rotorblade_depth = 60;
 echo(rotorblade_depth);
 
 blade_profile_fn = $preview? 50:200;
+print_cuts = false;
 
 blade_length = 100+145*6;
 blade_print_cuts = [0, 100, 100+145*1, 100+145*2, 100+145*3, 100+145*4, 100+145*5, 100+145*6];
@@ -335,14 +336,14 @@ module blade_printpart(part){
 }
 
 
-//blade_outer();
-//blade_infill();
-blade();
-//#blade_root_holes(0);
-//blade_spine_holes(0);
+#blade_outer();
+blade_infill(0);
+//blade();
+#blade_root_holes(0);
+blade_spine_holes(0);
 
 
-if(true)
+if(print_cuts == true)
   for(h=blade_print_cuts){
       %translate([0, 0, h])
           square(200, center = true);
