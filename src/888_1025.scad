@@ -95,12 +95,12 @@ module 888_1025(draft = true, top = true){
                             scale([1.8, 1, 1])
                               sphere (r = 20, $fs = 0.5, $fa = 10);
 
-                        //přední stěna Z+
-                        translate([0, 0, width_of_engine_holder/2 ])
+                        //přední stěna Z+ global_clearance for two fold manifold error fix
+                        translate([0, global_clearance/2, width_of_engine_holder/2 ])
                           cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                         //přední stěna Z-
-                        translate([0, 0, - hull_wall_thickness - width_of_engine_holder/2])
+                        translate([0, global_clearance/2, - hull_wall_thickness - width_of_engine_holder/2])
                           cube([top_cover_division[1], hull_y_size, hull_wall_thickness]);
 
                         // lemy pro výztuhu a slepení

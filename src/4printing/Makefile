@@ -1,10 +1,10 @@
-STL_DIR=../../STL/print_plate
-AMF_DIR=../../AMF/print_plate
+STL_DIR=../../STL/4printing
+AMF_DIR=../../AMF/4printing
 IMG_DIR=../../images
 SRC_DIR=.
 DEP_DIR=../../dep
 GCD_DIR=../../gcode
-INI_DIR=../../slicing/print_plate
+INI_DIR=../../slicing/4printing
 GIT_ROOT=../..
 SOURCES=$(wildcard $(SRC_DIR)/*.scad)
 include ../../utils/Makefile
