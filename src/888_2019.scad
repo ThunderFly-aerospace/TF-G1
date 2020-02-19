@@ -75,7 +75,7 @@ difference(){
 
             translate([0, 0, -7.5-1.5])
             rotate([90, 0, 0])
-                cylinder(d = 15, h = 50, $fn = 80, center = true, $fn = $preview? 10:80);
+                cylinder(d = 15, h = 50, center = true, $fn = $preview? 10:80);
 
 
     // Otvor na Srouby do loziska
