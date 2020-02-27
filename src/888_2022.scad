@@ -36,7 +36,7 @@ wheel_tolerance = -5;
 888_2022_wheel_diameter = wheel_diameter+wheel_tolerance;
 lifting_size = 10;
 
-height = 696_bearing_outer_diameter+material_around_bearing*2;
+height = 888_2022_height;
 connector_width = 15;
 wheel_screw_overhang = 8;
 
@@ -117,16 +117,11 @@ module 888_2022(set_wheel=false) {
             rotate([0, 90, 0])
                 cylinder(d=M3_screw_diameter, h=chasis_fork_thickness*2+fork_wheel_width+10, center=true, $fn=20);
 
-        //matka šroubu u pístu
-
-        for(i = [-1, 1])
-        translate([i*(fork_wheel_width+chassis_fork_width)/2, -front_fork_length - piston_mount_offset, screw_spring_distance])
-            rotate([0, 90, 0]){
-                rotate([0, 0, 30])
-                    cylinder(d=M3_nut_diameter, h=M3_nut_height, $fn=6, center = true);
-                translate([-30, -M3_nut_diameter/2, -M3_nut_height/2])
-                    cube([30, M3_nut_diameter, M3_nut_height]);
-            }
+        
+        translate([fork_wheel_width/2-KBRM03_B/2+chasis_fork_thickness/2, -300, height/2])
+            cube([KBRM03_B, 500, 50]);
+        translate([-fork_wheel_width/2-KBRM03_B/2-chasis_fork_thickness/2, -300, height/2])
+            cube([KBRM03_B, 500, 50]);
 
         //šroub uchycení
         rotate([0, 90, 0])

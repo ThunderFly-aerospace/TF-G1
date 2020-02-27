@@ -30,11 +30,11 @@ translate([0, -888_2024_holder_length, -(696_bearing_outer_diameter+material_aro
         rotate([1+888_2022_mount_piston_bottom_angle+888_2024_mount_piston_top_angle+main_angle, 0, 180])
             888_2022(true);
 
-        translate([chasis_fork_thickness+fork_wheel_width/2+KBRM03_B/2+888_2025_distance_space, 888_2024_holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
+        translate([chasis_fork_thickness+fork_wheel_width/2+KBRM03_B/2+888_2025_distance_space-KBRM03_B-(chasis_fork_thickness-KBRM03_B)/2, 888_2024_holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
             rotate([-888_2025_base_angle+piston_angle, 0, 0])
                 888_2025(pistons, damper_position);
         mirror([1, 0, 0])
-            translate([chasis_fork_thickness+fork_wheel_width/2+KBRM03_B/2+888_2025_distance_space, 888_2024_holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
+            translate([chasis_fork_thickness+fork_wheel_width/2+KBRM03_B/2+888_2025_distance_space-KBRM03_B-(chasis_fork_thickness-KBRM03_B)/2, 888_2024_holder_length, -696_bearing_outer_diameter/2-material_around_bearing])
                 rotate([-888_2025_base_angle+piston_angle, 0, 0])
                     888_2025(pistons, damper_position);
         

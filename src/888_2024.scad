@@ -68,7 +68,7 @@ module 888_2024(orientate = 0) {
 
                 translate([0, holder_length, 0])
                     rotate([0, 90, 0])
-                        cylinder(d=888_2025_washer_diameter, h=chasis_fork_thickness*2+fork_wheel_width+KBRM03_B-sliding_insert_metal_width-888_2025_sliding_insert_overlap*2-888_2025_washer_thickness*2, $fn=50, center=true);
+                        cylinder(d=888_2025_washer_diameter, h=fork_wheel_width+chasis_fork_thickness-KBRM03_B-(sliding_insert_metal_width/2-888_2025_sliding_insert_overlap), $fn=50, center=true);
             }
 
             //doraz
@@ -77,6 +77,15 @@ module 888_2024(orientate = 0) {
                     translate([0, -joint_diameter/2-stop_size, -40])
                         cube([stop_width, stop_size+10, joint_height+40]);
         }
+
+        //výřez pro píst
+        translate([(fork_wheel_width+chasis_fork_thickness-KBRM03_B-(sliding_insert_metal_width/2-888_2025_sliding_insert_overlap))/2, holder_length, 0])
+            rotate([0, 90, 0])
+                cylinder(d=888_2025_washer_diameter+3, h=100, $fn=50);
+        translate([25+(fork_wheel_width+chasis_fork_thickness-KBRM03_B-(sliding_insert_metal_width/2-888_2025_sliding_insert_overlap))/2, holder_length, 0])
+            rotate([-60, 0, 0])
+                translate([0, 0, -25])
+                    cube([50, 888_2025_washer_diameter+3, 50], center = true);
 
         //šroub úchytu
         translate([0, 0, 696_bearing_outer_diameter/2+material_around_bearing])
@@ -179,4 +188,4 @@ module 888_2024(orientate = 0) {
 
 
 
-888_2024(1);
+888_2024();

@@ -67,10 +67,10 @@ module 888_2025(piston=false, piston_position = 0) {
         //plocha pro podložky
         translate([-sliding_insert_metal_width/2+888_2025_sliding_insert_overlap, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
             rotate([0, -90, 0])
-                cylinder(d=888_2025_washer_diameter+1, h=50, $fn=50);
+                cylinder(d=888_2025_washer_diameter+7, h=50, $fn=50);
         translate([sliding_insert_metal_width/2-888_2025_sliding_insert_overlap, 0, RT57208M25_MR+RT57208M25_LB+wall_thickness+M6_screw_diameter/2+wall_thickness+height])
             rotate([0, 90, 0])
-                cylinder(d=888_2025_washer_diameter+1, h=50, $fn=50);
+                cylinder(d=888_2025_washer_diameter+7, h=50, $fn=50);
     }
 
     }
