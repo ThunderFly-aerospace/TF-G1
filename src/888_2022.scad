@@ -117,6 +117,10 @@ module 888_2022(set_wheel=false) {
             rotate([0, 90, 0])
                 cylinder(d=M3_screw_diameter, h=chasis_fork_thickness*2+fork_wheel_width+10, center=true, $fn=20);
 
+        //matka pístu
+        translate([0, -front_fork_length - piston_mount_offset, screw_spring_distance])
+            rotate([0, 90, 0])
+                cylinder(d=M3_nut_diameter, h=fork_wheel_width+M3_nut_height*2, center=true, $fn=6);
         
         translate([fork_wheel_width/2-KBRM03_B/2+chasis_fork_thickness/2, -300, height/2])
             cube([KBRM03_B, 500, 50]);
