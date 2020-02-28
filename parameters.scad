@@ -761,8 +761,8 @@ joint_width = 25;
 888_2025_distance_space = 0;
 888_2025_wall_thickness = 2;
 888_2025_height = 10;
-888_2025_sliding_insert_overlap = 0.1;
-888_2025_washer_diameter = 10;
+888_2025_sliding_insert_overlap = global_clearance/2;
+888_2025_washer_diameter = 20;
 888_2025_washer_thickness = 1;
 
 //888_2022
@@ -777,5 +777,5 @@ sliding_insert_plastic_diameter = 6;
 sliding_insert_plastic_width = 18;
 
 //sliding insert metal
-sliding_insert_metal_diameter = 6;
+sliding_insert_metal_diameter = 6 + global_clearance;
 sliding_insert_metal_width = 7;
