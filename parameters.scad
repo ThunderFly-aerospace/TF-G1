@@ -358,7 +358,7 @@ Rudder_depth = main_tube_outer_diameter/2;          // hloubka smerovky (pohibli
 Rudder_wall_thickness = hull_wall_thickness;        // tloustka povrchove steny smerovky
 Rudder_infill_wall_thickness = 0.64;                // tloustka vnitrnich sten smerovky
 Rudder_gap_width = 2*hull_wall_thickness;           // šířka mezery mezi směrovkou a ocasní plochou
-Rudder_shaft_diameter = 2.6;                        // otočné uchycení směrovky - průměr 2 mm
+Rudder_shaft_diameter = 2.3;                        // otočné uchycení směrovky - průměr 2 mm
 Rudder_arm_x_offset = 5.5;                          // odsazeni paky servo od osy smerovky
 Rudder_shaft_end_cut = 5;                           // hloubka vykousnuti konce osy
 
