@@ -779,3 +779,13 @@ sliding_insert_plastic_width = 18;
 //sliding insert metal
 sliding_insert_metal_diameter = 6 + global_clearance;
 sliding_insert_metal_width = 7;
+
+
+//magnetic plate
+888_1037_offset = 0;
+888_1037_width = 75;
+888_1037_length = 888_1037_width+888_1037_offset;
+888_1037_height = 20;
+888_1037_mag_holes_width = 42;
+888_1037_mag_screw_depth = 10;
+888_1037_ag_screw_depth = 15;
