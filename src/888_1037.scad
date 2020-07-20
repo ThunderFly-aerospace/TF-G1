@@ -18,11 +18,11 @@ module 888_1037(draft = true) {
             translate([0,0,-5])
             difference() {
                 union() {
-                    cylinder(d = 888_1037_width+10, h = 888_1037_height+5, $fn = draft?8:120);
+                    cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height+5, $fn = draft?8:120);
                     
                     translate([0,0,-5])
                     intersection() {
-                        cylinder(d = 888_1037_width+10, h = 888_1037_height+10, $fn = draft?8:120);
+                        cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height+10, $fn = draft?8:120);
                         
                         for (i=[0:7]) rotate([0, 0, 22.5*i]){
                             translate([0,0,0])
@@ -32,7 +32,7 @@ module 888_1037(draft = true) {
                 }
                 
                 translate([0,0,-15.01])
-                cylinder(d = 888_1037_width, h = 20, $fn = draft?8:120);
+                cylinder(d = 888_1037_width+global_clearance, h = 20, $fn = draft?8:120);
             }
         }
         
