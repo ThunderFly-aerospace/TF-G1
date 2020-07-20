@@ -5,12 +5,33 @@
 
 include <../parameters.scad>
 
-
 module 888_1037(draft = true) {
     difference() {
         // main body
-        translate([-888_1037_length/2+888_1037_offset/2,-888_1037_width/2,0])
-        cube([888_1037_length,888_1037_width,888_1037_height]);
+        union() {
+            //translate([-888_1037_length/2+888_1037_offset/2,-888_1037_width/2,0])
+            //cube([888_1037_length,888_1037_width,888_1037_height]);
+            
+            translate([0,0,-5])
+            difference() {
+                union() {
+                    cylinder(d = 888_1037_width+10, h = 888_1037_height+5, $fn = draft?8:120);
+                    
+                    translate([0,0,-5])
+                    intersection() {
+                        cylinder(d = 888_1037_width+10, h = 888_1037_height+10, $fn = draft?8:120);
+                        
+                        for (i=[0:7]) rotate([0, 0, 22.5*i]){
+                            translate([0,0,0])
+                            cube([888_1037_width+30,7.5,10],true);
+                        }
+                    }
+                }
+                
+                translate([0,0,-15.01])
+                cylinder(d = 888_1037_width, h = 20, $fn = draft?8:120);
+            }
+        }
         
         // magnetic plate screw holes
         translate([0,888_1037_mag_holes_width/2,-1])
