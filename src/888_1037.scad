@@ -9,9 +9,12 @@ module 888_1037(draft = true) {
     difference() {
         // main body
         union() {
+            // offset platform
             //translate([-888_1037_length/2+888_1037_offset/2,-888_1037_width/2,0])
             //cube([888_1037_length,888_1037_width,888_1037_height]);
             
+            
+            // rotation locking mechanism
             translate([0,0,-5])
             difference() {
                 union() {
