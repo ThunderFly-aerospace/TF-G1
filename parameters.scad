@@ -782,7 +782,7 @@ sliding_insert_metal_width = 7;
 
 
 //magnetic plate
-888_1037_offset = 0;
+888_1037_offset = 5;
 888_1037_width = 75;
 888_1037_length = 888_1037_width+888_1037_offset;
 888_1037_height = 20;
