@@ -789,3 +789,4 @@ sliding_insert_metal_width = 7;
 888_1037_mag_holes_width = 42;
 888_1037_mag_screw_depth = 10;
 888_1037_ag_screw_depth = 15;
+888_1037_teeth_width = 35-1;

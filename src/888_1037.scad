@@ -15,23 +15,22 @@ module 888_1037(draft = true) {
             
             
             // rotation locking mechanism
-            translate([0,0,-5])
             difference() {
                 union() {
-                    cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height+5, $fn = draft?8:120);
+                    cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height, $fn = draft?8:120);
                     
                     translate([0,0,-5])
                     intersection() {
                         cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height+10, $fn = draft?8:120);
                         
-                        for (i=[0:7]) rotate([0, 0, 22.5*i]){
-                            translate([0,0,0])
-                            cube([888_1037_width+30,7.5,10],true);
+                        for (i=[0:7]) rotate([0, 0, 45*i]){
+                            linear_extrude(height = 10)
+                            polygon(points=[[0,0],[888_1037_width+global_clearance+11,888_1037_teeth_width/2],[888_1037_width+global_clearance+11,-888_1037_teeth_width/2]]);
                         }
                     }
                 }
                 
-                translate([0,0,-15.01])
+                translate([0,0,-19.99])
                 cylinder(d = 888_1037_width+global_clearance, h = 20, $fn = draft?8:120);
             }
         }
