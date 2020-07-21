@@ -19,7 +19,7 @@ module 888_1037(draft = true) {
                 union() {
                     cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height, $fn = draft?8:120);
                     
-                    translate([0,0,-5])
+                    translate([0,0,-4.5])
                     intersection() {
                         cylinder(d = 888_1037_width+global_clearance+10, h = 888_1037_height+10, $fn = draft?8:120);
                         
