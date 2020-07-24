@@ -10,7 +10,7 @@ vesc6_mount_flange_thickness = 6;
 vesc6_mount_holes_distance = 39;
 vesc6_width = 70;
 
-module 888_1035(offset = 5){
+module 888_1035(offset = 0){
 
     difference(){
         union(){
