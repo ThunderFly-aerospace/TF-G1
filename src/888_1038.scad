@@ -7,7 +7,7 @@ include <../parameters.scad>
 
 module 888_1037(draft = true) {
 
-    plate_thickness = 10;
+    plate_thickness = 5;
 
     difference() {
         // main body
