@@ -38,7 +38,7 @@ module 888_1037(draft = true) {
         // magnetic plate screw holes
         translate([0,888_1037_mag_holes_width/2,-11])
         union() {
-            cylinder(d=M4_screw_diameter, h=888_1037_height+12, $fn = draft?8:80);
+            cylinder(d=M4_screw_diameter, h=888_1037_height-layer, $fn = draft?8:80);
             
             // nut pocket
             translate([0,0,888_1037_mag_screw_depth+10])
@@ -47,7 +47,7 @@ module 888_1037(draft = true) {
         
         translate([0,-888_1037_mag_holes_width/2,-11])
         union() {
-            cylinder(d=M4_screw_diameter, h=888_1037_height+12, $fn = draft?8:80);
+            cylinder(d=M4_screw_diameter, h=888_1037_height-layer, $fn = draft?8:80);
             
             // nut pocket
             translate([0,0,888_1037_mag_screw_depth+10])
