@@ -5,3 +5,8 @@ draft = false;
 
 rotate([0, 90, 0])
     666_1028_tube_mount(draft = draft);
+
+//modifiers
+
+rotate([0, 90, 0])
+    666_1028_modifiers_tube_mount();

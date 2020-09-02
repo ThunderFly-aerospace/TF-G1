@@ -364,7 +364,7 @@ module 666_1028_tube_mount(draft = true) {
             intersection() {
                 //main body
                 translate([- tail_tube_mount_length / 2, 0, - tail_pipe_z_position])
-			666_1028_rudder_shape();
+				666_1028_rudder_shape();
                 cube([tail_tube_mount_length - global_clearance, Rudder_depth * 2, tail_tube_mount_height], center = true);
             }
             //tube wall
@@ -631,116 +631,141 @@ module 666_1028_pipe(){
 module 666_1028_modifiers(side_choose = 1) {
 	
 	//Rudder modifiers------------------------------------
-	translate([0, 0, tail_bottom_height-global_clearance])
-	union(){
+	666_1028_modifiers_rudder();
 
-		//Front shaft shape-------------------------------
-
-		intersection(){
-			translate([Rudder_shaft_x_position ,0 , -tail_bottom_height-global_clearance])
-			666_1028_rudder_shaft_shape();
-			translate([0, -tail_length/2, 0])
-			cube([tail_length*2, tail_length, Rudder_height-global_clearance*2]);
-		}			
-
-		//Washer like material on bottom------------------
-
-		translate([Rudder_shaft_x_position, 0, 0])
-		cylinder(d = M3_nut_diameter, h = 1, $fn = draft ? 10 : 50, center = true);
-
-		//Servo arm cube----------------------------------
-		
-        translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, tail_servo_rudder_arm_z_position])
-		cube([tail_servo_rudder_arm_side_size+4, 50, tail_servo_rudder_arm_side_size+4], center = true);
-	}
 
 	//Top part modifiers----------------------------------
-	translate([0, 0, tail_bottom_height + Rudder_height])
-	union() {
+	666_1028_modifiers_top();
 
-        //Modifier for rudder shaft-----------------------
-
-        translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
-		cube([Rudder_shaft_outside_min_diameter,50,tail_height - tail_bottom_height - Rudder_height], center = true);
-		
-		//Modifier for A shape screws--------------------
-
-        translate([tail_A_shape_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
-		cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
-
-        translate([tail_A_shape_screw_x_position_2, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
-		cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
-	
-		//Modifier for passive rudder screws------------
-
-        translate([tail_top_passive_rudder_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
-		cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
-
-        translate([tail_top_passive_rudder_screw_x_position_2, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
-		cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
-
-
-	}
 
 	//Middle part modifiers-----------------------------
-	translate([(tail_tube_mount_length) / 2, 0, tail_pipe_z_position])
-	union() {
+	666_1028_modifiers_middle();
 
+
+	//Bottom part modifiers-----------------------------
+	666_1028_modifiers_bottom();
+
+
+	//Passive rudder modifiers--------------------------
+	translate([0, side_choose * (- 1.6), tail_height - 13])
+	rotate([- side_choose * (- tail_angle / 2), 0, 0])
+	666_1028_modifiers_passive_rudder();
+	
+	
+	/*
+	//Tube mount modifiers------------------------------
+	666_1028_modifiers_tube_mount();
+	*/
+}
+
+
+
+module 666_1028_modifiers_rudder() {
+	//Front shaft shape-------------------------------
+
+	intersection(){
+		translate([Rudder_shaft_x_position ,0 , -tail_bottom_height-global_clearance])
+		666_1028_rudder_shaft_shape();
+		translate([0, -tail_length/2, 0])
+		cube([tail_length*2, tail_length, Rudder_height-global_clearance*2]);
+	}			
+
+	//Washer like material on bottom------------------
+
+	translate([Rudder_shaft_x_position, 0, 0])
+	cylinder(d = M3_nut_diameter, h = 1, $fn = draft ? 10 : 50, center = true);
+
+	//Servo arm cube----------------------------------
+	
+	translate([Rudder_shaft_x_position + 4.35 + Rudder_arm_x_offset, 0, tail_servo_rudder_arm_z_position])
+	cube([tail_servo_rudder_arm_side_size+4, 50, tail_servo_rudder_arm_side_size+4], center = true);
+}
+
+
+
+module 666_1028_modifiers_top() {
+	//Modifier for rudder shaft-----------------------
+
+	translate([Rudder_shaft_x_position, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
+	cube([Rudder_shaft_outside_min_diameter,50,tail_height - tail_bottom_height - Rudder_height], center = true);
+	
+	//Modifier for A shape screws--------------------
+
+	translate([tail_A_shape_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
+	cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
+
+	translate([tail_A_shape_screw_x_position_2, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
+	cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
+
+	//Modifier for passive rudder screws------------
+
+	translate([tail_top_passive_rudder_screw_x_position_1, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
+	cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
+
+	translate([tail_top_passive_rudder_screw_x_position_2, 0, (tail_height - tail_bottom_height - Rudder_height)/2])
+	cube([M3_nut_diameter+4,50,tail_height - tail_bottom_height - Rudder_height], center = true);
+}
+
+
+
+module 666_1028_modifiers_middle() {
+	translate([(tail_tube_mount_length) / 2, 0, tail_pipe_z_position-tail_bottom_height])
+	union() {
 		//Modifier for servo hole-----------------------
 
 		translate([(tail_tube_mount_length + Rudder_infill_wall_thickness + tail_servo_length)/2+Rudder_infill_wall_thickness, 0, - tail_servo_height / 2 + 2 - Rudder_infill_wall_thickness - tail_servo_z_offset])
 		cube([tail_servo_length+4, 50, tail_servo_height+4], center = true);
 
 		//Modifier for tube mount-----------------------
-	
+
 		translate([-3-Rudder_infill_wall_thickness/2, 0, 0])
 		cube([tail_tube_mount_length+6, 50, tail_tube_mount_height+global_clearance*2+4], center = true);
 	}
-
-	//Bottom part modifiers-----------------------------
-	union(){
-		//Main Wall-------------------------------------
-		intersection(){	    
-			666_1028_rudder_shape();
-			translate([tail_length, 0, tail_bottom_height / 2])
-			cube([tail_length * 2, tail_length, tail_bottom_height], center = true);
-		}
-
-		intersection(){
-			translate ([tail_length/2, 0, -25])
-			cube([tail_length, 50, 50], center = true);
-
-			rotate([0,90,0])
-			rotate_extrude($fn = draft ? 50 : 200)
-				rotate([0,0,90])
-				difference(){
-				  polygon(points = airfoil_data(naca = 0005, L = tail_length, N = draft ? 50 : 100, open = false));
-				  square(tail_length);
-				}
-		}
-	}
-
-	//Passive rudder modifiers-------------------------
-	666_1028_modifiers_passive_rudder(side_choose);
-	
-	
 }
 
-module 666_1028_modifiers_passive_rudder(side_choose = - 1) {
+
+
+module 666_1028_modifiers_bottom() {
+	//Main Wall-------------------------------------
+	intersection(){	    
+		666_1028_rudder_shape();
+		translate([tail_length, 0, tail_bottom_height / 2])
+		cube([tail_length * 2, tail_length, tail_bottom_height], center = true);
+	}
+
+	intersection(){
+		translate ([tail_length/2, 0, -25])
+		cube([tail_length, 50, 50], center = true);
+
+		rotate([0,90,0])
+		rotate_extrude($fn = draft ? 50 : 200)
+			rotate([0,0,90])
+			difference(){
+			  polygon(points = airfoil_data(naca = 0005, L = tail_length, N = draft ? 50 : 100, open = false));
+			  square(tail_length);
+			}
+	}
+}
+
+
+
+module 666_1028_modifiers_passive_rudder() {
 
 	//Modifier for passive rudder screws------------
-	translate([0, side_choose * (- 1.6), tail_height - 13])
-	rotate([- side_choose * (- tail_angle / 2), 0, 0])
-	union(){
+	translate([tail_top_passive_rudder_screw_x_position_1, 0, Rudder_depth/2 - 2])
+	cube([M3_nut_diameter+4,50,Rudder_depth * 2 + 4], center = true);
 
-        translate([tail_top_passive_rudder_screw_x_position_1, 0, Rudder_depth/2 - 2])
-		cube([M3_nut_diameter+4,50,Rudder_depth * 2 + 4], center = true);
-
-        translate([tail_top_passive_rudder_screw_x_position_2, 0, Rudder_depth/2 - 2])
-		cube([M3_nut_diameter+4,50,Rudder_depth * 2 + 4], center = true);
-
-	}
+	translate([tail_top_passive_rudder_screw_x_position_2, 0, Rudder_depth/2 - 2])
+	cube([M3_nut_diameter+4,50,Rudder_depth * 2 + 4], center = true);
 }
+
+
+
+module 666_1028_modifiers_tube_mount() {
+	cube([tail_tube_mount_length - global_clearance, Rudder_depth * 2, tail_tube_mount_height], center = true);
+}
+
+
 
 module 666_1028(side_choose = 1, rudder = true, rudder_angle = 15, pipe = false, draft = true, modifiers = false){
     666_1028_body_bottom(side_choose);
