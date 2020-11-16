@@ -1,5 +1,7 @@
 ## TF-G1 Rotor Blades
 
+![Pair of TF-G1 rotor blades](img/rotor_blades.jpg)
+
 TF-G1 rotor blades are multilayer wood-composite autogyro rotor blades.  The each blade is carefully CNC machined in tandem with the second rotor blade to maintain precise balance of each rotor pair.
 The blade construction is based on wood-fiber-wood sendwitch, where internal stringer core is dimensioned to windstand 4kN centrifugal force corresponding to 1500 RPM.
 Rotor blades has delta-3 rotor head mount.
