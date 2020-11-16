@@ -1,6 +1,6 @@
 ## TF-G1 Rotor Blades
 
-TF-G1 rotor blades are multilayer wood-composite autogyro rotor blades.  The each blade is CNC machined in tandem with the second rotor blade to maintain precise balance of each rotor pair.
+TF-G1 rotor blades are multilayer wood-composite autogyro rotor blades.  The each blade is carefully CNC machined in tandem with the second rotor blade to maintain precise balance of each rotor pair.
 The blade construction is based on wood-fiber-wood sendwitch, where internal stringer core is dimensioned to windstand 4kN centrifugal force corresponding to 1500 RPM.
 Rotor blades has delta-3 rotor head mount.
 
@@ -8,7 +8,7 @@ Rotor blades has delta-3 rotor head mount.
 
 Main blade parameters
 
-  - Blade airfol NACA0016
+  - Blade airfoil NACA0016
   - Shape - rectangle
   - Depth 50mm
   - Lenght 970mm
